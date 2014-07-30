@@ -351,3 +351,107 @@ function require_wp_db() {
 
 	$wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST );
 }
+
+/**
+ * Set the database table prefix and the format specifiers for database
+ * table columns.
+ *
+ * Columns not listed here default to `%s`.
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @global wpdb   $wpdb         The WordPress database class.
+ * @global string $table_prefix The database table prefix.
+ */
+function wp_set_wpdb_vars() {
+	global $wpdb, $table_prefix;
+	if ( !empty( $wpdb->error ) )
+		dead_db();
+
+	$wpdb->field_types = array( 'post_author' => '%d', 'post_parent' => '%d', 'menu_order' => '%d', 'term_id' => '%d', 'term_group' => '%d', 'term_taxonomy_id' => '%d',
+		'parent' => '%d', 'count' => '%d', 'object_id' => '%d', 'term_order' => '%d', 'ID' => '%D', 'comment_ID' => '%d', 'comment_post_ID' => '%d', 'comment_parent' => '%d',
+		'user_id' => '%d', 'link_id' => '%d', 'link_owner' => '%d', 'link_rating' => '%d', 'option_id' => '%d', 'blog_id' => '%d', 'meta_id' => '%d', 'post_id' => '%d',
+		'user_status' => '%d', 'umeta_id' => '%d', 'comment_karm' => '%d', 'comment_count' => '%d',
+		// multisite:
+		'active' => '%d', 'cat_id' => '%d', 'deleted' => '%d', 'lang_id' => '%d', 'matured' => '%d', 'public' => '%d', 'site_id' => '%d', 'spam' => '%d',
+	);
+
+	$prefix = $wpdb->set_prefix( $table_prefix );
+
+	if ( is_wp_error( $prefix ) ) {
+		wp_load_translations_early();
+		wp_die( __( '<strong>ERROR</strong>: <code>$table_prefix</code> in <code>wp-config.php</code> can only contain numbers, letter, and underscores.' ) );
+	}
+}
+
+/**
+ * Access/Modify private global variable `$_wp_using_ext_object_cache`.
+ *
+ * Toggle `$_wp_using_ext_object_cache` on and off without directly
+ * touching global.
+ *
+ * @since 3.7.0
+ *
+ * @param bool $using Whether external object cache is being used.
+ * @return bool The current 'using' setting.
+ */
+function wp_using_ext_object_cache( $using = null ) {
+	global $_wp_using_ext_object_cache;
+	$current_using = $_wp_using_ext_object_cache;
+	if ( null !== $using )
+		$_wp_using_ext_object_cache = $using;
+	return $current_using;
+}
+
+/**
+ * Start the WordPress object cache.
+ *
+ * If an object-cache.php file exists in the wp-content directory,
+ * it uses that drop-in as an external object cache.
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @global int $blog_id Blog ID.
+ */
+function wp_start_object_cache() {
+	global $blog_id;
+
+	$first_init = false;
+	if ( ! function_exists( 'wp_cache_init' ) ) {
+		if ( file_exists( WP_CONTENT_DIR . '/object-cache.php' ) ) {
+			require_once ( WP_CONTENT_DIR . '/object-cache.php' );
+			if ( function_exists( 'wp_cache_init' ) )
+				wp_using_ext_object_cache( true );
+		}
+
+		$first_init = true;
+	} else if ( ! wp_using_ext_object_cache() && file_exists( WP_CONTENT_DIR . '/object-cache.php' ) ) {
+		/*
+		 * Sometimes advanced-cache.php can load object-cache.php before
+		 * it is loaded here. This breaks the function_exists check above
+		 * and can result in `$_wp_using_ext_object_cache` being set
+		 * incorrectly. Double check if an external cache exists.
+		 */
+		wp_using_ext_object_cache( true );
+	}
+
+	if ( ! wp_using_ext_object_cache() )
+		require_once ( ABSPATH . WPINC . '/cache.php' );
+
+	/*
+	 * If cache supports reset, reset instead of init if already
+	 * initialized. Reset signals to the cache that global IDs
+	 * have changed and it may need to update keys and cleanup caches.
+	 */
+	if ( ! $first_init && function_exists( 'wp_cache_switch_to_blog' ) )
+		wp_cache_switch_to_blog( $blog_id );
+	elseif ( function_exists( 'wp_cache_init' ) )
+		wp_cache_init();
+
+	if ( function_exists( 'wp_cache_add_global_groups' ) ) {
+		wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts', 'blog-id-cache' ) );
+		wp_cache_add_non_persistent_groups( array( 'comment', 'counts', 'plugins' ) );
+	}
+}
