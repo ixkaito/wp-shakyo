@@ -123,3 +123,231 @@ function wp_check_php_mysql_versions() {
 		die( __( 'Your PHP installation appears to be missing the MySQL extension which is required by WordPres.' ) );
 	}
 }
+
+/**
+ * Don't load all of WordPress when handling a favicon.ico request.
+ *
+ * Instead, send the headers for a zero-length favicon and bail.
+ *
+ * @since 3.0.0
+ */
+function wp_favicon_request() {
+	if ( '/favicon.ico' == $_SERVER['REQUEST_URI'] ) {
+		header('Content-Type: image/vnd.microsoft.icon');
+		header('Content-Length: 0');
+		exit;
+	}
+}
+
+/**
+ * Die with a maintenance message when conditions are met.
+ *
+ * Checks for a file in the WordPress root directory named ".maintenance".
+ * This file will contain the variable $upgrading, set to the time the file
+ * was created. If the file was reated less than 10 minutes ago, WordPress
+ * enters maintenance mode and displays a message.
+ *
+ * The default message can be replaced by using a drop-in (maintenance.php in
+ * the wp-content directory).
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @global int $upgrading the unix timestamp marking when upgrading WordPress began.
+ */
+function wp_maintenance() {
+	if ( !file_exists( ABSPATH . '.maintenance' ) || defined( 'WP_INSTALLING' ) )
+		return;
+
+	global $upgrading;
+
+	include( ABSPATH . '.maintenance' );
+	// If the $upgrading timestamp is older than 10 minutes, don't die.
+	if ( ( time() - $upgrading ) >= 600 )
+		return;
+
+	if ( file_exists( WP_CONTENT_DIR . '/maintenance.php' ) ) {
+		require_once( WP_CONTENT_DIR . '/maintenance.php' );
+		die();
+	}
+
+	wp_load_translations_early();
+
+	$protocol = $_SERVER["SERVER_PROTOCOL"];
+	if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
+		$protocol = 'HTTP/1.0';
+	header( "$protocol 503 Service Unavailable", true, 503 );
+	header( 'Content-Type: text/html; charset=utf-8' );
+	header( 'Retry-After: 600' );
+?>
+	<!DOCTYPE html>
+	<html xmlns="http://www.w3.org/1999/xhtml"<?php if ( is_rtl() ) echo ' dir="rtl"'; ?>>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title><?php _e( 'Maintenance' ); ?></title>
+
+	</head>
+	<body>
+		<h1><?php _e( 'Briefly unavailable for scheduled maintenance. Check back in a minute.' ); ?></h1>
+	</body>
+	</html>
+<?php
+	die();
+}
+
+/**
+ * Start the WordPress micro-timer.
+ *
+ * @since 0.71
+ * @access private
+ *
+ * @global float $timestart Unix timestamp set at the beginning of the page load.
+ * @see timer_stop()
+ *
+ * @return bool Always returns true.
+ */
+function timer_start() {
+	global $timestart;
+	$timestart = microtime( true );
+	return true;
+}
+
+/**
+ * Retrieve or display the time from the page start to when function is called.
+ *
+ * @since 0.71
+ *
+ * @global float $timestart Seconds from when timer_start() is called.
+ * @global float $timeend   Seconds from when function is called.
+ *
+ * @param int $display   Whether to echo or return the results. Accepts 0|false for return,
+ *                       1|true for echo. Default 0|false.
+ * @param int $precision The number of digits from the right of the decimal to display.
+ *                       Default 3.
+ * @return string The "second.microsecond" finished time calculation. The number is formatted
+ *                for human consumption, both localized and rounded.
+ */
+function timer_stop( $display = 0, $precision = 3 ) {
+	global $timestart, $timeend;
+	$timeend = microtime( true );
+	$timetotal = $timeend - $timestart;
+	$r = ( function_exists( 'number_format_i18n' ) ) ? number_format_i18n( $timetotal, $precision ) : number_format( $timetotal, $precision );
+	if ( $display )
+		echo $r;
+	return $r;
+}
+
+/**
+ * Set PHP error reporting based on WordPress debug settings.
+ *
+ * Uses three constants: `WP_DEBUG`, `WP_DEBUG_DISPLAY`, and `WP_DEBUG_LOG`.
+ * All three can be defined in wp-config.php, and by default are set to false.
+ *
+ * When `WP_DEBUG` is true, all PHP notices are reported. WordPress will also
+ * display internal notices: when a deprecated WordPress function, function
+ * argument, or file is used. Deprecated code may be removed from a later
+ * version.
+ *
+ * It is strongly recommended that plugin and theme developers use `WP_DEBUG`
+ * in their development environments.
+ *
+ * `WP_DEBUG_DISPLAY` and `WP_DEBUG_LOG` perform no function unless `WP_DEBUG`
+ * is true.
+ *
+ * When `WP_DEBUG_DISPLAY` is true, WordPress will force errors to be displayed.
+ * `WP_DEBUG_DISPLAY` defaults to true. Defining it as null prevents WordPress
+ * from changing the global configuration setting. Defining `WP_DEBUG_DISPLAY`
+ * as false will force errors to be hidden.
+ *
+ * When `WP_DEBUG_LOG` is true, errors will be logged to debug.log in the content
+ * directory.
+ *
+ * Errors are never displayed for XML-RPC requests.
+ *
+ * @since 3.0.0
+ * @access private
+ */
+function wp_debug_mode() {
+	if ( WP_DEBUG ) {
+		error_reporting( E_ALL );
+
+		if ( WP_DEBUG_DISPLAY )
+			ini_set( 'display_errors', 1 );
+		elseif ( null !== WP_DEBUG_DISPLAY )
+			ini_set( 'display_errors', 0 );
+
+		if ( WP_DEBUG_LOG ) {
+			ini_set( 'log_errors', 1 );
+			ini_set( 'error_log', WP_CONTENT_DIR . '/debug.log' );
+		}
+	} else {
+		error_reporting( E_CORE_ERROR | E_CORE_WARNING | E_COMPILE_ERROR | E_ERROR | E_WARNING | E_PARSE | E_USER_ERROR | E_USER_WARNING | E_RECOVERABLE_ERROR );
+	}
+	if ( defined( 'XMLRPC_REQUEST' ) )
+		ini_set( 'display_errors', 0 );
+}
+
+/**
+ * Set the location of the language directory.
+ *
+ * To set directory manually, define the `WP_LANG_DIR` constant
+ * in wp-config.php.
+ *
+ * If the language directory exists within `WP_CONTENT_DIR`, it
+ * is used. Otherwise the language directory is assumed to live
+ * in `WPINC`.
+ *
+ * @since 3.0.0
+ * @access private
+ */
+function wp_set_lang_dir() {
+	if ( !defined( 'WP_LANG_DIR' ) ) {
+		if ( file_exists( WP_CONTENT_DIR . '/languages' ) && @is_dir( WP_CONTENT_DIR . '/languages' ) || !@is_dir(ABSPATH . WPINC . '/languages') ) {
+			/**
+			 * Server path of the language directory.
+			 *
+			 * No leading slash, no trailing slash, full path, not relative to ABSPATH
+			 *
+			 * @since 2.1.0
+			 */
+			define( 'WP_LANG_DIR', WP_CONTENT_DIR . '/languages' );
+			if ( !defined( 'LANGDIR' ) ) {
+				// Old static relative path maintained for limited backwards compatiblility - won't work in some cases
+				define( 'LANGDIR', 'wp-content/languages' );
+			}
+		} else {
+			/**
+			 * Server path of the language directory.
+			 *
+			 * No leading slash, no trailing slash, full path, not relative to `ABSPATH`.
+			 *
+			 * @since 2.1.0
+			 */
+			define( 'WP_LANG_DIR', ABSPATH . WPINC . '/languages' );
+			if ( !defined( 'LANGDIR' ) ) {
+				// Old relative path maintained for backwards compatibility
+				define( 'LANGDIR', WPINC . '/languages' );
+			}
+		}
+	}
+}
+
+/**
+ * Load the database class file and instantiate the `$wpdb` global.
+ *
+ * @since 2.5.0
+ *
+ * @global wpdb $wpdb The WordPress database class.
+ */
+function require_wp_db() {
+	global $wpdb;
+
+	require_once( ABSPATH . WPINC . '/wp-db.php' );
+	if ( file_exists( WP_CONTENT_DIR . '/db.php' ) )
+		require_once( WP_CONTENT_DIR . '/db.php' );
+
+	if ( isset( $wpdb ) )
+		return;
+
+	$wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST );
+}
