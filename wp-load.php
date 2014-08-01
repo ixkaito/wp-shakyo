@@ -51,7 +51,6 @@ if ( file_exists( ABSPATH . 'wp-config.php') ) {
 	 * in an infinite loop, that's a silly thing to assume, don't you think? If
 	 * we're traveling in circles, our last-ditch effort is "Need more help?"
 	 */
-
 	if ( false === strpos( $_SERVER['REQUEST_URI'], 'setup-config' ) ) {
 		header( 'Location: ' . $path );
 		exit;

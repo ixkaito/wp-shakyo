@@ -8,6 +8,25 @@
 require( ABSPATH . WPINC . '/option.php' );
 
 /**
+ * Determine if SSL is used.
+ *
+ * @since 2.6.0
+ *
+ * @return bool True is SSL, false if not used.
+ */
+function is_ssl() {
+	if ( isset($_SERVER['HTTPS']) ) {
+		if ( 'on' == strtolower($_SERVER['HTTPS']) )
+			return true;
+		if ( '1' == $_SERVER['HTTPS'] )
+			return true;
+	} elseif ( isset($_SERVER['SERVER_PORT']) && ( '443' == $_SERVER['SERVER_PORT'] ) ) {
+		return true;
+	}
+	return false;
+}
+
+/**
  * Guess the URL for the site.
  *
  * Will remove wp-admin links to retrieve only return URLs not in the wp-admin
