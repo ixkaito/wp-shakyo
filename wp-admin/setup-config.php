@@ -29,3 +29,5 @@ define('WP_SETUP_CONFIG', true);
 error_reporting(0);
 
 define( 'ABSPATH', dirname( dirname( __FILE__ ) ) . '/' );
+
+require( ABSPATH . 'wp-settings.php' );
