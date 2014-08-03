@@ -479,3 +479,105 @@ function wp_not_installed() {
 		die();
 	}
 }
+
+/**
+ * If Multisite is enabled.
+ *
+ * @since 3.0.0
+ *
+ * @return bool True if Multisite is enabled, false oterwise.
+ */
+function is_multisite() {
+	if ( defined( 'MULTISITE' ) )
+		return  MULTISITE;
+	if ( defined( 'SUBDOMAIN_INSTALL' ) || defined( 'VHOST' ) || defined( 'SUNRISE' ) )
+		return true;
+
+	return false;
+}
+
+/**
+ * Attempt an early load of translations.
+ *
+ * Used for errors encountered during the initial loading process, before
+ * the locale has been properly detected and loaded.
+ *
+ * Designed for unusual load sequences (like setup-config.php) or for when
+ * the script will then terminate with an error, otherwise there is a risk
+ * that a file can be double-included.
+ *
+ * @since 3.4.0
+ * @access private
+ *
+ * @global $wp_locale The WordPress date and time locale object.
+ */
+function wp_load_translations_early() {
+	global $text_direction, $wp_locale;
+
+	static $loaded = false;
+	if ( $loaded )
+		return;
+	$loaded = true;
+
+	if ( function_exists( 'did_action' ) && did_action( 'init' ) )
+		return;
+
+	// We need $wp_local_package
+	require ABSPATH . WPINC . '/version.php';
+
+	// Translation and localization
+	require_once ABSPATH . WPINC . '/pomo/mo.php';
+	require_once ABSPATH . WPINC . '/l10n.php';
+	require_once ABSPATH . WPINC . '/locale.php';
+
+	// General libraries
+	require_once ABSPATH . WPINC . '/plugin.php';
+
+	$locales = $locations = array();
+
+	while ( true ) {
+		if ( defined( 'WPLANG' ) ) {
+			if ( '' == WPLANG )
+				break;
+			$locales[] = WPLANG;
+		}
+
+		if ( isset( $wp_local_package ) )
+			$locales[] = $wp_local_package;
+
+		if ( ! $locales )
+			break;
+
+		if ( defined( 'WP_LANG_DIR' ) && @is_dir( WP_LANG_DIR ) )
+			$locations[] = WP_LANG_DIR;
+
+		if ( defined( 'WP_CONTENT_DIR' ) && @is_dir( WP_CONTENT_DIR . '/languages' ) )
+			$locations[] = WP_CONTENT_DIR . '/languages';
+
+		if ( @is_dir( ABSPATH . 'wp-content/languages' ) )
+			$locations[] = ABSPATH . 'wp-content/languages';
+
+		if ( @is_dir( ABSPATH . WPINC . '/languages' ) )
+			$locations[] = ABSPATH . WPINC . '/languages';
+
+		if ( ! $locations )
+			break;
+
+		$locations = array_unique( $locations );
+
+		foreach ( $locales as $locale ) {
+			foreach ( $locations as $location ) {
+				if ( file_exists( $location . '/' . $locale . '.mo' ) ) {
+					load_textdomain( 'default', $location . '/' . $locale . '.mo' );
+					if ( defined( 'WP_SETUP_CONFIG' ) && file_exists( $location . '/admin-' . $locale . '.mo' ) )
+						load_textdomain( 'default', $location . '/admin-' .$locale . '.mo' );
+					break 2;
+				}
+			}
+		}
+
+		break;
+	}
+
+	$wp_locale = new WP_Locale();
+}
