@@ -1,25 +1,25 @@
 # Flow
 
 ┌-------------------------------------------------------┐
-| index.php                                             |
+| # index.php                                           |
 |                                                       |
 | ┌ require ------------------------------------------┐ |
-| | wp-blog-header.php                                | |
+| | # wp-blog-header.php                              | |
 | |                                                   | |
 | | ┌ require_once ---------------------------------┐ | |
-| | | wp-load.php                                   | | |
+| | | # wp-load.php                                 | | |
 | | |                                               | | |
 | | | ┌ require_once -----------------------------┐ | | |
-| | | | wp-includes/load.php                      | | | |
+| | | | # wp-includes/load.php                    | | | |
 | | | └-------------------------------------------┘ | | |
 | | |                                               | | |
 | | |  wp_fix_server_vars() < wp-includes/load.php  | | |
 | | |                                               | | |
 | | | ┌ require_once -----------------------------┐ | | |
-| | | | wp-includes/functions.php                 | | | |
+| | | | # wp-includes/functions.php               | | | |
 | | | |                                           | | | |
 | | | | ┌ require ------------------------------┐ | | | |
-| | | | | wp-includes/option.php                | | | | |
+| | | | | # wp-includes/option.php              | | | | |
 | | | | └---------------------------------------┘ | | | |
 | | | └-------------------------------------------┘ | | |
 | | |                                               | | |
@@ -32,24 +32,74 @@
 └-------------------------------------------------------┘
 
 ┌------------------------------------------------------
-| wp-admin/setup-config.php
+| # wp-admin/setup-config.php
 |
 | ┌ require ------------------------------------------
-| | wp-settings.php
+| | # wp-settings.php
 | |
 | | ┌ require --------------------------------
-| | | wp-includes/load.php
+| | | # wp-includes/load.php
 | | └---------------------------
 | |
 | | ┌ require --------------------------------
-| | | wp-includes/default-constants.php
+| | | # wp-includes/default-constants.php
 | | └---------------------------
 | |
 | | ┌ require --------------------------------
-| | | wp-includes/version.php
+| | | # wp-includes/version.php
 | | └---------------------------
 | |
 | |  wp_initial_constants() < wp-includes/default-constants.php
 | |
 | |  wp_check_php_mysql_versions() < wp-includes/load.php
 | |
+| |  wp_unregister_GLOBALS() < wp-includes/load.php
+| |
+| |  wp_fix_server_vars() < wp-includes/load.php
+| |
+| |  wp_favicon_request() < wp-includes/load.php
+| |
+| |  wp_maintenance() < wp-includes/load.php
+| |     |
+| |     ├ include ---------------┐
+| |     | # .maintenance
+| |     ├------------------------┘
+| |     |
+| |     └ wp_load_translations_early() < wp-includes/load.php
+| |         |
+| |         ├ require -------------------┐
+| |         | # wp-includes/version.php
+| |         ├----------------------------┘
+| |         |
+| |         ├ require_once ----------------------------┐
+| |         | # wp-includes/pomo/mo.php
+| |         |
+| |         | ┌ require_once ------------------------┐
+| |         | | # wp-includes/pomo/translations.php
+| |         | |
+| |         | | ┌ require_once ----------------┐
+| |         | | | # wp-includes/pomo/entry.php
+| |         | | └------------------------------┘
+| |         | |
+| |         | └--------------------------------------┘
+| |         |
+| |         | ┌ require_once -------------------┐
+| |         | | # wp-includes/pomo/streams.php
+| |         | └---------------------------------┘
+| |         |
+| |         ├------------------------------------------┘
+| |         |
+| |         ├ require_once --------------┐
+| |         | # wp-includes/l10n.php
+| |         ├----------------------------┘
+| |         |
+| |         ├ require_once --------------┐
+| |         | # wp-includes/locale.php
+| |         ├----------------------------┘
+| |         |
+| |         ├ require_once --------------┐
+| |         | # wp-includes/plugin.php
+| |         ├----------------------------┘
+| |         |
+| |         └ load_textdomain() < wp-includes/l10n.php
+
