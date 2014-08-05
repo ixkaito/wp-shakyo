@@ -102,4 +102,7 @@
 | |         ├----------------------------┘
 | |         |
 | |         └ load_textdomain() < wp-includes/l10n.php
-
+| |             |
+| |             ├ apply_filters( 'override_load_textdomain' ) < wp-includes/plugin.php
+| |             |
+| |             ├ do_action( 'load_textdomain' ) < wp-includes/plugin.php

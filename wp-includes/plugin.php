@@ -33,3 +33,4 @@ if ( ! isset( $merged_filters ) )
 
 if ( ! isset( $wp_current_filter ) )
 	$wp_current_filter = array();
+
