@@ -13,7 +13,7 @@
 | | | | # wp-includes/load.php                    | | | |
 | | | └-------------------------------------------┘ | | |
 | | |                                               | | |
-| | |  wp_fix_server_vars() < wp-includes/load.php  | | |
+| | |  wp_fix_server_vars() @wp-includes/load.php  | | |
 | | |                                               | | |
 | | | ┌ require_once -----------------------------┐ | | |
 | | | | # wp-includes/functions.php               | | | |
@@ -23,7 +23,7 @@
 | | | | └---------------------------------------┘ | | | |
 | | | └-------------------------------------------┘ | | |
 | | |                                               | | |
-| | |  wp_guess_url() < wp-includes/functions.php   | | |
+| | |  wp_guess_url() @wp-includes/functions.php   | | |
 | | |                                               | | |
 | | |  -> wp-admin/setup-config.php                 | | |
 | | |                                               | | |
@@ -49,23 +49,23 @@
 | | | # wp-includes/version.php
 | | └---------------------------
 | |
-| |  wp_initial_constants() < wp-includes/default-constants.php
+| |  wp_initial_constants() @wp-includes/default-constants.php
 | |
-| |  wp_check_php_mysql_versions() < wp-includes/load.php
+| |  wp_check_php_mysql_versions() @wp-includes/load.php
 | |
-| |  wp_unregister_GLOBALS() < wp-includes/load.php
+| |  wp_unregister_GLOBALS() @wp-includes/load.php
 | |
-| |  wp_fix_server_vars() < wp-includes/load.php
+| |  wp_fix_server_vars() @wp-includes/load.php
 | |
-| |  wp_favicon_request() < wp-includes/load.php
+| |  wp_favicon_request() @wp-includes/load.php
 | |
-| |  wp_maintenance() < wp-includes/load.php
+| |  wp_maintenance() @wp-includes/load.php
 | |     |
 | |     ├ include ---------------┐
 | |     | # .maintenance
 | |     ├------------------------┘
 | |     |
-| |     └ wp_load_translations_early() < wp-includes/load.php
+| |     └ wp_load_translations_early() @wp-includes/load.php
 | |         |
 | |         ├ require -------------------┐
 | |         | # wp-includes/version.php
@@ -101,14 +101,14 @@
 | |         | # wp-includes/plugin.php
 | |         ├----------------------------┘
 | |         |
-| |         └ load_textdomain() < wp-includes/l10n.php
+| |         └ load_textdomain() @wp-includes/l10n.php
 | |             |
-| |             ├ apply_filters( 'override_load_textdomain' ) < wp-includes/plugin.php
+| |             ├ apply_filters( 'override_load_textdomain' ) @wp-includes/plugin.php
 | |             |   |
-| |             |   └ _wp_call_all_hook() < wp-includes/plugin.php
+| |             |   └ _wp_call_all_hook() @wp-includes/plugin.php
 | |             |
-| |             ├ do_action( 'load_textdomain' ) < wp-includes/plugin.php
+| |             ├ do_action( 'load_textdomain' ) @wp-includes/plugin.php
 | |             |   |
-| |             |   └ _wp_call_all_hook() < wp-includes/plugin.php
+| |             |   └ _wp_call_all_hook() @wp-includes/plugin.php
 | |             |
-| |             └ new MO() < wp-includes/pomo/mo.php
+| |             └ new MO() @wp-includes/pomo/mo.php < Gettext_Translations @wp-includes/pomo/translations.php
