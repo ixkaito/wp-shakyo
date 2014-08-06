@@ -13,7 +13,7 @@
 | | | | # wp-includes/load.php                    | | | |
 | | | └-------------------------------------------┘ | | |
 | | |                                               | | |
-| | |  wp_fix_server_vars() @wp-includes/load.php  | | |
+| | |  wp_fix_server_vars() @wp-includes/load.php   | | |
 | | |                                               | | |
 | | | ┌ require_once -----------------------------┐ | | |
 | | | | # wp-includes/functions.php               | | | |
@@ -23,7 +23,7 @@
 | | | | └---------------------------------------┘ | | | |
 | | | └-------------------------------------------┘ | | |
 | | |                                               | | |
-| | |  wp_guess_url() @wp-includes/functions.php   | | |
+| | |  wp_guess_url() @wp-includes/functions.php    | | |
 | | |                                               | | |
 | | |  -> wp-admin/setup-config.php                 | | |
 | | |                                               | | |
