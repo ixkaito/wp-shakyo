@@ -111,4 +111,8 @@
 | |             |   |
 | |             |   └ _wp_call_all_hook() @wp-includes/plugin.php
 | |             |
-| |             └ new MO() @wp-includes/pomo/mo.php < Gettext_Translations @wp-includes/pomo/translations.php
+| |             └ new MO() @wp-includes/pomo/mo.php
+| |                 < class Gettext_Translations @wp-includes/pomo/translations.php
+| |                     < class Translations @wp-includes/pomo/translations.php
+| |                         |
+| |                         └ new Translation_Entry() @wp-includes/pomo/entry.php
