@@ -37,71 +37,87 @@
 | └----------------------------------------------------------------------┘ |
 └--------------------------------------------------------------------------┘
 
-┌------------------------------------------------------
-| # wp-admin/setup-config.php
-|
-| ┌ require ------------------------------------------
-| | # wp-settings.php
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/load.php
-| | └---------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/default-constants.php
-| | └---------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/version.php
-| | └---------------------------
-| |
-| |  wp_initial_constants() @wp-includes/default-constants.php
-| |
-| |  wp_check_php_mysql_versions() @wp-includes/load.php
-| |
-| |  wp_unregister_GLOBALS() @wp-includes/load.php
-| |
-| |  wp_fix_server_vars() @wp-includes/load.php
-| |
-| |  wp_favicon_request() @wp-includes/load.php
-| |
-| |  wp_maintenance() @wp-includes/load.php
-| |   |
-| |   └ [true] .maintenance not exists or WP_INSTALLING defined
-| |
-| |  timer_start() @wp-includes/load.php
-| |
-| |  wp_debug_mode() @wp-includes/load.php
-| |   |
-| |   └ [false] WP_DEBUG
-| |
-| |  [false] WP_CACHE
-| |
-| |  wp_set_lang_dir() @wp-includes/load.php
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/compat.php
-| | └-----------------------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/functions.php
-| | └-----------------------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/class-wp.php
-| | └-----------------------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/class-wp-error.php
-| | └-----------------------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/plugin.php
-| | └-----------------------------------------
-| |
-| | ┌ require --------------------------------
-| | | # wp-includes/pomo/mo.php
-| | └-----------------------------------------
+┌---------------------------------------------------------------------┐
+| # wp-admin/setup-config.php                                         |
+|                                                                     |
+| ┌ require --------------------------------------------------------┐ |
+| | # wp-settings.php                                               | |
+| |                                                                 | |
+| | ┌ require ----------------┐                                     | |
+| | | # wp-includes/load.php  |                                     | |
+| | └-------------------------┘                                     | |
+| |                                                                 | |
+| | ┌ require ----------------------------┐                         | |
+| | | # wp-includes/default-constants.php |                         | |
+| | └-------------------------------------┘                         | |
+| |                                                                 | |
+| | ┌ require ------------------┐                                   | |
+| | | # wp-includes/version.php |                                   | |
+| | └---------------------------┘                                   | |
+| |                                                                 | |
+| |  wp_initial_constants() @wp-includes/default-constants.php      | |
+| |                                                                 | |
+| |  wp_check_php_mysql_versions() @wp-includes/load.php            | |
+| |                                                                 | |
+| |  wp_unregister_GLOBALS() @wp-includes/load.php                  | |
+| |                                                                 | |
+| |  wp_fix_server_vars() @wp-includes/load.php                     | |
+| |                                                                 | |
+| |  wp_favicon_request() @wp-includes/load.php                     | |
+| |                                                                 | |
+| |  wp_maintenance() @wp-includes/load.php                         | |
+| |   |                                                             | |
+| |   └ [true] .maintenance not exists or WP_INSTALLING defined     | |
+| |                                                                 | |
+| |  timer_start() @wp-includes/load.php                            | |
+| |                                                                 | |
+| |  wp_debug_mode() @wp-includes/load.php                          | |
+| |   |                                                             | |
+| |   └ [false] WP_DEBUG                                            | |
+| |                                                                 | |
+| |  [false] WP_CACHE                                               | |
+| |                                                                 | |
+| |  wp_set_lang_dir() @wp-includes/load.php                        | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | |
+| | | # wp-includes/compat.php                                    | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | | 
+| | | # wp-includes/functions.php                                 | | |
+| | |                                                             | | |
+| | | ┌ require ------------------------------------------------┐ | | |
+| | | | # wp-includes/option.php                                | | | |
+| | | └---------------------------------------------------------┘ | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | |
+| | | # wp-includes/class-wp.php                                  | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | |
+| | | # wp-includes/class-wp-error.php                            | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | |
+| | | # wp-includes/plugin.php                                    | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | |
+| | | # wp-includes/pomo/mo.php                                   | | |
+| | |                                                             | | |
+| | | ┌ require_once -------------------------------------------┐ | | |
+| | | | # wp-includes/pomo/translations.php                     | | | |
+| | | |                                                         | | | |
+| | | | ┌ require_once ---------------------------------------┐ | | | |
+| | | | | # wp-includes/pomo/entry.php                        | | | | |
+| | | | └-----------------------------------------------------┘ | | | |
+| | | └---------------------------------------------------------┘ | | |
+| | |                                                             | | |
+| | | ┌ require_once -------------------------------------------┐ | | |
+| | | | # wp-includes/pomo/streams.php                          | | | |
+| | | └---------------------------------------------------------┘ | | |
+| | └-------------------------------------------------------------┘ | |
 
 
 
