@@ -312,7 +312,7 @@ function wp_set_lang_dir() {
 			 */
 			define( 'WP_LANG_DIR', WP_CONTENT_DIR . '/languages' );
 			if ( !defined( 'LANGDIR' ) ) {
-				// Old static relative path maintained for limited backwards compatiblility - won't work in some cases
+				// Old static relative path maintained for limited backwards compatibility - won't work in some cases
 				define( 'LANGDIR', 'wp-content/languages' );
 			}
 		} else {

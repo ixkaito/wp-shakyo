@@ -49,3 +49,16 @@ wp_favicon_request();
 
 // Check if we're in maintenance mode.
 wp_maintenance();
+
+// Start loading timer.
+timer_start();
+
+// Check if we're in WP_DEBUG mode.
+wp_debug_mode();
+
+// For an advanced caching plugin to use. Uses a static drop-in because you would only want one.
+if ( WP_CACHE )
+	WP_DEBUG ? include( WP_CONTENT_DIR . '/advanced-cache.php' ) : @include( WP_CONTENT_DIR . '/advanced-cache.php' );
+
+// Define WP_LANG_DIR if not set.
+wp_set_lang_dir();
