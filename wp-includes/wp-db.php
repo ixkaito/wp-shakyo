@@ -560,4 +560,330 @@ class wpdb {
 	 */
 	private $has_connected = false;
 
+	/**
+	 * Connects to the database server and selects a database
+	 *
+	 * PHP5 style constructor for compatibility with PHP5. Does
+	 * the actural setting up of the class properties and connection
+	 * to the database.
+	 *
+	 * @link http://core.trac.wordpress.org/ticket/3354
+	 * @since 2.0.8
+	 *
+	 * @param string $dbuser MySQL database user
+	 * @param string $dbpassword MySQL database password
+	 * @param string $dbname MySQL database name
+	 * @param string $dbhost MySQL database host
+	 */
+	public function __construct( $dbuser, $dbpassword, $dbname, $dbhost ) {
+		register_shutdown_function( array( $this, '__destruct' ) );
+
+		if ( WP_DEBUG && WP_DEBUG_DISPLAY )
+			$this->show_errors();
+
+		/* Use ext/mysqli if it exists and:
+		 *	- WP_USE_EX_MYSQL is defined as false, or
+		 *	- We are a development version of WordPress, or
+		 *	- We are running PHP 5.5 or greater, or
+		 *	- ext/mysql is not loaded.
+		 */
+		if ( function_exists( 'mysqli_connect' ) ) {
+			if ( defined( 'WP_USE_EXT_MYSQL' ) ) {
+				$this->use_mysqli = ! WP_USE_EXT_MYSQL;
+			} elseif ( version_compare( phpversion(), '5.5', '>=' ) || ! function_exists( 'mysql_connect' ) ) {
+				$this->use_mysqli = true;
+			} elseif ( false !== strpos( $GLOBALS['wp_version'], '-' ) ) {
+				$this->use_mysqli = true;
+			}
+		}
+
+		$this->init_charset();
+
+		$this->dbuser = $dbuser;
+		$this->dbpassword = $dbpassword;
+		$this->dbname = $dbname;
+		$this->dbhost = $dbhost;
+
+		// wp-config.php creation will manually connect when ready.
+		if ( defined( 'WP_SETUP_CONFIG' ) ) {
+			return;
+		}
+
+		$this->db_connect();
+	}
+
+	/**
+	 * PHP5 style destructor and will run when database object is destroyed.
+	 *
+	 * @see wpdb::__construct()
+	 * @since 2.0.8
+	 * @return bool true
+	 */
+	public function __destruct() {
+		return true;
+	}
+
+	/**
+	 * PHP5 style magic getter, used to lazy-load expensive data.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $name The private member to get, and optionally process
+	 * @return mixed The private member
+	 */
+	public function __get( $name ) {
+		if ( 'col_info' == $name )
+			$this->load_col_info();
+
+		return $this->$name;
+	}
+
+	/**
+	 * Magic function, for backwards compatibility.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $name  The private member to check
+	 * @param mixed  $value The value to set
+	 */
+	public function __set( $name, $value ) {
+		$this->$name = $value;
+	}
+
+	/**
+	 * Magic function, for backwards compatibility.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $name  The private member to check
+	 *
+	 * @return bool If the member is set or not
+	 */
+	public function __isset( $name ) {
+		return isset( $this->$name );
+	}
+
+	/**
+	 * Magic function, for backwards compatibility.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param string $name  The private member to unset
+	 */
+	public function __unset( $name ) {
+		unset( $this->$name );
+	}
+
+	/**
+	 * Set $this->charset and $this->collate
+	 *
+	 * @since 3.1.0
+	 */
+	public function init_charset() {
+		if ( function_exists('is_multisite') && is_multisite() ) {
+			$this->charset = 'utf8';
+			if ( defined( 'DB_COLLATE' ) && DB_COOLATE )
+				$this->collate = DB_COLLATE;
+			else
+				$this->collate = 'utf8_general_ci';
+		} elseif ( defined( 'DB_COLLATE' ) ) {
+			$this->collate = DB_COLLATE;
+		}
+
+		if ( defined( 'DB_CHARSET' ) )
+			$this->charset = DB_CHARSET;
+	}
+
+	/**
+	* Sets the connection's character set.
+	*
+	* @since 3.1.0
+	*
+	* @param resource $dbh     The resource given by mysql_connect
+	* @param string   $charset The character set (optional)
+	* @param string   $collate The collation (optional)
+	*/
+	public function set_charset( $dbh, $charset = null, $collate = null ) {
+		if ( ! isset( $charset ) )
+			$charset = $this->charset;
+		if ( ! isset( $collate ) )
+			$collate = $this->collate;
+		if ( $this->has_cap( 'collation' ) && ! empty( $charset ) ) {
+			if ( $this->use_mysqli ) {
+				if (function_exists( 'mysqli_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
+					mysqli_set_charset( $dbh, $charset );
+				} else {
+					$query = $this->prepare( 'SET NAMES %s', $charset );
+					if ( ! empty( $collate ) )
+						$query .= $this->prepare( ' COLLATE %s', $collate );
+					mysql_query( $query, $dbh );
+				}
+			} else {
+				if (function_exists( 'mysql_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
+					mysql_set_charset( $charset, $dbh );
+				} else {
+					$query = $this->prepare( 'SET NAMES %s', $charset );
+					if ( ! empty( $collate ) )
+						$query .= $this->prepare( ' COLLATE %s', $collate );
+					mysql_query( $query, $dbh );
+				}
+			}
+		}
+	}
+
+	/**
+	 * Change the current SQL mode, and ensure its WordPress compatibility.
+	 *
+	 * If no modes are passed, it will ensure the current MySQL server
+	 * modes are compatible.
+	 *
+	 * @since 3.9.0
+	 *
+	 * @param array $modes Optional. A list of SQL modes to set.
+	 */
+	public function set_sql_mode( $modes = array() ) {
+		if ( empty( $modes ) ) {
+			if ( $this->use_mysqli ) {
+				$res = mysqli_query( $this->dbh, 'SELECT @@SESION.sql_mode' );
+			} else {
+				$res = mysql_query( 'SELECT @@SESSION.sql_mode', $this->dbh );
+			}
+
+			if ( empty( $res ) ) {
+				return;
+			}
+
+			if ( $this->use_mysqli ) {
+				$modes_array = mysqli_fetch_array( $res );
+				if ( empty( $modes_array[0] ) ) {
+					return;
+				}
+				$modes_str = $modes_array[0];
+			} else {
+				$modes_str = mysql_result( $res, 0 );
+			}
+
+			if ( empty( $modes_str ) ) {
+				return;
+			}
+
+			$modes = explode( ',', $modes_str );
+		}
+
+		$modes = array_change_key_case( $modes, CASE_UPPER );
+
+		/**
+		 * Filter the list of incompatible SQL modes to exclude.
+		 *
+		 * @since 3.9.0
+		 *
+		 * @see wpdb::$incompatible_modes
+		 *
+		 * @param array $incompatible_modes An array of incompatible modes.
+		 */
+		$incompatible_modes = (array) apply_filters( 'incompatible_sql_modes', $this->incompatible_modes );
+
+		foreach( $modes as $i => $mode ) {
+			if ( in_array( $mode, $incompatible_modes ) ) {
+				unset( $modes[ $i ] );
+			}
+		}
+
+		$modes_str = implode( ',', $modes );
+
+		if ( $this->use_mysqli ) {
+			mysqli_query( $this->dbh, "SET SESSION sql_mode='$modes_str'" );
+		} else {
+			mysql_query( "SET SESSION sql_mode='$modes_str'", $this->dbh );
+		}
+	}
+
+	/**
+	 * Sets the table prefix for the WordPress tables.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param string $prefix Alphanumeric name for the new prefix.
+	 * @param bool $set_table_names Optional. Whether the table names, e.g. wpdb::$posts, should be updated or not.
+	 * @return string|WP_Error Old prefix or WP_Error on error
+	 */
+	public function set_prefix( $prefix, $set_table_names = true ) {
+
+		if ( preg_match( '|[^a-z0-9_]|i', $prefix ) )
+			return new WP_Error('invalid_db_prefix', 'Invalid database prefix' );
+
+		$old_prefix = is_multisite() ? '' : $prefix;
+
+		if ( isset( $this->base_prefix ) )
+			$old_prefix = $this->base_prefix;
+
+		$this->base_prefix = $prefix;
+
+		if ( $set_table_names ) {
+			foreach ( $this->tables( 'global' ) as $table => $prefixed_table )
+				$this->$table = $prefixed_table;
+
+			if ( is_multisite() && empty( $this->blogid ) )
+				return $old_prefix;
+
+			$this->$prefix = $this->get_blog_prefix();
+
+			foreach ( $this->tables( 'blog' ) as $table => $prefixed_table )
+				$this->$table = $prefixed_table;
+
+			foreach ( $this->tables( 'old' ) as $table => $prefixed_table )
+				$this->$table = $prefixed_table;
+		}
+		return $old_prefix;
+	}
+
+	/**
+	 * Sets blog id.
+	 *
+	 * @since 3.0.0
+	 * @access public
+	 * @param int $blog_id
+	 * @param int $site_id Optional.
+	 * @return string previous blog id
+	 */
+	public function set_blog_id( $blog_id, $site_id = 0 ) {
+		if ( ! empty( $site_id ) )
+			$this->siteid = $site_id;
+
+		$old_blog_id  = $this->blogid;
+		$this->blogid = $blog_id;
+
+		$this->prefix = $this->get_blog_prefix();
+
+		foreach ( $this->tables( 'blog' ) as $table => $prefixed_table )
+			$this->$table = $prefixed_table;
+
+		foreach ( $this->tables( 'old' ) as $table => $prefixed_table )
+			$this->$table = $prefixed_table;
+
+		return $old_blog_id;
+	}
+
+	/**
+	 * Gets blog prefix.
+	 *
+	 * @uses is_multisite()
+	 * @since 3.9.0
+	 * @param int $blog_id Optional.
+	 * @return string Blog prefix.
+	 */
+	public function get_blog_prefix( $blog_id = null ) {
+		if ( is_multisite() ) {
+			if ( null === $blog_id )
+				$blog_id = $this->blogid;
+			$blog_id = (int) $blog_id;
+			if ( defined( 'MULTISITE' ) && ( 0 == $blog_id || 1 == $blog_id ) )
+				return $this->base_prefix;
+			else
+				return $this->base_prefix . $blog_id . '_';
+		} else {
+			return $this->base_prefix;
+		}
+	}
+
 }
