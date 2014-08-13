@@ -886,4 +886,163 @@ class wpdb {
 		}
 	}
 
+	/**
+	 * Returns an array of WordPress tables.
+	 *
+	 * Also allows for the CUSTOM_USER_TABLE and CUSTOM_USER_META_TABLE to
+	 * override the WordPress users and usermeta tables that would otherwise
+	 * be determined by the prefix.
+	 *
+	 * The scope argument can take one of the following:
+	 *
+	 * 'all' - returns 'all' and 'global' tables. No old tables are returned.
+	 * 'blog' - returns the blog-level tables for the queried blog.
+	 * 'global' - returns the  global tables for the installation, returning multisite tables only if running multisite.
+	 * 'ms_global' - returns the multisite global tables, regardless if current installation is multisite.
+	 * 'old' - returns tables which are deprecated.
+	 *
+	 * @since 3.0.0
+	 * @uses wpdb::$tables
+	 * @uses wpdb::$old_tables
+	 * @uses wpdb::$global_tables
+	 * @uses wpdb::$ms_global_tables
+	 * @uses is_multisite()
+	 *
+	 * @param string $scope Optional. Can be all, global, ms_global, blog, or old tables. Defaults to all.
+	 * @param bool $prefix Optional. WHether to include table prefixes. Default true. If blog
+	 *	prefix is requested, then the custom users and usermeta tables will be mapped.
+	 * @param int $blog_id Optional. The blog_id to prefix. Defaults to wpdb::$blogid. Used only when prefix is requested.
+	 * @return array Table names. When a prefix is requested, the key is the unprefixed table name.
+	 */
+	public function tables( $scope = 'all', $prefix = true, $blog_id = 0 ) {
+		switch ( $scope ) {
+			case 'all' :
+				$tables = array_merge( $this->global_tables, $this->tables );
+				if ( is_multisite() )
+					$tables = array_merge( $tables, $this->ms_global_tables );
+				break;
+			case 'blog' :
+				$tables = $this->tables;
+				break;
+			case 'global' :
+				$tables = $this->global_tables;
+				if ( is_multisite() )
+					$tables = array_merge( $tables, $this->ms_global_tables );
+				break;
+			case 'ms_global' :
+				$tables = $this->ms_global_tables;
+				break;
+			case 'old' :
+				$tables = $this->old_tables;
+				break;
+			default :
+				return array();
+		}
+
+		if ( $prefix ) {
+			if ( ! $blog_id )
+				$blog_id = $this->blogid;
+			$blog_prefix = $this->get_blog_prefix( $blog_id );
+			$base_prefix = $this->base_prefix;
+			$global_tables = array_merge( $this->global_tables, $this->ms_global_tables );
+			foreach ( $tables as $k => $table ) {
+				if ( in_array( $table, $global_tables ) )
+					$tables[ $table ] = $base_prefix . $table;
+				else
+					$tables[ $table ] = $blog_prefix . $table;
+				unset( $tables[ $k ] );
+			}
+
+			if ( isset( $tables['users'] ) && defined( 'CUSTOM_USER_TABLE' ) )
+				$tables['users'] = CUSTOM_USER_TABLE;
+
+			if ( isset( $tables['usermeta'] ) && defined( 'CUSTOM_USER_META_TABLE' ) )
+				$tables['usermeta'] = CUSTOM_USER_META_TABLE;
+		}
+
+		return $tables;
+	}
+
+	/**
+	 * Selects a database using the current database connection.
+	 *
+	 * The database name will be changed based on the current database
+	 * connection. On failure, the execution will bail and display an DB error.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string $db MySQL database name
+	 * @param resource $dbh Optional link identifier.
+	 * @return null Always null.
+	 */
+	public function select( $db, $dbh = null ) {
+		if ( is_null($dbh) )
+			$dbh = $this->dbh;
+
+		if ( $this->use_mysqli ) {
+			$success = @mysqli_select_db( $dbh, $db );
+		} else {
+			$success = @mysql_select_db( $db, $dbh );
+		}
+		if ( ! $success ) {
+			$this->ready = false;
+			if ( ! did_action( 'template_redirect' ) ) {
+				wp_load_translations_early();
+				$this->bail( sprintf( __( '<h1>Can&#8217;t select database</h1>
+<p>We were able to connect to the database server (which means your username and password is okay) but not able to select the <code>%1$s</code> database.</p>
+<ul>
+<li>Are you sure it exists?</li>
+<li>Does the user <code>%2$s</code> have permission to use the <code>%1$s</code> database?</li>
+<li>On some systems the name of your database is prefixed with your username, so it would be like <code>username_%1$s</code>. Could that be the problem?</li>
+</ul>
+<p>If you don\'t know how to set up a database you should <strong>contact your host</strong>. If all else fails you may find help at the <a href="https://wordpress.org/support/">WordPress Support Forums</a>.</p>' ), htmlspecialchars( $db, ENT_QUOTES ), htmlspecialchars( $this->dbuser, ENT_QUOTES ) ), 'db_select_fail' );
+			}
+			return;
+		}
+	}
+
+	/**
+	 * Do not use, deprecated.
+	 *
+	 * Use esc_sql() or wpdb::prepare() instead.
+	 *
+	 * @since 2.8.0
+	 * @deprecated 3.6.0
+	 * @see wpdb::prepare
+	 * @see esc_sql()
+	 * @access private
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	function _weak_escape( $string ) {
+		if ( func_num_args() === 1 && function_exists( '_deprecated_function' ) )
+			_deprecated_function( __METHOD__, '3.6', 'wpdb::prepare() or esc_sql()' );
+		return addslashes( $string );
+	}
+
+	/**
+	 * Real escape, using mysqli_real_escape_string() or mysql_real_escape_string()
+	 *
+	 * @see mysqli_real_escape_string()
+	 * @see mysql_real_escape_string()
+	 * @since 2.8.0
+	 * @access private
+	 *
+	 * @param  string $string to escape
+	 * @return string escaped
+	 */
+	function _real_escape( $string ) {
+		if ( $this->dbh ) {
+			if ( $this->use_mysqli ) {
+				return mysqli_real_escape_string( $this->dbh, $string );
+			} else {
+				return mysql_real_escape_string( $string, $this->dbh );
+			}
+		}
+
+		$class = get_class( $this );
+		_doing_it_wrong( $class, "$class must set a database connection for use with escaping.", E_USER_NOTICE );
+		return addslashes( $string );
+	}
 }
