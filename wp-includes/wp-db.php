@@ -1045,4 +1045,157 @@ class wpdb {
 		_doing_it_wrong( $class, "$class must set a database connection for use with escaping.", E_USER_NOTICE );
 		return addslashes( $string );
 	}
+
+	/**
+	 * Escape data. Works on arrays.
+	 *
+	 * @uses wpdb::_real_escape()
+	 * @since 2.8.0
+	 * @access private
+	 *
+	 * @param  string|array $data
+	 * @return string|array escaped
+	 */
+	function _escape( $data ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $k => $v ) {
+				if ( is_array($v) )
+					$data[$k] = $this->_escape( $v );
+				else
+					$data[$k] = $this->_real_escape( $v );
+			}
+		} else {
+			$data = $this->_real_escape( $data );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Do not use, deprecated.
+	 *
+	 * Use esc_sql() or wpdb::prepare() instead.
+	 *
+	 * @since 0.71
+	 * @deprecated 3.6.0
+	 * @see wpdb::prepare()
+	 * @see esc_sql()
+	 *
+	 * @param mixed $data
+	 * @return mixed
+	 */
+	public function escape( $data ) {
+		if ( func_num_args() === 1 && function_exists( '_deprecated_function' ) )
+			_deprecated_function( __METHOD__, '3.6', 'wpdb::prepare() or esc_sql()' );
+		if ( is_array( $data ) ) {
+			foreach ( $data as $k => $v ) {
+				if ( is_array( $v ) )
+					$data[$k] = $this->escape( $v, 'recursive' );
+				else
+					$data[$k] = $this->_weak_escape( $v, 'internal' );
+			}
+		} else {
+			$data = $this->_weak_escape( $data, 'internal' );
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Escapes content by reperence for insertion into the database, for security
+	 *
+	 * @uses wpdb::_real_escape()
+	 * @since 2.3.0
+	 * @param string $string to escape
+	 * @return void
+	 */
+	public function escape_by_ref( &$string ) {
+		if ( ! is_float( $string ) )
+			$string = $this->_real_escape( $string );
+	}
+
+	/**
+	 * Prepares a SQL query for safe execution. Uses sprintf()-like syntax.
+	 *
+	 * The following directives can be used in the query format string:
+	 *   %d (integer)
+	 *   %f (float)
+	 *   %s (string)
+	 *   %% (literal percentage sign - no argument needed)
+	 *
+	 * All of %d, %f, and %s are to be left unquoted in the query string and they need an argument passed for them.
+	 * Literals (%) as parts of the query must be properly written as %%.
+	 *
+	 * This function only supports a small subset of the sprintf syntas; it only supports %d (integer), %f (float), and %s (string).
+	 * Does not support sign, padding, alignment, width or precision specifiers.
+	 * Does not support argument numbering/swapping.
+	 *
+	 * May be called like {@link http://php.net/sprintf sprintf()} or like {@link http://php.net/vsprintf vsprintf()}.
+	 *
+	 * Both %d and %s should be left unquoted in the query string.
+	 *
+	 * <code>
+	 * wpdb::prepare( "SELECT * FROM `table` WHERE `column` = %s AND `field` = %d", 'foo', 1337 )
+	 * wpdb::prepare( "SELECT DATE_FORMAT(`field`, '%%c') FROM `table` WHERE `column` = %s", 'foo' );
+	 * </code>
+	 *
+	 * @link http://php.net/sprintf Description of syntax.
+	 * @since 2.3.0
+	 *
+	 * @param string $query Query statement with sprintf()-like placeholders
+	 * @param array|mixed $args The array of variables to substitute into the query's placeholders if being called like
+	 *	{@link http://php.net/vsprintf vsprintf()}, or the first variable to substitute into the query's placeholders if
+	 *	being called like {@link http://php.net/sprintf sprintf()}.
+	 * @param mixed $args,... further variables to substitute into the query's placeholders if being called like
+	 *	{@link http://php.net/sprintf sprintf()}.
+	 * @return null|false|string Sanitized query string, null if there is no query, false if there is an error and string
+	 *	if here was something to prepare
+	 */
+	public function prepare( $query, $args ) {
+		if ( is_null( $query ) )
+			return;
+
+		// This is not meant to be foolproof -- but it will catch obviously incorrect usage.
+		if ( strpos( $query, '%' ) === false ) {
+			_doing_it_wrong( 'wpdb::prepare', sprintf( __( 'The query argument of %s must have a placeholder.' ), 'wpdb::prepare()' ), '3.9' );
+		}
+
+		$args = func_get_args();
+		array_shift( $args );
+		// If args were passed as an array (as in vsprintf), move them up
+		if ( isset( $args[0] ) && is_array($args[0]) )
+			$args = $args[0];
+		$query = str_replace( "'%s'", '%s', $query ); // in case someone mistakenly already singlequoted it
+		$query = str_replace( '"%s"', '%s', $query ); // doublequote unquoting
+		$query = preg_replace( '|(?<!%)%f|' , '%F', $query ); // Force floats to be locale unaware
+		$query = preg_replace( '|(?<!%)%s|', "'%s'", $query ); // quote the strings, avoiding escaped string like %%s
+		array_walk( $args, array( $this, 'escaped_by_ref' ) );
+		return @vsprintf( $query, $args );
+	}
+
+	/**
+	 * First half of escaping for LIKE special characters % and _ before preparing for MySQL.
+	 *
+	 * Use this only before wpdg::prepare() or esc_sql(). Reversing the order is very bad for security.
+	 *
+	 * Example Prepared Statement:
+	 *  $wild = '%';
+	 *  $find = 'only 43% of planets';
+	 *  $like = $wild . $wpdb->esc_like( $find ) . $wild;
+	 *  $sql  = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE post_content LIKE %s", $like );
+	 *
+	 * Example Escape Chain:
+	 *  $sql  = esc_sql( $wpdb->esc_like( $input ) );
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $text The raw text to be escaped. The input typed by the user should have no
+	 *                     extra or deleted slashes.
+	 * @return string Text in the form of a LIKE phrase. The output is not SQL safe. Call $wpdb::prepare()
+	 *                or real_escape next.
+	 */
+	public function esc_like( $text ) {
+		return addcslashes( $text, '_%\\' );
+	}
 }
