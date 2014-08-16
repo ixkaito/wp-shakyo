@@ -5,7 +5,7 @@
  * Original code from {@link http://php.justinvincent.com Justin Vincent (justin@visunet.ie)}
  *
  * @package WordPress
- * @subpackage Databse
+ * @subpackage Database
  * @since 0.71
  */
 
@@ -203,7 +203,7 @@ class wpdb {
 	var $ready = false;
 
 	/**
-	 * {@internal Missing Description}}
+	 * {@internal Missing Description}
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -248,7 +248,7 @@ class wpdb {
 	 *
 	 * @since 3.0.0
 	 * @access private
-	 * @see wpdb:: tables()
+	 * @see wpdb::tables()
 	 * @var array
 	 */
 	var $global_tables = array( 'users', 'usermeta' );
@@ -274,7 +274,7 @@ class wpdb {
 	public $comments;
 
 	/**
-	 * WordPress Comments Metadata table
+	 * WordPress Comment Metadata table
 	 *
 	 * @since 2.9.0
 	 * @access public
@@ -345,8 +345,8 @@ class wpdb {
 	 */
 	public $term_taxonomy;
 
-	/**
-	 * Clobal and Multisite tables
+	/*
+	 * Global and Multisite tables
 	 */
 
 	/**
@@ -368,7 +368,7 @@ class wpdb {
 	public $users;
 
 	/**
-	 * WordPress Blogs table
+	 * Multisite Blogs table
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -377,7 +377,7 @@ class wpdb {
 	public $blogs;
 
 	/**
-	 * WordPress Blog Version table
+	 * Multisite Blog Versions table
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -386,7 +386,7 @@ class wpdb {
 	public $blog_versions;
 
 	/**
-	 * WordPress Registration Log table
+	 * Multisite Registration Log table
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -395,7 +395,7 @@ class wpdb {
 	public $registration_log;
 
 	/**
-	 * WordPress Signups table
+	 * Multisite Signups table
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -404,7 +404,7 @@ class wpdb {
 	public $signups;
 
 	/**
-	 * WordPress Sites table
+	 * Multisite Sites table
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -413,7 +413,7 @@ class wpdb {
 	public $site;
 
 	/**
-	 * WordPress Sitewide Terms table
+	 * Multisite Sitewide Terms table
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -456,7 +456,7 @@ class wpdb {
 	public $charset;
 
 	/**
-	 * Database table columns charset
+	 * Database table columns collate
 	 *
 	 * @since 2.2.0
 	 * @access public
@@ -564,7 +564,7 @@ class wpdb {
 	 * Connects to the database server and selects a database
 	 *
 	 * PHP5 style constructor for compatibility with PHP5. Does
-	 * the actural setting up of the class properties and connection
+	 * the actual setting up of the class properties and connection
 	 * to the database.
 	 *
 	 * @link http://core.trac.wordpress.org/ticket/3354
@@ -582,10 +582,10 @@ class wpdb {
 			$this->show_errors();
 
 		/* Use ext/mysqli if it exists and:
-		 *	- WP_USE_EX_MYSQL is defined as false, or
-		 *	- We are a development version of WordPress, or
-		 *	- We are running PHP 5.5 or greater, or
-		 *	- ext/mysql is not loaded.
+		 *  - WP_USE_EXT_MYSQL is defined as false, or
+		 *  - We are a development version of WordPress, or
+		 *  - We are running PHP 5.5 or greater, or
+		 *  - ext/mysql is not loaded.
 		 */
 		if ( function_exists( 'mysqli_connect' ) ) {
 			if ( defined( 'WP_USE_EXT_MYSQL' ) ) {
@@ -643,7 +643,7 @@ class wpdb {
 	 *
 	 * @since 3.5.0
 	 *
-	 * @param string $name  The private member to check
+	 * @param string $name  The private member to set
 	 * @param mixed  $value The value to set
 	 */
 	public function __set( $name, $value ) {
@@ -682,7 +682,7 @@ class wpdb {
 	public function init_charset() {
 		if ( function_exists('is_multisite') && is_multisite() ) {
 			$this->charset = 'utf8';
-			if ( defined( 'DB_COLLATE' ) && DB_COOLATE )
+			if ( defined( 'DB_COLLATE' ) && DB_COLLATE )
 				$this->collate = DB_COLLATE;
 			else
 				$this->collate = 'utf8_general_ci';
@@ -695,14 +695,14 @@ class wpdb {
 	}
 
 	/**
-	* Sets the connection's character set.
-	*
-	* @since 3.1.0
-	*
-	* @param resource $dbh     The resource given by mysql_connect
-	* @param string   $charset The character set (optional)
-	* @param string   $collate The collation (optional)
-	*/
+	 * Sets the connection's character set.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param resource $dbh     The resource given by mysql_connect
+	 * @param string   $charset The character set (optional)
+	 * @param string   $collate The collation (optional)
+	 */
 	public function set_charset( $dbh, $charset = null, $collate = null ) {
 		if ( ! isset( $charset ) )
 			$charset = $this->charset;
@@ -710,16 +710,16 @@ class wpdb {
 			$collate = $this->collate;
 		if ( $this->has_cap( 'collation' ) && ! empty( $charset ) ) {
 			if ( $this->use_mysqli ) {
-				if (function_exists( 'mysqli_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
+				if ( function_exists( 'mysqli_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
 					mysqli_set_charset( $dbh, $charset );
 				} else {
 					$query = $this->prepare( 'SET NAMES %s', $charset );
 					if ( ! empty( $collate ) )
 						$query .= $this->prepare( ' COLLATE %s', $collate );
-					mysql_query( $query, $dbh );
+					mysqli_query( $query, $dbh );
 				}
 			} else {
-				if (function_exists( 'mysql_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
+				if ( function_exists( 'mysql_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
 					mysql_set_charset( $charset, $dbh );
 				} else {
 					$query = $this->prepare( 'SET NAMES %s', $charset );
@@ -744,7 +744,7 @@ class wpdb {
 	public function set_sql_mode( $modes = array() ) {
 		if ( empty( $modes ) ) {
 			if ( $this->use_mysqli ) {
-				$res = mysqli_query( $this->dbh, 'SELECT @@SESION.sql_mode' );
+				$res = mysqli_query( $this->dbh, 'SELECT @@SESSION.sql_mode' );
 			} else {
 				$res = mysql_query( 'SELECT @@SESSION.sql_mode', $this->dbh );
 			}
@@ -826,7 +826,7 @@ class wpdb {
 			if ( is_multisite() && empty( $this->blogid ) )
 				return $old_prefix;
 
-			$this->$prefix = $this->get_blog_prefix();
+			$this->prefix = $this->get_blog_prefix();
 
 			foreach ( $this->tables( 'blog' ) as $table => $prefixed_table )
 				$this->$table = $prefixed_table;
@@ -868,7 +868,7 @@ class wpdb {
 	 * Gets blog prefix.
 	 *
 	 * @uses is_multisite()
-	 * @since 3.9.0
+	 * @since 3.0.0
 	 * @param int $blog_id Optional.
 	 * @return string Blog prefix.
 	 */
@@ -897,7 +897,7 @@ class wpdb {
 	 *
 	 * 'all' - returns 'all' and 'global' tables. No old tables are returned.
 	 * 'blog' - returns the blog-level tables for the queried blog.
-	 * 'global' - returns the  global tables for the installation, returning multisite tables only if running multisite.
+	 * 'global' - returns the global tables for the installation, returning multisite tables only if running multisite.
 	 * 'ms_global' - returns the multisite global tables, regardless if current installation is multisite.
 	 * 'old' - returns tables which are deprecated.
 	 *
@@ -909,8 +909,8 @@ class wpdb {
 	 * @uses is_multisite()
 	 *
 	 * @param string $scope Optional. Can be all, global, ms_global, blog, or old tables. Defaults to all.
-	 * @param bool $prefix Optional. WHether to include table prefixes. Default true. If blog
-	 *	prefix is requested, then the custom users and usermeta tables will be mapped.
+	 * @param bool $prefix Optional. Whether to include table prefixes. Default true. If blog
+	 * 	prefix is requested, then the custom users and usermeta tables will be mapped.
 	 * @param int $blog_id Optional. The blog_id to prefix. Defaults to wpdb::$blogid. Used only when prefix is requested.
 	 * @return array Table names. When a prefix is requested, the key is the unprefixed table name.
 	 */
@@ -1050,7 +1050,7 @@ class wpdb {
 	 * Escape data. Works on arrays.
 	 *
 	 * @uses wpdb::_real_escape()
-	 * @since 2.8.0
+	 * @since  2.8.0
 	 * @access private
 	 *
 	 * @param  string|array $data
@@ -1102,7 +1102,7 @@ class wpdb {
 	}
 
 	/**
-	 * Escapes content by reperence for insertion into the database, for security
+	 * Escapes content by reference for insertion into the database, for security
 	 *
 	 * @uses wpdb::_real_escape()
 	 * @since 2.3.0
@@ -1126,7 +1126,7 @@ class wpdb {
 	 * All of %d, %f, and %s are to be left unquoted in the query string and they need an argument passed for them.
 	 * Literals (%) as parts of the query must be properly written as %%.
 	 *
-	 * This function only supports a small subset of the sprintf syntas; it only supports %d (integer), %f (float), and %s (string).
+	 * This function only supports a small subset of the sprintf syntax; it only supports %d (integer), %f (float), and %s (string).
 	 * Does not support sign, padding, alignment, width or precision specifiers.
 	 * Does not support argument numbering/swapping.
 	 *
@@ -1144,12 +1144,12 @@ class wpdb {
 	 *
 	 * @param string $query Query statement with sprintf()-like placeholders
 	 * @param array|mixed $args The array of variables to substitute into the query's placeholders if being called like
-	 *	{@link http://php.net/vsprintf vsprintf()}, or the first variable to substitute into the query's placeholders if
-	 *	being called like {@link http://php.net/sprintf sprintf()}.
+	 * 	{@link http://php.net/vsprintf vsprintf()}, or the first variable to substitute into the query's placeholders if
+	 * 	being called like {@link http://php.net/sprintf sprintf()}.
 	 * @param mixed $args,... further variables to substitute into the query's placeholders if being called like
-	 *	{@link http://php.net/sprintf sprintf()}.
+	 * 	{@link http://php.net/sprintf sprintf()}.
 	 * @return null|false|string Sanitized query string, null if there is no query, false if there is an error and string
-	 *	if here was something to prepare
+	 * 	if there was something to prepare
 	 */
 	public function prepare( $query, $args ) {
 		if ( is_null( $query ) )
@@ -1168,15 +1168,15 @@ class wpdb {
 		$query = str_replace( "'%s'", '%s', $query ); // in case someone mistakenly already singlequoted it
 		$query = str_replace( '"%s"', '%s', $query ); // doublequote unquoting
 		$query = preg_replace( '|(?<!%)%f|' , '%F', $query ); // Force floats to be locale unaware
-		$query = preg_replace( '|(?<!%)%s|', "'%s'", $query ); // quote the strings, avoiding escaped string like %%s
-		array_walk( $args, array( $this, 'escaped_by_ref' ) );
+		$query = preg_replace( '|(?<!%)%s|', "'%s'", $query ); // quote the strings, avoiding escaped strings like %%s
+		array_walk( $args, array( $this, 'escape_by_ref' ) );
 		return @vsprintf( $query, $args );
 	}
 
 	/**
 	 * First half of escaping for LIKE special characters % and _ before preparing for MySQL.
 	 *
-	 * Use this only before wpdg::prepare() or esc_sql(). Reversing the order is very bad for security.
+	 * Use this only before wpdb::prepare() or esc_sql().  Reversing the order is very bad for security.
 	 *
 	 * Example Prepared Statement:
 	 *  $wild = '%';
