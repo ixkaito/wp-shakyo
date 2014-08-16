@@ -46,8 +46,8 @@ if ( ! isset( $wp_current_filter ) )
  * <code>
  * // Our filter callback function
  * function example_callback( $string, $arg1, $arg2 ) {
- *  // (maybe) modify $string
- *  return $string;
+ *	// (maybe) modify $string
+ *	return $string;
  * }
  * add_filter( 'example_filter', 'example_callback', 10, 3 );
  *
@@ -70,46 +70,46 @@ if ( ! isset( $wp_current_filter ) )
  * @param mixed  $var   Additional variables passed to the functions hooked to <tt>$tag</tt>.
  * @return mixed The filtered value after all hooked functions are applied to it.
  */
-function apply_filter( $tag, $value ) {
+function apply_filters( $tag, $value ) {
 	global $wp_filter, $merged_filters, $wp_current_filter;
 
 	$args = array();
 
 	// Do 'all' actions first.
-	if ( isset($wp_filter['all']) ) {
+	if ( isset( $wp_filter['all'] ) ) {
 		$wp_current_filter[] = $tag;
 		$args = func_get_args();
-		_wp_call_all_hook($args);
+		_wp_call_all_hook( $args );
 	}
 
-	if ( !isset($wp_filter[$tag]) ) {
-		if ( isset($wp_filter['all']) )
-			array_pop($wp_current_filter);
+	if ( ! isset( $wp_filter[$tag] ) ) {
+		if ( isset( $wp_filter['all'] ) )
+			array_pop( $wp_current_filter );
 		return $value;
 	}
 
-	if ( !isset($wp_filter['all']) )
+	if ( ! isset( $wp_filter['all'] ) )
 		$wp_current_filter[] = $tag;
 
 	// Sort.
-	if ( !isset( $merged_filters[ $tag ] ) ) {
-		ksort($wp_filter[$tag]);
+	if ( ! isset( $merged_filters[ $tag ] ) ) {
+		ksort( $wp_filter[$tag] );
 		$merged_filters[ $tag ] = true;
 	}
 
 	reset( $wp_filter[ $tag ] );
 
-	if ( empty($args) )
+	if ( empty( $args ) )
 		$args = func_get_args();
 
 	do {
-		foreach( (array) current($wp_filter[$tag]) as $the_ )
-			if ( !is_null($the_['function']) ){
+		foreach( (array) current( $wp_filter[$tag] ) as $the_ )
+			if ( ! is_null( $the_['function'] ) ){
 				$args[1] = $value;
-				$value = call_user_func_array($the_['function'], array_slice($args, 1, (int) $the_['accepted_args']));
+				$value = call_user_func_array( $the_['function'], array_slice( $args, 1, (int) $the_['accepted_args'] ) );
 			}
 
-	} while ( next($wp_filter[$tag]) !== false );
+	} while ( next( $wp_filter[$tag] ) !== false );
 
 	array_pop( $wp_current_filter );
 
@@ -128,64 +128,64 @@ function apply_filter( $tag, $value ) {
  *
  * @since 1.2.0
  *
- * @see apply_fiters() This function works similar with the exception that nothing
- *                     is returned and only the functions or methods are called.
+ * @see apply_filters() This function works similar with the exception that nothing
+ *                      is returned and only the functions or methods are called.
  * @global array $wp_filter  Stores all of the filters
  * @global array $wp_actions Increments the amount of times action was triggered.
  *
  * @param string $tag The name of the action to be executed.
- * @param mixed  $tag Optional. Additional arguments which are passed on to the
+ * @param mixed  $arg Optional. Additional arguments which are passed on to the
  *                    functions hooked to the action. Default empty.
  * @return null Will return null if $tag does not exist in $wp_filter array.
  */
-function do_action($tag, $arg = '') {
+function do_action( $tag, $arg = '' ) {
 	global $wp_filter, $wp_actions, $merged_filters, $wp_current_filter;
 
-	if ( ! isset($wp_actions[$tag]) )
+	if ( ! isset( $wp_actions[$tag] ) )
 		$wp_actions[$tag] = 1;
 	else
 		++$wp_actions[$tag];
 
 	// Do 'all' actions first
-	if ( isset($wp_filter['all']) ) {
+	if ( isset( $wp_filter['all'] ) ) {
 		$wp_current_filter[] = $tag;
 		$all_args = func_get_args();
-		_wp_call_all_hook($all_args);
+		_wp_call_all_hook( $all_args );
 	}
 
-	if ( !isset($wp_filter[$tag]) ) {
-		if ( isset($wp_filter['all']) )
-			array_pop($wp_current_filter);
+	if ( ! isset( $wp_filter[$tag] ) ) {
+		if ( isset( $wp_filter['all'] ) )
+			array_pop( $wp_current_filter );
 		return;
 	}
 
-	if ( !isset($wp_filter['all']) )
+	if ( ! isset( $wp_filter['all'] ) )
 		$wp_current_filter[] = $tag;
 
 	$args = array();
-	if ( is_array($tag) && 1 == count($arg) && isset($arg[0]) && is_object($arg[0]) ) // array(&$this)
+	if ( is_array( $arg ) && 1 == count( $arg ) && isset( $arg[0] ) && is_object( $arg[0] ) ) // array(&$this)
 		$args[] =& $arg[0];
 	else
 		$args[] = $arg;
 	for ( $a = 2; $a < func_num_args(); $a++ )
-		$args[] = func_get_arg($a);
+		$args[] = func_get_arg( $a );
 
 	// Sort
-	if ( !isset( $merged_filters[ $tag ] ) ) {
-		ksort($wp_filter[$tag]);
-		$merged_filters[ $tag ] = true;
+	if ( ! isset( $merged_filters[$tag] ) ) {
+		ksort( $wp_filter[$tag] );
+		$merged_filters[$tag] = true;
 	}
 
-	reset( $wp_filter[ $tag ] );
+	reset( $wp_filter[$tag] );
 
 	do {
-		foreach ( (array) current($wp_filter[$tag]) as $the_ )
-			if ( !is_null($the_['function']) )
-				call_user_func_array($the_['function'], array_slice($args, 0, (int) $the_['accepted_args']));
+		foreach ( (array) current( $wp_filter[$tag] ) as $the_ )
+			if ( ! is_null( $the_['function'] ) )
+				call_user_func_array( $the_['function'], array_slice( $args, 0, (int) $the_['accepted_args'] ) );
 
-	} while ( next($wp_filter[$tag]) !== false );
+	} while ( next( $wp_filter[$tag] ) !== false );
 
-	array_pop($wp_current_filter);
+	array_pop( $wp_current_filter );
 }
 
 /**
@@ -196,7 +196,7 @@ function do_action($tag, $arg = '') {
  *
  * This function is used internally for apply_filters(), do_action(), and
  * do_action_ref_array() and is not meant to be used from outside those
- * function. This function does not check for the existence of the all hook, so
+ * functions. This function does not check for the existence of the all hook, so
  * it will fail unless the all hook exists prior to this function call.
  *
  * @since 2.5.0
