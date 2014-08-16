@@ -191,7 +191,7 @@ class wpdb {
 	 * @access public
 	 * @var string
 	 */
-	public $base_prefix;
+	 public $base_prefix;
 
 	/**
 	 * Whether the database queries are ready to start executing.
@@ -203,7 +203,7 @@ class wpdb {
 	var $ready = false;
 
 	/**
-	 * {@internal Missing Description}
+	 * {@internal Missing Description}}
 	 *
 	 * @since 3.0.0
 	 * @access public
@@ -212,7 +212,7 @@ class wpdb {
 	public $blogid = 0;
 
 	/**
-	 * {@internal Missing Description}
+	 * {@internal Missing Description}}
 	 *
 	 * @since 3.0.0
 	 * @access public
