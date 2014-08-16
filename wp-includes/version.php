@@ -1,10 +1,10 @@
 <?php
 /**
- * The WorePress version string
+ * The WordPress version string
  *
  * @global string $wp_version
  */
-$wp_version = '4.0-beta2';
+$wp_version = '4.0-beta4';
 
 /**
  * Holds the WordPress DB revision, increments when changes are made to the WordPress DB schema.
@@ -18,7 +18,7 @@ $wp_db_version = 29188;
  *
  * @global string $tinymce_version
  */
-$tinymce_version = '4102-20140717';
+$tinymce_version = '4103-20140809';
 
 /**
  * Holds the required PHP version
