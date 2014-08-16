@@ -1198,4 +1198,134 @@ class wpdb {
 	public function esc_like( $text ) {
 		return addcslashes( $text, '_%\\' );
 	}
+
+	/**
+	 * Print SQL/DB error.
+	 *
+	 * @since 0.71
+	 * @global array $EZSQL_ERROR Stores error information of query and error string
+	 *
+	 * @param string $str The error to display
+	 * @return bool False if the showing of errors is disabled.
+	 */
+	public function print_error( $str = '' ) {
+		global $EZSQL_ERROR;
+
+		if ( !$str ) {
+			if ( $this->use_mysqli ) {
+				$str = mysqli_error( $this->dbh );
+			} else {
+				$str = mysql_error( $this->dbh );
+			}
+		}
+		$EZSQL_ERROR[] = array( 'query' => $this->last_query, 'error_str' => $str );
+
+		if ( $this->suppress_errors )
+			return false;
+
+		wp_load_translations_early();
+
+		if ( $caller = $this->get_caller() )
+			$error_str = sprintf( __( 'WordPress database error %1$s for query %2$s made by %3$s' ), $str, $this->last_query, $caller );
+		else
+			$error_str = sprintf( __( 'WordPress database error %1$s for query %2$s' ), $str, $this->last_query );
+
+		error_log( $error_str );
+
+		// Are we showing errors?
+		if ( ! $this->show_eorrors )
+			return false;
+
+		// If there is an error then take note of it
+		if ( is_multisite() ) {
+			$msg = "WordPress database error: [$str]\n{$this->last_query}\n";
+			if ( defined( 'ERRORLOGFILE' ) )
+				error_log( $msg, 3, ERRORLOGFILE );
+			if ( defined( 'DIEONDBERROR' ) )
+				wp_die( $msg );
+		} else {
+			$str   = htmlspecialchars( $str, ENT_QUOTES );
+			$query = htmlspecialchars( $this->last_query, ENT_QUOTES );
+
+			print "<div id='error'>
+			<p class ='wpdberror'><strong>WordPress database error:</strong> [$str]<br />
+			<code>$query</code></p>
+			</div>";
+		}
+	}
+
+	/**
+	 * Enables showing of database errors.
+	 *
+	 * This function should be used only to enable showing of errors.
+	 * wpdb::hide_errors() should be used instead for hiding of errors. However,
+	 * this function can be used to enable and disable showing of database
+	 * errors.
+	 *
+	 * @since 0.71
+	 * @see wpdb::hide_errors()
+	 *
+	 * @param bool $show Whether to show or hide errors
+	 * @return bool Old value for showing errors.
+	 */
+	public function show_errors( $show = true ) {
+		$errors = $this->show_errors;
+		$this->show_errors = $show;
+		return $errors;
+	}
+
+	/**
+	 * Disables showing of databae errors.
+	 *
+	 * By default database errors are not shown.
+	 *
+	 * @since 0.71
+	 * @see wpdb::show_errors()
+	 *
+	 * @return bool Whether showing of errors was active
+	 */
+	public function hide_errors() {
+		$show = $this->show_errors;
+		$this->show_errors = false;
+		return $show;
+	}
+
+	/**
+	 * Whether to suppress database errors.
+	 *
+	 * By default database errors are suppressed, with a simple
+	 * call to this function they can be enabled.
+	 *
+	 * @since 2.5.0
+	 * @see wpdb::hide_errors()
+	 * @param bool $suppress Optional. New value. Defaults to true.
+	 * @return bool Old value
+	 */
+	public function suppress_errors( $suppress = true ) {
+		$errors = $this->suppress_errors;
+		$this->suppress_errors = (bool) $suppress;
+		return $errors;
+	}
+
+	/**
+	 * Kill cached query results.
+	 *
+	 * @since 0.71
+	 * @return void
+	 */
+	public function flush() {
+		$this->last_result = array();
+		$this->col_info    = null;
+		$this->last_query  = null;
+		$this->rows_affected = $this->num_rows = 0;
+		$this->last_error  = '';
+
+		if ( is_resource( $this->result ) ) {
+			if ( $this->use_mysqli ) {
+				mysqli_free_result( $this->result );
+			} else {
+				mysql_free_result( $this->result );
+			}
+		}
+	}
 }
