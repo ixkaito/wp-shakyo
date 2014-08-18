@@ -1522,4 +1522,188 @@ class wpdb {
 		dead_db();
 	}
 
+	/**
+	 * Perform a MySQL database query, using current database connection.
+	 *
+	 * More information can be found on the codex page.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string $query Database query
+	 * @return int|false Number of rows affected/selected or false on error
+	 */
+	public function query( $query ) {
+		if ( ! $this->ready )
+			return false;
+
+		/**
+		 * Filter the database query.
+		 *
+		 * Some queries are made before the plugins have been loaded,
+		 * and thus cannot be filtered with this method.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param string $query Database query.
+		 */
+		$query = apply_filters( 'query', $query );
+
+		$this->flush();
+
+		// Log how the function was called
+		$this->func_call = "\$db->query(\"$query\")";
+
+		// Keep track of the last query for debug..
+		$this->last_query = $query;
+
+		$this->_do_query( $query );
+
+		// MySQL server has gone away, try to reconnect
+		$mysql_errno = 0;
+		if ( ! empty( $this->dbh ) ) {
+			if ( $this->use_mysqli ) {
+				$mysql_errno = mysqli_errno( $this->dbh );
+			} else {
+				$mysql_errno = mysql_errno( $this->dbh );
+			}
+		}
+
+		if ( empty( $this->dbh ) || 2006 == $mysql_errno ) {
+			if ( $this->check_connection() ) {
+				$this->_do_query( $query );
+			} else {
+				$this->insert_id = 0;
+				return false;
+			}
+		}
+
+		// If there is an error then take note of it..
+		if ( $this->use_mysqli ) {
+			$this->last_error = mysqli_error( $this->dbh );
+		} else {
+			$this->last_error = mysql_error( $this->dbh );
+		}
+
+		if ( $this->last_error ) {
+			// Clear insert_id on a subsequent failed insert.
+			if ( $this->insert_id && preg_match( '/^\s*(insert|replace)\s/i', $query ) )
+				$this->insert_id = 0;
+
+			$this->print_error();
+			return false;
+		}
+
+		if ( preg_match( '/^\s*(create|alter|truncate|drop)\s/i', $query ) ) {
+			$return_val = $this->result;
+		} elseif ( preg_match( '/^\s*(insert|delete|update|replace)\s/i', $query ) ) {
+			if ( $this->use_mysqli ) {
+				$this->rows_affected = mysqli_affected_rows( $this->dbh );
+			} else {
+				$this->rows_affected = mysql_affected_rows( $this->dbh );
+			}
+			// Take note of the insert_id
+			if ( preg_match( '/^\s*(insert|replace)\s/i', $query ) ) {
+				if ( $this->use_mysqli ) {
+					$this->insert_id = mysqli_insert_id( $this->dbh );
+				} else {
+					$this->insert_id = mysql_insert_id( $this->dbh );
+				}
+			}
+			// Return number of rows affected
+			$return_val = $this->mssql_rows_affected;
+		} else {
+			$num_rows = 0;
+			if ( $this->use_mysqli ) {
+				while ( $row = @mysqli_fetch_object( $this->result ) ) {
+					$this->last_result[$num_rows] = $row;
+					$num_rows++;
+				}
+			} else {
+				while ( $row = @mysql_fetch_object( $this->result ) ) {
+					$this->last_result[$num_rows] = $row;
+					$num_$rows++;
+				}
+			}
+
+			// Log number of rows the query returned
+			// and return number of rows selected
+			$this->num_rows = $num_rows;
+			$return_val     = $num_rows;
+		}
+
+		return $return_val;
+	}
+
+	/**
+	 * Internal function to perform the mysql_query() call.
+	 *
+	 * @since 3.9.0
+	 *
+	 * @access private
+	 * @see wpdb::query()
+	 *
+	 * @param string $query The query to run.
+	 */
+	private function _do_query( $query ) {
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
+			$this->timer_start();
+		}
+
+		if ( $this->use_mysqli ) {
+			$this->result = @mysqli_query( $this->dbh, $query );
+		} else {
+			$this->result = @mysql_query( $query, $this->dbh );
+		}
+		$this->num_queries++;
+
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
+			$this->queries[] = array( $query, $this->timer_stop(), $this->get_caller() );
+		}
+	}
+
+	/**
+	 * Insert a row into a table.
+	 *
+	 * <code>
+	 * wpdb::insert( 'table', array( 'column' => 'foo', 'field' => 'bar' ) )
+	 * wpdb::insert( 'table', array( 'column' => 'foo', 'field' => 1337 ), array( '%s', '%d' ) )
+	 * </code>
+	 *
+	 * @since 2.5.0
+	 * @see wpdb::prepare()
+	 * @see wpdb::$field_types
+	 * @see wp_set_wpdb_vars()
+	 *
+	 * @param string $table table name
+	 * @param array $data Data to insert (in column => value pairs). Both $data columns and $data values should be "raw" (neither should be SQL escaped).
+	 * @param array|string $format Optional. An array of formats to be mapped to each of the value in $data. If string, that format will be used for all of the values in $data.
+	 * 	A format is one of '%d', '%f', '%s' (integer, float, string). If omitted, all values in $data will be treated as strings unless otherwise specified in wpdb::$field_types.
+	 * @return int|false The number of rows inserted, or false on error.
+	 */
+	public function insert( $table, $data, $format = null ) {
+		return $this->_insert_replace_helper( $table, $data, $format, 'INSERT' );
+	}
+
+	/**
+	 * Replace a row into a table.
+	 *
+	 * <code>
+	 * wpdb::replace( 'table', array( 'column' => 'foo', 'field' => 'bar' ) )
+	 * wpdb::replace( 'table', array( 'column' => 'foo', 'field' => 1337 ), array( '%s', '%d' ) )
+	 * </code>
+	 *
+	 * @since 3.0.0
+	 * @see wpdb::prepare()
+	 * @see wpdb::$field_types
+	 * @see wp_set_wpdb_vars()
+	 *
+	 * @param string $table table name
+	 * @param array $data Data to insert (in column => value pairs). Both $data columns and $data values should be "raw" (neither should be SQL escaped).
+	 * @param array|string $format Optional. An array of formats to be mapped to each of the value in $data. If string, that format will be used for all of the values in $data.
+	 * 	A format is one of '%d', '%f', '%s' (integer, float, string). If omitted, all values in $data will be treated as strings unless otherwise specified in wpdb::$field_types.
+	 * @return int|false The number of rows affected, or false on error.
+	 */
+	public function replace( $table, $data, $format = null ) {
+		return $this->_insert_replace_helper( $table, $data, $format, 'REPLACE' );
+	}
 }
