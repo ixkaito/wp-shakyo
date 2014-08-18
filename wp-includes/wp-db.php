@@ -1328,4 +1328,198 @@ class wpdb {
 			}
 		}
 	}
+
+	/**
+	 * Connect to and select database.
+	 *
+	 * If $allow_bail is false, the lack of database connection will need
+	 * to be handled manually.
+	 *
+	 * @since 3.0.0
+	 * @since 3.9.0 $allow_bail parameter added.
+	 *
+	 * @param bool $allow_bail Optional. Allows the function to bail. Default true.
+	 * @return bool True with a successful connection, false on failure.
+	 */
+	public function db_connect( $allow_bail = true ) {
+
+		$this->is_mysql = true;
+
+		/*
+		 * Deprecated in 3.9+ when using MySQLi. No equivalent
+		 * $new_link parameter exists for mysqli_* functions.
+		 */
+		$new_link = defined( 'MYSQL_NEW_LINK' ) ? MYSQL_NEW_LINK : true;
+		$client_flags = defined( 'MYSQL_CLIENT_FLAGS' ) ? MYSQL_CLIENT_FLAGS : 0;
+
+		if ( $this->use_mysqli ) {
+			$this->dbh = mysqli_init();
+
+			// mysqli_real_connect doesn't support the host param including a port or socket
+			// like mysql_connect does. This duplicates how mysql_connect detects a port and/or socket file.
+			$port = null;
+			$socket = null;
+			$host = $this->dbhost;
+			$port_or_socket = strstr( $host, ':' );
+			if ( ! empty( $port_or_socket ) ) {
+				$host = substr( $host, 0, strpos( $host, ':' ) );
+				$port_or_socket = substr( $port_or_socket, 1 );
+				if ( 0 !== strpos( $port_or_socket, '/') ) {
+					$port = intval( $port_or_socket );
+					$maybe_socket = strstr( $port_or_socket, ':' );
+					if ( ! empty( $maybe_socket ) ) {
+						$socket = substr( $maybe_socket, 1 );
+					}
+				} else {
+					$socket = $port_or_socket;
+				}
+			}
+
+			if ( WP_DEBUG ) {
+				mysqli_real_connect( $this->dbh, $host, $this->dbuser, $this->dbpassword, null, $port, $socket, $client_flags );
+			} else {
+				@mysqli_real_connect( $this->dbh, $host, $this->dbuser, $this->dbpassword, null, $port, $socket, $client_flags );
+			}
+
+			if ( $this->dbh->connect_errno ) {
+				$this->dbh = null;
+
+				/* It's possible ext/mysqli is misconfigured. Fall back to ext/mysql if:
+				 *	- We haven't previously connected, and
+				 *	- WP_USE_EXT_MYSQL isn't set to false, and
+				 *	- ext/mysql is loaded.
+				 */
+				$attempt_fallback = true;
+
+				if ( $this->has_connected ) {
+					$attempt_fallback = false;
+				} else if ( defined( 'WP_USE_EXT_MYSQL' ) && ! WP_USE_EXT_MYSQL ) {
+					$attempt_fallback = false;
+				} else if ( ! function_exists( 'mysql_connect' ) ) {
+					$attempt_fallback = false;
+				}
+
+				if ( $attempt_fallback ) {
+					$this->use_mysqli = false;
+					$this->db_connect();
+				}
+			}
+		} else {
+			if ( WP_DEBUG ) {
+				$this->dbh = mysql_connect( $this->dbhost, $this->dbuser, $this->dbpassword, $new_link, $client_flags );
+			} else {
+				$this->dbh = @mysql_connect( $this->dbhost, $this->dbuser, $this->dbpassword, $new_link, $client_flags );
+			}
+		}
+
+		if ( ! $this->dbh && $allow_bail ) {
+			wp_load_translations_early();
+
+			// Load custom DB error template, if present.
+			if ( file_exists( WP_CONTENT_DIR . '/db-error.php' ) ) {
+				require_once( WP_CONTENT_DIR . '/db-error.php' );
+				die();
+			}
+
+			$this->bail( sprintf( __( "
+<h1>Error establishing a database connection</h1>
+<p>This either means that the username and password information in your <code>wp-config.php</code> file is incorrect or we can't contact the database server at <code>%s</code>. This could mean your host's database server is down.</p>
+<ul>
+	<li>Are you sure you have the correct username and password?</li>
+	<li>Are you sure that you have typed the correct hostname?</li>
+	<li>Are you sure that the database server is running?</li>
+</ul>
+<p>If you're unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href='https://wordpress.org/support/'>WordPress Support Forums</a>.</p>
+" ), htmlspecialchars( $this->dbhost, ENT_QUOTES ) ), 'db_connect_fail' );
+
+			return false;
+		} else if ( $this->dbh ) {
+			$this->has_connected = true;
+			$this->set_charset( $this->dbh );
+			$this->set_sql_mode();
+			$this->ready = true;
+			$this->select( $this->dbname, $this->dbh );
+
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check that the connection to the database is still up. If not, try to reconnect.
+	 *
+	 * If this function is unable to reconnect, it will forcibly die, or if after the
+	 * the template_redirect hook has been fired, return false instead.
+	 *
+	 * If $allow_bail is false, the lack of database connection will need
+	 * to be handled manually.
+	 *
+	 * @since 3.9.0
+	 *
+	 * @param bool $allow_bail Optional. Allows the function to bail. Default true.
+	 * @return bool True if the connection is up.
+	 */
+	public function check_connection( $allow_bail = true ) {
+		if ( $this->use_mysqli ) {
+			if ( @mysqli_ping( $this->dbh ) ) {
+				return true;
+			}
+		} else {
+			if ( @mysql_ping( $this->dbh ) ) {
+				return true;
+			}
+		}
+
+		$error_reporting = false;
+
+		// Disable warnings, as we don't want to see a multitude of "unable to connect" messages
+		if ( WP_DEBUG ) {
+			$error_reporting = error_reporting();
+			error_reporting( $error_reporting & ~E_WARNING );
+		}
+
+		for ( $tries = 1; $tries <= $this->reconnect_retries; $tries++ ) {
+			// On the last try, re-enable warnings. We want to see a single instance of the
+			// "unable to connect" message on the bail() screen, if it appears.
+			if ( $this->reconnect_retries === $tries && WP_DEBUG ) {
+				error_reporting( $error_reporting );
+			}
+
+			if ( $this->db_connect( false ) ) {
+				if ( $error_reporting ) {
+					error_reporting( $error_reporting );j
+				}
+
+				return true;
+			}
+
+			sleep( 1 );
+		}
+
+		// If template_redirect has already happend, it's too late for wp_die()/dead_db().
+		// Let's just return and hope for the best.
+		if ( did_action( 'template_redirect' ) ) {
+			return false;
+		}
+
+		if ( ! $allow_bail ) {
+			return false;
+		}
+
+		// We weren't able to reconnect, so we better bail.
+		$this->bail( sprintf( ( "
+<h1>Error reconnecting to the database</h1>
+<p>This means that we lost contact with the database server at <code>%s</code>. This could mean your host's database server is down.</p>
+<ul>
+	<li>Are you sure that the database server is running?</li>
+	<li>Are you sure that the database server is not under particularly heavy load?</li>
+</ul>
+<p>If you're unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href='https://wordpress.org/support/'>WordPress Support Forums</a>.</p>
+" ), htmlspecialchars( $this->dbhost, ENT_QUOTES ) ), 'db_connect_fail' );
+
+		// Call dead_db() if bail didn't die, because this database is no more. It has ceased to be (at least temporarily).
+		dead_db();
+	}
+
 }
