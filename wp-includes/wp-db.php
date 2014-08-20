@@ -1488,7 +1488,7 @@ class wpdb {
 
 			if ( $this->db_connect( false ) ) {
 				if ( $error_reporting ) {
-					error_reporting( $error_reporting );j
+					error_reporting( $error_reporting );
 				}
 
 				return true;
@@ -1621,7 +1621,7 @@ class wpdb {
 			} else {
 				while ( $row = @mysql_fetch_object( $this->result ) ) {
 					$this->last_result[$num_rows] = $row;
-					$num_$rows++;
+					$num_rows++;
 				}
 			}
 
