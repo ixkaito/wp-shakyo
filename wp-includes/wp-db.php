@@ -1987,4 +1987,202 @@ class wpdb {
 		}
 		return null;
 	}
+
+	/**
+	 * Load the column metadata from the last query.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @access protected
+	 */
+	protected function load_col_info() {
+		if ( $this->col_info )
+			return;
+
+		if ( $this->use_mysqli ) {
+			for ( $i = 0; $i < @mysqli_num_fields( $this->result ); $i++ ) {
+				$this->col_info[ $i ] = @mysqli_fetch_field( $this->result );
+			}
+		} else {
+			for ( $i = 0; $i < @mysql_num_fields( $this->result ); $i++ ) {
+				$this->col_info[ $i ] = @mysql_fetch_field( $this->result, $i );
+			}
+		}
+	}
+
+	/**
+	 * Retrieve column metadata from the last query.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string $info_type Optional. Type one of name, table, def, max_length, not_null, primary_key, multiple_key, unique_key, numeric, blob, type, unsigned, zerofill
+	 * @param int $col_offset Optional. 0: col name. 1: which table the col's in. 2: col's max length. 3: if the col is numeric. 4: col's type
+	 * @return mixed Column Results
+	 */
+	public function get_col_info( $info_type == 'name', $col_offset = -1 ) {
+		$this->load_col_info();
+
+		if ( $this->col_info ) {
+			if ( $col_offset == -1 ) {
+				$i = 0;
+				$new_array = array();
+				foreach ( (array) $this->col_info as $col ) {
+					$new_array[$i] = $col->{$info_type};
+					$i++;
+				}
+				return $new_array;
+			} else {
+				return $this->col_info[$col_offset]->{$info_type};
+			}
+		}
+	}
+
+	/**
+	 * Starts the timer, for debugging purposes.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return true
+	 */
+	public function timer_start() {
+		$this->time_start = microtime( true );
+		return true;
+	}
+
+	/**
+	 * Stops the debugging timer.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return float Total time spent on the query, in seconds
+	 */
+	public function timer_stop() {
+		return ( microtime( true ) - $this->time_start );
+	}
+
+	/**
+	 * Wraps errors in a nice header and footer and dies.
+	 *
+	 * Will not die if wpdb::$show_errors is false.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $message The Error message
+	 * @param string $error_code Optional. A Computer readable string to identify the error.
+	 * @return false|void
+	 */
+	public function bail( $message, $error_code = '500' ) {
+		if ( !$this->show_errors ) {
+			if ( class_exists( 'WP_Error' ) )
+				$this->error = new WP_Error($error_code, $message);
+			else
+				$this->error = $message;
+			return false;
+		}
+		wp_die($message);
+	}
+
+	/**
+	 * Whether MySQL database is at least the required minimun version.
+	 *
+	 * @since 2.5.0
+	 * @uses $wp_version
+	 * @uses $required_mysql_version
+	 *
+	 * @return WP_Error
+	 */
+	public function check_database_version() {
+		global $wp_version, $required_mysql_version;
+		// Make sure the server has the required MySQL version
+		if ( version_compare($this->db_version(), $required_mysql_version, '<') )
+			return new WP_Error('database_version', sprintf( __( '<strong>ERROR</strong>: WordPress %1$s requires MySQL %2$s or higher' ), $wp_version, $required_mysql_version ));
+	}
+
+	/**
+	 * Whether the database supports collation.
+	 *
+	 * Called when WordPress is generating the table scheme.
+	 *
+	 * @since 2.5.0
+	 * @deprecated 3.5.0
+	 * @deprecated Use wpdb::has_cap( 'collation' )
+	 *
+	 * @return bool True if collation is supported, false if version does not
+	 */
+	public function supports_collation() {
+		_deprecated_function( __FUNCTION__, '3.5', 'wpdb::has_cap( \'collation\' )' );
+		return $this->has_cap( 'collation' );
+	}
+
+	/**
+	 * The database character collate.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @return string The database character collate.
+	 */
+	public function get_charset_collate() {
+		$charset_collate = '';
+
+		if ( ! empty( $this->charset ) )
+			$charset_collate = "DEFAULT CHARACTER SET $this->charset";
+		if ( ! empty( $this->collate ) )
+			$charset_collate .= " COLLATE $this->collate";
+
+		return $charset_collate;
+	}
+
+	/**
+	 * Determine if a database supports a particular feature.
+	 *
+	 * @since 2.7.0
+	 * @see wpdb::db_version()
+	 *
+	 * @param string $db_cap The feature to check for.
+	 * @return bool
+	 */
+	public function has_cap( $db_cap ) {
+		$version = $this->db_version();
+
+		switch ( strtolower( $db_cap ) ) {
+			case 'collation' :    // @since 2.5.0
+			case 'group_concat' : // @since 2.7.0
+			case 'subqueries' :   // @since 2.7.0
+				return version_compare( $version, '4.1', '>=' );
+			case 'set_charset' :
+				return version_compare( $version, '5.0.7', '>=' );
+		};
+
+		return false;
+	}
+
+	/**
+	 * Retrieve the name of the function that called wpdb.
+	 *
+	 * Searches up the list of functions until it reaches
+	 * the one that would most logically had called this method.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return string The name of the calling function
+	 */
+	public function get_caller() {
+		return wp_debug_backtrace_summary( __CASE__ );
+	}
+
+	/**
+	 * The database version number.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @return false|string false on failure, version number on success
+	 */
+	public function db_version() {
+		if ( $this->use_mysqli ) {
+			$server_info = mysqli_get_server_info( $this->dbh );
+		} else {
+			$server_info = mysql_get_server_info( $this->dbh );
+		}
+		return preg_replace( '/[^0-9.].*/', '', $server_info );
+	}
 }
