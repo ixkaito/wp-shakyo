@@ -1931,4 +1931,60 @@ class wpdb {
 		}
 		return $new_array;
 	}
+
+	/**
+	 * Retrieve an entire SQL result set from the database (i.e., many rows)
+	 *
+	 * Executes a SQL query and retruns the entire SQL result.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string $query SQL query.
+	 * @param string $output Optional. Any of ARRAY_A | ARRAY_N | OBJECT | OBJECT_K constants. With one of the first three, return an array of rows indexed from 0 by SQL result row number.
+	 * 	Each row is an associative array (column => value, ...), a numerically indexed array (0 => value, ...), or an object. ( -> column = value ), respectively.
+	 * 	With OBJECT_K, return an associative array of row objects keyed by the value of each row's first column's value. Duplicate keys are discarded.
+	 * @return mixed Database query results
+	 */
+	public function get_results( $query = null, $output = OBJECT ) {
+		$this->func_call = "\$db->get_results(\"$query\", $output)";
+
+		if ( $query )
+			$this->query( $query );
+		else
+			return null;
+
+		$new_array = array();
+		if ( $output == OBJECT ) {
+			// Return an integer-keyed array of row objects
+			return $this->last_result;
+		} elseif ( $output == OBJECT_K ) {
+			// Return an array of row objects with keys from column 1
+			// (Duplicates are discarded)
+			foreach ( $this->last_result as $row ) {
+				$var_by_ref = get_object_vars( $row );
+				$key = array_shift( $var_by_ref );
+				if ( ! isset( $new_array[ $key ] ) )
+					$new_array[ $key ] = $row;
+			}
+			return $new_array;
+		} elseif ( $output == ARRAY_A || $output == ARRAY_N ) {
+			// Return an integer-keyed array of...
+			if ( $this->last_result ) {
+				foreach( (array) $this->last_result as $row ) {
+					if ( $output == ARRAY_N ) {
+						// ...integer-keyed row arrays
+						$new_array[] = array_values( get_object_vars( $row ) );
+					} else {
+						// ...column name-keyed row arrays
+						$new_array[] = get_object_vars( $row );
+					}
+				}
+			}
+			return $new_array;
+		} elseif ( strtoupper( $output ) === OBJECT ) {
+			// Back compat for OBJECT being previously case insensitive.
+			return $this->last_result;
+		}
+		return null;
+	}
 }
