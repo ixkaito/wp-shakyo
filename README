@@ -127,6 +127,26 @@
 | |   |                                                             | |
 | |   └ new wpdb() @wp-includes/wp-db.php                           | |
 | |                                                                 | |
+| |  wp_set_wpdb_vars() @wp-includes/load.php                       | |
+| |   |                                                             | |
+| |   └ is_wp_error() @wp-includes/class-wp-error.php               | |
+| |                                                                 | |
+| |  wp_start_object_cache() @wp-includes/load.php                  | |
+| |   |                                                             | |
+| |   ├ require_once ---------------------------------------------┐ | |
+| |   | # wp-includes/cache.php                                   | | |
+| |   └-----------------------------------------------------------┘ | |
+| |                                                                 | |
+| | ┌ require ----------------------------------------------------┐ | |
+| | | # wp-includes/default-filters.php                           | | |
+| | |                                                             | | |
+| | |  add_filter() @wp-includes/plugin.php                       | | |
+| | |                                                             | | |
+| | |                                                             | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| |                                                                 | |
+| |                                                                 | |
 | |                                                                 | |
 | |                                                                 | |
 
