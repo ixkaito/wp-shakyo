@@ -141,6 +141,8 @@
 | | | # wp-includes/default-filters.php                           | | |
 | | |                                                             | | |
 | | |  add_filter() @wp-includes/plugin.php                       | | |
+| | |   |                                                         | | |
+| | |   └ _wp_filter_build_unique_id @wp-includes/plugin.php      | | |
 | | |                                                             | | |
 | | |                                                             | | |
 | | └-------------------------------------------------------------┘ | |
