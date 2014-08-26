@@ -84,4 +84,24 @@ wp_start_object_cache();
 // Attach the default filters.
 require( ABSPATH . WPINC . '/default-filters.php' );
 
+// Initilize multisite if enabled.
+if ( is_multisite() ) {
+	require( ABSPATH . WPINC . '/ms-blogs.php' );
+	require( ABSPATH . WPINC . '/ms-settings.php' );
+} elseif ( ! defined( 'MULTISITE' ) ) {
+	define( 'MULTISITE', false );
+}
+
+register_shutdown_function( 'shutdown_action_hook' );
+
+// Stop most of WordPress from being loaded if we just want the basics.
+if ( SHORTINIT )
+	return false;
+
+// Load the L10n library.
+require_once( ABSPATH . WPINC . '/l10n.php' );
+
+// Run the installer if WordPress is not installed.
+wp_not_installed();
+
 var_dump( __FILE__ );

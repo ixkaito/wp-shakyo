@@ -144,8 +144,27 @@
 | | |   |                                                         | | |
 | | |   └ _wp_filter_build_unique_id() @wp-includes/plugin.php    | | |
 | | |                                                             | | |
-| | |                                                             | | |
 | | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| |  register_shutdown_function( 'shutdown_action_hook' )           | |
+| |   |                                                             | |
+| |   └ shutdown_action_hook() @wp-includes/load.php                | |
+| |      |                                                          | |
+| |      ├ do_action( 'shutdown' )                                  | |
+| |      |                                                          | |
+| |      └ wp_cache_close();                                        | |
+| |                                                                 | |
+| |  [false] SHORTINIT                                              | |
+| |                                                                 | |
+| | ┌ require_once -----------------------------------------------┐ | |
+| | | # wp-includes/l10n.php                                      | | |
+| | └-------------------------------------------------------------┘ | |
+| |                                                                 | |
+| |  wp_not_installed() @wp-includes/functions.php                  | |
+| |   |                                                             | |
+| |   ├ wp_cache_get() @wp-includes/cache.php                       | |
+| |   |                                                             | |
+| |   └                                                             | |
 | |                                                                 | |
 | |                                                                 | |
 | |                                                                 | |
