@@ -9,15 +9,15 @@
 | | ┌ require_once ----------------------------------------------------┐ | |
 | | | # wp-load.php                                                    | | |
 | | |                                                                  | | |
-| | |  [false] wp-config.php exists                                    | | |
+| | | [false] wp-config.php exists                                     | | |
 | | |                                                                  | | |
-| | |  [false] ../wp-config.php exists & ../wp-settings.php not exists | | |
+| | | [false] ../wp-config.php exists & ../wp-settings.php not exists  | | |
 | | |                                                                  | | |
 | | | ┌ require_once ------------------------------------------------┐ | | |
 | | | | # wp-includes/load.php                                       | | | |
 | | | └--------------------------------------------------------------┘ | | |
 | | |                                                                  | | |
-| | |  wp_fix_server_vars() @wp-includes/load.php                      | | |
+| | | wp_fix_server_vars() @wp-includes/load.php                       | | |
 | | |                                                                  | | |
 | | | ┌ require_once ------------------------------------------------┐ | | |
 | | | | # wp-includes/functions.php                                  | | | |
@@ -27,11 +27,11 @@
 | | | | └----------------------------------------------------------┘ | | | |
 | | | └--------------------------------------------------------------┘ | | |
 | | |                                                                  | | |
-| | |  wp_guess_url() @wp-includes/functions.php                       | | |
+| | | wp_guess_url() @wp-includes/functions.php                        | | |
 | | |                                                                  | | |
-| | |  [true] not requesting setup-config                              | | |
-| | |   |                                                              | | |
-| | |   └ -> wp-admin/setup-config.php                                 | | |
+| | | [true] not requesting setup-config                               | | |
+| | | |                                                                | | |
+| | | └ -> wp-admin/setup-config.php                                   | | |
 | | |                                                                  | | |
 | | └------------------------------------------------------------------┘ | |
 | └----------------------------------------------------------------------┘ |
@@ -55,29 +55,29 @@
 | | | # wp-includes/version.php |                                   | |
 | | └---------------------------┘                                   | |
 | |                                                                 | |
-| |  wp_initial_constants() @wp-includes/default-constants.php      | |
+| | wp_initial_constants() @wp-includes/default-constants.php       | |
 | |                                                                 | |
-| |  wp_check_php_mysql_versions() @wp-includes/load.php            | |
+| | wp_check_php_mysql_versions() @wp-includes/load.php             | |
 | |                                                                 | |
-| |  wp_unregister_GLOBALS() @wp-includes/load.php                  | |
+| | wp_unregister_GLOBALS() @wp-includes/load.php                   | |
 | |                                                                 | |
-| |  wp_fix_server_vars() @wp-includes/load.php                     | |
+| | wp_fix_server_vars() @wp-includes/load.php                      | |
 | |                                                                 | |
-| |  wp_favicon_request() @wp-includes/load.php                     | |
+| | wp_favicon_request() @wp-includes/load.php                      | |
 | |                                                                 | |
-| |  wp_maintenance() @wp-includes/load.php                         | |
-| |   |                                                             | |
-| |   └ [true] .maintenance not exists or WP_INSTALLING defined     | |
+| | wp_maintenance() @wp-includes/load.php                          | |
+| | |                                                               | |
+| | └ [true] .maintenance not exists or WP_INSTALLING defined       | |
 | |                                                                 | |
-| |  timer_start() @wp-includes/load.php                            | |
+| | timer_start() @wp-includes/load.php                             | |
 | |                                                                 | |
-| |  wp_debug_mode() @wp-includes/load.php                          | |
-| |   |                                                             | |
-| |   └ [false] WP_DEBUG                                            | |
+| | wp_debug_mode() @wp-includes/load.php                           | |
+| | |                                                               | |
+| | └ [false] WP_DEBUG                                              | |
 | |                                                                 | |
-| |  [false] WP_CACHE                                               | |
+| | [false] WP_CACHE                                                | |
 | |                                                                 | |
-| |  wp_set_lang_dir() @wp-includes/load.php                        | |
+| | wp_set_lang_dir() @wp-includes/load.php                         | |
 | |                                                                 | |
 | | ┌ require ----------------------------------------------------┐ | |
 | | | # wp-includes/compat.php                                    | | |
@@ -119,52 +119,63 @@
 | | | └---------------------------------------------------------┘ | | |
 | | └-------------------------------------------------------------┘ | |
 | |                                                                 | |
-| |  require_wp_db() @wp-includes/load.php                          | |
-| |   |                                                             | |
-| |   ├ require_once ---------------------------------------------┐ | |
-| |   | # wp-includes/wp-db.php                                   | | |
-| |   ├-----------------------------------------------------------┘ | |
-| |   |                                                             | |
-| |   └ new wpdb() @wp-includes/wp-db.php                           | |
+| | require_wp_db() @wp-includes/load.php                           | |
+| | |                                                               | |
+| | ├ require_once -----------------------------------------------┐ | |
+| | | # wp-includes/wp-db.php                                     | | |
+| | ├-------------------------------------------------------------┘ | |
+| | |                                                               | |
+| | └ new wpdb() @wp-includes/wp-db.php                             | |
 | |                                                                 | |
-| |  wp_set_wpdb_vars() @wp-includes/load.php                       | |
-| |   |                                                             | |
-| |   └ is_wp_error() @wp-includes/class-wp-error.php               | |
+| | wp_set_wpdb_vars() @wp-includes/load.php                        | |
+| | |                                                               | |
+| | └ is_wp_error() @wp-includes/class-wp-error.php                 | |
 | |                                                                 | |
-| |  wp_start_object_cache() @wp-includes/load.php                  | |
-| |   |                                                             | |
-| |   ├ require_once ---------------------------------------------┐ | |
-| |   | # wp-includes/cache.php                                   | | |
-| |   └-----------------------------------------------------------┘ | |
+| | wp_start_object_cache() @wp-includes/load.php                   | |
+| | |                                                               | |
+| | ├ require_once -----------------------------------------------┐ | |
+| | | # wp-includes/cache.php                                     | | |
+| | └-------------------------------------------------------------┘ | |
 | |                                                                 | |
 | | ┌ require ----------------------------------------------------┐ | |
 | | | # wp-includes/default-filters.php                           | | |
 | | |                                                             | | |
-| | |  add_filter() @wp-includes/plugin.php                       | | |
-| | |   |                                                         | | |
-| | |   └ _wp_filter_build_unique_id() @wp-includes/plugin.php    | | |
+| | | add_filter() @wp-includes/plugin.php                        | | |
+| | | |                                                           | | |
+| | | └ _wp_filter_build_unique_id() @wp-includes/plugin.php      | | |
 | | |                                                             | | |
 | | └-------------------------------------------------------------┘ | |
 | |                                                                 | |
-| |  register_shutdown_function( 'shutdown_action_hook' )           | |
+| | register_shutdown_function( 'shutdown_action_hook' )            | |
+| | |                                                               | |
+| | └ shutdown_action_hook() @wp-includes/load.php                  | |
 | |   |                                                             | |
-| |   └ shutdown_action_hook() @wp-includes/load.php                | |
-| |      |                                                          | |
-| |      ├ do_action( 'shutdown' )                                  | |
-| |      |                                                          | |
-| |      └ wp_cache_close();                                        | |
+| |   ├ do_action( 'shutdown' )                                     | |
+| |   |                                                             | |
+| |   └ wp_cache_close();                                           | |
 | |                                                                 | |
-| |  [false] SHORTINIT                                              | |
+| | [false] SHORTINIT                                               | |
 | |                                                                 | |
 | | ┌ require_once -----------------------------------------------┐ | |
 | | | # wp-includes/l10n.php                                      | | |
 | | └-------------------------------------------------------------┘ | |
 | |                                                                 | |
-| |  wp_not_installed() @wp-includes/load.php                       | |
-| |   |                                                             | |
-| |   ├ wp_cache_get() @wp-includes/cache.php                       | |
-| |   |                                                             | |
-| |   └                                                             | |
+| | wp_not_installed() @wp-includes/load.php                        | |
+| | |                                                               | |
+| | ├ [false] is_multisite() @wp-includes/load.php                  | |
+| | |                                                               | |
+| | ├ [false] is_blog_installed() @wp-includes/functions.php        | |
+| | | |                                                             | |
+| | | └ wp_cache_get() @wp-includes/cache.php                       | |
+| | |   |                                                           | |
+| | |   └ wp_cache_init() @wp-includes/cache.php                    | |
+| | |     |                                                         | |
+| | |     └ new WP_Object_Cache() @wp-includes/cache.php            | |
+| | |                                                               | |
+| | |                                                               | |
+| | ├ wp_cache_get() @wp-includes/cache.php                         | |
+| | |                                                               | |
+| | └                                                               | |
 | |                                                                 | |
 | |                                                                 | |
 | |                                                                 | |
