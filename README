@@ -160,7 +160,7 @@
 | | | # wp-includes/l10n.php                                      | | |
 | | └-------------------------------------------------------------┘ | |
 | |                                                                 | |
-| |  wp_not_installed() @wp-includes/functions.php                  | |
+| |  wp_not_installed() @wp-includes/load.php                       | |
 | |   |                                                             | |
 | |   ├ wp_cache_get() @wp-includes/cache.php                       | |
 | |   |                                                             | |
