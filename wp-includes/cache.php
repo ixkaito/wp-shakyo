@@ -63,7 +63,7 @@ function wp_cache_init() {
  * the cache contents.
  *
  * The Object Cache can be replaced by other caching mechanisms by placing files
- * in the wp-content folder which is looked at in wp-setting. If that file
+ * in the wp-content folder which is looked at in wp-settings. If that file
  * exists, then this file will not be included.
  *
  * @package WordPress
@@ -168,4 +168,163 @@ class WP_Object_Cache {
 	public function __unset( $name ) {
 		unset( $this->$name );
 	}
+
+	/**
+	 * Adds data to the cache if it doesn't already exist.
+	 *
+	 * @uses WP_Object_Cache::_exists Checks to see if the cache already has data.
+	 * @uses WP_Object_Cache::set Sets the data after the checking the cache
+	 *		contents existence.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int|sting $key What to call the contents in the cache
+	 * @param mixed $data The contents to store in the cache
+	 * @param string $group Where to group the cache contents
+	 * @param int $expire When to expire the cache contents
+	 * @return bool False if cache key and group already exist, true on success
+	 */
+	public function add( $key, $data, $group = 'default', $expire = 0 ) {
+		if ( wp_suspend_cache_addition() )
+			return false;
+
+		if ( empty( $group ) )
+			$group = 'default';
+
+		$id = $key;
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$id = $this->blog_prefix . $key;
+
+		if ( $this->_exists( $id, $group ) )
+			return false;
+
+		return $this->set( $key, $data, $group, (int) $expire );
+	}
+
+	/**
+	 * Sets the list of global groups.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param array $groups List of groups that are global.
+	 */
+	public function add_global_groups( $groups ) {
+		$groups = (array) $groups;
+
+		$groups = array_fill_keys( $groups, true );
+		$this->global_groups = array_merge( $this->global_groups, $groups );
+	}
+
+	/**
+	 * Decrement numeric cache item's value
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param int|string $key The cache key to increment
+	 * @param int $offset The amount by which to decrement the item's value. Default is 1.
+	 * @param string $group The group the key is in.
+	 * @return false|int False on failure, the item's new value on success.
+	 */
+	public function decr( $key, $offset = 1, $group = 'default' ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$key = $this->blog_prefix . $key;
+
+		if ( ! $this->_exists( $key, $group ) )
+			return false;
+
+		if ( ! is_numeric( $this->cache[ $group ][ $key ] ) )
+			$this->cache[ $group ][ $key ] = 0;
+
+		$offset = (int) $offset;
+
+		$this->cache[ $group ][ $key ] -= $offset;
+
+		if ( $this->cache[ $group ][ $key ] < 0 )
+			$this->cache[ $group ][ $key ] = 0;
+
+		return $this->cache[ $group ][ $key ];
+	}
+
+	/**
+	 * Remove the contents of the cache key in the group
+	 *
+	 * If the cache key does not exist in the group, then nothing will happen.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int|string $key What the contents in the cache are called
+	 * @param string $group Where the cache contents are grouped
+	 * @param bool $deprecated Deprecated.
+	 *
+	 * @return bool False if the contents weren't deleted and true on success
+	 */
+	public function delete( $key, $group = 'default', $deprecated = false ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$key = $this->blog_prefix . $key;
+
+		if ( ! $this->_exists( $key, $group ) )
+			return false;
+
+		unset( $this->cache[$group][$key] );
+		return true;
+	}
+
+	/**
+	 * Clears the object cache of all data
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return bool Always returns true
+	 */
+	public function flush() {
+		$this->cache = array();
+
+		return true;
+	}
+
+	/**
+	 * Retrieves the cache contents, if it exists
+	 *
+	 * The contents will be first attempted to be retrieved by searching by the
+	 * key in the cache group. If the cache is hit (success) then the contents
+	 * are returned.
+	 *
+	 * On failure, the number of cache misses will be incremented.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int|string $key What the contents in the cache are called
+	 * @param string $group Where the cache contents are grouped
+	 * @param string $force Whether to force a refetch rather than relying on the local cache (default is false)
+	 * @return bool|mixed False on failure to retrieve contents or the cache
+	 *		contents on success
+	 */
+	public function get( $key, $group = 'default', $force = false, &$found = null ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$key = $this->blog_prefix . $key;
+
+		if ( $this->_exists( $key, $group ) ) {
+			$found = true;
+			$this->cache_hits += 1;
+			if ( is_object($this->cache[$group][$key]) )
+				return clone $this->cache[$group][$key];
+			else
+				return $this->cache[$group][$key];
+		}
+
+		$found = false;
+		$this->cache_misses += 1;
+		return false;
+	}
+
+	/**
 }
