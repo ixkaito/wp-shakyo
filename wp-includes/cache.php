@@ -327,4 +327,35 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Increment numeric cache item's value
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param int|string $key The cache key to increment
+	 * @param int $offset The amount by which to incremnet the item's value. Default is 1.
+	 * @param string $group The group the key is in.
+	 * @return false|int False on failure, the item's new value on success.
+	 */
+	public function incr( $key, $offset = 1, $group = 'default' ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$key = $this->blog_prefix . $key;
+
+		if ( ! $this->_exists( $key, $group ) )
+			return false;
+
+		if ( ! is_numeric( $this->cache[ $group ][ $key ] ) )
+			$this->cache[ $group ][ $key ] = 0;
+
+		$offset = (int) $offset;
+
+		$this->cache[ $group ][ $key ] += $offset;
+
+		if ( $this->cache[ $group ][ $key ] < 0 )
+			$this->cache[ $group ][ $key ] = 0;
+
+		return $this->cache[ $group ][ $key ];
+	}
 }
