@@ -358,4 +358,30 @@ class WP_Object_Cache {
 
 		return $this->cache[ $group ][ $key ];
 	}
+
+	/**
+	 * Relplace the contents in the cache, if contents already exist
+	 *
+	 * @since 2.0.0
+	 * @see WP_Object_Cache::set()
+	 *
+	 * @param int|string $key What to call the contents in the cache
+	 * @param mixed $data The contents to store in the cache
+	 * @param string $group Where to group the cache contents
+	 * @param int $expire When to expire the cache contents
+	 * @return bool False if not exists, true if contents were replaced
+	 */
+	public function replace( $key, $data, $group = 'default', $expire = 0 ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		$id = $key;
+		if ( $this->multisite && ! isset( $this->global_group[ $group ] ) )
+			$id = $this->blog_prefix . $key;
+
+		if ( ! $this->_exists( $id, $group ) )
+			return false;
+
+		return $this->set( $key, $data, $group, (int) $expire );
+	}
 }
