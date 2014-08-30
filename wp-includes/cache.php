@@ -384,4 +384,20 @@ class WP_Object_Cache {
 
 		return $this->set( $key, $data, $group, (int) $expire );
 	}
+
+	/**
+	 * Reset keys
+	 *
+	 * @since 3.0.0
+	 * @deprecated 3.5.0
+	 */
+	public function reset() {
+		_deprecated_function( __FUNCTION__, '3.5', 'switch_to_blog()' );
+
+		// Clear out non-global caches since the blog ID has changed.
+		foreach ( array_keys( $this->cache ) as $group ) {
+			if ( ! isset( $this->global_groups[ $group ] ) )
+				unset( $this->cache[ $group ] );
+		}
+	}
 }
