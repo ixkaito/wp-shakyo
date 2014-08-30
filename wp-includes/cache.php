@@ -400,4 +400,38 @@ class WP_Object_Cache {
 				unset( $this->cache[ $group ] );
 		}
 	}
+
+	/**
+	 * Sets the data contents into the cache
+	 *
+	 * The cache contents is grouped by the $group parameter followed by the
+	 * $key. This allows for duplicated ids in unique groups. Therefore, naming of
+	 * the group should be used with care and should follow normal function
+	 * naming guideling outside of core WordPress usage.
+	 *
+	 * The $expire parameter is not used, because the cache will automatically
+	 * expire for each time a page is accessed and PHP finisheds. The method is
+	 * more for cache plugins which use files.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int|string $key What to call the contents in the cache
+	 * @param mixed $data The contents to store in the cache
+	 * @param string $group Where to group the cache contents
+	 * @param int $expire Not Used
+	 * @return bool Always returns true
+	 */
+	public function set( $key, $data, $group = 'default', $expire = 0 ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$key = $this->blog_prefix . $key;
+
+		if ( is_object( $data ) )
+			$data = clone $data;
+
+		$this->cache[$group][$key] = $data;
+		return true;
+	}
 }
