@@ -434,4 +434,24 @@ class WP_Object_Cache {
 		$this->cache[$group][$key] = $data;
 		return true;
 	}
+
+	/**
+	 * Echoes the stats of the caching.
+	 *
+	 * Ginves the cache hits, and cache misses. Also prints every cached group,
+	 * key and the data.
+	 *
+	 * @since 2.0.0
+	 */
+	public function stats() {
+		echo "<p>";
+		echo "<strong>Cache Hits:</strong> {$this->cache_hits}<br />";
+		echo "<strong>Cache Misses:</strong> {$this->cache_misses}<br />";
+		echo "</p>";
+		echo '<ul>';
+		foreach ($this->cache as $group => $cache) {
+			echo "<li><strong>Group:</strong> $group - ( " . number_format( strlen( serialize( $cache ) ) / 1024, 2 ) . 'k )</li>';
+		}
+		echo '</ul>';
+	}
 }
