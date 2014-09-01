@@ -454,4 +454,62 @@ class WP_Object_Cache {
 		}
 		echo '</ul>';
 	}
+
+	/**
+	 * Switch the interal blog id.
+	 *
+	 * This changes the blog id used to create keys in blog specific groups.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param int $blog_id Blog ID
+	 */
+	public function switch_to_blog( $blog_id ) {
+		$blog_id = (int) $blog_id;
+		$this->blog_prefix = $this->multisite ? $blog_id . ':' : '';
+	}
+
+	/**
+	 * Utility function to determine whether a key exists in the cache.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @access protected
+	 */
+	protected function _exists( $key, $group ) {
+		return isset( $this->cache[ $group ] ) && ( isset( $this->cache[ $group ][ $key ] ) || array_key_exists( $key, $this->cache[ $group ] ) );
+	}
+
+	/**
+	 * Sets up object properties; PHP 5 style constructor
+	 *
+	 * @since 2.0.8
+	 * @return null|WP_Object_Cache If cache is disabled, returns null.
+	 */
+	public function __construct() {
+		global $blog_id;
+
+		$this->multisite = is_multisite();
+		$this->blog_prefix = $this->multisite ? $blog_id . ':' : '';
+
+
+		/**
+		 * @todo This should be moved to the PHP4 style constructor, PHP5
+		 * already calls __destruct()
+		 */
+		register_shutdown_function( array( $this, '__destruct' ) );
+	}
+
+	/**
+	 * Will save the object cache before object is completely destroyed.
+	 *
+	 * Called upon object destruction, which should be when PHP ends.
+	 *
+	 * @since 2.0.8
+	 *
+	 * @return bool True vaule. Won't be used by PHP
+	 */
+	public function __destruct() {
+		return true;
+	}
 }
