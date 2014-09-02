@@ -83,7 +83,7 @@
 | | | # wp-includes/compat.php                                    | | |
 | | └-------------------------------------------------------------┘ | |
 | |                                                                 | |
-| | ┌ require ----------------------------------------------------┐ | | 
+| | ┌ require ----------------------------------------------------┐ | |
 | | | # wp-includes/functions.php                                 | | |
 | | |                                                             | | |
 | | | ┌ require ------------------------------------------------┐ | | |
@@ -166,12 +166,21 @@
 | | |                                                               | |
 | | ├ [false] is_blog_installed() @wp-includes/functions.php        | |
 | | | |                                                             | |
-| | | └ wp_cache_get() @wp-includes/cache.php                       | |
-| | |   |                                                           | |
-| | |   └ wp_cache_init() @wp-includes/cache.php                    | |
-| | |     |                                                         | |
-| | |     └ new WP_Object_Cache() @wp-includes/cache.php            | |
-| | |                                                               | |
+*** Maybe need `if ( function_exists( 'wp_cache_init' ) )` ************
+| | | ├ wp_cache_get() @wp-includes/cache.php                       | |
+***********************************************************************
+| | | |                                                             | |
+*** Maybe need `if ( function_exists( 'wp_cache_init' ) )` ************
+| | | ├ wp_cache_set() @wp-includes/cache.php                       | |
+***********************************************************************
+| | | |                                                             | |
+| | | ├ $wpdb->suppress_errors() @wp-includes/wp-db.php             | | <
+| | | |                                                             | |
+| | | ├ $wpdb->tables() @wp-includes/wp-db.php                      | |
+| | | |                                                             | |
+| | | ├ wp_load_translations_early() @wp-includes/load.php          | |
+| | | |                                                             | |
+| | | └ dead_db() @wp-includes/functions.php                        | |
 | | |                                                               | |
 | | ├ wp_cache_get() @wp-includes/cache.php                         | |
 | | |                                                               | |
@@ -185,7 +194,12 @@
 
 
 
-
+***********************************************************************
+| | | | |                                                           | |
+| | | | └ wp_cache_init() @wp-includes/cache.php                    | |
+| | | |   |                                                         | |
+| | | |   └ new WP_Object_Cache() @wp-includes/cache.php            | |
+***********************************************************************
 
 
 
