@@ -228,7 +228,7 @@
 | | | | |       |                                                                   | |
 | | | | |       └ new Translation_Entry() @wp-includes/pomo/entry.php               | |
 | | | | |                                                                           | |
-| | | | └ new WP_Locale()                                                           | |
+| | | | └ new WP_Locale() @wp-includes/locale.php                                   | |<
 | | | |                                                                             | |
 | | | └ dead_db() @wp-includes/functions.php                                        | |
 | | |                                                                               | |
