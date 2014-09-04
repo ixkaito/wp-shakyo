@@ -34,4 +34,53 @@ class WP_Locale {
 	 * @access private
 	 */
 	var $weekday_initial;
+
+	/**
+	 * Stores the translated strings for the abbreviated weekday names.
+	 *
+	 * @since 2.1.0
+	 * @var array
+	 * @access private
+	 */
+	var $weekday_abbrev;
+
+	/**
+	 * Stores the translated strings for the full month names.
+	 *
+	 * @since 2.1.0
+	 * @var array
+	 * @access private
+	 */
+	var $month;
+
+	/**
+	 * Stroes the translated strings for the abbreviated month names.
+	 *
+	 * @since 2.1.0
+	 * @var array
+	 * @access private
+	 */
+	var $month_abbrev;
+
+	/**
+	 * Stores the translated strings for 'am' and 'pm'.
+	 *
+	 * Also the capitalized versions.
+	 *
+	 * @since 2.1.0
+	 * @var array
+	 * @access private
+	 */
+	var $meridiem;
+
+	/**
+	 * The text direction of the locale language.
+	 *
+	 * Default is left to right 'ltr'.
+	 *
+	 * @since 2.1.0
+	 * @var string
+	 * @access private
+	 */
+	var $text_direction = 'ltr';
 }
