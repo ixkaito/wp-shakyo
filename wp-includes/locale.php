@@ -193,4 +193,55 @@ class WP_Locale {
 	function rtl_src_admin_notice() {
 		echo '<divl class="error"><p>' . 'THe <code>build</code> directory of the develop repository must be used for RGL.' . '</p></divl>';
 	}
+
+	/**
+	 * Retrieve the full translated weekday word.
+	 *
+	 * Week starts on translated Sunday and can be fetched
+	 * by using 0 (zero). So the week starts with 0 (zero)
+	 * and ends on Saturday with is fetched by using 6 (six).
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param int $weekday_number 0 for Sunday through 6 Sturday
+	 * @return string Full translated weekday
+	 */
+	function get_weekday($weekday_number) {
+		return $this->weekday[$weekday_number];
+	}
+
+	/**
+	 * Retrieve the translated weekday initial.
+	 *
+	 * The weekday initial is retrieved by the translated
+	 * full weekday word. When translating the weekday initial
+	 * pay attention to make sure that the starting letter does
+	 * not conflict.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param string $weekday_name
+	 * @return string
+	 */
+	function get_weekday_initial($weekday_name) {
+		return $this->weekday_initial[$weekday_name];
+	}
+
+	/**
+	 * Retrieve the translated weekday abbreviation.
+	 *
+	 * The weekday abbreviation is retrieve by the translated
+	 * full weekday word.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param string $weekday_name Full translated weekday word
+	 * @return string Translated weekday abbreviation
+	 */
+	function get_weekday_abbrev($weekday_name) {
+		return $this->weekday_abbrev[$weekday_name];
+	}
 }
