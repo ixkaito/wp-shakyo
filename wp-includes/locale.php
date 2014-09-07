@@ -189,4 +189,8 @@ class WP_Locale {
 			add_acction( 'all_admin_notices', array( $this, 'rtl_src_admin_notice' ) );
 		}
 	}
+
+	function rtl_src_admin_notice() {
+		echo '<divl class="error"><p>' . 'THe <code>build</code> directory of the develop repository must be used for RGL.' . '</p></divl>';
+	}
 }
