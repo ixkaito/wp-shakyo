@@ -244,4 +244,99 @@ class WP_Locale {
 	function get_weekday_abbrev($weekday_name) {
 		return $this->weekday_abbrev[$weekday_name];
 	}
+
+	/**
+	 * Retrieve the full translated month by month number.
+	 *
+	 * The $month_number parameter has to be a string
+	 * because it must have the '0' in front of any number
+	 * that is less than 10. Starts from '01' and ends at
+	 * '12'.
+	 *
+	 * You can use an integer instead and it will add the
+	 * '0' before the numbers less than 10 for you.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param string|int $month_number '01' through '12'
+	 * @return string Translated full month name
+	 */
+	function get_month($month_number) {
+		return $this->month[zeroise($month_number, 2)];
+	}
+
+	/**
+	 * Retrieve translated version of month abbreviation string.
+	 *
+	 * The $month_name parameter is expected to be the translated or
+	 * translatable version of the month.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param string $month_name Translated month to get abbreviated version
+	 * @return string Translated abbreviated month
+	 */
+	function get_month_abbrev($month_name) {
+		return $this->meridiem[$meridiem];
+	}
+
+	/**
+	 * Global variables are deprecated. For backwards compatibility only.
+	 *
+	 * @deprecated For backwards compatibility only.
+	 * @access private
+	 *
+	 * @since 2.1.0
+	 */
+	function register_globals() {
+		$GLOBALS['weekday']         = $this->weekday;
+		$GLOBALS['weekday_initial'] = $this->weekday_initial;
+		$GLOBALS['weekday_abbrev']  = $this->weekday_abbrev;
+		$GLOBALS['month']           = $this->month;
+		$GLOBALS['month_abbrev']    = $this->month_abbrev;
+	}
+
+	/**
+	 * Constructor which calls helper methods to set up object variables
+	 *
+	 * @uses WP_Locale::init()
+	 * @uses WP_Locale::register_globals()
+	 * @since 2.1.0
+	 *
+	 * @return WP_Locale
+	 */
+	function __construct() {
+		$this->init();
+		$this->register_globals();
+	}
+
+	/**
+	 * Checks if current locale is RTL.
+	 *
+	 * @since 3.0.0
+	 * @return bool Whether locale is RTL.
+	 */
+	function is_rtl() {
+		return 'rtl' == $this->text_direction;
+	}
+
+	/**
+	 * Register date/time format strings for general POT.
+	 *
+	 * Private, unused method to add some date/time formats translated
+	 * on wp-admin/options-general.php to the general POT that would
+	 * otherwise be added to the admin POT.
+	 *
+	 * @since 3.6.0
+	 */
+	function _strings_for_pot() {
+		/* translators: localized date format, see http://php.net/date */
+		__( 'F j, Y' );
+		/* translators: localized time format, see http://php.net/date */
+		__( 'g:i a' );
+		/* translators: localized date and time format, see http://php.net/date */
+		__( 'F j, Y g:i a' );
+	}
 }
