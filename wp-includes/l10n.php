@@ -7,6 +7,34 @@
  */
 
 /**
+ * Retrieve the translation of $text.
+ *
+ * If there is no translation, or the text domain isn't loaded, the original text is returned.
+ *
+ * <strong>Note:</strong> Don't use translate() directly, use __() or related functions.
+ *
+ * @since 2.2.0
+ *
+ * @param string $text   Text to translate.
+ * @param string $domain Optional. Text domain. Unique identifier for retrieving translated strings.
+ * @return string Translated text
+ */
+function translate( $text, $domain = 'default' ) {
+	$translations = get_translations_for_domain( $domain );
+	$translations = $translations->translate( $text );
+	/**
+	 * Filter text with its translation.
+	 *
+	 * @since 2.0.11
+	 *
+	 * @param string $translations Translated text.
+	 * @param string $text         Text to translate.
+	 * @param string $domain       Text domain. Unique identifier for retrieving translated strings.
+	 */
+	return apply_filters( 'gettext', $translations, $text, $domain );
+}
+
+/**
  * Retrieve the translation of $text. If there is no translation,
  * or the text domain isn't loaded, the original text is returned.
  *

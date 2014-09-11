@@ -228,9 +228,15 @@
 | | | | |       |                                                                   | |
 | | | | |       └ new Translation_Entry() @wp-includes/pomo/entry.php               | |
 | | | | |                                                                           | |
-| | | | ├ new WP_Locale() @wp-includes/locale.php                                   | |<
+| | | | ├ new WP_Locale() @wp-includes/locale.php                                   | |
 | | | | |                                                                           | |
 | | | | └ __() @wp-includes/l10n.php                                                | |
+| | | |   |                                                                         | |
+| | | |   └ translate() @wp-includes/l10.php                                        | |
+| | | |     |                                                                       | |
+| | | |     ├ get_translations_for_domain() @wp-includes/l10.php                    | |<
+| | | |     |                                                                       | |
+| | | |     └ apply_filters( 'gettext' ) @wp-includes/plugin.php                    | |
 | | | |                                                                             | |
 | | | └ dead_db() @wp-includes/functions.php                                        | |
 | | |                                                                               | |
