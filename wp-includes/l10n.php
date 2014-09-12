@@ -35,6 +35,35 @@ function translate( $text, $domain = 'default' ) {
 }
 
 /**
+ * Retrieve the translation of $text in the context defined in $context.
+ *
+ * If there is no translation, or the text domain isn't loaded the original
+ * text is returned.
+ *
+ * @since 2.8.0
+ *
+ * @param string $text    Text to translate.
+ * @param string $context Context information for the translators.
+ * @param string $domain  Optional. Text domain. Unique identifier for retrieving translated strings.
+ * @return string Translated text on success, original text on failure.
+ */
+function translate_with_gettext_context( $text, $context, $domain = 'default' ) {
+	$translations = get_translations_for_domain( $domain );
+	$translations = $translations->translate( $text, $context );
+	/**
+	 * Filter text with its translation based on contextinformation.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param string $translations Translated text.
+	 * @param string $text         Text to translate.
+	 * @param string $context      Context information for the translators.
+	 * @param string $domain       Text domain. Unique identifier for retrieving translated strings.
+	 */
+	return apply_filters( 'gettext_with_context', $translations, $text, $context, $domain );
+}
+
+/**
  * Retrieve the translation of $text. If there is no translation,
  * or the text domain isn't loaded, the original text is returned.
  *

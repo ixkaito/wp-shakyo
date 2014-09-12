@@ -242,9 +242,11 @@
 | | | | |                                                                           | |
 | | | | └ _x() @wp-includes/l10n.php                                                | |
 | | | |   |                                                                         | |
-| | | |   └ translate_with_gettext_context() @wp-includes/l10n.php                  | |<
+| | | |   └ translate_with_gettext_context() @wp-includes/l10n.php                  | |
+| | | |     |                                                                       | |
+| | | |     └ apply_filters( 'gettext_with_context' ) @wp-includes/plugin.php       | |
 | | | |                                                                             | |
-| | | └ dead_db() @wp-includes/functions.php                                        | |
+| | | └ dead_db() @wp-includes/functions.php                                        | |<
 | | |                                                                               | |
 | | ├ wp_cache_get() @wp-includes/cache.php                                         | |
 | | |                                                                               | |
