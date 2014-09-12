@@ -230,13 +230,17 @@
 | | | | |                                                                           | |
 | | | | ├ new WP_Locale() @wp-includes/locale.php                                   | |
 | | | | |                                                                           | |
-| | | | └ __() @wp-includes/l10n.php                                                | |
-| | | |   |                                                                         | |
-| | | |   └ translate() @wp-includes/l10.php                                        | |
-| | | |     |                                                                       | |
-| | | |     ├ get_translations_for_domain() @wp-includes/l10.php                    | |<
-| | | |     |                                                                       | |
-| | | |     └ apply_filters( 'gettext' ) @wp-includes/plugin.php                    | |
+| | | | ├ __() @wp-includes/l10n.php                                                | |
+| | | | | |                                                                         | |
+| | | | | └ translate() @wp-includes/l10.php                                        | |
+| | | | |   |                                                                       | |
+| | | | |   ├ get_translations_for_domain() @wp-includes/l10.php                    | |
+| | | | |   | |                                                                     | |
+| | | | |   | └ new NOOP_Translations @wp-includes/pomo/translations.php            | |<
+| | | | |   |                                                                       | |
+| | | | |   └ apply_filters( 'gettext' ) @wp-includes/plugin.php                    | |
+| | | | |                                                                           | |
+| | | | └ _x()                                                                      | |
 | | | |                                                                             | |
 | | | └ dead_db() @wp-includes/functions.php                                        | |
 | | |                                                                               | |
