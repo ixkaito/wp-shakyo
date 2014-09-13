@@ -246,7 +246,17 @@
 | | | |     |                                                                       | |
 | | | |     └ apply_filters( 'gettext_with_context' ) @wp-includes/plugin.php       | |
 | | | |                                                                             | |
-| | | └ dead_db() @wp-includes/functions.php                                        | |<
+| | | └ dead_db() @wp-includes/functions.php                                        | |
+| | |   |                                                                           | |
+| | |   ├ wp_load_translations_early() @wp-includes/load.php                        | |
+| | |   |                                                                           | |
+| | |   ├ [false] file_exists( 'wp-content/db-error.php' )                          | |
+| | |   |                                                                           | |
+| | |   ├ [true] defined('WP_INSTALLING')                                           | |
+| | |   | |                                                                         | |
+| | |   | └ wp_die() @wp-includes/load.php                                          | |<
+| | |   |                                                                           | |
+| | |   |                                                                           | |
 | | |                                                                               | |
 | | ├ wp_cache_get() @wp-includes/cache.php                                         | |
 | | |                                                                               | |
