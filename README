@@ -254,7 +254,15 @@
 | | |   |                                                                           | |
 | | |   ├ [true] defined('WP_INSTALLING')                                           | |
 | | |   | |                                                                         | |
-| | |   | └ wp_die() @wp-includes/load.php                                          | |<
+| | |   | └ wp_die() @wp-includes/load.php                                          | |
+| | |   |   |                                                                       | |
+| | |   |   ├ [false] DOING_AJAX                                                    | |
+| | |   |   |                                                                       | |
+| | |   |   ├ [false] XMLRPC_REQUEST                                                | |
+| | |   |   |                                                                       | |
+| | |   |   ├ apply_filters( 'wp_die_handler' ) @wp-includes/plugin.php             | |
+| | |   |   |                                                                       | |
+| | |   |   └ _default_wp_die_handler() @wp-includes/functions.php                  | |<
 | | |   |                                                                           | |
 | | |   |                                                                           | |
 | | |                                                                               | |

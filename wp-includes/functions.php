@@ -85,6 +85,54 @@ function is_blog_installed() {
 }
 
 /**
+ * Kill WordPress execution and display HTML message with error message.
+ *
+ * This function complements the die() PHP function. The difference is that
+ * HTML will be displayed to the user. It is recommended to use this function
+ * only, when the execution should not continue any further. It is not
+ * recommended to call this function very often and try to handle as many errors
+ * as possible silently.
+ *
+ * @since 2.0.4
+ *
+ * @param string       $message Optional. Error message. Default empty.
+ * @param string       $title   Optional. Error title. Default empty.
+ * @param string|array $args    Optional. Arguments to control behavior. Default empty array.
+ */
+function wp_die( $message = '', $title = '', $args = array() ) {
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		/**
+		 * Filter callback for killing WordPress execution for AJAX requests.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @param callback $function Callback function name.
+		 */
+		$function = apply_filters( 'wp_die_ajax_handler', '_ajax_wp_die_handler' );
+	} elseif ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
+		/**
+		 * Filter callback for killing WordPress execution for XML-RPC requests.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @param callback $function Callback function name.
+		 */
+		$function = apply_filters( 'wp_die_xmlrpc_handler', '_xmlrpc_wp_die_handler' );
+	} else {
+		/**
+		 * Filter callback for killing WordPress execution for all non-AJAX, non-XML-RPC requests.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param callback $function Callback function name.
+		 */
+		$function = apply_filters( 'wp_die_handler', '_default_wp_die_handler' );
+	}
+
+	call_user_func( $function, $message, $title, $args );
+}
+
+/**
  * Load custom DB error or display WordPress DB error.
  *
  * If a file exists in the wp-content directory named db-error.php, then it will
