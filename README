@@ -262,7 +262,9 @@
 | | |   |   |                                                                       | |
 | | |   |   ├ apply_filters( 'wp_die_handler' ) @wp-includes/plugin.php             | |
 | | |   |   |                                                                       | |
-| | |   |   └ _default_wp_die_handler() @wp-includes/functions.php                  | |<
+| | |   |   └ _default_wp_die_handler() @wp-includes/functions.php                  | |
+| | |   |     |                                                                     | |
+| | |   |     └ wp_parse_args() @wp-includes/functions.php                          | |<
 | | |   |                                                                           | |
 | | |   |                                                                           | |
 | | |                                                                               | |
