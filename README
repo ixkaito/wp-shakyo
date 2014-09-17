@@ -264,7 +264,13 @@
 | | |   |   |                                                                       | |
 | | |   |   └ _default_wp_die_handler() @wp-includes/functions.php                  | |
 | | |   |     |                                                                     | |
-| | |   |     └ wp_parse_args() @wp-includes/functions.php                          | |<
+| | |   |     ├ wp_parse_args() @wp-includes/functions.php                          | |
+| | |   |     |                                                                     | |
+| | |   |     ├ __() @wp-includes/l10n.php                                          | |
+| | |   |     |                                                                     | |
+| | |   |     ├ did_action() @wp-includes/plugin.php                                | |
+| | |   |     |                                                                     | |
+| | |   |     └ status_header() @wp-includes/functions.php                          | |<
 | | |   |                                                                           | |
 | | |   |                                                                           | |
 | | |                                                                               | |
