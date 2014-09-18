@@ -270,8 +270,9 @@
 | | |   |     |                                                                     | |
 | | |   |     ├ did_action() @wp-includes/plugin.php                                | |
 | | |   |     |                                                                     | |
-| | |   |     └ status_header() @wp-includes/functions.php                          | |<
-| | |   |                                                                           | |
+| | |   |     └ status_header() @wp-includes/functions.php                          | |
+| | |   |       |                                                                   | |
+| | |   |       └ get_status_header_desc() @wp-includes/functions.php               | |<
 | | |   |                                                                           | |
 | | |                                                                               | |
 | | ├ wp_cache_get() @wp-includes/cache.php                                         | |
