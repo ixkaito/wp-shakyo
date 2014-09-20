@@ -278,8 +278,9 @@
 | | |   |     | |                                                                   | |
 | | |   |     | └ apply_filters( 'status_header' ) @wp-includes/plugin.php          | |
 | | |   |     |                                                                     | |
-| | |   |     ├ nocache_headers() @wp-includes/functions.php                        | |<
-| | |   |                                                                           | |
+| | |   |     ├ nocache_headers() @wp-includes/functions.php                        | |
+| | |   |     | |                                                                   | |
+| | |   |     | ├ wp_get_nocache_headers() @wp-includes/functions.php               | |<
 | | |   |                                                                           | |
 | | |                                                                               | |
 | | ├ wp_cache_get() @wp-includes/cache.php                                         | |

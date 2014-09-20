@@ -128,6 +128,40 @@ function status_header( $code ) {
 }
 
 /**
+ * Set the headers to prevent caching for the different browsers.
+ *
+ * Different browsers support different nocache headers, so several
+ * header must be sent so that all of them get the point that no
+ * caching should occur.
+ *
+ * @since 2.0.0
+ *
+ * @see wp_get_nocache_headers()
+ */
+function nocache_headers() {
+	$headers = wp_get_nocache_headers();
+
+	unset( $headers['Last-Modified'] );
+
+	// In PHP 5.3+, make sure we are not sending a Last-Modified header.
+	if ( function_exists( 'header_remove' ) ) {
+		@header_remove( 'Last-Modified' );
+	} else {
+		// In PHP 5.2, send an empty Last-Modified header, but only as a
+		// last resort to override a header already sent. #WP23021
+		foreach ( headers_list() as $header ) {
+			if ( 0 === stripos( $header, 'Last-Modified' ) ) {
+				$headers['Last-Modified'] = '';
+				break;
+			}
+		}
+	}
+
+	foreach( $headers as $name => $field_value )
+		@header("{$name}: {$field_value}");
+}
+
+/**
  * Test whether blog is already installed.
  *
  * The cache will be checked first. If you have a cache plugin, which saves
