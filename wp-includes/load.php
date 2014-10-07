@@ -498,6 +498,25 @@ function shutdown_action_hook() {
 }
 
 /**
+ * Whether the current request is for an administrative interface page.
+ *
+ * Does not check if the user is an administrator; {@see current_user_can()}
+ * for checking roles and capabilities.
+ *
+ * @since 1.5.1
+ *
+ * @return bool True if inside WordPress administration interface, false otherwise.
+ */
+function is_admin() {
+	if ( isset( $GLOBALS['current_screen'] ) )
+		return $GLOBALS['current_screen']->in_admin();
+	elseif ( defined( 'WP_ADMIN' ) )
+		return WP_ADMIN;
+
+	return false;
+}
+
+/**
  * If Multisite is enabled.
  *
  * @since 3.0.0
