@@ -28,3 +28,90 @@ foreach ( array( 'term_name', 'comment_author_name', 'link_name', 'link_target',
 	}
 	add_filter( $filter, '_wp_specialchars', 30 );
 }
+
+// Kses only for textarea saves
+foreach ( array( 'pre_term_description', 'pre_link_description', 'pre_link_notes', 'pre_user_description' ) as $filter ) {
+	add_filter( $filter, 'wp_filter_kses' );
+}
+
+// Kses only for textarea admin displays
+if ( is_admin() ) {
+	foreach ( array( 'term_description', 'link_description', 'link_notes', 'user_description' ) as $filter ) {
+		add_filter( $filter, 'wp_kses_data' );
+	}
+	add_filter( 'comment_text', 'wp_kses_post' );
+}
+
+// Email saves
+foreach ( array( 'pre_comment_author_email', 'pre_user_email' ) as $filter ) {
+	add_filter( $filter, 'trim'           );
+	add_filter( $filter, 'sanitize_email' );
+	add_filter( $filter, 'wp_filter_kses' );
+}
+
+// Email admin display
+foreach ( array( 'comment_author_email', 'user_email' ) as $filter ) {
+	add_filter( $filter, 'sanitize_email' );
+	if ( is_admin() )
+		add_filter( $filter, 'wp_kses_data' );
+}
+
+// Save URL
+foreach ( array( 'pre_comment_author_url', 'pre_user_url', 'pre_link_url', 'pre_link_image',
+	'pre_link_rss', 'pre_post_guid' ) as $filter ) {
+	add_filter( $filter, 'wp_strip_all_tags' );
+	add_filter( $filter, 'esc_url_raw' );
+	add_filter( $filter, 'wp_filter_kses' );
+}
+
+// Display URL
+foreach ( array( 'user_url', 'link_url', 'link_image', 'link_rss', 'comment_url', 'post_guid' ) as $filter ) {
+	if ( is_admin() )
+		add_filter( $filter, 'wp_strip_all_tags' );
+	add_filter( $filter, 'esc_url'           );
+	if ( is_admin() )
+		add_filter( $filter, 'wp_kses_data'    );
+}
+
+// Slugs
+add_filter( 'pre_term_slug', 'sanitize_title' );
+
+// Keys
+foreach ( array( 'pre_post_type', 'pre_post_status', 'pre_post_comment_status', 'pre_post_ping_status' ) as $filter ) {
+	add_filter( $filter, 'sanitize_key' );
+}
+
+// Mime types
+add_filter( 'pre_post_mime_type', 'sanitize_mime_type' );
+add_filter( 'post_mime_type', 'sanitize_mime_type' );
+
+// Places to balance tags on input
+foreach ( array( 'content_save_pre', 'excerpt_save_pre', 'comment_save_pre', 'pre_comment_content' ) as $filter ) {
+	add_filter( $filter, 'balanceTags', 50 );
+}
+
+// Format strings for display.
+foreach ( array( 'comment_author', 'term_name', 'link_name', 'link_description', 'link_notes', 'bloginfo', 'wp_title', 'widget_title' ) as $filter ) {
+	add_filter( $filter, 'wptexturize'   );
+	add_filter( $filter, 'convert_chars' );
+	add_filter( $filter, 'esc_html'      );
+}
+
+// Format WordPress
+foreach ( array( 'the_content', 'the_title', 'wp_title' ) as $filter )
+	add_filter( $filter, 'capital_P_dangit', 11 );
+add_filter( 'comment_text', 'capital_p_dangit', 31 );
+
+// Format titles
+foreach ( array( 'single_post_title', 'single_cat_title', 'single_tag_title', 'single_month_title', 'nav_menu_attr_title', 'nav_menu_description' ) as $filter ) {
+	add_filter( $filter, 'wptexturize' );
+	add_filter( $filter, 'strip_tags'  );
+}
+
+// Format text area for display.
+foreach ( array( 'term_description' ) as $filter ) {
+	add_filter( $filter, 'wptexturize'      );
+	add_filter( $filter, 'convert_chars'    );
+	add_filter( $filter, 'wpautop'          );
+	add_filter( $filter, 'shortcode_unautop');
+}
