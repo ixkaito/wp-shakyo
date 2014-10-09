@@ -115,3 +115,55 @@ foreach ( array( 'term_description' ) as $filter ) {
 	add_filter( $filter, 'wpautop'          );
 	add_filter( $filter, 'shortcode_unautop');
 }
+
+// Format for RSS
+add_filter( 'term_name_rss', 'convert_chars' );
+
+// Pre save hierarchy
+add_filter( 'wp_insert_post_parent', 'wp_check_post_hierarchy_for_loops', 10, 2 );
+add_filter( 'wp_insert_post_parent', 'wp_check_term_hierarchy_for_loops', 10, 3 );
+
+// Display filters
+add_filter( 'the_title', 'wptexturize'   );
+add_filter( 'the_title', 'convert_chars' );
+add_filter( 'the_title', 'trim'          );
+
+add_filter( 'the_content', 'wptexturize'        );
+add_filter( 'the_content', 'convert_smilies'    );
+add_filter( 'the_content', 'convert_chars'      );
+add_filter( 'the_content', 'wpautop'            );
+add_filter( 'the_content', 'shortcode_unautop'  );
+add_filter( 'the_content', 'prepend_attachment' );
+
+add_filter( 'the_excerpt',     'wptexturize'      );
+add_filter( 'the_excerpt',     'convert_smilies'  );
+add_filter( 'the_excerpt',     'convert_chars'    );
+add_filter( 'the_excerpt',     'wpautop'          );
+add_filter( 'the_excerpt',     'shortcode_unautop');
+add_filter( 'get_the_excerpt', 'wp_trim_excerpt'  );
+
+add_filter( 'comment_text', 'wptexturize'            );
+add_filter( 'comment_text', 'convert_chars'          );
+add_filter( 'comment_text', 'make_clickable',      9 );
+add_filter( 'comment_text', 'force_balance_tags', 25 );
+add_filter( 'comment_text', 'convert_smilies',    20 );
+add_filter( 'comment_text', 'wpautop',            30 );
+
+add_filter( 'comment_excerpt', 'convert_chars' );
+
+add_filter( 'list_cats',         'wptexturize' );
+
+add_filter( 'wp_sprintf', 'wp_sprintf_l', 10, 2 );
+
+// RSS filter
+add_filter( 'the_title_rss',      'strip_tags'      );
+add_filter( 'the_title_rss',      'ent2ncr',      8 );
+add_filter( 'the_title_rss',      'esc_html'        );
+add_filter( 'the_content_rss',    'ent2ncr',      8 );
+add_filter( 'the_excerpt_rss',    'convert_chars'   );
+add_filter( 'the_excerpt_rss',    'ent2ncr',      8 );
+add_filter( 'comment_author_rss', 'ent2ncr',      8 );
+add_filter( 'comment_text_rss',   'ent2ncr',      8 );
+add_filter( 'comment_text_rss',   'esc_html'        );
+add_filter( 'bloginfo_rss',       'ent2ncr',      8 );
+add_filter( 'the_author',         'ent2ncr',      8 );
