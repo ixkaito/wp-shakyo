@@ -193,3 +193,24 @@ add_filter( 'pingback_ping_source_uri', 'pingback_ping_source_uri'            );
 add_filter( 'xmlrpc_pingback_error',    'xmlrpc_pingback_error'               );
 
 add_filter( 'http_request_host_is_external', 'allowed_http_request_hosts', 10, 2 );
+
+// Actions
+add_action( 'wp_head',             'wp_enqueue_scripts',              1     );
+add_action( 'wp_head',             'feed_link',                       2     );
+add_action( 'wp_head',             'feed_links_extra',                3     );
+add_action( 'wp_head',             'rsd_link'                               );
+add_action( 'wp_head',             'wlwmanifest_link'                       );
+add_action( 'wp_head',             'adjacent_posts_rel_link_wp_head', 10, 0 );
+add_action( 'wp_head',             'locale_stylesheet'                      );
+add_action( 'publish_future_post', 'check_and_publish_future_post',   10, 1 );
+add_action( 'wp_head',             'noindex',                          1    );
+add_action( 'wp_head',             'wp_print_styles',                  8    );
+add_action( 'wp_head',             'wp_print_head_scripts',            9    );
+add_action( 'wp_head',             'wp_generator'                           );
+add_action( 'wp_head',             'rel_canonical'                          );
+add_action( 'wp_footer',           'wp_print_footer_scripts',         20    );
+add_action( 'wp_head',             'wp_shortlink_wp_head',            10, 0 );
+add_action( 'template_redirect',   'wp_shortlink_header',             11, 0 );
+add_action( 'wp_print_footer_scripts', '_wp_footer_scripts'                 );
+add_action( 'init',                'check_theme_switched',            99    );
+add_action( 'after_switch_theme',  '_wp_sidebars_changed'                   );
