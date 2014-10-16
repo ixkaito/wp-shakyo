@@ -265,3 +265,42 @@ add_action( 'delete_post',                '_wp_delete_post_menu_item'         );
 add_action( 'delete_term',                '_wp_delete_tax_menu_item',   10, 3 );
 add_action( 'transition_post_status',     '_wp_auto_add_pages_to_menu', 10, 3 );
 
+// Post Thumbnail CSS class filtering
+add_action( 'begin_fetch_post_thumbnail_html', '_wp_post_thumbnail_class_filter_add'    );
+add_action( 'end_fetch_post_thumbnail_html',   '_wp_post_thumbnail_class_filter_remove' );
+
+// Redirect Old Slugs
+add_action( 'template_redirect', 'wp_old_slug_redirect'             );
+add_action( 'post_updated',      'wp_check_for_changed_slug', 12, 3 );
+
+// Nonce check for Post Previews
+add_action( 'init', '_show_post_preview' );
+
+// Timezone
+add_filter( 'pre_option_gmt_offset','wp_timezone_override_offset' );
+
+// Admin Color Schemes
+add_action( 'admin_init', 'register_admin_color_schemes', 1);
+add_action( 'admin_color_scheme_picker', 'admin_color_scheme_picker' );
+
+// If the upgrade hasn't run yet, assume link manager is used.
+add_filter( 'default_option_link_manager_enabled', '__return_true' );
+
+// This option no longer exists; tell plugins we always support auto-embedding.
+add_filter( 'default_option_embed_autourls', '__return_true' );
+
+// Default settings for heartbeat
+add_filter( 'heartbeat_settings', 'wp_heartbeat_settings' );
+
+// Check if the user is logged out
+add_action( 'admin_enqueue_scripts', 'wp_auth_check_load' );
+add_filter( 'heartbeat_send',        'wp_auth_check' );
+add_filter( 'heartbeat_nopriv_send', 'wp_auth_check' );
+
+// Default authentication filters
+add_filter( 'authenticate', 'wp_authenticate_username_password',  20, 3 );
+add_filter( 'authenticate', 'wp_authenticate_spam_check',         99    );
+add_filter( 'determine_current_user', 'wp_validate_auth_cookie'          );
+add_filter( 'determine_current_user', 'wp_validate_logged_in_cookie', 20 );
+
+unset($filter, $action);
