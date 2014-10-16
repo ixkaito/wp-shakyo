@@ -255,7 +255,13 @@ add_action( 'transition_post_status',     '_update_term_count_on_transition_post
 add_action( 'comment_form',               'wp_comment_form_unfiltered_html_nonce'          );
 add_action( 'wp_scheduled_delete',        'wp_scheduled_delete'                            );
 add_action( 'wp_scheduled_auto_draft_delete', 'wp_delete_auto_drafts'                      );
-add_action( 'admin_init',                 'send_frame_options_header',               19, 0 );
+add_action( 'admin_init',                 'send_frame_options_header',               10, 0 );
 add_action( 'importer_scheduled_cleanup', 'wp_delete_attachment'                           );
 add_action( 'upgrader_scheduled_cleanup', 'wp_delete_attachment'                           );
 add_action( 'welcome_panel',              'wp_welcome_panel'                               );
+
+// Navigation menu actions
+add_action( 'delete_post',                '_wp_delete_post_menu_item'         );
+add_action( 'delete_term',                '_wp_delete_tax_menu_item',   10, 3 );
+add_action( 'transition_post_status',     '_wp_auto_add_pages_to_menu', 10, 3 );
+
