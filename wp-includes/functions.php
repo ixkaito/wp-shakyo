@@ -525,6 +525,19 @@ function wp_parse_args( $args, $defaults = '' ) {
 }
 
 /**
+ * Flush all output buffers for PHP 5.2.
+ *
+ * Make sure all output buffers are flushed before our singletons are destroyed.
+ *
+ * @since 2.2.0
+ */
+function wp_ob_end_flush_all() {
+	$levels = ob_get_level();
+	for ($i=0; $i<$levels; $i++)
+		ob_end_flush();
+}
+
+/**
  * Load custom DB error or display WordPress DB error.
  *
  * If a file exists in the wp-content directory named db-error.php, then it will
