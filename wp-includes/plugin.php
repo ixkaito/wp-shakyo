@@ -171,6 +171,32 @@ function apply_filters( $tag, $value ) {
 }
 
 /**
+ * Hooks a function on to a specific action.
+ *
+ * Actions are the hooks that the WordPress core launches at specific points
+ * during execution, or when specific events occur. Plugins can specify that
+ * one or more of its PHP functions are executed at these points, using the
+ * Action API.
+ *
+ * @since 1.2.0
+ *
+ * @uses add_filter() Adds and action. Parameter list and functionality are the same.
+ *
+ * @param string   $tag             The name of the action to which the $function_to_add is hooked.
+ * @param callback $function_to_add The name of the function you wish to be called.
+ * @param int      $priority        Optional. Used to specify the order in which the functions
+ *                                  associated with a paritcular action are executed. Default 10.
+ *                                  Lower numbers correspond with earlier execution,
+ *                                  and functions with the same priority are executed
+ *                                  in the order in which they were added to the action.
+ * @param int      $accepted_args   Optional. The number of arguments the function accept. Default 1.
+ * @return bool Will always return true.
+ */
+function add_action($tag, $function_to_add, $priority = 10, $accepted_args = 1) {
+	return add_filter($tag, $function_to_add, $priority, $accepted_args);
+}
+
+/**
  * Execute functions hooked on a specific action hook.
  *
  * This function invokes all functions attached to action hook $tag. It is
