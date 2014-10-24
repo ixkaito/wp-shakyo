@@ -248,7 +248,7 @@ function is_blog_installed() {
 
 	$suppress = $wpdb->suppress_errors();
 
-	/**
+	/*
 	 * Loop over the WP tables. If none exist, then scratch install is allowed.
 	 * If one or more exist, suggest table repair since we got here because the
 	 * options table could not be accessed.
@@ -259,6 +259,9 @@ function is_blog_installed() {
 		if ( defined( 'CUSTOM_USER_TABLE' ) && CUSTOM_USER_TABLE == $table )
 			continue;
 		if ( defined( 'CUSTOM_USER_META_TABLE' ) && CUSTOM_USER_META_TABLE == $table )
+			continue;
+
+		if ( ! $wpdb->get_results( "DESCRIBE $table;" ) )
 			continue;
 
 		// One or more tables exist. We are insane.
