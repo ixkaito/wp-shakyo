@@ -107,5 +107,10 @@ wp_not_installed();
 // Load most of WordPress
 require( ABSPATH . WPINC . '/class-wp-walker.php' );
 require( ABSPATH . WPINC . '/class-wp-ajax-response.php' );
+require( ABSPATH . WPINC . '/formatting.php' );
+require( ABSPATH . WPINC . '/capabilities.php' );
+require( ABSPATH . WPINC . '/query.php' );
+require( ABSPATH . WPINC . '/date.php' );
+require( ABSPATH . WPINC . '/theme.php' );
 
 var_dump( __FILE__ );
