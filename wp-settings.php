@@ -124,5 +124,12 @@ require( ABSPATH . WPINC . '/post.php' );
 require( ABSPATH . WPINC . '/post-template.php' );
 require( ABSPATH . WPINC . '/revision.php' );
 require( ABSPATH . WPINC . '/post-formats.php' );
+require( ABSPATH . WPINC . '/post-thumbnail-template.php' );
+require( ABSPATH . WPINC . '/category.php' );
+require( ABSPATH . WPINC . '/category-template.php' );
+require( ABSPATH . WPINC . '/comment.php' );
+require( ABSPATH . WPINC . '/comment-template.php' );
+require( ABSPATH . WPINC . '/rewrite.php' );
+require( ABSPATH . WPINC . '/feed.php' );
 
 var_dump( __FILE__ );
