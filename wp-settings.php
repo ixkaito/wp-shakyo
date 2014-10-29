@@ -121,5 +121,8 @@ require( ABSPATH . WPINC . '/general-template.php' );
 require( ABSPATH . WPINC . '/link-template.php' );
 require( ABSPATH . WPINC . '/author-template.php' );
 require( ABSPATH . WPINC . '/post.php' );
+require( ABSPATH . WPINC . '/post-template.php' );
+require( ABSPATH . WPINC . '/revision.php' );
+require( ABSPATH . WPINC . '/post-formats.php' );
 
 var_dump( __FILE__ );
