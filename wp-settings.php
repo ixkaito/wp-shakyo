@@ -136,5 +136,6 @@ require( ABSPATH . WPINC . '/bookmark-template.php' );
 require( ABSPATH . WPINC . '/kses.php' );
 require( ABSPATH . WPINC . '/cron.php' );
 require( ABSPATH . WPINC . '/deprecated.php' );
+require( ABSPATH . WPINC . '/script-loader.php' );
 
 var_dump( __FILE__ );
