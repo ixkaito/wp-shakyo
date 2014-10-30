@@ -131,5 +131,10 @@ require( ABSPATH . WPINC . '/comment.php' );
 require( ABSPATH . WPINC . '/comment-template.php' );
 require( ABSPATH . WPINC . '/rewrite.php' );
 require( ABSPATH . WPINC . '/feed.php' );
+require( ABSPATH . WPINC . '/bookmark.php' );
+require( ABSPATH . WPINC . '/bookmark-template.php' );
+require( ABSPATH . WPINC . '/kses.php' );
+require( ABSPATH . WPINC . '/cron.php' );
+require( ABSPATH . WPINC . '/deprecated.php' );
 
 var_dump( __FILE__ );
