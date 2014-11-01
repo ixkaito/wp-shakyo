@@ -522,6 +522,27 @@ function is_admin() {
 }
 
 /**
+ * Whether the current request is for the network administrative interface.
+ *
+ * e.g. `/wp-admin/network/`
+ *
+ * Does not check if the user is an administrator; {@see current_user_can()}
+ * for checking roles and capabilities.
+ *
+ * @since 3.1.0
+ *
+ * @return bool True if inside WordPress network administration pages.
+ */
+function is_network_admin() {
+	if ( isset( $GLOBALS['current_screen'] ) )
+		return $GLOBALS['current_screen']->in_admin( 'net_work' );
+	elseif ( defined( 'WP_NETWORK_ADMIN' ) )
+		return WP_NETWORK_ADMIN;
+
+	return false;
+}
+
+/**
  * If Multisite is enabled.
  *
  * @since 3.0.0
@@ -535,6 +556,18 @@ function is_multisite() {
 		return true;
 
 	return false;
+}
+
+/**
+ * Retrieve the current blog ID.
+ *
+ * @since 3.1.0
+ *
+ * @return int Blog id
+ */
+function get_current_blog_id() {
+	global $blog_id;
+	return absint($blog_id);
 }
 
 /**
