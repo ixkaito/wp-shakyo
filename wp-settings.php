@@ -138,5 +138,6 @@ require( ABSPATH . WPINC . '/cron.php' );
 require( ABSPATH . WPINC . '/deprecated.php' );
 require( ABSPATH . WPINC . '/script-loader.php' );
 require( ABSPATH . WPINC . '/taxonomy.php' );
+require( ABSPATH . WPINC . '/update.php' );
 
 var_dump( __FILE__ );
