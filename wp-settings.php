@@ -139,5 +139,8 @@ require( ABSPATH . WPINC . '/deprecated.php' );
 require( ABSPATH . WPINC . '/script-loader.php' );
 require( ABSPATH . WPINC . '/taxonomy.php' );
 require( ABSPATH . WPINC . '/update.php' );
+require( ABSPATH . WPINC . '/canonical.php' );
+require( ABSPATH . WPINC . '/shortcodes.php' );
+require( ABSPATH . WPINC . '/class-wp-embed.php' );
 
 var_dump( __FILE__ );
