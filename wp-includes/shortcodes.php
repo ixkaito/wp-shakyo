@@ -43,4 +43,60 @@
  */
 $shortcode_tags = array();
 
+/**
+ * Add hook for shortcode tag.
+ *
+ * There can only be one hook for each shortcode. Which means that if another
+ * plugin has a similar shortcode, it will override yours or yours will override
+ * theirs depending on which order the plugins are included and/or ran.
+ *
+ * Simplest example of a shortcode tag using the API:
+ *
+ * <code>
+ * // [footag foo="bar"]
+ * function footag_func($atts) {
+ * 	return "foo = {$atts[foo]}";
+ * }
+ * add_shortcode('footag', 'footag_func');
+ * </code>
+ *
+ * Example with nice attribute defaults:
+ *
+ * <code>
+ * // [bartag foo="bar"]
+ * function bartag_func($atts) {
+ * 	$args = shortcode_atts(array(
+ * 		'foo' => 'no foo',
+ * 		'baz' => 'default baz',
+ * 	), $atts);
+ *
+ * 	return "foo = {$args['foo']}";
+ * }
+ * add_shortcode('bartag', 'bartag_func');
+ * </code>
+ *
+ * Example with enclosed content:
+ *
+ * <code>
+ * // [baztag]content[/baztag]
+ * function baztag_func($atts, $content='') {
+ * 	return "content = $content";
+ * }
+ * add_shortcode('baztag', 'baztag_func');
+ * </code>
+ *
+ * @since 2.5.0
+ *
+ * @uses $shortcode_tags
+ *
+ * @param string $tag Shortcode tag to be searched in post content.
+ * @param callable $func Hook to run when shortcode is found.
+ */
+function add_shortcode($tag, $func) {
+	global $shortcode_tags;
+
+	if ( is_callable($func) )
+		$shortcode_tags[$tag] = $func;
+}
+
 add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
