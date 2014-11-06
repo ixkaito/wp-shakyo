@@ -115,6 +115,159 @@ class WP_Embed {
 		if ( isset($this->handlers[$priority][$id]) )
 			unset($this->handlers[$priority][$id]);
 	}
+
+	/**
+	 * The {@link do_shortcode()} callback function.
+	 *
+	 * Attempts to convert a URL into embed HTML. Starts by checking the URL against the regex of the registered embed handlers.
+	 * If none of the regex matches and it's enabled, then the URL will be given to the {@link WP_oEmbed} class.
+	 *
+	 * @uses wp_oembed_get()
+	 * @uses wp_parse_args()
+	 * @uses wp_embed_defaults()
+	 * @uses WP_Embed::maybe_make_link()
+	 * @uses get_option()
+	 * @uses author_can()
+	 * @uses wp_cache_get()
+	 * @uses wp_cache_set()
+	 * @uses get_post_meta()
+	 * @uses update_post_meta()
+	 *
+	 * @param array $attr {
+	 *     Shortcode attributes. Optional.
+	 *
+	 *     @type int $width  Width of the embed in pixels.
+	 *     @type int $height Height of the embed in pixels.
+	 * }
+	 * @param string $url The URL attempting to be embedded.
+	 * @return string The embed HTML on success, otherwise the original URL.
+	 */
+	public function shortcode( $attr, $url = '' ) {
+		$post = get_post();
+
+		if ( empty( $url ) && ! empty( $attr['src'] ) ) {
+			$url = $attr['src'];
+		}
+
+		if ( empty( $url ) )
+			return '';
+
+		$rawattr = $attr;
+		$attr = wp_parse_args( $attr, wp_embed_defaults( $url ) );
+
+		// kses converts & into &amp; and we need to undo this
+		// See Http://core.trac.wordpress.org/ticket/11311
+		$url = str_replace( '&amp;', '&', $url );
+
+		// Look for known internal handlers
+		ksort( $this->handlers );
+		foreach ( $this->handlers as $priority => $handlers ) {
+			foreach ( $handlers as $id => $handler ) {
+				if ( preg_match( $handler['regex'], $url, $matches ) && is_callable( $handler['callback'] ) ) {
+					if ( false !== $return = call_user_func( $handler['callback'], $matches, $attr, $url, $rawattr ) )
+						/**
+						 * Filter the returned embed handler.
+						 *
+						 * @since 2.9.0
+						 *
+						 * @see WP_Embed::shortcode()
+						 *
+						 * @param mixed  $return The shortcode callback function to call.
+						 * @param string $url    The attempted embed URL.
+						 * @param array  $attr   An array of shortcode attributes.
+						 */
+						return apply_filters( 'embed_handler_html', $return, $url, $attr );
+				}
+			}
+		}
+
+		$post_ID = ( ! empty( $post->ID ) ) ? $post->ID : null;
+		if ( ! empty( $this->post_ID ) ) // Potentially set by WP_Embed::cache_oembed()
+			$post_ID = $this->post_ID;
+
+		// Unkown URL format. Let oEmbed have a go.
+		if ( $post_ID ) {
+
+			// Check for a cached result (stored in the post meta)
+			$key_suffix = md5( $url . serialize( $attr ) );
+			$cachekey = '_oembed_' . $key_suffix;
+			$cachekey_time = '_oembed_time_' . $key_suffix;
+
+			/**
+			 * Filter the oEmbed TTL value (time to live).
+			 *
+			 * @since 4.0.0
+			 *
+			 * @param int    $time    Time to live (in seconds).
+			 * @param string $url     The attempted embed URL.
+			 * @param array  $attr    An array of shortcode attributes.
+			 * @param int    $post_ID Post ID.
+			 */
+			$ttl = apply_filters( 'oembed_ttl', DAY_IN_SECONDS, $url, $attr, $post_ID );
+
+			$cache = get_post_meta( $post_ID, $cachekey, true );
+			$cache_time = get_post_meta( $post_ID, $cachekey_time, true );
+
+			if ( ! $cache_time ) {
+				$cache_time = 0;
+			}
+
+			$cached_recently = ( time() - $cache_time ) < $ttl;
+
+			if ( $this->usecache || $cached_recently ) {
+				// Failures are cached. Serve one if we're using the cache.
+				if ( '{{unknown}}' === $cache )
+					return $this->maybe_make_link( $url );
+
+				if ( ! empty( $cache ) ) {
+					/**
+					 * Filter the cached oEmbed HTML.
+					 *
+					 * @since 2.9.0
+					 *
+					 * @see WP_Embed::shortcode()
+					 *
+					 * @param mixed  $cache   The cached HTML result, stored in post meta.
+					 * @param string $url     The attemped embed URL.
+					 * @param array  $attr    And array of shortcode attributes.
+					 * @param int    $post_ID Post ID.
+					 */
+					return apply_filters( 'embed_oembed_html', $cache, $url, $attr, $post_ID );
+				}
+			}
+
+			/**
+			 * Filter whether to inspect the given URL for discoverable <link> tags.
+			 *
+			 * @since 2.9.0
+			 *
+			 * @see WP_eEmbed::discover()
+			 *
+			 * @param bool $enable whether to enable <link> tag discovery. Default false.
+			 */
+			$attr['discover'] = ( apply_filters( 'embed_oembed_discover', false ) && author_can( $post_ID, 'unfiltered_html' ) );
+
+			// Use oEmbed to get the HTML
+			$html = wp_oembed_get( $url, $attr );
+
+			// Maybe cache the result
+			if ( $html ) {
+				update_post_meta( $post_ID, $cachekey, $html );
+				update_post_meta( $post_ID, $cachekey_time, time() );
+			} elseif ( ! $cache ) {
+				update_post_meta( $post_ID, $cachekey, '{{unknown}}' );
+			}
+
+			// If there was a result, return it
+			if ( $html ) {
+				/** This filter is documented in wp-includes/class-wp-embed.php */
+				return apply_filters( 'embed_oembed_html', $html, $url, $attr, $post_ID );
+			}
+		}
+
+		// Still unknown
+		return $this->maybe_make_link( $url );
+	}
 }
 
 $GLOBALS['wp_embed'] = new WP_Embed();
