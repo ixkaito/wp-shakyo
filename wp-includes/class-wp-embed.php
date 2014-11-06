@@ -34,6 +34,40 @@ class WP_Embed {
 		// After a post is saved, cache oEmbed items via AJAX
 		add_action( 'edit_form_advanced', array( $this, 'maybe_run_ajax_cache' ) );
 	}
+
+	/**
+	 * Process the [embed] shortcode.
+	 *
+	 * Since the [embed] shortcode needs to be run earlier than other shortcodes,
+	 * this function removes all existing shortcodes, registers the [embed] shortcode,
+	 * calls {@link do_shortcode()}, and then re-registers the old shortcodes.
+	 *
+	 * @uses $shortcode_tags
+	 * @uses remove_all_shortcodes()
+	 * @uses add_shortcode()
+	 * @uses do_shortcode()
+	 *
+	 * @param string $content Content to parse
+	 * @return string Content with shortcode parsed
+	 */
+	public function run_shortcode( $content ) {
+		global $shortcode_tags;
+
+		// Back up current registered shortcodes and clear them all out
+		$orig_shortcode_tags = $shortcode_tags;
+		remove_all_shortcodes();
+
+		add_shortcode( 'embed', array( $this, 'shortcode' ) );
+
+		// Do the shortcode (only the [embed] one is registered)
+		$content = do_shortcode( $content );
+
+		// Put the original shortcodes back
+		$shortcode_tags = $orig_shortcode_tags;
+
+		return $content;
+	}
+
 }
 
 $GLOBALS['wp_embed'] = new WP_Embed();
