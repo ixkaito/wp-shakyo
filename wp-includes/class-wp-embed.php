@@ -268,6 +268,23 @@ class WP_Embed {
 		// Still unknown
 		return $this->maybe_make_link( $url );
 	}
+
+	/**
+	 * Delete all oEmbed caches. Unused by core as of 4.0.0.
+	 *
+	 * @param int $post_ID post ID to delete the caches for.
+	 */
+	public function delete_oembed_caches( $post_ID ) {
+		$post_metas = get_post_custom_keys( $post_ID );
+		if ( empty($post_metas) )
+			return;
+
+		foreach( $post_metas as $post_meta_key ) {
+			if ( '_oembed_' == substr( $post_meta_key, 0, 8 ) )
+				delete_post_meta( $post_ID, $post_meta_key );
+		}
+	}
+
 }
 
 $GLOBALS['wp_embed'] = new WP_Embed();
