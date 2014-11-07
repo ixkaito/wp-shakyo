@@ -329,7 +329,22 @@ class WP_Embed {
 		return preg_replace_callback( '|^\s*(https?://[^\s"]+)\s*$|im', array( $this, 'autoembed_callback' ), $content );
 	}
 
+	/**
+	 * Callback function for {@link WP_Embed::autoembed()}.
+	 *
+	 * @uses WP_Embed::shortcode()
+	 *
+	 * @param array $match A regex match array.
+	 * @return string The embed HTML on success, otherwise the original URL.
+	 */
+	public function autoembed_callback( $match ) {
+		$oldval = $this->linkifunknown;
+		$this->linkifunknown = false;
+		$return = $this->shortcode( array(), $match[1] );
+		$this->linkifunkown = $oldval;
 
+		return "\n$return\n";
+	}
 }
 
 $GLOBALS['wp_embed'] = new WP_Embed();
