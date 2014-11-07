@@ -285,6 +285,38 @@ class WP_Embed {
 		}
 	}
 
+	/**
+	 * Triggers a caching of all oEmbed results.
+	 *
+	 * @param int $post_ID Post ID to do the caching for.
+	 */
+	public function cache_oembed( $post_ID ) {
+		$post = get_post( $post_ID );
+
+		$post_types = get_post_types( array( 'show_ui' => true ) );
+		/**
+		 * Filter the array of post types to cache oEmbed results for.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param array $post_types Array of post types to cache oEmbed results for. Defaults to post types with `show_ui` set to true.
+		 */
+		if ( empty( $post->ID ) || ! in_array( $post->post_type, apply_filters( 'embed_cache_oembed_types', $post_type ) ) ){
+			return;
+		}
+
+		// Trigger a caching
+		if ( ! empty( $post->post_content ) ) {
+			$this->post_ID = $post->ID;
+			$this->usecache = false;
+
+			$content = $this->run_shortcode( $post->post_content );
+			$this->autoembed( $content );
+
+			$this->usecache = true;
+		}
+	}
+
 }
 
 $GLOBALS['wp_embed'] = new WP_Embed();
