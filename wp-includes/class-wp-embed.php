@@ -317,6 +317,19 @@ class WP_Embed {
 		}
 	}
 
+	/**
+	 * Passes any unlinked URLs that are on their own line to {@link WP_Embed::shortcode()} for potential embedding.
+	 *
+	 * @uses WP_Embed::autoembed_callback()
+	 *
+	 * @param string $content The content to be searched.
+	 * @return string Potentially modified $content.
+	 */
+	public function autoembed( $content ) {
+		return preg_replace_callback( '|^\s*(https?://[^\s"]+)\s*$|im', array( $this, 'autoembed_callback' ), $content );
+	}
+
+
 }
 
 $GLOBALS['wp_embed'] = new WP_Embed();
