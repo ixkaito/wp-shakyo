@@ -341,10 +341,33 @@ class WP_Embed {
 		$oldval = $this->linkifunknown;
 		$this->linkifunknown = false;
 		$return = $this->shortcode( array(), $match[1] );
-		$this->linkifunkown = $oldval;
+		$this->linkifunknown = $oldval;
 
 		return "\n$return\n";
 	}
-}
 
+	/**
+	 * Conditionally makes a hyperlink based on an internal class variable.
+	 *
+	 * @param string $url URL to potentially be linked.
+	 * @return string Linked URL or the original URL.
+	 */
+	public function maybe_make_link( $url ) {
+		if ( $this->return_false_on_fail ) {
+			return false;
+		}
+
+		$output = ( $this->linkifunknown ) ? '<a href="' . esc_url($url) . '">' . esc_html($url) . '</a>' : $url;
+
+		/**
+		 * Filter the returned, maybe-linked embed URL.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param string $output The linked or original URL.
+		 * @param string $url    The original URL.
+		 */
+		return apply_filters( 'embed_maybe_make_link', $output, $url );
+	}
+}
 $GLOBALS['wp_embed'] = new WP_Embed();
