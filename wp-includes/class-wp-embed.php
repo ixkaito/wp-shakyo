@@ -156,7 +156,7 @@ class WP_Embed {
 		$attr = wp_parse_args( $attr, wp_embed_defaults( $url ) );
 
 		// kses converts & into &amp; and we need to undo this
-		// See Http://core.trac.wordpress.org/ticket/11311
+		// See http://core.trac.wordpress.org/ticket/11311
 		$url = str_replace( '&amp;', '&', $url );
 
 		// Look for known internal handlers
@@ -185,7 +185,7 @@ class WP_Embed {
 		if ( ! empty( $this->post_ID ) ) // Potentially set by WP_Embed::cache_oembed()
 			$post_ID = $this->post_ID;
 
-		// Unkown URL format. Let oEmbed have a go.
+		// Unknown URL format. Let oEmbed have a go.
 		if ( $post_ID ) {
 
 			// Check for a cached result (stored in the post meta)
@@ -228,8 +228,8 @@ class WP_Embed {
 					 * @see WP_Embed::shortcode()
 					 *
 					 * @param mixed  $cache   The cached HTML result, stored in post meta.
-					 * @param string $url     The attemped embed URL.
-					 * @param array  $attr    And array of shortcode attributes.
+					 * @param string $url     The attempted embed URL.
+					 * @param array  $attr    An array of shortcode attributes.
 					 * @param int    $post_ID Post ID.
 					 */
 					return apply_filters( 'embed_oembed_html', $cache, $url, $attr, $post_ID );
@@ -241,9 +241,9 @@ class WP_Embed {
 			 *
 			 * @since 2.9.0
 			 *
-			 * @see WP_eEmbed::discover()
+			 * @see WP_oEmbed::discover()
 			 *
-			 * @param bool $enable whether to enable <link> tag discovery. Default false.
+			 * @param bool $enable Whether to enable <link> tag discovery. Default false.
 			 */
 			$attr['discover'] = ( apply_filters( 'embed_oembed_discover', false ) && author_can( $post_ID, 'unfiltered_html' ) );
 
@@ -272,7 +272,7 @@ class WP_Embed {
 	/**
 	 * Delete all oEmbed caches. Unused by core as of 4.0.0.
 	 *
-	 * @param int $post_ID post ID to delete the caches for.
+	 * @param int $post_ID Post ID to delete the caches for.
 	 */
 	public function delete_oembed_caches( $post_ID ) {
 		$post_metas = get_post_custom_keys( $post_ID );
@@ -301,7 +301,7 @@ class WP_Embed {
 		 *
 		 * @param array $post_types Array of post types to cache oEmbed results for. Defaults to post types with `show_ui` set to true.
 		 */
-		if ( empty( $post->ID ) || ! in_array( $post->post_type, apply_filters( 'embed_cache_oembed_types', $post_type ) ) ){
+		if ( empty( $post->ID ) || ! in_array( $post->post_type, apply_filters( 'embed_cache_oembed_types', $post_types ) ) ){
 			return;
 		}
 
