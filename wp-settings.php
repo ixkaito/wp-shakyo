@@ -157,4 +157,8 @@ if ( is_multisite() ) {
 	require( ABSPATH . WPINC . '/ms-deprecated.php' );
 }
 
+// Define constants that  rely on the API to obtain the default value.
+// Define must-use plugin directory constants, which may be overridden in the sunrise.php drop-in.
+wp_plugin_directory_constants();
+
 var_dump( __FILE__ );
