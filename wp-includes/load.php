@@ -486,6 +486,34 @@ function wp_not_installed() {
 }
 
 /**
+ * Retrieve an array of must-use plugin files.
+ *
+ * The default directory is wp-content/mu-plugins. To change the default
+ * directory manually, define `WPMU_PLUGIN_DIR` and `WPMU_PLUGIN_URL`
+ * in wp-config.php.
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @return array Files to include.
+ */
+function wp_get_mu_plugins() {
+	$mu_plugins = array();
+	if ( !is_dir( WPMU_PLUGIN_DIR ) )
+		return $mu_plugins;
+	if ( ! $dh = opendir( WPMU_PLUGIN_DIR ) )
+		return $mu_plugins;
+	while ( ( $plugin = readdir( $dh ) ) !== false ) {
+		if ( substr( $plugin, -4 ) == '.php' )
+			$mu_plugins[] = WPMU_PLUGIN_DIR . '/' . $plugin;
+	}
+	closedir( $dh );
+	sort( $mu_plugins );
+
+	return $mu_plugins;
+}
+
+/**
  * Runs just before PHP shuts down execution.
  *
  * @since 1.2.0
