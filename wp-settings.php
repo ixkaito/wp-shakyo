@@ -182,4 +182,11 @@ if ( is_multisite() ) {
 	unset( $network_plugin );
 }
 
+/**
+ * Fires once all must-use and network-activated plugins have loaded.
+ *
+ * @since 2.8.0
+ */
+do_action( 'muplugins_loaded' );
+
 var_dump( __FILE__ );
