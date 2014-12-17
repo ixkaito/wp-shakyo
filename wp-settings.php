@@ -1,6 +1,6 @@
 <?php
 /**
- * used to set up and fix common variables and include
+ * Used to set up and fix common variables and include
  * the WordPress procedural and class library.
  *
  * Allows for some configuration in wp-config.php (see default-constants.php)
@@ -21,7 +21,11 @@ define( 'WPINC', 'wp-includes' );
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
 
-// Include files required for initialization.
+/*
+ * These can't be directly globalized in version.php. When updating,
+ * we're including version.php from another install and don't want
+ * these values to be overridden if already set.
+ */
 global $wp_version, $wp_db_version, $tinymce_version, $required_php_version, $required_mysql_version;
 require( ABSPATH . WPINC . '/version.php' );
 
@@ -84,7 +88,7 @@ wp_start_object_cache();
 // Attach the default filters.
 require( ABSPATH . WPINC . '/default-filters.php' );
 
-// Initilize multisite if enabled.
+// Initialize multisite if enabled.
 if ( is_multisite() ) {
 	require( ABSPATH . WPINC . '/ms-blogs.php' );
 	require( ABSPATH . WPINC . '/ms-settings.php' );
@@ -104,7 +108,7 @@ require_once( ABSPATH . WPINC . '/l10n.php' );
 // Run the installer if WordPress is not installed.
 wp_not_installed();
 
-// Load most of WordPress
+// Load most of WordPress.
 require( ABSPATH . WPINC . '/class-wp-walker.php' );
 require( ABSPATH . WPINC . '/class-wp-ajax-response.php' );
 require( ABSPATH . WPINC . '/formatting.php' );
@@ -157,7 +161,7 @@ if ( is_multisite() ) {
 	require( ABSPATH . WPINC . '/ms-deprecated.php' );
 }
 
-// Define constants that  rely on the API to obtain the default value.
+// Define constants that rely on the API to obtain the default value.
 // Define must-use plugin directory constants, which may be overridden in the sunrise.php drop-in.
 wp_plugin_directory_constants();
 
