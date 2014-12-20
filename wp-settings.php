@@ -189,4 +189,7 @@ if ( is_multisite() ) {
  */
 do_action( 'muplugins_loaded' );
 
+if ( is_multisite() )
+	ms_cookie_constants();
+
 var_dump( __FILE__ );
