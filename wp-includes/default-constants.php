@@ -150,3 +150,90 @@ function wp_plugin_directory_constants() {
 	if ( !defined( 'MUPLUGINDIR' ) )
 		define( 'MUPLUGINDIR', 'wp-content/mu-plugins' ); // Relative to ABSPATH. For back compat.
 }
+
+/**
+ * Defines cookie related WordPress constants
+ *
+ * Defines constants after multisite is loaded. Cookie-related constants may be overridden in ms_network_cookies().
+ * @since 3.0.0
+ */
+function wp_cookie_constants() {
+	/**
+	 * Used to guarantee unique hash cookies
+	 *
+	 * @since 1.5.0
+	 */
+	if ( !defined( 'COOKIEHASH' ) ) {
+		$siteurl = get_site_option( 'siteurl' );
+		if ( $siteurl )
+			define( 'COOKIEHASH', md5( $siteurl ) );
+		else
+			define( 'COOKIEHASH', '' );
+	}
+
+	/**
+	 * @since 2.0.0
+	 */
+	if ( !defined('USER_COOKIE') )
+		define('USER_COOKIE', 'wordpressuser_' . COOKIEHASH);
+
+	/**
+	 * @since 2.0.0
+	 */
+	if ( !defined('PASS_COOKIE') )
+		define('PASS_COOKIE', 'wordpressuser_' . COOKIEHASH);
+
+	/**
+	 * @since 2.5.0
+	 */
+	if ( !defined('AUTH_COOKIE') )
+		define('AUTH_COOKIE', 'wordpress_' . COOKIEHASH);
+
+	/**
+	 * @since 2.6.0
+	 */
+	if ( !defined('SECURE_AUTH_COOKIE') )
+		define('SECURE_AUTH_COOKIE', 'wordpress_sec_' . COOKIEHASH);
+
+	/**
+	 * @since 2.6.0
+	 */
+	if ( !defined('LOGGED_IN_COOKIE') )
+		define('LOGGED_IN_COOKIE', 'wordpress_logged_in_' . COOKIEHASH);
+
+	/**
+	 * @since 2.3.0
+	 */
+	if ( !defined('TEST_COOKIE') )
+		define('TEST_COOKIE', 'wordpress_test_cookie');
+
+	/**
+	 * @since 1.2.0
+	 */
+	if ( !defined('COOKIEPATH') )
+		define('COOKIEPATH', preg_replace('|https?://[^/]+|i', '', get_option('home') . '/' ) );
+
+	/**
+	 * @since 1.5.0
+	 */
+	if ( !defined('SITECOOKIEPATH') )
+		define('SITECOOKIEPATH', preg_replace('|https?://[^/]+|i', '', get_option('siteurl') . '/' ) );
+
+	/**
+	 * @since 2.6.0
+	 */
+	if ( !defined('ADMIN_COOKIE_PATH') )
+		define( 'ADMIN_COOKIE_PATH', SITECOOKIEPATH . 'wp-admin' );
+
+	/**
+	 * @since 2.6.0
+	 */
+	if ( !defined('PLUGINS_COOKIE_PATH') )
+		define( 'PLUGINS_COOKIE_PATH', preg_replace('|https?://[^/]+|i', '', WP_PLUGIN_URL)  );
+
+	/**
+	 * @since 2.0.0
+	 */
+	if ( !defined('COOKIE_DOMAIN') )
+		define('COOKIE_DOMAIN', false);
+}
