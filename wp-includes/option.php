@@ -122,3 +122,96 @@ function get_option( $option, $default = false ) {
 	 */
 	return apply_filters( 'option_' . $option, maybe_unserialize( $value ) );
 }
+
+/**
+ * Retrieve site option value based on name of option.
+ *
+ * @since 2.8.0
+ *
+ * @see get_option()
+ *
+ * @param string $option Name of option to retrieve. Expected to not be SQL-escaped.
+ * @param mixed $default Optional value to return if option doesn't exist. Default false.
+ * @param bool $use_cache Whether to use cache. Multisite only. Default true.
+ * @return mixed Value set for the option.
+ */
+function get_site_option( $option, $default = false, $use_cache = true ) {
+	global $wpdb;
+
+	/**
+	 * Filter an existing site option before it is retrieved.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * Passing a truthy value to the filter will effectively short-circuit retrieval,
+	 * returning the passed value instead.
+	 *
+	 * @since 2.9.0 As 'pre_site_option_' . $key
+	 * @since 3.0.0
+	 *
+	 * @param mixed $pre_option The default value to return if the option does not exist.
+	 */
+	$pre = apply_filters( 'pre_site_option_' . $option, false );
+
+	if ( false !== $pre )
+		return $pre;
+
+	// prevent non-existent options from triggering multiple queries
+	$notoptions_key = "{$wpdb->siteid}:notoptions";
+	$notoptions = wp_cache_get( $notoptions_key, 'site-options' );
+
+	if ( isset( $notoptions[$option] ) ) {
+
+		/**
+		 * Filter a specific default site option.
+		 *
+		 * The dynamic portion of the hook name, $option, refers to the option name.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @param mixed $default The value to return if the site option does not exist
+		 *                       in the database.
+		 */
+		return apply_filters( 'default_site_option_' . $option, $default );
+	}
+
+	if ( ! is_multisite() ) {
+
+		/** This filter is documented in wp-includes/option.php */
+		$default = apply_filters( 'default_site_option_' . $option, $default );
+		$value = get_option($option, $default);
+	} else {
+		$cache_key = "{$wpdb->siteid}:$option";
+		if ( $use_cache )
+			$value = wp_cache_get($cache_key, 'site-options');
+
+		if ( !isset($value) || (false === $value) ) {
+			$row = $wpdb->get_row( $wpdb->prepare("SELECT meta_value FROM $wpdb->sitemeta WHERE meta_key = %s AND site_id = %d", $option, $wpdb->siteid ) );
+
+			// Has to be get_row instead of get_var becuase of funkiness with 0, false, null values
+			if ( is_object( $row ) ) {
+				$value = $row->meta_value;
+				$value = maybe_unserialize( $value );
+				wp_cache_set( $cache_key, $value, 'site-options' );
+			} else {
+				$notoptions[$option] = true;
+				wp_cache_set( $notoptions_key, $notoptions, 'site-options' );
+
+				/** This filter is documented in wp-includes/option.php */
+				$value = apply_filters( 'default_site_option_' . $option, $default );
+			}
+		}
+	}
+
+	/**
+	 * Filter the value of an existing site option.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 2.9.0 As 'site_option_' . $key
+	 * @since 3.0.0
+	 *
+	 * @param mixed $value Value of site option.
+	 */
+	return apply_filters( 'site_option_' . $option, $value );
+}
