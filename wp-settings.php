@@ -190,9 +190,12 @@ if ( is_multisite() ) {
 do_action( 'muplugins_loaded' );
 
 if ( is_multisite() )
-	ms_cookie_constants();
+	ms_cookie_constants(  );
 
 // Define constants after multisite is loaded. Cookie-related constants may be overridden in ms_network_cookies().
 wp_cookie_constants();
+
+// Define and enforce our SSL constants
+wp_ssl_constants();
 
 var_dump( __FILE__ );
