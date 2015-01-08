@@ -21,5 +21,7 @@ global $pagenow,
 
 // Oh which page are we ?
 if ( is_admin() ) {
-
+	// wp-admin pages are checked more carefully
+	if ( is_network_admin() )
+		preg_match('#/wp-admin/network/?(.*?)$#i', $_SERVER['PHP_SELF'], $self_matcheds);
 }
