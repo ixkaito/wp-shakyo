@@ -83,3 +83,6 @@ if ( isset($_SERVER['HTTP_USER_AGENT']) ) {
 		$is_NS4 = true;
 	}
 }
+
+if ( $is_safari && stripos($_SERVER['HTTP_USER_AGENT'], 'mobile') !== false )
+	$is_iphone = true;
