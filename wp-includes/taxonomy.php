@@ -136,14 +136,14 @@ add_action( 'init', 'create_initial_taxonomies', 0 ); // highest priority
  * parameter), along with strings for the taxonomy name and another string for
  * the object type.
  *
- * Nothing is returned, so expect orror maybe or use taxonomy_exists() to check
+ * Nothing is returned, so expect error maybe or use taxonomy_exists() to check
  * whether taxonomy exists.
  *
  * Optional $args contents:
  *
  * - label - Name of the taxonomy shown in the menu. Usually plural. If not set, labels['name'] will be used.
  * - labels - An array of labels for this taxonomy.
- *     * By befault tag labels are used for non-hierarchical types and category labels for hierarchical ones.
+ *     * By default tag labels are used for non-hierarchical types and category labels for hierarchical ones.
  *     * You can see accepted values in {@link get_taxonomy_labels()}.
  * - description - A short descriptive summary of what the taxonomy is for. Defaults to blank.
  * - public - If the taxonomy should be publicly queryable; //@TODO not implemented.
@@ -168,7 +168,7 @@ add_action( 'init', 'create_initial_taxonomies', 0 ); // highest priority
  *     * If false, no meta box is shown.
  * - capabilities - Array of capabilities for this taxonomy.
  *     * You can see accepted values in this function.
- * - rewirte - Triggers the handling of rewrites for this taxonomy. Defaults to true, using $taxonomy as slug.
+ * - rewrite - Triggers the handling of rewrites for this taxonomy. Defaults to true, using $taxonomy as slug.
  *     * To prevent rewrite, set to false.
  *     * To specify rewrite rules, an array can be passed with any of these keys
  *         * 'slug' => string Customize the permastruct slug. Defaults to $taxonomy key
