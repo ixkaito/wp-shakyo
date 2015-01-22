@@ -127,3 +127,70 @@ function create_initial_taxonomies() {
 	) );
 }
 add_action( 'init', 'create_initial_taxonomies', 0 ); // highest priority
+
+/**
+ * Create or modify a taxonomy object. Do not use before init.
+ *
+ * A simple function for creating or modifying a taxonomy object based on the
+ * parameters given. The function will accept an array (third optional
+ * parameter), along with strings for the taxonomy name and another string for
+ * the object type.
+ *
+ * Nothing is returned, so expect orror maybe or use taxonomy_exists() to check
+ * whether taxonomy exists.
+ *
+ * Optional $args contents:
+ *
+ * - label - Name of the taxonomy shown in the menu. Usually plural. If not set, labels['name'] will be used.
+ * - labels - An array of labels for this taxonomy.
+ *     * By befault tag labels are used for non-hierarchical types and category labels for hierarchical ones.
+ *     * You can see accepted values in {@link get_taxonomy_labels()}.
+ * - description - A short descriptive summary of what the taxonomy is for. Defaults to blank.
+ * - public - If the taxonomy should be publicly queryable; //@TODO not implemented.
+ *     * Defaults to true.
+ * - hierarchical - Whether the taxonomy is hierarchical (e.g. category). Defaults to false.
+ * - show_ui - Whether to generate a default UI for managing this taxonomy in the admin.
+ *     * If not set, the default is inherited from public.
+ * - show_in_menu - Whether to show the taxonomy in the admin menu.
+ *     * If true, the taxonomy is shown as a submenu of the object type menu.
+ *     * If false, no menu is shown.
+ *     * show_ui must be true.
+ *     * If not set, the default is inherited from show_ui.
+ * - show_in_nav_menus - Makes this taxonomy available for selection in navigation menus.
+ *     * If not set, the default is inherited from public.
+ * - show_tagcloud - Whether to list the taxonomy in the Tag Cloud Widget.
+ *     * If not set, the default is inherited from show_ui.
+ * - show_admin_column - Whether to display a column for the taxonomy on its post type listing screens.
+ *     * Defaults to false.
+ * - meta_box_cb - Provide a callback function for the meta box display.
+ *     * If not set, defaults to post_categories_meta_box for hierarchical taxonomies
+ *     and post_tags_meta_box for non-hierarchical.
+ *     * If false, no meta box is shown.
+ * - capabilities - Array of capabilities for this taxonomy.
+ *     * You can see accepted values in this function.
+ * - rewirte - Triggers the handling of rewrites for this taxonomy. Defaults to true, using $taxonomy as slug.
+ *     * To prevent rewrite, set to false.
+ *     * To specify rewrite rules, an array can be passed with any of these keys
+ *         * 'slug' => string Customize the permastruct slug. Defaults to $taxonomy key
+ *         * 'with_front' => bool Should the permastruct be prepended with WP_Rewrite::$front. Defaults to true.
+ *         * 'hierarchical' => bool Either hierarchical rewrite tag or not. Defaults to false.
+ *         * 'ep_mask' => const Assign an endpoint mask.
+ *             * If not specified, defaults to EP_NONE.
+ * - query_var - Sets the query_var key for this taxonomy. Defaults to $taxonomy key
+ *     * If false, a taxonomy cannot be loaded at ?{query_var}={term_slug}
+ *     * If specified as a string, the query ?{query_var_string}={term_slug} will be valid.
+ * - update_count_callback - Works much like a hook, in that it will be called when the count is updated.
+ *     * Defaults to _update_post_term_count() for taxonomies attached to post types, which then confirms
+ *       that the objects are published before counting them.
+ *     * Defaults to _update_generic_term_count() for taxonomies attached to other object types, such as links.
+ * - _builtin - true if this taxonomy is a native or "built-in" taxonomy. THIS IS FOR INTERNAL USE ONLY!
+ *
+ * @since 2.3.0
+ * @uses $wp_taxonomies Inserts new taxonomy object into the list
+ * @uses $wp Adds query vars
+ *
+ * @param string $taxonomy Taxonomy key, must not exceed 32 characters.
+ * @param array|string $object_type Name of the object type for the taxonomy object.
+ * @param array|string $args See optional args description above.
+ * @return null|WP_Error WP_Error if errors, otherwise null.
+ */
