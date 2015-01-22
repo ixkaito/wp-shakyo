@@ -194,3 +194,115 @@ add_action( 'init', 'create_initial_taxonomies', 0 ); // highest priority
  * @param array|string $args See optional args description above.
  * @return null|WP_Error WP_Error if errors, otherwise null.
  */
+function register_taxonomy( $taxonomy, $object_type, $args = array() ) {
+	global $wp_taxonomies, $wp;
+
+	if ( ! is_array( $wp_taxonomies ) )
+		$wp_taxonomies = array();
+
+	$defaults = array(
+		'labels'                => array(),
+		'description'           => '',
+		'public'                => true,
+		'hierarchical'          => false,
+		'show_ui'               => null,
+		'show_in_menu'          => null,
+		'show_in_nav_menus'     => null,
+		'show_tagcloud'         => null,
+		'show_admin_column'     => false,
+		'meta_box_cb'           => null,
+		'capabilities'          => array(),
+		'rewrite'               => true,
+		'query_var'             => $taxonomy,
+		'update_count_callback' => '',
+		'_builtin'              => false,
+	);
+	$args = wp_parse_args( $args, $defaults );
+
+	if ( strlen( $taxonomy ) > 32 ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Taxonomies cannot exceed 32 characters in length' ), '4.0' );
+		return new WP_Error( 'taxonomy_too_long', __( 'Taxonomies cannot exceed 32 characters in length' ) );
+	}
+
+	if ( false !== $args['query_var'] && ! empty( $wp ) ) {
+		if ( true === $args['query_var'] )
+			$args['query_var'] = $taxonomy;
+		else
+			$args['query_var'] = sanitize_title_with_dashes( $args['query_var'] );
+		$wp->add_query_var( $args['query_var'] );
+	}
+
+	if ( false !== $args['rewrite'] && ( is_admin() || '' != get_option( 'permalink_structure' ) ) ) {
+		$args['rewrite'] = wp_parse_args( $args['rewrite'], array(
+			'with_front' => true,
+			'hierarchical' => false,
+			'ep_mask' => EP_NONE,
+		) );
+
+		if ( empty( $args['rewrite']['slug'] ) )
+			$args['rewrite']['slug'] = sanitize_title_with_dashes( $taxonomy );
+
+		if ( $args['hierarchical'] && $args['rewrite']['hierarchical'] )
+			$tag = '(.+?)';
+		else
+			$tag = '([^/]+)';
+
+		add_rewrite_tag( "%$taxonomy%", $tag, $args['query_var'] ? "{$args['query_var']}=" : "taxonomy=$taxonomy&term=" );
+		add_permastruct( $taxonomy, "{$args['rewrite']['slug']}/%$taxonomy%", $args['rewrite'] );
+	}
+
+	// If not set, default to the setting for public.
+	if ( null === $args['show_ui'] )
+		$args['show_ui'] = $args['public'];
+
+	// If not set, default to the setting for show_ui.
+	if ( null === $args['show_in_menu' ] || ! $args['show_ui'] )
+		$args['show_in_menu' ] = $args['show_ui'];
+
+	// If not set, default to the setting for public.
+	if ( null === $args['show_in_nav_menus'] )
+		$args['show_in_nav_menus'] = $args['public'];
+
+	// If not set, default to the setting for show_ui.
+	if ( null === $args['show_tagcloud'] )
+		$args['show_tagcloud'] = $args['show_ui'];
+
+	$default_caps = array(
+		'manage_terms' => 'manage_categories',
+		'edit_terms'   => 'manage_categories',
+		'delete_terms' => 'manage_categories',
+		'assign_terms' => 'edit_posts',
+	);
+	$args['cap'] = (object) array_merge( $default_caps, $args['capabilities'] );
+	unset( $args['capabilities'] );
+
+	$args['name'] = $taxonomy;
+	$args['object_type'] = array_unique( (array) $object_type );
+
+	$args['labels'] = get_taxonomy_labels( (object) $args );
+	$args['label'] = $args['labels']->name;
+
+	// If not set, use the default meta box
+	if ( null === $args['meta_box_cb'] ) {
+		if ( $args['hierarchical'] )
+			$args['meta_box_cb'] = 'post_categories_meta_box';
+		else
+			$args['meta_box_cb'] = 'post_tags_meta_box';
+	}
+
+	$wp_taxonomies[ $taxonomy ] = (object) $args;
+
+	// register callback handling for metabox
+ 	add_filter( 'wp_ajax_add-' . $taxonomy, '_wp_ajax_add_hierarchical_term' );
+
+	/**
+	 * Fires after a taxonomy is registered.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string       $taxonomy    Taxonomy slug.
+	 * @param array|string $object_type Object type or array of object types.
+	 * @param array        $args        Array of taxonomy registration arguments.
+	 */
+	do_action( 'registered_taxonomy', $taxonomy, $object_type, $args );
+}
