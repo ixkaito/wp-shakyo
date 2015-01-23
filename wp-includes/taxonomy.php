@@ -335,3 +335,34 @@ function register_taxonomy( $taxonomy, $object_type, $args = array() ) {
  * @return object object with all the labels as member variables
  */
 
+function get_taxonomy_labels( $tax ) {
+	$tax->labels = (array) $tax->labels;
+
+	if ( isset( $tax->helps ) && empty( $tax->labels['separate_items_with_commas'] ) )
+		$tax->labels['separate_items_with_commas'] = $tax->helps;
+
+	if ( isset( $tax->no_tagcloud ) && empty( $tax->labels['not_found'] ) )
+		$tax->labels['not_found'] = $tax->no_tagcloud;
+
+	$nohier_vs_hier_defaults = array(
+		'name' => array( _x( 'Tags', 'taxonomy general name' ), _x( 'Categories', 'taxonomy general name' ) ),
+		'singular_name' => array( _x( 'Tag', 'taxonomy singular name' ), _x( 'Category', 'taxonomy singular name' ) ),
+		'search_items' => array( __( 'Search Tags' ), __( 'Search Categories' ) ),
+		'popular_items' => array( __( 'Popular Tags' ), null ),
+		'all_items' => array( __( 'All Tags' ), __( 'All Categories' ) ),
+		'parent_item' => array( null, __( 'Parent Category' ) ),
+		'parent_item_colon' => array( null, __( 'Parent Category:' ) ),
+		'edit_item' => array( __( 'Edit Tag' ), __( 'Edit Category' ) ),
+		'view_item' => array( __( 'View Tag' ), __( 'View Category' ) ),
+		'update_item' => array( __( 'Update Tag' ), __( 'Update Category' ) ),
+		'add_new_item' => array( __( 'Add New Tag' ), __( 'Add New Category' ) ),
+		'new_item_name' => array( __( 'New Tag Name' ), __( 'New Category Name' ) ),
+		'separate_items_with_commas' => array( __( 'Separate tags with commas' ), null ),
+		'add_or_remove_items' => array( __( 'Add or remove tags' ), null ),
+		'choose_from_most_used' => array( __( 'Choose from the most used tags' ), null ),
+		'not_found' => array( __( 'No tags found.' ), null ),
+	);
+	$nohier_vs_hier_defaults['menu_name'] = $nohier_vs_hier_defaults['name'];
+
+	return _get_custom_object_labels( $tax, $nohier_vs_hier_defaults );
+}
