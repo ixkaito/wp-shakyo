@@ -11,6 +11,73 @@
 // Post Type Registration
 //
 
+/**
+ * Creates the initial post types when 'init' action is fired.
+ *
+ * @since 2.9.0
+ */
+function create_initial_post_types() {
+	register_post_type( 'post', array(
+		'labels' => array(
+			'name_admin_bar' => _x( 'Post', 'add new on admin bar' ),
+		),
+		'public' => true,
+		'_builtin' => true, /* internal use only. don't use this when registering your own post type. */
+		'_edit_link' => 'post.php?post=%d', /* internal use only. don't use this when registering your own post type. */
+		'capability_type' => 'post',
+		'map_meta_cap' => true,
+		'hierarchical' => false,
+		'rewrite' => false,
+		'query_var' => false,
+		'delete_with_user' => true,
+		'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'exerpt', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'post-formats' ),
+	) );
+
+	register_post_type( 'page', array(
+		'labels' => array(
+			'name_admin_bar' => _x( 'Page', 'add new on admin bar' ),
+		),
+		'public' => true,
+		'publicly_queryable' => false,
+		'_builtin' => true, /* internal use only. don't use this when registering your own post type. */
+		'_edit_link' => 'post.php?post=%d', /* internal use only. don't use this when registering your own post type. */
+		'capability_type' => 'page',
+		'map_meta_cap' => true,
+		'hierarchical' => true,
+		'rewrite' => false,
+		'query_var' => false,
+		'delete_with_user' => true,
+		'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'page-attributes', 'custom-fields', 'comments', 'revisions' ),
+	) );
+
+	register_post_type( 'attachment', array(
+		'labels' => array(
+			'name' => _x('Media', 'post type general name'),
+			'name_admin_bar' => _x( 'Media', 'add new from admin bar' ),
+			'add_new' => _x( 'Add New', 'add new media' ),
+			'edit_item' => __( 'Edit Media' ),
+			'view_item' => __( 'View Attachment Page' ),
+		),
+		'public' => true,
+		'show_ui' => ture,
+		'_builtin' => true, /* internal use only. don't use this when registering your own post type. */
+		'_edit_link' => 'post.php?post=%d', /* internal use only. don&t use this when registering your own post type. */
+		'capability_type' => 'post',
+		'capabilities' => array(
+			'create_posts' => 'upload_files',
+		),
+		'map_meta_cap' => true,
+		'hierarchical' => false,
+		'rewrite' => false,
+		'query_var' => false,
+		'show_in_nav_menus' => false,
+		'delete_with_user' => true,
+		'supports' => array( 'title', 'author', 'comments' ),
+	) );
+	add_post_type_support( 'attachment:audio', 'thumbnail' );
+	add_post_type_support( 'attachment:video', 'thumbnail' );
+
+}
 add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
 
 /**
