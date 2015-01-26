@@ -204,5 +204,6 @@ require( ABSPATH . WPINC . '/vars.php' );
 // Make taxonomies and posts available to plugins and themes.
 // @plugin authors: warning: these get registered again on the init hook.
 create_initial_taxonomies();
+create_initial_post_types();
 
 var_dump( __FILE__ );
