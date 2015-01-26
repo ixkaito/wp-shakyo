@@ -21,7 +21,7 @@ function create_initial_post_types() {
 		'labels' => array(
 			'name_admin_bar' => _x( 'Post', 'add new on admin bar' ),
 		),
-		'public' => true,
+		'public'  => true,
 		'_builtin' => true, /* internal use only. don't use this when registering your own post type. */
 		'_edit_link' => 'post.php?post=%d', /* internal use only. don't use this when registering your own post type. */
 		'capability_type' => 'post',
@@ -30,7 +30,7 @@ function create_initial_post_types() {
 		'rewrite' => false,
 		'query_var' => false,
 		'delete_with_user' => true,
-		'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'exerpt', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'post-formats' ),
+		'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'post-formats' ),
 	) );
 
 	register_post_type( 'page', array(
@@ -55,13 +55,13 @@ function create_initial_post_types() {
 			'name' => _x('Media', 'post type general name'),
 			'name_admin_bar' => _x( 'Media', 'add new from admin bar' ),
 			'add_new' => _x( 'Add New', 'add new media' ),
-			'edit_item' => __( 'Edit Media' ),
-			'view_item' => __( 'View Attachment Page' ),
+ 			'edit_item' => __( 'Edit Media' ),
+ 			'view_item' => __( 'View Attachment Page' ),
 		),
 		'public' => true,
-		'show_ui' => ture,
+		'show_ui' => true,
 		'_builtin' => true, /* internal use only. don't use this when registering your own post type. */
-		'_edit_link' => 'post.php?post=%d', /* internal use only. don&t use this when registering your own post type. */
+		'_edit_link' => 'post.php?post=%d', /* internal use only. don't use this when registering your own post type. */
 		'capability_type' => 'post',
 		'capabilities' => array(
 			'create_posts' => 'upload_files',
@@ -84,7 +84,7 @@ function create_initial_post_types() {
 		),
 		'public' => false,
 		'_builtin' => true, /* internal use only. don't use this when registering your own post type. */
-		'_edit_link' => 'post.php?revision=%d', /* internal use only. don&t use this when registering your own post type. */
+		'_edit_link' => 'revision.php?revision=%d', /* internal use only. don't use this when registering your own post type. */
 		'capability_type' => 'post',
 		'map_meta_cap' => true,
 		'hierarchical' => false,
@@ -112,53 +112,54 @@ function create_initial_post_types() {
 		'label'       => _x( 'Published', 'post' ),
 		'public'      => true,
 		'_builtin'    => true, /* internal use only. */
-		'label_count' => _n_noop( 'Published <span class"count">(%s)</span>', 'Published <span class="count">(%s)</span>' ),
+		'label_count' => _n_noop( 'Published <span class="count">(%s)</span>', 'Published <span class="count">(%s)</span>' ),
 	) );
 
 	register_post_status( 'future', array(
 		'label'       => _x( 'Scheduled', 'post' ),
-		'public'      => true,
+		'protected'   => true,
 		'_builtin'    => true, /* internal use only. */
-		'label_count' => _n_noop( 'Scheduled <span class"count">(%s)</span>', 'Scheduled <span class="count">(%s)</span>' ),
+		'label_count' => _n_noop('Scheduled <span class="count">(%s)</span>', 'Scheduled <span class="count">(%s)</span>' ),
 	) );
 
 	register_post_status( 'draft', array(
 		'label'       => _x( 'Draft', 'post' ),
-		'public'      => true,
+		'protected'   => true,
 		'_builtin'    => true, /* internal use only. */
-		'label_count' => _n_noop( 'Draft <span class"count">(%s)</span>', 'Drafts <span class="count">(%s)</span>' ),
+		'label_count' => _n_noop( 'Draft <span class="count">(%s)</span>', 'Drafts <span class="count">(%s)</span>' ),
 	) );
 
 	register_post_status( 'pending', array(
 		'label'       => _x( 'Pending', 'post' ),
-		'public'      => true,
+		'protected'   => true,
 		'_builtin'    => true, /* internal use only. */
-		'label_count' => _n_noop( 'Pending <span class"count">(%s)</span>', 'Pending <span class="count">(%s)</span>' ),
+		'label_count' => _n_noop( 'Pending <span class="count">(%s)</span>', 'Pending <span class="count">(%s)</span>' ),
 	) );
 
 	register_post_status( 'private', array(
 		'label'       => _x( 'Private', 'post' ),
-		'public'      => true,
+		'private'     => true,
 		'_builtin'    => true, /* internal use only. */
-		'label_count' => _n_noop( 'Private <span class"count">(%s)</span>', 'Private <span class="count">(%s)</span>' ),
+		'label_count' => _n_noop( 'Private <span class="count">(%s)</span>', 'Private <span class="count">(%s)</span>' ),
 	) );
 
 	register_post_status( 'trash', array(
 		'label'       => _x( 'Trash', 'post' ),
-		'public'      => true,
+		'internal'    => true,
 		'_builtin'    => true, /* internal use only. */
-		'label_count' => _n_noop( 'Trash <span class"count">(%s)</span>', 'Trash <span class="count">(%s)</span>' ),
+		'label_count' => _n_noop( 'Trash <span class="count">(%s)</span>', 'Trash <span class="count">(%s)</span>' ),
+		'show_in_admin_status_list' => true,
 	) );
 
 	register_post_status( 'auto-draft', array(
 		'label'    => 'auto-draft',
-		'public'   => true,
+		'internal' => true,
 		'_builtin' => true, /* internal use only. */
 	) );
 
 	register_post_status( 'inherit', array(
 		'label'    => 'inherit',
-		'public'   => true,
+		'internal' => true,
 		'_builtin' => true, /* internal use only. */
 		'exclude_from_search' => false,
 	) );
