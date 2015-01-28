@@ -279,6 +279,41 @@ add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
  * }
  * @return object|WP_Error The registered post type object, or an error object.
  */
+function register_post_type( $post_type, $args = array() ) {
+	global $wp_post_types, $wp_rewrite, $wp;
+
+	if ( ! is_array( $wp_post_types ) )
+		$wp_post_types = array();
+
+	// Args prefixed with an underscore are reserved for internal use.
+	$defaults = array(
+		'labels'               => array(),
+		'description'          => '',
+		'public'               => false,
+		'hierarchical'         => false,
+		'exclude_from_search'  => null,
+		'publicly_queryable'   => null,
+		'show_ui'              => null,
+		'show_in_menu'         => null,
+		'show_in_nav_menus'    => null,
+		'show_in_admin_bar'    => null,
+		'menu_position'        => null,
+		'menu_icon'            => null,
+		'capabilitiey_type'    => 'post',
+		'capabilities'         => array(),
+		'map_meta_cap'         => null,
+		'supports'             => array(),
+		'register_meta_box_cb' => null,
+		'taxonomies'           => array(),
+		'has_archive'          => false,
+		'rewrite'              => true,
+		'query_var'            => true,
+		'can_export'           => true,
+		'delete_with_user'     => null,
+		'_builting'            => false,
+		'_edit_link'           => 'post.php?post=%d',
+	);
+}
 
 /**
  * Build an object with custom-something object (post type, taxonomy) labels
