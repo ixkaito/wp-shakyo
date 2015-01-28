@@ -206,16 +206,16 @@ add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
  *                                             * ?{post_type_query_var}={single_post_slug}
  *                                             If not set, the default is inherited from $public.
  *     @type bool        $show_ui              Whether to generate a default UI for managing this post type in the
- *                                             admin. Default is value of $pulic.
+ *                                             admin. Default is value of $public.
  *     @type bool        $show_in_menu         Where to show the post type in the admin menu. To work, $show_ui
- *                                             must be true. If ture, the post type is shown in its own top level
+ *                                             must be true. If true, the post type is shown in its own top level
  *                                             menu. If false, no menu is shown. If a string of an existing top
  *                                             level menu (eg. 'tools.php' or 'edit.php?post_type=page'), the post
  *                                             type will be placed as a sub-menu of that.
  *                                             Default is value of $show_ui.
  *     @type bool        $show_in_nav_menus    Makes this post type available for selection in navigation menus.
  *                                             Default is value $public.
- *     @type bool        $show_in_admin_bar    makes this post type available via the admin bar. Default is value
+ *     @type bool        $show_in_admin_bar    Makes this post type available via the admin bar. Default is value
  *                                             of $show_in_menu.
  *     @type int         $menu_position        The position in the menu order the post type should appear. To work,
  *                                             $show_in_menu must be true. Default null (at the bottom).
@@ -238,7 +238,7 @@ add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
  *                                             Defaults to array containing 'title' & 'editor'.
  *     @type callback    $register_meta_box_cb Provide a callback function that sets up the meta boxes for the
  *                                             edit form. Do remove_meta_box() and add_meta_box() calls in the
- *                                             callback. Defautl null.
+ *                                             callback. Default null.
  *     @type array       $taxonomies           An array of taxonomy identifiers that will be registered for the
  *                                             post type. Taxonomies can be registered later with
  *                                             {@see register_taxonomy()} or {@see register_taxonomy_for_object_type()}.
@@ -247,7 +247,7 @@ add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
  *                                             archive slug to use. Will generate the proper rewrite rules if
  *                                             $rewrite is enabled. Default false.
  *     @type bool|array  $rewrite              {
- *         Triggers the handling of rewrites for this post type. To prevent rerwrite, set to false.
+ *         Triggers the handling of rewrites for this post type. To prevent rewrite, set to false.
  *         Defaults to true, using $post_type as slug. To specify rewrite rules, an array can be
  *         passed with any of these keys:
  *
