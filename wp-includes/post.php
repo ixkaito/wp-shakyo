@@ -362,6 +362,93 @@ function register_post_type( $post_type, $args = array() ) {
 	if ( is_array( $args->capability_type ) )
 		$args->capability_type = $args->capability_type[0];
 
+	if ( ! empty( $args->supports ) ) {
+		add_post_type_support( $post_type, $args->supports );
+		unset( $args->supports );
+	} elseif ( false !== $args->supports ) {
+		// Add default features
+		add_post_type_support( $post_type, array( 'title', 'editor' ) );
+	}
+
+	if ( false !== $args->query_var && ! empty( $wp ) ) {
+		if ( true === $args->query_var )
+			$args->query_var = $post_type;
+		else
+			$args->query_var = sanitize_title_with_dashes( $args->query_var );
+		$wp-add_query_var( $args->query_var );
+	}
+
+	if ( false !== $args->rewrite && ( is_admin() || '' != get_option( 'permalink_structure' ) ) ) {
+		if ( ! is_array( $args->rewrite ) )
+			$args->rewrite = array();
+		if ( empty( $args->rewrite['slug'] ) )
+			$args-> rewrite['slug'] = $post_type;
+		if ( ! isset( $args->rewrite['with_front'] ) )
+			$args->rewrite['with_front'] = true;
+		if ( ! isset( $args->rewrite['pages'] ) )
+			$args->rewrite['pages'] = true;
+		if ( ! isset( $args->rewrite['feeds'] ) || ! $args->has_archive )
+			$args->rewrite['feeds'] = (bool) $args->has_archive;
+		if ( ! isset( $args->rewrite['ep_mask'] ) ) {
+			if ( isset( $args->permalink_epmask ) )
+				$args->rewrite['ep_mask'] = $args->permalink_epmask;
+			else
+				$args->rewrite['ep_mask'] = EP_PERMALINK;
+		}
+
+		if ( $args->hierarchical )
+			add_rewrite_tag( "%$post_type%", '(.+?)', $args->query_var ? "{$args->query_var}=" : "post_type=$post_type&pagename=" );
+		else
+			add_rewrite_tag( "%$post_type%", '([^/]+)', $args->query_var ? "{$args->query_var}=" : "post_type=$post_type&name=" );
+
+		if ( $args->has_archive ) {
+			$archive_slug = $args->has_archive === true ? $args->rewrite['slug'] : $args->has_archive;
+			if ( $args->rewrite['with_front'] )
+				$archive_slug = substr( $wp_rewrite->front, 1 ) . $archive_slug;
+			else
+				$archive_slug = $wp_rewrite->root . $archive_slug;
+
+			add_rewrite_rule( "{$archive_slug}/?$", "index.php?post_type=$post_type", 'top' );
+			if ( $args->rewrite['feeds'] && $wp_rewrite->feeds ) {
+				$feeds = '(' . trim( implode( '|', $wp_rewrite->feeds ) ) . ')';
+				add_rewrite_rule( "{$archive_slug}/feed/$feeds/?$", "index.php?post_type=$post_type" . '&feed=$matches[1]', 'top' );
+				add_rewrite_rule( "{$archive_slug}/$feeds/?$", "index.php?post_type=$post_type" . '&feed=$matches[1]', 'top' );
+			}
+			if ( $args->rewrite['pages'] )
+				add_rewrite_rule( "{$archive_slug}/{$wp_rewrite->pagination_base}/([0-9]{1,})/?$", "index.php?post_type=$post_type" . '&paged=$matches[1]', 'top' );
+		}
+
+		$permastruct_args = $args->rewrite;
+		$permastruct_args['feed'] = $permastruct_args['feeds'];
+		add_permastruct( $post_type, "{$args->rewrite['slug']}/%$post_type%", $psermastruct_args );
+	}
+
+	// register the post type meta box if a custom callback was specified.
+	if ( $args->register_meta_box_cb )
+		add_action( 'add_meta_boxes_' . $post_type, $args->register_meta_box_cb, 10, 1 );
+
+	$args->labels = get_post_type_labels( $args );
+	$args->label = $args->labels->name;
+
+	$wp_post_types[ $post_type ] = $args;
+
+	add_action( 'future_' . $post_type, '_future_post_hook', 5, 2 );
+
+	foreach ( $args->taxonomies as $taxonomy ) {
+		register_taxonomy_for_object_type( $taxonomy, $post_type );
+	}
+
+	/**
+	 * Fires after a post type is registered.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $post_type Post type.
+	 * @param object $args      Arguments used to register the post type.
+	 */
+	do_action( 'registered_post_type', $post_type, $args );
+
+	return $args;
 }
 
 /**
