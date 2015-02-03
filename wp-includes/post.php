@@ -299,7 +299,7 @@ function register_post_type( $post_type, $args = array() ) {
 		'show_in_admin_bar'    => null,
 		'menu_position'        => null,
 		'menu_icon'            => null,
-		'capabilitiey_type'    => 'post',
+		'capability_type'      => 'post',
 		'capabilities'         => array(),
 		'map_meta_cap'         => null,
 		'supports'             => array(),
@@ -310,7 +310,7 @@ function register_post_type( $post_type, $args = array() ) {
 		'query_var'            => true,
 		'can_export'           => true,
 		'delete_with_user'     => null,
-		'_builting'            => false,
+		'_builtin'             => false,
 		'_edit_link'           => 'post.php?post=%d',
 	);
 	$args = wp_parse_args( $args, $defaults );
@@ -353,7 +353,7 @@ function register_post_type( $post_type, $args = array() ) {
 		$args->map_meta_cap = true;
 
 	// If not set, default to false.
-	If ( null === $args->map_meta_cap )
+	if ( null === $args->map_meta_cap )
 		$args->map_meta_cap = false;
 
 	$args->cap = get_post_type_capabilities( $args );
@@ -375,14 +375,14 @@ function register_post_type( $post_type, $args = array() ) {
 			$args->query_var = $post_type;
 		else
 			$args->query_var = sanitize_title_with_dashes( $args->query_var );
-		$wp-add_query_var( $args->query_var );
+		$wp->add_query_var( $args->query_var );
 	}
 
 	if ( false !== $args->rewrite && ( is_admin() || '' != get_option( 'permalink_structure' ) ) ) {
 		if ( ! is_array( $args->rewrite ) )
 			$args->rewrite = array();
 		if ( empty( $args->rewrite['slug'] ) )
-			$args-> rewrite['slug'] = $post_type;
+			$args->rewrite['slug'] = $post_type;
 		if ( ! isset( $args->rewrite['with_front'] ) )
 			$args->rewrite['with_front'] = true;
 		if ( ! isset( $args->rewrite['pages'] ) )
@@ -420,10 +420,10 @@ function register_post_type( $post_type, $args = array() ) {
 
 		$permastruct_args = $args->rewrite;
 		$permastruct_args['feed'] = $permastruct_args['feeds'];
-		add_permastruct( $post_type, "{$args->rewrite['slug']}/%$post_type%", $psermastruct_args );
+		add_permastruct( $post_type, "{$args->rewrite['slug']}/%$post_type%", $permastruct_args );
 	}
 
-	// register the post type meta box if a custom callback was specified.
+	// Register the post type meta box if a custom callback was specified.
 	if ( $args->register_meta_box_cb )
 		add_action( 'add_meta_boxes_' . $post_type, $args->register_meta_box_cb, 10, 1 );
 
