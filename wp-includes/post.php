@@ -313,6 +313,55 @@ function register_post_type( $post_type, $args = array() ) {
 		'_builting'            => false,
 		'_edit_link'           => 'post.php?post=%d',
 	);
+	$args = wp_parse_args( $args, $defaults );
+	$args = (object) $args;
+
+	$post_type = sanitize_key( $post_type );
+	$args->name = $post_type;
+
+	if ( strlen( $post_type ) > 20 ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Post types cannot exceed 20 characters in length' ), '4.0' );
+		return new WP_Error( 'post_type_too_long', __( 'Post types cannot exceed 20 characters in length' ) );
+	}
+
+	// If not set, default to the setting for public.
+	if ( null === $args->publicly_queryable )
+		$args->publicly_queryable = $args->public;
+
+	// If not set, default to the setting for public.
+	if ( null === $args->show_ui )
+		$args->show_ui = $args->public;
+
+	// If not set, default to the setting for show_ui.
+	if ( null === $args->show_in_menu || ! $args->show_ui )
+		$args->show_in_menu = $args->show_ui;
+
+	// If not set, default to the whether the full UI is shown.
+	if ( null === $args->show_in_admin_bar )
+		$args->show_in_admin_bar = true === $args->show_in_menu;
+
+	// If not set, default to the setting for public.
+	if ( null === $args->show_in_nav_menus )
+		$args->show_in_nav_menus = $args->public;
+
+	// If not set, default to true if not public, false if public.
+	if ( null === $args->exclude_from_search )
+		$args->exclude_from_search = !$args->public;
+
+	// Back compat with quirky handling in version 3.0. #14122.
+	if ( empty( $args->capabilities ) && null === $args->map_meta_cap && in_array( $args->capability_type, array( 'post', 'page' ) ) )
+		$args->map_meta_cap = true;
+
+	// If not set, default to false.
+	If ( null === $args->map_meta_cap )
+		$args->map_meta_cap = false;
+
+	$args->cap = get_post_type_capabilities( $args );
+	unset( $args->capabilities );
+
+	if ( is_array( $args->capability_type ) )
+		$args->capability_type = $args->capability_type[0];
+
 }
 
 /**
