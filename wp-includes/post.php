@@ -452,6 +452,19 @@ function register_post_type( $post_type, $args = array() ) {
 }
 
 /**
+ * Build an object with all post type capabilities out of a post type object
+ *
+ * Post type capabilities use the 'capability_type' argument as a base, if the
+ * capability is not set in the 'capabilities' argument array or if the
+ * 'capabilities' argument is not supplied.
+ *
+ * The capability_type argument can optionally be registered as an array, with
+ * the first value being singular and the second plural, e.g. array('story, 'stories')
+ * Otherwise, an 's' will be added to the value for the plural form. After
+ * registration, capability_type will always be a string of the singular value.
+ */
+
+/**
  * Build an object with custom-something object (post type, taxonomy) labels
  * out of a custom-something object
  *
