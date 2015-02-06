@@ -462,6 +462,21 @@ function register_post_type( $post_type, $args = array() ) {
  * the first value being singular and the second plural, e.g. array('story, 'stories')
  * Otherwise, an 's' will be added to the value for the plural form. After
  * registration, capability_type will always be a string of the singular value.
+ *
+ * By default, seven keys are accepted as part of the capabilities array:
+ *
+ * - edit_post, read_post, and delete_post are meta capabilities, which are then
+ *   generally mapped to corresponding primitive capabilities depending on the
+ *   context, which would be the post being edited/read/deleted and the user or
+ *   role being checked. Thus these capabilities would generally not be granted
+ *   directly to users or roles.
+ *
+ * - edit_posts - Controls whether objects of this post type can be edited.
+ * - edit_others_posts - COntrols whether objects of this type owned by other users
+ *   can be edited. If the post type does not support an author, then this will
+ *   behave like edit_posts.
+ * - publish_posts - Controls publishing objects of this post type.
+ * - read_private_posts - Controls whether private objects can be read.
  */
 
 /**
