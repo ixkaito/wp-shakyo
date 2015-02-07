@@ -472,7 +472,7 @@ function register_post_type( $post_type, $args = array() ) {
  *   directly to users or roles.
  *
  * - edit_posts - Controls whether objects of this post type can be edited.
- * - edit_others_posts - COntrols whether objects of this type owned by other users
+ * - edit_others_posts - Controls whether objects of this type owned by other users
  *   can be edited. If the post type does not support an author, then this will
  *   behave like edit_posts.
  * - publish_posts - Controls publishing objects of this post type.
@@ -480,14 +480,14 @@ function register_post_type( $post_type, $args = array() ) {
  *
  * These four primitive capabilities are checked in core in various locations.
  * There are also seven other primitive capabilities which are not referenced
- * directoly in core, except in map_meta_cap(), which takes the three aforementioned
+ * directly in core, except in map_meta_cap(), which takes the three aforementioned
  * meta capabilities and translates them into one or more primitive capabilities
  * that must then be checked against the user or role, depending on the context.
  *
  * - read - Controls whether objects of this post type can be read.
  * - delete_posts - Controls whether objects of this post type can be deleted.
  * - delete_private_posts - Controls whether private objects can be deleted.
- * - delete_published_posts - Controls whether private objects can be deleted.
+ * - delete_published_posts - Controls whether published objects can be deleted.
  * - delete_others_posts - Controls whether objects owned by other users can be
  *   can be deleted. If the post type does not support an author, then this will
  *   behave like delete_posts.
@@ -506,7 +506,6 @@ function register_post_type( $post_type, $args = array() ) {
  * @param object $args Post type registration arguments.
  * @return object object with all the capabilities as member variables.
  */
-
 
 /**
  * Build an object with custom-something object (post type, taxonomy) labels
