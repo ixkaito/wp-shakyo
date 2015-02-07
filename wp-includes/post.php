@@ -506,6 +506,37 @@ function register_post_type( $post_type, $args = array() ) {
  * @param object $args Post type registration arguments.
  * @return object object with all the capabilities as member variables.
  */
+function get_post_type_capabilities( $args ) {
+	if ( ! is_array( $args->capability_type ) )
+		$args->capability_type = array( $args->capability_type, $args->capability_type . 's' );
+
+	// Singular base for meta capabilities, plural base for primitive capabilities.
+	list( $singular_base, $plural_base ) = $args->capability_type;
+
+	$default_capabilities = array(
+		// Meta capabilities
+		'edit_post'          => 'edit_'         . $singular_base,
+		'read_post'          => 'read_'         . $singular_base,
+		'delete_post'        => 'delete_'       . $singular_base,
+		// Primitive capabilities used outside of map_meta_cap():
+		'edit_posts'         => 'edit_'         . $plural_base,
+		'edit_others_posts'  => 'edit_others_'  . $plural_base,
+		'publish_posts'      => 'publish_'      . $plural_base,
+		'read_private_posts' => 'read_private_' . $plural_base,
+	);
+
+	$capabilities = array_merge( $default_capabilities, $args->capabilites );
+
+	// Post creation capability simply maps to edit_posts by default:
+	if ( ! isset( $capabilities['create_posts'] ) )
+		$capabilities['create_posts'] = $capabilities['edit_posts'];
+
+	// Remember meta capabilities for future reference.
+	if ( $args->map_meta_cap )
+		_post_type_meta_capabilities( $capabilites );
+
+	return (object) $capabilites;
+}
 
 /**
  * Build an object with custom-something object (post type, taxonomy) labels
