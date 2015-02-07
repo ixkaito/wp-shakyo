@@ -525,7 +525,21 @@ function get_post_type_capabilities( $args ) {
 		'read_private_posts' => 'read_private_' . $plural_base,
 	);
 
-	$capabilities = array_merge( $default_capabilities, $args->capabilites );
+	// Primitive capabilities used within map_meta_cap():
+	if ( $args->map_meta_cap ) {
+		$default_capabilities_for_mapping = array(
+			'read'                   => 'read',
+			'delete_posts'           => 'delete_'           . $plural_base,
+			'delete_private_posts'   => 'delete_private_'   . $plural_base,
+			'delete_published_posts' => 'delete_published_' . $plural_base,
+			'delete_others_posts'    => 'delete_others_'    . $plural_base,
+			'edit_private_posts'     => 'edit_private_'     . $plural_base,
+			'edit_published_posts'   => 'edit_published_'   . $plural_base,
+		);
+		$default_capabilities = array_merge( $default_capabilities, $default_capabilities_for_mapping );
+	}
+
+	$capabilities = array_merge( $default_capabilities, $args->capabilities );
 
 	// Post creation capability simply maps to edit_posts by default:
 	if ( ! isset( $capabilities['create_posts'] ) )
@@ -533,9 +547,9 @@ function get_post_type_capabilities( $args ) {
 
 	// Remember meta capabilities for future reference.
 	if ( $args->map_meta_cap )
-		_post_type_meta_capabilities( $capabilites );
+		_post_type_meta_capabilities( $capabilities );
 
-	return (object) $capabilites;
+	return (object) $capabilities;
 }
 
 /**
