@@ -553,6 +553,24 @@ function get_post_type_capabilities( $args ) {
 }
 
 /**
+ * Store or return a list of post type meta caps for map_meta_cap().
+ *
+ * @since 3.1.0
+ * @access private
+ *
+ * @param null|array $capabilities Post type meta capabilities.
+ */
+function _post_type_meta_capabilities( $capabilities = null ) {
+	static $meta_caps = array();
+	if ( null === $capabilities )
+		return $meta_caps;
+	foreach ( $capabilities as $core => $custom ) {
+		if ( in_array( $core, array( 'read_post', 'delete_post', 'edit_post' ) ) )
+			$meta_caps[ $custom ] = $core;
+	}
+}
+
+/**
  * Build an object with custom-something object (post type, taxonomy) labels
  * out of a custom-something object
  *
