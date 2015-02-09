@@ -571,6 +571,41 @@ function _post_type_meta_capabilities( $capabilities = null ) {
 }
 
 /**
+ * Build an object with all post type labels out of a post type object
+ *
+ * Accepted keys of the label array in the post type object:
+ *
+ * - name - general name for  the  post type, usually plural. The same and overridden
+ *          by $post_type_object->label. Default is Posts/Pages
+ * - singular_name - name for one object of this post type. Default is Post/Page
+ * - add_new - Default is Add New for both hierarchical and non-hierarchical types.
+ *             When internationalizing this string, please use a gettext context
+ *             {@see http://codex.wordpress.org/I18n_for_WordPress_Developer#Disambiguation_by_context}
+ *             matching your post type. Example: <code>_x('Add New', 'product');</code>.
+ * - add_new_item - Default is Add New Post/Add New Page.
+ * - edit_item - Default is Edit Post/Edit page.
+ * - new_item - Default is New Post/New Page.
+ * - view_itme - Default is View Post/View Page.
+ * - search_items - Deafult is Search Posts/Search Pages.
+ * - not_found - Default is No posts found/No pages found.
+ * - not_found_in_trash - Default is No posts found in Trash/No pages found in Trash.
+ * - parent_item_colon - This string isn't used on non-hierarchical types. In hierarchical
+ *                       ones the default is 'Parent Page:'.
+ * - all_items - String for the submenu. Default is All Posts/All Pages.
+ * - menu_name - Default is the same as <code>name</code>.
+ *
+ * Above, the first default value is for non-hierarchical post types (like posts)
+ * and the second one is for hierarchical post types (like pages).
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @param object $post_type_object Post type object.
+ * @return object object with all the labels as member variables.
+ */
+
+
+/**
  * Build an object with custom-something object (post type, taxonomy) labels
  * out of a custom-something object
  *
