@@ -575,18 +575,18 @@ function _post_type_meta_capabilities( $capabilities = null ) {
  *
  * Accepted keys of the label array in the post type object:
  *
- * - name - general name for  the  post type, usually plural. The same and overridden
+ * - name - general name for the post type, usually plural. The same and overridden
  *          by $post_type_object->label. Default is Posts/Pages
  * - singular_name - name for one object of this post type. Default is Post/Page
  * - add_new - Default is Add New for both hierarchical and non-hierarchical types.
  *             When internationalizing this string, please use a gettext context
- *             {@see http://codex.wordpress.org/I18n_for_WordPress_Developer#Disambiguation_by_context}
+ *             {@see http://codex.wordpress.org/I18n_for_WordPress_Developers#Disambiguation_by_context}
  *             matching your post type. Example: <code>_x('Add New', 'product');</code>.
  * - add_new_item - Default is Add New Post/Add New Page.
- * - edit_item - Default is Edit Post/Edit page.
+ * - edit_item - Default is Edit Post/Edit Page.
  * - new_item - Default is New Post/New Page.
- * - view_itme - Default is View Post/View Page.
- * - search_items - Deafult is Search Posts/Search Pages.
+ * - view_item - Default is View Post/View Page.
+ * - search_items - Default is Search Posts/Search Pages.
  * - not_found - Default is No posts found/No pages found.
  * - not_found_in_trash - Default is No posts found in Trash/No pages found in Trash.
  * - parent_item_colon - This string isn't used on non-hierarchical types. In hierarchical
