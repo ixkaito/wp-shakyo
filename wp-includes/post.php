@@ -603,7 +603,41 @@ function _post_type_meta_capabilities( $capabilities = null ) {
  * @param object $post_type_object Post type object.
  * @return object object with all the labels as member variables.
  */
+function get_post_type_labels( $post_type_object ) {
+	$nohier_vs_hier_defaults = array(
+		'name' => array( _x('Posts', 'post type general name'), _x('Pages', 'post type general name') ),
+		'singular_name' => array( _x('Post', 'post type singular name'), _x('Page', 'post type singular name') ),
+		'add_new' => array( _x('Add New', 'Post'), _x('Add New', 'page') ),
+		'add_new_item' => array( __('Add New Post'), __('Add New Page') ),
+		'edit_item' => array( __('Edit Post'), __('Edit Page') ),
+		'new_item' => array( __('New Post'), __('New Page') ),
+		'view_item' => array( __('View Post'), __('View Page') ),
+		'search_items' => array( __('Search Posts'), __('Search Pages') ),
+		'not_found' => array( __('No posts found.'), __('No pages found.') ),
+		'not_found_in_trash' => array( __('No posts found in Trash.'), __('No pages found in Trash.') ),
+		'parent_item_colon' => array( null, __('Parent Page:') ),
+		'all_items' => array( __( 'All Posts' ), __( 'All Pages' ) )
+	);
+	$nohier_vs_hier_defaults['menu_name'] = $nohier_vs_hier_defaults['name'];
 
+	$labels = _get_custom_object_labels( $post_type_object, $nohier_vs_hier_defaults );
+
+	$post_type = $post_type_object->name;
+
+	/**
+	 * Filter the labels of a specific post type.
+	 *
+	 * The dynamic portion of the hook name, $post_type, refers to
+	 * the post type slug.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @see get_post_type_labels() for the full list of labels.
+	 *
+	 * @param array $labels Array of labels for the given post type.
+	 */
+	return apply_filters( "post_type_labels_{$post_type}", $labels );
+}
 
 /**
  * Build an object with custom-something object (post type, taxonomy) labels
