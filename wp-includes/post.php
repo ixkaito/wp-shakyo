@@ -176,7 +176,7 @@ add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
  * Arguments prefixed with an _underscore shouldn't be used by plugins and themes.
  *
  * @since 3.0.0
- * @uses $wp_post_statuses　Inserts new post status object into the list
+ * @uses $wp_post_statuses Inserts new post status object into the list
  *
  * @param string $post_status Name of the post status.
  * @param array|string $args {
