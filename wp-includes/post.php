@@ -208,6 +208,70 @@ add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
  *                                                  Default is value of $internal.
  * }
  */
+function register_post_status( $post_status, $args = array() ) {
+	global $wp_post_statuses;
+
+	if (!is_array($wp_post_statuses))
+		$wp_post_statuses = array();
+
+	// Args prefixed with an underscore are reserved for internal use.
+	$defaults = array(
+		'label' => false,
+		'label_count' => false,
+		'exclude_from_search' => null,
+		'_builtin' => false,
+		'public' => null,
+		'internal' => null,
+		'protected' => null,
+		'private' => null,
+		'publicly_queryable' => null,
+		'show_in_admin_status_list' => null,
+		'show_in_admin_all_list' => null,
+	);
+	$args = wp_parse_args($args, $defaults);
+	$args = (object) $args;
+
+	$post_status = sanitize_key($post_status);
+	$args->name = $post_status;
+
+	// Set various defaults.
+	if ( null === $args->public && null === $args->internal && null === $args->protected && null === $args->private )
+		$args->internal = true;
+
+	if ( null === $args->public  )
+		$args->public = false;
+
+	if ( null === $args->private  )
+		$args->private = false;
+
+	if ( null === $args->protected  )
+		$args->protected = false;
+
+	if ( null === $args->internal  )
+		$args->internal = false;
+
+	if ( null === $args->publicly_queryable )
+		$args->publicly_queryable = $args->public;
+
+	if ( null === $args->exclude_from_search )
+		$args->exclude_from_search = $args->internal;
+
+	if ( null === $args->show_in_admin_all_list )
+		$args->show_in_admin_all_list = !$args->internal;
+
+	if ( null === $args->show_in_admin_status_list )
+		$args->show_in_admin_status_list = !$args->internal;
+
+	if ( false === $args->label )
+		$args->label = $post_status;
+
+	if ( false === $args->label_count )
+		$args->label_count = array( $args->label, $args->label );
+
+	$wp_post_statuses[$post_status] = $args;
+
+	return $args;
+}
 
 /**
  * Register a post type. Do not use before init.
