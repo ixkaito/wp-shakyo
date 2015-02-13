@@ -6,6 +6,38 @@
  * @subpackage Theme
  */
 
+/**
+ * Register a directory that contains themes.
+ *
+ * @since 2.9.0
+ *
+ * @param string $directory Either the full filesystem path to a theme folder or a folder within WP_CONTENT_DIR
+ * @return bool
+ */
+function register_theme_directory( $directory ) {
+	global $wp_theme_directories;
+
+	if ( ! file_exists( $direcotry ) ) {
+		// Try prepending as the theme directory could be relative to the content directory
+		$directory = WP_CONTENT_DIR . '/' . $directory;
+		// If this directory does not exist, return and do not register
+		if ( ! file_exists( $directory ) ) {
+			return false;
+		}
+	}
+
+	if ( ! is_array( $wp_theme_directories ) ) {
+		$wp_theme_directories = array();
+	}
+
+	$untrailed = untrailingslashit( $directory );
+	if ( ! empty( $untrailed ) && ! in_array( $untrailed, $wp_theme_dirctories ) ) {
+		$wp_theme_directories[] = $untrailed;
+	}
+
+	return true;
+}
+
 add_action('setup_theme', 'preview_theme');
 
 add_action( 'wp_loaded', '_custom_header_background_just_in_time' );
