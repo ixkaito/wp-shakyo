@@ -534,7 +534,7 @@ function wp_get_active_and_valid_plugins() {
 	// Check for hacks file if the option is enabled
 	if ( get_option( 'hack_file' ) && file_exists( ABSPATH . 'my-hacks.php' ) ) {
 		_deprecated_file( 'my-hacks.php', '1.5' );
-		array_unshift( $plugin, ABSPATH . 'my-hacks.php' );
+		array_unshift( $plugins, ABSPATH . 'my-hacks.php' );
 	}
 
 	if ( empty( $active_plugins ) || defined( 'WP_INSTALLING' ) )
