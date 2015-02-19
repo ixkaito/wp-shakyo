@@ -220,4 +220,7 @@ unset( $plugin );
 require( ABSPATH . WPINC . '/pluggable.php' );
 require( ABSPATH . WPINC . '/pluggable-deprecated.php' );
 
+// Set internal encoding.
+wp_set_internal_encoding();
+
 var_dump( __FILE__ );
