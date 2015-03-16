@@ -218,54 +218,54 @@ function add_action($tag, $function_to_add, $priority = 10, $accepted_args = 1) 
  *                    functions hooked to the action. Default empty.
  * @return null Will return null if $tag does not exist in $wp_filter array.
  */
-function do_action( $tag, $arg = '' ) {
+function do_action($tag, $arg = '') {
 	global $wp_filter, $wp_actions, $merged_filters, $wp_current_filter;
 
-	if ( ! isset( $wp_actions[$tag] ) )
+	if ( ! isset($wp_actions[$tag]) )
 		$wp_actions[$tag] = 1;
 	else
 		++$wp_actions[$tag];
 
 	// Do 'all' actions first
-	if ( isset( $wp_filter['all'] ) ) {
+	if ( isset($wp_filter['all']) ) {
 		$wp_current_filter[] = $tag;
 		$all_args = func_get_args();
-		_wp_call_all_hook( $all_args );
+		_wp_call_all_hook($all_args);
 	}
 
-	if ( ! isset( $wp_filter[$tag] ) ) {
-		if ( isset( $wp_filter['all'] ) )
-			array_pop( $wp_current_filter );
+	if ( !isset($wp_filter[$tag]) ) {
+		if ( isset($wp_filter['all']) )
+			array_pop($wp_current_filter);
 		return;
 	}
 
-	if ( ! isset( $wp_filter['all'] ) )
+	if ( !isset($wp_filter['all']) )
 		$wp_current_filter[] = $tag;
 
 	$args = array();
-	if ( is_array( $arg ) && 1 == count( $arg ) && isset( $arg[0] ) && is_object( $arg[0] ) ) // array(&$this)
+	if ( is_array($arg) && 1 == count($arg) && isset($arg[0]) && is_object($arg[0]) ) // array(&$this)
 		$args[] =& $arg[0];
 	else
 		$args[] = $arg;
 	for ( $a = 2; $a < func_num_args(); $a++ )
-		$args[] = func_get_arg( $a );
+		$args[] = func_get_arg($a);
 
 	// Sort
-	if ( ! isset( $merged_filters[$tag] ) ) {
-		ksort( $wp_filter[$tag] );
-		$merged_filters[$tag] = true;
+	if ( !isset( $merged_filters[ $tag ] ) ) {
+		ksort($wp_filter[$tag]);
+		$merged_filters[ $tag ] = true;
 	}
 
-	reset( $wp_filter[$tag] );
+	reset( $wp_filter[ $tag ] );
 
 	do {
-		foreach ( (array) current( $wp_filter[$tag] ) as $the_ )
-			if ( ! is_null( $the_['function'] ) )
-				call_user_func_array( $the_['function'], array_slice( $args, 0, (int) $the_['accepted_args'] ) );
+		foreach ( (array) current($wp_filter[$tag]) as $the_ )
+			if ( !is_null($the_['function']) )
+				call_user_func_array($the_['function'], array_slice($args, 0, (int) $the_['accepted_args']));
 
-	} while ( next( $wp_filter[$tag] ) !== false );
+	} while ( next($wp_filter[$tag]) !== false );
 
-	array_pop( $wp_current_filter );
+	array_pop($wp_current_filter);
 }
 
 /**
