@@ -13,6 +13,24 @@ add_shortcode('gallery', 'gallery_shortcode');
 
 add_shortcode( 'playlist', 'wp_playlist_shortcode' );
 
+/**
+ * Return a filtered list of WP-supported audio formats.
+ *
+ * @since 3.6.0
+ * @return array
+ */
+function wp_get_audio_extensions() {
+	/**
+	 * Filter the list of supported audio formats.
+	 *
+	 * @since 3.6.0
+	 *
+	 * @param array $extensions An array of support audio formats. Defaults are
+	 *                          'mp3', 'ogg', 'wma', 'm4a', 'wav'.
+	 */
+	return apply_filters( 'wp_audio_extensions', array( 'mp3', 'ogg', 'wma', 'm4a', 'wav' ) );
+}
+
 add_shortcode( 'audio', 'wp_audio_shortcode' );
 
 add_shortcode( 'video', 'wp_video_shortcode' );
