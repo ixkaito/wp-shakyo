@@ -143,6 +143,23 @@ function current_theme_supports( $feature ) {
 
 add_action( 'delete_attachment', '_delete_attachment_theme_mod' );
 
+/**
+ * Includes and instantiates the WP_Customize_Manager class.
+ *
+ * Fires when ?wp_customize=on or on wp-admin/customize.php.
+ *
+ * @since 3.4.0
+ */
+function _wp_customize_include() {
+	if ( ! ( ( isset( $_REQUEST['wp_customize'] ) && 'on' == $_REQUEST['wp_customize'] )
+		|| ( is_admin() && 'customize.php' == basename( $_SERVER['PHP_SELF'] ) )
+	) )
+		return;
+
+	require( ABSPATH . WPINC . '/class-wp-customize-manager.php' );
+	// Init Customize class
+	$GLOBALS['wp_customize'] = new WP_Customize_Manager;
+}
 add_action( 'plugins_loaded', '_wp_customize_include' );
 
 add_action( 'admin_enqueue_scripts', '_wp_customize_loader_settings' );
