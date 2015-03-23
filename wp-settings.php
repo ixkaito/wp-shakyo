@@ -239,4 +239,7 @@ do_action( 'plugins_loaded' );
 // Define constants which affect functionality if not already defined.
 wp_functionality_constants();
 
+// Add magic quotes and set up $_REQUEST ( $_GET + $_POST )
+wp_magic_quotes();
+
 var_dump( __FILE__ );
