@@ -264,3 +264,31 @@ function wp_ssl_constants() {
 		force_ssl_admin( true );
 	}
 }
+
+/**
+ * Defines functionality related WordPress constants
+ *
+ * @since 3.0.0
+ */
+function wp_functionality_constants() {
+	/**
+	 * @since 2.5.0
+	 */
+	if ( !defined( 'AUTOSAVE_INTERVAL' ) )
+		define( 'AUTOSAVE_INTERVAL', 60 );
+
+	/**
+	 * @since 2.9.0
+	 */
+	if ( !defined( 'EMPTY_TRASH_DAYS' ) )
+		define( 'EMPTY_TRASH_DAYS', 30 );
+
+	if ( !defined('WP_POST_REVISIONS') )
+		define('WP_POST_REVISIONS', true);
+
+	/**
+	 * @since 3.3.0
+	 */
+	if ( !defined( 'WP_CRON_LOCK_TIMEOUT' ) )
+		define('WP_CRON_LOCK_TIMEOUT', 60);  // In seconds
+}
