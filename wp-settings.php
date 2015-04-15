@@ -249,4 +249,11 @@ wp_magic_quotes();
  */
 do_action( 'sanitize_comment_cookies' );
 
+/**
+ * WordPress Query object
+ * @global object $wp_the_query
+ * @since 2.0.0
+ */
+$GLOBALS['wp_the_query'] = new WP_Query();
+
 var_dump( __FILE__ );
