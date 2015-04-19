@@ -69,4 +69,24 @@ class WP_Query {
 	 */
 	public $date_query = false;
 
+	/**
+	 * Holds the data for a single object that is queried.
+	 *
+	 * Holds the contents of a post, page, category, attachement.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var object|array
+	 */
+	public $queried_object;
+
+	/**
+	 * The ID of the queried object.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var int
+	 */
+	public $queried_object_id;
+
 }
