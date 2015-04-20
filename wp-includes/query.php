@@ -89,4 +89,58 @@ class WP_Query {
 	 */
 	public $queried_object_id;
 
+	/**
+	 * Get post database query.
+	 *
+	 * @since 2.0.1
+	 * @access public
+	 * @var string
+	 */
+	public $request;
+
+	/**
+	 * List of posts.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var array
+	 */
+	public $posts;
+
+	/**
+	 * The amount of posts for the current query.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var int
+	 */
+	public $post_count = 0;
+
+	/**
+	 * Index of the current item in the loop.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var int
+	 */
+	public $current_post = -1;
+
+	/**
+	 * Whether the loop has started and the caller is in the loop.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var bool
+	 */
+	public $in_the_loop = false;
+
+	/**
+	 * The current post.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var WP_Post
+	 */
+	public $post;
+
 }
