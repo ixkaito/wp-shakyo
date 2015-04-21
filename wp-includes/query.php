@@ -143,4 +143,40 @@ class WP_Query {
 	 */
 	public $post;
 
+	/**
+	 * The list of comments for current post.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 * @var array
+	 */
+	public $comments;
+
+	/**
+	 * The amount of comments for the posts.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 * @var int
+	 */
+	public $comment_count = 0;
+
+	/**
+	 * The index of the comment in the comment loop.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 * @var int
+	 */
+	public $current_comment = -1;
+
+	/**
+	 * Current comment ID.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 * @var int
+	 */
+	public $comment;
+
 }
