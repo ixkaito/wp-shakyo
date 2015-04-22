@@ -179,4 +179,33 @@ class WP_Query {
 	 */
 	public $comment;
 
+	/**
+	 * The amount of found posts for the current query.
+	 *
+	 * If limit clause was not used, equals $post_count.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 * @var int
+	 */
+	public $found_posts = 0;
+
+	/**
+	 * The amount of pages.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 * @var int
+	 */
+	public $max_num_pages = 0;
+
+	/**
+	 * The amount of comment pages.
+	 *
+	 * @since 2.7.0
+	 * @access public
+	 * @var int
+	 */
+	public $max_num_comment_pages = 0;
+
 }
