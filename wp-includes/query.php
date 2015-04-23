@@ -208,4 +208,60 @@ class WP_Query {
 	 */
 	public $max_num_comment_pages = 0;
 
+	/**
+	 * Set if query is paged
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_paged = false;
+
+	/**
+	 * Set if query is part of administration page.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_admin = false;
+
+	/**
+	 * Set if query is an attachement.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_attachement = false;
+
+	/**
+	 * Set if is single, is a page, or is an attachement.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_singular = false;
+
+	/**
+	 * Set if query is for robots.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_robots = false;
+
+	/**
+	 * Set if query contains posts.
+	 *
+	 * Basically, the homepage if the option isn't set for the static homepage.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_posts_page = false;
+
 }
