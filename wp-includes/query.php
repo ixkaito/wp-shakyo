@@ -43,7 +43,7 @@ class WP_Query {
 	public $query_vars = array();
 
 	/**
-	 * Taxonomy query, a passed to get_tax_sql()
+	 * Taxonomy query, as passed to get_tax_sql()
 	 *
 	 * @since 3.1.0
 	 * @access public
@@ -72,7 +72,7 @@ class WP_Query {
 	/**
 	 * Holds the data for a single object that is queried.
 	 *
-	 * Holds the contents of a post, page, category, attachement.
+	 * Holds the contents of a post, page, category, attachment.
 	 *
 	 * @since 1.5.0
 	 * @access public
@@ -209,6 +209,186 @@ class WP_Query {
 	public $max_num_comment_pages = 0;
 
 	/**
+	 * Set if query is single post.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_single = false;
+
+	/**
+	 * Set if query is preview of blog.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_preview = false;
+
+	/**
+	 * Set if query returns a page.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_page = false;
+
+	/**
+	 * Set if query is an archive list.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_archive = false;
+
+	/**
+	 * Set if query is part of a date.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_date = false;
+
+	/**
+	 * Set if query contains a year.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_year = false;
+
+	/**
+	 * Set if query contains a month.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_month = false;
+
+	/**
+	 * Set if query contains a day.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_day = false;
+
+	/**
+	 * Set if query contains time.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_time = false;
+
+	/**
+	 * Set if query contains an author.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_author = false;
+
+	/**
+	 * Set if query contains category.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_category = false;
+
+	/**
+	 * Set if query contains tag.
+	 *
+	 * @since 2.3.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_tag = false;
+
+	/**
+	 * Set if query contains taxonomy.
+	 *
+	 * @since 2.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_tax = false;
+
+	/**
+	 * Set if query was part of a search result.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_search = false;
+
+	/**
+	 * Set if query is feed display.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_feed = false;
+
+	/**
+	 * Set if query is comment feed display.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_comment_feed = false;
+
+	/**
+	 * Set if query is trackback.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_trackback = false;
+
+	/**
+	 * Set if query is blog homepage.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_home = false;
+
+	/**
+	 * Set if query couldn't found anything.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_404 = false;
+
+	/**
+	 * Set if query is within comments popup window.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_comments_popup = false;
+
+	/**
 	 * Set if query is paged
 	 *
 	 * @since 1.5.0
@@ -227,16 +407,16 @@ class WP_Query {
 	public $is_admin = false;
 
 	/**
-	 * Set if query is an attachement.
+	 * Set if query is an attachment.
 	 *
 	 * @since 2.0.0
 	 * @access public
 	 * @var bool
 	 */
-	public $is_attachement = false;
+	public $is_attachment = false;
 
 	/**
-	 * Set if is single, is a page, or is an attachement.
+	 * Set if is single, is a page, or is an attachment.
 	 *
 	 * @since 2.1.0
 	 * @access public
@@ -263,5 +443,49 @@ class WP_Query {
 	 * @var bool
 	 */
 	public $is_posts_page = false;
+
+	/**
+	 * Set if query is for a post type archive.
+	 *
+	 * @since 3.1.0
+	 * @access public
+	 * @var bool
+	 */
+	public $is_post_type_archive = false;
+
+	/**
+	 * Stores the ->query_vars state like md5(serialize( $this->query_vars ) ) so we know
+	 * whether we have to re-parse because something has changed
+	 *
+	 * @since 3.1.0
+	 * @access private
+	 */
+	private $query_vars_hash = false;
+
+	/**
+	 * Whether query vars have changed since the initial parse_query() call. Used to catch modifications to query vars made
+	 * via pre_get_posts hooks.
+	 *
+	 * @since 3.1.1
+	 * @access private
+	 */
+	private $query_vars_changed = true;
+
+	/**
+	 * Set if post thumbnails are cached
+	 *
+	 * @since 3.2.0
+	 * @access public
+	 * @var bool
+	 */
+	 public $thumbnails_cached = false;
+
+	/**
+	 * Cached list of search stopwords.
+	 *
+	 * @since 3.7.0
+	 * @var array
+	 */
+	private $stopwords;
 
 }
