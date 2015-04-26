@@ -525,4 +525,32 @@ class WP_Query {
 		$this->is_posts_page = false;
 		$this->is_post_type_archive = false;
 	}
+
+	/**
+	 * Initiates object properties and sets default values.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 */
+	public function init() {
+		unset($this->posts);
+		unset($this->query);
+		$this->query_vars = array();
+		unset($this->queried_object);
+		unset($this->queried_object_id);
+		$this->post_count = 0;
+		$this->current_post = -1;
+		$this->in_the_loop = false;
+		unset( $this->request );
+		unset( $this->post );
+		unset( $this->comments );
+		unset( $this->comment );
+		$this->comment_count = 0;
+		$this->current_comment = -1;
+		$this->found_posts = 0;
+		$this->max_num_pages = 0;
+		$this->max_num_comment_pages = 0;
+
+		$this->init_query_flags();
+	}
 }
