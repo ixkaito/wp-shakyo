@@ -553,4 +553,14 @@ class WP_Query {
 
 		$this->init_query_flags();
 	}
+
+	/**
+	 * Reparse the query vars.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 */
+	public function parse_query_vars() {
+		$this->parse_query();
+	}
 }
