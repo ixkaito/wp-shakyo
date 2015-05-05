@@ -677,6 +677,14 @@ class WP_Query {
 	 *     @type bool         $nopaging                Show all posts (true) or paginate (false). Default false.
 	 *     @type bool         $no_found_rows           Whether to skip counting the total rows found. Enabling can improve
 	 *                                                 performance. Default false.
+	 *     @type int          $offset                  The number of posts to offset before retrieval.
+	 *     @type string       $order                   Designates ascending or descending order of posts. Default 'DESC'.
+	 *                                                 Accepts 'ASC', 'DESC'.
+	 *     @type string       $orderby                 Sort retrieved posts by parameter. One or more options can be
+	 *                                                 passed. To use 'meta_value', or 'meta_value_num',
+	 *                                                 'meta_key=keyname' must be also be defined. Default 'date'.
+	 *                                                 Accepts 'none', 'name', 'author', 'date', 'title', 'modified',
+	 *                                                 'menu_order', 'parent', 'ID', 'rand', 'comment_count'.
 	 * }
 	 */
 }
