@@ -689,6 +689,8 @@ class WP_Query {
 	 *     @type int          $page                    Show the number of posts that would show up on page X of a
 	 *                                                 static front page.
 	 *     @type int          $paged                   The number of the current page.
+	 *     @type int          $page_id                 Page ID.
+	 *     @type string       $pagename                Page slug.
 	 * }
 	 */
 }
