@@ -685,6 +685,10 @@ class WP_Query {
 	 *                                                 'meta_key=keyname' must be also be defined. Default 'date'.
 	 *                                                 Accepts 'none', 'name', 'author', 'date', 'title', 'modified',
 	 *                                                 'menu_order', 'parent', 'ID', 'rand', 'comment_count'.
+	 *     @type int          $p                       Post ID.
+	 *     @type int          $page                    Show the number of posts that would show up on page X of a
+	 *                                                 static front page.
+	 *     @type int          $paged                   The number of the current page.
 	 * }
 	 */
 }
