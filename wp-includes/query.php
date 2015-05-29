@@ -702,4 +702,36 @@ class WP_Query {
 	 *     @type array        $post_parent__not_in     An array containing parent page IDs not to query child pages from.
 	 * }
 	 */
+	public function parse_query( $query =  '' ) {
+		if ( ! empty( $query ) ) {
+			$this->init();
+			$this->query = $this->query_vars = wp_parse_args( $query );
+		} elseif ( ! isset( $this->query ) ) {
+			$this->query = $this->query_vars;
+		}
+
+		$this->query_vars = $this->fill_query_vars($this->query_vars);
+		$qv = &$this->query_vars;
+		$this->query_vars_changed = true;
+
+		if ( ! empty($qv['robots']) )
+			$this->is_robots = true;
+
+		$qv['p'] =  absint($qv['p']);
+		$qv['page_id'] =  absint($qv['page_id']);
+		$qv['year'] = absint($qv['year']);
+		$qv['monthnum'] = absint($qv['monthnum']);
+		$qv['day'] = absint($qv['day']);
+		$qv['w'] = absint($qv['w']);
+		$qv['m'] = preg_replace( '|[^0-9]|', '', $qv['m'] );
+		$qv['paged'] = absint($qv['paged']);
+		$qv['cat'] = preg_replace( '|[^0-9,-]|', '', $qv['cat'] ); // comma separated list of positive or negative integers
+		$qv['author'] = preg_replace( '|[^0-9,-]|', '', $qv['author'] ); // comma separated list of positive or negative integers
+		$qv['pagename'] = trim( $qv['pagename'] );
+		$qv['name'] = trim( $qv['name'] );
+		if ( '' !== $qv['hour'] ) $qv['hour'] = absint($qv['hour']);
+		if ( '' !== $qv['minute'] ) $qv['minute'] = absint($qv['minute']);
+		if ( '' !== $qv['second'] ) $qv['second'] = absint($qv['second']);
+		if ( '' !== $qv['menu_order'] ) $qv['menu_order'] = absint($qv['menu_order']);
+	}
 }
