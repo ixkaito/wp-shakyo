@@ -733,5 +733,35 @@ class WP_Query {
 		if ( '' !== $qv['minute'] ) $qv['minute'] = absint($qv['minute']);
 		if ( '' !== $qv['second'] ) $qv['second'] = absint($qv['second']);
 		if ( '' !== $qv['menu_order'] ) $qv['menu_order'] = absint($qv['menu_order']);
+
+		// Fairly insane upper bound for search string lengths.
+		if ( ! empty( $qv['s'] ) && strlen( $qv['s'] ) > 1600 )
+			$qv['s'] = '';
+
+		// Compat. Map subpost to attachment.
+		if ( '' != $qv['subpost'] )
+			$qv['attachment'] = $qv['subpost'];
+		if ( '' != $qv['subpost_id'] )
+			$qv['attachment_id'] = $qv['subpost_id'];
+
+		$qv['attachment_id'] = absint($qv['attachment_id']);
+
+		if ( ('' != $qv['attachment']) || !empty($qv['attachment_id']) ) {
+			$this->is_single = true;
+			$this->is_attachment = true;
+		} elseif ( '' != $qv['name'] ) {
+			$this->is_single = true;
+		} elseif ( $qv['p'] ) {
+			$this->is_single = true;
+		} elseif ( ('' !== $qv['hour']) && ('' !== $qv['minute']) &&('' !== $qv['second']) && ('' != $qv['year']) && ('' != $qv['monthnum']) && ('' != $qv['day']) ) {
+			// If year, month, day, hour, minute, and second are set, a single
+			// post is being queried.
+			$this->is_single = true;
+		} elseif ( '' != $qv['static'] || '' != $qv['pagename'] || !empty($qv['page_id']) ) {
+			$this->is_page = true;
+			$this->is_single = false;
+		} else {
+			// Look for archive queries. Dates, categories, authors, search, post type archives.
+		}
 	}
 }
