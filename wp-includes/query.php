@@ -762,6 +762,39 @@ class WP_Query {
 			$this->is_single = false;
 		} else {
 			// Look for archive queries. Dates, categories, authors, search, post type archives.
+
+			if ( isset( $this->query['s'] ) ) {
+				$this->is_search = true;
+			}
+
+			if ( '' != $qv['second'] ) {
+				$this->is_time = true;
+				$this->is_date = true;
+			}
+
+			if ( '' != $qv['minute'] ) {
+				$this->is_time = true;
+				$this->is_date = true;
+			}
+
+			if ( '' != $qv['hour'] ) {
+				$this->is_time = true;
+				$this->is_date = true;
+			}
+
+			if ( $qv['day'] ) {
+				if ( ! $this->is_date ) {
+					$date = sprintf( '%04d-%02d-%02d', $qv['year'], $qv['monthnum'], $qv['day'] );
+					if ( $qv['monthnum'] && $qv['year'] && ! wp_checkdate( $qv['monthnum'], $qv['day'], $qv['year'], $date ) ) {
+						$qv['error'] = '404';
+					} else {
+						$this->is_day = true;
+						$this->is_date = true;
+					}
+				}
+			}
+
+
 		}
 	}
 }
