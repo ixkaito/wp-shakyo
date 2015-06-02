@@ -794,7 +794,43 @@ class WP_Query {
 				}
 			}
 
+			if ( $qv['monthnum'] ) {
+				if ( ! $this->is_date ) {
+					if ( 12 < $qv['monthnum'] ) {
+						$qv['error'] = '404';
+					} else {
+						$this->is_month = true;
+						$this->is_date = true;
+					}
+				}
+			}
 
+			if ( $qv['year'] ) {
+				if ( ! $this->is_date ) {
+					$this->is_year = true;
+					$this->is_date = true;
+				}
+			}
+
+			if ( $qv['m'] ) {
+				$this->is_date = true;
+				if ( strlen($qv['m']) > 9 ) {
+					$this->is_time = true;
+				} else if ( strlen($qv['m']) > 7 ) {
+					$this->is_day = true;
+				} else if ( strlen($qv['m']) > 5 ) {
+					$this->is_month = true;
+				} else {
+					$this->is_year = true;
+				}
+			}
+
+			if ( '' != $qv['w'] ) {
+				$this->is_date = true;
+			}
+
+			$this->query_vars_hash = false;
+			$this->parse_tax_query( $qv );
 		}
 	}
 }
