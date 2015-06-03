@@ -746,6 +746,8 @@ class WP_Query {
 
 		$qv['attachment_id'] = absint($qv['attachment_id']);
 
+);
+
 		if ( ('' != $qv['attachment']) || !empty($qv['attachment_id']) ) {
 			$this->is_single = true;
 			$this->is_attachment = true;
@@ -767,17 +769,17 @@ class WP_Query {
 				$this->is_search = true;
 			}
 
-			if ( '' != $qv['second'] ) {
+			if ( '' !== $qv['second'] ) {
 				$this->is_time = true;
 				$this->is_date = true;
 			}
 
-			if ( '' != $qv['minute'] ) {
+			if ( '' !== $qv['minute'] ) {
 				$this->is_time = true;
 				$this->is_date = true;
 			}
 
-			if ( '' != $qv['hour'] ) {
+			if ( '' !== $qv['hour'] ) {
 				$this->is_time = true;
 				$this->is_date = true;
 			}
@@ -831,6 +833,39 @@ class WP_Query {
 
 			$this->query_vars_hash = false;
 			$this->parse_tax_query( $qv );
-		}
+
+			foreach ( $this->tax_query->queries as $tax_query ) {
+				if ( 'NOT IN' != $tax_query['operator'] ) {
+					switch ( $tax_query['taxonomy'] ) {
+						case 'category':
+							$this->is_category = true;
+							break;
+						case 'post_tag':
+							$this->is_tag = true;
+							break;
+						default:
+							$this->is_tax = true;
+					}
+				}
+			}
+			unset( $tax_query );
+
+			if ( empty($qv['author']) || ($qv['author'] == '0') ) {
+				$this->is_author = false;
+			} else {
+				$this->is_author = true;
+			}
+
+			if ( '' != $qv['author_name'] )
+				$this->is_author = true;
+
+			if ( !empty( $qv['post_type'] ) && ! is_array( $qv['post_type'] ) ) {
+				$post_type_obj = get_post_type_object( $qv['post_type'] );
+				if ( ! empty( $post_type_obj->has_archive ) )
+					$this->is_post_type_archive = true;
+			}
+
+			if ( $this->is_post_type_archive || $this->is_date || $this->is_author || $this->is_category || $this->is_tag || $this->is_tax )
+				$this->is_archive = true;
 	}
 }
