@@ -867,5 +867,31 @@ class WP_Query {
 
 			if ( $this->is_post_type_archive || $this->is_date || $this->is_author || $this->is_category || $this->is_tag || $this->is_tax )
 				$this->is_archive = true;
+		}
+
+		if ( '' != $qv['feed'] )
+			$this->is_feed = true;
+
+		if ( '' != $qv['tb'] )
+			$this->is_trackback = true;
+
+		if ( '' != $qv['paged'] && ( intval($qv['paged']) > 1 ) )
+			$this->is_paged = true;
+
+		if ( '' != $qv['comments_popup'] )
+			$this->is_comments_popup = true;
+
+		// if we're previewing inside the write screen
+		if ( '' != $qv['preview'] )
+			$this->is_preview = true;
+
+		if ( is_admin() )
+			$this->is_admin = true;
+
+		if ( false !== strpos($qv['feed'], 'comments-') ) {
+			$qv['feed'] = str_replace('comments-', '', $qv['feed']);
+			$qv['withcomments'] = 1;
+		}
+
 	}
 }
