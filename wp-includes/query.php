@@ -893,5 +893,31 @@ class WP_Query {
 			$qv['withcomments'] = 1;
 		}
 
+		$this->is_singular = $this->is_single || $this->is_page || $this->is_attachment;
+
+		if ( $this->is_feed && ( !empty($qv['withcomments']) || ( empty($qv['withcomments']) && $this->is_singular ) ) )
+			$this->is_comment_feed = true;
+
+		if ( !( $this->is_singular || $this->is_archive || $this->is_search || $this->is_feed || $this->is_trackback || $this->is_404 || $this->is_admin || $this->is_comments_popup || $this->is_robots ) )
+			$this->is_home = true;
+
+		// Correct is_* for page_on_front and page_for_posts
+		if ( $this->is_home && 'page' == get_option('show_on_front') && get_option('page_on_front') ) {
+			$_query = wp_parse_args($this->query);
+			// pagename can be set and empty depending on matched rewrite rules. Ignore an empty pagename.
+			if ( isset($_query['pagename']) && '' == $_query['pagename'] )
+				unset($_query['pagename']);
+			if ( empty($_query) || !array_diff( array_keys($_query), array('preview', 'page', 'paged', 'cpage') ) ) {
+				$this->is_page = true;
+				$this->is_home = false;
+				$qv['page_id'] = get_option('page_on_front');
+				// Correct <!--nextpage--> for page_on_front
+				if ( !empty($qv['paged']) ) {
+					$qv['page'] = $qv['paged'];
+					unset($qv['paged']);
+				}
+			}
+		}
+
 	}
 }
