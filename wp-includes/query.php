@@ -746,8 +746,6 @@ class WP_Query {
 
 		$qv['attachment_id'] = absint($qv['attachment_id']);
 
-);
-
 		if ( ('' != $qv['attachment']) || !empty($qv['attachment_id']) ) {
 			$this->is_single = true;
 			$this->is_attachment = true;
