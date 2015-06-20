@@ -290,6 +290,75 @@ function update_option( $option, $value ) {
 }
 
 /**
+ * Removes option by name. Prevents removal of protected WordPress options.
+ *
+ * @since 1.2.0
+ *
+ * @param string $option Name of option to remove. Expected to not be SQL-escaped.
+ * @return bool True, if option is successfully deleted. False on failure.
+ */
+function delete_option( $option ) {
+	global $wpdb;
+
+	$option = trim( $option );
+	if ( empty( $option ) )
+		return false;
+
+	wp_protect_special_option( $option );
+
+	// Get the ID, if no ID then return
+	$row = $wpdb->get_row( $wpdb->prepare( "SELECT autoload FROM $wpdb->options WHERE option_name = %s", $option ) );
+	if ( is_null( $row ) )
+		return false;
+
+	/**
+	 * Fires immediately before an option is deleted.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param string $option Name of the option to delete.
+	 */
+	do_action( 'delete_option', $option );
+
+	$result = $wpdb->delete( $wpdb->options, array( 'option_name' => $option ) );
+	if ( ! defined( 'WP_INSTALLING' ) ) {
+		if ( 'yes' == $row->autoload ) {
+			$alloptions = wp_load_alloptions();
+			if ( is_array( $alloptions ) && isset( $alloptions[$option] ) ) {
+				unset( $alloptions[$option] );
+				wp_cache_set( 'alloptions', $alloptions, 'options' );
+			}
+		} else {
+			wp_cache_delete( $option, 'options' );
+		}
+	}
+	if ( $result ) {
+
+		/**
+		 * Fires after a specific option has been deleted.
+		 *
+		 * The dynamic portion of the hook name, $option, refers to the option name.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string $option Name of the deleted option.
+		 */
+		do_action( "delete_option_$option", $option );
+
+		/**
+		 * Fires after an option has been deleted.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param string $option Name of the deleted option.
+		 */
+		do_action( 'deleted_option', $option );
+		return true;
+	}
+	return false;
+}
+
+/**
  * Retrieve site option value based on name of option.
  *
  * @since 2.8.0
