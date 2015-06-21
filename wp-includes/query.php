@@ -926,7 +926,7 @@ class WP_Query {
 
 			if  ( 'page' == get_option('show_on_front') && isset($this->queried_object_id) && $this->queried_object_id == get_option('page_for_posts') ) {
 				$this->is_page = false;
-				$this->is_hoem = true;
+				$this->is_home = true;
 				$this->is_posts_page = true;
 			}
 		}
