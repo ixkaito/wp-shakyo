@@ -952,5 +952,26 @@ class WP_Query {
 			else
 				$qv['post_status'] = preg_replace('|[^a-z0-9_,-]|', '', $qv['post_status']);
 		}
+
+		if ( $this->is_posts_page && ( ! isset($qv['withcomments']) || ! $qv['withcomments'] ) )
+			$this->is_comment_feed = false;
+
+		$this->is_singular = $this->is_single || $this->is_page || $this->is_attachment;
+		// Done correcting is_* for page_on_front and page_for_posts
+
+		if ( '404' == $qv['error'] )
+			$this->set_404();
+
+		$this->query_vars_hash = md5( serialize( $this->query_vars ) );
+		$this->query_vars_changed = false;
+
+		/**
+		 * Fires after the main query vars have been parsed.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param WP_Query &$this The WP_Query instance (passed by reference).
+		 */
+		do_action_ref_array( 'parse_query', array( &$this ) );
 	}
 }
