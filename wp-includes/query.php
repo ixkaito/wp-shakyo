@@ -930,5 +930,27 @@ class WP_Query {
 				$this->is_posts_page = true;
 			}
 		}
+
+		if ( $qv['page_id'] ) {
+			if  ( 'page' == get_option('show_on_front') && $qv['page_id'] == get_option('page_for_posts') ) {
+				$this->is_page = false;
+				$this->is_home = true;
+				$this->is_posts_page = true;
+			}
+		}
+
+		if ( !empty($qv['post_type']) ) {
+			if ( is_array($qv['post_type']) )
+				$qv['post_type'] = array_map('sanitize_key', $qv['post_type']);
+			else
+				$qv['post_type'] = sanitize_key($qv['post_type']);
+		}
+
+		if ( ! empty( $qv['post_status'] ) ) {
+			if ( is_array( $qv['post_status'] ) )
+				$qv['post_status'] = array_map('sanitize_key', $qv['post_status']);
+			else
+				$qv['post_status'] = preg_replace('|[^a-z0-9_,-]|', '', $qv['post_status']);
+		}
 	}
 }
