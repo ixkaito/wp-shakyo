@@ -992,7 +992,7 @@ class WP_Query {
 			$tax_query = array();
 		}
 
-		if ( !empty($q['taxnomoy']) && !empty($q['term']) ) {
+		if ( !empty($q['taxonomy']) && !empty($q['term']) ) {
 			$tax_query[] = array(
 				'taxonomy' => $q['taxonomy'],
 				'terms' => array( $q['term'] ),
@@ -1000,7 +1000,7 @@ class WP_Query {
 			);
 		}
 
-		foreach ( ge_taxonomies( array() , 'objects' ) as $taxonomy => $t ) {
+		foreach ( get_taxonomies( array() , 'objects' ) as $taxonomy => $t ) {
 			if ( 'post_tag' == $taxonomy )
 				continue;	// Handled further down in the $q['tag'] block
 
@@ -1010,12 +1010,11 @@ class WP_Query {
 					'field' => 'slug',
 				);
 
-				if ( isset( $t->rewrite['hierarchical'] ) && $t->rewrite['hierarchical'] ) {
+ 				if ( isset( $t->rewrite['hierarchical'] ) && $t->rewrite['hierarchical'] ) {
 					$q[$t->query_var] = wp_basename( $q[$t->query_var] );
 				}
 
 				$term = $q[$t->query_var];
-
 
 				if ( strpos($term, '+') !== false ) {
 					$terms = preg_split( '/[+]+/', $term );
@@ -1025,7 +1024,7 @@ class WP_Query {
 						) );
 					}
 				} else {
-					$tax_query[] = array_merg( $tax_query_defaults, array(
+					$tax_query[] = array_merge( $tax_query_defaults, array(
 						'terms' => preg_split( '/[,]+/', $term )
 					) );
 				}
