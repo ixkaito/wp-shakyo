@@ -1030,5 +1030,43 @@ class WP_Query {
 				}
 			}
 		}
+
+		// Category stuff
+		if ( ! empty( $q['cat'] ) && ! $this->is_singular ) {
+			$cat_in = $cat_not_in = array();
+
+			$cat_array = preg_split( '/[,\s]+/', urldecode( $q['cat'] ) );
+			$cat_array = array_map( 'intval', $cat_array );
+			$q['cat'] = implode( ',', $cat_array );
+
+			foreach ( $cat_array as $cat ) {
+				if ( $cat > 0 )
+					$cat_in[] = $cat;
+				elseif ( $cat < 0 )
+					$cat_not_in[] = abs( $cat );
+			}
+
+			if ( ! empty( $cat_in ) ) {
+				$tax_query[] = array(
+					'taxonomy' => 'category',
+					'terms' => $cat_in,
+					'field' => 'term_id',
+					'include_children' => true
+				);
+			}
+
+			if ( ! empty( $cat_not_in ) ) {
+				$tax_query[] = array(
+					'taxonomy' => 'category',
+					'terms' => $cat_not_in,
+					'field' => 'term_id',
+					'operator' => 'NOT IN',
+					'include_children' => true
+				);
+			}
+			unset( $cat_array, $cat_in, $cat_not_in );
+		}
+
+
 	}
 }
