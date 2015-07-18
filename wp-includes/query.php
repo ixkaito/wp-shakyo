@@ -1067,6 +1067,13 @@ class WP_Query {
 			unset( $cat_array, $cat_in, $cat_not_in );
 		}
 
+		if ( ! empty( $q['category__and'] ) && 1 === count( (array) $q['category__and'] ) ) {
+			$q['category__and'] = (array) $q['category__and'];
+			if ( ! isset( $q['category__in'] ) )
+				$q['category__in'] = array();
+			$q['category__in'][] = absint( reset( $q['category__and'] ) );
+			unset( $q['category__and'] );
+		}
 
 	}
 }
