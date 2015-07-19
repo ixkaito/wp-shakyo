@@ -1075,5 +1075,15 @@ class WP_Query {
 			unset( $q['category__and'] );
 		}
 
+		if ( ! empty( $q['category__in'] ) ) {
+			$q['category__in'] = array_map( 'absint', array_unique( (array) $q['category__in'] ) );
+			$tax_query[] = array(
+				'taxonomy' => 'category',
+				'terms' => $q['category__in'],
+				'field' => 'term_id',
+				'include_children' => false
+			);
+		}
+
 	}
 }
