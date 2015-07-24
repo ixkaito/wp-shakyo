@@ -1085,5 +1085,15 @@ class WP_Query {
 			);
 		}
 
+		if ( ! empty($q['category__not_in']) ) {
+			$q['category__not_in'] = array_map( 'absint', array_unique( (array) $q['category__not_in'] ) );
+			$tax_query[] = array(
+				'taxonomy' => 'category',
+				'terms' => $q['category__not_in'],
+				'operator' => 'NOT IN',
+				'include_children' => false
+			);
+		}
+
 	}
 }
