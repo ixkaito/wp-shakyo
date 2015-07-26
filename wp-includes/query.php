@@ -1121,7 +1121,7 @@ class WP_Query {
 					$q['tag_slug__and'][] = $tag;
 				}
 			} else {
-				$q['tag'] = sanitize_term_field('slgu', $q['tag'], 0, 'post_tag', 'db');
+				$q['tag'] = sanitize_term_field('slug', $q['tag'], 0, 'post_tag', 'db');
 				$q['tag_slug__in'][] = $q['tag'];
 			}
 		}
