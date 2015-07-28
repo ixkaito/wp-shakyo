@@ -1126,5 +1126,12 @@ class WP_Query {
 			}
 		}
 
+		if ( !empty($q['tag_id']) ) {
+			$q['tag_id'] = absint( $q['tag_id'] );
+			$tax_query[] = array(
+				'taxonomy' => 'post_tag',
+				'terms' => $q['tag_id']
+			);
+		}
 	}
 }
