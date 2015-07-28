@@ -1133,5 +1133,14 @@ class WP_Query {
 				'terms' => $q['tag_id']
 			);
 		}
+
+		if ( !empty($q['tag__in']) ) {
+			$q['tag__in'] = array_map('absint', array_unique( (array) $q['tag__in'] ) );
+			$tax_query[] = array(
+				'taxonomy' => 'post_tag',
+				'terms' => $q['tag__not_in'],
+				'operator' => 'NOT IN'
+			);
+		}
 	}
 }
