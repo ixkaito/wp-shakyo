@@ -1138,8 +1138,7 @@ class WP_Query {
 			$q['tag__in'] = array_map('absint', array_unique( (array) $q['tag__in'] ) );
 			$tax_query[] = array(
 				'taxonomy' => 'post_tag',
-				'terms' => $q['tag__not_in'],
-				'operator' => 'NOT IN'
+				'terms' => $q['tag__in']
 			);
 		}
 	}
