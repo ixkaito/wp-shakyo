@@ -1141,5 +1141,23 @@ class WP_Query {
 				'terms' => $q['tag__in']
 			);
 		}
+
+		if ( !empty($q['tag__not_in']) ) {
+			$q['tag__not_in'] = array_map('absint', array_unique( (array) $q['tag__not_in'] ) );
+			$tax_query[] = array(
+				'taxonomy' => 'post_tag',
+				'terms' => $q['tag__not_in'],
+				'operator' => 'NOT IN'
+			);
+		}
+
+		if ( !empty($q['tag__and']) ) {
+			$q['tag__and'] = array_map('absint', array_unique( (array) $q['tag__and'] ) );
+			$tax_query[] = array(
+				'taxonomy' => 'post_tag',
+				'terms' => $q['tag__and'],
+				'operator' => 'AND'
+			);
+		}
 	}
 }
