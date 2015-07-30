@@ -1168,5 +1168,15 @@ class WP_Query {
 				'field' => 'slug'
 			);
 		}
+
+		if ( !empty($q['tag_slug__and']) ) {
+			$q['tag_slug__and'] = array_map('sanitize_title_for_query', array_unique( (array) $q['tag_slug__and'] ) );
+			$tax_query[] = array(
+				'taxonomy' => 'post_tag',
+				'terms' => $q['tag_slug__and'],
+				'field' => 'slug',
+				'operator' => 'AND'
+			);
+		}
 	}
 }
