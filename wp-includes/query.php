@@ -1178,5 +1178,7 @@ class WP_Query {
 				'operator' => 'AND'
 			);
 		}
+
+		$this->tax_query = new WP_Tax_Query( $tax_query );
 	}
 }
