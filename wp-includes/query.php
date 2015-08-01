@@ -1180,5 +1180,14 @@ class WP_Query {
 		}
 
 		$this->tax_query = new WP_Tax_Query( $tax_query );
+
+		/**
+		 * Fires after taxonomy-related query vars have been parsed.
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param WP_Query $this The WP_Query instance.
+		 */
+		do_action( 'parse_tax_query', $this );
 	}
 }
