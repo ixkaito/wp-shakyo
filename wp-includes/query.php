@@ -1190,4 +1190,14 @@ class WP_Query {
 		 */
 		do_action( 'parse_tax_query', $this );
 	}
+
+	/**
+	 * Generate SQL for the WHERE clause based on passed search terms.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @global wpdb $wpdb
+	 * @param array $q Query variables.
+	 * @return string WHERE clause.
+	 */
 }
