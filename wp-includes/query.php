@@ -1200,4 +1200,52 @@ class WP_Query {
 	 * @param array $q Query variables.
 	 * @return string WHERE clause.
 	 */
+	protected function parse_search( &$q ) {
+		global $wpdb;
+
+		$search = '';
+
+		// added slashed screw with quote grouping when done early, so done later
+		$q['s'] = stripslashes( $q['s'] );
+		if ( empty( $_GET['s'] ) && $this->is_main_query() )
+			$q['s'] = urldecode( $q['s'] );
+		// there are no line breaks in <input /> fields
+		$q['s'] = str_replace( array( "\r", "\n" ), '', $q['s'] );
+		$q['search_terms_count'] = 1;
+		if ( ! empty( $q['sentence'] ) ) {
+			$q['search_terms'] = array( $q['s'] );
+		} else {
+			if ( preg_match_all( '/".*?("|$)|((?<=[\t ",+])|^)[^\t ",+]+/', $q['s'], $matches ) ) {
+				$q['search_terms_count'] = count( $matches[0] );
+				$q['search_terms'] = $this->parse_search_terms( $matches[0] );
+				// if the search string has only short terms or stopwords, or is 10+ terms long, match it as sentence
+				if ( empty( $q['search_terms'] ) || count( $q['search_terms'] ) > 9 )
+					$q['search_terms'] = array( $q['s'] );
+			} else {
+				$q['search_terms'] = array( $q['s'] );
+			}
+		}
+
+		$n = ! empty( $q['exact'] ) ? '' : '%';
+		$searchand = '';
+		$q['search_orderby_title'] = array();
+		foreach ( $q['search_terms'] as $term ) {
+			if ( $n ) {
+				$like = '%' . $wpdb->esc_like( $term ) . '%';
+				$q['search_orderby_title'][] = $wpdb->prepare( "$wpdb->posts.post_title LIKE %s", $like );
+			}
+
+			$like = $n . $wpdb->esc_like( $term ) . $n;
+			$search .= $wpdb->prepare( "{$searchand}(($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))", $like, $like );
+			$searchand = ' AND';
+		}
+
+		if ( ! empty( $search ) ) {
+			$search = " AND ({$search}) ";
+			if ( ! is_user_logged_in() )
+				$search .= " AND ($wpdb->posts.post_password = '') ";
+		}
+
+		return $search;
+	}
 }
