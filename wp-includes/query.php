@@ -1205,7 +1205,7 @@ class WP_Query {
 
 		$search = '';
 
-		// added slashed screw with quote grouping when done early, so done later
+		// added slashes screw with quote grouping when done early, so done later
 		$q['s'] = stripslashes( $q['s'] );
 		if ( empty( $_GET['s'] ) && $this->is_main_query() )
 			$q['s'] = urldecode( $q['s'] );
@@ -1237,7 +1237,7 @@ class WP_Query {
 
 			$like = $n . $wpdb->esc_like( $term ) . $n;
 			$search .= $wpdb->prepare( "{$searchand}(($wpdb->posts.post_title LIKE %s) OR ($wpdb->posts.post_content LIKE %s))", $like, $like );
-			$searchand = ' AND';
+			$searchand = ' AND ';
 		}
 
 		if ( ! empty( $search ) ) {
