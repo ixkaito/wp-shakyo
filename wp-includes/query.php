@@ -1248,4 +1248,18 @@ class WP_Query {
 
 		return $search;
 	}
+
+	/**
+	 * Check if the terms are suitable for searching.
+	 *
+	 * Uses an array of stopwords (terms) that are excluded from the separate
+	 * term matching when searching for posts. The list of English stopwords is
+	 * the approximate search engines list, and is translatable.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @param array Terms to check.
+	 * @return array Terms that are not stopwords.
+	 */
+
 }
