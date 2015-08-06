@@ -1261,5 +1261,29 @@ class WP_Query {
 	 * @param array Terms to check.
 	 * @return array Terms that are not stopwords.
 	 */
+	protected function parse_search_terms( $terms ) {
+		$strtolower = function_exists( 'mb_strtolower' ) ? 'mb_strtolower' : 'strtolower';
+		$checked = array();
 
+		$stopwords = $this->get_search_stopwords();
+
+		foreach ( $terms as $term ) {
+			// keep before/after spaces when term is for exact match
+			if ( preg_match( '/^".+"$/', $term ) )
+				$term = trim( $term, "\"'" );
+			else
+				$term = trim( $term, "\"' " );
+
+			// Avoid single A-Z.
+			if ( ! $term || ( 1 === strlen( $term ) && preg_match( '/^[a-z]$/i', $term ) ) )
+				continue;
+
+			if ( in_array( call_user_func( $strtolower, $term ), $stopwords, true ) )
+				continue;
+
+			$checked[] = $term;
+		}
+
+		return $checked;
+	}
 }
