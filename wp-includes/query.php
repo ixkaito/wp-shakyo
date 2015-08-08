@@ -1286,4 +1286,40 @@ class WP_Query {
 
 		return $checked;
 	}
+
+	/**
+	 * Retrieve stopwords used when parsing search terms.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @return array Stopwords.
+	 */
+	protected function get_search_stopwords() {
+		if ( isset( $this->stopwords ) )
+			return $this->stopwords;
+
+		/* translators: This is a comma-separated list of very common words that should be excluded from a search,
+		 * like a, an, and the. These are usually called "stopwords". You should not simply translate these individual
+		 * words into your language. Instead, look for and provide commonly accepted stopwords in your language.
+		 */
+		$words = explode( ',', _x( 'about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www',
+			'Comma-separated list of search stopwords in your language' ) );
+
+		$stopwords = array();
+		foreach( $words as $word ) {
+			$word = trim( $word, "\r\n\t " );
+			if ( $word )
+				$stopwords[] = $word;
+		}
+
+		/**
+		 * Filter stopwords used when parsing search terms.
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param array $stopwords Stopwords.
+		 */
+		$this->stopwords = apply_filters( 'wp_search_stopwords', $stopwords );
+		return $this->stopwords;
+	}
 }
