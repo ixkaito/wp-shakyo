@@ -1322,4 +1322,43 @@ class WP_Query {
 		$this->stopwords = apply_filters( 'wp_search_stopwords', $stopwords );
 		return $this->stopwords;
 	}
+
+	/**
+	 * Generate SQL for the ORDER BY condition based on passed search terms.
+	 *
+	 * @global wpdb $wpdb
+	 * @param array $q Query variables.
+	 * @return string ORDER BY clause.
+	 */
+	protected function parse_search_order( &$q ) {
+		global $wpdb;
+
+		if ( $q['search_terms_count'] > 1 ) {
+			$num_terms = count( $q['search_orderby_title'] );
+			$like = '%' . $wpdb->esc_like( $q['s'] ) . '%';
+
+			$search_orderby = '(CASE ';
+			// sentence match in 'post_title'
+			$search_orderby .= $wpdb->prepare( "WHEN $wpdb->posts.post_title LIKE %s THEN 1 ", $like );
+
+			// sanity limit, sort as sentence when more than 6 terms
+			// (few searches are longer than 6 terms and most titles are not)
+			if ( $num_terms < 7 ) {
+				// all words in title
+				$search_orderby .= 'WHEN ' . implode( ' AND ', $q['search_orderby_title'] ) . ' THEN 2 ';
+				// any word in title, not needed when $num_terms == 1
+				if ( $num_terms > 1 )
+					$search_orderby .= 'WHEN ' . implode( ' OR ', $q['search_orderby_title'] ) . ' THEN 3 ';
+			}
+
+			// sentence match in 'post_content'
+			$search_orderby .= $wpdb->prepare( "WHEN $wpdb->posts.post_content LIKE %s THEN 4 ", $like );
+			$search_orderby .= 'ELSE 5 END)';
+		} else {
+			// single word or sentence search
+			$search_orderby = reset( $q['search_orderby_title'] ) . ' DESC';
+		}
+
+		return $search_orderby;
+	}
 }
