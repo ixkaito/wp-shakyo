@@ -1361,4 +1361,74 @@ class WP_Query {
 
 		return $search_orderby;
 	}
+
+	/**
+	 * If the passed orderby value is allowed, convert the alias to a
+	 * properly-prefixed orderby value.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @global wpdb $wpdb WordPress database access abstraction object.
+	 *
+	 * @param string $orderby Alias for the field to order by.
+	 * @return string|bool Table-prefixed value to used in the ORDER clause. False otherwise.
+	 */
+	protected function parse_orderby( $orderby ) {
+		global $wpdb;
+
+		// Used to filter values.
+		$allowed_keys = array(
+			'post_name', 'post_author', 'post_date', 'post_title', 'post_modified',
+			'post_parent', 'post_type', 'name', 'author', 'date', 'title', 'modified',
+			'parent', 'type', 'ID', 'menu_order', 'comment_count', 'rand',
+		);
+
+		$meta_key = $this->get( 'meta_key' );
+		if ( ! empty( $meta_key ) ) {
+			$allowed_keys[] = $meta_key;
+			$allowed_keys[] = 'meta_value';
+			$allowed_keys[] = 'meta_value_num';
+		}
+
+		if ( ! in_array( $orderby, $allowed_keys ) ) {
+			return false;
+		}
+
+		switch ( $orderby ) {
+			case 'post_name':
+			case 'post_author':
+			case 'post_date':
+			case 'post_title':
+			case 'post_modified':
+			case 'post_parent':
+			case 'post_type':
+			case 'ID':
+			case 'menu_order':
+			case 'comment_count':
+				$orderby = "$wpdb->posts.{$orderby}";
+				break;
+			case 'rand':
+				$orderby = 'RAND()';
+				break;
+			case $meta_key:
+			case 'meta_value':
+				$type = $this->get( 'meta_type' );
+				if ( ! empty( $type ) ) {
+					$meta_type = $this->meta_query->get_cast_for_type( $type );
+					$orderby = "CAST($wpdb->postmeta.meta_value AS {$meta_type})";
+				} else {
+					$orderby = "$wpdb->postmeta.meta_value";
+				}
+				break;
+			case 'meta_value_num':
+				$orderby = "$wpdb->postmeta.meta_value+0";
+				break;
+			default:
+				$orderby = "$wpdb->posts.post_" . $orderby;
+				break;
+		}
+
+		return $orderby;
+	}
 }
