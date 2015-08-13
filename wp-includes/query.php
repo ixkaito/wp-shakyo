@@ -1467,4 +1467,22 @@ class WP_Query {
 
 		$this->is_feed = $is_feed;
 	}
+
+	/**
+	 * Retrieve query variable.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @param string $query_var Query variable key.
+	 * @param mixed  $default   Value to return if the query variable is not set. Default ''.
+	 * @return mixed
+	 */
+	public function get( $query_var, $default = '' ) {
+		if ( isset( $this->query_vars[ $query_var ] ) ) {
+			return $this->query_vars[ $query_var ];
+		}
+
+		return $default;
+	}
 }
