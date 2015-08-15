@@ -1498,4 +1498,65 @@ class WP_Query {
 	public function set($query_var, $value) {
 		$this->query_vars[$query_var] = $value;
 	}
+
+	/**
+	 * Retrieve the posts based on query variables.
+	 *
+	 * There are a few filters and actions that can be used to modify the post
+	 * database query.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @uses do_action_ref_array() Calls 'pre_get_posts' hook before retrieving posts.
+	 *
+	 * @return array List of posts.
+	 */
+	public function get_posts() {
+		global $wpdb;
+
+		$this->parse_query();
+
+		/**
+		 * Fires after the query variable object is created, but before the actual query is run.
+		 *
+		 * Note: If using conditional tags, use the mothod versions within the passed instance
+		 * (e.g. $this->is_main_query() instead of is_main_query()). This is because the functions
+		 * like is_main_query() test against the global $wp_query instance, not the passed one.
+		 *
+		 * @since 2.0.0
+		 *
+		 * @param WP_Query &$this The WP_Query instance (passed by reference).
+		 */
+		do_action_ref_array( 'pre_get_posts', array( &$this ) );
+
+		// Shorthand.
+		$q = &$this->query_vars;
+
+		// Fill again in case pre_get_posts unset some vars.
+		$q = $this->fill_query_vars($q);
+
+		// Parse meta query
+		$this->meta_query = new WP_Meta_Query();
+		$this->meta_query->parse_query_vars( $q );
+
+		// Set a flag if a pre_get_posts hook changed the query vars.
+		$hash = md5( serialize( $this->query_vars ) );
+		if ( $hash != $this->query_vars_hash ) {
+			$this->query_vars_changed = true;
+			$this->query_vars_hash = $hash;
+		}
+		unset($hash);
+
+		// First let's clear some variables
+		$distinct = '';
+		$whichauthor = '';
+		$whichmimetype = '';
+		$where = '';
+		$limits = '';
+		$join = '';
+		$search = '';
+		$groupby = '';
+		$post_status_join = false;
+		$page = 1;
+	}
 }
