@@ -1656,5 +1656,20 @@ class WP_Query {
 
 		if ( '' !== $q['menu_order'] )
 			$where .= " AND $wpdb->posts.menu_order = " . $q['menu_order'];
+
+		// The "m" parameter is meant for months but accepts datetimes of varying specificity
+		if ( $q['m'] ) {
+			$where .= " AND YEAR($wpdb->posts.post_date)=" . substr($q['m'], 0, 4);
+			if ( strlen($q['m']) > 5 )
+				$where .= " AND MONTH($wpdb->posts.post_date)=" . substr($q['m'], 4, 2);
+			if ( strlen($q['m']) > 7 )
+				$where .= " AND DAYOFMONTH($wpdb->posts.post_date)=" . substr($q['m'], 6, 2);
+			if ( strlen($q['m']) > 9 )
+				$where .= " AND HOUR($wpdb->posts.post_date)=" . substr($q['m'], 8, 2);
+			if ( strlen($q['m']) > 11 )
+				$where .= " AND MINUTE($wpdb->posts.post_date)=" . substr($q['m'], 10, 2);
+			if ( strlen($q['m']) > 13 )
+				$where .= " AND SECOND($wpdb->posts.post_date)=" . substr($q['m'], 12, 2);
+		}
 	}
 }
