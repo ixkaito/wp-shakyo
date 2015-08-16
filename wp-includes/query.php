@@ -1671,5 +1671,35 @@ class WP_Query {
 			if ( strlen($q['m']) > 13 )
 				$where .= " AND SECOND($wpdb->posts.post_date)=" . substr($q['m'], 12, 2);
 		}
+
+		// Handle the other individual date parameters
+		$date_parameters = array();
+
+		if ( '' !== $q['hour'] )
+			$date_parameters['hour'] = $q['hour'];
+
+		if ( '' !== $q['minute'] )
+			$date_parameters['minute'] = $q['minute'];
+
+		if ( '' !== $q['second'] )
+			$date_parameters['second'] = $q['second'];
+
+		if ( $q['year'] )
+			$date_parameters['year'] = $q['year'];
+
+		if ( $q['monthnum'] )
+			$date_parameters['monthnum'] = $q['monthnum'];
+
+		if ( $q['w'] )
+			$date_parameters['week'] = $q['w'];
+
+		if ( $q['day'] )
+			$date_parameters['day'] = $q['day'];
+
+		if ( $date_parameters ) {
+			$date_query = new WP_Date_Query( array( $date_parameters ) );
+			$where .= $date_query->get_sql();
+		}
+		unset( $date_parameters, $date_query );
 	}
 }
