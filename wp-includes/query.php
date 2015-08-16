@@ -1558,5 +1558,24 @@ class WP_Query {
 		$groupby = '';
 		$post_status_join = false;
 		$page = 1;
+
+		if ( isset( $q['caller_get_posts'] ) ) {
+			_deprecated_argument( 'WP_Query', '3.1', __( '"caller_get_posts" is deprecated. Use "ignore_sticky_posts" instead.' ) );
+			if ( !isset( $q['ignore_sticky_posts'] ) )
+				$q['ignore_sticky_posts'] = $q['caller_get_posts'];
+		}
+
+		if ( !isset( $q['ignore_sticky_posts'] ) )
+			$q['ignore_sticky_posts'] = false;
+
+		if ( !isset($q['suppress_filters']) )
+			$q['suppress_filters'] = false;
+
+		if ( !isset($q['cache_results']) ) {
+			if ( wp_using_ext_object_cache() )
+				$q['cache_results'] = false;
+			else
+				$q['cache_results'] = true;
+		}
 	}
 }
