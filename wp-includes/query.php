@@ -1701,5 +1701,34 @@ class WP_Query {
 			$where .= $date_query->get_sql();
 		}
 		unset( $date_parameters, $date_query );
+
+		// Handle comples date queries
+		if ( ! empty( $q['date_query'] ) ) {
+			$this->date_query = new WP_Date_Query( $q['date_query'] );
+			$where .= $this->date_query->get_sql();
+		}
+
+
+		// If we've got a post_type AND it's not "any" post_type.
+		if ( !empty($q['post_type']) && 'any' != $q['post_type'] ) {
+			foreach ( (array)$q['post_type'] as $_post_type ) {
+				$ptype_obj = get_post_type_object($_post_type);
+				if ( !$ptype_obj || !$ptype_obj->query_var || empty($q[ $ptype_obj->query_var ]) )
+					continue;
+
+				if ( ! $ptype_obj->hierarchical ) {
+					// Non-hierarchical post types can directly use 'name'.
+					$q['name'] = $q[ $ptype_obj->query_var ];
+				} else {
+					// Hierarchical post types will operate through 'pagename'.
+					$q['pagename'] = $q[ $ptype_obj->query_var ];
+					$q['name'] = '';
+				}
+
+				// Only one request for a slug is possible, this is why name & pagename are overwritten above.
+				break;
+			} //end foreach
+			unset($ptype_obj);
+		}
 	}
 }
