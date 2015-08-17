@@ -1577,5 +1577,84 @@ class WP_Query {
 			else
 				$q['cache_results'] = true;
 		}
+
+		if ( !isset($q['update_post_term_cache']) )
+			$q['update_post_term_cache'] = true;
+
+		if ( !isset($q['update_post_meta_cache']) )
+			$q['update_post_meta_cache'] = true;
+
+		if ( !isset($q['post_type']) ) {
+			if ( $this->is_search )
+				$q['post_type'] = 'any';
+			else
+				$q['post_type'] = '';
+		}
+		$post_type = $q['post_type'];
+		if ( empty( $q['posts_per_page'] ) ) {
+			$q['posts_per_page'] = get_option( 'posts_per_page' );
+		}
+		if ( isset($q['showposts']) && $q['showposts'] ) {
+			$q['showposts'] = (int) $q['showposts'];
+			$q['posts_per_page'] = $q['showposts'];
+		}
+		if ( (isset($q['posts_per_archive_page']) && $q['posts_per_archive_page'] != 0) && ($this->is_archive || $this->is_search) )
+			$q['posts_per_page'] = $q['posts_per_archive_page'];
+		if ( !isset($q['nopaging']) ) {
+			if ( $q['posts_per_page'] == -1 ) {
+				$q['nopaging'] = true;
+			} else {
+				$q['nopaging'] = false;
+			}
+		}
+
+		if ( $this->is_feed ) {
+			// This overrides posts_per_page.
+			if ( ! empty( $q['posts_per_rss'] ) ) {
+				$q['posts_per_page'] = $q['posts_per_rss'];
+			} else {
+				$q['posts_per_page'] = get_option( 'posts_per_rss' );
+			}
+			$q['nopaging'] = false;
+		}
+		$q['posts_per_page'] = (int) $q['posts_per_page'];
+		if ( $q['posts_per_page'] < -1 )
+			$q['posts_per_page'] = abs($q['posts_per_page']);
+		else if ( $q['posts_per_page'] == 0 )
+			$q['posts_per_page'] = 1;
+
+		if ( !isset($q['comments_per_page']) || $q['comments_per_page'] == 0 )
+			$q['comments_per_page'] = get_option('comments_per_page');
+
+		if ( $this->is_home && (empty($this->query) || $q['preview'] == 'true') && ( 'page' == get_option('show_on_front') ) && get_option('page_on_front') ) {
+			$this->is_page = true;
+			$this->is_home = false;
+			$q['page_id'] = get_option('page_on_front');
+		}
+
+		if ( isset($q['page']) ) {
+			$q['page'] = trim($q['page'], '/');
+			$q['page'] = absint($q['page']);
+		}
+
+		// If true, forcibly turns off SQL_CALC_FOUND_ROWS even when limits are present.
+		if ( isset($q['no_found_rows']) )
+			$q['no_found_rows'] = (bool) $q['no_found_rows'];
+		else
+			$q['no_found_rows'] = false;
+
+		switch ( $q['fields'] ) {
+			case 'ids':
+				$fields = "$wpdb->posts.ID";
+				break;
+			case 'id=>parent':
+				$fields = "$wpdb->posts.ID, $wpdb->posts.post_parent";
+				break;
+			default:
+				$fields = "$wpdb->posts.*";
+		}
+
+		if ( '' !== $q['menu_order'] )
+			$where .= " AND $wpdb->posts.menu_order = " . $q['menu_order'];
 	}
 }
