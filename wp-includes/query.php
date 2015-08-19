@@ -1817,5 +1817,25 @@ class WP_Query {
 		if ( ! empty( $q['s'] ) ) {
 			$search = $this->parse_search( $q );
 		}
+
+		/**
+		 * Filter the search SQL that is used in the WHERE clause of WP_Query.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string   $search Search SQL for WHERE clause.
+		 * @param WP_Query $this   The current WP_Query object.
+		 */
+		$search = apply_filters_ref_array( 'posts_search', array( $search, &$this ) );
+
+		// Taxonomies
+		if ( !$this->is_singular ) {
+			$this->parse_tax_query( $q );
+
+			$clauses = $this->tax_query->get_sql( $wpdb->posts, 'ID' );
+
+			$join .= $clauses['join'];
+			$where .= $clauses['where'];
+		}
 	}
 }
