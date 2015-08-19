@@ -1906,5 +1906,29 @@ class WP_Query {
 				unset( $tag_query );
 			}
 		}
+
+		if ( !empty( $this->tax_query->queries ) || !empty( $this->meta_query->queries ) ) {
+			$groupby = "{$wpdb->posts}.ID";
+		}
+
+		// Author/user stuff
+
+		if ( ! empty( $q['author'] ) && $q['author'] != '0' ) {
+			$q['author'] = addslashes_gpc( '' . urldecode( $q['author'] ) );
+			$authors = array_unique( array_map( 'intval', preg_split( '/[,\s]+/', $q['author'] ) ) );
+			foreach ( $authors as $author ) {
+				$key = $author > 0 ? 'author__in' : 'author__not_in';
+				$q[$key][] = abs( $author );
+			}
+			$q['author'] = implode( ',', $authors );
+		}
+
+		if ( ! empty( $q['author__not_in'] ) ) {
+			$author__not_in = implode( ',', array_map( 'absint', array_unique( (array) $q['author__not_in'] ) ) );
+			$where .= " AND {$wpdb->posts}.post_author NOT IN ($author__not_in) ";
+		} elseif ( ! empty( $q['author__in'] ) ) {
+			$author__in = implode( ',', array_map( 'absint', array_unique( (array) $q['author__in'] ) ) );
+			$where .= " AND {$wpdb->posts}.post_author IN ($author__in) ";
+		}
 	}
 }
