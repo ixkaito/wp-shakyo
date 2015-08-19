@@ -1837,5 +1837,74 @@ class WP_Query {
 			$join .= $clauses['join'];
 			$where .= $clauses['where'];
 		}
+
+		if ( $this->is_tax ) {
+			if ( empty($post_type) ) {
+				// Do a fully inclusive search for currently registered post types of queried taxonomies
+				$post_type = array();
+				$taxonomies = wp_list_pluck( $this->tax_query->queries, 'taxonomy' );
+				foreach ( get_post_types( array( 'exclude_from_search' => false ) ) as $pt ) {
+					$object_taxonomies = $pt === 'attachment' ? get_taxonomies_for_attachments() : get_object_taxonomies( $pt );
+					if ( array_intersect( $taxonomies, $object_taxonomies ) )
+						$post_type[] = $pt;
+				}
+				if ( ! $post_type )
+					$post_type = 'any';
+				elseif ( count( $post_type ) == 1 )
+					$post_type = $post_type[0];
+
+				$post_status_join = true;
+			} elseif ( in_array('attachment', (array) $post_type) ) {
+				$post_status_join = true;
+			}
+		}
+
+		// Back-compat
+		if ( !empty($this->tax_query->queries) ) {
+			$tax_query_in_and = wp_list_filter( $this->tax_query->queries, array( 'operator' => 'NOT IN' ), 'NOT' );
+			if ( !empty( $tax_query_in_and ) ) {
+				if ( !isset( $q['taxonomy'] ) ) {
+					foreach ( $tax_query_in_and as $a_tax_query ) {
+						if ( !in_array( $a_tax_query['taxonomy'], array( 'category', 'post_tag' ) ) ) {
+							$q['taxonomy'] = $a_tax_query['taxonomy'];
+							if ( 'slug' == $a_tax_query['field'] )
+								$q['term'] = $a_tax_query['terms'][0];
+							else
+								$q['term_id'] = $a_tax_query['terms'][0];
+
+							break;
+						}
+					}
+				}
+
+				$cat_query = wp_list_filter( $tax_query_in_and, array( 'taxonomy' => 'category' ) );
+				if ( ! empty( $cat_query ) ) {
+					$cat_query = reset( $cat_query );
+
+					if ( ! empty( $cat_query['terms'][0] ) ) {
+						$the_cat = get_term_by( $cat_query['field'], $cat_query['terms'][0], 'category' );
+						if ( $the_cat ) {
+							$this->set( 'cat', $the_cat->term_id );
+							$this->set( 'category_name', $the_cat->slug );
+						}
+						unset( $the_cat );
+					}
+				}
+				unset( $cat_query );
+
+				$tag_query = wp_list_filter( $tax_query_in_and, array( 'taxonomy' => 'post_tag' ) );
+				if ( ! empty( $tag_query ) ) {
+					$tag_query = reset( $tag_query );
+
+					if ( ! empty( $tag_query['terms'][0] ) ) {
+						$the_tag = get_term_by( $tag_query['field'], $tag_query['terms'][0], 'post_tag' );
+						if ( $the_tag )
+							$this->set( 'tag_id', $the_tag->term_id );
+						unset( $the_tag );
+					}
+				}
+				unset( $tag_query );
+			}
+		}
 	}
 }
