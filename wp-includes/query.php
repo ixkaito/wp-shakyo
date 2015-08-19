@@ -1780,5 +1780,42 @@ class WP_Query {
 
 		if ( intval($q['comments_popup']) )
 			$q['p'] = absint($q['comments_popup']);
+
+		// If an attachment is requested by number, let it supersede any post number.
+		if ( $q['attachment_id'] )
+			$q['p'] = absint($q['attachment_id']);
+
+		// If a post number is specified, load that post
+		if ( $q['p'] ) {
+			$where .= " AND {$wpdb->posts}.ID = " . $q['p'];
+		} elseif ( $q['post__in'] ) {
+			$post__in = implode(',', array_map( 'absint', $q['post__in'] ));
+			$where .= " AND {$wpdb->posts}.ID IN ($post__in)";
+		} elseif ( $q['post__not_in'] ) {
+			$post__not_in = implode(',',  array_map( 'absint', $q['post__not_in'] ));
+			$where .= " AND {$wpdb->posts}.ID NOT IN ($post__not_in)";
+		}
+
+		if ( is_numeric( $q['post_parent'] ) ) {
+			$where .= $wpdb->prepare( " AND $wpdb->posts.post_parent = %d ", $q['post_parent'] );
+		} elseif ( $q['post_parent__in'] ) {
+			$post_parent__in = implode( ',', array_map( 'absint', $q['post_parent__in'] ) );
+			$where .= " AND {$wpdb->posts}.post_parent IN ($post_parent__in)";
+		} elseif ( $q['post_parent__not_in'] ) {
+			$post_parent__not_in = implode( ',',  array_map( 'absint', $q['post_parent__not_in'] ) );
+			$where .= " AND {$wpdb->posts}.post_parent NOT IN ($post_parent__not_in)";
+		}
+
+		if ( $q['page_id'] ) {
+			if  ( ('page' != get_option('show_on_front') ) || ( $q['page_id'] != get_option('page_for_posts') ) ) {
+				$q['p'] = $q['page_id'];
+				$where = " AND {$wpdb->posts}.ID = " . $q['page_id'];
+			}
+		}
+
+		// If a search pattern is specified, load the posts that match.
+		if ( ! empty( $q['s'] ) ) {
+			$search = $this->parse_search( $q );
+		}
 	}
 }
