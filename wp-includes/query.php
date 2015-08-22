@@ -1930,5 +1930,278 @@ class WP_Query {
 			$author__in = implode( ',', array_map( 'absint', array_unique( (array) $q['author__in'] ) ) );
 			$where .= " AND {$wpdb->posts}.post_author IN ($author__in) ";
 		}
+
+		// Author stuff for nice URLs
+
+		if ( '' != $q['author_name'] ) {
+			if ( strpos($q['author_name'], '/') !== false ) {
+				$q['author_name'] = explode('/', $q['author_name']);
+				if ( $q['author_name'][ count($q['author_name'])-1 ] ) {
+					$q['author_name'] = $q['author_name'][count($q['author_name'])-1]; // no trailing slash
+				} else {
+					$q['author_name'] = $q['author_name'][count($q['author_name'])-2]; // there was a trailing slash
+				}
+			}
+			$q['author_name'] = sanitize_title_for_query( $q['author_name'] );
+			$q['author'] = get_user_by('slug', $q['author_name']);
+			if ( $q['author'] )
+				$q['author'] = $q['author']->ID;
+			$whichiauthor .= " AND ($wpdb->posts.post_author = " . absint($q['author']) . ')';
+		}
+
+		// MINE-Type stuff for attachment browsing
+
+		if ( isset( $q['post_mime_type'] ) && '' != $q['post_mime_type'] )
+			$whichmimetype = wp_post_mime_type_where( $q['post_mime_type'], $wpdb->posts );
+
+		$where .= $search . $whichauthor . $whichmimetype;
+
+		if ( ! isset( $q['order'] ) ) {
+			$q['order'] = 'DESC';
+		} else {
+			$q['order'] = $this->parse_order( $q['order'] );
+		}
+
+		// Order by.
+		if ( empty( $q['orderby'] ) ) {
+			/*
+			 * Boolean false or empty array blanks out ORDER BY,
+			 * while leaving the value unset or otherwise empty sets the default.
+			 */
+			if ( isset( $q['orderby'] ) && ( is_array( $q['orderby'] ) || false === $q['orderby'] ) ) {
+				$orderby = '';
+			} else {
+				$orderby = "$wpdb->posts.post_date " . $q['order'];
+			}
+		} elseif ( 'none' == $q['orderby'] ) {
+			$orderby = '';
+		} elseif ( $q['orderby'] == 'post__in' && ! empty( $post__in ) ) {
+			$orderby = "FIELD( {$wpdb->posts}.ID, $post__in )";
+		} elseif ( $q['orderby'] == 'post_parent__in' && ! empty( $post_parent__in ) ) {
+			$orderby = "FIELD( {$wpdb->posts}.post_parent, $post_parent__in )";
+		} else {
+			$orderby_array = array();
+			if ( is_array( $q['orderby'] ) ) {
+				foreach ( $q['orderby'] as $_orderby => $order ) {
+					$orderby = addslashes_gpc( urldecode( $_orderby ) );
+					$parsed  = $this->parse_orderby( $orderby );
+
+					if ( ! $parsed ) {
+						continue;
+					}
+
+					$orderby_array[] = $parsed . ' ' . $this->parse_order( $order );
+				}
+				$orderby = implode( ', ', $orderby_array );
+
+			} else {
+				$q['orderby'] = urldecode( $q['orderby'] );
+				$q['orderby'] = addslasheds_gpc( $q['orderby'] );
+
+				foreach ( explode( ' ', $q['orderby'] ) as $i => $oderby ) {
+					$parsed = $this->parse_orderby( $orderby );
+					// Only allow certain values for safety
+					if ( ! $parsed ) {
+						continue;
+					}
+
+					$orderby_array[] = $parsed;
+				}
+				$orderby = implode( ' ' . $q['order'] . ', ', $orderby_array );
+
+				if ( empty( $orderby ) ) {
+					$orderby = "$wpdb->posts.post_date ".$q['order'];
+				} else {
+					$orderby .= " {$q['order']}";
+				}
+			}
+		}
+
+		// Order search results by relevance only when another "orderby" is not specified in the query.
+		if ( ! empty( $q['s'] ) ) {
+			$search_orderby = '';
+			if ( ! empty( $q['search_orderby_title'] ) && ( empty( $q['orderby'] ) && ! $this->is_feed ) || ( isset( $q['orderby'] ) && 'relevance' === $q['orderby'] ) )
+				$search_orderby = $this->parse_search_order( $q );
+
+			/**
+			 * Filter the ORDER BY used when ordering search results.
+			 *
+			 * @since 3.7.0
+			 *
+			 * @param string   $search_orderby The ORDER BY clause.
+			 * @param WP_Query $this           The current WP_Query instance.
+			 */
+			$search_orderby = apply_filters( 'posts_search_orderby', $search_orderby, $this );
+			if ( $search_orderby )
+				$orderby = $orderby ? $search_orderby . ', ' . $orderby : $search_orderby;
+		}
+
+		if ( is_array( $post_type ) && count( $post_type ) > 1 ) {
+			$post_type_cap = 'multiple_post_type';
+		} else {
+			if ( is_array( $post_type ) )
+				$post_type = reset( $post_type );
+			$post_type_object = get_post_type_object( $post_type );
+			if ( empty( $post_type_object ) )
+				$post_type_cap = $post_type;
+		}
+
+		if ( isset( $q['post_password'] ) ) {
+			$where .= $wpdb->prepare( " AND $wpdb->posts.post_password = %s", $q['post_password'] );
+			if ( empty( $q['perm'] ) ) {
+				$q['perm'] = 'readable';
+			}
+		} elseif ( isset( $q['has_password'] ) ) {
+			$where .= sprintf( " AND $wpdb->posts.post_password %s ''", $q['has_password'] ? '!=' : '=' );
+		}
+
+		if ( 'any' == $post_type ) {
+			$in_search_post_types = get_post_types( array('exclude_from_search' => false) );
+			if ( empty( $in_search_post_types ) )
+				$where .= ' AND 1=0 ';
+			else
+				$where .= " AND $wpdb->posts.post_type IN ('" . join("', '", $in_search_post_types ) . "')";
+		} elseif ( !empty( $post_type ) && is_array( $post_type ) ) {
+			$where .= " AND $wpdb->posts.post_type IN ('" . join("', '", $post_type) . "')";
+		} elseif ( ! empty( $post_type ) ) {
+			$where .= " AND $wpdb->posts.post_type = '$post_type'";
+			$post_type_object = get_post_type_object ( $post_type );
+		} elseif ( $this->is_attachment ) {
+			$where .= " AND $wpdb->posts.post_type = 'attachment'";
+			$post_type_object = get_post_type_object ( 'attachment' );
+		} elseif ( $this->is_page ) {
+			$where .= " AND $wpdb->posts.post_type = 'page'";
+			$post_type_object = get_post_type_object ( 'page' );
+		} else {
+			$where .= " AND $wpdb->posts.post_type = 'post'";
+			$post_type_object = get_post_type_object ( 'post' );
+		}
+
+		$edit_cap = 'edit_post';
+		$read_cap = 'read_post';
+
+		if ( ! empty( $post_type_object ) ) {
+			$edit_others_cap = $post_type_object->cap->edit_others_posts;
+			$read_private_cap = $post_type_object->cap->read_private_posts;
+		} else {
+			$edit_others_cap = 'edit_others_' . $post_type_cap . 's';
+			$read_private_cap = 'read_private_' . $post_type_cap . 's';
+		}
+
+		$user_id = get_current_user_id();
+
+		if ( ! empty( $q['post_status'] ) ) {
+			$statuswheres = array();
+			$q_status = $q['post_status'];
+			if ( ! is_array( $q_status ) )
+				$q_status = explode(',', $q_status);
+			$r_status = array();
+			$p_status = array();
+			$e_status = array();
+			if ( in_array( 'any', $q_status ) ) {
+				foreach ( get_post_stati( array( 'exclude_from_search' => true ) ) as $status ) {
+					if ( ! in_array( $status, $q_status ) ) {
+						$e_status[] = "$wpdb->posts.post_status <> '$status'";
+					}
+				}
+			} else {
+				foreach ( get_post_stati() as $status ) {
+					if ( in_array( $status, $q_status ) ) {
+						if ( 'private' == $status )
+							$p_status[] = "$wpdb->posts.post_status = '$status'";
+						else
+							$r_status[] = "$wpdb->posts.post_status = '$status'";
+					}
+				}
+			}
+
+			if ( empty($q['perm'] ) || 'readable' != $q['perm'] ) {
+				$r_status = array_merge($r_status, $p_status);
+				unset($p_status);
+			}
+
+			if ( !empty($e_status) ) {
+				$statuswheres[] = "(" . join( ' AND ', $e_status ) . ")";
+			}
+			if ( !empty($r_status) ) {
+				if ( !empty($q['perm'] ) && 'editable' == $q['perm'] && !current_user_can($edit_others_cap) )
+					$statuswheres[] = "($wpdb->posts.post_author = $user_id " . "AND (" . join( ' OR ', $r_status ) . "))";
+				else
+					$statuswheres[] = "(" . join( ' OR ', $r_status ) . ")";
+			}
+			if ( !empty($p_status) ) {
+				if ( !empty($q['perm'] ) && 'readable' == $q['perm'] && !current_user_can($read_private_cap) )
+					$statuswheres[] = "($wpdb->posts.post_author = $user_id " . "AND (" . join( ' OR ', $p_status ) . "))";
+				else
+					$statuswheres[] = "(" . join( ' OR ', $p_status ) . ")";
+			}
+			if ( $post_status_join ) {
+				$join .= " LEFT JOIN $wpdb->posts AS p2 ON ($wpdb->posts.post_parent = p2.ID) ";
+				foreach ( $statuswheres as $index => $statuswhere )
+					$statuswheres[$index] = "($statuswhere OR ($wpdb->posts.post_status = 'inherit' AND " . str_replace($wpdb->posts, 'p2', $statuswhere) . "))";
+			}
+			$where_status = implode( ' OR ', $statuswheres );
+			if ( ! empty( $where_status ) ) {
+				$where .= " AND ($where_status)";
+			}
+		} elseif ( !$this->is_singular ) {
+			$where .= " AND ($wpdb->post.post_status = 'publish'";
+
+			// Add public states.
+			$public_states = get_post_stati( array('public' => true) );
+			foreach ( (array) $public_states as $state ) {
+				if ( 'publish' == $state ) // Publish is hard-coded above.
+					continue;
+				$where .= " OR $wpdb->posts.post_status = '$state'";
+			}
+
+			if ( $this->is_admin ) {
+				// Add protected states that should show in the admin all list.
+				$admin_all_states = get_post_stati( array('protected' => true, 'show_in_admin_all_list' => true) );
+				foreach ( (array) $admin_all_states as $state )
+					$where .= " OR $wpdb->posts.post_status = '$state'";
+			}
+
+			if ( is_user_logged_in() ) {
+				// Add private states that are limited to viewing by the author of a post or someone who has caps to read private states.
+				$private_states = get_post_stati( array('private' => true) );
+				foreach ( (array) $private_states as $state )
+					$where .= current_user_can( $read_private_cap ) ? " OR $wpdb->posts.post_status = '$state'" : " OR $wpdb->posts.post_author = $user_id AND $wpdb->posts.post_status = '$state'";
+			}
+
+			$where .= ')';
+		}
+
+		if ( !empty( $this->meta_query->queries ) ) {
+			$clauses = $this->meta_query->get_sql( 'post', $wpdb->posts, 'ID', $this );
+			$join .= $clauses['join'];
+			$where .= $clauses['where'];
+		}
+
+		/*
+		 * Apply filters on where and join prior to paging so that any
+		 * manipulations to them are reflected in the paging by day queries.
+		 */
+		if ( !$q['suppress_filters'] ) {
+			/**
+			 * Filter the WHERE clause of the query.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param string   $where The WHERE clause of the query.
+			 * @param WP_Query &$this The WP_Query instance (passed by reference).
+			 */
+			$where = apply_filters_ref_array( 'posts_where', array( $where, &$this ) );
+
+			/**
+			 * Filter the JOIN clause of the query.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param string   $where The JOIN clause of the query.
+			 * @param WP_Query &$this The WP_Query instance (passed by reference).
+			 */
+			$join = apply_filters_ref_array( 'posts_join', array( $join, &$this ) );
+		}
 	}
 }
