@@ -2403,5 +2403,16 @@ class WP_Query {
 			$fields = isset( $clauses[ 'fields' ] ) ? $clauses[ 'fields' ] : '';
 			$limits = isset( $clauses[ 'limits' ] ) ? $clauses[ 'limits' ] : '';
 		}
+
+		/**
+		 * Fires to announce the query's current selection parameters.
+		 *
+		 * For use by caching plugins.
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param string $selection The assembled selection query.
+		 */
+		do_action( 'posts_selection', $where . $groupby . $orderby . $limits . $join );
 	}
 }
