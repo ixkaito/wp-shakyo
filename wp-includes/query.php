@@ -2572,5 +2572,128 @@ class WP_Query {
 		}
 
 		$split_the_query = ( $old_request == $this->request && "$wpdb->posts.*" == $fields && !empty( $limits ) && $q['posts_per_page'] < 500 );
+
+		/**
+		 * Filter whether to split the query.
+		 *
+		 * Splitting the query will cause it to fetch just the IDs of the found posts
+		 * (and then individually fetch each post by ID), rather than fetching every
+		 * complete row at once. One massive result vs. many small results.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @param bool     $split_the_query Whether or not to split the query.
+		 * @param WP_Query $this            The WP_Query instance.
+		 */
+		$split_the_query = apply_filters( 'split_the_query', $split_the_query, $this );
+
+		if ( $split_the_query ) {
+			// First get the IDs and then fill in the objects
+
+			$this->request = "SELECT $found_rows $distinct $wpdb->posts.ID FROM $wpdb->posts $join WHERE 1=1 $where $groupby $orderby $limits";
+
+			/**
+			 * Filter the Post IDs SQL request before sending.
+			 *
+			 * @since 3.4.0
+			 *
+			 * @param string   $request The post ID request.
+			 * @param WP_Query $this    The WP_Query instance.
+			 */
+			$this->request = apply_filters( 'posts_request_ids', $this->request, $this );
+
+			$ids = $wpdb->get_col( $this->request );
+
+			if ( $ids ) {
+				$this->posts = $ids;
+				$this->set_found_posts( $q, $limits );
+				_prime_post_caches( $ids, $q['update_post_term_cache'], $q['update_post_meta_cache'] );
+			} else {
+				$this->posts = array();
+			}
+		} else {
+			$this->posts = $wpdb->get_results( $this->request );
+			$this->set_found_posts( $q, $limits );
+		}
+
+		// Convert to WP_Post objects
+		if ( $this->posts )
+			$this->posts = array_map( 'get_post', $this->posts );
+
+		if ( ! $q['suppress_filters'] ) {
+			/**
+			 * Filter the raw post results array, prior to status checks.
+			 *
+			 * @since 2.3.0
+			 *
+			 * @param array    $posts The post results array.
+			 * @param WP_Query &$this The WP_Query instance (passed by reference).
+			 */
+			$this->posts = apply_filters_ref_array( 'posts_results', array( $this->posts, &$this ) );
+		}
+
+		if ( !empty($this->posts) && $this->is_comment_feed && $this->is_singular ) {
+			/** This filter is documented in wp-includes/query.php */
+			$cjoin = apply_filters_ref_array( 'comment_feed_join', array( '', &$this ) );
+
+			/** This filter is documented in wp-includes/query.php */
+			$cwhere = apply_filters_ref_array( 'comment_feed_where', array( "WHERE comment_post_ID = '{$this->posts[0]->ID}' AND comment_approved = '1'", &$this ) );
+
+			/** This filter is documented in wp-includes/query.php */
+			$cgroupby = apply_filters_ref_array( 'comment_feed_groupby', array( '', &$this ) );
+			$cgroupby = ( ! empty( $cgroupby ) ) ? 'GROUP BY ' . $cgroupby : '';
+
+			/** This filter is documented in wp-includes/query.php */
+			$corderby = apply_filters_ref_array( 'comment_feed_orderby', array( 'comment_date_gmt DESC', &$this ) );
+			$corderby = ( ! empty( $corderby ) ) ? 'ORDER BY ' . $corderby : '';
+
+			/** This filter is documented in wp-includes/query.php */
+			$climits = apply_filters_ref_array( 'comment_feed_limits', array( 'LIMIT ' . get_option('posts_per_rss'), &$this ) );
+
+			$comments_request = "SELECT $wpdb->comments.* FROM $wpdb->comments $cjoin $cwhere $cgroupby $corderby $climits";
+			$this->comments = $wpdb->get_results($comments_request);
+			$this->comment_count = count($this->comments);
+		}
+
+		// Check post status to determine if post should be displayed.
+		if ( !empty($this->posts) && ($this->is_single || $this->is_page) ) {
+			$status = get_post_status($this->posts[0]);
+			$post_status_obj = get_post_status_object($status);
+			//$type = get_post_type($this->posts[0]);
+			if ( !$post_status_obj->public ) {
+				if ( ! is_user_logged_in() ) {
+					// User must be logged in to view unpublished posts.
+					$this->posts = array();
+				} else {
+					if  ( $post_status_obj->protected ) {
+						// User must have edit permissions on the draft to preview.
+						if ( ! current_user_can($edit_cap, $this->posts[0]->ID) ) {
+							$this->posts = array();
+						} else {
+							$this->is_preview = true;
+							if ( 'future' != $status )
+								$this->posts[0]->post_date = current_time('mysql');
+						}
+					} elseif ( $post_status_obj->private ) {
+						if ( ! current_user_can($read_cap, $this->posts[0]->ID) )
+							$this->posts = array();
+					} else {
+						$this->posts = array();
+					}
+				}
+			}
+
+			if ( $this->is_preview && $this->posts && current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
+				/**
+				 * Filter the single post for preview mode.
+				 *
+				 * @since 2.7.0
+				 *
+				 * @param WP_Post  $post_preview  The Post object.
+				 * @param WP_Query &$this         The WP_Query instance (passed by reference).
+				 */
+				$this->posts[0] = get_post( apply_filters_ref_array( 'the_preview', array( $this->posts[0], &$this ) ) );
+			}
+		}
 	}
 }
