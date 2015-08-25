@@ -1519,7 +1519,7 @@ class WP_Query {
 		/**
 		 * Fires after the query variable object is created, but before the actual query is run.
 		 *
-		 * Note: If using conditional tags, use the mothod versions within the passed instance
+		 * Note: If using conditional tags, use the method versions within the passed instance
 		 * (e.g. $this->is_main_query() instead of is_main_query()). This is because the functions
 		 * like is_main_query() test against the global $wp_query instance, not the passed one.
 		 *
@@ -1702,7 +1702,7 @@ class WP_Query {
 		}
 		unset( $date_parameters, $date_query );
 
-		// Handle comples date queries
+		// Handle complex date queries
 		if ( ! empty( $q['date_query'] ) ) {
 			$this->date_query = new WP_Date_Query( $q['date_query'] );
 			$where .= $this->date_query->get_sql();
@@ -1946,10 +1946,10 @@ class WP_Query {
 			$q['author'] = get_user_by('slug', $q['author_name']);
 			if ( $q['author'] )
 				$q['author'] = $q['author']->ID;
-			$whichiauthor .= " AND ($wpdb->posts.post_author = " . absint($q['author']) . ')';
+			$whichauthor .= " AND ($wpdb->posts.post_author = " . absint($q['author']) . ')';
 		}
 
-		// MINE-Type stuff for attachment browsing
+		// MIME-Type stuff for attachment browsing
 
 		if ( isset( $q['post_mime_type'] ) && '' != $q['post_mime_type'] )
 			$whichmimetype = wp_post_mime_type_where( $q['post_mime_type'], $wpdb->posts );
@@ -1996,11 +1996,11 @@ class WP_Query {
 
 			} else {
 				$q['orderby'] = urldecode( $q['orderby'] );
-				$q['orderby'] = addslasheds_gpc( $q['orderby'] );
+				$q['orderby'] = addslashes_gpc( $q['orderby'] );
 
-				foreach ( explode( ' ', $q['orderby'] ) as $i => $oderby ) {
+				foreach ( explode( ' ', $q['orderby'] ) as $i => $orderby ) {
 					$parsed = $this->parse_orderby( $orderby );
-					// Only allow certain values for safety
+					// Only allow certain values for safety.
 					if ( ! $parsed ) {
 						continue;
 					}
@@ -2145,7 +2145,7 @@ class WP_Query {
 				$where .= " AND ($where_status)";
 			}
 		} elseif ( !$this->is_singular ) {
-			$where .= " AND ($wpdb->post.post_status = 'publish'";
+			$where .= " AND ($wpdb->posts.post_status = 'publish'";
 
 			// Add public states.
 			$public_states = get_post_stati( array('public' => true) );
@@ -2205,7 +2205,7 @@ class WP_Query {
 		}
 
 		// Paging
-		if ( empty($q['nopagin']) && !$this->is_singular ) {
+		if ( empty($q['nopaging']) && !$this->is_singular ) {
 			$page = absint($q['paged']);
 			if ( !$page )
 				$page = 1;
@@ -2280,7 +2280,7 @@ class WP_Query {
 				 * @param string   $climits The JOIN clause of the query.
 				 * @param WP_Query &$this   The WP_Query instance (passed by reference).
 				 */
-				$climits = apply_filters_ref_array( 'comment_feed_limits', array( 'LIMIT' . get_option('posts_per_rss'), &$this ) );
+				$climits = apply_filters_ref_array( 'comment_feed_limits', array( 'LIMIT ' . get_option('posts_per_rss'), &$this ) );
 			}
 			$cgroupby = ( ! empty( $cgroupby ) ) ? 'GROUP BY ' . $cgroupby : '';
 			$corderby = ( ! empty( $corderby ) ) ? 'ORDER BY ' . $corderby : '';
@@ -2309,7 +2309,7 @@ class WP_Query {
 		 */
 		if ( !$q['suppress_filters'] ) {
 			/**
-			 * FIlter the WHERE clause of the query.
+			 * Filter the WHERE clause of the query.
 			 *
 			 * Specifically for manipulating paging queries.
 			 *
@@ -2321,7 +2321,7 @@ class WP_Query {
 			$where = apply_filters_ref_array( 'posts_where_paged', array( $where, &$this ) );
 
 			/**
-			 * FIlter the GROUP BY clause of the query.
+			 * Filter the GROUP BY clause of the query.
 			 *
 			 * @since 2.0.0
 			 *
@@ -2331,7 +2331,7 @@ class WP_Query {
 			$groupby = apply_filters_ref_array( 'posts_groupby', array( $groupby, &$this ) );
 
 			/**
-			 * FIlter the JOIN clause of the query.
+			 * Filter the JOIN clause of the query.
 			 *
 			 * Specifically for manipulating paging queries.
 			 *
@@ -2423,14 +2423,14 @@ class WP_Query {
 			/**
 			 * Filter the WHERE clause of the query.
 			 *
-			 * FOr use by caching plugins.
+			 * For use by caching plugins.
 			 *
 			 * @since 2.5.0
 			 *
 			 * @param string   $where The WHERE clause of the query.
 			 * @param WP_Query &$this The WP_Query instance (passed by reference).
 			 */
-			$where = apply_filters_ref_array( 'posts_where_requery', array( $where, &$this ) );
+			$where = apply_filters_ref_array( 'posts_where_request', array( $where, &$this ) );
 
 			/**
 			 * Filter the GROUP BY clause of the query.
@@ -2548,7 +2548,7 @@ class WP_Query {
 			 * @param array    $request The complete SQL query.
 			 * @param WP_Query &$this   The WP_Query instance (passed by reference).
 			 */
-			$this->request = apply_filters_ref_array( 'post_request', array( $this->request, &$this ) );
+			$this->request = apply_filters_ref_array( 'posts_request', array( $this->request, &$this ) );
 		}
 
 		if ( 'ids' == $q['fields'] ) {
@@ -2697,6 +2697,7 @@ class WP_Query {
 		}
 
 		// Put sticky posts at the top of the posts array
+		$sticky_posts = get_option('sticky_posts');
 		if ( $this->is_home && $page <= 1 && is_array($sticky_posts) && !empty($sticky_posts) && !$q['ignore_sticky_posts'] ) {
 			$num_posts = count($this->posts);
 			$sticky_offset = 0;
