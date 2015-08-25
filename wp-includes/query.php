@@ -2695,5 +2695,45 @@ class WP_Query {
 				$this->posts[0] = get_post( apply_filters_ref_array( 'the_preview', array( $this->posts[0], &$this ) ) );
 			}
 		}
+
+		// Put sticky posts at the top of the posts array
+		if ( $this->is_home && $page <= 1 && is_array($sticky_posts) && !empty($sticky_posts) && !$q['ignore_sticky_posts'] ) {
+			$num_posts = count($this->posts);
+			$sticky_offset = 0;
+			// Loop over posts and relocate stickies to the front.
+			for ( $i = 0; $i < $num_posts; $i++ ) {
+				if ( in_array($this->posts[$i]->ID, $sticky_posts) ) {
+					$sticky_post = $this->posts[$i];
+					// Remove sticky from current position
+					array_splice($this->posts, $i, 1);
+					// Move to front, after other stickies
+					array_splice($this->posts, $sticky_offset, 0, array($sticky_post));
+					// Increment the sticky offset. The next sticky will be placed at this offset.
+					$sticky_offset++;
+					// Remove post from sticky posts array
+					$offset = array_search($sticky_post->ID, $sticky_posts);
+					unset( $sticky_posts[$offset] );
+				}
+			}
+
+			// If any posts have been excluded specifically, Ignore those that are sticky.
+			if ( !empty($sticky_posts) && !empty($q['post__not_in']) )
+				$sticky_posts = array_diff($sticky_posts, $q['post__not_in']);
+
+			// Fetch sticky posts that weren't in the query results
+			if ( !empty($sticky_posts) ) {
+				$stickies = get_posts( array(
+					'post__in' => $sticky_posts,
+					'post_type' => $post_type,
+					'post_status' => 'publish',
+					'nopaging' => true
+				) );
+
+				foreach ( $stickies as $sticky_post ) {
+					array_splice( $this->posts, $sticky_offset, 0, array( $sticky_post ) );
+					$sticky_offset++;
+				}
+			}
+		}
 	}
 }
