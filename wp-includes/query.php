@@ -2735,5 +2735,18 @@ class WP_Query {
 				}
 			}
 		}
+
+		if ( ! $q['suppress_filters'] ) {
+			/**
+			 * Filter the array of retrieved posts after they've been fetched and
+			 * internally processed.
+			 *
+			 * @since 1.5.0
+			 *
+			 * @param array    $posts The array of retrieved posts.
+			 * @param WP_Query &$this The WP_Query instance (passed by reference).
+			 */
+			$this->posts = apply_filters_ref_array( 'the_posts', array( $this->posts, &$this ) );
+		}
 	}
 }
