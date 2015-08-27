@@ -2768,4 +2768,47 @@ class WP_Query {
 
 		return $this->posts;
 	}
+
+	/**
+	 * Set up the amount of found posts and the number of pages (if limit clause was used)
+	 * for the current query.
+	 *
+	 * @since 3.5.0
+	 * @access private
+	 */
+	private function set_found_posts( $q, $limits ) {
+		global $wpdb;
+
+		// Bail if posts is an empty array. Continue if posts is an empty string,
+		// null, or false to accommodate caching plugins that fill posts later.
+		if ( $q['no_found_rows'] || ( is_array( $this->posts ) && ! $this->posts ) )
+			return;
+
+		if ( ! empty( $limits ) ) {
+			/**
+			 * Filter the query to run for retrieving the found posts.
+			 *
+			 * @since 2.1.0
+			 *
+			 * @param string   $found_posts The query to run to find the found posts.
+			 * @param WP_Query &$this       The WP_Query instance (passed by reference).
+			 */
+			$this->found_posts = $wpdb->get_var( apply_filters_ref_array( 'found_posts_query', array( 'SELECT FOUND_ROWS()', &$this ) ) );
+		} else {
+			$this->found_posts = count( $this->posts );
+		}
+
+		/**
+		 * Filter the number of found posts for the query.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param int      $found_posts The number of posts found.
+		 * @param WP_Query &$this       The WP_Query instance (passed by reference).
+		 */
+		$this->found_posts = apply_filters_ref_array( 'found_posts', array( $this->found_posts, &$this ) );
+
+		if ( ! empty( $limits ) )
+			$this->max_num_pages = ceil( $this->found_posts / $q['posts_per_page'] );
+	}
 }
