@@ -2811,4 +2811,20 @@ class WP_Query {
 		if ( ! empty( $limits ) )
 			$this->max_num_pages = ceil( $this->found_posts / $q['posts_per_page'] );
 	}
+
+	/**
+	 * Set up the next post and iterate current post index.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return WP_Post Next post.
+	 */
+	public function next_post() {
+
+		$this->current_post++;
+
+		$this->post = $this->posts[$this->current_post];
+		return $this->post;
+	}
 }
