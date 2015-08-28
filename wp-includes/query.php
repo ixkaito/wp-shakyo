@@ -2827,4 +2827,33 @@ class WP_Query {
 		$this->post = $this->posts[$this->current_post];
 		return $this->post;
 	}
+
+	/**
+	 * Sets Up the current post.
+	 *
+	 * Retrieves the next post, sets up the post, sets the 'in the loop'
+	 * property to true.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @uses $post
+	 * @uses do_action_ref_array() Calls 'loop_start' if loop has just started
+	 */
+	public function the_post() {
+		global $post;
+		$this->in_the_loop = true;
+
+		if ( $this->current_post == -1 ) // loop has just started
+			/**
+			 * Fires once the loop is started.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param WP_Query &$this The WP_Query instance (passed by reference).
+			 */
+			do_action_ref_array( 'loop_start', array( &$this ) );
+
+		$post = $this->next_post();
+		setup_postdata($post);
+	}
 }
