@@ -2856,4 +2856,35 @@ class WP_Query {
 		$post = $this->next_post();
 		setup_postdata($post);
 	}
+
+	/**
+	 * Whether there are more posts available in the loop.
+	 *
+	 * Calls action 'loop_end', when the loop is complete.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 * @uses do_action_ref_array() Calls 'loop_end' if loop is ended
+	 *
+	 * @return bool True if posts are available, false if end of loop.
+	 */
+	public function have_posts() {
+		if ( $this->current_post + 1 < $this->post_count ) {
+			return true;
+		} elseif ( $this->current_post + 1 == $this->post_count && $this->post_count > 0 ) {
+			/**
+			 * Fires once the loop has ended.
+			 *
+			 * @since 2.0.0
+			 *
+			 * @param WP_Query &$this The WP_Query instance (passed by reference).
+			 */
+			do_action_ref_array( 'loop_end', array( &$this ) );
+			// Do some cleaning up after the loop
+			$this->rewind_posts();
+		}
+
+		$this->in_the_loop = false;
+		return false;
+	}
 }
