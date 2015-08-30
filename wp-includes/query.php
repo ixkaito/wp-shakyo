@@ -2887,4 +2887,17 @@ class WP_Query {
 		$this->in_the_loop = false;
 		return false;
 	}
+
+	/**
+	 * Rewind the posts and reset post index.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 */
+	public function rewind_posts() {
+		$this->current_post = -1;
+		if ( $this->post_count > 0 ) {
+			$this->post = $this->posts[0];
+		}
+	}
 }
