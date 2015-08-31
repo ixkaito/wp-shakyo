@@ -2900,4 +2900,19 @@ class WP_Query {
 			$this->post = $this->posts[0];
 		}
 	}
+
+	/**
+	 * Iterate current comment index and return comment object.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 *
+	 * @return object Comment object.
+	 */
+	public function next_comment() {
+		$this->current_comment++;
+
+		$this->comment = $this->comments[$this->current_comment];
+		return $this->comment;
+	}
 }
