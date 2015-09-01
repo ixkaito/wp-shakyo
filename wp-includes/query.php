@@ -2915,4 +2915,27 @@ class WP_Query {
 		$this->comment = $this->comments[$this->current_comment];
 		return $this->comment;
 	}
+
+	/**
+	 * Set up the current comment.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 * @global object $comment Current comment.
+	 * @uses do_action() Calls 'comment_loop_start' hook when first comment is processed.
+	 */
+	public function the_comment() {
+		global $comment;
+
+		$comment = $this->next_comment();
+
+		if ( $this->current_comment == 0 ) {
+			/**
+			 * Fires once the comment loop is started.
+			 *
+			 * @since 2.2.0
+			 */
+			do_action( 'comment_loop_start' );
+		}
+	}
 }
