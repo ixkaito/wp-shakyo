@@ -2938,4 +2938,24 @@ class WP_Query {
 			do_action( 'comment_loop_start' );
 		}
 	}
+
+	/**
+	 * Whether there are more comments available.
+	 *
+	 * Automatically rewinds comments when finished.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 *
+	 * @return bool True, if more comments. False, if no more posts.
+	 */
+	public function have_comments() {
+		if ( $this->current_comment + 1 < $this->comment_count ) {
+			return true;
+		} elseif ( $this->current_comment + 1 == $this->comment_count ) {
+			$this->rewind_comments();
+		}
+
+		return false;
+	}
 }
