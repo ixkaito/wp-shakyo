@@ -2958,4 +2958,17 @@ class WP_Query {
 
 		return false;
 	}
+
+	/**
+	 * Rewind the comments, resets the comment index and comment to first.
+	 *
+	 * @since 2.2.0
+	 * @access public
+	 */
+	public function rewind_comments() {
+		$this->current_comment = -1;
+		if ( $this->comment_count > 0 ) {
+			$this->comment = $this->comments[0];
+		}
+	}
 }
