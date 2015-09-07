@@ -2986,4 +2986,76 @@ class WP_Query {
 		$this->query = $this->query_vars = wp_parse_args( $query );
 		return $this->get_posts();
 	}
+
+	/**
+	 * Retrieve queried object.
+	 *
+	 * If queried object is not set, then the queried object will be set from
+	 * the category, tag, taxonomy, posts page, single post, page, or author
+	 * query variable. After it is set up, it will be returned.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return object
+	 */
+	public function get_queried_object() {
+		if ( isset($this->queried_object) )
+			return $this->queried_object;
+
+		$this->queried_object = null;
+		$this->queried_object_id = 0;
+
+		if ( $this->is_category || $this->is_tag || $this->is_tax ) {
+			if ( $this->is_category ) {
+				if ( $this->get( 'cat' ) ) {
+					$term = get_term( $this->get( 'cat' ), 'category' );
+				} elseif ( $this->get( 'category_name' ) ) {
+					$term = get_term_by( 'slug', $this->get( 'category_name' ), 'category' );
+				}
+			} elseif ( $this->is_tag ) {
+				if ( $this->get( 'tag_id' ) ) {
+					$term = get_term( $this->get( 'tag_id' ), 'post_tag' );
+				} elseif ( $this->get( 'tag' ) ) {
+					$term = get_term_by( 'slug', $this->get( 'tag' ), 'post_tag' );
+				}
+			} else {
+				$tax_query_in_and = wp_list_filter( $this->tax_query->queries, array( 'operator' => 'NOT IN' ), 'NOT' );
+				$query = reset( $tax_query_in_and );
+
+				if ( $query['terms'] ) {
+					if ( 'term_id' == $query['field'] ) {
+						$term = get_term( reset( $query['terms'] ), $query['taxonomy'] );
+					} else {
+						$term = get_term_by( $query['field'], reset( $query['terms'] ), $query['taxonomy'] );
+					}
+				}
+			}
+
+			if ( ! empty( $term ) && ! is_wp_error( $term ) )  {
+				$this->queried_object = $term;
+				$this->queried_object_id = (int) $term->term_id;
+
+				if ( $this->is_category && 'category' === $this->queried_object->taxonomy )
+					_make_cat_compat( $this->queried_object );
+			}
+		} elseif ( $this->is_post_type_archive ) {
+			$post_type = $this->get( 'post_type' );
+			if ( is_array( $post_type ) )
+				$post_type = reset( $post_type );
+			$this->queried_object = get_post_type_object( $post_type );
+		} elseif ( $this->is_posts_page ) {
+			$page_for_posts = get_option('page_for_posts');
+			$this->queried_object = get_post( $page_for_posts );
+			$this->queried_object_id = (int) $this->queried_object->ID;
+		} elseif ( $this->is_singular && ! empty( $this->post ) ) {
+			$this->queried_object = $this->post;
+			$this->queried_object_id = (int) $this->post->ID;
+		} elseif ( $this->is_author ) {
+			$this->queried_object_id = (int) $this->get('author');
+			$this->queried_object = get_userdata( $this->queried_object_id );
+		}
+
+		return $this->queried_object;
+	}
 }
