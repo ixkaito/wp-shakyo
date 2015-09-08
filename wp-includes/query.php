@@ -3058,4 +3058,22 @@ class WP_Query {
 
 		return $this->queried_object;
 	}
+
+	/**
+	 * Retrieve ID of the current queried object.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return int
+	 */
+	public function get_queried_object_id() {
+		$this->get_queried_object();
+
+		if ( isset($this->queried_object_id) ) {
+			return $this->queried_object_id;
+		}
+
+		return 0;
+	}
 }
