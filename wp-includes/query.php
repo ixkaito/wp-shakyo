@@ -3076,4 +3076,21 @@ class WP_Query {
 
 		return 0;
 	}
+
+	/**
+	 * Constructor.
+	 *
+	 * Sets up the WordPress query, if parameter is not empty.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @param string $query URL query string.
+	 * @return WP_Query
+	 */
+	public function __construct($query = '') {
+		if ( ! empty($query) ) {
+			$this->query($query);
+		}
+	}
 }
