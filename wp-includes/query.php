@@ -3093,4 +3093,17 @@ class WP_Query {
 			$this->query($query);
 		}
 	}
+
+	/**
+	 * Make private properties readable ofr backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to get.
+	 * @return mixed Property.
+	 */
+	public function __get( $name ) {
+		return $this->$name;
+	}
 }
