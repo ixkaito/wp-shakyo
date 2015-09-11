@@ -3119,4 +3119,16 @@ class WP_Query {
 	public function __isset( $name ) {
 		return isset( $this->$name );
 	}
+
+	/**
+	 * Make private properties settable for backwards compatibility.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $name Property to unset.
+	 */
+	public function __unset( $name ) {
+		unset( $this->$name );
+	}
 }
