@@ -3145,4 +3145,17 @@ class WP_Query {
 	public function __call( $name, $arguments ) {
 		return call_user_func_array( array( $this, $name ), $arguments );
 	}
-}
+
+	/**
+	 * Is the query for an existing archive page?
+	 *
+	 * Month, Year, Category, Author, Post Type archive...
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_archive() {
+		return (bool) $this->is_archive;
+	}
+ }
