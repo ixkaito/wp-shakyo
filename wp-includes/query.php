@@ -3158,4 +3158,24 @@ class WP_Query {
 	public function is_archive() {
 		return (bool) $this->is_archive;
 	}
+
+	/**
+	 * Is the query for an existing post type archive page?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $post_types Optional. Post type or array of posts types to check against.
+	 * @return bool
+	 */
+	public function is_post_type_archive( $post_types = '' ) {
+		if ( empty( $post_types ) || ! $this->is_post_type_archive )
+			return (bool) $this->is_post_type_archive;
+
+		$post_type = $this->get( 'post_type' );
+		if ( is_array( $post_type ) )
+			$post_type = reset( $post_type );
+		$post_type_object = get_post_type_object( $post_type );
+
+		return in_array( $post_type_object->name, (array) $post_types );
+	}
  }
