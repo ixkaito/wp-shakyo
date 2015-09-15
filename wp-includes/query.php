@@ -3178,4 +3178,35 @@ class WP_Query {
 
 		return in_array( $post_type_object->name, (array) $post_types );
 	}
- }
+
+	/**
+	 * Is the query for an existing attachment page?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $attachment Attachment ID, title, slug, or array of such.
+	 * @return bool
+	 */
+	public function is_attachment( $attachment = '' ) {
+		if ( ! $this->is_attachment ) {
+			return false;
+		}
+
+		if ( empty( $attachment ) ) {
+			return true;
+		}
+
+		$attachment = (array) $attachment;
+
+		$post_obj = $this->get_queried_object();
+
+		if ( in_array( $post_obj->ID, $attachment ) ) {
+			return true;
+		} elseif ( in_array( $post_obj->post_title, $attachment ) ) {
+			return true;
+		} elseif ( in_array( $post_obj->post_name, $attachment ) ) {
+			return true;
+		}
+		return false;
+	}
+}
