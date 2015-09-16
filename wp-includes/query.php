@@ -3209,4 +3209,36 @@ class WP_Query {
 		}
 		return false;
 	}
+
+	/**
+	 * Is the query for an existing author archive page?
+	 *
+	 * If the $author parameter is specified, this function will additionally
+	 * check if the query is for one of the authors specified.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $author Optional. User ID, nickname, nicename, or array of User IDs, nicknames, and nicenames
+	 * @return bool
+	 */
+	public function is_author( $author = '' ) {
+		if ( !$this->is_author )
+			return false;
+
+		if ( empty($author) )
+			return true;
+
+		$author_obj = $this->get_queried_object();
+
+		$author = (array) $author;
+
+		if ( in_array( $author_obj->ID, $author ) )
+			return true;
+		elseif ( in_array( $author_obj->nickname, $author ) )
+			return true;
+		elseif ( in_array( $author_obj->user_nicename, $author ) )
+			return true;
+
+		return false;
+	}
 }
