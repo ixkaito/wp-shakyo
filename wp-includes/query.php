@@ -3241,4 +3241,36 @@ class WP_Query {
 
 		return false;
 	}
+
+	/**
+	 * Is the query for an existing category archive page?
+	 *
+	 * If the $category parameter is specified, this function will additionally
+	 * check if the query is for one of the cateogories specified.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $category Optional. Category ID, name, slug, or array of Category IDs, name, and slugs.
+	 * @return bool
+	 */
+	public function is_category( $category = '' ) {
+		if ( !$this->is_category )
+			return false;
+
+		if ( empty($category) )
+			return true;
+
+		$cat_obj = $this->get_queried_object();
+
+		$category = (array) $category;
+
+		if ( in_array( $cat_obj->term_id, $category ) )
+			return true;
+		elseif ( in_array( $cat_obj->name, $category ) )
+			return true;
+		elseif ( in_array( $cat_obj->slug, $category ) )
+			return true;
+
+		return false;
+	}
 }
