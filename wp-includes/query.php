@@ -3273,4 +3273,36 @@ class WP_Query {
 
 		return false;
 	}
+
+	/**
+	 * Is the query for an existing tag archive page?
+	 *
+	 * If the $tag parameter is specified, this function will additionally
+	 * check if the query is for one of the tags specified.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $tage Optional. Tag ID, name, slug, or array of Tag IDs, names, and slugs.
+	 * @return bool
+	 */
+	public function is_tag( $tag = '' ) {
+		if ( ! $this->is_tag )
+			return false;
+
+		if ( empty( $tag ) )
+			return true;
+
+		$tag_obj = $this->get_queried_object();
+
+		$tag = (array) $tag;
+
+		if ( in_array( $tag_obj->term_id, $tag ) )
+			return true;
+		elseif ( in_array( $tag_obj->name, $tag ) )
+			return true;
+		elseif ( in_array( $tag_obj->slug, $tag ) )
+			return true;
+
+		return false;
+	}
 }
