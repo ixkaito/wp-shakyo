@@ -3305,4 +3305,48 @@ class WP_Query {
 
 		return false;
 	}
+
+	/**
+	 * Is the query for an existing taxonomy archive page?
+	 *
+	 * If the $taxonomy parameter is specified, this function will additionally
+	 * check if the query is for that specific $taxonomy.
+	 *
+	 * If the $term parameter is specified in addition to the $taxonomy parameter,
+	 * this function will additionally check if the query is for one of the terms
+	 * specified.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $taxonomy Optional. Taxonomy slug or slugs.
+	 * @param mixed $term. Optional. Term ID, name, slug or array of Term IDs, names, and slugs.
+	 * @return bool
+	 */
+	public function is_tax( $taxonomy = '', $term = '' ) {
+		global $wp_taxonomies;
+
+		if ( !$this->is_tax )
+			return false;
+
+		if ( empty( $taxonomy ) )
+			return true;
+
+		$queried_object = $this->get_queried_object();
+		$tax_array = array_intersect( array_keys( $wp_taxonomies ), (array) $taxonomy );
+		$term_array = (array) $term;
+
+		// Check that the taxonomy matches.
+		if ( ! ( isset( $queried_object->taxonomy ) && count( $tax_array ) && in_array( $queried_object->taxonomy, $tax_array ) ) )
+			return false;
+
+		// Only a Taxonomy provided.
+		if ( empty( $term ) )
+			return true;
+
+		return isset( $queried_object->term_id ) &&
+			count( array_intersect(
+				array( $queried_object->term_id, $queried_object->name, $queried_object->slug ),
+				$term_array
+			) );
+	}
 }
