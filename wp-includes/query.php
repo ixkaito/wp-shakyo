@@ -3371,4 +3371,15 @@ class WP_Query {
 	public function is_date() {
 		return (bool) $this->is_date;
 	}
+
+	/**
+	 * Is the query for an existing day archive?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_day() {
+		return (bool) $this->is_day;
+	}
 }
