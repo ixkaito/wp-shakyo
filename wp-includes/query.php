@@ -3349,4 +3349,15 @@ class WP_Query {
 				$term_array
 			) );
 	}
+
+	/**
+	 * Wether the current URL is within the comments popup window.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_comments_popup() {
+		return (bool) $this->is_comments_popup;
+	}
 }
