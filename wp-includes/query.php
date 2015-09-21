@@ -3382,4 +3382,21 @@ class WP_Query {
 	public function is_day() {
 		return (bool) $this->is_day;
 	}
+
+	/**
+	 * Is the query for a feed?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param string|array $feeds Optional feed types to check.
+	 * @return bool
+	 */
+	public function is_feed( $feeds = '' ) {
+		if ( empty( $feeds ) || ! $this->is_feed )
+			return (bool) $this->is_feed;
+		$qv = $this->get( 'feed' );
+		if ( 'feed' == $qv )
+			$qv = get_default_feed();
+		return in_array( $qv, (array) $feeds );
+	}
 }
