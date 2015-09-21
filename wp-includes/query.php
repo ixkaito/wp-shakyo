@@ -3399,4 +3399,15 @@ class WP_Query {
 			$qv = get_default_feed();
 		return in_array( $qv, (array) $feeds );
 	}
+
+	/**
+	 * Is the query for a comments feed?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_comment_feed() {
+		return (bool) $this->is_comment_feed;
+	}
 }
