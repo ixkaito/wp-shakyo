@@ -3410,4 +3410,32 @@ class WP_Query {
 	public function is_comment_feed() {
 		return (bool) $this->is_comment_feed;
 	}
+
+	/**
+	 * Is the query for the front page of the site?
+	 *
+	 * This is for what is displayed at your site's main URL.
+	 *
+	 * Depends on the site's "Front page displays" Reading Settings 'show_on_front' and 'page_on_front'.
+	 *
+	 * If you set a static page for the front page of your site, this function will return
+	 * true when viewing that page.
+	 *
+	 * Otherwise the same as @see WP_Query::is_home()
+	 *
+	 * @since 3.1.0
+	 * @uses is_home()
+	 * @uses get_option()
+	 *
+	 * @return bool True, if front of site.
+	 */
+	public function is_front_page() {
+		// most likely case
+		if ( 'posts' == get_option( 'show_on_front') && $this->is_home() )
+			return true;
+		elseif ( 'page' == get_option( 'show_on_front') && get_option( 'page_on_front' ) && $this->is_page( get_option( 'page_on_front' ) ) )
+			return true;
+		else
+			return false;
+	}
 }
