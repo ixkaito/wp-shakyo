@@ -3458,4 +3458,15 @@ class WP_Query {
 	public function is_home() {
 		return (bool) $this->is_home;
 	}
+
+	/**
+	 * Is the query for an existing month archives?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_month() {
+		return (bool) $this->is_month;
+	}
 }
