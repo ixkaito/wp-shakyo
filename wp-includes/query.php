@@ -3438,4 +3438,24 @@ class WP_Query {
 		else
 			return false;
 	}
+
+	/**
+	 * Is the query for the blog homepage?
+	 *
+	 * This is the page which shows the time based blog content of your site.
+	 *
+	 * Depends on the site's "Front page displays" Reading Settings 'show_on_front' and 'page_for_posts'.
+	 *
+	 * If you set a static page for the front page of your site, this function will return
+	 * true only on the page you set as the "Posts page".
+	 *
+	 * @see WP_Query::is_front_page()
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool True if blog view homepage.
+	 */
+	public function is_home() {
+		return (bool) $this->is_home;
+	}
 }
