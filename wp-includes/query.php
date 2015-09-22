@@ -3469,4 +3469,51 @@ class WP_Query {
 	public function is_month() {
 		return (bool) $this->is_month;
 	}
+
+	/**
+	 * Is the query for an existing single page?
+	 *
+	 * If the $page parameter is specified, this function will additionally
+	 * check if the query is for one of the pages specified.
+	 *
+	 * @see WP_Query::is_single()
+	 * @see WP_Query::is_singular()
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $page Page ID, title, slug, path, or array of such.
+	 * @return bool
+	 */
+	public function is_page( $page = '' ) {
+		if ( !$this->is_page )
+			return false;
+
+		if ( empty( $page ) )
+			return true;
+
+		$page_obj = $this->get_queried_object();
+
+		$page = (array) $page;
+
+		if ( in_array( $page_obj->ID, $page ) ) {
+			return true;
+		} elseif ( in_array( $page_obj->post_title, $page ) ) {
+			return true;
+		} else if ( in_array( $page_obj->post_name, $page ) ) {
+			return true;
+		} else {
+			foreach ( $page as $pagepath ) {
+				if ( ! strpos( $pagepath, '/' ) ) {
+					continue;
+				}
+				$pagepath_obj = get_page_by_path( $pagepath );
+
+				if ( $pagepath_obj && ( $pagepath_obj->ID == $page_obj->ID ) ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 }
