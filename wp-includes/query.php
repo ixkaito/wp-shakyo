@@ -3527,4 +3527,15 @@ class WP_Query {
 	public function is_paged() {
 		return (bool) $this->is_paged;
 	}
+
+	/**
+	 * Is the query for a post or page preview?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_preview() {
+		return (bool) $this->is_preview;
+	}
 }
