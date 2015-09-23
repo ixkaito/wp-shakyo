@@ -3538,4 +3538,15 @@ class WP_Query {
 	public function is_preview() {
 		return (bool) $this->is_preview;
 	}
+
+	/**
+	 * Is the query for the robots file?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_robots() {
+		return (bool) $this->is_robots;
+	}
 }
