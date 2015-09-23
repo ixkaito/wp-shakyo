@@ -3549,4 +3549,15 @@ class WP_Query {
 	public function is_robots() {
 		return (bool) $this->is_robots;
 	}
+
+	/**
+	 * Is the query for a search?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_search() {
+		return (bool) $this->is_search;
+	}
 }
