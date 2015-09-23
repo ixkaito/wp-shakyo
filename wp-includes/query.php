@@ -3516,4 +3516,15 @@ class WP_Query {
 
 		return false;
 	}
+
+	/**
+	 * Is the query for paged result and not for the first page?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_paged() {
+		return (bool) $this->is_paged;
+	}
 }
