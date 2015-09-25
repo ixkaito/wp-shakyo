@@ -3560,4 +3560,52 @@ class WP_Query {
 	public function is_search() {
 		return (bool) $this->is_search;
 	}
+
+	/**
+	 * Is the query for an existing single post?
+	 *
+	 * Works for any post type, except attachments and pages
+	 *
+	 * If the $post parameter is specified, this function will additionally
+	 * check if the query is for one of the Posts specified.
+	 *
+	 * @see WP_Query::is_page()
+	 * @see WP_Query::is_singular()
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $post Post ID, title, slug, path, or array of such.
+	 * @return bool
+	 */
+	public function is_single( $post = '' ) {
+		if ( !$this->is_single )
+			return false;
+
+		if ( empty($post) )
+			return true;
+
+		$post_obj = $this->get_queried_object();
+
+		$post = (array) $post;
+
+		if ( in_array( $post_obj->ID, $post ) ) {
+			return true;
+		} elseif ( in_array( $post_obj->post_title, $post ) ) {
+			return true;
+		} elseif ( in_array( $post_obj->post_name, $post ) ) {
+			return true;
+		} else {
+			foreach ( $post as $postpath ) {
+				if ( ! strpos( $postpath, '/' ) ) {
+					continue;
+				}
+				$postpath_obj = get_page_by_path( $postpath, OBJECT, $post_obj->post_type );
+
+				if ( $postpath_obj && ( $postpath_obj->ID == $post_obj->ID ) ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
