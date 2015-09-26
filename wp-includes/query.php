@@ -3608,4 +3608,27 @@ class WP_Query {
 		}
 		return false;
 	}
+
+	/**
+	 * Is the query for an existing single post of any post type (post, attachment, page, ... )?
+	 *
+	 * If the $post_types parameter is specified, this function will additionally
+	 * check if the query is for one of the Posts Types specified.
+	 *
+	 * @see WP_Query::is_page()
+	 * @see WP_Query::is_single()
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $post_types Optional. Post Type or array of Post Types
+	 * @return bool
+	 */
+	public function is_singular( $post_types = '' ) {
+		if ( empty( $post_types ) || !$this->is_singular )
+			return (bool) $this->is_singular;
+
+		$post_obj = $this->get_queried_object();
+
+		return in_array( $post_obj->post_type, (array) $post_types );
+	}
 }
