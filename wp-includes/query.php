@@ -3631,4 +3631,15 @@ class WP_Query {
 
 		return in_array( $post_obj->post_type, (array) $post_types );
 	}
+
+	/**
+	 * Is the query for a specific time?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_time() {
+		return (bool) $this->is_time;
+	}
 }
