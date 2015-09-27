@@ -3653,4 +3653,15 @@ class WP_Query {
 	public function is_trackback() {
 		return (bool) $this->is_trackback;
 	}
+
+	/**
+	 * Is the query for an existing year archive?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_year() {
+		return (bool) $this->is_year;
+	}
 }
