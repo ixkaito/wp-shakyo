@@ -3687,4 +3687,19 @@ class WP_Query {
 		global $wp_the_query;
 		return $wp_the_query === $this;
 	}
+
+	/**
+	 * After looping through a nested query, this function
+	 * restores the $post global to the current post in this query.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @return bool
+	 */
+	public function reset_postdata() {
+		if ( ! empty( $this->post ) ) {
+			$GLOBALS['post'] = $this->post;
+			setup_postdata( $this->post );
+		}
+	}
 }
