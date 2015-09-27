@@ -3642,4 +3642,15 @@ class WP_Query {
 	public function is_time() {
 		return (bool) $this->is_time;
 	}
+
+	/**
+	 *  Is the query for a trackback endpoint call?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_trackback() {
+		return (bool) $this->is_trackback;
+	}
 }
