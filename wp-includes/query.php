@@ -3728,3 +3728,63 @@ class WP_Query {
 		}
 	}
 }
+
+/**
+ * Redirect old slugs to the correct permalink.
+ *
+ * Attempts to find the current slug from the post slugs.
+ *
+ * @since 2.1.0
+ * @uses $wp_query
+ * @uses $wpdb
+ *
+ * @return null If no link is found, null is returned.
+ */
+function wp_old_slug_redirect() {
+	global $wp_query;
+	if ( is_404() && '' != $wp_query->query_vars['name'] ) :
+		global $wpdb;
+
+		// Guess the current post_type based on the query vars.
+		if ( get_query_var('post_type') )
+			$post_type = get_query_var('post_type');
+		elseif ( !empty($wp_query->query_vars['pagename']) )
+			$post_type = 'page';
+		else
+			$post_type = 'post';
+
+		if ( is_array( $post_type ) ) {
+			if ( count( $post_type ) > 1 )
+				return;
+			$post_type = array_shift( $post_type );
+		}
+
+		// Do not attempt redirect for hierarchical post types
+		if ( is_post_type_hierarchical( $post_type ) )
+			return;
+
+		$query = $wpdb->prepare("SELECT post_id FROM $wpdb->postmeta, $wpdb->posts WHERE ID = post_id AND post_type = %s AND meta_key = '_wp_old_slug' AND meta_value = %s", $post_type, $wp_query->query_vars['name']);
+
+		// if year, monthnum, or day have been specified, make our query more precise
+		// just in case there are multiple identical _wp_old_slug values
+		if ( '' != $wp_query->query_vars['year'] )
+			$query .= $wpdb->prepare(" AND YEAR(post_date) = %d", $wp_query->query_vars['year']);
+		if ( '' != $wp_query->query_vars['monthnum'] )
+			$query .= $wpdb->prepare(" AND MONTH(post_date) = %d", $wp_query->query_vars['monthnum']);
+		if ( '' != $wp_query->query_vars['day'] )
+			$query .= $wpdb->prepare(" AND DAYOFMONTH(post_date) = %d", $wp_query->query_vars['day']);
+
+		$id = (int) $wpdb->get_var($query);
+
+		if ( ! $id )
+			return;
+
+		$link = get_permalink($id);
+
+		if ( !$link )
+			return;
+
+		wp_redirect( $link, 301 ); // Permanent redirect
+		exit;
+	endif;
+}
