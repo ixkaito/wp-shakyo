@@ -3675,4 +3675,16 @@ class WP_Query {
 	public function is_404() {
 		return (bool) $this->is_404;
 	}
+
+	/**
+	 * Is the query the main query?
+	 *
+	 * @since 3.3.0
+	 *
+	 * @return bool
+	 */
+	public function is_main_query() {
+		global $wp_the_query;
+		return $wp_the_query === $this;
+	}
 }
