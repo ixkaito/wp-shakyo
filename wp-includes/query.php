@@ -700,6 +700,31 @@ class WP_Query {
 	 *                                                 top-level pages.
 	 *     @type array        $post_parent__in         An array containing parent page IDs to query child pages from.
 	 *     @type array        $post_parent__not_in     An array containing parent page IDs not to query child pages from.
+	 *     @type string|array $post_type               A post type slug (string) or array of post type slugs.
+	 *                                                 Default 'any' if using 'tax_query'.
+	 *     @type string|array $post_status             A post status (string) or array of post statuses.
+	 *     @type int          $posts_per_page          The number of posts to query for. Use -1 to request all posts.
+	 *     @type int          $posts_per_archive_page  The number of posts to query for by archive page. Overrides
+	 *                                                 'posts_per_page' when is_archive(), or is_search() are true.
+	 *     @type string       $s                       Search keyword.
+	 *     @type int          $second                  Second of the minute. Default empty. Accepts numbers 0-60.
+	 *     @type array        $search_terms            Array of search terms.
+	 *     @type bool         $sentence                Whether to search by phrase. Default false.
+	 *     @type bool         $suppress_filters        Whether to suppress filters. Default false.
+	 *     @type string       $tag                     Tag slug. Comma-separated (either), Plus-separated (all).
+	 *     @type array        $tag__and                An array of tag ids (AND in).
+	 *     @type array        $tag__in                 An array of tag ids (OR in).
+	 *     @type array        $tag__not_in             An array of tag ids (NOT in).
+	 *     @type int          $tag_id                  Tag id or comma-separated list of IDs.
+	 *     @type array        $tag_slug__and           An array of tag slugs (AND in).
+	 *     @type array        $tag_slug__in            An array of tag slugs (OR in). unless 'ignore_sticky_posts' is
+	 *                                                 true. Note: a string of comma-separated IDs will NOT work.
+	 *     @type array        $tax_query               An associative array of WP_Tax_Query arguments.
+	 *                                                 {@see WP_Tax_Query->queries}
+	 *     @type bool         $update_post_meta_cache  Whether to update the post meta cache. Default true.
+	 *     @type bool         $update_post_term_cache  Whether to update the post term cache. Default true.
+	 *     @type int          $w                       The week number of the year. Default empty. Accepts numbers 0-53.
+	 *     @type int          $year                    The four-digit year. Default empty. Accepts any four-digit year.
 	 * }
 	 */
 	public function parse_query( $query =  '' ) {
@@ -2829,7 +2854,7 @@ class WP_Query {
 	}
 
 	/**
-	 * Sets Up the current post.
+	 * Sets up the current post.
 	 *
 	 * Retrieves the next post, sets up the post, sets the 'in the loop'
 	 * property to true.
@@ -2917,7 +2942,7 @@ class WP_Query {
 	}
 
 	/**
-	 * Set up the current comment.
+	 * Sets up the current comment.
 	 *
 	 * @since 2.2.0
 	 * @access public
@@ -3095,7 +3120,7 @@ class WP_Query {
 	}
 
 	/**
-	 * Make private properties readable ofr backwards compatibility.
+	 * Make private properties readable for backwards compatibility.
 	 *
 	 * @since 4.0.0
 	 * @access public
@@ -3147,14 +3172,14 @@ class WP_Query {
 	}
 
 	/**
-	 * Is the query for an existing archive page?
+ 	 * Is the query for an existing archive page?
+ 	 *
+ 	 * Month, Year, Category, Author, Post Type archive...
 	 *
-	 * Month, Year, Category, Author, Post Type archive...
-	 *
-	 * @since 3.1.0
-	 *
-	 * @return bool
-	 */
+ 	 * @since 3.1.0
+ 	 *
+ 	 * @return bool
+ 	 */
 	public function is_archive() {
 		return (bool) $this->is_archive;
 	}
@@ -3246,11 +3271,11 @@ class WP_Query {
 	 * Is the query for an existing category archive page?
 	 *
 	 * If the $category parameter is specified, this function will additionally
-	 * check if the query is for one of the cateogories specified.
+	 * check if the query is for one of the categories specified.
 	 *
 	 * @since 3.1.0
 	 *
-	 * @param mixed $category Optional. Category ID, name, slug, or array of Category IDs, name, and slugs.
+	 * @param mixed $category Optional. Category ID, name, slug, or array of Category IDs, names, and slugs.
 	 * @return bool
 	 */
 	public function is_category( $category = '' ) {
@@ -3282,7 +3307,7 @@ class WP_Query {
 	 *
 	 * @since 3.1.0
 	 *
-	 * @param mixed $tage Optional. Tag ID, name, slug, or array of Tag IDs, names, and slugs.
+	 * @param mixed $tag Optional. Tag ID, name, slug, or array of Tag IDs, names, and slugs.
 	 * @return bool
 	 */
 	public function is_tag( $tag = '' ) {
@@ -3351,7 +3376,7 @@ class WP_Query {
 	}
 
 	/**
-	 * Wether the current URL is within the comments popup window.
+	 * Whether the current URL is within the comments popup window.
 	 *
 	 * @since 3.1.0
 	 *
@@ -3460,7 +3485,7 @@ class WP_Query {
 	}
 
 	/**
-	 * Is the query for an existing month archives?
+	 * Is the query for an existing month archive?
 	 *
 	 * @since 3.1.0
 	 *
@@ -3644,7 +3669,7 @@ class WP_Query {
 	}
 
 	/**
-	 *  Is the query for a trackback endpoint call?
+	 * Is the query for a trackback endpoint call?
 	 *
 	 * @since 3.1.0
 	 *
