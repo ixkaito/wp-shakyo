@@ -3664,4 +3664,15 @@ class WP_Query {
 	public function is_year() {
 		return (bool) $this->is_year;
 	}
+
+	/**
+	 * Is the query a 404 (returns no results)?
+	 *
+	 * @since 3.1.0
+	 *
+	 * @return bool
+	 */
+	public function is_404() {
+		return (bool) $this->is_404;
+	}
 }
