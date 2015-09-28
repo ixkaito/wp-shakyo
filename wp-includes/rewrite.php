@@ -135,6 +135,38 @@ define( 'EP_ALL', EP_PERMALINK | EP_ATTACHMENT | EP_ROOT | EP_COMMENTS | EP_SEAR
  */
 class WP_Rewrite {
 	/**
+	 * Sets up the object's properties.
+	 *
+	 * The 'use_verbose_page_rules' object property will be set to true if the
+	 * permalink structure begins with one of the following: '%postname%', '%category%',
+	 * '%tag%', or '%author%'.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 */
+	public function init() {
+		$this->extra_rules = $this->non_wp_rules = $this->endpoints = array();
+		$this->permalink_structure = get_option('permalink_structure');
+		$this->front = substr($this->permalink_structure, 0, strpos($this->permalink_structure, '%'));
+		$this->root = '';
+		if ( $this->using_index_permalinks() )
+			$this->root = $this->index . '/';
+		unset($this->author_structure);
+		unset($this->date_structure);
+		unset($this->page_structure);
+		unset($this->search_structure);
+		unset($this->feed_structure);
+		unset($this->comment_feed_structure);
+		$this->use_trailing_slashes = ( '/' == substr($this->permalink_structure, -1, 1) );
+
+		// Enable generic rules for pages if permalink structure doesn't begin with a wildcard.
+		if ( preg_match("/^[^%]*%(?:postname|category|tag|author)%/", $this->permalink_structure) )
+			 $this->use_verbose_page_rules = true;
+		else
+			$this->use_verbose_page_rules = false;
+	}
+
+	/**
 	 * Constructor - Calls init(), which runs setup.
 	 *
 	 * @since 1.5.0
