@@ -133,4 +133,16 @@ define( 'EP_ALL', EP_PERMALINK | EP_ATTACHMENT | EP_ROOT | EP_COMMENTS | EP_SEAR
  *
  * @since 1.5.0
  */
-class WP_Rewrite {}
+class WP_Rewrite {
+	/**
+	 * Constructor - Calls init(), which runs setup.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return WP_Rewrite
+	 */
+	public function __construct() {
+		$this->init();
+	}
+}
