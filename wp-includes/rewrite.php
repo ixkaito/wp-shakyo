@@ -135,6 +135,42 @@ define( 'EP_ALL', EP_PERMALINK | EP_ATTACHMENT | EP_ROOT | EP_COMMENTS | EP_SEAR
  */
 class WP_Rewrite {
 	/**
+	 * Permalink structure for posts.
+	 *
+	 * @since 1.5.0
+	 * @access private
+	 * @var string
+	 */
+	var $permalink_structure;
+
+	/**
+	 * Whether to add trailing slashes.
+	 *
+	 * @since 2.2.0
+	 * @access private
+	 * @var bool
+	 */
+	var $use_trailing_slashes;
+
+	/**
+	 * Base for the author permalink structure (example.com/$author_base/authorname).
+	 *
+	 * @since 1.5.0
+	 * @access private
+	 * @var string
+	 */
+	var $author_base = 'author';
+
+	/**
+	 * Permalink struture for author archives.
+	 *
+	 * @since 1.5.0
+	 * @access private
+	 * @var string
+	 */
+	var $author_structure;
+
+	/**
 	 * Whether permalinks are being used and rewrite module is not enabled.
 	 *
 	 * Means that permalink links are enabled and index.php is in the URL.
