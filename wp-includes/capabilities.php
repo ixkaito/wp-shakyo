@@ -71,4 +71,37 @@ class WP_Roles {
 	public function __construct() {
 		$this->_init();
 	}
+
+	/**
+	 * Set up the object properties.
+	 *
+	 * The role key is set to the current prefix for the $wpdb object with
+	 * 'user_roles' appended. If the $wp_user_roles global is set, then it will
+	 * be used and the role option will not be updated or used.
+	 *
+	 * @since 2.1.0
+	 * @access protected
+	 * @uses $wpdb Used to get the database prefix.
+	 * @global array $wp_user_roles Used to set the 'roles' property value.
+	 */
+	protected function _init() {
+		global $wpdb, $wp_user_roles;
+		$this->role_key = $wpdb->get_blog_prefix() . 'user_roles';
+		if ( ! empty( $wp_user_roles ) ) {
+			$this->roles = $wp_user_roles;
+			$this->use_db = false;
+		} else {
+			$this->roles = get_option( $this->role_key );
+		}
+
+		if ( empty( $this->roles ) )
+			return;
+
+		$this->role_objects = array();
+		$this->role_names =  array();
+		foreach ( array_keys( $this->roles ) as $role ) {
+			$this->role_objects[$role] = new WP_Role( $role, $this->roles[$role]['capabilities'] );
+			$this->role_names[$role] = $this->roles[$role]['name'];
+		}
+	}
 }
