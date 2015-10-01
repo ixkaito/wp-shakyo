@@ -299,4 +299,7 @@ $GLOBALS['wp_roles'] = new WP_Roles();
  */
 do_action( 'setup_theme' );
 
+// Define the template related constants.
+wp_templating_constants(  );
+
 var_dump( __FILE__ );
