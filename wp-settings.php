@@ -278,4 +278,11 @@ $GLOBALS['wp_rewrite'] = new WP_Rewrite();
  */
 $GLOBALS['wp'] = new WP();
 
+/**
+ * WordPress Widget Factory Object
+ * @global object $wp_widget_factory
+ * @since 2.8.0
+ */
+$GLOBALS['wp_widget_factory'] = new WP_Widget_Factory();
+
 var_dump( __FILE__ );
