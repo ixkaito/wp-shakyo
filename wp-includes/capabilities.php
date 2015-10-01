@@ -62,4 +62,13 @@ class WP_Roles {
 	 * @var bool
 	 */
 	public $use_db = true;
+
+	/**
+	 * Constructor
+	 *
+	 * @since 2.0.0
+	 */
+	public function __construct() {
+		$this->_init();
+	}
 }
