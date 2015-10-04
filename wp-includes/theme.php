@@ -7,6 +7,30 @@
  */
 
 /**
+ * Retrieve current theme directory.
+ *
+ * @since 1.5.0
+ *
+ * @return string Template directory path.
+ */
+function get_template_directory() {
+	$template = get_template();
+	$theme_root = get_theme_root( $template );
+	$template_dir = "$theme_root/$template";
+
+	/**
+	 * Filter the current theme directory path.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $template_dir The URI of the current theme directory.
+	 * @param string $template     Directory name of the current theme.
+	 * @param string $theme_root   Absolute path to the theme directory.
+	 */
+	return apply_filters( 'template_directory', $template_dir, $template, $theme_root );
+}
+
+/**
  * Register a directory that contains themes.
  *
  * @since 2.9.0
