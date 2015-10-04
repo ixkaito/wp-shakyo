@@ -7,6 +7,25 @@
  */
 
 /**
+ * Retrieve name of the current theme.
+ *
+ * @since 1.5.0
+ * @uses apply_filters() Calls 'template' filter on template option.
+ *
+ * @return string Template name.
+ */
+function get_template() {
+	/**
+	 * Filter the name of the current theme.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $template Current theme's directory name.
+	 */
+	return apply_filters( 'template', get_option( 'template' ) );
+}
+
+/**
  * Retrieve current theme directory.
  *
  * @since 1.5.0
