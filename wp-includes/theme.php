@@ -7,6 +7,30 @@
  */
 
 /**
+ * Retrieve stylesheet directory path for current theme.
+ *
+ * @since 1.5.0
+ *
+ * @return string Path to current theme directory.
+ */
+function get_stylesheet_directory() {
+	$stylesheet = get_stylesheet();
+	$theme_root = get_theme_root( $stylesheet );
+	$stylesheet_dir = "$theme_root/$stylesheet";
+
+	/**
+	 * Filter the stylesheet directory path for current theme.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $stylesheet_dir Absolute path to the current them.
+	 * @param string $stylesheet     Directory name of the current theme.
+	 * @param string $theme_root     Absolute path to themes directory.
+	 */
+	return apply_filters( 'stylesheet_directory', $stylesheet_dir, $stylesheet, $theme_root );
+}
+
+/**
  * Retrieve name of the current theme.
  *
  * @since 1.5.0
