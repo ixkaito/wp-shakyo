@@ -192,6 +192,43 @@ function load_textdomain( $domain, $mofile ) {
 }
 
 /**
+ * Load default translated strings based on locale.
+ *
+ * Loads the .mo file in WP_LANG_DIR constant path from WordPress root.
+ * The translated (.mo) file is named based on the locale.
+ *
+ * @see load_textdomain()
+ *
+ * @since 1.5.0
+ *
+ * @param string $locale Optional. Locale to load. Defaults to get_locale().
+ */
+function load_default_textdomain( $locale = null ) {
+	if ( null === $locale ) {
+		$locale = get_locale();
+	}
+
+	// Unload previously loaded strings so we can switch translations.
+	unload_textdomain( 'default' );
+
+	$return = load_textdomain( 'default', WP_LANG_DIR . "/$locale.mo" );
+
+	if ( ( is_multisite() || ( defined( 'WP_INSTALLING_NETWORK' ) && WP_INSTALLING_NETWORK ) ) && ! file_exists(  WP_LANG_DIR . "/admin-$locale.mo" ) ) {
+		load_textdomain( 'default', WP_LANG_DIR . "/ms-$locale.mo" );
+		return $return;
+	}
+
+	if ( is_admin() || defined( 'WP_INSTALLING' ) || ( defined( 'WP_REPAIRING' ) && WP_REPAIRING ) ) {
+		load_textdomain( 'default', WP_LANG_DIR . "/admin-$locale.mo" );
+	}
+
+	if ( is_network_admin() || ( defined( 'WP_INSTALLING_NETWORK' ) && WP_INSTALLING_NETWORK ) )
+		load_textdomain( 'default', WP_LANG_DIR . "/admin-network-$locale.mo" );
+
+	return $return;
+}
+
+/**
  * Return the Translations instance for a text domain.
  *
  * If there isn't one, return empty Translations instance.
