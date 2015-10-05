@@ -7,6 +7,71 @@
  */
 
 /**
+ * Get the current locale.
+ *
+ * If the locale is set, then it will filter the locale in the 'locale' filter
+ * hook and return the value.
+ *
+ * If the locale is not set already, then the WPLANG constant is used if it is
+ * defined. Then it is filtered through the 'locale' filter hook and the value
+ * for the locale global set and the locale is returned.
+ *
+ * The process to get the locale should only be done once, but the locale will
+ * always be filtered using the 'locale' hook.
+ *
+ * @since 1.5.0
+ *
+ * @return string The locale of the blog or from the 'locale' hook.
+ */
+function get_locale() {
+	global $locale, $wp_local_package;
+
+	if ( isset( $locale ) ) {
+		/**
+		 * Filter WordPress install's locale ID.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param string $locale The locale ID.
+		 */
+		return apply_filters( 'locale', $locale );
+	}
+
+	if ( isset( $wp_local_package ) ) {
+		$locale = $wp_local_package;
+	}
+
+	// WPLANG was defined in wp-config.
+	if ( defined( 'WPLANG' ) ) {
+		$locale = WPLANG;
+	}
+
+	// If multisite, check options.
+	if ( is_multisite() ) {
+		// Don't check blog option when installing.
+		if ( defined( 'WP_INSTALLING' ) || ( false === $ms_locale = get_option( 'WPLANG' ) ) ) {
+			$ms_locale = get_site_option( 'WPLANG' );
+		}
+
+		if ( $ms_locale !== false ) {
+			$locale = $ms_locale;
+		}
+	} else {
+		$db_locale = get_option( 'WPLANG' );
+		if ( $db_locale !== false ) {
+			$locale = $db_locale;
+		}
+	}
+
+	if ( empty( $locale ) ) {
+		$locale = 'en_US';
+	}
+
+	/** This filter is documented in wp-includes/l10n.php */
+	return apply_filters( 'locale', $locale );
+}
+
+/**
  * Retrieve the translation of $text.
  *
  * If there is no translation, or the text domain isn't loaded, the original text is returned.
