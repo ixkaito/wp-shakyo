@@ -302,4 +302,7 @@ do_action( 'setup_theme' );
 // Define the template related constants.
 wp_templating_constants(  );
 
+// Load the default text localization domain.
+load_default_textdomain();
+
 var_dump( __FILE__ );
