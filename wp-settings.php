@@ -336,4 +336,7 @@ if ( ! defined( 'WP_INSTALLING' ) || 'wp-activate.php' === $pagenow ) {
  */
 do_action( 'after_setup_theme' );
 
+// Set up current user.
+$GLOBALS['wp']->init();
+
 var_dump( __FILE__ );
