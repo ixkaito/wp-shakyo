@@ -314,4 +314,11 @@ unset( $locale_file );
 // Pull in locale data after loading text domain.
 require_once( ABSPATH . WPINC . '/locale.php' );
 
+/**
+ * WordPress Locale object for loading locale domain date and various strings.
+ * @global object $wp_locale
+ * @since 2.1.0
+ */
+$GLOBALS['wp_locale'] = new WP_Locale();
+
 var_dump( __FILE__ );
