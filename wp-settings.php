@@ -329,4 +329,11 @@ if ( ! defined( 'WP_INSTALLING' ) || 'wp-activate.php' === $pagenow ) {
 		include( TEMPLATEPATH . '/functions.php' );
 }
 
+/**
+ * Fires after the theme is loaded.
+ *
+ * @since 3.0.0
+ */
+do_action( 'after_setup_theme' );
+
 var_dump( __FILE__ );
