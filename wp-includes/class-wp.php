@@ -82,4 +82,13 @@ class WP {
 	 * @var bool
 	 */
 	public $did_permalink = false;
+
+	/**
+	 * Set up the current user.
+	 *
+	 * @since 2.0.0
+	 */
+	public function init() {
+		wp_get_current_user();
+	}
 }
