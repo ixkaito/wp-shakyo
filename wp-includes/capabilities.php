@@ -105,3 +105,12 @@ class WP_Roles {
 		}
 	}
 }
+
+/**
+ * WordPress User class.
+ *
+ * @since 2.0.0
+ * @package WordPress
+ * @subpackage User
+ */
+class WP_User {}
