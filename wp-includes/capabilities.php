@@ -113,4 +113,69 @@ class WP_Roles {
  * @package WordPress
  * @subpackage User
  */
-class WP_User {}
+class WP_User {
+	/**
+	 * User data container.
+	 *
+	 * @since 2.0.0
+	 * @access private
+	 * @var array
+	 */
+	var $data;
+
+	/**
+	 * The user's ID.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 * @var int
+	 */
+	public $ID = 0;
+
+	/**
+	 * The individual capabilities the user has been given.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var array
+	 */
+	public $caps = array();
+
+	/**
+	 * User metadata option name.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var string
+	 */
+	public $cap_key;
+
+	/**
+	 * The roles the user is part of.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var array
+	 */
+	public $roles = array();
+
+	/**
+	 * All capabilities the user has, including individual and role based.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var array
+	 */
+	public $allcaps = array();
+
+	/**
+	 * The filter context applied to user data fields.
+	 *
+	 * @since 2.9.0
+	 * @access private
+	 * @var string
+	 */
+	var $filter = null;
+
+	private static $back_compat_keys;
+}
