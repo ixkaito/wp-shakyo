@@ -237,3 +237,51 @@ function wp_validate_auth_cookie($cookie = '', $scheme = '') {
 	return $user->ID;
 }
 endif;
+
+if ( !function_exists('wp_parse_auth_cookie') ) :
+/**
+ * Parse a cookie into its components
+ *
+ * @since 2.7.0
+ *
+ * @param string $cookie
+ * @param string $scheme Optional. The cookie scheme to use: auth, secure_auth, or logged_in
+ * @return array Authentication cookie components
+ */
+function wp_parse_auth_cookie($cookie = '', $scheme = '') {
+	if ( empty($cookie) ) {
+		switch ($scheme){
+			case 'auth':
+				$cookie_name = AUTH_COOKIE;
+				break;
+			case 'secure_auth':
+				$cookie_name = SECURE_AUTH_COOKIE;
+				break;
+			case "logged_in":
+				$cookie_name = LOGGED_IN_COOKIE;
+				break;
+			default:
+				if ( is_ssl() ) {
+					$cookie_name = SECURE_AUTH_COOKIE;
+					$scheme = 'secure_auth';
+				} else {
+					$cookie_name = AUTH_COOKIE;
+					$scheme = 'auth';
+				}
+	    }
+
+		if ( empty($_COOKIE[$cookie_name]) )
+			return false;
+		$cookie = $_COOKIE[$cookie_name];
+	}
+
+	$cookie_elements = explode('|', $cookie);
+	if ( count( $cookie_elements ) !== 4 ) {
+		return false;
+	}
+
+	list( $username, $expiration, $token, $hmac ) = $cookie_elements;
+
+	return compact( 'username', 'expiration', 'token', 'hmac', 'scheme' );
+}
+endif;
