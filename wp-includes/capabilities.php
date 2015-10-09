@@ -290,6 +290,58 @@ class WP_User {
 
 		return $user;
 	}
+
+	/**
+	 * Whether user has capability or role name.
+	 *
+	 * This is useful for looking up whether the user has a specific role
+	 * assigned to the user. The second optional parameter can also be used to
+	 * check for capabilities against a specific object, such as a post or user.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string|int $cap Capability or role name to search.
+	 * @return bool True, if user has capability; false, if user does not have capability.
+	 */
+	public function has_cap( $cap ) {
+		if ( is_numeric( $cap ) ) {
+			_deprecated_argument( __FUNCTION__, '2.0', __('Usage of user levels by plugins and themes is deprecated. Use roles and capabilities instead.') );
+			$cap = $this->translate_level_to_cap( $cap );
+		}
+
+		$args = array_slice( func_get_args(), 1 );
+		$args = array_merge( array( $cap, $this->ID ), $args );
+		$caps = call_user_func_array( 'map_meta_cap', $args );
+
+		// Multisite super admin has all caps by definition, Unless specifically denied.
+		if ( is_multisite() && is_super_admin( $this->ID ) ) {
+			if ( in_array('do_not_allow', $caps) )
+				return false;
+			return true;
+		}
+
+		/**
+		 * Dynamically filter a user's capabilities.
+		 *
+		 * @since 2.0.0
+		 * @since 3.7.0 Added the user object.
+		 *
+		 * @param array   $allcaps An array of all the role's capabilities.
+		 * @param array   $caps    Actual capabilities for meta capability.
+		 * @param array   $args    Optional parameters passed to has_cap(), typically object ID.
+		 * @param WP_User $user    The user object.
+		 */
+		// Must have ALL requested caps
+		$capabilities = apply_filters( 'user_has_cap', $this->allcaps, $caps, $args, $this );
+		$capabilities['exist'] = true;// Everyone is allowed to exist
+		foreach ( (array) $caps as $cap ) {
+			if ( empty( $capabilities[ $cap ] ) )
+				return false;
+		}
+
+		return true;
+	}
 }
 
 /**
