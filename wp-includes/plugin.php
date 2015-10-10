@@ -173,7 +173,7 @@ function apply_filters( $tag, $value ) {
 /**
  * Removes a function from a specified filter hook.
  *
- * This function removes a function attached to specified filter hook. This
+ * This function removes a function attached to a specified filter hook. This
  * method can be used to remove default functions attached to a specific filter
  * hook and possibly replace them with a substitute.
  *
