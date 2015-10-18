@@ -352,4 +352,13 @@ $GLOBALS['wp']->init();
  */
 do_action( 'init' );
 
+// Check site status
+if ( is_multisite() ) {
+	if ( true !== ( $file = ms_site_check() ) ) {
+		require( $file );
+		die();
+	}
+	unset($file);
+}
+
 var_dump( __FILE__ );
