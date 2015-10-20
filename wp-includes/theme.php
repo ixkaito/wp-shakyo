@@ -201,6 +201,42 @@ function preview_theme() {
 }
 add_action('setup_theme', 'preview_theme');
 
+/**
+ * Registers the internal custom header and background routines.
+ *
+ * @since 3.4.0
+ * @access private
+ */
+function _custom_header_background_just_in_time() {
+	global $custom_image_header, $custom_background;
+
+	if ( current_theme_supports( 'custom-header' ) ) {
+		// In case any constants were defined after an add_custom_image_header() call, re-run.
+		add_theme_support( 'custom-header', array( '__jit' => true ) );
+
+		$args = get_theme_support( 'custom-header' );
+		if ( $args[0]['wp-head-callback'] )
+			add_action( 'wp_head', $args[0]['wp-head-callback'] );
+
+		if ( is_admin() ) {
+			require_once( ABSPATH . 'wp-admin/custom-header.php' );
+			$custom_image_header = new Custom_Image_Header( $args[0]['admin-head-callback'], $args[0]['admin-preview-callback'] );
+		}
+	}
+
+	if ( current_theme_supports( 'custom-background' ) ) {
+		// In case any constants were defined after an add_custom_background() call, re-run.
+		add_theme_support( 'custom-background', array( '__jit' => true ) );
+
+		$args = get_theme_support( 'custom-background' );
+		add_action( 'wp_head', $args[0]['wp-head-callback'] );
+
+		if ( is_admin() ) {
+			require_once( ABSPATH . 'wp-admin/custom-background.php' );
+			$custom_background = new Custom_Background( $args[0]['admin-head-callback'], $args[0]['admin-preview-callback'] );
+		}
+	}
+}
 add_action( 'wp_loaded', '_custom_header_background_just_in_time' );
 
 /**
