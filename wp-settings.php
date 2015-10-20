@@ -265,7 +265,7 @@ $GLOBALS['wp_the_query'] = new WP_Query();
 $GLOBALS['wp_query'] = $GLOBALS['wp_the_query'];
 
 /**
- * Holds the WOrdPress Rewrite object for creating pretty URLs
+ * Holds the WordPress Rewrite object for creating pretty URLs
  * @global object $wp_rewrite
  * @since 1.5.0
  */
@@ -362,7 +362,7 @@ if ( is_multisite() ) {
 }
 
 /**
- * This hook is fired once WP, all plugins, and the theme are fully loaded and instantianted.
+ * This hook is fired once WP, all plugins, and the theme are fully loaded and instantiated.
  *
  * AJAX requests should use wp-admin/admin-ajax.php. admin-ajax.php can handle requests for
  * users not logged in.
@@ -372,6 +372,3 @@ if ( is_multisite() ) {
  * @since 3.0.0
  */
 do_action( 'wp_loaded' );
-
-
-var_dump( __FILE__ );
