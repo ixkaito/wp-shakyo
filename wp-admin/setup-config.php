@@ -31,3 +31,8 @@ error_reporting(0);
 define( 'ABSPATH', dirname( dirname( __FILE__ ) ) . '/' );
 
 require( ABSPATH . 'wp-settings.php' );
+
+/** Load WordPress Administration Upgrade API */
+require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
+var_dump( __FILE__ );
