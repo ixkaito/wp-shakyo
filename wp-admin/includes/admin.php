@@ -14,3 +14,6 @@ if ( ! defined('WP_ADMIN') ) {
 	 */
 	load_textdomain( 'default', WP_LANG_DIR . '/admin-' . get_locale() . '.mo' );
 }
+
+/** WordPress Bookmark Administration API */
+require_once(ABSPATH . 'wp-admin/includes/bookmark.php');
