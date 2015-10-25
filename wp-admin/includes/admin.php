@@ -17,3 +17,5 @@ if ( ! defined('WP_ADMIN') ) {
 
 /** WordPress Bookmark Administration API */
 require_once(ABSPATH . 'wp-admin/includes/bookmark.php');
+
+var_dump( __FILE__ );
