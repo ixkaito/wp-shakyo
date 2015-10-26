@@ -18,4 +18,7 @@ if ( ! defined('WP_ADMIN') ) {
 /** WordPress Bookmark Administration API */
 require_once(ABSPATH . 'wp-admin/includes/bookmark.php');
 
+/** WordPress Comment Administration API */
+require_once(ABSPATH . 'wp-admin/includes/comment.php');
+
 var_dump( __FILE__ );
