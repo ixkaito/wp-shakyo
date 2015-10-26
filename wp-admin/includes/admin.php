@@ -21,4 +21,7 @@ require_once(ABSPATH . 'wp-admin/includes/bookmark.php');
 /** WordPress Comment Administration API */
 require_once(ABSPATH . 'wp-admin/includes/comment.php');
 
+/** WordPress Administration File API */
+require_once(ABSPATH . 'wp-admin/includes/file.php');
+
 var_dump( __FILE__ );
