@@ -30,4 +30,7 @@ require_once(ABSPATH . 'wp-admin/includes/image.php');
 /** WordPress Media Administrtion API */
 require_once(ABSPATH . 'wp-admin/includes/media.php');
 
+/** WordPress Import Administration API */
+require_once(ABSPATH . 'wp-admin/includes/import.php');
+
 var_dump( __FILE__ );
