@@ -331,3 +331,125 @@ if ( $action ) {
 			break;
 	}
 }
+
+$wp_list_table->prepare_items();
+
+wp_enqueue_script('plugin-install');
+add_thickbox();
+
+add_screen_option( 'per_page', array('label' => _x( 'Plugins', 'plugins per page (screen options)' ), 'default' => 999 ) );
+
+get_current_screen()->add_help_tab( array(
+'id'		=> 'overview',
+'title'		=> __('Overview'),
+'content'	=>
+	'<p>' . __('Plugins extend and expand the functionality of WordPress. Once a plugin is installed, you may activate it or deactivate it here.') . '</p>' .
+	'<p>' . sprintf(__('You can find additional plugins for your site by using the <a href="%1$s">Plugin Browser/Installer</a> functionality or by browsing the <a href="%2$s" target="_blank">WordPress Plugin Directory</a> directly and installing new plugins manually. To manually install a plugin you generally just need to upload the plugin file into your <code>/wp-content/plugins</code> directory. Once a plugin has been installed, you can activate it here.'), 'plugin-install.php', 'https://wordpress.org/plugins/') . '</p>'
+) );
+get_current_screen()->add_help_tab( array(
+'id'		=> 'compatibility-problems',
+'title'		=> __('Troubleshooting'),
+'content'	=>
+	'<p>' . __('Most of the time, plugins play nicely with the core of WordPress and with other plugins. Sometimes, though, a plugin&#8217;s code will get in the way of another plugin, causing compatibility issues. If your site starts doing strange things, this may be the problem. Try deactivating all your plugins and re-activating them in various combinations until you isolate which one(s) caused the issue.') . '</p>' .
+	'<p>' . sprintf( __('If something goes wrong with a plugin and you can&#8217;t use WordPress, delete or rename that file in the <code>%s</code> directory and it will be automatically deactivated.'), WP_PLUGIN_DIR) . '</p>'
+) );
+
+get_current_screen()->set_help_sidebar(
+	'<p><strong>' . __('For more information:') . '</strong></p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Managing_Plugins#Plugin_Management" target="_blank">Documentation on Managing Plugins</a>') . '</p>' .
+	'<p>' . __('<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
+);
+
+$title = __('Plugins');
+$parent_file = 'plugins.php';
+
+require_once(ABSPATH . 'wp-admin/admin-header.php');
+
+$invalid = validate_active_plugins();
+if ( !empty($invalid) )
+	foreach ( $invalid as $plugin_file => $error )
+		echo '<div id="message" class="error"><p>' . sprintf(__('The plugin <code>%s</code> has been <strong>deactivated</strong> due to an error: %s'), esc_html($plugin_file), $error->get_error_message()) . '</p></div>';
+?>
+
+<?php if ( isset($_GET['error']) ) :
+
+	if ( isset( $_GET['main'] ) )
+		$errmsg = __( 'You cannot delete a plugin while it is active on the main site.' );
+	elseif ( isset($_GET['charsout']) )
+		$errmsg = sprintf(__('The plugin generated %d characters of <strong>unexpected output</strong> during activation. If you notice &#8220;headers already sent&#8221; messages, problems with syndication feeds or other issues, try deactivating or removing this plugin.'), $_GET['charsout']);
+	else
+		$errmsg = __('Plugin could not be activated because it triggered a <strong>fatal error</strong>.');
+	?>
+	<div id="message" class="error"><p><?php echo $errmsg; ?></p>
+	<?php
+		if ( !isset( $_GET['main'] ) && !isset($_GET['charsout']) && wp_verify_nonce($_GET['_error_nonce'], 'plugin-activation-error_' . $plugin) ) { ?>
+	<iframe style="border:0" width="100%" height="70px" src="<?php echo 'plugins.php?action=error_scrape&amp;plugin=' . esc_attr($plugin) . '&amp;_wpnonce=' . esc_attr($_GET['_error_nonce']); ?>"></iframe>
+	<?php
+		}
+	?>
+	</div>
+<?php elseif ( isset($_GET['deleted']) ) :
+		$delete_result = get_transient( 'plugins_delete_result_' . $user_ID );
+		// Delete it once we're done.
+		delete_transient( 'plugins_delete_result_' . $user_ID );
+
+		if ( is_wp_error($delete_result) ) : ?>
+		<div id="message" class="error"><p><?php printf( __('Plugin could not be deleted due to an error: %s'), $delete_result->get_error_message() ); ?></p></div>
+		<?php else : ?>
+		<div id="message" class="updated"><p><?php _e('The selected plugins have been <strong>deleted</strong>.'); ?></p></div>
+		<?php endif; ?>
+<?php elseif ( isset($_GET['activate']) ) : ?>
+	<div id="message" class="updated"><p><?php _e('Plugin <strong>activated</strong>.') ?></p></div>
+<?php elseif (isset($_GET['activate-multi'])) : ?>
+	<div id="message" class="updated"><p><?php _e('Selected plugins <strong>activated</strong>.'); ?></p></div>
+<?php elseif ( isset($_GET['deactivate']) ) : ?>
+	<div id="message" class="updated"><p><?php _e('Plugin <strong>deactivated</strong>.') ?></p></div>
+<?php elseif (isset($_GET['deactivate-multi'])) : ?>
+	<div id="message" class="updated"><p><?php _e('Selected plugins <strong>deactivated</strong>.'); ?></p></div>
+<?php elseif ( 'update-selected' == $action ) : ?>
+	<div id="message" class="updated"><p><?php _e('No out of date plugins were selected.'); ?></p></div>
+<?php endif; ?>
+
+<div class="wrap">
+<h2><?php echo esc_html( $title );
+if ( ( ! is_multisite() || is_network_admin() ) && current_user_can('install_plugins') ) { ?>
+ <a href="<?php echo self_admin_url( 'plugin-install.php' ); ?>" class="add-new-h2"><?php echo esc_html_x('Add New', 'plugin'); ?></a>
+<?php }
+if ( $s )
+	printf( '<span class="subtitle">' . __('Search results for &#8220;%s&#8221;') . '</span>', esc_html( $s ) ); ?>
+</h2>
+
+<?php
+/**
+ * Fires before the plugins list table is rendered.
+ *
+ * This hook also fires before the plugins list table is rendered in the Network Admin.
+ *
+ * Please note: The 'active' portion of the hook name does not refer to whether the current
+ * view is for active plugins, but rather all plugins actively-installed.
+ *
+ * @since 3.0.0
+ *
+ * @param array $plugins_all An array containing all installed plugins.
+ */
+do_action( 'pre_current_active_plugins', $plugins['all'] );
+?>
+
+<?php $wp_list_table->views(); ?>
+
+<form method="get" action="">
+<?php $wp_list_table->search_box( __( 'Search Installed Plugins' ), 'plugin' ); ?>
+</form>
+
+<form method="post" action="">
+
+<input type="hidden" name="plugin_status" value="<?php echo esc_attr($status) ?>" />
+<input type="hidden" name="paged" value="<?php echo esc_attr($page) ?>" />
+
+<?php $wp_list_table->display(); ?>
+</form>
+
+</div>
+
+<?php
+include(ABSPATH . 'wp-admin/admin-footer.php');
