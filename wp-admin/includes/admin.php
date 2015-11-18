@@ -7,7 +7,7 @@
  */
 
 if ( ! defined('WP_ADMIN') ) {
-	/**
+	/*
 	 * This file is being included from a file other than wp-admin/admin.php, so
 	 * some setup was skipped. Make sure the admin message catalog is loaded since
 	 * load_default_textdomain() will not have done so in this context.
@@ -24,10 +24,10 @@ require_once(ABSPATH . 'wp-admin/includes/comment.php');
 /** WordPress Administration File API */
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 
-/** WordPress Image Administrtion API */
+/** WordPress Image Administration API */
 require_once(ABSPATH . 'wp-admin/includes/image.php');
 
-/** WordPress Media Administrtion API */
+/** WordPress Media Administration API */
 require_once(ABSPATH . 'wp-admin/includes/media.php');
 
 /** WordPress Import Administration API */
