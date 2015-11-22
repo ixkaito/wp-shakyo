@@ -18,3 +18,6 @@ global $wpdb, $wp_queries, $charset_collate;
  * @name $charset_collate
  */
 $charset_collate = $wpdb->get_charset_collate();
+
+// Populate for back compat.
+$wp_queries = wp_get_db_schema( 'all' );
