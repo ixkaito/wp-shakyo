@@ -8,6 +8,6 @@
  * @subpackage Deprecated
  */
 
-/**
+/*
  * Deprecated functions come here to die.
  */
