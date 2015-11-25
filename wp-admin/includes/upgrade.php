@@ -54,5 +54,3 @@ endif;
  */
 if ( !function_exists( 'install_global_terms' ) ) :
 endif;
-
-var_dump( __FILE__ );
