@@ -368,7 +368,7 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 
 	if ( function_exists( 'is_wp_error' ) && is_wp_error( $message ) ) {
 		if ( empty( $title ) ) {
-			$errro_data = $message->get_error_data();
+			$error_data = $message->get_error_data();
 			if ( is_array( $error_data ) && isset( $error_data['title'] ) )
 				$title = $error_data['title'];
 		}
@@ -455,6 +455,10 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 			font-size: 14px ;
 		}
 		a {
+			color: #21759B;
+			text-decoration: none;
+		}
+		a:hover {
 			color: #D54E21;
 		}
 		.button {
@@ -479,7 +483,7 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 
 			-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0,0,0,.08);
 			box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba(0,0,0,.08);
-			vertical-align: top;
+		 	vertical-align: top;
 		}
 
 		.button.button-large {
@@ -495,7 +499,7 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 			color: #222;
 		}
 
-		.button:focus {
+		.button:focus  {
 			-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,.2);
 			box-shadow: 1px 1px 1px rgba(0,0,0,.2);
 		}
@@ -504,8 +508,8 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 			background: #eee;
 			border-color: #999;
 			color: #333;
-			-webkit-box-shadow: inset 0 2px 5px -3px rgba( 0, 0, 0, .5 );
-			box-shadow: inset 0 2px 5px -3px rgba( 0, 0, 0, .5 );
+			-webkit-box-shadow: inset 0 2px 5px -3px rgba( 0, 0, 0, 0.5 );
+		 	box-shadow: inset 0 2px 5px -3px rgba( 0, 0, 0, 0.5 );
 		}
 
 		<?php if ( 'rtl' == $text_direction ) : ?>
@@ -515,12 +519,12 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 </head>
 <body id="error-page">
 <?php endif; // ! did_action( 'admin_head' ) ?>
+	<?php echo $message; ?>
 </body>
 </html>
 <?php
 	die();
 }
-
 
 /**
  * Convert smiley code to the icon graphic file equivalent.
