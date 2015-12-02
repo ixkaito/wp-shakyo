@@ -48,4 +48,8 @@ elseif ( file_exists( dirname( ABSPATH ) . '/wp-config-sample.php' ) )
 else
 	wp_die( __( 'Sorry, I need a wp-config-sample.php file to work from. Please re-upload this file from your WordPress installation.' ) );
 
+// Check if wp-config.php has been created
+if ( file_exists( ABSPATH . 'wp-config.php' ) )
+	wp_die( '<p>' . sprintf( __( "The file 'wp-config.php' already exists. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='%s'>installing now</a>." ), 'install.php' ) . '</p>' );
+
 var_dump( __FILE__ );
