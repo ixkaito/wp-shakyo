@@ -58,4 +58,33 @@ if ( file_exists(ABSPATH . '../wp-config.php' ) && ! file_exists( ABSPATH . '../
 
 $step = isset( $_GET['step'] ) ? (int) $_GET['step'] : -1;
 
+/**
+ * Display setup wp-config.php file header.
+ *
+ * @ignore
+ * @since 2.3.0
+ */
+function setup_config_display_header( $body_classes = array() ) {
+	global $wp_version;
+	$body_classes = (array) $body_classes;
+	$body_classes[] = 'wp-core-ui';
+	if ( is_rtl() ) {
+		$body_classes[] = 'rtl';
+	}
+
+	header( 'Content-Type: text/html; charset=utf-8' );
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"<?php if ( is_rtl() ) echo ' dir="rtl"'; ?>>
+<head>
+	<meta name="viewport" content="width=device-width" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><?php _e( 'WordPress &rsaquo; Setup Configuration File' ); ?></title>
+	<?php wp_admin_css( 'install', true ); ?>
+</head>
+<body class="<?php echo implode( ' ', $body_classes ); ?>">
+<h1 id="logo"><a href="<?php esc_attr_e( 'https://wordpress.org/' ); ?>" tabindex="-1"><?php _e( 'WordPress' ); ?></a></h1>
+<?php
+} // end function setup_config_display_header();
+
 var_dump( __FILE__ );
