@@ -87,4 +87,11 @@ function setup_config_display_header( $body_classes = array() ) {
 <?php
 } // end function setup_config_display_header();
 
+$language = '';
+if ( ! empty( $_REQUEST['language'] ) ) {
+	$language = preg_replace( '/[^a-zA-Z_]/', '', $_REQUEST['language'] );
+} elseif ( isset( $GLOBALS['wp_local_package'] ) ) {
+	$language = $GLOBALS['wp_local_package'];
+}
+
 var_dump( __FILE__ );
