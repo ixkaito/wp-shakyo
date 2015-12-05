@@ -94,4 +94,16 @@ if ( ! empty( $_REQUEST['language'] ) ) {
 	$language = $GLOBALS['wp_local_package'];
 }
 
+switch($step) {
+	case -1:
+		if ( wp_can_install_language_pack() && empty( $language ) && ( $languages = wp_get_available_translations() ) ) {
+			setup_config_display_header( 'language-chooser' );
+			echo '<form id="setup" method="post" action="?step=0">';
+			wp_install_language_form( $languages );
+			echo '</form>';
+			break;
+		}
+
+		// Deliberately fall through if we can't reach the translation API.
+}
 var_dump( __FILE__ );
