@@ -56,4 +56,6 @@ if ( file_exists( ABSPATH . 'wp-config.php' ) )
 if ( file_exists(ABSPATH . '../wp-config.php' ) && ! file_exists( ABSPATH . '../wp-settings.php' ) )
 	wp_die( '<p>' . sprintf( __( "The file 'wp-config.php' already exists one level above your WordPress installation. If you need to reset any of the configuration items in this file, please delete it first. You may try <a href='install.php'>installing now</a>."), 'install.php' ) . '</p>' );
 
+$step = isset( $_GET['step'] ) ? (int) $_GET['step'] : -1;
+
 var_dump( __FILE__ );
