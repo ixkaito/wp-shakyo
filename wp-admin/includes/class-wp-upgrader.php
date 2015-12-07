@@ -11,3 +11,4 @@
  * @since 2.8.0
  */
 
+require ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
