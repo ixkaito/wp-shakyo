@@ -12,3 +12,14 @@
  */
 
 require ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
+
+/**
+ * Language pack upgrader, for updating translations of palugins, themes, and core.
+ *
+ * @package WordPress
+ * @subpackage Upgrader
+ * @since 3.7.0
+ */
+class Language_Pack_Upgrader extends WP_Upgrader {
+
+}
