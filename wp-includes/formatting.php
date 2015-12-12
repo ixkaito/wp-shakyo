@@ -41,6 +41,87 @@ function seems_utf8($str) {
 }
 
 /**
+ * Converts a number of special characters into their HTML entities.
+ *
+ * Specifically deals with: &, <, >, ", and '.
+ *
+ * $quote_style can be set to ENT_COMPAT to encode " to
+ * &quot;, or ENT_QUOTES to do both. Default is ENT_NOQUOTES where no quotes are encoded.
+ *
+ * @since 1.2.2
+ * @access private
+ *
+ * @param string $string The text which is to be encoded.
+ * @param mixed $quote_style Optional. Converts double quotes if set to ENT_COMPAT, both single and double if set to ENT_QUOTES or none if set to ENT_NOQUOTES. Also compatible with old values; converting single quotes if set to 'single', double if set to 'double' or both if otherwise set. Default is ENT_NOQUOTES.
+ * @param string $charset Optional. The character encoding of the string. Default is false.
+ * @param boolean $double_encode Optional. Whether to encode existing html entities. Default is false.
+ * @return string The encoded text with HTML entities.
+ */
+function _wp_specialchars( $string, $quote_style = ENT_NOQUOTES, $charset = false, $double_encode = false ) {
+	$string = (string) $string;
+
+	if ( 0 === strlen( $string ) )
+		return '';
+
+	// Don't bother if there are no specialchars - saves some processing
+	if ( ! preg_match( '/[&<>"\']/', $string ) )
+		return $string;
+
+	// Account for the previous behaviour of the function when the $quote_style is not an accepted value
+	if ( empty( $quote_style ) )
+		$quote_style = ENT_NOQUOTES;
+	elseif ( ! in_array( $quote_style, array( 0, 2, 3, 'single', 'double' ), true ) )
+		$quote_style = ENT_QUOTES;
+
+	// Store the site charset as a static to avoid multiple calls to wp_load_alloptions()
+	if ( ! $charset ) {
+		static $_charset;
+		if ( ! isset( $_charset ) ) {
+			$alloptions = wp_load_alloptions();
+			$_charset = isset( $alloptions['blog_charset'] ) ? $alloptions['blog_charset'] : '';
+		}
+		$charset = $_charset;
+	}
+
+	if ( in_array( $charset, array( 'utf8', 'utf-8', 'UTF8' ) ) )
+		$charset = 'UTF-8';
+
+	$_quote_style = $quote_style;
+
+	if ( $quote_style === 'double' ) {
+		$quote_style = ENT_COMPAT;
+		$_quote_style = ENT_COMPAT;
+	} elseif ( $quote_style === 'single' ) {
+		$quote_style = ENT_NOQUOTES;
+	}
+
+	// Handle double encoding ourselves
+	if ( $double_encode ) {
+		$string = @htmlspecialchars( $string, $quote_style, $charset );
+	} else {
+		// Decode &amp; into &
+		$string = wp_specialchars_decode( $string, $_quote_style );
+
+		// Guarantee every &entity; is valid or re-encode the &
+		$string = wp_kses_normalize_entities( $string );
+
+		// Now re-encode everything except &entity;
+		$string = preg_split( '/(&#?x?[0-9a-z]+;)/i', $string, -1, PREG_SPLIT_DELIM_CAPTURE );
+
+		for ( $i = 0; $i < count( $string ); $i += 2 )
+			$string[$i] = @htmlspecialchars( $string[$i], $quote_style, $charset );
+
+		$string = implode( '', $string );
+	}
+
+	// Backwards compatibility
+	if ( 'single' === $_quote_style )
+		$string = str_replace( "'", '&#039;', $string );
+
+	return $string;
+}
+
+/**
  * Checks for invalid UTF8 in a string.
  *
  * @since 2.8.0
