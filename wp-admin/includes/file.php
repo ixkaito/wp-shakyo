@@ -66,7 +66,7 @@ function request_filesystem_credentials($form_post, $type = '', $error = false, 
 	/**
 	 * Filter the filesystem credentials form output.
 	 *
-	 * Returning anything other than an empty string will effectively short-circut
+	 * Returning anything other than an empty string will effectively short-circuit
 	 * output of the filesystem credentials form, returning that value instead.
 	 *
 	 * @since 2.5.0
@@ -77,7 +77,7 @@ function request_filesystem_credentials($form_post, $type = '', $error = false, 
 	 * @param bool   $error        Whether the current request has failed to connect.
 	 *                             Default false.
 	 * @param string $context      Full path to the directory that is tested for
-	 *                             being writables.
+	 *                             being writable.
 	 * @param array  $extra_fields Extra POST fields.
 	 */
 	$req_cred = apply_filters( 'request_filesystem_credentials', '', $form_post, $type, $error, $context, $extra_fields );
@@ -104,7 +104,7 @@ function request_filesystem_credentials($form_post, $type = '', $error = false, 
 	$credentials['public_key'] = defined('FTP_PUBKEY') ? FTP_PUBKEY : (!empty($_POST['public_key']) ? wp_unslash( $_POST['public_key'] ) : '');
 	$credentials['private_key'] = defined('FTP_PRIKEY') ? FTP_PRIKEY : (!empty($_POST['private_key']) ? wp_unslash( $_POST['private_key'] ) : '');
 
-	// Sanitize the hostname , Some people might pass in odd-data:
+	// Sanitize the hostname, Some people might pass in odd-data:
 	$credentials['hostname'] = preg_replace('|\w+://|', '', $credentials['hostname']); //Strip any schemes off
 
 	if ( strpos($credentials['hostname'], ':') ) {
@@ -117,7 +117,7 @@ function request_filesystem_credentials($form_post, $type = '', $error = false, 
 
 	if ( ( defined('FTP_SSH') && FTP_SSH ) || ( defined('FS_METHOD') && 'ssh2' == FS_METHOD ) )
 		$credentials['connection_type'] = 'ssh';
-	else if ( (defined('FTP_SSL') && FTP_SSL) && 'ftpext' == $type ) // Only the FTP Extension understands SSL
+	else if ( (defined('FTP_SSL') && FTP_SSL) && 'ftpext' == $type ) //Only the FTP Extension understands SSL
 		$credentials['connection_type'] = 'ftps';
 	else if ( !empty($_POST['connection_type']) )
 		$credentials['connection_type'] = wp_unslash( $_POST['connection_type'] );
