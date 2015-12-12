@@ -21,6 +21,10 @@ class WP_Upgrader_Skin {
 	public $done_footer = false;
 	public $result = false;
 
+	public function __construct($args = array()) {
+		$defaults = array( 'url' => '', 'nonce' => '', 'title' => '', 'context' => false );
+		$this->options = wp_parse_args($args, $defaults);
+	}
 }
 
 /**
