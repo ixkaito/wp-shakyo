@@ -143,6 +143,18 @@ function __( $text, $domain = 'default' ) {
 }
 
 /**
+ * Display translated text.
+ *
+ * @since 1.2.0
+ *
+ * @param string $text   Text to translate.
+ * @param string $domain Optional. Text domain. Unique identifier for retrieving translated strings.
+ */
+function _e( $text, $domain = 'default' ) {
+	echo translate( $text, $domain );
+}
+
+/**
  * Retrieve translated string with gettext context.
  *
  * Quite a few times, there will be collisions with similar translatable text
