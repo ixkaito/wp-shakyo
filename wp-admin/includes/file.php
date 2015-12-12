@@ -45,6 +45,59 @@ $wp_file_descriptions = array(
 );
 
 /**
+ * Determines which Filesystem Method to use.
+ * The priority of the Transports are: Direct, SSH2, FTP PHP Extension, FTP Sockets (Via Sockets class, or fsockopen())
+ *
+ * Note that the return value of this function can be overridden in 2 ways
+ *  - By defining FS_METHOD in your <code>wp-config.php</code> file
+ *  - By using the filesystem_method filter
+ * Valid values for these are: 'direct', 'ssh2', 'ftpext' or 'ftpsockets'
+ * Plugins may also define a custom transport handler, See the WP_Filesystem function for more information.
+ *
+ * @since 2.5.0
+ *
+ * @param array $args Connection details.
+ * @param string $context Full path to the directory that is tested for being writable.
+ * @return string The transport to use, see description for valid return values.
+ */
+function get_filesystem_method($args = array(), $context = false) {
+	$method = defined('FS_METHOD') ? FS_METHOD : false; // Please ensure that this is either 'direct', 'ssh2', 'ftpext' or 'ftpsockets'
+
+	if ( ! $method && function_exists('getmyuid') && function_exists('fileowner') ){
+		if ( !$context )
+			$context = WP_CONTENT_DIR;
+
+		// If the directory doesn't exist (wp-content/languages) then use the parent directory as we'll create it.
+		if ( WP_LANG_DIR == $context && ! is_dir( $context ) )
+			$context = dirname( $context );
+
+		$context = trailingslashit($context);
+		$temp_file_name = $context . 'temp-write-test-' . time();
+		$temp_handle = @fopen($temp_file_name, 'w');
+		if ( $temp_handle ) {
+			if ( getmyuid() == @fileowner($temp_file_name) )
+				$method = 'direct';
+			@fclose($temp_handle);
+			@unlink($temp_file_name);
+		}
+ 	}
+
+	if ( ! $method && isset($args['connection_type']) && 'ssh' == $args['connection_type'] && extension_loaded('ssh2') && function_exists('stream_get_contents') ) $method = 'ssh2';
+	if ( ! $method && extension_loaded('ftp') ) $method = 'ftpext';
+	if ( ! $method && ( extension_loaded('sockets') || function_exists('fsockopen') ) ) $method = 'ftpsockets'; //Sockets: Socket extension; PHP Mode: FSockopen / fwrite / fread
+
+	/**
+	 * Filter the filesystem method to use.
+	 *
+	 * @since 2.6.0
+	 *
+	 * @param string $method Filesystem method to return.
+	 * @param array  $args   An array of connection details for the method.
+	 */
+	return apply_filters( 'filesystem_method', $method, $args );
+}
+
+/**
  * Displays a form to the user to request for their FTP/SSH details in order to connect to the filesystem.
  * All chosen/entered details are saved, Excluding the Password.
  *
