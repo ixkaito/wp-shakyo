@@ -184,3 +184,21 @@ function sanitize_key( $key ) {
 	 */
 	return apply_filters( 'sanitize_key', $key, $raw_key );
 }
+
+/**
+ * Appends a trailing slash.
+ *
+ * Will remove trailing forward and backslashes if it exists already before adding
+ * a trailing forward slash. This prevents double slashing a string or path.
+ *
+ * The primary use of this is for paths and thus should be used for paths. It is
+ * not restricted to paths and offers no specific path support.
+ *
+ * @since 1.2.0
+ *
+ * @param string $string What to add the trailing slash to.
+ * @return string String with trailing slash added.
+ */
+function trailingslashit( $string ) {
+	return untrailingslashit( $string ) . '/';
+}
