@@ -231,7 +231,7 @@ function untrailingslashit( $string ) {
  *
  * @param string $url The URL to be cleaned.
  * @param array $protocols Optional. An array of acceptable protocols.
- *		Defaults to 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet', 'mms' 'rtsp', 'svn' if not set.
+ *		Defaults to 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'svn' if not set.
  * @param string $_context Private. Use esc_url_raw() for database usage.
  * @return string The cleaned $url after the 'clean_url' filter is applied.
  */
@@ -244,7 +244,7 @@ function esc_url( $url, $protocols = null, $_context = 'display' ) {
 	$strip = array('%0d', '%0a', '%0D', '%0A');
 	$url = _deep_replace($strip, $url);
 	$url = str_replace(';//', '://', $url);
-	/* If the URL doesn't appeart to contain a scheme, we
+	/* If the URL doesn't appear to contain a scheme, we
 	 * presume it needs http:// appended (unless a relative
 	 * link starting with /, # or ? or a php file).
 	 */
@@ -276,7 +276,7 @@ function esc_url( $url, $protocols = null, $_context = 'display' ) {
 	 *
 	 * @param string $good_protocol_url The cleaned URL to be returned.
 	 * @param string $original_url      The URL prior to cleaning.
-	 * @param string $_context          If 'dispaly', replace ampersands and single quotes only.
+	 * @param string $_context          If 'display', replace ampersands and single quotes only.
 	 */
 	return apply_filters( 'clean_url', $good_protocol_url, $original_url, $_context );
 }
