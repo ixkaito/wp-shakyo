@@ -13,6 +13,17 @@
 
 require ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
 
+/**
+ * WordPress Upgrader class for Upgrading/Installing a local set of files via the Filesystem Abstraction classes from a Zip file.
+ *
+ * @package WordPress
+ * @subpackage Upgrader
+ * @since 2.8.0
+ */
+class WP_Upgrader {
+
+}
+
 add_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
 
 /**
