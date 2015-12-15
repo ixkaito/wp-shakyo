@@ -30,7 +30,7 @@ function disabled( $disabled, $current = true, $echo = true ) {
 /**
  * Private helper function for checked, selected, and disabled.
  *
- * Compare the first two arguments and if identical marks as $type
+ * Compares the first two arguments and if identical marks as $type
  *
  * @since 2.8.0
  * @access private
