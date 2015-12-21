@@ -47,6 +47,23 @@ class WP_Error {
 		if ( ! empty($data) )
 			$this->error_data[$code] = $data;
 	}
+
+	/**
+	 * Retrieve first error code available.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @return string|int Empty string, if no error codes.
+	 */
+	public function get_error_code() {
+		$codes = $this->get_error_codes();
+
+		if ( empty($codes) )
+			return '';
+
+		return $codes[0];
+	}
 }
 
 /**
