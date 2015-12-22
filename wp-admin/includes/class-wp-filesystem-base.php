@@ -13,4 +13,14 @@
  */
 class WP_Filesystem_Base {
 
+	/**
+	 * Connect filesystem.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return bool True on success or false on failure (always true for WP_Filesystem_Direct).
+	 */
+	public function connect() {
+		return true;
+	}
 }
