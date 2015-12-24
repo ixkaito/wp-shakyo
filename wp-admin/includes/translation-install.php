@@ -7,6 +7,42 @@
  */
 
 /**
+ * Get available translations from the WordPress.org API.
+ *
+ * @since 4.0.0
+ *
+ * @see translations_api()
+ *
+ * @return array Array of translations, each an array of data. If the API response results
+ *               in an error, an empty array will be returned.
+ */
+function wp_get_available_translations() {
+	if ( ! defined( 'WP_INSTALLING' ) && false !== ( $translations = get_site_transient( 'available_translations' ) ) ) {
+		return $translations;
+	}
+
+	include( ABSPATH . WPINC . '/version.php' ); // include an unmodified $wp_version
+
+	$api = translations_api( 'core', array( 'version' => $wp_version ) );
+
+	if ( is_wp_error( $api ) || empty( $api['translations'] ) ) {
+		return array();
+	}
+
+	$translations = array();
+	// Key the aray with the language code for now.
+	foreach ( $api['translations'] as $translation ) {
+		$translations[ $translation['language'] ] = $translation;
+	}
+
+	if ( ! defined( 'WP_INSTALLING' ) ) {
+		set_site_transient( 'available_translations', $translations, 3 * HOUR_IN_SECONDS );
+	}
+
+	return $translations;
+}
+
+/**
  * Check if WordPress has access to the filesystem without asking for
  * credentials.
  *
