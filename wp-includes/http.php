@@ -12,7 +12,7 @@
  */
 
 /**
- * Determines if there is an HTTP Transpport that can process this request.
+ * Determines if there is an HTTP Transport that can process this request.
  *
  * @since 3.2.0
  *
