@@ -12,6 +12,23 @@
  */
 
 /**
+ * Retruns the initialized WP_Http Object
+ *
+ * @since 2.7.0
+ * @access private
+ *
+ * @return WP_Http HTTP Transport object.
+ */
+function _wp_http_get_object() {
+	static $http;
+
+	if ( is_null($http) )
+		$http = new WP_Http();
+
+	return $http;
+}
+
+/**
  * Determines if there is an HTTP Transport that can process this request.
  *
  * @since 3.2.0
