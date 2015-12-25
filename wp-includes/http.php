@@ -12,7 +12,7 @@
  */
 
 /**
- * Retruns the initialized WP_Http Object
+ * Returns the initialized WP_Http Object
  *
  * @since 2.7.0
  * @access private
