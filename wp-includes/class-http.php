@@ -44,7 +44,7 @@ class WP_Http {
 		 *
 		 * @since 3.7.0
 		 *
-		 * @param array  $value Array of HTTP transport to check. Default array contains
+		 * @param array  $value Array of HTTP transports to check. Default array contains
 		 *                      'curl', and 'streams', in that order.
 		 * @param array  $args  HTTP request arguments.
 		 * @param string $url   The URL to request.
