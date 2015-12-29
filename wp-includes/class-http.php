@@ -68,6 +68,16 @@ class WP_Http {
 }
 
 /**
+ * HTTP request method uses PHP Streams to retrieve the url.
+ *
+ * @since 2.7.0
+ * @since 3.7.0 Combined with the fsockopen transport and switched to stream_socket_client().
+ */
+class WP_Http_Streams {
+
+}
+
+/**
  * HTTP request method uses Curl extension to retrieve the url.
  *
  * Requires the Curl extension to be installed.
