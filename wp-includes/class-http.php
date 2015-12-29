@@ -75,6 +75,39 @@ class WP_Http {
  */
 class WP_Http_Streams {
 
+	/**
+	 * Whether this class can be used for retrieving a URL.
+	 *
+	 * @static
+	 * @access public
+	 * @since 2.7.0
+	 * @since 3.7.0 Combined with the fsockopen transport and switched to stream_socket_client().
+	 *
+	 * @return boolean False means this class can not be used, true means it can.
+	 */
+	public static function test( $args = array() ) {
+		if ( ! function_exists( 'stream_socket_client' ) )
+			return false;
+
+		$is_ssl = isset( $args['ssl'] ) && $args['ssl'];
+
+		if ( $is_ssl ) {
+			if ( ! extension_loaded( 'openssl' ) )
+				return false;
+			if ( ! function_exists( 'openssl_x509_parse' ) )
+				return false;
+		}
+
+		/**
+		 * Filter whether streams can be used as a transport for retrieving a URL.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param bool  $use_class Whether the class can be used. Default true.
+		 * @param array $args      Request arguments.
+		 */
+		return apply_filters( 'use_streams_transport', true, $args );
+	}
 }
 
 /**
