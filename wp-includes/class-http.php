@@ -57,7 +57,7 @@ class WP_Http {
 	 *                                             and processing returned to the calling code immediately, the caller
 	 *                                             will know if the request succeeded or failed, but will not receive
 	 *                                             any response from the remote server. Default true.
-	 *     @type string|array $headers             Aarray or string of headers to send with the request.
+	 *     @type string|array $headers             Array or string of headers to send with the request.
 	 *                                             Default empty array.
 	 *     @type array        $cookies             List of cookies to send with the request. Default empty array.
 	 *     @type string|array $body                Body to send with the request. Default null.
@@ -68,9 +68,9 @@ class WP_Http {
 	 *                                             need to be separately decompressed. Default true.
 	 *     @type bool         $sslverify           Whether to verify SSL for the request. Default true.
 	 *     @type string       sslcertificates      Absolute path to an SSL certificate .crt file.
-	 *                                             Default ABSPATH . WPINC . '/certificate/ca-bundle.crt'.
+	 *                                             Default ABSPATH . WPINC . '/certificates/ca-bundle.crt'.
 	 *     @type bool         $stream              Whether to stream to a file. If set to true and no filename was
-	 *                                             given, it will be droped it in the WP temp dir and its anme will
+	 *                                             given, it will be droped it in the WP temp dir and its name will
 	 *                                             be set using the basename of the URL. Default false.
 	 *     @type string       $filename            Filename of the file to write to when streaming. $stream must be
 	 *                                             set to true. Default null.
