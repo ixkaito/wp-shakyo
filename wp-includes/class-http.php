@@ -192,6 +192,101 @@ class WP_Http {
 
 		if ( $this->block_request( $url ) )
 			return new WP_Error( 'http_request_failed', __( 'User has blocked requests through HTTP.' ) );
+
+		/*
+		 * Determine if this is a https call and pass that on to the transport functions
+		 * so that we can blacklist the transports that do no support ssl verification
+		 */
+		$r['ssl'] = $arrURL['scheme'] == 'https' || $arrURL['scheme'] == 'ssl';
+
+		// Determine if this request is to OUR intall of WordPress.
+		$homeURL = parse_url( get_bloginfo( 'url' ) );
+		$r['local'] = 'localhost' == $arrURL['host'] || ( isset( $homeURL['host'] ) && $homeURL['host'] == $arrURL['host'] );
+		unset( $homeURL );
+
+		/*
+		 * If we are streaming to a file but no filename was given drop it in the WP temp dir
+		 * and pick its name using the basename of the $url.
+		 */
+		if ( $r['stream']  && empty( $r['filename'] ) )
+			$r['filename'] = get_temp_dir() . basename( $url );
+
+		/*
+		 * Force some settings if we are streaming to a file and check for existence and perms
+		 * of destination directory.
+		 */
+		if ( $r['stream'] ) {
+			$r['blocking'] = true;
+			if ( ! wp_is_writable( dirname( $r['filename'] ) ) )
+				return new WP_Error( 'http_request_failed', __( 'Destination directory for file streaming does not exist or is not writable.' ) );
+		}
+
+		if ( is_null( $r['headers'] ) )
+			$r['headers'] = array();
+
+		if ( ! is_array( $r['headers'] ) ) {
+			$processedHeaders = WP_Http::processHeaders( $r['headers'], $url );
+			$r['headers'] = $processedHeaders['headers'];
+		}
+
+		if ( isset( $r['headers']['User-Agent'] ) ) {
+			$r['user-agent'] = $r['headers']['User-Agent'];
+			unset( $r['headers']['User-Agent'] );
+		}
+
+		if ( isset( $r['headers']['user-agent'] ) ) {
+			$r['user-agent'] = $r['headers']['user-agent'];
+			unset( $r['headers']['user-agent'] );
+		}
+
+		if ( '1.1' == $r['httpversion'] && !isset( $r['headers']['connection'] ) ) {
+			$r['headers']['connection'] = 'close';
+		}
+
+		// Construct Cookie: header if any cookies are set.
+		WP_Http::buildCookieHeader( $r );
+
+		// Avoid issues where mbstring.func_overload is enabled.
+		mbstring_binary_safe_encoding();
+
+		if ( ! isset( $r['headers']['Accept-Encoding'] ) ) {
+			if ( $encoding = WP_Http_Encoding::accept_encoding( $url, $r ) )
+				$r['headers']['Accept-Encoding'] = $encoding;
+		}
+
+		if ( ( ! is_null( $r['body'] ) && '' != $r['body'] ) || 'POST' == $r['method'] || 'PUT' == $r['method'] ) {
+			if ( is_array( $r['body'] ) || is_object( $r['body'] ) ) {
+				$r['body'] = http_build_query( $r['body'], null, '&' );
+
+				if ( ! isset( $r['headers']['Content-Type'] ) )
+					$r['headers']['Content-Type'] = 'application/x-www-form-urlencoded; charset=' . get_option( 'blog_charset' );
+			}
+
+			if ( '' === $r['body'] )
+				$r['body'] = null;
+
+			if ( ! isset( $r['headers']['Content-Length'] ) && ! isset( $r['headers']['content-length'] ) )
+				$r['headers']['Content-Length'] = strlen( $r['body'] );
+		}
+
+		$response = $this->_dispatch_request( $url, $r );
+
+		reset_mbstring_encoding();
+
+		if ( is_wp_error( $response ) )
+			return $response;
+
+		// Append cookies that were used in this request to the response
+		if ( ! empty( $r['cookies'] ) ) {
+			$cookies_set = wp_list_pluck( $response['cookies'], 'name' );
+			foreach ( $r['cookies'] as $cookie ) {
+				if ( ! in_array( $cookie->name, $cookies_set ) && $cookie->test( $url ) ) {
+					$response['cookies'][] = $cookie;
+				}
+			}
+		}
+
+		return $response;
 	}
 
 	/**
