@@ -195,11 +195,11 @@ class WP_Http {
 
 		/*
 		 * Determine if this is a https call and pass that on to the transport functions
-		 * so that we can blacklist the transports that do no support ssl verification
+		 * so that we can blacklist the transports that do not support ssl verification
 		 */
 		$r['ssl'] = $arrURL['scheme'] == 'https' || $arrURL['scheme'] == 'ssl';
 
-		// Determine if this request is to OUR intall of WordPress.
+		// Determine if this request is to OUR install of WordPress.
 		$homeURL = parse_url( get_bloginfo( 'url' ) );
 		$r['local'] = 'localhost' == $arrURL['host'] || ( isset( $homeURL['host'] ) && $homeURL['host'] == $arrURL['host'] );
 		unset( $homeURL );
