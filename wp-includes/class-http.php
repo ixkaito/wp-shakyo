@@ -81,6 +81,87 @@ class WP_Http {
 	 *                        A WP_Error instance upon error.
 	 */
 	public function request( $url, $args = array() ) {
+		global $wp_version;
+
+		$defaults = array(
+			'method' => 'GET',
+			/**
+			 * Filter the timeout value for an HTTP request.
+			 *
+			 * @since 2.7.0
+			 *
+			 * @param int $timeout_value Time in seconds until a request times out.
+			 *                           Default 5.
+			 */
+			'timeout' => apply_filters( 'http_request_timeout', 5 ),
+			/**
+			 * Filter the number of redirects allowed during an HTTP request.
+			 *
+			 * @since 2.7.0
+			 *
+			 * @param int $redirect_count Number of redirects allowed. Default 5.
+			 */
+			'redirection' => apply_filters( 'http_request_redirection_count', 5 ),
+			/**
+			 * Filter the version of the HTTP protocol used in a request.
+			 *
+			 * @since 2.7.0
+			 *
+			 * @param string $version Version of HTTP used. Accepts '1.0' and '1.1'.
+			 *                        Default '1.0'.
+			 */
+			'httpversion' => apply_filters( 'http_request_version', '1.0' ),
+			/**
+			 * Filter the user agent value sent with an HTTP request.
+			 *
+			 * @since 2.7.0
+			 *
+			 * @param string $user_agent WordPress user agent string.
+			 */
+			'user-agent' => apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) ),
+			/**
+			 * Filter whether to pass URLs through wp_http_validate_url() in an HTTP request.
+			 *
+			 * @since 3.6.0
+			 *
+			 * @param bool $pass_url Whether to pass URLs through wp_http_validate_url().
+			 *                       Default false.
+			 */
+			'reject_unsafe_urls' => apply_filters( 'http_request_reject_unsafe_urls', false ),
+			'blocking' => true,
+			'headers' => array(),
+			'cookies' => array(),
+			'body' => null,
+			'compress' => false,
+			'decompress' => true,
+			'sslverify' => true,
+			'sslcertificates' => ABSPATH . WPINC . '/certificates/ca-bundle.crt',
+			'stream' => false,
+			'filename' => null,
+			'limit_response_size' => null,
+		);
+
+		// Pre-parse for the HEAD checks.
+		$args = wp_parse_args( $args );
+
+		// By default, Head requests do not cause redirections.
+		if ( isset($args['method']) && 'HEAD' == $args['method'] )
+			$defaults['redirection'] = 0;
+
+		$r = wp_parse_args( $args, $defaults );
+		/**
+		 * Filter the arguments used in an HTTP request.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param array  $r   An array of HTTP request arguments.
+		 * @param string $url The request URL.
+		 */
+		$r = apply_filters( 'http_request_args', $r, $url );
+
+		// The transports decrement this, store a copy of the original value for loop purposes.
+		if ( ! isset( $r['_redirection'] ) )
+			$r['_redirection'] = $r['redirection'];
 	}
 
 	/**
