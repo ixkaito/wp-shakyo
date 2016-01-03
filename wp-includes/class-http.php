@@ -162,6 +162,36 @@ class WP_Http {
 		// The transports decrement this, store a copy of the original value for loop purposes.
 		if ( ! isset( $r['_redirection'] ) )
 			$r['_redirection'] = $r['redirection'];
+
+		/**
+		 * Filter whether to preempt an HTTP request's return.
+		 *
+		 * Returning a truthy value to the filter will short-circuit
+		 * the HTTP request and return early with that value.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param bool   $preempt Whether to preempt an HTTP request return. Default false.
+		 * @param array  $r       HTTP request arguments.
+		 * @param string $url     The request URL.
+		 */
+		$pre = apply_filters( 'pre_http_request', false, $r, $url );
+		if ( false !== $pre )
+			return $pre;
+
+		if ( function_exists( 'wp_kses_bad_protocol' ) ) {
+			if ( $r['reject_unsafe_urls'] )
+				$url = wp_http_validate_url( $url );
+			$url = wp_kses_bad_protocol( $url, array( 'http', 'https', 'ssl' ) );
+		}
+
+		$arrURL = @parse_url( $url );
+
+		if ( empty( $url ) || empty( $arrURL['scheme'] ) )
+			return new WP_Error('http_request_failed', __('A valid URL was not provided.'));
+
+		if ( $this->block_request( $url ) )
+			return new WP_Error( 'http_request_failed', __( 'User has blocked requests through HTTP.' ) );
 	}
 
 	/**
