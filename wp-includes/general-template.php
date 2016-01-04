@@ -9,20 +9,20 @@
 /**
  * Retrieve information about the blog.
  *
- * Soe show parameter values are deprecated and will be removed in future
+ * Some show parameter values are deprecated and will be removed in future
  * versions. These options will trigger the _deprecated_argument() function.
  * The deprecated blog info options are listed in the function contents.
  *
- * The posible values for the 'show' parameter are listed below.
+ * The possible values for the 'show' parameter are listed below.
  * <ol>
  * <li><strong>url</strong> - Blog URI to homepage.</li>
  * <li><strong>wpurl</strong> - Blog URI path to WordPress.</li>
  * <li><strong>description</strong> - Secondary title</li>
  * </ol>
  *
- * The feed URL options ca be retrieved from 'rdf_url' (RSS 0.91),
+ * The feed URL options can be retrieved from 'rdf_url' (RSS 0.91),
  * 'rss_url' (RSS 1.0), 'rss2_url' (RSS 2.0), or 'atom_url' (Atom feed). The
- * comment feeds can be retrieved from the 'commnets_atom_url' (Atom comment
+ * comment feeds can be retrieved from the 'comments_atom_url' (Atom comment
  * feed) or 'comments_rss2_url' (RSS 2.0 comment feed).
  *
  * @since 0.71
