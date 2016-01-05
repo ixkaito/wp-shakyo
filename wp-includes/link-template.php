@@ -7,6 +7,25 @@
  */
 
 /**
+ * Retrieve the home url for the current site.
+ *
+ * Returns the 'home' option with the appropriate protocol, 'https' if
+ * is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+ * overridden.
+ *
+ * @since 3.0.0
+ *
+ * @uses get_home_url()
+ *
+ * @param  string $path   (optional) Path relative to the home url.
+ * @param  string $scheme (optional) Scheme to give the home url context. Currently 'http', 'https', or 'relative'.
+ * @return string Home url link with optional path appended.
+*/
+function home_url( $path = '', $scheme = null ) {
+	return get_home_url( null, $path, $scheme );
+}
+
+/**
  * Set the scheme for a URL
  *
  * @since 3.4.0
