@@ -351,9 +351,9 @@ class WP_Http {
 	 * Those who are behind a proxy and want to prevent access to certain hosts may do so. This will
 	 * prevent plugins from working and core functionality, if you don't include api.wordpress.org.
 	 *
-	 * You block external URL requests by defining  WP_HTTP_BLOCK_EXTERNAL as true in your wp-config.php
+	 * You block external URL requests by defining WP_HTTP_BLOCK_EXTERNAL as true in your wp-config.php
 	 * file and this will only allow localhost and your blog to make requests. The constant
-	 * WP_ACCESSIBLE_HOSTS will allow addintional hosts to go through for requests. The format of the
+	 * WP_ACCESSIBLE_HOSTS will allow additional hosts to go through for requests. The format of the
 	 * WP_ACCESSIBLE_HOSTS constant is a comma separated list of hostnames to allow, wildcard domains
 	 * are supported, eg *.wordpress.org will allow for all subdomains of wordpress.org to be contacted.
 	 *
@@ -382,7 +382,7 @@ class WP_Http {
 			 *
 			 * @since 2.8.0
 			 *
-			 * @param bool $block Whether to block local requests trhough proxy.
+			 * @param bool $block Whether to block local requests through proxy.
 			 *                    Default false.
 			 */
 			return apply_filters( 'block_local_requests', false );
