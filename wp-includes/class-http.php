@@ -344,6 +344,72 @@ class WP_Http {
 		$r = wp_parse_args( $args, $defaults );
 		return $this->request($url, $r);
 	}
+
+	/**
+	 * Block requests through the proxy.
+	 *
+	 * Those who are behind a proxy and want to prevent access to certain hosts may do so. This will
+	 * prevent plugins from working and core functionality, if you don't include api.wordpress.org.
+	 *
+	 * You block external URL requests by defining  WP_HTTP_BLOCK_EXTERNAL as true in your wp-config.php
+	 * file and this will only allow localhost and your blog to make requests. The constant
+	 * WP_ACCESSIBLE_HOSTS will allow addintional hosts to go through for requests. The format of the
+	 * WP_ACCESSIBLE_HOSTS constant is a comma separated list of hostnames to allow, wildcard domains
+	 * are supported, eg *.wordpress.org will allow for all subdomains of wordpress.org to be contacted.
+	 *
+	 * @since 2.8.0
+	 * @link http://core.trac.wordpress.org/ticket/8927 Allow preventing external requests.
+	 * @link http://core.trac.wordpress.org/ticket/14636 Allow wildcard domains in WP_ACCESSIBLE_HOSTS
+	 *
+	 * @param string $uri URI of url.
+	 * @return bool True to block, false to allow.
+	 */
+	public function block_request($uri) {
+		// We don't need to block requests, because nothing is blocked.
+		if ( ! defined( 'WP_HTTP_BLOCK_EXTERNAL' ) || ! WP_HTTP_BLOCK_EXTERNAL )
+			return false;
+
+		$check = parse_url($uri);
+		if ( ! $check )
+			return true;
+
+		$home = parse_url( get_option('siteurl') );
+
+		// Don't block requests back to ourselves by default.
+		if ( 'localhost' == $check['host'] || ( isset( $home['host'] ) && $home['host'] == $check['host'] ) ) {
+			/**
+			 * Filter whether to block local requests through the proxy.
+			 *
+			 * @since 2.8.0
+			 *
+			 * @param bool $block Whether to block local requests trhough proxy.
+			 *                    Default false.
+			 */
+			return apply_filters( 'block_local_requests', false );
+		}
+
+		if ( !defined('WP_ACCESSIBLE_HOSTS') )
+			return true;
+
+		static $accessible_hosts;
+		static $wildcard_regex = false;
+		if ( null == $accessible_hosts ) {
+			$accessible_hosts = preg_split('|,\s*|', WP_ACCESSIBLE_HOSTS);
+
+			if ( false !== strpos(WP_ACCESSIBLE_HOSTS, '*') ) {
+				$wildcard_regex = array();
+				foreach ( $accessible_hosts as $host )
+					$wildcard_regex[] = str_replace( '\*', '.+', preg_quote( $host, '/' ) );
+				$wildcard_regex = '/^(' . implode('|', $wildcard_regex) . ')$/i';
+			}
+		}
+
+		if ( !empty($wildcard_regex) )
+			return !preg_match($wildcard_regex, $check['host']);
+		else
+			return !in_array( $check['host'], $accessible_hosts ); //Inverse logic, If it's in the array, then we can't access it.
+
+	}
 }
 
 /**
