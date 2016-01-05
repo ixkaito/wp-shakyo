@@ -26,7 +26,7 @@ function home_url( $path = '', $scheme = null ) {
 }
 
 /**
- * Retrieve the home url of a given site.
+ * Retrieve the home url for a given site.
  *
  * Returns the 'home' option with the appropriate protocol, 'https' if
  * is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
