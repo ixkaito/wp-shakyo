@@ -529,3 +529,16 @@ class WP_Http_Curl {
 		return apply_filters( 'use_curl_transport', true, $args );
 	}
 }
+
+/**
+ * Implementation for deflate and gzip transfer encodings.
+ *
+ * Includes RFC 1950, RFC 1951, and RFC 1952.
+ *
+ * @since 2.8.0
+ * @package WordPress
+ * @subpackage HTTP
+ */
+class WP_Http_Encoding {
+
+}
