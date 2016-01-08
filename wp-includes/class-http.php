@@ -541,4 +541,47 @@ class WP_Http_Curl {
  */
 class WP_Http_Encoding {
 
+	/**
+	 * What encoding types to accept and their priority values.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @return string Types of encoding to accept.
+	 */
+	public static function accept_encoding( $url, $args ) {
+		$type = array();
+		$compression_enabled = WP_Http_Encoding::is_available();
+
+		if ( ! $args['decompress'] ) // Decompression specifically disabled.
+			$compression_enabled = false;
+		elseif ( $args['stream'] ) // Disable when streaming to file.
+			$compression_enabled = false;
+		elseif ( isset( $args['limit_response_size'] ) ) // If only partial content is being requested, we won't be able to decompress it.
+			$compression_enabled = false;
+
+		if ( $compression_enabled ) {
+			if ( function_exists( 'gzinflate' ) )
+				$type[] = 'deflate;q=1.0';
+
+			if ( function_exists( 'gzuncompress' ) )
+				$type[] = 'compress;q=0.5';
+
+			if ( function_exists( 'gzdecode' ) )
+				$type[] = 'gzip;q=0.5';
+		}
+
+		/**
+		 * Filter the allowed encoding types.
+		 *
+		 * @since 3.6.0
+		 *
+		 * @param array  $type Encoding types allowed. Accepts 'gzinflate',
+		 *                     'gzuncompress', 'gzdecode'.
+		 * @param string $url  URL of the HTTP request.
+		 * @param array  $args HTTP request arguments.
+		 */
+		$type = apply_filters( 'wp_http_accept_encoding', $type, $url, $args );
+
+		return implode(', ', $type);
+	}
 }
