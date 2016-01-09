@@ -584,4 +584,19 @@ class WP_Http_Encoding {
 
 		return implode(', ', $type);
 	}
+
+	/**
+	 * Whether decompression and compression are supported by the PHP version.
+	 *
+	 * Each function is tested instead of checking for the zlib extension, to
+	 * ensure that the functions all exist in the PHP version and aren't
+	 * disabled.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @return bool
+	 */
+	public static function is_available() {
+		return ( function_exists('gzuncompress') || function_exists('gzdeflate') || function_exists('gzinflate') );
+	}
 }
