@@ -372,7 +372,7 @@ class WP_Http {
 			return $response;
 
 		/**
-		 * Filter the HTTP API response immediatedly before the response is returned.
+		 * Filter the HTTP API response immediately before the response is returned.
 		 *
 		 * @since 2.9.0
 		 *
