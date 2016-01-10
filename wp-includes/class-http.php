@@ -328,6 +328,62 @@ class WP_Http {
 	}
 
 	/**
+	 * Dispatches a HTTP request to a supporting transport.
+	 *
+	 * Tests each transport in order to find a transport which matches the request arguments.
+	 * Also caches the transport instance to be used later.
+	 *
+	 * The order for requests is cURL, and then PHP Streams.
+	 *
+	 * @since 3.2.0
+	 * @access private
+	 *
+	 * @param string $url URL to Request
+	 * @param array $args Request arguments
+	 * @return array|WP_Error Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error
+	 */
+	private function _dispatch_request( $url, $args ) {
+		static $transports = array();
+
+		$class = $this->_get_first_available_transport( $args, $url );
+		if ( !$class )
+			return new WP_Error( 'http_failure', __( 'There are no HTTP transports available which can complete the requested request.' ) );
+
+		// Transport claims to support request, instantiate it and give it a whirl.
+		if ( empty( $transports[$class] ) )
+			$transports[$class] = new $class;
+
+		$response = $transports[$class]->request( $url, $args );
+
+		/**
+		 * Fires after an HTTP API response is received and before the response is returned.
+		 *
+		 * @since 2.8.0
+		 *
+		 * @param array|WP_Error $response HTTP response or WP_Error object.
+		 * @param string         $context  Context under which the hook is fired.
+		 * @param string         $class    HTTP transport used.
+		 * @param array          $args     HTTP request arguments.
+		 * @param string         $url      The request URL.
+		 */
+		do_action( 'http_api_debug', $response, 'response', $class, $args, $url );
+
+		if ( is_wp_error( $response ) )
+			return $response;
+
+		/**
+		 * Filter the HTTP API response immediatedly before the response is returned.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param array  $response HTTP response.
+		 * @param array  $args     HTTP request arguments.
+		 * @param string $url      The request URL.
+		 */
+		return apply_filters( 'http_response', $response, $args, $url );
+	}
+
+	/**
 	 * Uses the POST HTTP method.
 	 *
 	 * Used for sending data that is expected to be in the body.
