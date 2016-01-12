@@ -810,7 +810,7 @@ class WP_Http_Curl {
 }
 
 /**
- * Adds Proxy suppor to the WordPress HTTP API.
+ * Adds Proxy support to the WordPress HTTP API.
  *
  * There are caveats to proxy support. It requires that defines be made in the wp-config.php file to
  * enable proxy support. There are also a few filters that plugins can hook into for some of the
@@ -822,7 +822,7 @@ class WP_Http_Curl {
  * The constants are as follows:
  * <ol>
  * <li>WP_PROXY_HOST - Enable proxy support and host for connecting.</li>
- * <li>WP_PROXY_PORT - Proxy port for connection. No default,  must be defined.</li>
+ * <li>WP_PROXY_PORT - Proxy port for connection. No default, must be defined.</li>
  * <li>WP_PROXY_USERNAME - Proxy username, if it requires authentication.</li>
  * <li>WP_PROXY_PASSWORD - Proxy password, if it requires authentication.</li>
  * <li>WP_PROXY_BYPASS_HOSTS - Will prevent the hosts in this list from going through the proxy.
@@ -830,7 +830,7 @@ class WP_Http_Curl {
  * through the proxy. The list should be presented in a comma separated list, wildcards using * are supported, eg. *.wordpress.org</li>
  * </ol>
  *
- * And example can be as seen below.
+ * An example can be as seen below.
  * <code>
  * define('WP_PROXY_HOST', '192.168.84.101');
  * define('WP_PROXY_PORT', '8080');
