@@ -841,7 +841,22 @@ class WP_Http_Curl {
  * @link http://core.trac.wordpress.org/ticket/14636 Allow wildcard domains in WP_PROXY_BYPASS_HOSTS
  * @since 2.8.0
  */
-class WP_HTTP_Proxy {}
+class WP_HTTP_Proxy {
+
+	/**
+	 * Whether proxy connection should be used.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @use WP_PROXY_HOST
+	 * @use WP_PROXY_PORT
+	 *
+	 * @return bool
+	 */
+	public function is_enabled() {
+		return defined('WP_PROXY_HOST') && defined('WP_PROXY_PORT');
+	}
+}
 
 /**
  * Implementation for deflate and gzip transfer encodings.
