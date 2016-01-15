@@ -346,7 +346,7 @@ function do_action_ref_array($tag, $args) {
 	else
 		++$wp_actions[$tag];
 
-	// Do 'all' action first
+	// Do 'all' actions first
 	if ( isset($wp_filter['all']) ) {
 		$wp_current_filter[] = $tag;
 		$all_args = func_get_args();
