@@ -402,6 +402,80 @@ class WP_Http {
 	}
 
 	/**
+	 * Transform header sring into an array.
+	 *
+	 * If an array is given then it is assumed to be raw header data with numeric keys with the
+	 * headers as the values. No headers must be passed that were already processed.
+	 *
+	 * @access public
+	 * @static
+	 * @since 2.7.0
+	 *
+	 * @param string|array $headers
+	 * @param string $url The URL that was requested
+	 * @return array Processed string headers. If duplicate headers are encountered,
+	 * 					Then a numbered array is returned as the value of that header-key.
+	 */
+	public static function processHeaders( $headers, $url = '' ) {
+		// Split headers, on per array element.
+		if ( is_string($headers) ) {
+			// Tolerate line terminater: CRLF = LF (RFC 2616 19.3).
+			$headers = str_replace("\r\n", "\n", $headers);
+			/*
+			 * Unfold folded header fields. LWS = [CRLF] 1*( SP | HT ) <US-ASCII SP, space (32)>,
+			 * <US-ASCII HT, horizontal-tab (9)> (RFC 2616 2.2).
+			 */
+			$headers = preg_replace('/\n[ \t]/', ' ', $headers);
+			// Create the headers array.
+			$headers = explode("\n", $headers);
+		}
+
+		$response = array('code' => 0, 'message' => '');
+
+		/*
+		 * If a redirection has taken place, The headers for each page request may have been passed.
+		 * In this case, determine the final HTTP header and parse from there.
+		 */
+		for ( $i = count($headers)-1; $i >= 0; $i-- ) {
+			if ( !empty($headers[$i]) && false === strpos($headers[$i], ':') ) {
+				$headers = array_splice($headers, $i);
+				break;
+			}
+		}
+
+		$cookies = array();
+		$newheaders = array();
+		foreach ( (array) $headers as $tempheader ) {
+			if ( empty($tempheader) )
+				continue;
+
+			if ( false === strpos($tempheader, ':') ) {
+				$stack = explode(' ', $tempheader, 3);
+				$stack[] = '';
+				list( , $response['code'], $response['message']) = $stack;
+				continue;
+			}
+
+			list($key, $value) = explode(':', $tempheader, 2);
+
+			$key = strtolower( $key );
+			$value = trim( $value );
+
+			if ( isset( $newheaders[ $key ] ) ) {
+				if ( ! is_array( $newheaders[ $key ] ) )
+					$newheaders[$key] = array( $newheaders[ $key ] );
+				$newheaders[ $key ][] = $value;
+			} else {
+				$newheaders[ $key ] = $value;
+			}
+			if ( 'set-cookie' == $key )
+				$cookies[] = new WP_Http_Cookie( $value, $url );
+		}
+
+		return array('response' => $response, 'headers' => $newheaders, 'cookies' => $cookies);
+	}
+
+	/**
 	 * Takes the arguments for a ::request() and checks for the cookie array.
 	 *
 	 * If it's found, then it upgrades any basic name => value pairs to WP_Http_Cookie instances,
