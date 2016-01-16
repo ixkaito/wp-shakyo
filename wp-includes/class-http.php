@@ -402,7 +402,7 @@ class WP_Http {
 	}
 
 	/**
-	 * Transform header sring into an array.
+	 * Transform header string into an array.
 	 *
 	 * If an array is given then it is assumed to be raw header data with numeric keys with the
 	 * headers as the values. No headers must be passed that were already processed.
@@ -417,9 +417,9 @@ class WP_Http {
 	 * 					Then a numbered array is returned as the value of that header-key.
 	 */
 	public static function processHeaders( $headers, $url = '' ) {
-		// Split headers, on per array element.
+		// Split headers, one per array element.
 		if ( is_string($headers) ) {
-			// Tolerate line terminater: CRLF = LF (RFC 2616 19.3).
+			// Tolerate line terminator: CRLF = LF (RFC 2616 19.3).
 			$headers = str_replace("\r\n", "\n", $headers);
 			/*
 			 * Unfold folded header fields. LWS = [CRLF] 1*( SP | HT ) <US-ASCII SP, space (32)>,
