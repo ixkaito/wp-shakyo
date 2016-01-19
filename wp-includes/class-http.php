@@ -628,6 +628,42 @@ class WP_Http_Streams {
 class WP_Http_Curl {
 
 	/**
+	 * Temporary header storage for during requests.
+	 *
+	 * @since 3.2.0
+	 * @access private
+	 * @var string
+	 */
+	private $headers = '';
+
+	/**
+	 * Temporary body storage for during requests.
+	 *
+	 * @since 3.6.0
+	 * @access private
+	 * @var string
+	 */
+	private $body = '';
+
+	/**
+	 * The maximum amount of data to receive from the remote server.
+	 *
+	 * @since 3.6.0
+	 * @access private
+	 * @var int
+	 */
+	private $max_body_length = false;
+
+	/**
+	 * The file resource used for streaming to file.
+	 *
+	 * @since 3.6.0
+	 * @access private
+	 * @var resource
+	 */
+	private $stream_handle = false;
+
+	/**
 	 * Send a HTTP request to a URI using cURL extension.
 	 *
 	 * @access public
@@ -848,6 +884,47 @@ class WP_Http_Curl {
 		$response['body'] = $theBody;
 
 		return $response;
+	}
+
+	/**
+	 * Grab the headers of the cURL request
+	 *
+	 * Each header is sent individually to this callback, so we append to the $header property for temporary storage
+	 *
+	 * @since 3.2.0
+	 * @access private
+	 * @return int
+	 */
+	private function stream_headers( $handle, $headers ) {
+		$this->headers .= $headers;
+		return strlen( $headers );
+	}
+
+	/**
+	 * Grab the body of the cURL request
+	 *
+	 * The contents of the document are passed in chunks, so we append to the $body property for temporary storage.
+	 * Returning a length shorter than the length of $data passed in will cause cURL to abort the request as "completed"
+	 *
+	 * @since 3.6.0
+	 * @access private
+	 * @return int
+	 */
+	private function stream_body( $handle, $data ) {
+		$data_length = strlen( $data );
+
+		if ( $this->max_body_length && ( strlen( $this->body ) + $data_length ) > $this->max_body_length )
+			$data = substr( $data, 0, ( $this->max_body_length - $data_length ) );
+
+		if ( $this->stream_handle ) {
+			$bytes_written = fwrite( $this->stream_handle, $data );
+		} else {
+			$this->body .= $data;
+			$bytes_written = $data_length;
+		}
+
+		// Upon event of this function returning less than strlen( $data ) curl will error with CURLE_WRITE_ERROR.
+		return $bytes_written;
 	}
 
 	/**
