@@ -571,6 +571,54 @@ class WP_Http {
 			return !in_array( $check['host'], $accessible_hosts ); //Inverse logic, If it's in the array, then we can't access it.
 
 	}
+
+	/**
+	 * Handles HTTP Redirects and follows them if appropriate.
+	 *
+	 * @since 3.7.0
+	 *
+	 * @param string $url The URL which was requested.
+	 * @param array $args The Arguments which were used to make the request.
+	 * @param array $response The Response of the HTTP request.
+	 * @return false|object False if no redirect is present, a WP_HTTP or WP_Error result otherwise.
+	 */
+	public static function handle_redirects( $url, $args, $response ) {
+		// If no redirects are present, or, redirects were not requested, perform no action.
+		if ( ! isset( $response['headers']['location'] ) || 0 === $args['_redirection'] )
+			return false;
+
+		// Only perform redirections on redirection http codes.
+		if ( $response['response']['code'] > 399 || $response['response']['code'] < 300 )
+			return false;
+
+		// Don't redirect if we've run out of redirects.
+		if ( $args['redirection']-- <= 0 )
+			return new WP_Error( 'http_request_failed', __('Too many redirects.') );
+
+		$redirect_location = $response['headers']['location'];
+
+		// If there were multiple Location headers, use the last header specified.
+		if ( is_array( $redirect_location ) )
+			$redirect_location = array_pop( $redirect_location );
+
+		$redirect_location = WP_HTTP::make_absolute_url( $redirect_location, $url );
+
+		// POST requests should not POST to a redirected location.
+		if ( 'POST' == $args['method'] ) {
+			if ( in_array( $response['response']['code'], array( 302, 303 ) ) )
+				$args['method'] = 'GET';
+		}
+
+		// Include valid cookies in the redirect process.
+		if ( ! empty( $response['cookies'] ) ) {
+			foreach ( $response['cookies'] as $cookie ) {
+				if ( $cookie->test( $redirect_location ) )
+					$args['cookies'][] = $cookie;
+			}
+		}
+
+		return wp_remote_request( $redirect_location, $args );
+	}
 }
 
 /**
