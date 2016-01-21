@@ -1113,6 +1113,25 @@ class WP_Http_Encoding {
 	}
 
 	/**
+	 * Whether the content be decoded based on the headers.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param array|string $headers All of the available headers.
+	 * @return bool
+	 */
+	public static function should_decode($headers) {
+		if ( is_array( $headers ) ) {
+			if ( array_key_exists('content-encoding', $headers) && ! empty( $headers['content-encoding'] ) )
+				return true;
+		} else if ( is_string( $headers ) ) {
+			return ( stripos($headers, 'content-encoding:') !== false );
+		}
+
+		return false;
+	}
+
+	/**
 	 * Whether decompression and compression are supported by the PHP version.
 	 *
 	 * Each function is tested instead of checking for the zlib extension, to
