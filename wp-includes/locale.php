@@ -105,12 +105,12 @@ class WP_Locale {
 		$this->weekday[6] = /* translators: weekday */ __('Saturday');
 
 		// The first letter of each day. The _%day%_initial suffix is a hack to make
-		// Sure the day initials are unique.
+		// sure the day initials are unique.
 		$this->weekday_initial[__('Sunday')]    = /* translators: one-letter abbreviation of the weekday */ __('S_Sunday_initial');
 		$this->weekday_initial[__('Monday')]    = /* translators: one-letter abbreviation of the weekday */ __('M_Monday_initial');
 		$this->weekday_initial[__('Tuesday')]   = /* translators: one-letter abbreviation of the weekday */ __('T_Tuesday_initial');
 		$this->weekday_initial[__('Wednesday')] = /* translators: one-letter abbreviation of the weekday */ __('W_Wednesday_initial');
-		$this->weekday_initial[__('Thursday')]  = /* translators: one-letter abbreviation of the weekday */ __('T_Thurday_initial');
+		$this->weekday_initial[__('Thursday')]  = /* translators: one-letter abbreviation of the weekday */ __('T_Thursday_initial');
 		$this->weekday_initial[__('Friday')]    = /* translators: one-letter abbreviation of the weekday */ __('F_Friday_initial');
 		$this->weekday_initial[__('Saturday')]  = /* translators: one-letter abbreviation of the weekday */ __('S_Saturday_initial');
 
@@ -127,7 +127,7 @@ class WP_Locale {
 		$this->weekday_abbrev[__('Friday')]    = /* translators: three-letter abbreviation of the weekday */ __('Fri');
 		$this->weekday_abbrev[__('Saturday')]  = /* translators: three-letter abbreviation of the weekday */ __('Sat');
 
-		// The Moths
+		// The Months
 		$this->month['01'] = /* translators: month name */ __('January');
 		$this->month['02'] = /* translators: month name */ __('February');
 		$this->month['03'] = /* translators: month name */ __('March');
@@ -143,18 +143,18 @@ class WP_Locale {
 
 		// Abbreviations for each month. Uses the same hack as above to get around the
 		// 'May' duplication.
-		$this->month_abbrev[__('January')] = /* translators: month name */ __('Jan_January_abbreviation');
-		$this->month_abbrev[__('February')] = /* translators: month name */ __('Feb_February_abbreviation');
-		$this->month_abbrev[__('March')] = /* translators: month name */ __('Mar_March_abbreviation');
-		$this->month_abbrev[__('April')] = /* translators: month name */ __('Apr_April_abbreviation');
-		$this->month_abbrev[__('May')] = /* translators: month name */ __('May_May_abbreviation');
-		$this->month_abbrev[__('June')] = /* translators: month name */ __('Jun_June_abbreviation');
-		$this->month_abbrev[__('July')] = /* translators: month name */ __('Jul_July_abbreviation');
-		$this->month_abbrev[__('August')] = /* translators: month name */ __('Aug_August_abbreviation');
-		$this->month_abbrev[__('September')] = /* translators: month name */ __('Sep_September_abbreviation');
-		$this->month_abbrev[__('October')] = /* translators: month name */ __('Oct_October_abbreviation');
-		$this->month_abbrev[__('November')] = /* translators: month name */ __('Nov_November_abbreviation');
-		$this->month_abbrev[__('December')] = /* translators: month name */ __('Dec_December_abbreviation');
+		$this->month_abbrev[__('January')] = /* translators: three-letter abbreviation of the month */ __('Jan_January_abbreviation');
+		$this->month_abbrev[__('February')] = /* translators: three-letter abbreviation of the month */ __('Feb_February_abbreviation');
+		$this->month_abbrev[__('March')] = /* translators: three-letter abbreviation of the month */ __('Mar_March_abbreviation');
+		$this->month_abbrev[__('April')] = /* translators: three-letter abbreviation of the month */ __('Apr_April_abbreviation');
+		$this->month_abbrev[__('May')] = /* translators: three-letter abbreviation of the month */ __('May_May_abbreviation');
+		$this->month_abbrev[__('June')] = /* translators: three-letter abbreviation of the month */ __('Jun_June_abbreviation');
+		$this->month_abbrev[__('July')] = /* translators: three-letter abbreviation of the month */ __('Jul_July_abbreviation');
+		$this->month_abbrev[__('August')] = /* translators: three-letter abbreviation of the month */ __('Aug_August_abbreviation');
+		$this->month_abbrev[__('September')] = /* translators: three-letter abbreviation of the month */ __('Sep_September_abbreviation');
+		$this->month_abbrev[__('October')] = /* translators: three-letter abbreviation of the month */ __('Oct_October_abbreviation');
+		$this->month_abbrev[__('November')] = /* translators: three-letter abbreviation of the month */ __('Nov_November_abbreviation');
+		$this->month_abbrev[__('December')] = /* translators: three-letter abbreviation of the month */ __('Dec_December_abbreviation');
 
 		foreach ($this->month_abbrev as $month_ => $month_abbrev_) {
 			$this->month_abbrev[$month_] = preg_replace('/_.+_abbreviation$/', '', $month_abbrev_);
@@ -186,12 +186,12 @@ class WP_Locale {
 
 		if ( 'rtl' === $this->text_direction && strpos( $GLOBALS['wp_version'], '-src' ) ) {
 			$this->text_direction = 'ltr';
-			add_acction( 'all_admin_notices', array( $this, 'rtl_src_admin_notice' ) );
+			add_action( 'all_admin_notices', array( $this, 'rtl_src_admin_notice' ) );
 		}
 	}
 
 	function rtl_src_admin_notice() {
-		echo '<divl class="error"><p>' . 'THe <code>build</code> directory of the develop repository must be used for RGL.' . '</p></divl>';
+		echo '<div class="error"><p>' . 'The <code>build</code> directory of the develop repository must be used for RTL.' . '</p></div>';
 	}
 
 	/**
@@ -204,7 +204,7 @@ class WP_Locale {
 	 * @since 2.1.0
 	 * @access public
 	 *
-	 * @param int $weekday_number 0 for Sunday through 6 Sturday
+	 * @param int $weekday_number 0 for Sunday through 6 Saturday
 	 * @return string Full translated weekday
 	 */
 	function get_weekday($weekday_number) {
@@ -232,7 +232,7 @@ class WP_Locale {
 	/**
 	 * Retrieve the translated weekday abbreviation.
 	 *
-	 * The weekday abbreviation is retrieve by the translated
+	 * The weekday abbreviation is retrieved by the translated
 	 * full weekday word.
 	 *
 	 * @since 2.1.0
@@ -279,6 +279,21 @@ class WP_Locale {
 	 * @return string Translated abbreviated month
 	 */
 	function get_month_abbrev($month_name) {
+		return $this->month_abbrev[$month_name];
+	}
+
+	/**
+	 * Retrieve translated version of meridiem string.
+	 *
+	 * The $meridiem parameter is expected to not be translated.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param string $meridiem Either 'am', 'pm', 'AM', or 'PM'. Not translated version.
+	 * @return string Translated version
+	 */
+	function get_meridiem($meridiem) {
 		return $this->meridiem[$meridiem];
 	}
 
@@ -339,4 +354,15 @@ class WP_Locale {
 		/* translators: localized date and time format, see http://php.net/date */
 		__( 'F j, Y g:i a' );
 	}
+}
+
+/**
+ * Checks if current locale is RTL.
+ *
+ * @since 3.0.0
+ * @return bool Whether locale is RTL.
+ */
+function is_rtl() {
+	global $wp_locale;
+	return $wp_locale->is_rtl();
 }
