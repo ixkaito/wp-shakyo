@@ -10,3 +10,5 @@
  * @uses _WP_Dependency
  * @since r74
  */
+class WP_Dependencies {
+}
