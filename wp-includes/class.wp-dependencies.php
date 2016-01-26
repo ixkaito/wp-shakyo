@@ -17,8 +17,8 @@ class WP_Dependencies {
 	 * @access public
 	 * @since 2.1.0
 	 *
-	 * @param string $handle Name of the item. Should be uique.
-	 * @param string $list   Property name of list array
+	 * @param string $handle Name of the item. Should be unique.
+	 * @param string $list   Property name of list array.
 	 * @return bool Found, or object Item data.
 	 */
 	public function query( $handle, $list = 'registered' ) {
