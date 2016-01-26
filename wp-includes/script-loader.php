@@ -39,7 +39,7 @@ require( ABSPATH . WPINC . '/functions.wp-styles.php' );
 /**
  * Assign default styles to $styles object.
  *
- * nothing is returned, because the $styles parameter is passed by reference.
+ * Nothing is returned, because the $styles parameter is passed by reference.
  * Meaning that whatever object is passed will be updated without having to
  * reassign the variable that was passed back to the same value. This saves
  * memory.
@@ -49,7 +49,7 @@ require( ABSPATH . WPINC . '/functions.wp-styles.php' );
  *
  * @since 2.6.0
  *
- * @param object $tyles
+ * @param object $styles
  */
 function wp_default_styles( &$styles ) {
 	include( ABSPATH . WPINC . '/version.php' ); // include an unmodified $wp_version
