@@ -70,3 +70,13 @@ class WP_Dependencies {
 		return false;
 	}
 }
+
+/**
+ * Class _WP_Dependency
+ *
+ * Helper class to register a handle and associated data.
+ *
+ * @access private
+ * @since 2.6.0
+ */
+class _WP_Dependency {}
