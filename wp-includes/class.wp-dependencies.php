@@ -13,6 +13,59 @@
 class WP_Dependencies {
 
 	/**
+	 * Process the items and dependencies.
+	 *
+	 * Processes the items passed to it or the queue, and their dependencies.
+	 *
+	 * @access public
+	 * @since 2.1.0
+	 *
+	 * @param mixed $handles Optional. Items to be processed: Process queue (false), process item (string), process items (array of strings).
+	 * @param mixed $group   Group level: level (int), no groups (false).
+	 * @return array Handles of items that have been processed.
+	 */
+	public function do_items( $handles = false, $group = false ) {
+		/**
+		 * If nothing is passed, print the queue. If a string is passed,
+		 * print that item. If an array is passed, print those items.
+		 */
+		$handles = false === $handles ? $this->queue : (array) $handles;
+		$this->all_deps( $handles );
+
+		foreach( $this->to_do as $key => $handle ) {
+			if ( !in_array($handle, $this->done, true) && isset($this->registered[$handle]) ) {
+
+				/**
+				 * A single item may alias a set of items, by having dependencies,
+				 * but no source. Queuing the item queues the dependencies.
+				 *
+				 * Example: The extending class WP_Scripts is used to register 'scriptaculous' as a set of registered handles:
+				 *   <code>add( 'scriptaculous', false, array( 'scriptaculous-dragdrop', 'scriptaculous-slider', 'scriptaculous-controls' ) );</code>
+				 *
+				 * The src property is false.
+				**/
+				if ( ! $this->registered[$handle]->src ) {
+					$this->done[] = $handle;
+					continue;
+				}
+
+				/**
+				 * Attempt to process the item. If successful,
+				 * add the handle to the done array.
+				 *
+				 * Unset the item from the to_do array.
+				 */
+				if ( $this->do_item( $handle, $group ) )
+					$this->done[] = $handle;
+
+				unset( $this->to_do[$key] );
+			}
+		}
+
+		return $this->done;
+	}
+
+	/**
 	 * Register an item.
 	 *
 	 * Registers the item if no item of that name already exists.
