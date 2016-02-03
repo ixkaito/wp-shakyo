@@ -66,6 +66,64 @@ class WP_Dependencies {
 	}
 
 	/**
+	 * Determine dependencies.
+	 *
+	 * Recursively builds an array of items to process taking
+	 * dependencies into account. Does NOT catch infinite loops.
+	 *
+	 * @access public
+	 * @since 2.1.0
+	 *
+	 * @param mixed $handles   Item handle and argument (string) or item handles and arguments (array of strings).
+	 * @param bool  $recursion Internal flag that function is calling itself.
+	 * @param mixed $group     Group level: (int) level, (false) no groups.
+	 * @return bool True on success, false on failure.
+	 */
+	public function all_deps( $handles, $recursion = false, $group = false ) {
+		if ( !$handles = (array) $handles )
+			return false;
+
+		foreach ( $handles as $handle ) {
+			$handle_parts = explode('?', $handle);
+			$handle = $handle_parts[0];
+			$queued = in_array($handle, $this->to_do, true);
+
+			if ( in_array($handle, $this->done, true) ) // Already done
+				continue;
+
+			$moved = $this->set_group( $handle, $recursion, $group );
+
+			if ( $queued && !$moved ) // already queued and in the right group
+				continue;
+
+			$keep_going = true;
+			if ( !isset($this->registered[$handle]) )
+				$keep_going = false; // Item doesn't exist.
+			elseif ( $this->registered[$handle]->deps && array_diff($this->registered[$handle]->deps, array_keys($this->registered)) )
+				$keep_going = false; // Item requires dependencies that don't exist.
+			elseif ( $this->registered[$handle]->deps && !$this->all_deps( $this->registered[$handle]->deps, true, $group ) )
+				$keep_going = false; // Item requires dependencies that don't exist.
+
+			if ( ! $keep_going ) { // Either item or its dependencies don't exist.
+				if ( $recursion )
+					return false; // Abort this branch.
+				else
+					continue; // We're at the top level. Move on to the next one.
+			}
+
+			if ( $queued ) // Already grabbed it and its dependencies.
+				continue;
+
+			if ( isset($handle_parts[1]) )
+				$this->args[$handle] = $handle_parts[1];
+
+			$this->to_do[] = $handle;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Register an item.
 	 *
 	 * Registers the item if no item of that name already exists.
