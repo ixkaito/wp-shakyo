@@ -239,6 +239,7 @@ class WP_Dependencies {
 		$this->groups[$handle] = $group;
 		return true;
 	}
+
 }
 
 /**
