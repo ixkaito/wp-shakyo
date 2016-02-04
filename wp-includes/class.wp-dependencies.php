@@ -200,6 +200,32 @@ class WP_Dependencies {
 		}
 		return false;
 	}
+
+	/**
+	 * Set item group, unless already in a lower group.
+	 *
+	 * @access public
+	 * @since 2.8.0
+	 *
+	 * @param string $handle    Name of the item. Should be unique.
+	 * @param bool   $recursion Internal flag that calling function was called recursively.
+	 * @param mixed  $group     Group level.
+	 * @return bool Not already in the group or a lower group
+	 */
+	public function set_group( $handle, $recursion, $group ) {
+		$group = (int) $group;
+
+		if ( $recursion )
+			$group = min($this->group, $group);
+		else
+			$this->group = $group;
+
+		if ( isset($this->groups[$handle]) && $this->groups[$handle] <= $group )
+			return false;
+
+		$this->groups[$handle] = $group;
+		return true;
+	}
 }
 
 /**
