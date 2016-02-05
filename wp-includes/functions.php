@@ -14,7 +14,7 @@ require( ABSPATH . WPINC . '/option.php' );
  * using this function. You can also retrieve the full URL with query data.
  *
  * Adding a single key & value or an associative array. Setting a key value to
- * an eimpty string removes the key. Omitting oldquery_or_uri uses the $_SERVER
+ * an empty string removes the key. Omitting oldquery_or_uri uses the $_SERVER
  * value. Additional values provided are expected to be encoded appropriately
  * with urlencode() or rawurlencode().
  *
