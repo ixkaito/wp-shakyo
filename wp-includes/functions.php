@@ -8,6 +8,86 @@
 require( ABSPATH . WPINC . '/option.php' );
 
 /**
+ * Retrieve a modified URL query string.
+ *
+ * You can rebuild the URL and append a new query variable to the URL query by
+ * using this function. You can also retrieve the full URL with query data.
+ *
+ * Adding a single key & value or an associative array. Setting a key value to
+ * an eimpty string removes the key. Omitting oldquery_or_uri uses the $_SERVER
+ * value. Additional values provided are expected to be encoded appropriately
+ * with urlencode() or rawurlencode().
+ *
+ * @since 1.5.0
+ *
+ * @param string|array $param1 Either newkey or an associative_array.
+ * @param string       $param2 Either newvalue or oldquery or URI.
+ * @param string       $param3 Optional. Old query or URI.
+ * @return string New URL query string.
+ */
+function add_query_arg() {
+	$args = func_get_args();
+	if ( is_array( $args[0] ) ) {
+		if ( count( $args ) < 2 || false === $args[1] )
+			$uri = $_SERVER['REQUEST_URI'];
+		else
+			$uri = $args[1];
+	} else {
+		if ( count( $args ) < 3 || false === $args[2] )
+			$uri = $_SERVER['REQUEST_URI'];
+		else
+			$uri = $args[2];
+	}
+
+	if ( $frag = strstr( $uri, '#' ) )
+		$uri = substr( $uri, 0, -strlen( $frag ) );
+	else
+		$frag = '';
+
+	if ( 0 === stripos( $uri, 'http://' ) ) {
+		$protocol = 'http://';
+		$uri = substr( $uri, 7 );
+	} elseif ( 0 === stripos( $uri, 'https://' ) ) {
+		$protocol = 'https://';
+		$uri = substr( $uri, 8 );
+	} else {
+		$protocol = '';
+	}
+
+	if ( strpos( $uri, '?' ) !== false ) {
+		list( $base, $query ) = explode( '?', $uri, 2 );
+		$base .= '?';
+	} elseif ( $protocol || strpos( $uri, '=' ) === false ) {
+		$base = $uri . '?';
+		$query = '';
+	} else {
+		$base = '';
+		$query = $uri;
+	}
+
+	wp_parse_str( $query, $qs );
+	$qs = urlencode_deep( $qs ); // this re-URL-encodes things that were already in the query string
+	if ( is_array( $args[0] ) ) {
+		$kayvees = $args[0];
+		$qs = array_merge( $qs, $kayvees );
+	} else {
+		$qs[ $args[0] ] = $args[1];
+	}
+
+	foreach ( $qs as $k => $v ) {
+		if ( $v === false )
+			unset( $qs[$k] );
+	}
+
+	$ret = build_query( $qs );
+	$ret = trim( $ret, '?' );
+	$ret = preg_replace( '#=(&|$)#', '$1', $ret );
+	$ret = $protocol . $base . $ret . $frag;
+	$ret = rtrim( $ret, '?' );
+	return $ret;
+}
+
+/**
  * Walks the array while sanitizing the contents.
  *
  * @since 0.71
