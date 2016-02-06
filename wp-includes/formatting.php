@@ -434,3 +434,28 @@ function esc_attr( $text ) {
 	 */
 	return apply_filters( 'attribute_escape', $safe_text, $text );
 }
+
+/**
+ * Parses a string in to variables to be stored in an array.
+ *
+ * Uses {@link http:///www.php.net/parse_str parse_str()} and stripslashes if
+ * {@link http://www.php.net/magic_quotes magic_quotes_gpc} is on.
+ *
+ * @since 2.2.1
+ *
+ * @param string $string The string to be parsed.
+ * @param array $array Variables will be stored in this array.
+ */
+function wp_parse_str( $string, &$array ) {
+	parse_str( $string, $array );
+	if ( get_magic_quotes_gpc() )
+		$array = stripslashes_deep( $array );
+	/**
+	 * Filter the array of variables derived from a parsed string.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param array $array The array populated with variables.
+	 */
+	$array = apply_filters( 'wp_parse_str', $array );
+}
