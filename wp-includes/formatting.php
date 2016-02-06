@@ -436,9 +436,9 @@ function esc_attr( $text ) {
 }
 
 /**
- * Parses a string in to variables to be stored in an array.
+ * Parses a string into variables to be stored in an array.
  *
- * Uses {@link http:///www.php.net/parse_str parse_str()} and stripslashes if
+ * Uses {@link http://www.php.net/parse_str parse_str()} and stripslashes if
  * {@link http://www.php.net/magic_quotes magic_quotes_gpc} is on.
  *
  * @since 2.2.1
