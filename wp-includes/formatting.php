@@ -348,6 +348,20 @@ function untrailingslashit( $string ) {
 }
 
 /**
+ * Navigates through an array and encodes the values to be used in a URL.
+ *
+ *
+ * @since 2.2.0
+ *
+ * @param array|string $value The array or string to be encoded.
+ * @return array|string $value The encoded array (or string from the callback).
+ */
+function urlencode_deep($value) {
+	$value = is_array($value) ? array_map('urlencode_deep', $value) : urlencode($value);
+	return $value;
+}
+
+/**
  * Checks and cleans a URL.
  *
  * A number of characters are removed from the URL. If the URL is for displaying
