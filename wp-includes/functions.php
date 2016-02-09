@@ -34,7 +34,7 @@ function build_query( $data ) {
  *
  * @see http://us1.php.net/manual/en/function.http-build-query.php
  *
- * @param array|object  $data       An array or object or data. Converted to array.
+ * @param array|object  $data       An array or object of data. Converted to array.
  * @param string        $prefix     Optional. Numeric index. If set, start parameter numbering with it.
  *                                  Default null.
  * @param string        $sep        Optional. Argument separator; defaults to 'arg_separator.output'.
