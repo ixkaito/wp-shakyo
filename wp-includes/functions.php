@@ -1042,7 +1042,7 @@ function is_main_site( $site_id = null ) {
  * @see wp_kses()
  * @see esc_url()
  *
- * @return array Array of allowd protocols.
+ * @return array Array of allowed protocols.
  */
 function wp_allowed_protocols() {
 	static $protocols;
