@@ -243,6 +243,28 @@ class WP_Dependencies {
 	}
 
 	/**
+	 * Get extra item data.
+	 *
+	 * Gets data associated with a registered item.
+	 *
+	 * @access public
+	 * @since 3.3.0
+	 *
+	 * @param string $handle Name of the item. Should be unique.
+	 * @param string $key    The data key.
+	 * @return mixed Extra item data (string), false otherwise.
+	 */
+	public function get_data( $handle, $key ) {
+		if ( !isset( $this->registered[$handle] ) )
+			return false;
+
+		if ( !isset( $this->registered[$handle]->extra[$key] ) )
+			return false;
+
+		return $this->registered[$handle]->extra[$key];
+	}
+
+	/**
 	 * Query list for an item.
 	 *
 	 * @access public
