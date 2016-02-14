@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Defines constants and global variables that can be overridden, generally in wp-config.php.
@@ -39,7 +38,7 @@ function wp_initial_constants() {
 	if ( ! isset($blog_id) )
 		$blog_id = 1;
 
-	// Set memory limits.
+	// set memory limits.
 	if ( function_exists( 'memory_get_usage' ) ) {
 		$current_limit = @ini_get( 'memory_limit' );
 		$current_limit_int = intval( $current_limit );
@@ -85,7 +84,7 @@ function wp_initial_constants() {
 	// in their respective number of seconds.
 	define( 'MINUTE_IN_SECONDS', 60 );
 	define( 'HOUR_IN_SECONDS',   60 * MINUTE_IN_SECONDS );
-	define( 'DAY_IN_SECONDS',    24 * HOUR_IN_SECOND    );
+	define( 'DAY_IN_SECONDS',    24 * HOUR_IN_SECONDS   );
 	define( 'WEEK_IN_SECONDS',    7 * DAY_IN_SECONDS    );
 	define( 'YEAR_IN_SECONDS',  365 * DAY_IN_SECONDS    );
 }
@@ -107,7 +106,7 @@ function wp_plugin_directory_constants() {
 	 * @since 2.6.0
 	 */
 	if ( !defined('WP_PLUGIN_DIR') )
-		define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugin' ); // full path, no trailing slash
+		define( 'WP_PLUGIN_DIR', WP_CONTENT_DIR . '/plugins' ); // full path, no trailing slash
 
 	/**
 	 * Allows for the plugins directory to be moved from the default location.
@@ -182,7 +181,7 @@ function wp_cookie_constants() {
 	 * @since 2.0.0
 	 */
 	if ( !defined('PASS_COOKIE') )
-		define('PASS_COOKIE', 'wordpressuser_' . COOKIEHASH);
+		define('PASS_COOKIE', 'wordpresspass_' . COOKIEHASH);
 
 	/**
 	 * @since 2.5.0
@@ -295,7 +294,7 @@ function wp_functionality_constants() {
 }
 
 /**
- * Defineds templating related WordPress constants
+ * Defines templating related WordPress constants
  *
  * @since 3.0.0
  */
@@ -315,7 +314,7 @@ function wp_templating_constants() {
 	/**
 	 * Slug of the default theme for this install.
 	 * Used as the default theme when installing new sites.
-	 * Will be used as the fallback if the current them doesn't exist.
+	 * Will be used as the fallback if the current theme doesn't exist.
 	 * @since 3.0.0
 	 */
 	if ( !defined('WP_DEFAULT_THEME') )
