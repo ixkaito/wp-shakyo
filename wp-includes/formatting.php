@@ -500,7 +500,7 @@ function wp_parse_str( $string, &$array ) {
 }
 
 /**
- * Remove slashes from a string a array of strings.
+ * Remove slashes from a string or array of strings.
  *
  * This should be used to remove slashes from data passed to core API that
  * expects data to be unslashed.
