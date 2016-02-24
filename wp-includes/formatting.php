@@ -223,6 +223,32 @@ function utf8_uri_encode( $utf8_string, $length = 0 ) {
 }
 
 /**
+ * Sanitizes a string key.
+ *
+ * Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes and underscores are allowed.
+ *
+ * @since 3.0.0
+ *
+ * @param string $key String key
+ * @return string Sanitized key
+ */
+function sanitize_key( $key ) {
+	$raw_key = $key;
+	$key = strtolower( $key );
+	$key = preg_replace( '/[^a-z0-9_\-]/', '', $key );
+
+	/**
+	 * Filter a sanitized key string.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $key     Sanitized key.
+	 * @param string $raw_key The key prior to sanitization.
+	 */
+	return apply_filters( 'sanitize_key', $key, $raw_key );
+}
+
+/**
  * Sanitizes a title, replacing whitespace and a few other characters with dashes.
  *
  * Limits the output to alphanumeric characters, underscore (_) and dash (-).
@@ -289,32 +315,6 @@ function sanitize_title_with_dashes( $title, $raw_title = '', $context = 'displa
 }
 
 /**
- * Sanitizes a string key.
- *
- * Keys are used as internal identifiers. Lowercase alphanumeric characters, dashes and underscores are allowed.
- *
- * @since 3.0.0
- *
- * @param string $key String key
- * @return string Sanitized key
- */
-function sanitize_key( $key ) {
-	$raw_key = $key;
-	$key = strtolower( $key );
-	$key = preg_replace( '/[^a-z0-9_\-]/', '', $key );
-
-	/**
-	 * Filter a sanitized key string.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param string $key     Sanitized key.
-	 * @param string $raw_key The key prior to sanitization.
-	 */
-	return apply_filters( 'sanitize_key', $key, $raw_key );
-}
-
-/**
  * Appends a trailing slash.
  *
  * Will remove trailing forward and backslashes if it exists already before adding
@@ -345,6 +345,32 @@ function trailingslashit( $string ) {
  */
 function untrailingslashit( $string ) {
 	return rtrim( $string, '/\\' );
+}
+
+/**
+ * Navigates through an array and removes slashes from the values.
+ *
+ * If an array is passed, the array_map() function causes a callback to pass the
+ * value back to the function. The slashes from this value will removed.
+ *
+ * @since 2.0.0
+ *
+ * @param mixed $value The value to be stripped.
+ * @return mixed Stripped value.
+ */
+function stripslashes_deep($value) {
+	if ( is_array($value) ) {
+		$value = array_map('stripslashes_deep', $value);
+	} elseif ( is_object($value) ) {
+		$vars = get_object_vars( $value );
+		foreach ($vars as $key=>$data) {
+			$value->{$key} = stripslashes_deep( $data );
+		}
+	} elseif ( is_string( $value ) ) {
+		$value = stripslashes($value);
+	}
+
+	return $value;
 }
 
 /**
