@@ -28,7 +28,7 @@ function wp_cache_add( $key, $data, $group = '', $expire = 0 ) {
 }
 
 /**
- * Close the cache.
+ * Closes the cache.
  *
  * This function has ceased to do anything since WordPress 2.5. The
  * functionality was removed along with the rest of the persistent cache. This
