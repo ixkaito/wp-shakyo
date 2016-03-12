@@ -119,6 +119,25 @@ define( 'EP_ALL_ARCHIVES', EP_DATE | EP_YEAR | EP_MONTH | EP_DAY | EP_CATEGORIES
 define( 'EP_ALL', EP_PERMALINK | EP_ATTACHMENT | EP_ROOT | EP_COMMENTS | EP_SEARCH | EP_PAGES | EP_ALL_ARCHIVES );
 
 /**
+ * Filter the URL base for taxonomies.
+ *
+ * To remove any manually prepended /index.php/.
+ *
+ * @access private
+ * @since 2.6.0
+ *
+ * @param string $base The taxonomy base that we're going to filter
+ * @return string
+ */
+function _wp_filter_taxonomy_base( $base ) {
+	if ( !empty( $base ) ) {
+		$base = preg_replace( '|^/index\.php/|', '', $base );
+		$base = trim( $base, '/' );
+	}
+	return $base;
+}
+
+/**
  * WordPress Rewrite Component.
  *
  * The WordPress Rewrite class writes the rewrite module rules to the .htaccess
