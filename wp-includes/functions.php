@@ -1182,6 +1182,28 @@ function is_main_site( $site_id = null ) {
 }
 
 /**
+ * gmt_offset modification for smart timezone handling.
+ *
+ * Overrides the gmt_offset option if we have a timezone_string available.
+ *
+ * @since 2.8.0
+ *
+ * @return float|bool Timezone GMT offset, false otherwise.
+ */
+function wp_timezone_override_offset() {
+	if ( !$timezone_string = get_option( 'timezone_string' ) ) {
+		return false;
+	}
+
+	$timezone_object = timezone_open( $timezone_string );
+	$datetime_object = date_create();
+	if ( false === $timezone_object || false === $datetime_object ) {
+		return false;
+	}
+	return round( timezone_offset_get( $timezone_object, $datetime_object ) / HOUR_IN_SECONDS, 2 );
+}
+
+/**
  * Retrieve a list of protocols to allow in HTML attributes.
  *
  * @since 3.3.0
