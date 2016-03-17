@@ -68,6 +68,52 @@ function wp_next_scheduled( $hook, $args = array() ) {
 	return false;
 }
 
+/**
+ * Retrieve supported and filtered Cron recurrences.
+ *
+ * The supported recurrences are 'hourly' and 'daily'. A plugin may add more by
+ * hooking into the 'cron_schedules' filter. The filter accepts an array of
+ * arrays. The outer array has a key that is the name of the schedule or for
+ * example 'weekly'. The value is an array with two keys, one is 'interval' and
+ * the other is 'display'.
+ *
+ * The 'interval' is a number in seconds of when the cron job should run. So for
+ * 'hourly', the time is 3600 or 60*60. For weekly, the value would be
+ * 60*60*24*7 or 604800. The value of 'interval' would then be 604800.
+ *
+ * The 'display' is the description. For the 'weekly' key, the 'display' would
+ * be <code>__('Once Weekly')</code>.
+ *
+ * For your plugin, you will be passed an array. you can easily add your
+ * schedule by doing the following.
+ * <code>
+ * // filter parameter variable name is 'array'
+ *	$array['weekly'] = array(
+ *		'interval' => 604800,
+ *		'display' => __('Once Weekly')
+ *	);
+ * </code>
+ *
+ * @since 2.1.0
+ *
+ * @return array
+ */
+function wp_get_schedules() {
+	$schedules = array(
+		'hourly'     => array( 'interval' => HOUR_IN_SECONDS,      'display' => __( 'Once Hourly' ) ),
+		'twicedaily' => array( 'interval' => 12 * HOUR_IN_SECONDS, 'display' => __( 'Twice Daily' ) ),
+		'daily'      => array( 'interval' => DAY_IN_SECONDS,       'display' => __( 'Once Daily' ) ),
+	);
+	/**
+	 * Filter the non-default cron schedules.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param array $new_schedules An array of non-default cron schedules. Default empty.
+	 */
+	return array_merge( apply_filters( 'cron_schedules', array() ), $schedules );
+}
+
 //
 // Private functions
 //
