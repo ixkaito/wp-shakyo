@@ -155,6 +155,126 @@ function wp_load_alloptions() {
 }
 
 /**
+ * Update the value of an option that was already added.
+ *
+ * You do not need to serialize values. If the value needs to be serialized, then
+ * it will be serialized before it is inserted into the database. Remember,
+ * resources can not be serialized or added as an option.
+ *
+ * If the option does not exist, then the option will be added with the option
+ * value, but you will not be able to set whether it is autoloaded. If you want
+ * to set whether an option is autoloaded, then you need to use the add_option().
+ *
+ * @since 1.0.0
+ *
+ * @param string $option Option name. Expected to not be SQL-escaped.
+ * @param mixed $value Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+ * @return bool False if value was not updated and true if value was updated.
+ */
+function update_option( $option, $value ) {
+	global $wpdb;
+
+	$option = trim($option);
+	if ( empty($option) )
+		return false;
+
+	wp_protect_special_option( $option );
+
+	if ( is_object( $value ) )
+		$value = clone $value;
+
+	$value = sanitize_option( $option, $value );
+	$old_value = get_option( $option );
+
+	/**
+	 * Filter a specific option before its value is (maybe) serialized and updated.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 2.6.0
+	 *
+	 * @param mixed $value     The new, unserialized option value.
+	 * @param mixed $old_value The old option value.
+	 */
+	$value = apply_filters( 'pre_update_option_' . $option, $value, $old_value );
+
+	/**
+	 * Filter an option before its value is (maybe) serialized and updated.
+	 *
+	 * @since 3.9.0
+	 *
+	 * @param mixed  $value     The new, unserialized option value.
+	 * @param string $option    Name of the option.
+	 * @param mixed  $old_value The old option value.
+	 */
+	$value = apply_filters( 'pre_update_option', $value, $option, $old_value );
+
+	// If the new and old values are the same, no need to update.
+	if ( $value === $old_value )
+		return false;
+
+	if ( false === $old_value )
+		return add_option( $option, $value );
+
+	$serialized_value = maybe_serialize( $value );
+
+	/**
+	 * Fires immediately before an option value is updated.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param string $option    Name of the option to update.
+	 * @param mixed  $old_value The old option value.
+	 * @param mixed  $value     The new option value.
+	 */
+	do_action( 'update_option', $option, $old_value, $value );
+
+	$result = $wpdb->update( $wpdb->options, array( 'option_value' => $serialized_value ), array( 'option_name' => $option ) );
+	if ( ! $result )
+		return false;
+
+	$notoptions = wp_cache_get( 'notoptions', 'options' );
+	if ( is_array( $notoptions ) && isset( $notoptions[$option] ) ) {
+		unset( $notoptions[$option] );
+		wp_cache_set( 'notoptions', $notoptions, 'options' );
+	}
+
+	if ( ! defined( 'WP_INSTALLING' ) ) {
+		$alloptions = wp_load_alloptions();
+		if ( isset( $alloptions[$option] ) ) {
+			$alloptions[ $option ] = $serialized_value;
+			wp_cache_set( 'alloptions', $alloptions, 'options' );
+		} else {
+			wp_cache_set( $option, $serialized_value, 'options' );
+		}
+	}
+
+	/**
+	 * Fires after the value of a specific option has been successfully updated.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 2.0.1
+	 *
+	 * @param mixed $old_value The old option value.
+	 * @param mixed $value     The new option value.
+	 */
+	do_action( "update_option_{$option}", $old_value, $value );
+
+	/**
+	 * Fires after the value of an option has been successfully updated.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param string $option    Name of the updated option.
+	 * @param mixed  $old_value The old option value.
+	 * @param mixed  $value     The new option value.
+	 */
+	do_action( 'updated_option', $option, $old_value, $value );
+	return true;
+}
+
+/**
  * Retrieve site option value based on name of option.
  *
  * @since 2.8.0
