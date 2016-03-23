@@ -274,6 +274,21 @@ function add_magic_quotes( $array ) {
 }
 
 /**
+ * Set up the WordPress query.
+ *
+ * @since 2.0.0
+ *
+ * @param string $query_vars Default WP_Query arguments.
+ */
+function wp( $query_vars = '' ) {
+	global $wp, $wp_query, $wp_the_query;
+	$wp->main( $query_vars );
+
+	if ( !isset($wp_the_query) )
+		$wp_the_query = $wp_query;
+}
+
+/**
  * Retrieve the description for the HTTP status.
  *
  * @since 2.3.0
