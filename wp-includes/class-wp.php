@@ -103,4 +103,34 @@ class WP {
 	public function init() {
 		wp_get_current_user();
 	}
+
+	/**
+	 * Sets up all of the variables required by the WordPress environment.
+	 *
+	 * The action 'wp' has one parameter that references the WP object. It
+	 * allows for accessing the properties and methods to further manipulate the
+	 * object.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param string|array $query_args Passed to {@link parse_request()}
+	 */
+	public function main($query_args = '') {
+		$this->init();
+		$this->parse_request($query_args);
+		$this->send_headers();
+		$this->query_posts();
+		$this->handle_404();
+		$this->register_globals();
+
+		/**
+		 * Fires once the WordPress environment has been set up.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param WP &$this Current WordPress environment instance (passed by reference).
+		 */
+		do_action_ref_array( 'wp', array( &$this ) );
+	}
+
 }
