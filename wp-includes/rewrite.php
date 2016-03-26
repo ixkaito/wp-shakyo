@@ -507,6 +507,32 @@ class WP_Rewrite {
 
 		return false;
 	}
+
+	/**
+	 * Retrieve the rewrite rules.
+	 *
+	 * The difference between this method and {@link
+	 * WP_Rewrite::rewrite_rules()} is that this method stores the rewrite rules
+	 * in the 'rewrite_rules' option and retrieves it. This prevents having to
+	 * process all of the permalinks to get the rewrite rules in the form of
+	 * caching.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return array Rewrite rules.
+	 */
+	public function wp_rewrite_rules() {
+		$this->rules = get_option('rewrite_rules');
+		if ( empty($this->rules) ) {
+			$this->matches = 'matches';
+			$this->rewrite_rules();
+			update_option('rewrite_rules', $this->rules);
+		}
+
+		return $this->rules;
+	}
+
 	/**
 	 * Sets up the object's properties.
 	 *
