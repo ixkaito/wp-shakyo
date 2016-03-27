@@ -509,6 +509,212 @@ class WP_Rewrite {
 	}
 
 	/**
+	 * Construct rewrite matches and queries from permalink structure.
+	 *
+	 * Runs the action 'generate_rewrite_rules' with the parameter that is an
+	 * reference to the current WP_Rewrite instance to further manipulate the
+	 * permalink structures and rewrite rules. Runs the 'rewrite_rules_array'
+	 * filter on the full rewrite rule array.
+	 *
+	 * There are two ways to manipulate the rewrite rules, one by hooking into
+	 * the 'generate_rewrite_rules' action and gaining full control of the
+	 * object or just manipulating the rewrite rule array before it is passed
+	 * from the function.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return array An associate array of matches and queries.
+	 */
+	public function rewrite_rules() {
+		$rewrite = array();
+
+		if ( empty($this->permalink_structure) )
+			return $rewrite;
+
+		// robots.txt -only if installed at the root
+		$home_path = parse_url( home_url() );
+		$robots_rewrite = ( empty( $home_path['path'] ) || '/' == $home_path['path'] ) ? array( 'robots\.txt$' => $this->index . '?robots=1' ) : array();
+
+		// Old feed and service files
+		$deprecated_files = array(
+			'.*wp-(atom|rdf|rss|rss2|feed|commentsrss2)\.php$' => $this->index . '?feed=old',
+			'.*wp-app\.php(/.*)?$' => $this->index . '?error=403',
+		);
+
+		// Registration rules
+		$registration_pages = array();
+		if ( is_multisite() && is_main_site() ) {
+			$registration_pages['.*wp-signup.php$'] = $this->index . '?signup=true';
+			$registration_pages['.*wp-activate.php$'] = $this->index . '?activate=true';
+		}
+		$registration_pages['.*wp-register.php$'] = $this->index . '?register=true'; // Deprecated
+
+		// Post rewrite rules.
+		$post_rewrite = $this->generate_rewrite_rules( $this->permalink_structure, EP_PERMALINK );
+
+		/**
+		 * Filter rewrite rules used for "post" archives.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $post_rewrite The rewrite rules for posts.
+		 */
+		$post_rewrite = apply_filters( 'post_rewrite_rules', $post_rewrite );
+
+		// Date rewrite rules.
+		$date_rewrite = $this->generate_rewrite_rules($this->get_date_permastruct(), EP_DATE);
+
+		/**
+		 * Filter rewrite rules used for date archives.
+		 *
+		 * Likely date archives would include /yyyy/, /yyyy/mm/, and /yyyy/mm/dd/.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $date_rewrite The rewrite rules for date archives.
+		 */
+		$date_rewrite = apply_filters( 'date_rewrite_rules', $date_rewrite );
+
+		// Root-level rewrite rules.
+		$root_rewrite = $this->generate_rewrite_rules($this->root . '/', EP_ROOT);
+
+		/**
+		 * Filter rewrite rules used for root-level archives.
+		 *
+		 * Likely root-level archives would include pagination rules for the homepage
+		 * as well as site-wide post feeds (e.g. /feed/, and /feed/atom/).
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $root_rewrite The root-level rewrite rules.
+		 */
+		$root_rewrite = apply_filters( 'root_rewrite_rules', $root_rewrite );
+
+		// Comments rewrite rules.
+		$comments_rewrite = $this->generate_rewrite_rules($this->root . $this->comments_base, EP_COMMENTS, false, true, true, false);
+
+		/**
+		 * Filter rewrite rules used for comment feed archives.
+		 *
+		 * Likely comments feed archives include /comments/feed/, and /comments/feed/atom/.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $comments_rewrite The rewrite rules for the site-wide comments feeds.
+		 */
+		$comments_rewrite = apply_filters( 'comments_rewrite_rules', $comments_rewrite );
+
+		// Search rewrite rules.
+		$search_structure = $this->get_search_permastruct();
+		$search_rewrite = $this->generate_rewrite_rules($search_structure, EP_SEARCH);
+
+		/**
+		 * Filter rewrite rules used for search archives.
+		 *
+		 * Likely search-related archives include /search/search+query/ as well as
+		 * pagination and feed paths for a search.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $search_rewrite The rewrite rules for search queries.
+		 */
+		$search_rewrite = apply_filters( 'search_rewrite_rules', $search_rewrite );
+
+		// Author rewrite rules.
+		$author_rewrite = $this->generate_rewrite_rules($this->get_author_permastruct(), EP_AUTHORS);
+
+		/**
+		 * Filter rewrite rules used for author archives.
+		 *
+		 * Likely author archives would include /author/author-name/, as well as
+		 * pagination and feed paths for author archives.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $author_rewrite The rewrite rules for author archives.
+		 */
+		$author_rewrite = apply_filters( 'author_rewrite_rules', $author_rewrite );
+
+		// Pages rewrite rules.
+		$page_rewrite = $this->page_rewrite_rules();
+
+		/**
+		 * Filter rewrite rules used for "page" post type archives.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $page_rewrite The rewrite rules for the "page" post type.
+		 */
+		$page_rewrite = apply_filters( 'page_rewrite_rules', $page_rewrite );
+
+		// Extra permastructs.
+		foreach ( $this->extra_permastructs as $permastructname => $struct ) {
+			if ( is_array( $struct ) ) {
+				if ( count( $struct ) == 2 )
+					$rules = $this->generate_rewrite_rules( $struct[0], $struct[1] );
+				else
+					$rules = $this->generate_rewrite_rules( $struct['struct'], $struct['ep_mask'], $struct['paged'], $struct['feed'], $struct['forcomments'], $struct['walk_dirs'], $struct['endpoints'] );
+			} else {
+				$rules = $this->generate_rewrite_rules( $struct );
+			}
+
+			/**
+			 * Filter rewrite rules used for individual permastructs.
+			 *
+			 * The dynamic portion of the hook name, $permastructname, refers
+			 * to the name of the registered permastruct, e.g. 'post_tag' (tags),
+			 * 'category' (categories), etc.
+			 *
+			 * @since 3.1.0
+			 *
+			 * @param array $rules The rewrite rules generated for the current permastruct.
+			 */
+			$rules = apply_filters( $permastructname . '_rewrite_rules', $rules );
+			if ( 'post_tag' == $permastructname ) {
+
+				/**
+				 * Filter rewrite rules used specifically for Tags.
+				 *
+				 * @since 2.3.0
+				 * @deprecated 3.1.0 Use 'post_tag_rewrite_rules' instead
+				 *
+				 * @param array $rules The rewrite rules generated for tags.
+				 */
+				$rules = apply_filters( 'tag_rewrite_rules', $rules );
+			}
+
+			$this->extra_rules_top = array_merge($this->extra_rules_top, $rules);
+		}
+
+		// Put them together.
+		if ( $this->use_verbose_page_rules )
+			$this->rules = array_merge($this->extra_rules_top, $robots_rewrite, $deprecated_files, $registration_pages, $root_rewrite, $comments_rewrite, $search_rewrite,  $author_rewrite, $date_rewrite, $page_rewrite, $post_rewrite, $this->extra_rules);
+		else
+			$this->rules = array_merge($this->extra_rules_top, $robots_rewrite, $deprecated_files, $registration_pages, $root_rewrite, $comments_rewrite, $search_rewrite,  $author_rewrite, $date_rewrite, $post_rewrite, $page_rewrite, $this->extra_rules);
+
+		/**
+		 * Fires after the rewrite rules are generated.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param WP_Rewrite $this Current WP_Rewrite instance, passed by reference.
+		 */
+		do_action_ref_array( 'generate_rewrite_rules', array( &$this ) );
+
+		/**
+		 * Filter the full set of generated rewrite rules.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $this->rules The compiled array of rewrite rules.
+		 */
+		$this->rules = apply_filters( 'rewrite_rules_array', $this->rules );
+
+		return $this->rules;
+	}
+
+	/**
 	 * Retrieve the rewrite rules.
 	 *
 	 * The difference between this method and {@link
