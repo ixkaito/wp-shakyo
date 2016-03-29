@@ -974,6 +974,33 @@ function wp_parse_args( $args, $defaults = '' ) {
 }
 
 /**
+ * Filters a list of objects, based on a set of key => value arguments.
+ *
+ * @since 3.0.0
+ *
+ * @param array       $list     An array of objects to filter
+ * @param array       $args     Optional. An array of key => value arguments to match
+ *                              against each object. Default empty array.
+ * @param string      $operator Optional. The logical operation to perform. 'or' means
+ *                              only one element from the array needs to match; 'and'
+ *                              means all elements must match. Default 'and'.
+ * @param bool|string $field    A field from the object to place instead of the entire object.
+ *                              Default false.
+ * @return array A list of objects or object fields.
+ */
+function wp_filter_object_list( $list, $args = array(), $operator = 'and', $field = false ) {
+	if ( ! is_array( $list ) )
+		return array();
+
+	$list = wp_list_filter( $list, $args, $operator );
+
+	if ( $field )
+		$list = wp_list_pluck( $list, $field );
+
+	return $list;
+}
+
+/**
  * Flush all output buffers for PHP 5.2.
  *
  * Make sure all output buffers are flushed before our singletons are destroyed.
