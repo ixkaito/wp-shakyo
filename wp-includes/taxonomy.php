@@ -129,6 +129,27 @@ function create_initial_taxonomies() {
 add_action( 'init', 'create_initial_taxonomies', 0 ); // highest priority
 
 /**
+ * Get a list of registered taxonomy objects.
+ *
+ * @since 3.0.0
+ * @uses $wp_taxonomies
+ * @see register_taxonomy
+ *
+ * @param array $args An array of key => value arguments to match against the taxonomy objects.
+ * @param string $output The type of output to return, either taxonomy 'names' or 'objects'. 'names' is the default.
+ * @param string $operator The logical operation to perform. 'or' means only one element
+ *  from the array needs to match; 'and' means all elements must match. The default is 'and'.
+ * @return array A list of taxonomy names or objects
+ */
+function get_taxonomies( $args = array(), $output = 'names', $operator = 'and' ) {
+	global $wp_taxonomies;
+
+	$field = ('names' == $output) ? 'name' : false;
+
+	return wp_filter_object_list($wp_taxonomies, $args, $operator, $field);
+}
+
+/**
  * Create or modify a taxonomy object. Do not use before init.
  *
  * A simple function for creating or modifying a taxonomy object based on the
