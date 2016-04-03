@@ -323,6 +323,24 @@ function wp_parse_auth_cookie($cookie = '', $scheme = '') {
 }
 endif;
 
+if ( !function_exists('is_user_logged_in') ) :
+/**
+ * Checks if the current visitor is a logged in user.
+ *
+ * @since 2.0.0
+ *
+ * @return bool True if user is logged in, false if not logged in.
+ */
+function is_user_logged_in() {
+	$user = wp_get_current_user();
+
+	if ( ! $user->exists() )
+		return false;
+
+	return true;
+}
+endif;
+
 if ( !function_exists('wp_generate_password') ) :
 /**
  * Generates a random password drawn from the defined set of characters.
