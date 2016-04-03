@@ -322,6 +322,121 @@ class WP {
 	}
 
 	/**
+	 * Send additional HTTP headers for caching, content type, etc.
+	 *
+	 * Sets the X-Pingback header, 404 status (if 404), Content-type. If showing
+	 * a feed, it will also send last-modified, etag, and 304 status if needed.
+	 *
+	 * @since 2.0.0
+	 */
+	public function send_headers() {
+		$headers = array('X-Pingback' => get_bloginfo('pingback_url'));
+		$status = null;
+		$exit_required = false;
+
+		if ( is_user_logged_in() )
+			$headers = array_merge($headers, wp_get_nocache_headers());
+		if ( ! empty( $this->query_vars['error'] ) ) {
+			$status = (int) $this->query_vars['error'];
+			if ( 404 === $status ) {
+				if ( ! is_user_logged_in() )
+					$headers = array_merge($headers, wp_get_nocache_headers());
+				$headers['Content-Type'] = get_option('html_type') . '; charset=' . get_option('blog_charset');
+			} elseif ( in_array( $status, array( 403, 500, 502, 503 ) ) ) {
+				$exit_required = true;
+			}
+		} else if ( empty($this->query_vars['feed']) ) {
+			$headers['Content-Type'] = get_option('html_type') . '; charset=' . get_option('blog_charset');
+		} else {
+			// We're showing a feed, so WP is indeed the only thing that last changed
+			if ( !empty($this->query_vars['withcomments'])
+				|| false !== strpos( $this->query_vars['feed'], 'comments-' )
+				|| ( empty($this->query_vars['withoutcomments'])
+					&& ( !empty($this->query_vars['p'])
+						|| !empty($this->query_vars['name'])
+						|| !empty($this->query_vars['page_id'])
+						|| !empty($this->query_vars['pagename'])
+						|| !empty($this->query_vars['attachment'])
+						|| !empty($this->query_vars['attachment_id'])
+					)
+				)
+			)
+				$wp_last_modified = mysql2date('D, d M Y H:i:s', get_lastcommentmodified('GMT'), 0).' GMT';
+			else
+				$wp_last_modified = mysql2date('D, d M Y H:i:s', get_lastpostmodified('GMT'), 0).' GMT';
+			$wp_etag = '"' . md5($wp_last_modified) . '"';
+			$headers['Last-Modified'] = $wp_last_modified;
+			$headers['ETag'] = $wp_etag;
+
+			// Support for Conditional GET
+			if (isset($_SERVER['HTTP_IF_NONE_MATCH']))
+				$client_etag = wp_unslash( $_SERVER['HTTP_IF_NONE_MATCH'] );
+			else $client_etag = false;
+
+			$client_last_modified = empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? '' : trim($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+			// If string is empty, return 0. If not, attempt to parse into a timestamp
+			$client_modified_timestamp = $client_last_modified ? strtotime($client_last_modified) : 0;
+
+			// Make a timestamp for our most recent modification...
+			$wp_modified_timestamp = strtotime($wp_last_modified);
+
+			if ( ($client_last_modified && $client_etag) ?
+					 (($client_modified_timestamp >= $wp_modified_timestamp) && ($client_etag == $wp_etag)) :
+					 (($client_modified_timestamp >= $wp_modified_timestamp) || ($client_etag == $wp_etag)) ) {
+				$status = 304;
+				$exit_required = true;
+			}
+		}
+
+		/**
+		 * Filter the HTTP headers before they're sent to the browser.
+		 *
+		 * @since 2.8.0
+		 *
+		 * @param array $headers The list of headers to be sent.
+		 * @param WP    $this    Current WordPress environment instance.
+		 */
+		$headers = apply_filters( 'wp_headers', $headers, $this );
+
+		if ( ! empty( $status ) )
+			status_header( $status );
+
+		// If Last-Modified is set to false, it should not be sent (no-cache situation).
+		if ( isset( $headers['Last-Modified'] ) && false === $headers['Last-Modified'] ) {
+			unset( $headers['Last-Modified'] );
+
+			// In PHP 5.3+, make sure we are not sending a Last-Modified header.
+			if ( function_exists( 'header_remove' ) ) {
+				@header_remove( 'Last-Modified' );
+			} else {
+				// In PHP 5.2, send an empty Last-Modified header, but only as a
+				// last resort to override a header already sent. #WP23021
+				foreach ( headers_list() as $header ) {
+					if ( 0 === stripos( $header, 'Last-Modified' ) ) {
+						$headers['Last-Modified'] = '';
+						break;
+					}
+				}
+			}
+		}
+
+		foreach( (array) $headers as $name => $field_value )
+			@header("{$name}: {$field_value}");
+
+		if ( $exit_required )
+			exit();
+
+		/**
+		 * Fires once the requested HTTP headers for caching, content type, etc. have been sent.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param WP &$this Current WordPress environment instance (passed by reference).
+		 */
+		do_action_ref_array( 'send_headers', array( &$this ) );
+	}
+
+	/**
 	 * Set up the current user.
 	 *
 	 * @since 2.0.0
