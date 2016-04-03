@@ -336,6 +336,18 @@ class WP_User {
 	}
 
 	/**
+	 * Determine whether the user exists in the database.
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @return bool True if user exists in the database, false if not.
+	 */
+	public function exists() {
+		return ! empty( $this->ID );
+	}
+
+	/**
 	 * Whether user has capability or role name.
 	 *
 	 * This is useful for looking up whether the user has a specific role
