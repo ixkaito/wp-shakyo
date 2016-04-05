@@ -446,6 +446,18 @@ class WP {
 	}
 
 	/**
+	 * Set up the Loop based on the query variables.
+	 *
+	 * @uses WP::$query_vars
+	 * @since 2.0.0
+	 */
+	public function query_posts() {
+		global $wp_the_query;
+		$this->build_query_string();
+		$wp_the_query->query($this->query_vars);
+ 	}
+
+	/**
 	 * Sets up all of the variables required by the WordPress environment.
 	 *
 	 * The action 'wp' has one parameter that references the WP object. It
