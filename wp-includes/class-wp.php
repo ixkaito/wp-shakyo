@@ -437,6 +437,39 @@ class WP {
 	}
 
 	/**
+	 * Sets the query string property based off of the query variable property.
+	 *
+	 * The 'query_string' filter is deprecated, but still works. Plugins should
+	 * use the 'request' filter instead.
+	 *
+	 * @since 2.0.0
+	 */
+	public function build_query_string() {
+		$this->query_string = '';
+		foreach ( (array) array_keys($this->query_vars) as $wpvar) {
+			if ( '' != $this->query_vars[$wpvar] ) {
+				$this->query_string .= (strlen($this->query_string) < 1) ? '' : '&';
+				if ( !is_scalar($this->query_vars[$wpvar]) ) // Discard non-scalars.
+					continue;
+				$this->query_string .= $wpvar . '=' . rawurlencode($this->query_vars[$wpvar]);
+			}
+		}
+
+		if ( has_filter( 'query_string' ) ) {  // Don't bother filtering and parsing if no plugins are hooked in.
+			/**
+			 * Filter the query string before parsing.
+			 *
+			 * @since 1.5.0
+			 * @deprecated 2.1.0 Use 'query_vars' or 'request' filters instead.
+			 *
+			 * @param string $query_string The query string to modify.
+			 */
+			$this->query_string = apply_filters( 'query_string', $this->query_string );
+			parse_str($this->query_string, $this->query_vars);
+		}
+	}
+
+	/**
 	 * Set up the current user.
 	 *
 	 * @since 2.0.0
