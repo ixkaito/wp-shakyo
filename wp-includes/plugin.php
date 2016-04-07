@@ -89,6 +89,57 @@ function add_filter( $tag, $function_to_add, $priority = 10, $accepted_args = 1 
 }
 
 /**
+ * Check if any filter has been registered for a hook.
+ *
+ * @since 2.5.0
+ *
+ * @global array $wp_filter Stores all of the filters.
+ *
+ * @param string        $tag               The name of the filter hook.
+ * @param callback|bool $function_to_check Optional. The callback to check for. Default false.
+ * @return bool|int If $function_to_check is omitted, returns boolean for whether the hook has
+ *                  anything registered. When checking a specific function, the priority of that
+ *                  hook is returned, or false if the function is not attached. When using the
+ *                  $function_to_check argument, this function may return a non-boolean value
+ *                  that evaluates to false (e.g.) 0, so use the === operator for testing the
+ *                  return value.
+ */
+function has_filter($tag, $function_to_check = false) {
+	// Don't reset the internal array pointer
+	$wp_filter = $GLOBALS['wp_filter'];
+
+	$has = ! empty( $wp_filter[ $tag ] );
+
+	// Make sure at least one priority has a filter callback
+	if ( $has ) {
+		$exists = false;
+		foreach ( $wp_filter[ $tag ] as $callbacks ) {
+			if ( ! empty( $callbacks ) ) {
+				$exists = true;
+				break;
+			}
+		}
+
+		if ( ! $exists ) {
+			$has = false;
+		}
+	}
+
+	if ( false === $function_to_check || false == $has )
+		return $has;
+
+	if ( !$idx = _wp_filter_build_unique_id($tag, $function_to_check, false) )
+		return false;
+
+	foreach ( (array) array_keys($wp_filter[$tag]) as $priority ) {
+		if ( isset($wp_filter[$tag][$priority][$idx]) )
+			return $priority;
+	}
+
+	return false;
+}
+
+/**
  * Call the functions added to a filter hook.
  *
  * The callback functions attached to filter hook $tag are invoked by calling
