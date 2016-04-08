@@ -222,6 +222,61 @@ function apply_filters( $tag, $value ) {
 }
 
 /**
+ * Execute functions hooked on a specific filter hook, specifying arguments in an array.
+ *
+ * @see apply_filters() This function is identical, but the arguments passed to the
+ * functions hooked to <tt>$tag</tt> are supplied using an array.
+ *
+ * @since 3.0.0
+ *
+ * @global array $wp_filter         Stores all of the filters
+ * @global array $merged_filters    Merges the filter hooks using this function.
+ * @global array $wp_current_filter Stores the list of current filters with the current one last
+ *
+ * @param string $tag  The name of the filter hook.
+ * @param array  $args The arguments supplied to the functions hooked to $tag.
+ * @return mixed The filtered value after all hooked functions are applied to it.
+ */
+function apply_filters_ref_array($tag, $args) {
+	global $wp_filter, $merged_filters, $wp_current_filter;
+
+	// Do 'all' actions first
+	if ( isset($wp_filter['all']) ) {
+		$wp_current_filter[] = $tag;
+		$all_args = func_get_args();
+		_wp_call_all_hook($all_args);
+	}
+
+	if ( !isset($wp_filter[$tag]) ) {
+		if ( isset($wp_filter['all']) )
+			array_pop($wp_current_filter);
+		return $args[0];
+	}
+
+	if ( !isset($wp_filter['all']) )
+		$wp_current_filter[] = $tag;
+
+	// Sort
+	if ( !isset( $merged_filters[ $tag ] ) ) {
+		ksort($wp_filter[$tag]);
+		$merged_filters[ $tag ] = true;
+	}
+
+	reset( $wp_filter[ $tag ] );
+
+	do {
+		foreach( (array) current($wp_filter[$tag]) as $the_ )
+			if ( !is_null($the_['function']) )
+				$args[0] = call_user_func_array($the_['function'], array_slice($args, 0, (int) $the_['accepted_args']));
+
+	} while ( next($wp_filter[$tag]) !== false );
+
+	array_pop( $wp_current_filter );
+
+	return $args[0];
+}
+
+/**
  * Removes a function from a specified filter hook.
  *
  * This function removes a function attached to a specified filter hook. This
