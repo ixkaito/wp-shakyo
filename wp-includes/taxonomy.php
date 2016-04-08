@@ -387,3 +387,98 @@ function get_taxonomy_labels( $tax ) {
 
 	return _get_custom_object_labels( $tax, $nohier_vs_hier_defaults );
 }
+
+/**
+ * Container class for a multiple taxonomy query.
+ *
+ * @since 3.1.0
+ */
+class WP_Tax_Query {
+
+	/**
+	 * List of taxonomy queries. A single taxonomy query is an associative array:
+	 * - 'taxonomy' string The taxonomy being queried. Optional when using the term_taxonomy_id field.
+	 * - 'terms' string|array The list of terms
+	 * - 'field' string (optional) Which term field is being used.
+	 *		Possible values: 'term_id', 'slug', 'name', or 'term_taxonomy_id'
+	 *		Default: 'term_id'
+	 * - 'operator' string (optional)
+	 *		Possible values: 'AND', 'IN' or 'NOT IN'.
+	 *		Default: 'IN'
+	 * - 'include_children' bool (optional) Whether to include child terms. Requires that a taxonomy be specified.
+	 *		Default: true
+	 *
+	 * @since 3.1.0
+	 * @access public
+	 * @var array
+	 */
+	public $queries = array();
+
+	/**
+	 * The relation between the queries. Can be one of 'AND' or 'OR'.
+	 *
+	 * @since 3.1.0
+	 * @access public
+	 * @var string
+	 */
+	public $relation;
+
+	/**
+	 * Standard response when the query should not return any rows.
+	 *
+	 * @since 3.2.0
+	 * @access private
+	 * @var string
+	 */
+	private static $no_results = array( 'join' => '', 'where' => ' AND 0 = 1' );
+
+	/**
+	 * Constructor.
+	 *
+	 * Parses a compact tax query and sets defaults.
+	 *
+	 * @since 3.1.0
+	 * @access public
+	 *
+	 * @param array $tax_query A compact tax query:
+	 *  array(
+	 *    'relation' => 'OR',
+	 *    array(
+	 *      'taxonomy' => 'tax1',
+	 *      'terms' => array( 'term1', 'term2' ),
+	 *      'field' => 'slug',
+	 *    ),
+	 *    array(
+	 *      'taxonomy' => 'tax2',
+	 *      'terms' => array( 'term-a', 'term-b' ),
+	 *      'field' => 'slug',
+	 *    ),
+	 *  )
+	 */
+	public function __construct( $tax_query ) {
+		if ( isset( $tax_query['relation'] ) && strtoupper( $tax_query['relation'] ) == 'OR' ) {
+			$this->relation = 'OR';
+		} else {
+			$this->relation = 'AND';
+		}
+
+		$defaults = array(
+			'taxonomy' => '',
+			'terms' => array(),
+			'include_children' => true,
+			'field' => 'term_id',
+			'operator' => 'IN',
+		);
+
+		foreach ( $tax_query as $query ) {
+			if ( ! is_array( $query ) )
+				continue;
+
+			$query = array_merge( $defaults, $query );
+
+			$query['terms'] = (array) $query['terms'];
+
+			$this->queries[] = $query;
+		}
+	}
+}
