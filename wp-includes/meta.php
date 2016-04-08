@@ -68,4 +68,32 @@ class WP_Meta_Query {
 			$this->queries[] = $query;
 		}
 	}
+
+	/**
+	 * Constructs a meta query based on 'meta_*' query vars
+	 *
+	 * @since 3.2.0
+	 * @access public
+	 *
+	 * @param array $qv The query variables
+	 */
+	public function parse_query_vars( $qv ) {
+		$meta_query = array();
+
+		// Simple query needs to be first for orderby=meta_value to work correctly
+		foreach ( array( 'key', 'compare', 'type' ) as $key ) {
+			if ( !empty( $qv[ "meta_$key" ] ) )
+				$meta_query[0][ $key ] = $qv[ "meta_$key" ];
+		}
+
+		// WP_Query sets 'meta_value' = '' by default
+		if ( isset( $qv[ 'meta_value' ] ) && '' !== $qv[ 'meta_value' ] && ( ! is_array( $qv[ 'meta_value' ] ) || $qv[ 'meta_value' ] ) )
+			$meta_query[0]['value'] = $qv[ 'meta_value' ];
+
+		if ( !empty( $qv['meta_query'] ) && is_array( $qv['meta_query'] ) ) {
+			$meta_query = array_merge( $meta_query, $qv['meta_query'] );
+		}
+
+		$this->__construct( $meta_query );
+	}
 }
