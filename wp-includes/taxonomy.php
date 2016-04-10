@@ -481,4 +481,96 @@ class WP_Tax_Query {
 			$this->queries[] = $query;
 		}
 	}
+
+	/**
+	 * Generates SQL clauses to be appended to a main query.
+	 *
+	 * @since 3.1.0
+	 * @access public
+	 *
+	 * @param string $primary_table
+	 * @param string $primary_id_column
+	 * @return array
+	 */
+	public function get_sql( $primary_table, $primary_id_column ) {
+		global $wpdb;
+
+		$join = '';
+		$where = array();
+		$i = 0;
+		$count = count( $this->queries );
+
+		foreach ( $this->queries as $index => $query ) {
+			$this->clean_query( $query );
+
+			if ( is_wp_error( $query ) ) {
+				return self::$no_results;
+			}
+
+			$terms = $query['terms'];
+			$operator = strtoupper( $query['operator'] );
+
+			if ( 'IN' == $operator ) {
+
+				if ( empty( $terms ) ) {
+					if ( 'OR' == $this->relation ) {
+						if ( ( $index + 1 === $count ) && empty( $where ) ) {
+							return self::$no_results;
+						}
+						continue;
+					} else {
+						return self::$no_results;
+					}
+				}
+
+				$terms = implode( ',', $terms );
+
+				$alias = $i ? 'tt' . $i : $wpdb->term_relationships;
+
+				$join .= " INNER JOIN $wpdb->term_relationships";
+				$join .= $i ? " AS $alias" : '';
+				$join .= " ON ($primary_table.$primary_id_column = $alias.object_id)";
+
+				$where[] = "$alias.term_taxonomy_id $operator ($terms)";
+			} elseif ( 'NOT IN' == $operator ) {
+
+				if ( empty( $terms ) ) {
+					continue;
+				}
+
+				$terms = implode( ',', $terms );
+
+				$where[] = "$primary_table.$primary_id_column NOT IN (
+					SELECT object_id
+					FROM $wpdb->term_relationships
+					WHERE term_taxonomy_id IN ($terms)
+				)";
+			} elseif ( 'AND' == $operator ) {
+
+				if ( empty( $terms ) ) {
+					continue;
+				}
+
+				$num_terms = count( $terms );
+
+				$terms = implode( ',', $terms );
+
+				$where[] = "(
+					SELECT COUNT(1)
+					FROM $wpdb->term_relationships
+					WHERE term_taxonomy_id IN ($terms)
+					AND object_id = $primary_table.$primary_id_column
+				) = $num_terms";
+			}
+
+			$i++;
+		}
+
+		if ( ! empty( $where ) ) {
+			$where = ' AND ( ' . implode( " $this->relation ", $where ) . ' )';
+		} else {
+			$where = '';
+		}
+		return compact( 'join', 'where' );
+	}
 }
