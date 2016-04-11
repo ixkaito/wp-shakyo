@@ -274,6 +274,27 @@ function register_post_status( $post_status, $args = array() ) {
 }
 
 /**
+ * Retrieve a post type object by name.
+ *
+ * @since 3.0.0
+ *
+ * @global array $wp_post_types List of post types.
+ *
+ * @see register_post_type()
+ *
+ * @param string $post_type The name of a registered post type.
+ * @return object A post type object.
+ */
+function get_post_type_object( $post_type ) {
+	global $wp_post_types;
+
+	if ( empty($wp_post_types[$post_type]) )
+		return null;
+
+	return $wp_post_types[$post_type];
+}
+
+/**
  * Get a list of all registered post type objects.
  *
  * @since 2.9.0
