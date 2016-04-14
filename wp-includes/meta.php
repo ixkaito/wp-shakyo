@@ -82,6 +82,82 @@ function get_metadata($meta_type, $object_id, $meta_key = '', $single = false) {
 }
 
 /**
+ * Update the metadata cache for the specified objects.
+ *
+ * @since 2.9.0
+ * @uses $wpdb WordPress database objct for queries.
+ *
+ * @param string $meta_type Type of obejct metadata is for (e.g., comment, post, or user)
+ * @param int|array $object_ids array or comma delimited list of object IDs to update cache for
+ * @return mixed Metadata cache for the specified objects, or false on failure.
+ */
+function update_meta_cache($meta_type, $object_ids) {
+	global $wpdb;
+
+	if ( ! $meta_type || ! $object_ids ) {
+		return false;
+	}
+
+	$table = _get_meta_table( $meta_type );
+	if ( ! $table ) {
+		return false;
+	}
+
+	$column = sanitize_key($meta_type . '_id');
+
+	if ( !is_array($object_ids) ) {
+		$object_ids = preg_replace('|[^0-9,]|', '', $object_ids);
+		$object_ids = explode(',', $object_ids);
+	}
+
+	$object_ids = array_map('intval', $object_ids);
+
+	$cache_key = $meta_type . '_meta';
+	$ids = array();
+	$cache = array();
+	foreach ( $object_ids as $id ) {
+		$cached_object = wp_cache_get( $id, $cache_key );
+		if ( false === $cached_object )
+			$ids[] = $id;
+		else
+			$cache[$id] = $cached_object;
+	}
+
+	if ( empty( $ids ) )
+		return $cache;
+
+	// Get meta info
+	$id_list = join( ',', $ids );
+	$id_column = 'user' == $meta_type ? 'umeta_id' : 'meta_id';
+	$meta_list = $wpdb->get_results( "SELECT $column, meta_key, meta_value FROM $table WHERE $column IN ($id_list) ORDER BY $id_column ASC", ARRAY_A );
+
+	if ( !empty($meta_list) ) {
+		foreach ( $meta_list as $metarow) {
+			$mpid = intval($metarow[$column]);
+			$mkey = $metarow['meta_key'];
+			$mval = $metarow['meta_value'];
+
+			// Force subkeys to be array type:
+			if ( !isset($cache[$mpid]) || !is_array($cache[$mpid]) )
+				$cache[$mpid] = array();
+			if ( !isset($cache[$mpid][$mkey]) || !is_array($cache[$mpid][$mkey]) )
+				$cache[$mpid][$mkey] = array();
+
+			// Add a value to the current pid/key:
+			$cache[$mpid][$mkey][] = $mval;
+		}
+	}
+
+	foreach ( $ids as $id ) {
+		if ( ! isset($cache[$id]) )
+			$cache[$id] = array();
+		wp_cache_add( $id, $cache[$id], $cache_key );
+	}
+
+	return $cache;
+}
+
+/**
  * Container class for a multiple metadata query
  *
  * @since 3.2.0
