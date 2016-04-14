@@ -1045,6 +1045,62 @@ function wp_list_filter( $list, $args = array(), $operator = 'AND' ) {
 }
 
 /**
+ * Pluck a certain field out of each object in a list.
+ *
+ * This has the same functionality and prototype of
+ * array_column() (PHP 5.5) but also supports objects.
+ *
+ * @since 3.1.0
+ * @since 4.0.0 $index_key parameter added.
+ *
+ * @param array      $list      List of objects or arrays
+ * @param int|string $field     Field from the object to place instead of the entire object
+ * @param int|string $index_key Optional. Field from the object to use as keys for the new array.
+ *                              Default null.
+ * @return array Array of found values. If $index_key is set, an array of found values with keys
+ *               corresponding to $index_key.
+ */
+function wp_list_pluck( $list, $field, $index_key = null ) {
+	if ( ! $index_key ) {
+		/*
+		 * This is simple. Could at some point wrap array_column()
+		 * if we knew we had an array of arrays.
+		 */
+		foreach ( $list as $key => $value ) {
+			if ( is_object( $value ) ) {
+				$list[ $key ] = $value->$field;
+			} else {
+				$list[ $key ] = $value[ $field ];
+			}
+		}
+		return $list;
+	}
+
+	/*
+	 * When index_key is not set for a particular item, push the value
+	 * to the end of the stack. This is how array_column() behaves.
+	 */
+	$newlist = array();
+	foreach ( $list as $value ) {
+		if ( is_object( $value ) ) {
+			if ( isset( $value->$index_key ) ) {
+				$newlist[ $value->$index_key ] = $value->$field;
+			} else {
+				$newlist[] = $value->$field;
+			}
+		} else {
+			if ( isset( $value[ $index_key ] ) ) {
+				$newlist[ $value[ $index_key ] ] = $value[ $field ];
+			} else {
+				$newlist[] = $value[ $field ];
+			}
+		}
+	}
+
+	return $newlist;
+}
+
+/**
  * Flush all output buffers for PHP 5.2.
  *
  * Make sure all output buffers are flushed before our singletons are destroyed.
