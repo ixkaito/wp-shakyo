@@ -65,3 +65,44 @@ function sanitize_comment_cookies() {
 		$_COOKIE['comment_author_url_'.COOKIEHASH] = $comment_author_url;
 	}
 }
+
+//
+// Internal
+//
+
+/**
+ * Close comments on old posts on the fly, without any extra DB queries. Hooked to the_posts.
+ *
+ * @access private
+ * @since 2.7.0
+ *
+ * @param object $posts Post data object.
+ * @param object $query Query object.
+ * @return object
+ */
+function _close_comments_for_old_posts( $posts, $query ) {
+	if ( empty( $posts ) || ! $query->is_singular() || ! get_option( 'close_comments_for_old_posts' ) )
+		return $posts;
+
+	/**
+	 * Filter the list of post types to automatically close comments for.
+	 *
+	 * @since 3.2.0
+	 *
+	 * @param array $post_types An array of registered post types. Default array with 'post'.
+	 */
+	$post_types = apply_filters( 'close_comments_for_post_types', array( 'post' ) );
+	if ( ! in_array( $posts[0]->post_type, $post_types ) )
+		return $posts;
+
+	$days_old = (int) get_option( 'close_comments_days_old' );
+	if ( ! $days_old )
+		return $posts;
+
+	if ( time() - strtotime( $posts[0]->post_date_gmt ) > ( $days_old * DAY_IN_SECONDS ) ) {
+		$posts[0]->comment_status = 'closed';
+		$posts[0]->ping_status = 'closed';
+	}
+
+	return $posts;
+}
