@@ -167,6 +167,53 @@ function create_initial_post_types() {
 add_action( 'init', 'create_initial_post_types', 0 ); // highest priority
 
 /**
+ * Retrieves post data given a post ID or post object.
+ *
+ * See {@link sanitize_post()} for optional $filter values. Also, the parameter
+ * $post, must be given as a variable, since it is passed by reference.
+ *
+ * @since 1.5.1
+ *
+ * @param int|WP_Post $post   Optional. Post ID or post object. Defaults to global $post.
+ * @param string      $output Optional, default is Object. Accepts OBJECT, ARRAY_A, or ARRAY_N.
+ *                            Default OBJECT.
+ * @param string      $filter Optional. Type of filter to apply. Accepts 'raw', 'edit', 'db',
+ *                            or 'display'. Default 'raw'.
+ * @return WP_Post|null WP_Post on success or null on failure.
+ */
+function get_post( $post = null, $output = OBJECT, $filter = 'raw' ) {
+	if ( empty( $post ) && isset( $GLOBALS['post'] ) )
+		$post = $GLOBALS['post'];
+
+	if ( is_a( $post, 'WP_Post' ) ) {
+		$_post = $post;
+	} elseif ( is_object( $post ) ) {
+		if ( empty( $post->filter ) ) {
+			$_post = sanitize_post( $post, 'raw' );
+			$_post = new WP_Post( $_post );
+		} elseif ( 'raw' == $post->filter ) {
+			$_post = new WP_Post( $post );
+		} else {
+			$_post = WP_Post::get_instance( $post->ID );
+		}
+	} else {
+		$_post = WP_Post::get_instance( $post );
+	}
+
+	if ( ! $_post )
+		return null;
+
+	$_post = $_post->filter( $filter );
+
+	if ( $output == ARRAY_A )
+		return $_post->to_array();
+	elseif ( $output == ARRAY_N )
+		return array_values( $_post->to_array() );
+
+	return $_post;
+}
+
+/**
  * Register a post status. Do not use before init.
  *
  * A simple function for creating or modifying a post status based on the
