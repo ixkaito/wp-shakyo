@@ -96,3 +96,17 @@ function setup_userdata($for_user_id = '') {
 	$user_url   = $user->user_url;
 	$user_identity = $user->display_name;
 }
+
+/**
+ * Update all user caches
+ *
+ * @since 3.0.0
+ *
+ * @param object $user User object to be cached
+ */
+function update_user_caches($user) {
+	wp_cache_add($user->ID, $user, 'users');
+	wp_cache_add($user->user_login, $user->ID, 'userlogins');
+	wp_cache_add($user->user_email, $user->ID, 'useremail');
+	wp_cache_add($user->user_nicename, $user->ID, 'userslugs');
+}
