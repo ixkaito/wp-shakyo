@@ -411,6 +411,22 @@ class WP_User {
 
 		return true;
 	}
+
+	/**
+	 * Set the blog to operate on. Defaults to the current blog.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param int $blog_id Optional Blog ID, defaults to current blog.
+	 */
+	public function for_blog( $blog_id = '' ) {
+		global $wpdb;
+		if ( ! empty( $blog_id ) )
+			$cap_key = $wpdb->get_blog_prefix( $blog_id ) . 'capabilities';
+		else
+			$cap_key = '';
+		$this->_init_caps( $cap_key );
+	}
 }
 
 /**
