@@ -85,9 +85,9 @@ function get_metadata($meta_type, $object_id, $meta_key = '', $single = false) {
  * Update the metadata cache for the specified objects.
  *
  * @since 2.9.0
- * @uses $wpdb WordPress database objct for queries.
+ * @uses $wpdb WordPress database object for queries.
  *
- * @param string $meta_type Type of obejct metadata is for (e.g., comment, post, or user)
+ * @param string $meta_type Type of object metadata is for (e.g., comment, post, or user)
  * @param int|array $object_ids array or comma delimited list of object IDs to update cache for
  * @return mixed Metadata cache for the specified objects, or false on failure.
  */
