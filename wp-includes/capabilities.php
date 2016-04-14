@@ -361,6 +361,35 @@ class WP_User {
 	}
 
 	/**
+	 * Set up capability object properties.
+	 *
+	 * Will set the value for the 'cap_key' property to current database table
+	 * prefix, followed by 'capabilities'. Will then check to see if the
+	 * property matching the 'cap_key' exists and is an array. If so, it will be
+	 * used.
+	 *
+	 * @access protected
+	 * @since 2.1.0
+	 *
+	 * @param string $cap_key Optional capability key
+	 */
+	function _init_caps( $cap_key = '' ) {
+		global $wpdb;
+
+		if ( empty($cap_key) )
+			$this->cap_key = $wpdb->get_blog_prefix() . 'capabilities';
+		else
+			$this->cap_key = $cap_key;
+
+		$this->caps = get_user_meta( $this->ID, $this->cap_key, true );
+
+		if ( ! is_array( $this->caps ) )
+			$this->caps = array();
+
+		$this->get_role_caps();
+	}
+
+	/**
 	 * Whether user has capability or role name.
 	 *
 	 * This is useful for looking up whether the user has a specific role
