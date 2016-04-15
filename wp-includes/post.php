@@ -1162,6 +1162,21 @@ add_action( 'before_delete_post', '_reset_front_page_settings_for_post' );
 add_action( 'wp_trash_post',      '_reset_front_page_settings_for_post' );
 
 /**
+ * Updates posts in cache.
+ *
+ * @since 1.5.1
+ *
+ * @param array $posts Array of post objects, passed by reference.
+ */
+function update_post_cache( &$posts ) {
+	if ( ! $posts )
+		return;
+
+	foreach ( $posts as $post )
+		wp_cache_add( $post->ID, $post, 'posts' );
+}
+
+/**
  * Call major cache updating functions for list of Post objects.
  *
  * @since 1.5.0
