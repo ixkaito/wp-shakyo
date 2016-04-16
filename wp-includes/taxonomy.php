@@ -150,6 +150,47 @@ function get_taxonomies( $args = array(), $output = 'names', $operator = 'and' )
 }
 
 /**
+ * Return all of the taxonomy names that are of $object_type.
+ *
+ * It appears that this function can be used to find all of the names inside of
+ * $wp_taxonomies global variable.
+ *
+ * <code><?php $taxonomies = get_object_taxonomies('post'); ?></code> Should
+ * result in <code>Array('category', 'post_tag')</code>
+ *
+ * @since 2.3.0
+ *
+ * @uses $wp_taxonomies
+ *
+ * @param array|string|object $object Name of the type of taxonomy object, or an object (row from posts)
+ * @param string $output The type of output to return, either taxonomy 'names' or 'objects'. 'names' is the default.
+ * @return array The names of all taxonomy of $object_type.
+ */
+function get_object_taxonomies($object, $output = 'names') {
+	global $wp_taxonomies;
+
+	if ( is_object($object) ) {
+		if ( $object->post_type == 'attachment' )
+			return get_attachment_taxonomies($object);
+		$object = $object->post_type;
+	}
+
+	$object = (array) $object;
+
+	$taxonomies = array();
+	foreach ( (array) $wp_taxonomies as $tax_name => $tax_obj ) {
+		if ( array_intersect($object, (array) $tax_obj->object_type) ) {
+			if ( 'names' == $output )
+				$taxonomies[] = $tax_name;
+			else
+				$taxonomies[ $tax_name ] = $tax_obj;
+		}
+	}
+
+	return $taxonomies;
+}
+
+/**
  * Create or modify a taxonomy object. Do not use before init.
  *
  * A simple function for creating or modifying a taxonomy object based on the
