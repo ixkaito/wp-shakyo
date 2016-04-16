@@ -574,3 +574,70 @@ class WP_Tax_Query {
 		return compact( 'join', 'where' );
 	}
 }
+
+/**
+ * Updates the cache for Term ID(s).
+ *
+ * Will only update the cache for terms not already cached.
+ *
+ * The $object_ids expects that the ids be separated by commas, if it is a
+ * string.
+ *
+ * It should be noted that update_object_term_cache() is very time extensive. It
+ * is advised that the function is not called very often or at least not for a
+ * lot of terms that exist in a lot of taxonomies. The amount of time increases
+ * for each term and it also increases for each taxonomy the term belongs to.
+ *
+ * @since 2.3.0
+ * @uses wp_get_object_terms() Used to get terms from the database to update
+ *
+ * @param string|array $object_ids Single or list of term object ID(s)
+ * @param array|string $object_type The taxonomy object type
+ * @return null|bool Null value is given with empty $object_ids. False if
+ */
+function update_object_term_cache($object_ids, $object_type) {
+	if ( empty($object_ids) )
+		return;
+
+	if ( !is_array($object_ids) )
+		$object_ids = explode(',', $object_ids);
+
+	$object_ids = array_map('intval', $object_ids);
+
+	$taxonomies = get_object_taxonomies($object_type);
+
+	$ids = array();
+	foreach ( (array) $object_ids as $id ) {
+		foreach ( $taxonomies as $taxonomy ) {
+			if ( false === wp_cache_get($id, "{$taxonomy}_relationships") ) {
+				$ids[] = $id;
+				break;
+			}
+		}
+	}
+
+	if ( empty( $ids ) )
+		return false;
+
+	$terms = wp_get_object_terms($ids, $taxonomies, array('fields' => 'all_with_object_id'));
+
+	$object_terms = array();
+	foreach ( (array) $terms as $term )
+		$object_terms[$term->object_id][$term->taxonomy][$term->term_id] = $term;
+
+	foreach ( $ids as $id ) {
+		foreach ( $taxonomies as $taxonomy ) {
+			if ( ! isset($object_terms[$id][$taxonomy]) ) {
+				if ( !isset($object_terms[$id]) )
+					$object_terms[$id] = array();
+				$object_terms[$id][$taxonomy] = array();
+			}
+		}
+	}
+
+	foreach ( $object_terms as $id => $value ) {
+		foreach ( $value as $taxonomy => $terms ) {
+			wp_cache_add( $id, $terms, "{$taxonomy}_relationships" );
+		}
+	}
+}
