@@ -1221,6 +1221,23 @@ function update_post_caches( &$posts, $post_type = 'post', $update_term_cache = 
 }
 
 /**
+ * Updates metadata cache for list of post IDs.
+ *
+ * Performs SQL query to retrieve the metadata for the post IDs and updates the
+ * metadata cache for the posts. Therefore, the functions, which call this
+ * function, do not need to perform SQL queries on their own.
+ *
+ * @since 2.1.0
+ *
+ * @param array $post_ids List of post IDs.
+ * @return bool|array Returns false if there is nothing to update or an array
+ *                    of metadata.
+ */
+function update_postmeta_cache( $post_ids ) {
+	return update_meta_cache('post', $post_ids);
+}
+
+/**
  * Adds any posts from the given ids to the cache that do not already exist in cache
  *
  * @since 3.4.0
