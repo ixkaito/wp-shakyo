@@ -243,3 +243,23 @@ class WP_Meta_Query {
 		$this->__construct( $meta_query );
 	}
 }
+
+/**
+ * Retrieve the name of the metadata table for the specified object type.
+ *
+ * @since 2.9.0
+ * @uses $wpdb WordPress database object for queries.
+ *
+ * @param string $type Type of object to get metadata table for (e.g., comment, post, or user)
+ * @return mixed Metadata table name, or false if no metadata table exists
+ */
+function _get_meta_table($type) {
+	global $wpdb;
+
+	$table_name = $type . 'meta';
+
+	if ( empty($wpdb->$table_name) )
+		return false;
+
+	return $wpdb->$table_name;
+}
