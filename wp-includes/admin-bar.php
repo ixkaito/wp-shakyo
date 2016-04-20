@@ -6,7 +6,7 @@
  */
 
 /**
- * Instantisate the admin bar object and set it up as a global for access elsewhere.
+ * Instantiate the admin bar object and set it up as a global for access elsewhere.
  *
  * UNHOOKING THIS FUNCTION WILL NOT PROPERLY REMOVE THE ADMIN BAR.
  * For that, use show_admin_bar(false) or the 'show_admin_bar' filter.
