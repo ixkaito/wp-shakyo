@@ -11,6 +11,26 @@
  * @subpackage Query
  */
 
+/**
+ * Is the query a 404 (returns no results)?
+ *
+ * @see WP_Query::is_404()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_404() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_404();
+}
+
 /*
  * WP_Query
  */
