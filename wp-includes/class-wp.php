@@ -490,6 +490,59 @@ class WP {
 		$wp_the_query->query($this->query_vars);
  	}
 
+ 	/**
+ 	 * Set the Headers for 404, if nothing is found for requested URL.
+	 *
+	 * Issue a 404 if a request doesn't match any posts and doesn't match
+	 * any object (e.g. an existing-but-empty category, tag, author) and a 404 was not already
+	 * issued, and if the request was not a search or the homepage.
+	 *
+	 * Otherwise, issue a 200.
+	 *
+	 * @since 2.0.0
+ 	 */
+	public function handle_404() {
+		global $wp_query;
+
+		// If we've already issued a 404, bail.
+		if ( is_404() )
+			return;
+
+		// Never 404 for the admin, robots, or if we found posts.
+		if ( is_admin() || is_robots() || $wp_query->posts ) {
+			status_header( 200 );
+			return;
+		}
+
+		// We will 404 for paged queries, as no posts were found.
+		if ( ! is_paged() ) {
+
+			// Don't 404 for authors without posts as long as they matched an author on this site.
+			$author = get_query_var( 'author' );
+			if ( is_author() && is_numeric( $author ) && $author > 0 && is_user_member_of_blog( $author ) ) {
+				status_header( 200 );
+				return;
+			}
+
+			// Don't 404 for these queries if they matched an object.
+			if ( ( is_tag() || is_category() || is_tax() || is_post_type_archive() ) && get_queried_object() ) {
+				status_header( 200 );
+				return;
+			}
+
+			// Don't 404 for these queries either.
+			if ( is_home() || is_search() || is_feed() ) {
+				status_header( 200 );
+				return;
+			}
+		}
+
+		// Guess it's time to 404.
+		$wp_query->set_404();
+		status_header( 404 );
+		nocache_headers();
+	}
+
 	/**
 	 * Sets up all of the variables required by the WordPress environment.
 	 *
