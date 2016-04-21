@@ -12,6 +12,26 @@
  */
 
 /**
+ * Is the query for a post or page preview?
+ *
+ * @see WP_Query::is_preview()
+ * @since 2.0.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_preview() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_preview();
+}
+
+/**
  * Is the query for the robots file?
  *
  * @see WP_Query::is_robots()
