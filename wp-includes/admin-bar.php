@@ -50,3 +50,44 @@ add_action( 'admin_init', '_wp_admin_bar_init' );
 
 add_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
 add_action( 'in_admin_header', 'wp_admin_bar_render', 0 );
+
+/**
+ * Determine whether the admin bar should be showing.
+ *
+ * @since 3.1.0
+ *
+ * @return bool Whether the admin bar should be showing.
+ */
+function is_admin_bar_showing() {
+	global $show_admin_bar, $pagenow;
+
+	// For all these types of requests, we never want an admin bar.
+	if ( defined('XMLRPC_REQUEST') || defined('DOING_AJAX') || defined('IFRAME_REQUEST') )
+		return false;
+
+	// Integrated into the admin.
+	if ( is_admin() )
+		return true;
+
+	if ( ! isset( $show_admin_bar ) ) {
+		if ( ! is_user_logged_in() || 'wp-login.php' == $pagenow ) {
+			$show_admin_bar = false;
+		} else {
+			$show_admin_bar = _get_admin_bar_pref();
+		}
+	}
+
+	/**
+	 * Filter whether to show the admin bar.
+	 *
+	 * Returning false to this hook is the recommended way to hide the admin bar.
+	 * The user's display preference is used for logged in users.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param bool $show_admin_bar Whether the admin bar should be shown. Default false.
+	 */
+	$show_admin_bar = apply_filters( 'show_admin_bar', $show_admin_bar );
+
+	return $show_admin_bar;
+}
