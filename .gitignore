@@ -1,3 +1,5 @@
+*.sql
+
 # Ignore htaccess password file.
 .htpasswd
 
