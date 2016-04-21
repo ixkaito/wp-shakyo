@@ -12,6 +12,26 @@
  */
 
 /**
+ * Whether the current URL is within the comments popup window.
+ *
+ * @see WP_Query::is_comments_popup()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_comments_popup() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_comments_popup();
+}
+
+/**
  * Is the query for a post or page preview?
  *
  * @see WP_Query::is_preview()
