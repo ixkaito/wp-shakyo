@@ -52,6 +52,26 @@ function is_robots() {
 }
 
 /**
+ * Is the query for a search?
+ *
+ * @see WP_Query::is_search()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_search() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_search();
+}
+
+/**
  * Is the query for a trackback endpoint call?
  *
  * @see WP_Query::is_trackback()
