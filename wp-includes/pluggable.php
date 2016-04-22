@@ -341,6 +341,112 @@ function is_user_logged_in() {
 }
 endif;
 
+if ( !function_exists('wp_salt') ) :
+/**
+ * Get salt to add to hashes.
+ *
+ * Salts are created using secret keys. Secret keys are located in two places:
+ * in the database and in the wp-config.php file. The secret key in the database
+ * is randomly generated and will be appended to the secret keys in wp-config.php.
+ *
+ * The secret keys in wp-config.php should be updated to strong, random keys to maximize
+ * security. Below is an example of how the secret key constants are defined.
+ * Do not paste this example directly into wp-config.php. Instead, have a
+ * {@link https://api.wordpress.org/secret-key/1.1/salt/ secret key created} just
+ * for you.
+ *
+ * <code>
+ * define('AUTH_KEY',         ' Xakm<o xQy rw4EMsLKM-?!T+,PFF})H4lzcW57AF0U@N@< >M%G4Yt>f`z]MON');
+ * define('SECURE_AUTH_KEY',  'LzJ}op]mr|6+![P}Ak:uNdJCJZd>(Hx.-Mh#Tz)pCIU#uGEnfFz|f ;;eU%/U^O~');
+ * define('LOGGED_IN_KEY',    '|i|Ux`9<p-h$aFf(qnT:sDO:D1P^wZ$$/Ra@miTJi9G;ddp_<q}6H1)o|a +&JCM');
+ * define('NONCE_KEY',        '%:R{[P|,s.KuMltH5}cI;/k<Gx~j!f0I)m_sIyu+&NJZ)-iO>z7X>QYR0Z_XnZ@|');
+ * define('AUTH_SALT',        'eZyT)-Naw]F8CwA*VaW#q*|.)g@o}||wf~@C-YSt}(dh_r6EbI#A,y|nU2{B#JBW');
+ * define('SECURE_AUTH_SALT', '!=oLUTXh,QW=H `}`L|9/^4-3 STz},T(w}W<I`.JjPi)<Bmf1v,HpGe}T1:Xt7n');
+ * define('LOGGED_IN_SALT',   '+XSqHc;@Q*K_b|Z?NC[3H!!EONbh.n<+=uKR:>*c(u`g~EJBf#8u#R{mUEZrozmm');
+ * define('NONCE_SALT',       'h`GXHhD>SLWVfg1(1(N{;.V!MoE(SfbA_ksP@&`+AycHcAV$+?@3q+rxV{%^VyKT');
+ * </code>
+ *
+ * Salting passwords helps against tools which has stored hashed values of
+ * common dictionary strings. The added values makes it harder to crack.
+ *
+ * @since 2.5.0
+ *
+ * @link https://api.wordpress.org/secret-key/1.1/salt/ Create secrets for wp-config.php
+ *
+ * @param string $scheme Authentication scheme (auth, secure_auth, logged_in, nonce)
+ * @return string Salt value
+ */
+function wp_salt( $scheme = 'auth' ) {
+	static $cached_salts = array();
+	if ( isset( $cached_salts[ $scheme ] ) ) {
+		/**
+		 * Filter the WordPress salt.
+		 *
+		 * @since 2.5.0
+		 *
+		 * @param string $cached_salt Cached salt for the given scheme.
+		 * @param string $scheme      Authentication scheme. Values include 'auth',
+		 *                            'secure_auth', 'logged_in', and 'nonce'.
+		 */
+		return apply_filters( 'salt', $cached_salts[ $scheme ], $scheme );
+	}
+
+	static $duplicated_keys;
+	if ( null === $duplicated_keys ) {
+		$duplicated_keys = array( 'put your unique phrase here' => true );
+		foreach ( array( 'AUTH', 'SECURE_AUTH', 'LOGGED_IN', 'NONCE', 'SECRET' ) as $first ) {
+			foreach ( array( 'KEY', 'SALT' ) as $second ) {
+				if ( ! defined( "{$first}_{$second}" ) ) {
+					continue;
+				}
+				$value = constant( "{$first}_{$second}" );
+				$duplicated_keys[ $value ] = isset( $duplicated_keys[ $value ] );
+			}
+		}
+	}
+
+	$values = array(
+		'key' => '',
+		'salt' => ''
+	);
+	if ( defined( 'SECRET_KEY' ) && SECRET_KEY && empty( $duplicated_keys[ SECRET_KEY ] ) ) {
+		$values['key'] = SECRET_KEY;
+	}
+	if ( 'auth' == $scheme && defined( 'SECRET_SALT' ) && SECRET_SALT && empty( $duplicated_keys[ SECRET_SALT ] ) ) {
+		$values['salt'] = SECRET_SALT;
+	}
+
+	if ( in_array( $scheme, array( 'auth', 'secure_auth', 'logged_in', 'nonce' ) ) ) {
+		foreach ( array( 'key', 'salt' ) as $type ) {
+			$const = strtoupper( "{$scheme}_{$type}" );
+			if ( defined( $const ) && constant( $const ) && empty( $duplicated_keys[ constant( $const ) ] ) ) {
+				$values[ $type ] = constant( $const );
+			} elseif ( ! $values[ $type ] ) {
+				$values[ $type ] = get_site_option( "{$scheme}_{$type}" );
+				if ( ! $values[ $type ] ) {
+					$values[ $type ] = wp_generate_password( 64, true, true );
+					update_site_option( "{$scheme}_{$type}", $values[ $type ] );
+				}
+			}
+		}
+	} else {
+		if ( ! $values['key'] ) {
+			$values['key'] = get_site_option( 'secret_key' );
+			if ( ! $values['key'] ) {
+				$values['key'] = wp_generate_password( 64, true, true );
+				update_site_option( 'secret_key', $values['key'] );
+			}
+		}
+		$values['salt'] = hash_hmac( 'md5', $scheme, $values['key'] );
+	}
+
+	$cached_salts[ $scheme ] = $values['key'] . $values['salt'];
+
+	/** This filter is documented in wp-includes/pluggable.php */
+	return apply_filters( 'salt', $cached_salts[ $scheme ], $scheme );
+}
+endif;
+
 if ( !function_exists('wp_hash') ) :
 /**
  * Get hash of given string.
