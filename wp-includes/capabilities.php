@@ -390,6 +390,41 @@ class WP_User {
 	}
 
 	/**
+	 * Retrieve all of the role capabilities and merge with individual capabilities.
+	 *
+	 * All of the capabilities of the roles the user belongs to are merged with
+	 * the users individual roles. This also means that the user can be denied
+	 * specific roles that their role might have, but the specific user isn't
+	 * granted permission to.
+	 *
+	 * @since 2.0.0
+	 * @uses $wp_roles
+	 * @access public
+	 *
+	 * @return array List of all capabilities for the user.
+	 */
+	public function get_role_caps() {
+		global $wp_roles;
+
+		if ( ! isset( $wp_roles ) )
+			$wp_roles = new WP_Roles();
+
+		//Filter out caps that are not role names and assign to $this->roles
+		if ( is_array( $this->caps ) )
+			$this->roles = array_filter( array_keys( $this->caps ), array( $wp_roles, 'is_role' ) );
+
+		//Build $allcaps from role caps, overlay user's $caps
+		$this->allcaps = array();
+		foreach ( (array) $this->roles as $role ) {
+			$the_role = $wp_roles->get_role( $role );
+			$this->allcaps = array_merge( (array) $this->allcaps, (array) $the_role->capabilities );
+		}
+		$this->allcaps = array_merge( (array) $this->allcaps, (array) $this->caps );
+
+		return $this->allcaps;
+	}
+
+	/**
 	 * Whether user has capability or role name.
 	 *
 	 * This is useful for looking up whether the user has a specific role
