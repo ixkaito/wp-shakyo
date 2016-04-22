@@ -106,6 +106,22 @@ class WP_Roles {
 	}
 
 	/**
+	 * Retrieve role object by name.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string $role Role name.
+	 * @return WP_Role|null WP_Role object if found, null if the role does not exist.
+	 */
+	public function get_role( $role ) {
+		if ( isset( $this->role_objects[$role] ) )
+			return $this->role_objects[$role];
+		else
+			return null;
+	}
+
+	/**
 	 * Whether role name is currently in the list of available roles.
 	 *
 	 * @since 2.0.0
