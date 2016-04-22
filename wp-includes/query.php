@@ -12,6 +12,23 @@
  */
 
 /**
+ * Retrieve variable in the WP_Query class.
+ *
+ * @see WP_Query::get()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @param string $var       The variable key to retrieve.
+ * @param mixed  $default   Value to return if the query variable is not set. Default ''.
+ * @return mixed
+ */
+function get_query_var( $var, $default = '' ) {
+	global $wp_query;
+
+	return $wp_query->get( $var, $default );
+}
+
+/**
  * Whether the current URL is within the comments popup window.
  *
  * @see WP_Query::is_comments_popup()
