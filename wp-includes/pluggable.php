@@ -341,6 +341,23 @@ function is_user_logged_in() {
 }
 endif;
 
+if ( !function_exists('wp_hash') ) :
+/**
+ * Get hash of given string.
+ *
+ * @since 2.0.3
+ * @uses wp_salt() Get WordPress salt
+ *
+ * @param string $data Plain text to hash
+ * @return string Hash of $data
+ */
+function wp_hash($data, $scheme = 'auth') {
+	$salt = wp_salt($scheme);
+
+	return hash_hmac('md5', $data, $salt);
+}
+endif;
+
 if ( !function_exists('wp_generate_password') ) :
 /**
  * Generates a random password drawn from the defined set of characters.
