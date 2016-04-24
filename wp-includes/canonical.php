@@ -487,4 +487,32 @@ function redirect_canonical( $requested_url = null, $do_redirect = true ) {
 
 add_action('template_redirect', 'redirect_canonical');
 
+function wp_redirect_admin_locations() {
+	global $wp_rewrite;
+	if ( ! ( is_404() && $wp_rewrite->using_permalinks() ) )
+		return;
+
+	$admins = array(
+		home_url( 'wp-admin', 'relative' ),
+		home_url( 'dashboard', 'relative' ),
+		home_url( 'admin', 'relative' ),
+		site_url( 'dashboard', 'relative' ),
+		site_url( 'admin', 'relative' ),
+	);
+	if ( in_array( untrailingslashit( $_SERVER['REQUEST_URI'] ), $admins ) ) {
+		wp_redirect( admin_url() );
+		exit;
+	}
+
+	$logins = array(
+		home_url( 'wp-login.php', 'relative' ),
+		home_url( 'login', 'relative' ),
+		site_url( 'login', 'relative' ),
+	);
+	if ( in_array( untrailingslashit( $_SERVER['REQUEST_URI'] ), $logins ) ) {
+		wp_redirect( site_url( 'wp-login.php', 'login' ) );
+		exit;
+	}
+}
+
 add_action( 'template_redirect', 'wp_redirect_admin_locations', 1000 );
