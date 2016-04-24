@@ -74,7 +74,7 @@ function is_feed( $feeds = '' ) {
  *
  * This is for what is displayed at your site's main URL.
  *
- * Depends on the site's "Front page displays" Reading settings 'show_on_front' and 'page_on_front'.
+ * Depends on the site's "Front page displays" Reading Settings 'show_on_front' and 'page_on_front'.
  *
  * If you set a static page for the front page of your site, this function will return
  * true when viewing that page.
