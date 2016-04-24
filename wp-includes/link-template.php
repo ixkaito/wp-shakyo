@@ -250,6 +250,77 @@ function set_url_scheme( $url, $scheme = null ) {
 }
 
 /**
+ * Return a shortlink for a post, page, attachment, or blog.
+ *
+ * This function exists to provide a shortlink tag that all themes and plugins can target. A plugin must hook in to
+ * porvide the actual shortlinks. Default shortlink support is limited to providing ?p= style links for posts.
+ * Plugins can short-circuit this function via the pre_get_shortlink filter or filter the output
+ * via the get_shortlink filter.
+ *
+ * @since 3.0.0
+ *
+ * @param int $id A post or blog id. Default is 0, which means the current post or blog.
+ * @param string $context Whether the id is a 'blog' id, 'post' id, or 'media' id. If 'post', the post_type of the post is consulted. If 'query', the current query is consulted to determine the id and context. Default is 'post'.
+ * @param bool $allow_slugs Wheterh to allow post slugs in the shortlink. It is up to the plugin how and whetehr to honor this.
+ * @return string A shortlink or an empty string if no shortlink exists for the requested resource or if shortlinks are not enabled.
+ */
+function wp_get_shortlink($id = 0, $context = 'post', $allow_slugs = true) {
+	/**
+	 * Filter whether to preempt generating a shortlink for the given post.
+	 *
+	 * Passing a truthy value to the filter will effectively short-circuit the
+	 * shortlink-generation process, returning that value instead.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param bool|string $return      Short-circuit return value. Either false or a URL string.
+	 * @param int         $id          Post ID, or 0 for the current post.
+	 * @param string      $context     The context for the link. One of 'post' or 'query',
+	 * @param bool        $allow_slugs Whether to allow post slugs in the shortlink.
+	 */
+	$shortlink = apply_filters( 'pre_get_shortlink', false, $id, $context, $allow_slugs );
+
+	if ( false !== $shortlink )
+		return $shortlink;
+
+	global $wp_query;
+	$post_id = 0;
+	if ( 'query' == $context && is_singular() ) {
+		$post_id = $wp_query->get_queried_object_id();
+		$post = get_post( $post_id );
+	} elseif ( 'post' == $context ) {
+		$post = get_post( $id );
+		if ( ! empty( $post->ID ) )
+			$post_id = $post->ID;
+	}
+
+	$shortlink = '';
+
+	// Return p= link for all public post types.
+	if ( ! empty( $post_id ) ) {
+		$post_type = get_post_type_object( $post->post_type );
+
+		if ( 'page' === $post->post_type && $post->ID == get_option( 'page_on_front' ) && 'page' == get_option( 'show_on_front' ) ) {
+			$shortlink = home_url( '/' );
+		} elseif ( $post_type->public ) {
+			$shortlink = home_url( '?p=' . $post_id );
+		}
+	}
+
+	/**
+	 * Filter the shortlink for a post.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $shortlink   Shortlink URL.
+	 * @param int    $id          Post ID, or 0 for the current post.
+	 * @param string $context     The context for the link. One of 'post' or 'query',
+	 * @param bool   $allow_slugs Whether to allow post slugs in the shortlink. Not used by default.
+	 */
+	return apply_filters( 'get_shortlink', $shortlink, $id, $context, $allow_slugs );
+}
+
+/**
  * Send a Link: rel=shortlink header if a shortlink is defined for the current page.
  *
  * Attached to the wp action.
