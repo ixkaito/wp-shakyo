@@ -10,3 +10,5 @@ if ( defined('WP_USE_THEMES') && WP_USE_THEMES )
 	 * @since 1.5.0
 	 */
 	do_action( 'template_redirect' );
+
+var_dump(__FILE__);

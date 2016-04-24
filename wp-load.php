@@ -55,5 +55,4 @@ if ( file_exists( ABSPATH . 'wp-config.php') ) {
 		header( 'Location: ' . $path );
 		exit;
 	}
-
 }
