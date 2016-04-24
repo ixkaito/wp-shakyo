@@ -70,6 +70,36 @@ function is_feed( $feeds = '' ) {
 }
 
 /**
+ * Is the query for the front page of the site?
+ *
+ * This is for what is displayed at your site's main URL.
+ *
+ * Depends on the site's "Front page displays" Reading settings 'show_on_front' and 'page_on_front'.
+ *
+ * If you set a static page for the front page of your site, this function will return
+ * true when viewing that page.
+ *
+ * Otherwise the same as @see is_home()
+ *
+ * @see WP_Query::is_front_page()
+ * @since 2.5.0
+ * @uses is_home()
+ * @uses get_option()
+ *
+ * @return bool True, if front of site.
+ */
+function is_front_page() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_front_page();
+}
+
+/**
  * Is the query for a post or page preview?
  *
  * @see WP_Query::is_preview()
