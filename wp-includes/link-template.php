@@ -248,3 +248,24 @@ function set_url_scheme( $url, $scheme = null ) {
 	 */
 	return apply_filters( 'set_url_scheme', $url, $scheme, $orig_scheme );
 }
+
+/**
+ * Send a Link: rel=shortlink header if a shortlink is definded for the current page.
+ *
+ * Attached to the wp action.
+ *
+ * @since 3.0.0
+ *
+ * @uses wp_get_shortlink()
+ */
+function wp_shortlink_header() {
+	if ( headers_sent() )
+		return;
+
+	$shortlink = wp_get_shortlink(0, 'query');
+
+	if ( empty($shortlink) )
+		return;
+
+	header('Link: <' . $shortlink . '>; rel=shortlink', false);
+}
