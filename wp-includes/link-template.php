@@ -250,7 +250,7 @@ function set_url_scheme( $url, $scheme = null ) {
 }
 
 /**
- * Send a Link: rel=shortlink header if a shortlink is definded for the current page.
+ * Send a Link: rel=shortlink header if a shortlink is defined for the current page.
  *
  * Attached to the wp action.
  *
