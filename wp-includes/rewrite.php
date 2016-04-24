@@ -488,6 +488,20 @@ class WP_Rewrite {
 	var $feeds = array( 'feed', 'rdf', 'rss', 'rss2', 'atom' );
 
 	/**
+	 * Whether permalinks are being used.
+	 *
+	 * This can be either rewrite module or permalink in the HTTP query string.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return bool True, if permalinks are enabled.
+	 */
+	public function using_permalinks() {
+		return ! empty($this->permalink_structure);
+	}
+
+	/**
 	 * Whether permalinks are being used and rewrite module is not enabled.
 	 *
 	 * Means that permalink links are enabled and index.php is in the URL.
