@@ -58,3 +58,36 @@ function get_front_page_template() {
 
 	return get_query_template( 'front_page', $templates );
 }
+
+/**
+ * Retrieve the name of the highest priority template file that exists.
+ *
+ * Searches in the STYLESHEETPATH before TEMPLATEPATH so that themes which
+ * inherit from a parent theme can just overload on file.
+ *
+ * @since 2.7.0
+ *
+ * @param string|array $templte_names Template files(s) to search for, in order.
+ * @param bool $load If true the template file will be loaded if it is found.
+ * @param bool $require_once Whether to require_once or require. Defualt true. Has no effect if $load is false.
+ * @return string The template filename if one is loaded.
+ */
+function locate_template($template_names, $load = false, $require_once = true ) {
+	$located = '';
+	foreach ( (array) $template_names as $template_name ) {
+		if ( !$template_name )
+			continue;
+		if ( file_exists(STYLESHEETPATH . '/' . $template_name)) {
+			$located = STYLESHEETPATH . '/' . $template_name;
+			break;
+		} else if ( file_exists(TEMPLATEPATH . '/' . $template_name) ) {
+			$located = TEMPLATEPATH . '/' . $template_name;
+			break;
+		}
+	}
+
+	if ( $load && '' != $located )
+		load_template( $located, $require_once );
+
+	return $located;
+}
