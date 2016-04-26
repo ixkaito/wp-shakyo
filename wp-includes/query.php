@@ -50,6 +50,27 @@ function is_post_type_archive( $post_types = '' ) {
 }
 
 /**
+ * Is the query for an existing attachment page?
+ *
+ * @see WP_Query::is_attachment()
+ * @since 2.0.0
+ * @uses $wp_query
+ *
+ * @param mixed $attachment Attachment ID, title, slug, or array of such.
+ * @return bool
+ */
+function is_attachment( $attachment = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_attachment( $attachment );
+}
+
+/**
  * Is the query for an existing taxonomy archive page?
  *
  * If the $taxonomy parameter is specified, this function will additionally
