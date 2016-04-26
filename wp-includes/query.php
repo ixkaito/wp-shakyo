@@ -260,6 +260,35 @@ function is_search() {
 }
 
 /**
+ * Is the query for an existing single post?
+ *
+ * Works for any post type, except attachments and pages
+ *
+ * If the $post parameter is specified, this function will additionally
+ * check if the query is for one of the Posts specified.
+ *
+ * @see is_page()
+ * @see is_singular()
+ *
+ * @see WP_Query::is_single()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @param mixed $post Post ID, title, slug, or array of such.
+ * @return bool
+ */
+function is_single( $post = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_single( $post );
+}
+
+/**
  * Is the query for an existing single post of any post type (post, attachment, page, ... )?
  *
  * If the $post_types parameter is specified, this function will additionally
