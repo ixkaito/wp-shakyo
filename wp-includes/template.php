@@ -53,7 +53,7 @@ function get_query_template( $type, $templates = array() ) {
  *
  * @see get_query_template()
  *
- * @return string Ful path to home template file.
+ * @return string Full path to home template file.
  */
 function get_home_template() {
 	$templates = array( 'home.php', 'index.php' );
