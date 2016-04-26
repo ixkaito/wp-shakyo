@@ -104,7 +104,7 @@ function is_front_page() {
  *
  * This is the page which shows the time based blog content of your site.
  *
- * Depends on the site's "Front page displays" Reading Setting 'show_on_front' and 'page_for_posts'.
+ * Depends on the site's "Front page displays" Reading Settings 'show_on_front' and 'page_for_posts'.
  *
  * If you set a static page for the front page of your site, this function will return
  * true only on the page you set as the "Posts page".
