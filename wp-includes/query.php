@@ -50,6 +50,35 @@ function is_post_type_archive( $post_types = '' ) {
 }
 
 /**
+ * Is the query for an existing taxonomy archive page?
+ *
+ * If the $taxonomy parameter is specified, this function will additionally
+ * check if the query is for that specific $taxonomy.
+ *
+ * If the $term parameter is specified in addition to the $taxonomy parameter,
+ * this function will additionally check if the query if for one of the terms
+ * specified.
+ *
+ * @see WP_Query::is_tax()
+ * @since 2.5.0
+ * @uses $wp_query
+ *
+ * @param mixed $taxonomy Optional. Taxonomy slug or slugs.
+ * @param mixed $term Optional. Term ID, name, slug or array of Term IDs, names, and slugs.
+ * @return bool
+ */
+function is_tax( $taxonomy = '', $term = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_tax( $taxonomy, $term );
+}
+
+/**
  * Whether the current URL is within the comments popup window.
  *
  * @see WP_Query::is_comments_popup()
