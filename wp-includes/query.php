@@ -29,6 +29,27 @@ function get_query_var( $var, $default = '' ) {
 }
 
 /**
+ * Is the query for an existing post type archive page?
+ *
+ * @see WP_Query::is_post_type_archive()
+ * @since 3.1.0
+ * @uses $wp_query
+ *
+ * @param mixed $post_types Optional. Post type or array of posts types to check against.
+ * @return bool
+ */
+function is_post_type_archive( $post_types = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_post_type_archive( $post_types );
+}
+
+/**
  * Whether the current URL is within the comments popup window.
  *
  * @see WP_Query::is_comments_popup()
