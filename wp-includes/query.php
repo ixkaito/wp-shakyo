@@ -100,6 +100,35 @@ function is_front_page() {
 }
 
 /**
+ * Is the query for the blog homepage?
+ *
+ * This is the page which shows the time based blog content of your site.
+ *
+ * Depends on the site's "Front page displays" Reading Setting 'show_on_front' and 'page_for_posts'.
+ *
+ * If you set a static page for the front page of your site, this function will return
+ * true only on the page you set as the "Posts page".
+ *
+ * @see is_front_page()
+ *
+ * @see WP_Query::is_home()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool True if blog view homepage.
+ */
+function is_home() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_home();
+}
+
+/**
  * Is the query for a post or page preview?
  *
  * @see WP_Query::is_preview()
