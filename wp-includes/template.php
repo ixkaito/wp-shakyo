@@ -42,6 +42,26 @@ function get_query_template( $type, $templates = array() ) {
 }
 
 /**
+ * Retrieve path of home template in current or parent template.
+ *
+ * This is the template used for the page containing the blog posts.
+ * Attempts to locate 'home.php' first before falling back to 'index.php'.
+ *
+ * The template path is filterable via the 'home_template' hook.
+ *
+ * @since 1.5.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Ful path to home template file.
+ */
+function get_home_template() {
+	$templates = array( 'home.php', 'index.php' );
+
+	return get_query_template( 'home', $templates );
+}
+
+/**
  * Retrieve path of front-page template in current or parent template.
  *
  * Looks for 'front-page.php'. The template path is filterable via the
