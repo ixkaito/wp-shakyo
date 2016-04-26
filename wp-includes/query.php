@@ -56,7 +56,7 @@ function is_post_type_archive( $post_types = '' ) {
  * check if the query is for that specific $taxonomy.
  *
  * If the $term parameter is specified in addition to the $taxonomy parameter,
- * this function will additionally check if the query if for one of the terms
+ * this function will additionally check if the query is for one of the terms
  * specified.
  *
  * @see WP_Query::is_tax()
