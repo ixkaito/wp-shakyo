@@ -192,6 +192,26 @@ function is_comments_popup() {
 }
 
 /**
+ * Is the query for an existing date archive?
+ *
+ * @see WP_Query::is_date()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_date() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_date();
+}
+
+/**
  * Is the query for a feed?
  *
  * @see WP_Query::is_feed()
