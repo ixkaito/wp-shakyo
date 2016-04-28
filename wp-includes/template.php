@@ -42,6 +42,21 @@ function get_query_template( $type, $templates = array() ) {
 }
 
 /**
+ * Retrieve path of index template in current or parent template.
+ *
+ * The template path is filterable via the 'index_template' hook.
+ *
+ * @since 3.0.0
+ *
+ * @see get_query_template()
+ *
+ * @return string Full path to index template file.
+ */
+function get_index_template() {
+	return get_query_template('index');
+}
+
+/**
  * Retrieve path of home template in current or parent template.
  *
  * This is the template used for the page containing the blog posts.
