@@ -73,8 +73,8 @@ function is_attachment( $attachment = '' ) {
 /**
  * Is the query for an existing category archive page?
  *
- * If the $cateogry parameter is specified, this function will additionally
- * check if the query is for one fo the categories specified.
+ * If the $category parameter is specified, this function will additionally
+ * check if the query is for one of the categories specified.
  *
  * @see WP_Query::is_category()
  * @since 1.5.0
