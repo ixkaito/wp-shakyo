@@ -29,6 +29,28 @@ function get_query_var( $var, $default = '' ) {
 }
 
 /**
+ * Is the query for an existing archive page?
+ *
+ * Month, Year, Category, Author, Post Type archive...
+ *
+ * @see WP_Query::is_archive()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_archive() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_archive();
+}
+
+/**
  * Is the query for an existing post type archive page?
  *
  * @see WP_Query::is_post_type_archive()
