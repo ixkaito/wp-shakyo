@@ -71,6 +71,30 @@ function is_attachment( $attachment = '' ) {
 }
 
 /**
+ * Is the query for an existing author archive page?
+ *
+ * If the $author parameter is specified, this function will additionally
+ * check if the query is for one of the authors specified.
+ *
+ * @see WP_Query::is_author()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @param mixed $author Optional. User ID, nickname, nicename, or array of User IDs, nicknames, and nicenames
+ * @return bool
+ */
+function is_author( $author = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_author( $author );
+}
+
+/**
  * Is the query for an existing category archive page?
  *
  * If the $category parameter is specified, this function will additionally
