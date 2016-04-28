@@ -200,6 +200,33 @@ function is_home() {
 }
 
 /**
+ * Is the query for an existing single page?
+ *
+ * If the $page parameter is specified, this function will additionally
+ * check if the query is for one of the pages specified.
+ *
+ * @see is_single()
+ * @see is_singular()
+ *
+ * @see WP_Query::is_page()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @param mixed $page Page ID, title, slug, or array of such.
+ * @return bool
+ */
+function is_page( $page = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_page( $page );
+}
+
+/**
  * Is the query for a post or page preview?
  *
  * @see WP_Query::is_preview()
