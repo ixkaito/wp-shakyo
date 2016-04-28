@@ -71,6 +71,30 @@ function is_attachment( $attachment = '' ) {
 }
 
 /**
+ * Is the query for an existing category archive page?
+ *
+ * If the $cateogry parameter is specified, this function will additionally
+ * check if the query is for one fo the categories specified.
+ *
+ * @see WP_Query::is_category()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @param mixed $category Optional. Category ID, name, slug, or array of Category IDs, names, and slugs.
+ * @return bool
+ */
+function is_category( $category = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_category( $category );
+}
+
+/**
  * Is the query for an existing taxonomy archive page?
  *
  * If the $taxonomy parameter is specified, this function will additionally
