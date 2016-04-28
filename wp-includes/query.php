@@ -341,6 +341,26 @@ function is_page( $page = '' ) {
 }
 
 /**
+ * Is the query for paged result and not for the first page?
+ *
+ * @see WP_Query::is_paged()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function is_paged() {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_paged();
+}
+
+/**
  * Is the query for a post or page preview?
  *
  * @see WP_Query::is_preview()
