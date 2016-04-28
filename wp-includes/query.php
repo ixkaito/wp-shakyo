@@ -95,6 +95,30 @@ function is_category( $category = '' ) {
 }
 
 /**
+ * Is the query for an existing tag archive page?
+ *
+ * If the $tag parameter is specified, this function will additionally
+ * check if the query is for one of the tags specified.
+ *
+ * @see WP_Query::is_tag()
+ * @since 2.3.0
+ * @uses $wp_query
+ *
+ * @param mixed $tag Optional. Tag ID, name, slug, or array of Tag IDs, names, and slugs.
+ * @return bool
+ */
+function is_tag( $tag = '' ) {
+	global $wp_query;
+
+	if ( ! isset( $wp_query ) ) {
+		_doing_it_wrong( __FUNCTION__, __( 'Conditional query tags do not work before the query is run. Before then, they always return false.' ), '3.1' );
+		return false;
+	}
+
+	return $wp_query->is_tag( $tag );
+}
+
+/**
  * Is the query for an existing taxonomy archive page?
  *
  * If the $taxonomy parameter is specified, this function will additionally
