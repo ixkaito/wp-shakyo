@@ -341,6 +341,53 @@ function is_user_logged_in() {
 }
 endif;
 
+if ( !function_exists('wp_redirect') ) :
+/**
+ * Redirects to another page.
+ *
+ * @since 1.5.1
+ *
+ * @param string $location The path to redirect to.
+ * @param int $status Status code to use.
+ * @return bool False if $location is not provided, true otherwise.
+ */
+function wp_redirect($location, $status = 302) {
+	global $is_IIS;
+
+	/**
+	 * Filter the redirect location.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string $location The path to redirect to.
+	 * @param int    $status   Status code to use.
+	 */
+	$location = apply_filters( 'wp_redirect', $location, $status );
+
+	/**
+	 * Filter the redirect status code.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param int    $status   Status code to use.
+	 * @param string $location The path to redirect to.
+	 */
+	$status = apply_filters( 'wp_redirect_status', $status, $location );
+
+	if ( ! $location )
+		return false;
+
+	$location = wp_sanitize_redirect($location);
+
+	if ( !$is_IIS && php_sapi_name() != 'cgi-fcgi' )
+		status_header($status); // This causes problems on IIS and some FastCGI setups
+
+	header("Location: $location", true, $status);
+
+	return true;
+}
+endif;
+
 if ( !function_exists('wp_salt') ) :
 /**
  * Get salt to add to hashes.
