@@ -387,7 +387,7 @@ function status_header( $code ) {
 	if ( empty( $description ) )
 		return;
 
-	$protocol = $_SEVER['SERVER_PROTOCOL'];
+	$protocol = $_SERVER['SERVER_PROTOCOL'];
 	if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
 		$protocol = 'HTTP/1.0';
 	$status_header = "$protocol $code $description";
