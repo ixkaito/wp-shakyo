@@ -187,6 +187,20 @@ function _x( $text, $context, $domain = 'default' ) {
 }
 
 /**
+ * Display translated string with gettext context.
+ *
+ * @since 3.0.0
+ *
+ * @param string $text    Text to translate.
+ * @param string $context Context information for the translators.
+ * @param string $domain  Optional. Text doamin. Unique identifier for retrieving translated strings.
+ * @return string Translated context string without pipe.
+ */
+function _ex( $text, $context, $domain = 'default' ) {
+	echo _x( $text, $context, $domain );
+}
+
+/**
  * Register plural strings in POT file, but don't translate them.
  *
  * Used when you want to keep structures with translatable plural
