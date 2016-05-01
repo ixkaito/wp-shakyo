@@ -148,6 +148,42 @@ add_action( 'update_option_start_of_week', 'delete_get_calendar_cache' );
 add_action( 'update_option_gmt_offset', 'delete_get_calendar_cache' );
 
 /**
+ * Display the language attributes for the html tag.
+ *
+ * Builds up a set of html attributes containing the text direction and language
+ * information for the page.
+ *
+ * @since 2.1.0
+ *
+ * @param string $doctype The type of html document (xhtml|html).
+ */
+function language_attributes($doctype = 'html') {
+	$attributes = array();
+
+	if ( function_exists( 'is_rtl' ) && is_rtl() )
+		$attributes[] = 'dir="rtl"';
+
+	if ( $lang = get_bloginfo('language') ) {
+		if ( get_option('html_type') == 'text/html' || $doctype == 'html' )
+			$attributes[] = "lang=\"$lang\"";
+
+		if ( get_option('html_type') != 'text/html' || $doctype == 'xhtml' )
+			$attributes[] = "xml:lang=\"$lang\"";
+	}
+
+	$output = implode(' ', $attributes);
+
+	/**
+	 * Filter the language attributes for display in the html tag.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param string $output A space-separated list of language attributes.
+	 */
+	echo apply_filters( 'language_attributes', $output );
+}
+
+/**
  * Enqueues or directly prints a stylesheet link to the specified CSS file.
  *
  * "Intelligently" decides to enqueue or to print the CSS file. If the
