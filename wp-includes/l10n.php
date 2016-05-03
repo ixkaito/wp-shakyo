@@ -389,3 +389,27 @@ function get_translations_for_domain( $domain ) {
 	}
 	return $l10n[$domain];
 }
+
+/**
+ * Get all available languages based on the presence of *.mo files in a given directory.
+ *
+ * The default directory is WP_LANG_DIR.
+ *
+ * @since 3.0.0
+ *
+ * @param string $dir A directory to search for language files.
+ *                    Default WP_LANG_DIR.
+ * @return array An array of language codes or an empty array if no languages are present. Language codes are formed by stripping the .mo extension from the language file names.
+ */
+function get_available_languages( $dir = null ) {
+	$languages = array();
+
+	foreach( (array)glob( ( is_null( $dir) ? WP_LANG_DIR : $dir ) . '/*.mo' ) as $lang_file ) {
+		$lang_file = basename($lang_file, '.mo');
+		if ( 0 !== strpos( $lang_file, 'continents-cities' ) && 0 !== strpos( $lang_file, 'ms-' ) &&
+			0 !== strpos( $lang_file, 'admin-' ))
+			$languages[] = $lang_file;
+	}
+
+	return $languages;
+}
