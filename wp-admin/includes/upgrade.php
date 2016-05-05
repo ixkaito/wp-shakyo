@@ -116,6 +116,20 @@ if ( !function_exists('wp_upgrade') ) :
 endif;
 
 /**
+ * {@internal} Missing Short Description}}
+ *
+ * {@internal} Missing Long Description}}
+ *
+ * @since 2.1.0
+ */
+function wp_check_mysql_version() {
+	global $wpdb;
+	$result = $wpdb->check_database_version();
+	if ( is_wp_error( $result ) )
+		die( $result->get_error_message() );
+}
+
+/**
  * Install global terms.
  *
  * @since 3.0.0
