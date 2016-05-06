@@ -116,6 +116,17 @@ if ( !function_exists('wp_upgrade') ) :
 endif;
 
 /**
+ * {@internal Missing Short Description}}
+ *
+ * {@internal Missing Long Description}}
+ *
+ * @since 1.5.0
+ */
+function make_db_current_silent( $tables = 'all' ) {
+	dbDelta( $tables );
+}
+
+/**
  * {@internal} Missing Short Description}}
  *
  * {@internal} Missing Long Description}}
