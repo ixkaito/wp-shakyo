@@ -44,6 +44,21 @@ function wp_cache_close() {
 }
 
 /**
+ * Removes all cache items.
+ *
+ * @since 2.0.0
+ * @uses $wp_object_cache Object Cache Class
+ * @see WP_Object_Cache::flush()
+ *
+ * @return bool False on failure, true on success
+ */
+function wp_cache_flush() {
+	global $wp_object_cache;
+
+	return $wp_object_cache->flush();
+}
+
+/**
  * Retrieves the cache contents from the cache by key and group.
  *
  * @since 2.0.0
