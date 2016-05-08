@@ -15,8 +15,8 @@
  * @since 3.4.0
  *
  * @param array $args The search arguments. Optional.
- * - errors      mixed  True to return themes with errors, false to return themes without errors, null
- *                      to return all themes. Defaults to false.
+ * - errors      mixed  True to return themes with errors, false to return themes without erros, null
+ *                      to return all themes. Defualts to false.
  * - allowed     mixed  (Multisite) True to return only allowed themes for a site. False to return only
  *                      disallowed themes for a site. 'site' to return only site-allowed themes. 'network'
  *                      to return only network-allowed themes. Null to return all themes. Defaults to null.
@@ -33,7 +33,7 @@ function wp_get_themes( $args = array() ) {
 	$theme_directories = search_theme_directories();
 
 	if ( count( $wp_theme_directories ) > 1 ) {
-		// Make sure the current theme wins out, in case search_theme_directories() picks the wrong
+		// Make sure the current theme wins out, in case search_theme_directories() pick the wrong
 		// one in the case of a conflict. (Normally, last registered theme root wins.)
 		$current_theme = get_stylesheet();
 		if ( isset( $theme_directories[ $current_theme ] ) ) {
