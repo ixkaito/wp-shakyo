@@ -5,3 +5,7 @@
  * @package WordPress
  * @subpackage Theme
  */
+
+final class WP_Theme implements ArrayAccess {
+
+}
