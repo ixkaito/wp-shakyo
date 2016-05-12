@@ -310,4 +310,59 @@ final class WP_Theme implements ArrayAccess {
 
 		return in_array( $offset, $keys );
 	}
+
+	/**
+	 * Method to implement ArrayAccess for keys formerly returned by get_themes().
+	 *
+	 * Author, Author Name, Author URI, and Description did not previously return
+	 * translated data. We are doing so now as it is safe to do. However, as
+	 * Name and Title could have been used as the key for get_themes(), both remain
+	 * untranslated for back compatibility. This means that ['Name'] is not ideal,
+	 * and care should be taken to use $theme->display('Name') to get a properly
+	 * translated header.
+	 */
+	public function offsetGet( $offset ) {
+		switch ( $offset ) {
+			case 'Name' :
+			case 'Title' :
+				// See note above about using translated data. get() is not ideal.
+				// It is only for backwards compatibility. Use display().
+				return $this->get('Name');
+			case 'Author' :
+				return $this->display( 'Author');
+			case 'Author Name' :
+				return $this->display( 'Author', false);
+			case 'Author URI' :
+				return $this->display('AuthorURI');
+			case 'Description' :
+				return $this->display( 'Description');
+			case 'Version' :
+			case 'Status' :
+				return $this->get( $offset );
+			case 'Template' :
+				return $this->get_template();
+			case 'Stylesheet' :
+				return $this->get_stylesheet();
+			case 'Template Files' :
+				return $this->get_files( 'php', 1, true );
+			case 'Stylesheet Files' :
+				return $this->get_files( 'css', 0, false );
+			case 'Template Dir' :
+				return $this->get_template_directory();
+			case 'Stylesheet Dir' :
+				return $this->get_stylesheet_directory();
+			case 'Screenshot' :
+				return $this->get_screenshot( 'relative' );
+			case 'Tags' :
+				return $this->get('Tags');
+			case 'Theme Root' :
+				return $this->get_theme_root();
+			case 'Theme Root URI' :
+				return $this->get_theme_root_uri();
+			case 'Parent Theme' :
+				return $this->parent() ? $this->parent()->get('Name') : '';
+			default :
+				return null;
+		}
+	}
 }
