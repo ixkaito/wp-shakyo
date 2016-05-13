@@ -301,6 +301,11 @@ final class WP_Theme implements ArrayAccess {
 	/**
 	 * Method to implement ArrayAccess for keys formerly returned by get_themes()
 	 */
+	public function offsetSet( $offset, $value ) {}
+
+	/**
+	 * Method to implement ArrayAccess for keys formerly returned by get_themes()
+	 */
 	public function offsetExists( $offset ) {
 		static $keys = array(
 			'Name', 'Version', 'Status', 'Title', 'Author', 'Author Name', 'Author URI', 'Description',
