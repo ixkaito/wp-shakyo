@@ -116,6 +116,35 @@ if ( !function_exists('wp_upgrade') ) :
 endif;
 
 /**
+ * Version of get_option that is private to install/upgrade.
+ *
+ * @since 1.5.1
+ * @access private
+ *
+ * @param string $setting Option name.
+ * @return mixed
+ */
+function __get_option($setting) {
+	global $wpdb;
+
+	if ( $setting == 'home' && defined( 'WP_HOME' ) )
+		return untrailingslashit( WP_HOME );
+
+	if ( $setting == 'siteurl' && defined( 'WP_SITEURL' ) )
+		return untrailingslashit( WP_SITEURL );
+
+	$option = $wpdb->get_var( $wpdb->prepare("SELECT option_value FROM $wpdb->options WHERE option_name = %s", $setting ) );
+
+	if ( 'home' == $setting && '' == $option )
+		return __get_option( 'siteurl' );
+
+	if ( 'siteurl' == $setting || 'home' == $setting || 'category_base' == $setting || 'tag_base' == $setting )
+		$option = untrailingslashit( $option );
+
+	return maybe_unserialize( $option );
+}
+
+/**
  * {@internal Missing Short Description}}
  *
  * {@internal Missing Long Description}}
