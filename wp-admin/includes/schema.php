@@ -794,3 +794,16 @@ function populate_roles_270() {
 		$role->add_cap( 'update_themes' );
 	}
 }
+
+/**
+ * Create and modify WordPress roles for WordPress 2.8.
+ *
+ * @since 2.8.0
+ */
+function populate_roles_280() {
+	$role = get_role( 'administrator' );
+
+	if ( !empty( $role ) ) {
+		$role->add_cap( 'install_themes' );
+	}
+}
