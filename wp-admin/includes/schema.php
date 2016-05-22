@@ -588,3 +588,108 @@ function populate_roles() {
 	populate_roles_280();
 	populate_roles_300();
 }
+
+/**
+ * Create the roles for WordPress 2.0
+ *
+ * @since 2.0.0
+ */
+function populate_roles_160() {
+	// Add roles
+
+	// Dummy gettext calls to get strings in the catalog.
+	/* translators: user role */
+	_x('Administrator', 'User role');
+	/* translators: user role */
+	_x('Editor', 'User role');
+	/* translators: user role */
+	_x('Author', 'User role');
+	/* translators: user role */
+	_x('Contributor', 'User role');
+	/* translators: user role */
+	_x('Subscriber', 'User role');
+
+	add_role('administrator', 'Administrator');
+	add_role('editor', 'Editor');
+	add_role('author', 'Author');
+	add_role('contributor', 'Contributor');
+	add_role('subscriber', 'Subscriber');
+
+	// Add caps for Administrator role
+	$role = get_role('administrator');
+	$role->add_cap('switch_themes');
+	$role->add_cap('edit_themes');
+	$role->add_cap('activate_plugins');
+	$role->add_cap('edit_plugins');
+	$role->add_cap('edit_users');
+	$role->add_cap('edit_files');
+	$role->add_cap('manage_options');
+	$role->add_cap('moderate_comments');
+	$role->add_cap('manage_categories');
+	$role->add_cap('manage_links');
+	$role->add_cap('upload_files');
+	$role->add_cap('import');
+	$role->add_cap('unfiltered_html');
+	$role->add_cap('edit_posts');
+	$role->add_cap('edit_others_posts');
+	$role->add_cap('edit_published_posts');
+	$role->add_cap('publish_posts');
+	$role->add_cap('edit_pages');
+	$role->add_cap('read');
+	$role->add_cap('level_10');
+	$role->add_cap('level_9');
+	$role->add_cap('level_8');
+	$role->add_cap('level_7');
+	$role->add_cap('level_6');
+	$role->add_cap('level_5');
+	$role->add_cap('level_4');
+	$role->add_cap('level_3');
+	$role->add_cap('level_2');
+	$role->add_cap('level_1');
+	$role->add_cap('level_0');
+
+	// Add caps for Editor role
+	$role = get_role('editor');
+	$role->add_cap('moderate_comments');
+	$role->add_cap('manage_categories');
+	$role->add_cap('manage_links');
+	$role->add_cap('upload_files');
+	$role->add_cap('unfiltered_html');
+	$role->add_cap('edit_posts');
+	$role->add_cap('edit_others_posts');
+	$role->add_cap('edit_published_posts');
+	$role->add_cap('publish_posts');
+	$role->add_cap('edit_pages');
+	$role->add_cap('read');
+	$role->add_cap('level_7');
+	$role->add_cap('level_6');
+	$role->add_cap('level_5');
+	$role->add_cap('level_4');
+	$role->add_cap('level_3');
+	$role->add_cap('level_2');
+	$role->add_cap('level_1');
+	$role->add_cap('level_0');
+
+	// Add caps for Author role
+	$role = get_role('author');
+	$role->add_cap('upload_files');
+	$role->add_cap('edit_posts');
+	$role->add_cap('edit_published_posts');
+	$role->add_cap('publish_posts');
+	$role->add_cap('read');
+	$role->add_cap('level_2');
+	$role->add_cap('level_1');
+	$role->add_cap('level_0');
+
+	// Add caps for Contributor role
+	$role = get_role('contributor');
+	$role->add_cap('edit_posts');
+	$role->add_cap('read');
+	$role->add_cap('level_1');
+	$role->add_cap('level_0');
+
+	// Add caps for Subscriber role
+	$role = get_role('subscriber');
+	$role->add_cap('read');
+	$role->add_cap('level_0');
+}
