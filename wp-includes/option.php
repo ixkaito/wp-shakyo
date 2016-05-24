@@ -124,6 +124,108 @@ function get_option( $option, $default = false ) {
 }
 
 /**
+ * Add a new option.
+ *
+ * You do not need to serialize values. If the value needs to be serialized, then
+ * it will be serialized before it is inserted into the database. Remember,
+ * resources can not be serialized or added as an option.
+ *
+ * You can create options without values and then update the values later.
+ * Existing options will not be updated and checks are performed to ensure that you
+ * aren't adding a protected WordPress option. Care should be taken to not name
+ * options the same as the ones which are protected.
+ *
+ * @since 1.0.0
+ *
+ * @param string $option Name of option to add. Expected to not be SQL-escaped.
+ * @param mixed $value Optional. Option value. Must be serializable if non-scalar. Expected to not be SQL-escaped.
+ * @param mixed $deprecated Optional. Description. Not used anymore.
+ * @param bool $autoload Optional. Default is enabled. Whether to load the option when WordPress starts up.
+ * @return bool False if option was not added and true if option was added.
+ */
+function add_option( $option, $value = '', $deprecated = '', $autoload = 'yes' ) {
+	global $wpdb;
+
+	if ( !empty( $deprecated ) )
+		_deprecated_argument( __FUNCTION__, '2.3' );
+
+	$option = trim($option);
+	if ( empty($option) )
+		return false;
+
+	wp_protect_special_option( $option );
+
+	if ( is_object($value) )
+		$value = clone $value;
+
+	$value = sanitize_option( $option, $value );
+
+	// Make sure the option doesn't already exist. We can check the 'notoptions' cache before we ask for a db query
+	$notoptions = wp_cache_get( 'notoptions', 'options' );
+	if ( !is_array( $notoptions ) || !isset( $notoptions[$option] ) )
+		if ( false !== get_option( $option ) )
+			return false;
+
+	$serialized_value = maybe_serialize( $value );
+	$autoload = ( 'no' === $autoload ) ? 'no' : 'yes';
+
+	/**
+	 * Fires before an option is added.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param string $option Name of the option to add.
+	 * @param mixed  $value  Value of the option.
+	 */
+	do_action( 'add_option', $option, $value );
+
+	$result = $wpdb->query( $wpdb->prepare( "INSERT INTO `$wpdb->options` (`option_name`, `option_value`, `autoload`) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE `option_name` = VALUES(`option_name`), `option_value` = VALUES(`option_value`), `autoload` = VALUES(`autoload`)", $option, $serialized_value, $autoload ) );
+	if ( ! $result )
+		return false;
+
+	if ( ! defined( 'WP_INSTALLING' ) ) {
+		if ( 'yes' == $autoload ) {
+			$alloptions = wp_load_alloptions();
+			$alloptions[ $option ] = $serialized_value;
+			wp_cache_set( 'alloptions', $alloptions, 'options' );
+		} else {
+			wp_cache_set( $option, $serialized_value, 'options' );
+		}
+	}
+
+	// This option exists now
+	$notoptions = wp_cache_get( 'notoptions', 'options' ); // yes, again... we need it to be fresh
+	if ( is_array( $notoptions ) && isset( $notoptions[$option] ) ) {
+		unset( $notoptions[$option] );
+		wp_cache_set( 'notoptions', $notoptions, 'options' );
+	}
+
+	/**
+	 * Fires after a specific option has been added.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 2.5.0 As "add_option_{$name}"
+	 * @since 3.0.0
+	 *
+	 * @param string $option Name of the option to add.
+	 * @param mixed  $value  Value of the option.
+	 */
+	do_action( "add_option_{$option}", $option, $value );
+
+	/**
+	 * Fires after an option has been added.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param string $option Name of the added option.
+	 * @param mixed  $value  Value of the option.
+	 */
+	do_action( 'added_option', $option, $value );
+	return true;
+}
+
+/**
  * Protect WordPress special option from being modified.
  *
  * Will die if $option is in protected list. Protected options are 'alloptions'
