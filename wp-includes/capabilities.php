@@ -885,6 +885,24 @@ function current_user_can( $capability ) {
 }
 
 /**
+ * Retrieve role object.
+ *
+ * @see WP_Roles::get_role() Uses method to retrieve role object.
+ * @since 2.0.0
+ *
+ * @param string $role Role name.
+ * @return WP_Role|null WP_Role object if found, null if the role does not exist.
+ */
+function get_role( $role ) {
+	global $wp_roles;
+
+	if ( ! isset( $wp_roles ) )
+		$wp_roles = new WP_Roles();
+
+	return $wp_roles->get_role( $role );
+}
+
+/**
  * Add role, if it does not exist.
  *
  * @see WP_Roles::add_role() Uses method to add role.
