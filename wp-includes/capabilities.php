@@ -208,6 +208,26 @@ class WP_Role {
 		$this->name = $role;
 		$this->capabilities = $capabilities;
 	}
+
+	/**
+	 * Assign role a capability.
+	 *
+	 * @see WP_Roles::add_cap() Method uses implementation for role.
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string $cap Capability name.
+	 * @param bool $grant Whether role has capability privilege.
+	 */
+	public function add_cap( $cap, $grant = true ) {
+		global $wp_roles;
+
+		if ( ! isset( $wp_roles ) )
+			$wp_roles = new WP_Roles();
+
+		$this->capabilities[$cap] = $grant;
+		$wp_roles->add_cap( $this->name, $cap, $grant );
+	}
 }
 
 /**
