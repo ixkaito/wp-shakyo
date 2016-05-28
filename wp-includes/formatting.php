@@ -1198,6 +1198,21 @@ function wp_parse_str( $string, &$array ) {
 }
 
 /**
+ * Convert lone less than signs.
+ *
+ * KSES already converts lone greater than signs.
+ *
+ * @uses wp_pre_kses_less_than_callback in the callback function.
+ * @since 2.3.0
+ *
+ * @param string $text Text to be converted.
+ * @return string Converted text.
+ */
+function wp_pre_kses_less_than( $text ) {
+	return preg_replace_callback('%<[^>]*?((?=<)|>|$)%', 'wp_pre_kses_less_than_callback', $text);
+}
+
+/**
  * Properly strip all HTML tags including script and style
  *
  * This differs from strip_tags() because it removes the contents of
