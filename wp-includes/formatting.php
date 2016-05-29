@@ -1213,6 +1213,21 @@ function wp_pre_kses_less_than( $text ) {
 }
 
 /**
+ * Callback function used by preg_replace.
+ *
+ * @uses esc_html to format the $matches text.
+ * @since 2.3.0
+ *
+ * @param array $matches Populated by matches to preg_replace.
+ * @return string The text returned after esc_html if needed.
+ */
+function wp_pre_kses_less_than_callback( $matches ) {
+	if ( false === strpos($matches[0], '>') )
+		return esc_html($matches[0]);
+	return $matches[0];
+}
+
+/**
  * Properly strip all HTML tags including script and style
  *
  * This differs from strip_tags() because it removes the contents of
