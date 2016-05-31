@@ -127,3 +127,19 @@ function update_user_caches($user) {
 	wp_cache_add($user->user_email, $user->ID, 'useremail');
 	wp_cache_add($user->user_nicename, $user->ID, 'userslugs');
 }
+
+/**
+ * Checks whether the given username exists.
+ *
+ * @since 2.0.0
+ *
+ * @param string $username Username.
+ * @return null|int The user's ID on success, and null on failure.
+ */
+function username_exists( $username ) {
+	if ( $user = get_user_by('login', $username ) ) {
+		return $user->ID;
+	} else {
+		return null;
+	}
+}
