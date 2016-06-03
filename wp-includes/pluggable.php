@@ -534,7 +534,7 @@ if ( !function_exists('wp_hash_password') ) :
 /**
  * Create a hash (encrypt) of a plain text password.
  *
- * FOr integration with other applications, this function can be overwritten to
+ * For integration with other applications, this function can be overwritten to
  * instead use the other package password checking algorithm.
  *
  * @since 2.5.0
