@@ -530,6 +530,34 @@ function wp_hash($data, $scheme = 'auth') {
 }
 endif;
 
+if ( !function_exists('wp_hash_password') ) :
+/**
+ * Create a hash (encrypt) of a plain text password.
+ *
+ * FOr integration with other applications, this function can be overwritten to
+ * instead use the other package password checking algorithm.
+ *
+ * @since 2.5.0
+ *
+ * @global object $wp_hasher PHPass object
+ * @uses PasswordHash::HashPassword
+ *
+ * @param string $password Plain text user password to hash
+ * @return string The hash string of the password
+ */
+function wp_hash_password($password) {
+	global $wp_hasher;
+
+	if ( empty($wp_hasher) ) {
+		require_once( ABSPATH . WPINC . '/class-phpass.php');
+		// By default, use the portable hash from phpass
+		$wp_hasher = new PasswordHash(8, true);
+	}
+
+	return $wp_hasher->HashPassword( trim( $password ) );
+}
+endif;
+
 if ( !function_exists('wp_generate_password') ) :
 /**
  * Generates a random password drawn from the defined set of characters.
