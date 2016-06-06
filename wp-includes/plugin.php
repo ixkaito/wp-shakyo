@@ -314,6 +314,18 @@ function remove_filter( $tag, $function_to_remove, $priority = 10 ) {
 }
 
 /**
+ * Retrieve the name of the current filter or action.
+ *
+ * @since 2.5.0
+ *
+ * @return string Hook name of the current filter or action.
+ */
+function current_filter() {
+	global $wp_current_filter;
+	return end( $wp_current_filter );
+}
+
+/**
  * Hooks a function on to a specific action.
  *
  * Actions are the hooks that the WordPress core launches at specific points
