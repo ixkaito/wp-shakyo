@@ -524,6 +524,49 @@ class WP_User {
 	}
 
 	/**
+	 * Set the role of the user.
+	 *
+	 * This will remove the previous roles of the user and assign the user the
+	 * new one. You can set the role to an empty string and it will remove all
+	 * of the roles from the user.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string $role Role name.
+	 */
+	public function set_role( $role ) {
+		if ( 1 == count( $this->roles ) && $role == current( $this->roles ) )
+			return;
+
+		foreach ( (array) $this->roles as $oldrole )
+			unset( $this->caps[$oldrole] );
+
+		$old_roles = $this->roles;
+		if ( !empty( $role ) ) {
+			$this->caps[$role] = true;
+			$this->roles = array( $role => true );
+		} else {
+			$this->roles = false;
+		}
+		update_user_meta( $this->ID, $this->cap_key, $this->caps );
+		$this->get_role_caps();
+		$this->update_user_level_from_caps();
+
+		/**
+		 * Fires after the user's role has changed.
+		 *
+		 * @since 2.9.0
+		 * @since 3.6.0 Added $old_roles to include an array of the user's previous roles.
+		 *
+		 * @param int    $user_id   The user ID.
+		 * @param string $role      The new role.
+		 * @param array  $old_roles An array of the user's previous roles.
+		 */
+		do_action( 'set_user_role', $this->ID, $role, $old_roles );
+	}
+
+	/**
 	 * Whether user has capability or role name.
 	 *
 	 * This is useful for looking up whether the user has a specific role
