@@ -567,6 +567,34 @@ class WP_User {
 	}
 
 	/**
+	 * Choose the maximum level the user has.
+	 *
+	 * Will compare the level from the $item parameter against the $max
+	 * parameter. If the item is incorrect, then just the $max parameter value
+	 * will be returned.
+	 *
+	 * Used to get the max level based on the capabilities the user has. This
+	 * is also based on roles, so if the user is assigned the Administrator role
+	 * then the capability 'level_10' will exist and the user will get that
+	 * value.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param int $max Max level of user.
+	 * @param string $item Level capability name.
+	 * @return int Max Level.
+	 */
+	public function level_reduction( $max, $item ) {
+		if ( preg_match( '/^level_(10|[0-9])$/i', $item, $matches ) ) {
+			$level = intval( $matches[1] );
+			return max( $max, $level );
+		} else {
+			return $max;
+		}
+	}
+
+	/**
 	 * Update the maximum user level for the user.
 	 *
 	 * Updates the 'user_level' user metadata (includes prefix that is the
