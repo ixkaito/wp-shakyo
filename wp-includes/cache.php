@@ -44,6 +44,23 @@ function wp_cache_close() {
 }
 
 /**
+ * Removes the cache contents matching key and group.
+ *
+ * @since 2.0.0
+ * @uses $wp_object_cache Object Cache Class
+ * @see WP_Object_Cache::delete()
+ *
+ * @param int|string $key What the contents in the cache are called
+ * @param string $group Where the cache contents are grouped
+ * @return bool True on successful removal, false on failure
+ */
+function wp_cache_delete($key, $group = '') {
+	global $wp_object_cache;
+
+	return $wp_object_cache->delete($key, $group);
+}
+
+/**
  * Removes all cache items.
  *
  * @since 2.0.0
