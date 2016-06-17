@@ -44,6 +44,24 @@ function wp_cache_close() {
 }
 
 /**
+ * Decrement numeric cache item's value
+ *
+ * @since 3.3.0
+ * @uses $wp_object_cache Object Cache Class
+ * @see WP_Object_Cache::decr()
+ *
+ * @param int|string $key The cache key to increment
+ * @param int $offset The amount by which to decrement the item's value. Default is 1.
+ * @param string $group The group the key is in.
+ * @return false|int False on failure, the item's new value on success.
+ */
+function wp_cache_decr( $key, $offset = 1, $group = '' ) {
+	global $wp_object_cache;
+
+	return $wp_object_cache->decr( $key, $offset, $group );
+}
+
+/**
  * Removes all cache items.
  *
  * @since 2.0.0
