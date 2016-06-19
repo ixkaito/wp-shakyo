@@ -1381,6 +1381,39 @@ function is_main_network( $network_id = null ) {
 }
 
 /**
+ * Determine whether global terms are enabled.
+ *
+ * @since 3.0.0
+ *
+ * @return bool True if multisite and global terms enabled.
+ */
+function global_terms_enabled() {
+	if ( ! is_multisite() )
+		return false;
+
+	static $global_terms = null;
+	if ( is_null( $global_terms ) ) {
+
+		/**
+		 * Filter whether global terms are enabled.
+		 *
+		 * Passing a non-null value to the filter will effectively short-circuit the function,
+		 * returning the value of the 'global_terms_enabled' site option instead.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param null $anbled Whether global terms are enabled.
+		 */
+		$filter = apply_filters( 'global_terms_enabled', null );
+		if ( ! is_null( $filter ) )
+			$global_terms = (bool) $filter;
+		else
+			$global_terms = (bool) get_site_option( 'global_terms_enabled', false );
+	}
+	return $global_terms;
+}
+
+/**
  * gmt_offset modification for smart timezone handling.
  *
  * Overrides the gmt_offset option if we have a timezone_string available.
