@@ -7,6 +7,20 @@
  */
 
 /**
+ * Remove rewrite rules and then recreate rewrite rules.
+ *
+ * @see WP_Rewrite::flush_rules()
+ * @since 3.0.0
+ *
+ * @param bool $hard Whether to update .htaccess (hard flush) or just update
+ * 	rewrite_rules transient (soft flush). Default is true (hard).
+ */
+function flush_rewrite_rules( $hard = true ) {
+	global $wp_rewrite;
+	$wp_rewrite->flush_rules( $hard );
+}
+
+/**
  * Endpoint Mask for default, which is nothing.
  *
  * @since 2.1.0
