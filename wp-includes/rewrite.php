@@ -768,6 +768,38 @@ class WP_Rewrite {
 	}
 
 	/**
+	 * Remove rewrite rules and then recreate rewrite rules.
+	 *
+	 * Calls {@link WP_Rewrite::wp_rewrite_rules()} after removing the
+	 * 'rewrite_rules' option. If the function named 'save_mod_rewrite_rules'
+	 * exists, it will be called.
+	 *
+	 * @since 2.0.1
+	 * @access public
+	 * @param bool $hard Whether to update .htaccess (hard flush) or just update rewrite_rules option (soft flush). Default is true (hard).
+	 */
+	public function flush_rules($hard = true) {
+		delete_option('rewrite_rules');
+		$this->wp_rewrite_rules();
+		/**
+		 * Filter whether a "hard" rewrite rule flush should be performed when requested.
+		 *
+		 * A "hard" flush updates .htaccess (Apache) or web.config (IIS).
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param bool $hard Whether to flush rewrite rules "hard". Default true.
+		 */
+		if ( ! $hard || ! apply_filters( 'flush_rewrite_rules_hard', true ) ) {
+			return;
+		}
+		if ( function_exists( 'save_mod_rewrite_rules' ) )
+			save_mod_rewrite_rules();
+		if ( function_exists( 'iis7_save_url_rewrite_rules' ) )
+			iis7_save_url_rewrite_rules();
+	}
+
+	/**
 	 * Sets up the object's properties.
 	 *
 	 * The 'use_verbose_page_rules' object property will be set to true if the
