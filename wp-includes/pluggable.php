@@ -162,6 +162,9 @@ function get_user_by( $field, $value ) {
 }
 endif;
 
+if ( !function_exists('cache_users') ) :
+endif;
+
 if ( !function_exists('wp_validate_auth_cookie') ) :
 /**
  * Validates authentication cookie.
