@@ -54,3 +54,10 @@ $secure = ( 'https' === parse_url( site_url(), PHP_URL_SCHEME ) && 'https' === p
 setcookie( TEST_COOKIE, 'WP Cookie check', 0, COOKIEPATH, COOKIE_DOMAIN, $secure );
 if ( SITECOOKIEPATH != COOKIEPATH )
 	setcookie( TEST_COOKIE, 'WP Cookie check', 0, SITECOOKIEPATH, COOKIE_DOMAIN, $secure );
+
+/**
+ * Fires when the login form is initialized.
+ *
+ * @since 3.2.0
+ */
+do_action( 'login_init' );
