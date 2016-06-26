@@ -37,3 +37,20 @@ if ( !in_array( $action, array( 'postpass', 'logout', 'lostpassword', 'retrievep
 	$action = 'login';
 
 nocache_headers();
+
+header('Content-Type: '.get_bloginfo('html_type').'; charset='.get_bloginfo('charset'));
+
+if ( defined( 'RELOCATE' ) && RELOCATE ) { // Move flag is set
+	if ( isset( $_SERVER['PATH_INFO'] ) && ($_SERVER['PATH_INFO'] != $_SERVER['PHP_SELF']) )
+		$_SERVER['PHP_SELF'] = str_replace( $_SERVER['PATH_INFO'], '', $_SERVER['PHP_SELF'] );
+
+	$url = dirname( set_url_scheme( 'http://' .  $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] ) );
+	if ( $url != get_option( 'siteurl' ) )
+		update_option( 'siteurl', $url );
+}
+
+//Set a cookie now to see if they are supported by the browser.
+$secure = ( 'https' === parse_url( site_url(), PHP_URL_SCHEME ) && 'https' === parse_url( home_url(), PHP_URL_SCHEME ) );
+setcookie( TEST_COOKIE, 'WP Cookie check', 0, COOKIEPATH, COOKIE_DOMAIN, $secure );
+if ( SITECOOKIEPATH != COOKIEPATH )
+	setcookie( TEST_COOKIE, 'WP Cookie check', 0, SITECOOKIEPATH, COOKIE_DOMAIN, $secure );
