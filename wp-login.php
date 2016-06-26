@@ -61,3 +61,5 @@ if ( SITECOOKIEPATH != COOKIEPATH )
  * @since 3.2.0
  */
 do_action( 'login_init' );
+
+var_dump(__FILE__);
