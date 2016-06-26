@@ -35,3 +35,5 @@ if ( isset($_GET['key']) )
 // validate action so as to default to the login screen
 if ( !in_array( $action, array( 'postpass', 'logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'register', 'login' ), true ) && false === has_filter( 'login_form_' . $action ) )
 	$action = 'login';
+
+nocache_headers();
