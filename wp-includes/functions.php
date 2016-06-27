@@ -1436,6 +1436,17 @@ function wp_timezone_override_offset() {
 }
 
 /**
+ * Send a HTTP header to limit rendering of pages to same origin iframes.
+ *
+ * @since 3.1.3
+ *
+ * @see https://developer.mozilla.org/en/the_x-frame-options_response_header
+ */
+function send_frame_options_header() {
+	@header( 'X-Frame-Options: SAMEORIGIN' );
+}
+
+/**
  * Retrieve a list of protocols to allow in HTML attributes.
  *
  * @since 3.3.0
