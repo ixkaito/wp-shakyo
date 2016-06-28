@@ -61,5 +61,15 @@ if ( SITECOOKIEPATH != COOKIEPATH )
  * @since 3.2.0
  */
 do_action( 'login_init' );
+/**
+ * Fires before a specified login form action.
+ *
+ * The dynamic portion of the hook name, $action, refers to the action
+ * that brought the visitor to the login form. Actions include 'postpass',
+ * 'logout', 'lostpassword', etc.
+ *
+ * @since 2.8.0
+ */
+do_action( 'login_form_' . $action );
 
 var_dump(__FILE__);
