@@ -72,4 +72,7 @@ do_action( 'login_init' );
  */
 do_action( 'login_form_' . $action );
 
+$http_post = ('POST' == $_SERVER['REQUEST_METHOD']);
+$interim_login = isset($_REQUEST['interim-login']);
+
 var_dump(__FILE__);
