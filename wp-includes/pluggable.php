@@ -502,6 +502,9 @@ function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()
 }
 endif;
 
+if ( !function_exists('wp_logout') ) :
+endif;
+
 if ( !function_exists('wp_validate_auth_cookie') ) :
 /**
  * Validates authentication cookie.
