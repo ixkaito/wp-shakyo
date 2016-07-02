@@ -102,6 +102,61 @@ function wp_signon( $credentials = array(), $secure_cookie = '' ) {
 }
 
 /**
+ * Authenticate the user using the username and password.
+ *
+ * @since 2.8.0
+ *
+ * @param WP_User|WP_Error|null $user     WP_User or WP_Error object from a previous callback. Default null.
+ * @param string                $username Username for authentication.
+ * @param string                $password Password for authentication.
+ * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
+ */
+function wp_authenticate_username_password($user, $username, $password) {
+	if ( is_a( $user, 'WP_User' ) ) {
+		return $user;
+	}
+
+	if ( empty($username) || empty($password) ) {
+		if ( is_wp_error( $user ) )
+			return $user;
+
+		$error = new WP_Error();
+
+		if ( empty($username) )
+			$error->add('empty_username', __('<strong>ERROR</strong>: The username field is empty.'));
+
+		if ( empty($password) )
+			$error->add('empty_password', __('<strong>ERROR</strong>: The password field is empty.'));
+
+		return $error;
+	}
+
+	$user = get_user_by('login', $username);
+
+	if ( !$user )
+		return new WP_Error( 'invalid_username', sprintf( __( '<strong>ERROR</strong>: Invalid username. <a href="%s">Lost your password</a>?' ), wp_lostpassword_url() ) );
+
+	/**
+	 * Filter whether the given user can be authenticated with the provided $password.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param WP_User|WP_Error $user     WP_User or WP_Error object if a previous
+	 *                                   callback failed authentication.
+	 * @param string           $password Password to check against the user.
+	 */
+	$user = apply_filters( 'wp_authenticate_user', $user, $password );
+	if ( is_wp_error($user) )
+		return $user;
+
+	if ( !wp_check_password($password, $user->user_pass, $user->ID) )
+		return new WP_Error( 'incorrect_password', sprintf( __( '<strong>ERROR</strong>: The password you entered for the username <strong>%1$s</strong> is incorrect. <a href="%2$s">Lost your password</a>?' ),
+		$username, wp_lostpassword_url() ) );
+
+	return $user;
+}
+
+/**
  * Validate the logged-in cookie.
  *
  * Checks the logged-in cookie if the previous auth cookie could not be
