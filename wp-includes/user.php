@@ -157,6 +157,42 @@ function wp_authenticate_username_password($user, $username, $password) {
 }
 
 /**
+ * Authenticate the user using the WordPress auth cookie.
+ *
+ * @since 2.8.0
+ *
+ * @param WP_User|WP_Error|null $user     WP_User or WP_Error object from a previous callback. Default null.
+ * @param string                $username Username. If not empty, cancels the cookie authentication.
+ * @param string                $password Password. If not empty, cancels the cookie authentication.
+ * @return WP_User|WP_Error WP_User on success, WP_Error on failure.
+ */
+function wp_authenticate_cookie($user, $username, $password) {
+	if ( is_a( $user, 'WP_User' ) ) {
+		return $user;
+	}
+
+	if ( empty($username) && empty($password) ) {
+		$user_id = wp_validate_auth_cookie();
+		if ( $user_id )
+			return new WP_User($user_id);
+
+		global $auth_secure_cookie;
+
+		if ( $auth_secure_cookie )
+			$auth_cookie = SECURE_AUTH_COOKIE;
+		else
+			$auth_cookie = AUTH_COOKIE;
+
+		if ( !empty($_COOKIE[$auth_cookie]) )
+			return new WP_Error('expired_session', __('Please log in again.'));
+
+		// If the cookie is not set, be silent.
+	}
+
+	return $user;
+}
+
+/**
  * Validate the logged-in cookie.
  *
  * Checks the logged-in cookie if the previous auth cookie could not be
