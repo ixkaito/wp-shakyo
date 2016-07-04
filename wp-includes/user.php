@@ -193,6 +193,33 @@ function wp_authenticate_cookie($user, $username, $password) {
 }
 
 /**
+ * For Multisite blogs, check if the authenticated user has been marked as a
+ * spammer, or if the user's primary blog has been marked as spam.
+ *
+ * @since 3.7.0
+ *
+ * @param WP_User|WP_Error|null $user WP_User or WP_Error object from a previous callback. Default null.
+ * @return WP_User|WP_Error WP_User on success, WP_Error if the user is considered a spammer.
+ */
+function wp_authenticate_spam_check( $user ) {
+	if ( $user && is_a( $user, 'WP_User' ) && is_multisite() ) {
+		/**
+		 * Filter whether the user has been marked as a spammer.
+		 *
+		 * @since 3.7.0
+		 *
+		 * @param bool    $spammed Whether the user is considered a spammer.
+		 * @param WP_User $user    User to check against.
+		 */
+		$spammed = apply_filters( 'check_is_user_spammed', is_user_spammy(), $user );
+
+		if ( $spammed )
+			return new WP_Error( 'spammer_account', __( '<strong>ERROR</strong>: Your account has been marked as a spammer.' ) );
+	}
+	return $user;
+}
+
+/**
  * Validate the logged-in cookie.
  *
  * Checks the logged-in cookie if the previous auth cookie could not be
