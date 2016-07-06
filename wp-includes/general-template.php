@@ -7,6 +7,18 @@
  */
 
 /**
+ * Display information about the blog.
+ *
+ * @see get_bloginfo() For possible values for the parameter.
+ * @since 0.71
+ *
+ * @param string $show What to display.
+ */
+function bloginfo( $show='' ) {
+	echo get_bloginfo( $show, 'display' );
+}
+
+/**
  * Retrieve information about the blog.
  *
  * Some show parameter values are deprecated and will be removed in future
