@@ -730,6 +730,28 @@ function wp_style_loader_src( $src, $handle ) {
 	return $src;
 }
 
+/**
+ * Prints the script queue in the HTML head on the front end.
+ *
+ * Postpones the scripts that were queued for the footer.
+ * wp_print_footer_script() is called in the footer to print these scripts.
+ *
+ * @since 2.8.0
+ */
+function wp_print_head_scripts() {
+	if ( ! did_action('wp_print_scripts') ) {
+		/** This action is documented in wp-includes/functions.wp-scripts.php */
+		do_action( 'wp_print_scripts' );
+	}
+
+	global $wp_scripts;
+
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
+		return array(); // no need to run if nothing is queued
+
+	return print_head_scripts();
+}
+
 add_action( 'wp_default_scripts', 'wp_default_scripts' );
 add_filter( 'wp_print_scripts', 'wp_just_in_time_script_localization' );
 add_filter( 'print_scripts_array', 'wp_prototype_before_jquery' );
