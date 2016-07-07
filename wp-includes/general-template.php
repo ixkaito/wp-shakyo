@@ -160,6 +160,18 @@ add_action( 'update_option_start_of_week', 'delete_get_calendar_cache' );
 add_action( 'update_option_gmt_offset', 'delete_get_calendar_cache' );
 
 /**
+ * Display a noindex meta tag.
+ *
+ * Outputs a noindex meta tag that tells web robots not to index the page content.
+ * Typical usage is as a wp_head callback. add_action( 'wp_head', 'wp_no_robots' );
+ *
+ * @since 3.3.0
+ */
+function wp_no_robots() {
+	echo "<meta name='robots' content='noindex,follow' />\n";
+}
+
+/**
  * Display the language attributes for the html tag.
  *
  * Builds up a set of html attributes containing the text direction and language
