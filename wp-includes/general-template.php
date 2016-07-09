@@ -7,6 +7,37 @@
  */
 
 /**
+ * Returns the Lost Password URL.
+ *
+ * Returns the URL that allows the user to retrieve the lost password
+ *
+ * @since 2.8.0
+ *
+ * @uses site_url() To generate the lost password URL
+ *
+ * @param string $redirect Path to redirect to on login.
+ * @return string Lost password URL.
+ */
+function wp_lostpassword_url( $redirect = '' ) {
+	$args = array( 'action' => 'lostpassword' );
+	if ( !empty($redirect) ) {
+		$args['redirect_to'] = $redirect;
+	}
+
+	$lostpassword_url = add_query_arg( $args, network_site_url('wp-login.php', 'login') );
+
+	/**
+	 * Filter the Lost Password URL.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param string $lostpassword_url The lost password page URL.
+	 * @param string $redirect         The path to redirect to on login.
+	 */
+	return apply_filters( 'lostpassword_url', $lostpassword_url, $redirect );
+}
+
+/**
  * Display information about the blog.
  *
  * @see get_bloginfo() For possible values for the parameter.
