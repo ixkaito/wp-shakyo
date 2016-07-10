@@ -205,6 +205,47 @@ function includes_url( $path = '', $scheme = null ) {
 }
 
 /**
+ * Retrieve the site url for the current network.
+ *
+ * Returns the site url with the appropriate protocol, 'https' if
+ * is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+ * overridden.
+ *
+ * @since 3.0.0
+ *
+ * @param string $path Optional. Path relative to the site url.
+ * @param string $scheme Optional. Scheme to give the site url context. See set_url_scheme().
+ * @return string Site url link with optional path appended.
+*/
+function network_site_url( $path = '', $scheme = null ) {
+	if ( ! is_multisite() )
+		return site_url($path, $scheme);
+
+	$current_site = get_current_site();
+
+	if ( 'relative' == $scheme )
+		$url = $current_site->path;
+	else
+		$url = set_url_scheme( 'http://' . $current_site->domain . $current_site->path, $scheme );
+
+	if ( $path && is_string( $path ) )
+		$url .= ltrim( $path, '/' );
+
+	/**
+	 * Filter the network site URL.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string      $url    The complete network site URL including scheme and path.
+	 * @param string      $path   Path relative to the network site URL. Blank string if
+	 *                            no path is specified.
+	 * @param string|null $scheme Scheme to give the URL context. Accepts 'http', 'https',
+	 *                            'relative' or null.
+	 */
+	return apply_filters( 'network_site_url', $url, $path, $scheme );
+}
+
+/**
  * Set the scheme for a URL
  *
  * @since 3.4.0
