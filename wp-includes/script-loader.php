@@ -731,6 +731,36 @@ function wp_style_loader_src( $src, $handle ) {
 }
 
 /**
+ * Prints the scripts that were queued for the footer or too late for the HTML head.
+ *
+ * @since 2.8.0
+ */
+function print_footer_scripts() {
+	global $wp_scripts, $concatenate_scripts;
+
+	if ( !is_a($wp_scripts, 'WP_Scripts') )
+		return array(); // No need to run if not instantiated.
+
+	script_concat_settings();
+	$wp_scripts->do_concat = $concatenate_scripts;
+	$wp_scripts->do_footer_items();
+
+	/**
+	 * Filter whether to print the footer scripts.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param bool $print Whether to print the footer scripts. Default true.
+	 */
+	if ( apply_filters( 'print_footer_scripts', true ) ) {
+		_print_scripts();
+	}
+
+	$wp_scripts->reset();
+	return $wp_scripts->done;
+}
+
+/**
  * Prints the script queue in the HTML head on the front end.
  *
  * Postpones the scripts that were queued for the footer.
