@@ -805,6 +805,33 @@ function print_late_styles() {
 	return $wp_styles->done;
 }
 
+/**
+ * @internal use
+ */
+function _print_styles() {
+	global $wp_styles, $compress_css;
+
+	$zip = $compress_css ? 1 : 0;
+	if ( $zip && defined('ENFORCE_GZIP') && ENFORCE_GZIP )
+		$zip = 'gzip';
+
+	if ( !empty($wp_styles->concat) ) {
+		$dir = $wp_styles->text_direction;
+		$ver = $wp_styles->default_version;
+		$href = $wp_styles->base_url . "/wp-admin/load-styles.php?c={$zip}&dir={$dir}&load=" . trim($wp_styles->concat, ', ') . '&ver=' . $ver;
+		echo "<link rel='stylesheet' href='" . esc_attr($href) . "' type='text/css' media='all' />\n";
+
+		if ( !empty($wp_styles->print_code) ) {
+			echo "<style type='text/css'>\n";
+			echo $wp_styles->print_code;
+			echo "\n</style>\n";
+		}
+	}
+
+	if ( !empty($wp_styles->print_html) )
+		echo $wp_styles->print_html;
+}
+
 add_action( 'wp_default_scripts', 'wp_default_scripts' );
 add_filter( 'wp_print_scripts', 'wp_just_in_time_script_localization' );
 add_filter( 'print_scripts_array', 'wp_prototype_before_jquery' );
