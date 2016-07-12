@@ -776,6 +776,35 @@ function wp_print_footer_scripts() {
 	do_action( 'wp_print_footer_scripts' );
 }
 
+/**
+ * Prints the styles that were queued too late for the HTML head.
+ *
+ * @since 3.3.0
+ */
+function print_late_styles() {
+	global $wp_styles, $concatenate_scripts;
+
+	if ( !is_a($wp_styles, 'WP_Styles') )
+		return;
+
+	$wp_styles->do_concat = $concatenate_scripts;
+	$wp_styles->do_footer_items();
+
+	/**
+	 * Filter whether to print the styles queued too late for the HTML head.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param bool $print Whether to print the 'late' styles. Default true.
+	 */
+	if ( apply_filters( 'print_late_styles', true ) ) {
+		_print_styles();
+	}
+
+	$wp_styles->reset();
+	return $wp_styles->done;
+}
+
 add_action( 'wp_default_scripts', 'wp_default_scripts' );
 add_filter( 'wp_print_scripts', 'wp_just_in_time_script_localization' );
 add_filter( 'print_scripts_array', 'wp_prototype_before_jquery' );
