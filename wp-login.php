@@ -795,5 +795,3 @@ try {
 login_footer();
 break;
 } // end action switch
-
-var_dump(__FILE__);
