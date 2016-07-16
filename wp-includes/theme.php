@@ -463,6 +463,35 @@ function _custom_header_background_just_in_time() {
 add_action( 'wp_loaded', '_custom_header_background_just_in_time' );
 
 /**
+ * Gets the theme support arguments passed when registering that support
+ *
+ * @since 3.1.0
+ *
+ * @param string $feature the feature to check
+ * @return array The array of extra arguments
+ */
+function get_theme_support( $feature ) {
+	global $_wp_theme_features;
+	if ( ! isset( $_wp_theme_features[ $feature ] ) )
+		return false;
+
+	if ( func_num_args() <= 1 )
+		return $_wp_theme_features[ $feature ];
+
+	$args = array_slice( func_get_args(), 1 );
+	switch ( $feature ) {
+		case 'custom-header' :
+		case 'custom-background' :
+			if ( isset( $_wp_theme_features[ $feature ][0][ $args[0] ] ) )
+				return $_wp_theme_features[ $feature ][0][ $args[0] ];
+			return false;
+
+		default :
+			return $_wp_theme_features[ $feature ];
+	}
+}
+
+/**
  * Checks a theme's support for a given feature
  *
  * @since 2.9.0
