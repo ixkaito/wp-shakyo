@@ -7,6 +7,48 @@
  */
 
 /**
+ * Load header template.
+ *
+ * Includes the header template for a theme or if a name is specified then a
+ * specialised header will be included.
+ *
+ * For the parameter, if the file is called "header-special.php" then specify
+ * "special".
+ *
+ * @since 1.5.0
+ *
+ * @uses locate_template()
+ *
+ * @param string $name The name of the specialised header.
+ */
+function get_header( $name = null ) {
+	/**
+	 * Fires before the header template file is loaded.
+	 *
+	 * The hook allows a specific header template file to be used in place of the
+	 * default header template file. If your file is called header-new.php,
+	 * you would specify the filename in the hook as get_header( 'new' ).
+	 *
+	 * @since 2.1.0
+	 * @since 2.8.0 $name parameter added.
+	 *
+	 * @param string $name Name of the specific header file to use.
+	 */
+	do_action( 'get_header', $name );
+
+	$templates = array();
+	$name = (string) $name;
+	if ( '' !== $name )
+		$templates[] = "header-{$name}.php";
+
+	$templates[] = 'header.php';
+
+	// Backward compat code will be removed in a future release
+	if ('' == locate_template($templates, true))
+		load_template( ABSPATH . WPINC . '/theme-compat/header.php');
+}
+
+/**
  * Returns the Lost Password URL.
  *
  * Returns the URL that allows the user to retrieve the lost password
