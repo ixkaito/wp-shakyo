@@ -126,3 +126,28 @@ function locate_template($template_names, $load = false, $require_once = true ) 
 
 	return $located;
 }
+
+/**
+ * Require the template file with WordPress environment.
+ *
+ * The globals are set up for the template file to ensure that the WordPress
+ * environment is available from within the function. The query variables are
+ * also available.
+ *
+ * @since 1.5.0
+ *
+ * @param string $_template_file Path to template file.
+ * @param bool $require_once Whether to require_once or require. Default true.
+ */
+function load_template( $_template_file, $require_once = true ) {
+	global $posts, $post, $wp_did_header, $wp_query, $wp_rewrite, $wpdb, $wp_version, $wp, $id, $comment, $user_ID;
+
+	if ( is_array( $wp_query->query_vars ) )
+		extract( $wp_query->query_vars, EXTR_SKIP );
+
+	if ( $require_once )
+		require_once( $_template_file );
+	else
+		require( $_template_file );
+}
+
