@@ -205,6 +205,32 @@ function includes_url( $path = '', $scheme = null ) {
 }
 
 /**
+ * Retrieve the url to the content directory.
+ *
+ * @since 2.6.0
+ *
+ * @param string $path Optional. Path relative to the content url.
+ * @return string Content url link with optional path appended.
+*/
+function content_url($path = '') {
+	$url = set_url_scheme( WP_CONTENT_URL );
+
+	if ( $path && is_string( $path ) )
+		$url .= '/' . ltrim($path, '/');
+
+	/**
+	 * Filter the URL to the content directory.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param string $url  The complete URL to the content directory including scheme and path.
+	 * @param string $path Path relative to the URL to the content directory. Blank string
+	 *                     if no path is specified.
+	 */
+	return apply_filters( 'content_url', $url, $path);
+}
+
+/**
  * Retrieve the site url for the current network.
  *
  * Returns the site url with the appropriate protocol, 'https' if
