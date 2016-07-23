@@ -375,6 +375,20 @@ add_action( 'update_option_start_of_week', 'delete_get_calendar_cache' );
 add_action( 'update_option_gmt_offset', 'delete_get_calendar_cache' );
 
 /**
+ * Fire the wp_head action
+ *
+ * @since 1.2.0
+ */
+function wp_head() {
+	/**
+	 * Print script or data in the head tag on the front end.
+	 *
+	 * @since 1.5.0
+	 */
+	do_action( 'wp_head' );
+}
+
+/**
  * Display a noindex meta tag.
  *
  * Outputs a noindex meta tag that tells web robots not to index the page content.
