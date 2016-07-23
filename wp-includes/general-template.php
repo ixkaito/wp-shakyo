@@ -389,6 +389,32 @@ function wp_head() {
 }
 
 /**
+ * Display the links to the general feeds.
+ *
+ * @since 2.8.0
+ *
+ * @param array $args Optional arguments.
+ */
+function feed_links( $args = array() ) {
+	if ( !current_theme_supports('automatic-feed-links') )
+		return;
+
+	$defaults = array(
+		/* translators: Separator between blog name and feed type in feed links */
+		'separator'	=> _x('&raquo;', 'feed link'),
+		/* translators: 1: blog title, 2: separator (raquo) */
+		'feedtitle'	=> __('%1$s %2$s Feed'),
+		/* translators: 1: blog title, 2: separator (raquo) */
+		'comstitle'	=> __('%1$s %2$s Comments Feed'),
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	echo '<link rel="alternate" type="' . feed_content_type() . '" title="' . esc_attr( sprintf( $args['feedtitle'], get_bloginfo('name'), $args['separator'] ) ) . '" href="' . esc_url( get_feed_link() ) . "\" />\n";
+	echo '<link rel="alternate" type="' . feed_content_type() . '" title="' . esc_attr( sprintf( $args['comstitle'], get_bloginfo('name'), $args['separator'] ) ) . '" href="' . esc_url( get_feed_link( 'comments_' . get_default_feed() ) ) . "\" />\n";
+}
+
+/**
  * Display a noindex meta tag if required by the blog configuration.
  *
  * If a blog is marked as not being public then the noindex meta tag will be
