@@ -336,6 +336,17 @@ function preview_theme() {
 add_action('setup_theme', 'preview_theme');
 
 /**
+ * Retrieve text color for custom header.
+ *
+ * @since 2.1.0
+ *
+ * @return string
+ */
+function get_header_textcolor() {
+	return get_theme_mod('header_textcolor', get_theme_support( 'custom-header', 'default-text-color' ) );
+}
+
+/**
  * Allows a theme to register its support of a certain feature
  *
  * Must be called in the theme's functions.php file to work.
