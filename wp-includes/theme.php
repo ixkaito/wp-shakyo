@@ -336,6 +336,28 @@ function preview_theme() {
 add_action('setup_theme', 'preview_theme');
 
 /**
+ * Retrieve all theme modifications.
+ *
+ * @since 3.1.0
+ *
+ * @return array Theme modifications.
+ */
+function get_theme_mods() {
+	$theme_slug = get_option( 'stylesheet' );
+	if ( false === ( $mods = get_option( "theme_mods_$theme_slug" ) ) ) {
+		$theme_name = get_option( 'current_theme' );
+		if ( false === $theme_name )
+			$theme_name = wp_get_theme()->get('Name');
+		$mods = get_option( "mods_$theme_name" ); // Deprecated location.
+		if ( is_admin() && false !== $mods ) {
+			update_option( "theme_mods_$theme_slug", $mods );
+			delete_option( "mods_$theme_name" );
+		}
+	}
+	return $mods;
+}
+
+/**
  * Retrieve theme modification value for the current theme.
  *
  * If the modification name does not exist, then the $default will be passed
