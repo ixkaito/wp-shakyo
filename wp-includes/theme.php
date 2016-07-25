@@ -336,6 +336,46 @@ function preview_theme() {
 add_action('setup_theme', 'preview_theme');
 
 /**
+ * Retrieve theme modification value for the current theme.
+ *
+ * If the modification name does not exist, then the $default will be passed
+ * through {@link http://php.net/sprintf sprintf()} PHP function with the first
+ * string the template directory URI and the second string the stylesheet
+ * directory URI.
+ *
+ * @since 2.1.0
+ *
+ * @param string $name Theme modification name.
+ * @param bool|string $default
+ * @return string
+ */
+function get_theme_mod( $name, $default = false ) {
+	$mods = get_theme_mods();
+
+	if ( isset( $mods[$name] ) ) {
+		/**
+		 * Filter the theme modification, or 'theme_mod', value.
+		 *
+		 * The dynamic portion of the hook name, $name, refers to
+		 * the key name of the modification array. For example,
+		 * 'header_textcolor', 'header_image', and so on depending
+		 * on the theme options.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param string $current_mod The value of the current theme modification.
+		 */
+		return apply_filters( "theme_mod_{$name}", $mods[$name] );
+	}
+
+	if ( is_string( $default ) )
+		$default = sprintf( $default, get_template_directory_uri(), get_stylesheet_directory_uri() );
+
+	/** This filter is documented in wp-includes/theme.php */
+	return apply_filters( "theme_mod_{$name}", $default );
+}
+
+/**
  * Retrieve text color for custom header.
  *
  * @since 2.1.0
