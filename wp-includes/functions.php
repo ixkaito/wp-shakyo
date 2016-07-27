@@ -1436,6 +1436,21 @@ function wp_timezone_override_offset() {
 }
 
 /**
+ * Strip close comment and close php tags from file headers used by WP.
+ *
+ * @since 2.8.0
+ * @access private
+ *
+ * @see http://core.trac.wordpress.org/ticket/8497
+ *
+ * @param string $str Header comment to clean up.
+ * @return string
+ */
+function _cleanup_header_comment( $str ) {
+	return trim(preg_replace("/\s*(?:\*\/|\?>).*/", '', $str));
+}
+
+/**
  * Retrieve metadata from a file.
  *
  * Searches for metadata in the first 8kiB of a file, such as a plugin or theme.
