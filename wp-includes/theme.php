@@ -433,6 +433,21 @@ function get_header_textcolor() {
 }
 
 /**
+ * Whether to display the header text.
+ *
+ * @since 3.4.0
+ *
+ * @return bool
+ */
+function display_header_text() {
+	if ( ! current_theme_supports( 'custom-header', 'header-text' ) )
+		return false;
+
+	$text_color = get_theme_mod( 'header_textcolor', get_theme_support( 'custom-header', 'default-text-color' ) );
+	return 'blank' != $text_color;
+}
+
+/**
  * Allows a theme to register its support of a certain feature
  *
  * Must be called in the theme's functions.php file to work.
