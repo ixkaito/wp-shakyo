@@ -460,4 +460,53 @@ final class WP_Theme implements ArrayAccess {
 
 		return $this->headers_sanitized[ $header ];
 	}
+
+	/**
+	 * Sanitize a theme header.
+	 *
+	 * @param string $header Theme header. Name, Description, Author, Version, ThemeURI, AuthorURI, Status, Tags.
+	 * @param string $value Value to sanitize.
+	 */
+	private function sanitize_header( $header, $value ) {
+		switch ( $header ) {
+			case 'Status' :
+				if ( ! $value ) {
+					$value = 'publish';
+					break;
+				}
+				// Fall through otherwise.
+			case 'Name' :
+				static $header_tags = array(
+					'abbr'    => array( 'title' => true ),
+					'acronym' => array( 'title' => true ),
+					'code'    => true,
+					'em'      => true,
+					'strong'  => true,
+				);
+				$value = wp_kses( $value, $header_tags );
+				break;
+			case 'Author' :
+				// There shouldn't be anchor tags in Author, but some themes like to be challenging.
+			case 'Description' :
+				static $header_tags_with_a = array(
+					'a'       => array( 'href' => true, 'title' => true ),
+					'abbr'    => array( 'title' => true ),
+					'acronym' => array( 'title' => true ),
+					'code'    => true,
+					'em'      => true,
+					'strong'  => true,
+				);
+				$value = wp_kses( $value, $header_tags_with_a );
+				break;
+			case 'ThemeURI' :
+			case 'AuthorURI' :
+				$value = esc_url_raw( $value );
+				break;
+			case 'Tags' :
+				$value = array_filter( array_map( 'trim', explode( ',', strip_tags( $value ) ) ) );
+				break;
+		}
+
+		return $value;
+	}
 }
