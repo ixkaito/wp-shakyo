@@ -448,6 +448,17 @@ function display_header_text() {
 }
 
 /**
+ * Retrieve background image for custom background.
+ *
+ * @since 3.0.0
+ *
+ * @return string
+ */
+function get_background_image() {
+	return get_theme_mod('background_image', get_theme_support( 'custom-background', 'default-image' ) );
+}
+
+/**
  * Allows a theme to register its support of a certain feature
  *
  * Must be called in the theme's functions.php file to work.
