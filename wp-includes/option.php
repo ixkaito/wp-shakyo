@@ -461,6 +461,70 @@ function delete_option( $option ) {
 }
 
 /**
+ * Get the value of a transient.
+ *
+ * If the transient does not exist, does not have a value, or has expired,
+ * then the return value will be false.
+ *
+ * @since 2.8.0
+ *
+ * @param string $transient Transient name. Expected to not be SQL-escaped.
+ * @return mixed Value of transient.
+ */
+function get_transient( $transient ) {
+
+ 	/**
+	 * Filter the value of an existing transient.
+	 *
+	 * The dynamic portion of the hook name, $transient, refers to the transient name.
+	 *
+	 * Passing a truthy value to the filter will effectively short-circuit retrieval
+	 * of the transient, returning the passed value instead.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param mixed $pre_transient The default value to return if the transient does not exist.
+	 *                             Any value other than false will short-circuit the retrieval
+	 *                             of the transient, and return the returned value.
+	 */
+	$pre = apply_filters( 'pre_transient_' . $transient, false );
+	if ( false !== $pre )
+		return $pre;
+
+	if ( wp_using_ext_object_cache() ) {
+		$value = wp_cache_get( $transient, 'transient' );
+	} else {
+		$transient_option = '_transient_' . $transient;
+		if ( ! defined( 'WP_INSTALLING' ) ) {
+			// If option is not in alloptions, it is not autoloaded and thus has a timeout
+			$alloptions = wp_load_alloptions();
+			if ( !isset( $alloptions[$transient_option] ) ) {
+				$transient_timeout = '_transient_timeout_' . $transient;
+				if ( get_option( $transient_timeout ) < time() ) {
+					delete_option( $transient_option  );
+					delete_option( $transient_timeout );
+					$value = false;
+				}
+			}
+		}
+
+		if ( ! isset( $value ) )
+			$value = get_option( $transient_option );
+	}
+
+	/**
+	 * Filter an existing transient's value.
+	 *
+	 * The dynamic portion of the hook name, $transient, refers to the transient name.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param mixed $value Value of transient.
+	 */
+	return apply_filters( 'transient_' . $transient, $value );
+}
+
+/**
  * Retrieve site option value based on name of option.
  *
  * @since 2.8.0
