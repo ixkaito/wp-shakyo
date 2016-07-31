@@ -525,6 +525,96 @@ function get_transient( $transient ) {
 }
 
 /**
+ * Set/update the value of a transient.
+ *
+ * You do not need to serialize values. If the value needs to be serialized, then
+ * it will be serialized before it is set.
+ *
+ * @since 2.8.0
+ *
+ * @param string $transient  Transient name. Expected to not be SQL-escaped. Must be
+ *                           45 characters or fewer in length.
+ * @param mixed  $value      Transient value. Must be serializable if non-scalar.
+ *                           Expected to not be SQL-escaped.
+ * @param int    $expiration Optional. Time until expiration in seconds. Default 0.
+ * @return bool False if value was not set and true if value was set.
+ */
+function set_transient( $transient, $value, $expiration = 0 ) {
+
+	/**
+	 * Filter a specific transient before its value is set.
+	 *
+	 * The dynamic portion of the hook name, $transient, refers to the transient name.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param mixed $value New value of transient.
+	 */
+	$value = apply_filters( 'pre_set_transient_' . $transient, $value );
+
+	$expiration = (int) $expiration;
+
+	if ( wp_using_ext_object_cache() ) {
+		$result = wp_cache_set( $transient, $value, 'transient', $expiration );
+	} else {
+		$transient_timeout = '_transient_timeout_' . $transient;
+		$transient = '_transient_' . $transient;
+		if ( false === get_option( $transient ) ) {
+			$autoload = 'yes';
+			if ( $expiration ) {
+				$autoload = 'no';
+				add_option( $transient_timeout, time() + $expiration, '', 'no' );
+			}
+			$result = add_option( $transient, $value, '', $autoload );
+		} else {
+			// If expiration is requested, but the transient has no timeout option,
+			// delete, then re-create transient rather than update.
+			$update = true;
+			if ( $expiration ) {
+				if ( false === get_option( $transient_timeout ) ) {
+					delete_option( $transient );
+					add_option( $transient_timeout, time() + $expiration, '', 'no' );
+					$result = add_option( $transient, $value, '', 'no' );
+					$update = false;
+				} else {
+					update_option( $transient_timeout, time() + $expiration );
+				}
+			}
+			if ( $update ) {
+				$result = update_option( $transient, $value );
+			}
+		}
+	}
+
+	if ( $result ) {
+
+		/**
+		 * Fires after the value for a specific transient has been set.
+		 *
+		 * The dynamic portion of the hook name, $transient, refers to the transient name.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param mixed $value      Transient value.
+		 * @param int   $expiration Time until expiration in seconds. Default 0.
+		 */
+		do_action( 'set_transient_' . $transient, $value, $expiration );
+
+		/**
+		 * Fires after the value for a transient has been set.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string $transient  The name of the transient.
+		 * @param mixed  $value      Transient value.
+		 * @param int    $expiration Time until expiration in seconds. Default 0.
+		 */
+		do_action( 'setted_transient', $transient, $value, $expiration );
+	}
+	return $result;
+}
+
+/**
  * Retrieve site option value based on name of option.
  *
  * @since 2.8.0
