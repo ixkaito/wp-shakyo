@@ -448,6 +448,25 @@ function display_header_text() {
 }
 
 /**
+ * Retrieve header image for custom header.
+ *
+ * @since 2.1.0
+ *
+ * @return string
+ */
+function get_header_image() {
+	$url = get_theme_mod( 'header_image', get_theme_support( 'custom-header', 'default-image' ) );
+
+	if ( 'remove-header' == $url )
+		return false;
+
+	if ( is_random_header_image() )
+		$url = get_random_header_image();
+
+	return esc_url_raw( set_url_scheme( $url ) );
+}
+
+/**
  * Retrieve background image for custom background.
  *
  * @since 3.0.0
