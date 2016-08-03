@@ -467,6 +467,46 @@ function get_header_image() {
 }
 
 /**
+ * Get random header image data from registered images in theme.
+ *
+ * @since 3.4.0
+ *
+ * @access private
+ *
+ * @return string Path to header image
+ */
+
+function _get_random_header_data() {
+	static $_wp_random_header;
+
+	if ( empty( $_wp_random_header ) ) {
+		global $_wp_default_headers;
+		$header_image_mod = get_theme_mod( 'header_image', '' );
+		$headers = array();
+
+		if ( 'random-uploaded-image' == $header_image_mod )
+			$headers = get_uploaded_header_images();
+		elseif ( ! empty( $_wp_default_headers ) ) {
+			if ( 'random-default-image' == $header_image_mod ) {
+				$headers = $_wp_default_headers;
+			} else {
+				if ( current_theme_supports( 'custom-header', 'random-default' ) )
+					$headers = $_wp_default_headers;
+			}
+		}
+
+		if ( empty( $headers ) )
+			return new stdClass;
+
+		$_wp_random_header = (object) $headers[ array_rand( $headers ) ];
+
+		$_wp_random_header->url =  sprintf( $_wp_random_header->url, get_template_directory_uri(), get_stylesheet_directory_uri() );
+		$_wp_random_header->thumbnail_url =  sprintf( $_wp_random_header->thumbnail_url, get_template_directory_uri(), get_stylesheet_directory_uri() );
+	}
+	return $_wp_random_header;
+}
+
+/**
  * Get random header image url from registered images in theme.
  *
  * @since 3.2.0
