@@ -467,6 +467,34 @@ function get_header_image() {
 }
 
 /**
+ * Check if random header iamge is in use.
+ *
+ * Always true if user experessly chooses the option in Appearance > Header.
+ * Also true if theme has multiple header images registered, no specific header image
+ * is chosen, and theme turns on random headers with add_theme_support().
+ *
+ * @since 3.2.0
+ *
+ * @param string $type The random pool to use. any|default|uploaded
+ * @return boolean
+ */
+function is_random_header_image( $type = 'any' ) {
+	$header_image_mod = get_theme_mod( 'header_image', get_theme_support( 'custom-header', 'default-image' ) );
+
+	if ( 'any' == $type ) {
+		if ( 'random-default-image' == $header_image_mod || 'random-uploaded-image' == $header_image_mod || ( '' != get_random_header_image() && empty( $header_image_mod ) ) )
+			return true;
+	} else {
+		if ( "random-$type-image" == $header_image_mod )
+			return true;
+		elseif ( 'default' == $type && empty( $header_image_mod ) && '' != get_random_header_image() )
+			return true;
+	}
+
+	return false;
+}
+
+/**
  * Retrieve background image for custom background.
  *
  * @since 3.0.0
