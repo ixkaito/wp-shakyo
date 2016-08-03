@@ -467,6 +467,21 @@ function get_header_image() {
 }
 
 /**
+ * Get random header image url from registered images in theme.
+ *
+ * @since 3.2.0
+ *
+ * @return string Path to header image
+ */
+
+function get_random_header_image() {
+	$random_image = _get_random_header_data();
+	if ( empty( $random_image->url ) )
+		return '';
+	return $random_image->url;
+}
+
+/**
  * Check if random header iamge is in use.
  *
  * Always true if user experessly chooses the option in Appearance > Header.
