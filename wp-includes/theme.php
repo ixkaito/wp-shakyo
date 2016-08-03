@@ -482,9 +482,9 @@ function get_random_header_image() {
 }
 
 /**
- * Check if random header iamge is in use.
+ * Check if random header image is in use.
  *
- * Always true if user experessly chooses the option in Appearance > Header.
+ * Always true if user expressly chooses the option in Appearance > Header.
  * Also true if theme has multiple header images registered, no specific header image
  * is chosen, and theme turns on random headers with add_theme_support().
  *
