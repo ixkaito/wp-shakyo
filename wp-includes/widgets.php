@@ -85,3 +85,27 @@ $GLOBALS['_wp_deprecated_widgets_callbacks'] = array(
 	'wp_widget_recent_comments_control'
 );
 
+/**
+ * Whether a sidebar is in use.
+ *
+ * @since 2.8.0
+ *
+ * @param mixed $index Sidebar name, id or number to check.
+ * @return bool true if the sidebar is in use, false otherwise.
+ */
+function is_active_sidebar( $index ) {
+	$index = ( is_int($index) ) ? "sidebar-$index" : sanitize_title($index);
+	$sidebars_widgets = wp_get_sidebars_widgets();
+	$is_active_sidebar = ! empty( $sidebars_widgets[$index] );
+
+	/**
+	 * Filter whether a dynamic sidebar is considered "active".
+	 *
+	 * @since 3.9.0
+	 *
+	 * @param bool       $is_active_sidebar Whether or not the sidebar should be considered "active".
+	 *                                      In other words, whether the sidebar contains any widgets.
+	 * @param int|string $index             Index, name, or ID of the dynamic sidebar.
+	 */
+	return apply_filters( 'is_active_sidebar', $is_active_sidebar, $index );
+}
