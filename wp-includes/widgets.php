@@ -109,3 +109,48 @@ function is_active_sidebar( $index ) {
 	 */
 	return apply_filters( 'is_active_sidebar', $is_active_sidebar, $index );
 }
+
+/* Internal Functions */
+
+/**
+ * Retrieve full list of sidebars and their widgets.
+ *
+ * Will upgrade sidebar widget list, if needed. Will also save updated list, if
+ * needed.
+ *
+ * @since 2.2.0
+ * @access private
+ *
+ * @param bool $deprecated Not used (deprecated).
+ * @return array Upgraded list of widgets to version 3 array format when called from the admin.
+ */
+function wp_get_sidebars_widgets($deprecated = true) {
+	if ( $deprecated !== true )
+		_deprecated_argument( __FUNCTION__, '2.8.1' );
+
+	global $_wp_sidebars_widgets, $sidebars_widgets;
+
+	// If loading from front page, consult $_wp_sidebars_widgets rather than options
+	// to see if wp_convert_widget_settings() has made manipulations in memory.
+	if ( !is_admin() ) {
+		if ( empty($_wp_sidebars_widgets) )
+			$_wp_sidebars_widgets = get_option('sidebars_widgets', array());
+
+		$sidebars_widgets = $_wp_sidebars_widgets;
+	} else {
+		$sidebars_widgets = get_option('sidebars_widgets', array());
+	}
+
+	if ( is_array( $sidebars_widgets ) && isset($sidebars_widgets['array_version']) )
+		unset($sidebars_widgets['array_version']);
+
+	/**
+	 * Filter the list of sidebars and their widgets.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @param array $sidebars_widgets An associative array of sidebars and their widgets.
+	 */
+	$sidebars_widgets = apply_filters( 'sidebars_widgets', $sidebars_widgets );
+	return $sidebars_widgets;
+}
