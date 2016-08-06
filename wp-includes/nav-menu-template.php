@@ -23,7 +23,7 @@
  *     @type string        $container_class Class that is applied to the container. Default 'menu-{menu slug}-container'.
  *     @type string        $container_id    The ID that is applied to the container. Default empty.
  *     @type callback|bool $fallback_cb     If the menu doesn't exists, a callback function will fire.
- *                                          Default is 'wp_page_menu'. set to false for no fallback.
+ *                                          Default is 'wp_page_menu'. Set to false for no fallback.
  *     @type string        $before          Text before the link text. Default empty.
  *     @type string        $after           Text after the link text. Default empty.
  *     @type string        $link_before     Text before the link. Default empty.
