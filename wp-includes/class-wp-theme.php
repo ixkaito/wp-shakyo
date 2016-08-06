@@ -509,4 +509,19 @@ final class WP_Theme implements ArrayAccess {
 
 		return $value;
 	}
+
+	/**
+	 * The directory name of the theme's "template" files, inside the theme root.
+	 *
+	 * In the case of a child theme, this is the directory name of the parent theme.
+	 * Otherwise, the get_template() is the same as get_stylesheet().
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @return string Template
+	 */
+	public function get_template() {
+		return $this->template;
+	}
 }
