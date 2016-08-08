@@ -35,3 +35,15 @@ function wp_get_nav_menu_object( $menu ) {
 
 	return $menu_obj;
 }
+
+/**
+ * Returns an array with the registered navigation menu locations and the menu assigned to it
+ *
+ * @since 3.0.0
+ * @return array
+ */
+
+function get_nav_menu_locations() {
+	$locations = get_theme_mod( 'nav_menu_locations' );
+	return ( is_array( $locations ) ) ? $locations : array();
+}
