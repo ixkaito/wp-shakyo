@@ -608,6 +608,34 @@ function wp_no_robots() {
 }
 
 /**
+ * Retrieve the contents of the search WordPress query variable.
+ *
+ * The search query string is passed through {@link esc_attr()}
+ * to ensure that it is safe for placing in an html attribute.
+ *
+ * @since 2.3.0
+ * @uses esc_attr()
+ *
+ * @param bool $escaped Whether the result is escaped. Default true.
+ * 	Only use when you are later escaping it. Do not use unescaped.
+ * @return string
+ */
+function get_search_query( $escaped = true ) {
+	/**
+	 * Filter the contents of the search query variable.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param mixed $search Contents of the search query variable.
+	 */
+	$query = apply_filters( 'get_search_query', get_query_var( 's' ) );
+
+	if ( $escaped )
+		$query = esc_attr( $query );
+	return $query;
+}
+
+/**
  * Display the language attributes for the html tag.
  *
  * Builds up a set of html attributes containing the text direction and language
