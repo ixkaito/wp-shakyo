@@ -516,6 +516,25 @@ function is_404() {
 	return $wp_query->is_404();
 }
 
+/**
+ * The Loop. Post loop control.
+ */
+
+/**
+ * Whether current WordPress query has results to loop over.
+ *
+ * @see WP_Query::have_posts()
+ * @since 1.5.0
+ * @uses $wp_query
+ *
+ * @return bool
+ */
+function have_posts() {
+	global $wp_query;
+
+	return $wp_query->have_posts();
+}
+
 /*
  * WP_Query
  */
