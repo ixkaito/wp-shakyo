@@ -535,6 +535,19 @@ function have_posts() {
 	return $wp_query->have_posts();
 }
 
+/**
+ * Iterate the post index in the loop.
+ *
+ * @see WP_Query::the_post()
+ * @since 1.5.0
+ * @uses $wp_query
+ */
+function the_post() {
+	global $wp_query;
+
+	$wp_query->the_post();
+}
+
 /*
  * WP_Query
  */
