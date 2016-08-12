@@ -4374,7 +4374,7 @@ function setup_postdata( $post ) {
 	 *
 	 * @since 2.8.0
 	 *
-	 * @param WP_Post &$post The post object (passed by reference).
+	 * @param WP_Post &$post The Post object (passed by reference).
 	 */
 	do_action_ref_array( 'the_post', array( &$post ) );
 
