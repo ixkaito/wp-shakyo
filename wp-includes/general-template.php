@@ -51,7 +51,7 @@ function get_header( $name = null ) {
 /**
  * Load a template part into a template
  *
- * Makes it easy for a theme to reuse sections of code in a easy to overlaoad way
+ * Makes it easy for a theme to reuse sections of code in a easy to overload way
  * for child themes.
  *
  * Includes the named template part for a theme or if a name is specified then a
