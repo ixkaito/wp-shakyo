@@ -8,17 +8,43 @@
 require( ABSPATH . WPINC . '/option.php' );
 
 /**
- * Unserialize value only if it was serialized.
+ * Convert given date string into a different format.
  *
- * @since 2.0.0
- *
- * @param string $original Maybe unserialized original, if is needed.
- * @return mixed Unserialized data can be any type.
+ * $format
  */
-function maybe_unserialize( $original ) {
-	if ( is_serialized( $original ) ) // don't attempt to unserialize data that wasn't serialized going in
-		return @unserialize( $original );
-	return $original;
+
+/**
+ * Convert given date string into a different format.
+ *
+ * $format should be either a PHP date format string, e.g. 'U' for a Unix
+ * timestamp, or 'G' for a Unix timestamp assuming that $date is GMT.
+ *
+ * If $translate is true then the given date and format string will
+ * be passed to date_i18n() for translation.
+ *
+ * @since 0.71
+ *
+ * @param string $format    Format of the date to return.
+ * @param string $date      Date string to convert.
+ * @param bool   $translate Whether the return date should be translated. Default true.
+ * @return string|int|bool Formatted date string or Unix timestamp. False if $date is empty.
+ */
+function mysql2date( $format, $date, $translate = true ) {
+	if ( empty( $date ) )
+		return false;
+
+	if ( 'G' == $format )
+		return strtotime( $date . ' +0000' );
+
+	$i = strtotime( $date );
+
+	if ( 'U' == $format )
+		return $i;
+
+	if ( $translate )
+		return date_i18n( $format, $i );
+	else
+		return date( $format, $i );
 }
 
 /**
