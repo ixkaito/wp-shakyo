@@ -7,6 +7,31 @@
  */
 
 /**
+ * Retrieve the format slug for a post
+ *
+ * @since 3.1.0
+ *
+ * @param int|object $post Post ID or post object. Optional, default is the current post from the loop.
+ * @return mixed The format if successful. False otherwise.
+ */
+function get_post_format( $post = null ) {
+	if ( ! $post = get_post( $post ) )
+		return false;
+
+	if ( ! post_type_supports( $post->post_type, 'post-formats' ) )
+		return false;
+
+	$_format = get_the_terms( $post->ID, 'post_format' );
+
+	if ( empty( $_format ) )
+		return false;
+
+	$format = array_shift( $_format );
+
+	return str_replace('post-format-', '', $format->slug );
+}
+
+/**
  * Filters the request to allow for the format prefix.
  *
  * @access private
