@@ -18,6 +18,19 @@ function the_ID() {
 }
 
 /**
+ * Retrieve the ID of the current item in the WordPress Loop.
+ *
+ * @since 2.1.0
+ * @uses $post
+ *
+ * @return int|bool The ID of the current item in the WordPress Loop. False if $post is not set.
+ */
+function get_the_ID() {
+	$post = get_post();
+	return ! empty( $post ) ? $post->ID : false;
+}
+
+/**
  * Display the classes for the body element.
  *
  * @since 2.8.0
