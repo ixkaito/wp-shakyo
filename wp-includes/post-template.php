@@ -44,6 +44,108 @@ function post_class( $class = '', $post_id = null ) {
 }
 
 /**
+ * Retrieve the classes for the post div as an array.
+ *
+ * The class names are many. If the post is a sticky, then the 'sticky'
+ * class name. The class 'hentry' is always added to each post. If the post has a
+ * post thumbnail, 'has-post-thumbnail' is added as a class. For each
+ * category, the class will be added with 'category-' with category slug is
+ * added. The tags are the same way as the categories with 'tag-' before the tag
+ * slug. All classes are pased through the filter, 'post_class' with the list
+ * of classes, followed by $class parameter value, with the post ID as the lass
+ * parameter.
+ *
+ * @since 2.7.0
+ *
+ * @param string|array $class One or more classes to add to the class list.
+ * @param int|WP_Post $post_id Optional. Post ID or post object.
+ * @return array Array of classes.
+ */
+function get_post_class( $class = '', $post_id = null ) {
+	$post = get_post($post_id);
+
+	$classes = array();
+
+	if ( empty($post) )
+		return $classes;
+
+	$classes[] = 'post-' . $post->ID;
+	if ( ! is_admin() )
+		$classes[] = $post->post_type;
+	$classes[] = 'type-' . $post->post_type;
+	$classes[] = 'status-' . $post->post_status;
+
+	// Post Format
+	if ( post_type_supports( $post->post_type, 'post-formats' ) ) {
+		$post_format = get_post_format( $post->ID );
+
+		if ( $post_format && !is_wp_error($post_format) )
+			$classes[] = 'format-' . sanitize_html_class( $post_format );
+		else
+			$classes[] = 'format-standard';
+	}
+
+	// Post requires password
+	if ( post_password_required( $post->ID ) ) {
+		$classes[] = 'post-password-required';
+	// Post thumbnails
+	} elseif ( ! is_attachment( $post ) && current_theme_supports( 'post-thumbnails' ) && has_post_thumbnail( $post->ID ) ) {
+		$classes[] = 'has-post-thumbnail';
+	}
+
+	// sticky for Sticky Posts
+	if ( is_sticky( $post->ID ) ) {
+		if ( is_home() && ! is_paged() ) {
+			$classes[] = 'sticky';
+		} elseif ( is_admin() ) {
+			$classes[] = 'status-sticky';
+		}
+	}
+
+	// hentry for hAtom compliance
+	$classes[] = 'hentry';
+
+	// Categories
+	if ( is_object_in_taxonomy( $post->post_type, 'category' ) ) {
+		foreach ( (array) get_the_category($post->ID) as $cat ) {
+			if ( empty($cat->slug ) )
+				continue;
+			$classes[] = 'category-' . sanitize_html_class($cat->slug, $cat->term_id);
+		}
+	}
+
+	// Tags
+	if ( is_object_in_taxonomy( $post->post_type, 'post_tag' ) ) {
+		foreach ( (array) get_the_tags($post->ID) as $tag ) {
+			if ( empty($tag->slug ) )
+				continue;
+			$classes[] = 'tag-' . sanitize_html_class($tag->slug, $tag->term_id);
+		}
+	}
+
+	if ( !empty($class) ) {
+		if ( !is_array( $class ) )
+			$class = preg_split('#\s+#', $class);
+		$classes = array_merge($classes, $class);
+	}
+
+	$classes = array_map('esc_attr', $classes);
+
+	/**
+	 * Filter the list of CSS classes for the current post.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @param array  $classes An array of post classes.
+	 * @param string $class   A comma-separated list of additional classes added to the post.
+	 * @param int    $post_id The post ID.
+	 */
+	$classes = apply_filters( 'post_class', $classes, $class, $post->ID );
+
+	return array_unique( $classes );
+}
+
+/**
  * Display the classes for the body element.
  *
  * @since 2.8.0
