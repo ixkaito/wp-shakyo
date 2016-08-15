@@ -51,8 +51,8 @@ function post_class( $class = '', $post_id = null ) {
  * post thumbnail, 'has-post-thumbnail' is added as a class. For each
  * category, the class will be added with 'category-' with category slug is
  * added. The tags are the same way as the categories with 'tag-' before the tag
- * slug. All classes are pased through the filter, 'post_class' with the list
- * of classes, followed by $class parameter value, with the post ID as the lass
+ * slug. All classes are passed through the filter, 'post_class' with the list
+ * of classes, followed by $class parameter value, with the post ID as the last
  * parameter.
  *
  * @since 2.7.0
