@@ -31,6 +31,19 @@ function get_the_ID() {
 }
 
 /**
+ * Display the classes for the post div.
+ *
+ * @since 2.7.0
+ *
+ * @param string|array $class One or more classes to add to the class list.
+ * @param int|WP_Post $post_id Optional. Post ID or post object.
+ */
+function post_class( $class = '', $post_id = null ) {
+	// Separates classes with a single space, collates classes for post DIV
+	echo 'class="' . join( ' ', get_post_class( $class, $post_id ) ) . '"';
+}
+
+/**
  * Display the classes for the body element.
  *
  * @since 2.8.0
