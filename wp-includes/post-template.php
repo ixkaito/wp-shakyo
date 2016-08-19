@@ -31,6 +31,30 @@ function get_the_ID() {
 }
 
 /**
+ * Display or retrieve the current post title with optional content.
+ *
+ * @since 0.71
+ *
+ * @param string $before Optional. Content to prepend to the title.
+ * @param string $after Optional. Content to append to the title.
+ * @param bool $echo Optional, default to true.Whether to display or return.
+ * @return null|string Null on no title. String if $echo parameter is false.
+ */
+function the_title($before = '', $after = '', $echo = true) {
+	$title = get_the_title();
+
+	if ( strlen($title) == 0 )
+		return;
+
+	$title = $before . $title . $after;
+
+	if ( $echo )
+		echo $title;
+	else
+		return $title;
+}
+
+/**
  * Display the classes for the post div.
  *
  * @since 2.7.0
