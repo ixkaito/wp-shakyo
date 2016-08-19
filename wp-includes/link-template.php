@@ -7,6 +7,137 @@
  */
 
 /**
+ * Retrieve full permalink for current post or post ID.
+ *
+ * @since 1.0.0
+ *
+ * @param int|WP_Post $id        Optional. Post ID or post object. Default current post.
+ * @param bool        $leavename Optional. Whether to keep post name or page name. Default false.
+ * @return string|bool The permalink URL or false if post does not exist.
+ */
+function get_permalink( $id = 0, $leavename = false ) {
+	$rewritecode = array(
+		'%year%',
+		'%monthnum%',
+		'%day%',
+		'%hour%',
+		'%minute%',
+		'%second%',
+		$leavename? '' : '%postname%',
+		'%post_id%',
+		'%category%',
+		'%author%',
+		$leavename? '' : '%pagename%',
+	);
+
+	if ( is_object($id) && isset($id->filter) && 'sample' == $id->filter ) {
+		$post = $id;
+		$sample = true;
+	} else {
+		$post = get_post($id);
+		$sample = false;
+	}
+
+	if ( empty($post->ID) )
+		return false;
+
+	if ( $post->post_type == 'page' )
+		return get_page_link($post, $leavename, $sample);
+	elseif ( $post->post_type == 'attachment' )
+		return get_attachment_link( $post, $leavename );
+	elseif ( in_array($post->post_type, get_post_types( array('_builtin' => false) ) ) )
+		return get_post_permalink($post, $leavename, $sample);
+
+	$permalink = get_option('permalink_structure');
+
+	/**
+	 * Filter the permalink structure for a post before token replacement occurs.
+	 *
+	 * Only applies to posts with post_type of 'post'.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string  $permalink The site's permalink structure.
+	 * @param WP_Post $post      The post in question.
+	 * @param bool    $leavename Whether to keep the post name.
+	 */
+	$permalink = apply_filters( 'pre_post_link', $permalink, $post, $leavename );
+
+	if ( '' != $permalink && !in_array($post->post_status, array('draft', 'pending', 'auto-draft')) ) {
+		$unixtime = strtotime($post->post_date);
+
+		$category = '';
+		if ( strpos($permalink, '%category%') !== false ) {
+			$cats = get_the_category($post->ID);
+			if ( $cats ) {
+				usort($cats, '_usort_terms_by_ID'); // order by ID
+
+				/**
+				 * Filter the category that gets used in the %category% permalink token.
+				 *
+				 * @since 3.5.0
+				 *
+				 * @param stdClass $cat  The category to use in the permalink.
+				 * @param array    $cats Array of all categories associated with the post.
+				 * @param WP_Post  $post The post in question.
+				 */
+				$category_object = apply_filters( 'post_link_category', $cats[0], $cats, $post );
+
+				$category_object = get_term( $category_object, 'category' );
+				$category = $category_object->slug;
+				if ( $parent = $category_object->parent )
+					$category = get_category_parents($parent, false, '/', true) . $category;
+			}
+			// show default category in permalinks, without
+			// having to assign it explicitly
+			if ( empty($category) ) {
+				$default_category = get_term( get_option( 'default_category' ), 'category' );
+				$category = is_wp_error( $default_category ) ? '' : $default_category->slug;
+			}
+		}
+
+		$author = '';
+		if ( strpos($permalink, '%author%') !== false ) {
+			$authordata = get_userdata($post->post_author);
+			$author = $authordata->user_nicename;
+		}
+
+		$date = explode(" ",date('Y m d H i s', $unixtime));
+		$rewritereplace =
+		array(
+			$date[0],
+			$date[1],
+			$date[2],
+			$date[3],
+			$date[4],
+			$date[5],
+			$post->post_name,
+			$post->ID,
+			$category,
+			$author,
+			$post->post_name,
+		);
+		$permalink = home_url( str_replace($rewritecode, $rewritereplace, $permalink) );
+		$permalink = user_trailingslashit($permalink, 'single');
+	} else { // if they're not using the fancy permalink option
+		$permalink = home_url('?p=' . $post->ID);
+	}
+
+	/**
+	 * Filter the permalink for a post.
+	 *
+	 * Only applies to posts with post_type of 'post'.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string  $permalink The post's permalink.
+	 * @param WP_Post $post      The post in question.
+	 * @param bool    $leavename Whether to keep the post name.
+	 */
+	return apply_filters( 'post_link', $permalink, $post, $leavename );
+}
+
+/**
  * Retrieve the home url for the current site.
  *
  * Returns the 'home' option with the appropriate protocol, 'https' if
