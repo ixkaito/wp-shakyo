@@ -59,7 +59,7 @@ function the_title($before = '', $after = '', $echo = true) {
  *
  * If the post is protected and the visitor is not an admin, then "Protected"
  * will be displayed before the post title. If the post is private, then
- * "private" will be located before the post title.
+ * "Private" will be located before the post title.
  *
  * @since 0.71
  *
