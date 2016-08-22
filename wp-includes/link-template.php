@@ -138,6 +138,43 @@ function get_permalink( $id = 0, $leavename = false ) {
 }
 
 /**
+ * Display edit post link for post.
+ *
+ * @since 1.0.0
+ *
+ * @param string $text Optional. Anchor text.
+ * @param string $before Optional. Display before edit link.
+ * @param string $after Optional. Display after edit link.
+ * @param int $id Optional. Post ID.
+ */
+function edit_post_link( $text = null, $before = '', $after = '', $id = 0 ) {
+	if ( ! $post = get_post( $id ) ) {
+		return;
+	}
+
+	if ( ! $url = get_edit_post_link( $post->ID ) ) {
+		return;
+	}
+
+	if ( null === $text ) {
+		$text = __( 'Edit This' );
+	}
+
+	$link = '<a class="post-edit-link" href="' . $url . '">' . $text . '</a>';
+
+	/**
+	 * Filter the post edit link anchor tag.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param string $link    Anchor tag for the edit link.
+	 * @param int    $post_id Post ID.
+	 * @param string $text    Anchor text.
+	 */
+	echo $before . apply_filters( 'edit_post_link', $link, $post->ID, $text ) . $after;
+}
+
+/**
  * Retrieve the home url for the current site.
  *
  * Returns the 'home' option with the appropriate protocol, 'https' if
