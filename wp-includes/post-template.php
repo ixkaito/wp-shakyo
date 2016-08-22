@@ -549,3 +549,51 @@ function post_password_required( $post = null ) {
 
 	return ! $hasher->CheckPassword( $post->post_password, $hash );
 }
+
+/**
+ * Wrap attachment in <<p>> element before content.
+ *
+ * @since 2.0.0
+ *
+ * @param string $content
+ * @return string
+ */
+function prepend_attachment($content) {
+	$post = get_post();
+
+	if ( empty($post->post_type) || $post->post_type != 'attachment' )
+		return $content;
+
+	if ( 0 === strpos( $post->post_mime_type, 'video' ) ) {
+		$meta = wp_get_attachment_metadata( get_the_ID() );
+		$atts = array( 'src' => wp_get_attachment_url() );
+		if ( ! empty( $meta['width'] ) && ! empty( $meta['height'] ) ) {
+			$atts['width'] = (int) $meta['width'];
+			$atts['height'] = (int) $meta['height'];
+		}
+		if ( has_post_thumbnail() ) {
+			$atts['poster'] = wp_get_attachment_url( get_post_thumbnail_id() );
+		}
+		$p = wp_video_shortcode( $atts );
+	} elseif ( 0 === strpos( $post->post_mime_type, 'audio' ) ) {
+		$p = wp_audio_shortcode( array( 'src' => wp_get_attachment_url() ) );
+	} else {
+		$p = '<p class="attachment">';
+		// show the medium sized image representation of the attachment if available, and link to the raw file
+		$p .= wp_get_attachment_link(0, 'medium', false);
+		$p .= '</p>';
+	}
+
+	/**
+	 * Filter the attachment markup to be prepended to the post content.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @see prepend_attachment()
+	 *
+	 * @param string $p The attachment HTML output.
+	 */
+	$p = apply_filters( 'prepend_attachment', $p );
+
+	return "$p\n$content";
+}
