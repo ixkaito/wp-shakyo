@@ -99,4 +99,33 @@ function add_shortcode($tag, $func) {
 		$shortcode_tags[$tag] = $func;
 }
 
+/**
+ * Search content for shortcodes and filter shortcodes through their hooks.
+ *
+ * If there are no shortcode tags defined, then the content will be returned
+ * without any filtering. This might cause issues when plugins are disabled but
+ * the shortcode will still show up in the post or content.
+ *
+ * @since 2.5.0
+ *
+ * @uses $shortcode_tags
+ * @uses get_shortcode_regex() Gets the search pattern for searching shortcodes.
+ *
+ * @param string $content Content to search for shortcodes
+ * @return string Content with shortcodes filtered out.
+ */
+function do_shortcode($content) {
+	global $shortcode_tags;
+
+	if ( false === strpos( $content, '[' ) ) {
+		return $content;
+	}
+
+	if (empty($shortcode_tags) || !is_array($shortcode_tags))
+		return $content;
+
+	$pattern = get_shortcode_regex();
+	return preg_replace_callback( "/$pattern/s", 'do_shortcode_tag', $content );
+}
+
 add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
