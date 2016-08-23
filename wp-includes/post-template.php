@@ -550,6 +550,125 @@ function post_password_required( $post = null ) {
 	return ! $hasher->CheckPassword( $post->post_password, $hash );
 }
 
+//
+// Page Template Functions for usage in Themes
+//
+
+/**
+ * The formatted output of a list of pages.
+ *
+ * Displays page links for paginated posts (i.e. includes the <!--nextpage-->.
+ * Quicktag one or more times). This tag must be within The Loop.
+ *
+ * @since 1.2.0
+ *
+ * @param string|array $args {
+ *     Optional. Array or string of default arguments.
+ *
+ *     @type string       $before           HTML or text to prepend to each link. Default is '<p> Pages:'.
+ *     @type string       $after            HTML or text to append to each link. Default is '</p>'.
+ *     @type string       $link_before      HTML or text to prepend to each link, inside the <a> tag.
+ *                                          Also prepended to the current item, which is not linked. Default empty.
+ *     @type string       $link_after       HTML or text to append to each Pages link inside the <a> tag.
+ *                                          Also appended to the current item, which is not linked. Default empty.
+ *     @type string       $next_or_number   Indicates whether page numbers should be used. Valid values are number
+ *                                          and next. Default is 'number'.
+ *     @type string       $separator        Text between pagination links. Default is ' '.
+ *     @type string       $nextpagelink     Link text for the next page link, if available. Default is 'Next Page'.
+ *     @type string       $previouspagelink Link text for the previous page link, if available. Default is 'Previous Page'.
+ *     @type string       $pagelink         Format string for page numbers. The % in the parameter string will be
+ *                                          replaced with the page number, so 'Page %' generates "Page 1", "Page 2", etc.
+ *                                          Defaults to '%', just the page number.
+ *     @type int|bool     $echo             Whether to echo or not. Accepts 1|true or 0|false. Default 1|true.
+ * }
+ * @return string Formatted output in HTML.
+ */
+function wp_link_pages( $args = '' ) {
+	$defaults = array(
+		'before'           => '<p>' . __( 'Pages:' ),
+		'after'            => '</p>',
+		'link_before'      => '',
+		'link_after'       => '',
+		'next_or_number'   => 'number',
+		'separator'        => ' ',
+		'nextpagelink'     => __( 'Next page' ),
+		'previouspagelink' => __( 'Previous page' ),
+		'pagelink'         => '%',
+		'echo'             => 1
+	);
+
+	$params = wp_parse_args( $args, $defaults );
+
+	/**
+	 * Filter the arguments used in retrieving page links for paginated posts.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param array $params An array of arguments for page links for paginated posts.
+	 */
+	$r = apply_filters( 'wp_link_pages_args', $params );
+
+	global $page, $numpages, $multipage, $more;
+
+	$output = '';
+	if ( $multipage ) {
+		if ( 'number' == $r['next_or_number'] ) {
+			$output .= $r['before'];
+			for ( $i = 1; $i <= $numpages; $i++ ) {
+				$link = $r['link_before'] . str_replace( '%', $i, $r['pagelink'] ) . $r['link_after'];
+				if ( $i != $page || ! $more && 1 == $page ) {
+					$link = _wp_link_page( $i ) . $link . '</a>';
+				}
+				/**
+				 * Filter the HTML output of individual page number links.
+				 *
+				 * @since 3.6.0
+				 *
+				 * @param string $link The page number HTML output.
+				 * @param int    $i    Page number for paginated posts' page links.
+				 */
+				$link = apply_filters( 'wp_link_pages_link', $link, $i );
+				$output .= $r['separator'] . $link;
+			}
+			$output .= $r['after'];
+		} elseif ( $more ) {
+			$output .= $r['before'];
+			$prev = $page - 1;
+			if ( $prev ) {
+				$link = _wp_link_page( $prev ) . $r['link_before'] . $r['previouspagelink'] . $r['link_after'] . '</a>';
+
+				/** This filter is documented in wp-includes/post-template.php */
+				$link = apply_filters( 'wp_link_pages_link', $link, $prev );
+				$output .= $r['separator'] . $link;
+			}
+			$next = $page + 1;
+			if ( $next <= $numpages ) {
+				$link = _wp_link_page( $next ) . $r['link_before'] . $r['nextpagelink'] . $r['link_after'] . '</a>';
+
+				/** This filter is documented in wp-includes/post-template.php */
+				$link = apply_filters( 'wp_link_pages_link', $link, $next );
+				$output .= $r['separator'] . $link;
+			}
+			$output .= $r['after'];
+		}
+	}
+
+	/**
+	 * Filter the HTML output of page links for paginated posts.
+	 *
+	 * @since 3.6.0
+	 *
+	 * @param string $output HTML output of paginated posts' page links.
+	 * @param array  $args   An array of arguments.
+	 */
+	$html = apply_filters( 'wp_link_pages', $output, $args );
+
+	if ( $r['echo'] ) {
+		echo $html;
+	}
+	return $html;
+}
+
 /**
  * Wrap attachment in <<p>> element before content.
  *
