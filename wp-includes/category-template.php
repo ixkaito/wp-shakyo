@@ -49,6 +49,43 @@ function the_tags( $before = null, $sep = ', ', $after = '' ) {
 }
 
 /**
+ * Retrieve the terms of the taxonomy that are attached to the post.
+ *
+ * @since 2.5.0
+ *
+ * @param int|object $post Post ID or object.
+ * @param string $taxonomy Taxonomy name.
+ * @return array|bool|WP_Error Array of term objects on success, false if there are no terms
+ *                             ore the post does not exist, WP_Error on failure.
+ */
+function get_the_terms( $post, $taxonomy ) {
+	if ( ! $post = get_post( $post ) )
+		return false;
+
+	$terms = get_object_term_cache( $post->ID, $taxonomy );
+	if ( false === $terms ) {
+		$terms = wp_get_object_terms( $post->ID, $taxonomy );
+		wp_cache_add($post->ID, $terms, $taxonomy . '_relationships');
+	}
+
+	/**
+	 * Filter the list of terms attached to the given post.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param array|WP_Error $terms    List of attached terms, or WP_Error on failure.
+	 * @param int            $post_id  Post ID.
+	 * @param string         $taxonomy Name of the taxonomy.
+	 */
+	$terms = apply_filters( 'get_the_terms', $terms, $post->ID, $taxonomy );
+
+	if ( empty( $terms ) )
+		return false;
+
+	return $terms;
+}
+
+/**
  * Retrieve a post's terms as a list with specified format.
  *
  * @since 2.5.0
