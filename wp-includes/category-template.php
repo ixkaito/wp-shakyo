@@ -56,7 +56,7 @@ function the_tags( $before = null, $sep = ', ', $after = '' ) {
  * @param int|object $post Post ID or object.
  * @param string $taxonomy Taxonomy name.
  * @return array|bool|WP_Error Array of term objects on success, false if there are no terms
- *                             ore the post does not exist, WP_Error on failure.
+ *                             or the post does not exist, WP_Error on failure.
  */
 function get_the_terms( $post, $taxonomy ) {
 	if ( ! $post = get_post( $post ) )
