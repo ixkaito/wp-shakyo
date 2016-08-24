@@ -49,6 +49,48 @@ function get_header( $name = null ) {
 }
 
 /**
+ * Load sidebar template.
+ *
+ * Includes the sidebar template for a theme or if a name is specified then a
+ * specialised sidebar will be included.
+ *
+ * For the parameter, if the file is called "sidebar-special.php" then specify
+ * "special".
+ *
+ * @since 1.5.0
+ *
+ * @uses locate_template()
+ *
+ * @param string $name The name of the specialised sidebar.
+ */
+function get_sidebar( $name = null ) {
+	/**
+	 * Fires before the sidebar template file is loaded.
+	 *
+	 * The hook allows a specific sidebar template file to be used in place of the
+	 * default sidebar template file. If your file is called sidebar-new.php,
+	 * you would specify the filename in the hook as get_sidebar( 'new' ).
+	 *
+	 * @since 2.2.0
+	 * @since 2.8.0 $name parameter added.
+	 *
+	 * @param string $name Name of the specific sidebar file to use.
+	 */
+	do_action( 'get_sidebar', $name );
+
+	$templates = array();
+	$name = (string) $name;
+	if ( '' !== $name )
+		$templates[] = "sidebar-{$name}.php";
+
+	$templates[] = 'sidebar.php';
+
+	// Backward compat code will be removed in a future release
+	if ('' == locate_template($templates, true))
+		load_template( ABSPATH . WPINC . '/theme-compat/sidebar.php');
+}
+
+/**
  * Load a template part into a template
  *
  * Makes it easy for a theme to reuse sections of code in a easy to overload way
