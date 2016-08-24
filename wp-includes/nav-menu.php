@@ -47,3 +47,21 @@ function get_nav_menu_locations() {
 	$locations = get_theme_mod( 'nav_menu_locations' );
 	return ( is_array( $locations ) ) ? $locations : array();
 }
+
+/**
+ * Whether a registered nav menu location has a menu assigned to it.
+ *
+ * @since 3.0.0
+ * @param string $location Menu location identifier.
+ * @return bool Whether location has a menu.
+ */
+function has_nav_menu( $location ) {
+	global $_wp_registered_nav_menus;
+
+	if ( ! isset( $_wp_registered_nav_menus[ $location ] ) ) {
+		return false;
+	}
+
+	$locations = get_nav_menu_locations();
+	return ( ! empty( $locations[ $location ] ) );
+}
