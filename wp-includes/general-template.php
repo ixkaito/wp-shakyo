@@ -49,6 +49,48 @@ function get_header( $name = null ) {
 }
 
 /**
+ * Load footer template.
+ *
+ * Includes the footer template for a theme or if a name is specified then a
+ * specialised footer will be included.
+ *
+ * For the parameter, if the file is called "footer-special.php" then specify
+ * "special".
+ *
+ * @since 1.5.0
+ *
+ * @uses locate_template()
+ *
+ * @param string $name The name of the specialised footer.
+ */
+function get_footer( $name = null ) {
+	/**
+	 * Fires before the footer template file is loaded.
+	 *
+	 * The hook allows a specific footer template file to be used in place of the
+	 * default footer template file. If your file is called footer-new.php,
+	 * you would specify the filename in the hook as get_footer( 'new' ).
+	 *
+	 * @since 2.1.0
+	 * @since 2.8.0 $name parameter added.
+	 *
+	 * @param string $name Name of the specific footer file to use.
+	 */
+	do_action( 'get_footer', $name );
+
+	$templates = array();
+	$name = (string) $name;
+	if ( '' !== $name )
+		$templates[] = "footer-{$name}.php";
+
+	$templates[] = 'footer.php';
+
+	// Backward compat code will be removed in a future release
+	if ('' == locate_template($templates, true))
+		load_template( ABSPATH . WPINC . '/theme-compat/footer.php');
+}
+
+/**
  * Load sidebar template.
  *
  * Includes the sidebar template for a theme or if a name is specified then a
