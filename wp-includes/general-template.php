@@ -608,6 +608,20 @@ function wp_head() {
 }
 
 /**
+ * Fire the wp_footer action
+ *
+ * @since 1.5.1
+ */
+function wp_footer() {
+	/**
+	 * Print scripts or data before the closing body tag on the front end.
+	 *
+	 * @since 1.5.1
+	 */
+	do_action( 'wp_footer' );
+}
+
+/**
  * Display the links to the general feeds.
  *
  * @since 2.8.0
