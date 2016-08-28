@@ -48,6 +48,50 @@ function _wp_admin_bar_init() {
 add_action( 'template_redirect', '_wp_admin_bar_init', 0 );
 add_action( 'admin_init', '_wp_admin_bar_init' );
 
+/**
+ * Render the admin bar to the page based on the $wp_admin_bar->menu member var.
+ * This is called very late on the footer actions so that it will render after anything else being
+ * added to the footer.
+ *
+ * It includes the action "admin_bar_menu" which should be used to hook in and
+ * add new menus to the admin bar. That way you can be sure that you are adding at most optimal point,
+ * right before the admin bar is rendered. This also gives you access to the $post global, among others.
+ *
+ * @since 3.1.0
+ */
+function wp_admin_bar_render() {
+	global $wp_admin_bar;
+
+	if ( ! is_admin_bar_showing() || ! is_object( $wp_admin_bar ) )
+		return false;
+
+	/**
+	 * Load all necessary admin bar items.
+	 *
+	 * This is the hook used to add, remove, or manipulate admin bar items.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param WP_Admin_Bar $wp_admin_bar WP_Admin_Bar instance, passed by reference
+	 */
+	do_action_ref_array( 'admin_bar_menu', array( &$wp_admin_bar ) );
+
+	/**
+	 * Fires before the admin bar is rendered.
+	 *
+	 * @since 3.1.0
+	 */
+	do_action( 'wp_before_admin_bar_render' );
+
+	$wp_admin_bar->render();
+
+	/**
+	 * Fires after the admin bar is rendered.
+	 *
+	 * @since 3.1.0
+	 */
+	do_action( 'wp_after_admin_bar_render' );
+}
 add_action( 'wp_footer', 'wp_admin_bar_render', 1000 );
 add_action( 'in_admin_header', 'wp_admin_bar_render', 0 );
 
