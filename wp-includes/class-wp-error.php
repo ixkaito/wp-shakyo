@@ -105,6 +105,23 @@ class WP_Error {
 	}
 
 	/**
+	 * Retrieve error data for error code.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string|int $code Optional. Error code.
+	 * @return mixed Null, if no errors.
+	 */
+	public function get_error_data($code = '') {
+		if ( empty($code) )
+			$code = $this->get_error_code();
+
+		if ( isset($this->error_data[$code]) )
+			return $this->error_data[$code];
+		return null;
+	}
+
+	/**
 	 * Get single error message.
 	 *
 	 * This will get the first message available for the code. If no code is
