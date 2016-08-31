@@ -448,6 +448,26 @@ class WP_User {
 	}
 
 	/**
+	 * Magic method for checking the existence of a certain custom field
+	 *
+	 * @since 3.3.0
+	 */
+	public function __isset( $key ) {
+		if ( 'id' == $key ) {
+			_deprecated_argument( 'WP_User->id', '2.1', __( 'Use <code>WP_User->ID</code> instead.' ) );
+			$key = 'ID';
+		}
+
+		if ( isset( $this->data->$key ) )
+			return true;
+
+		if ( isset( self::$back_compat_keys[ $key ] ) )
+			$key = self::$back_compat_keys[ $key ];
+
+		return metadata_exists( 'user', $this->ID, $key );
+	}
+
+	/**
 	 * Determine whether the user exists in the database.
 	 *
 	 * @since 3.4.0
