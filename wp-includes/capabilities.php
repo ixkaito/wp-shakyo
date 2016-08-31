@@ -460,6 +460,19 @@ class WP_User {
 	}
 
 	/**
+	 * Determine whether a property or meta key is set
+	 *
+	 * Consults the users and usermeta tables.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $key Property
+	 */
+	public function has_prop( $key ) {
+		return $this->__isset( $key );
+	}
+
+	/**
 	 * Set up capability object properties.
 	 *
 	 * Will set the value for the 'cap_key' property to current database table
