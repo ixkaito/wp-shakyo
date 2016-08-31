@@ -267,6 +267,59 @@ function get_current_user_id() {
 }
 
 /**
+ * Retrieve user option that can be either per Site or per Network.
+ *
+ * If the user ID is not given, then the current user will be used instead. If
+ * the user ID is given, then the user data will be retrieved. The filter for
+ * the result, will also pass the original option name and finally the user data
+ * object as the third parameter.
+ *
+ * The option will first check for the per site name and then the per Network name.
+ *
+ * @since 2.0.0
+ *
+ * @global wpdb $wpdb WordPress database object for queries.
+ *
+ * @param string $option     User option name.
+ * @param int    $user       Optional. User ID.
+ * @param bool   $deprecated Use get_option() to check for an option in the options table.
+ * @return mixed User option value on success, false on failure.
+ */
+function get_user_option( $option, $user = 0, $deprecated = '' ) {
+	global $wpdb;
+
+	if ( !empty( $deprecated ) )
+		_deprecated_argument( __FUNCTION__, '3.0' );
+
+	if ( empty( $user ) )
+		$user = get_current_user_id();
+
+	if ( ! $user = get_userdata( $user ) )
+		return false;
+
+	$prefix = $wpdb->get_blog_prefix();
+	if ( $user->has_prop( $prefix . $option ) ) // Blog specific
+		$result = $user->get( $prefix . $option );
+	elseif ( $user->has_prop( $option ) ) // User specific and cross-blog
+		$result = $user->get( $option );
+	else
+		$result = false;
+
+	/**
+	 * Filter a specific user option value.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the user option name.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param mixed   $result Value for the user's option.
+	 * @param string  $option Name of the option being retrieved.
+	 * @param WP_User $user   WP_User object of the user whose option is being retrieved.
+	 */
+	return apply_filters( "get_user_option_{$option}", $result, $option, $user );
+}
+
+/**
  * Retrieve user meta field for a user.
  *
  * @since 3.0.0
