@@ -468,6 +468,32 @@ class WP_User {
 	}
 
 	/**
+	 * Magic method for accessing custom fields
+	 *
+	 * @since 3.3.0
+	 */
+	public function __get( $key ) {
+		if ( 'id' == $key ) {
+			_deprecated_argument( 'WP_User->id', '2.1', __( 'Use <code>WP_User->ID</code> instead.' ) );
+			return $this->ID;
+		}
+
+		if ( isset( $this->data->$key ) ) {
+			$value = $this->data->$key;
+		} else {
+			if ( isset( self::$back_compat_keys[ $key ] ) )
+				$key = self::$back_compat_keys[ $key ];
+			$value = get_user_meta( $this->ID, $key, true );
+		}
+
+		if ( $this->filter ) {
+			$value = sanitize_user_field( $key, $value, $this->ID, $this->filter );
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Determine whether the user exists in the database.
 	 *
 	 * @since 3.4.0
