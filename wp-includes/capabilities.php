@@ -480,6 +480,19 @@ class WP_User {
 	}
 
 	/**
+	 * Retrieve the value of a property or meta key.
+	 *
+	 * Retrieves from the users and usermeta table.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $key Property
+	 */
+	public function get( $key ) {
+		return $this->__get( $key );
+	}
+
+	/**
 	 * Determine whether a property or meta key is set
 	 *
 	 * Consults the users and usermeta tables.
