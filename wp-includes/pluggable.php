@@ -952,6 +952,67 @@ function wp_hash_password($password) {
 }
 endif;
 
+if ( !function_exists('wp_check_password') ) :
+/**
+ * Checks the plaintext password against the encrypted Password.
+ *
+ * Maintains compatibility between old version and the new cookie authentication
+ * protocol using PHPass library. The $hash parameter is the encrypted password
+ * and the function compares the plain text password when encrypted similarly
+ * against the already encrypted password to see if they match.
+ *
+ * For integration with other applications, this function can be overwritten to
+ * instead use the other package password checking algorithm.
+ *
+ * @since 2.5.0
+ *
+ * @global object $wp_hasher PHPass object used for checking the password
+ *	against the $hash + $password
+ * @uses PasswordHash::CheckPassword
+ *
+ * @param string $password Plaintext user's password
+ * @param string $hash Hash of the user's password to check against.
+ * @return bool False, if the $password does not match the hashed password
+ */
+function wp_check_password($password, $hash, $user_id = '') {
+	global $wp_hasher;
+
+	// If the hash is still md5...
+	if ( strlen($hash) <= 32 ) {
+		$check = hash_equals( $hash, md5( $password ) );
+		if ( $check && $user_id ) {
+			// Rehash using new hash.
+			wp_set_password($password, $user_id);
+			$hash = wp_hash_password($password);
+		}
+
+		/**
+		 * Filter whether the plaintext password matches the encrypted password.
+		 *
+		 * @since 2.5.0
+		 *
+		 * @param bool   $check   Whether the passwords match.
+		 * @param string $hash    The hashed password.
+		 * @param int    $user_id User ID.
+		 */
+		return apply_filters( 'check_password', $check, $password, $hash, $user_id );
+	}
+
+	// If the stored hash is longer than an MD5, presume the
+	// new style phpass portable hash.
+	if ( empty($wp_hasher) ) {
+		require_once( ABSPATH . WPINC . '/class-phpass.php');
+		// By default, use the portable hash from phpass
+		$wp_hasher = new PasswordHash(8, true);
+	}
+
+	$check = $wp_hasher->CheckPassword($password, $hash);
+
+	/** This filter is documented in wp-includes/pluggable.php */
+	return apply_filters( 'check_password', $check, $password, $hash, $user_id );
+}
+endif;
+
 if ( !function_exists('wp_generate_password') ) :
 /**
  * Generates a random password drawn from the defined set of characters.
