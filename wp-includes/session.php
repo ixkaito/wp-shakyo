@@ -121,6 +121,18 @@ abstract class WP_Session_Tokens {
 		$verifier = $this->hash_token( $token );
 		$this->update_session( $verifier, $session );
 	}
+
+	/**
+	 * This method should update a session by its verifier.
+	 *
+	 * Omitting the second argument should destroy the session.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @param string $verifier Verifier of the session to update.
+	 */
+	abstract protected function update_session( $verifier, $session = null );
 }
 
 /**
@@ -130,4 +142,24 @@ abstract class WP_Session_Tokens {
  */
 class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {
 
+	/**
+	 * Update a session by its verifier.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @param string $verifier Verifier of the session to update.
+	 * @param array  $session  Optional. Session. Omitting this argument destroys the session.
+	 */
+	protected function update_session( $verifier, $session = null ) {
+		$sessions = $this->get_sessions();
+
+		if ( $session ) {
+			$sessions[ $verifier ] = $session;
+		} else {
+			unset( $sessions[ $verifier ] );
+		}
+
+		$this->update_sessions( $sessions );
+	}
 }
