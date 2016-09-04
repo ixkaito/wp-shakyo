@@ -123,6 +123,16 @@ abstract class WP_Session_Tokens {
 	}
 
 	/**
+	 * This method should retrieve all sessions of a user, keyed by verifier.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @return array Sessions of a user, keyed by verifier.
+	 */
+	abstract protected function get_sessions();
+
+	/**
 	 * This method should update a session by its verifier.
 	 *
 	 * Omitting the second argument should destroy the session.
@@ -141,6 +151,25 @@ abstract class WP_Session_Tokens {
  * @since 4.0.0
  */
 class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {
+
+	/**
+	 * Get all sessions of a user.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @return array Sessions of a user.
+	 */
+	protected function get_sessions() {
+		$sessions = get_user_meta( $this->user_id, 'session_tokens', true );
+
+		if ( ! is_array( $sessions ) ) {
+			return array();
+		}
+
+		$sessions = array_map( array( $this, 'prepare_session' ), $sessions );
+		return array_filter( $sessions, array( $this, 'is_still_valid' ) );
+	}
 
 	/**
 	 * Update a session by its verifier.
