@@ -52,6 +52,24 @@ abstract class WP_Session_Tokens {
 	}
 
 	/**
+	 * Hashes a session token for storage.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 *
+	 * @param string $token Session token to hash.
+	 * @return string A hash of the session token (a verifier).
+	 */
+	final private function hash_token( $token ) {
+		// If ext/hash is not present, use sha1() instead.
+		if ( function_exists( 'hash' ) ) {
+			return hash( 'sha256', $token );
+		} else {
+			return sha1( $token );
+		}
+	}
+
+	/**
 	 * Generate a session token and attach session information to it.
 	 *
 	 * A session token is a long, random string. It is used in a cookie
