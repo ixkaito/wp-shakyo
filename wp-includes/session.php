@@ -191,4 +191,24 @@ class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {
 
 		$this->update_sessions( $sessions );
 	}
+
+	/**
+	 * Update a user's sessions in the usermeta table.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @param array $sessions Sessions.
+	 */
+	protected function update_sessions( $sessions ) {
+		if ( ! has_filter( 'attach_session_information' ) ) {
+			$sessions = wp_list_pluck( $sessions, 'expiration' );
+		}
+
+		if ( $sessions ) {
+			update_user_meta( $this->user_id, 'session_tokens', $sessions );
+		} else {
+			delete_user_meta( $this->user_id, 'session_tokens' );
+		}
+	}
 }
