@@ -50,6 +50,45 @@ abstract class WP_Session_Tokens {
 		$manager = apply_filters( 'session_token_manager', 'WP_User_Meta_Session_Tokens' );
 		return new $manager( $user_id );
 	}
+
+	/**
+	 * Generate a session token and attach session information to it.
+	 *
+	 * A session token is a long, random string. It is used in a cookie
+	 * link that cookie to an expiration time and to ensure the cookie
+	 * becomes invalidated upon logout.
+	 *
+	 * This function generates a token and stores it with the associated
+	 * expiration time (and potentially other session information via the
+	 * `attach_session_information` filter).
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param int $expiration Session expiration timestamp.
+	 * @return string Session token.
+	 */
+	final public function create( $expiration ) {
+		/**
+		 * Filter the information attached to the newly created session.
+		 *
+		 * Could be used in the future to attach information such as
+		 * IP address or user agent to a session.
+		 *
+		 * @since 4.0.0
+		 *
+		 * @param array $session Array of extra data.
+		 * @param int   $user_id User ID.
+		 */
+		$session = apply_filters( 'attach_session_information', array(), $this->user_id );
+		$session['expiration'] = $expiration;
+
+		$token = wp_generate_password( 43, false, false );
+
+		$this->update( $token, $session );
+
+		return $token;
+	}
 }
 
 /**
@@ -57,4 +96,6 @@ abstract class WP_Session_Tokens {
  *
  * @since 4.0.0
  */
-class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {}
+class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {
+
+}
