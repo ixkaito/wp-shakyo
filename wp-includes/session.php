@@ -89,6 +89,20 @@ abstract class WP_Session_Tokens {
 
 		return $token;
 	}
+
+	/**
+	 * Update a session token.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $token Session token to update.
+	 * @param array  $session Session information.
+	 */
+	final public function update( $token, $session ) {
+		$verifier = $this->hash_token( $token );
+		$this->update_session( $verifier, $session );
+	}
 }
 
 /**
