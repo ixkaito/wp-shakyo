@@ -163,6 +163,17 @@ abstract class WP_Session_Tokens {
 	abstract protected function get_sessions();
 
 	/**
+	 * This method should look up a session by its verifier (token hash).
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @param string $verifier Verifier of the session to retrieve.
+	 * @return array|null The session, or null if it does not exist.
+	 */
+	abstract protected function get_session( $verifier );
+
+	/**
 	 * This method should update a session by its verifier.
 	 *
 	 * Omitting the second argument should destroy the session.
@@ -213,6 +224,25 @@ class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {
 		}
 
 		return $session;
+	}
+
+	/**
+	 * Retrieve a session by its verifier (token hash).
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @param string $verifier Verifier of the session to retrieve.
+	 * @return array|null The session, or null if it does not exist
+	 */
+	protected function get_session( $verifier ) {
+		$sessions = $this->get_sessions();
+
+		if ( isset( $sessions[ $verifier ] ) ) {
+			return $sessions[ $verifier ];
+		}
+
+		return null;
 	}
 
 	/**
