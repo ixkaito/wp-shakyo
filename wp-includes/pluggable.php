@@ -966,6 +966,35 @@ function wp_sanitize_redirect($location) {
 }
 endif;
 
+if ( !function_exists('wp_safe_redirect') ) :
+/**
+ * Performs a safe (local) redirect, using wp_redirect().
+ *
+ * Checks whether the $location is using an allowed host, if it has an absolute
+ * path. A plugin can therefore set or remove allowed host(s) to or from the
+ * list.
+ *
+ * If the host is not allowed, then the redirect is to wp-admin on the siteurl
+ * instead. This prevents malicious redirects which redirect to another host,
+ * but only used in a few places.
+ *
+ * @since 2.3.0
+ *
+ * @uses wp_validate_redirect() To validate the redirect is to an allowed host.
+ *
+ * @return void Does not return anything
+ **/
+function wp_safe_redirect($location, $status = 302) {
+
+	// Need to look at the URL the way it will end up in wp_redirect()
+	$location = wp_sanitize_redirect($location);
+
+	$location = wp_validate_redirect($location, admin_url());
+
+	wp_redirect($location, $status);
+}
+endif;
+
 if ( !function_exists('wp_salt') ) :
 /**
  * Get salt to add to hashes.
