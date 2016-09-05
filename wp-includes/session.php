@@ -172,6 +172,20 @@ class WP_User_Meta_Session_Tokens extends WP_Session_Tokens {
 	}
 
 	/**
+	 * Converts an expiration to an array of session information.
+	 *
+	 * @param mixed $session Session or expiration.
+	 * @return array Session.
+	 */
+	protected function prepare_session( $session ) {
+		if ( is_int( $session ) ) {
+			return array( 'expiration' => $session );
+		}
+
+		return $session;
+	}
+
+	/**
 	 * Update a session by its verifier.
 	 *
 	 * @since 4.0.0
