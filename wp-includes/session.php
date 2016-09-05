@@ -70,6 +70,22 @@ abstract class WP_Session_Tokens {
 	}
 
 	/**
+	 * Validate a user's session token as authentic.
+	 *
+	 * Checks that the given token is present and hasn't expired.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $token Token to verify.
+	 * @return bool Whether the token is valid for the user.
+	 */
+	final public function verify( $token ) {
+		$verifier = $this->hash_token( $token );
+		return (bool) $this->get_session( $verifier );
+	}
+
+	/**
 	 * Generate a session token and attach session information to it.
 	 *
 	 * A session token is a long, random string. It is used in a cookie
