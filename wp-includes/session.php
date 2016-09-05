@@ -123,6 +123,20 @@ abstract class WP_Session_Tokens {
 	}
 
 	/**
+	 * Determine whether a session token is still valid,
+	 * based on expiration.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 *
+	 * @param array $session Session to check.
+	 * @return bool Whether session is valid.
+	 */
+	final protected function is_still_valid( $session ) {
+		return $session['expiration'] >= time();
+	}
+
+	/**
 	 * This method should retrieve all sessions of a user, keyed by verifier.
 	 *
 	 * @since 4.0.0
