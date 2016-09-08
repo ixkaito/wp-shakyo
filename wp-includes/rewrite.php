@@ -849,6 +849,62 @@ class WP_Rewrite {
 	}
 
 	/**
+	 * Add a new permalink structure.
+	 *
+	 * A permalink structure (permastruct) is an abstract definition of a set of rewrite rules; it
+	 * is an easy way of expressing a set of regular expressions that rewrite to a set of query strings.
+	 * The new permastruct is added to the {@link WP_Rewrite::$extra_permastructs} array. When the
+	 * rewrite rules are built by {@link WP_Rewrite::rewrite_rules()} all of these extra permastructs
+	 * are passed to {@link WP_Rewrite::generate_rewrite_rules()} which transforms them into the
+	 * regular expressions that many love to hate.
+	 *
+	 * The $args parameter gives you control over how {@link WP_Rewrite::generate_rewrite_rules()}
+	 * works on the new permastruct.
+	 *
+	 * @since 2.5.0
+	 * @access public
+	 *
+	 * @param string $name Name for permalink structure.
+	 * @param string $struct Permalink structure (e.g. category/%category%)
+	 * @param array $args Optional configuration for building the rules from the permalink structure:
+	 *     - with_front (bool) - Should the structure be prepended with WP_Rewrite::$front? Default is true.
+	 *     - ep_mask (int) - Endpoint mask defining what endpoints are added to the structure. Default is EP_NONE.
+	 *     - paged (bool) - Should archive pagination rules be added for the structure? Default is true.
+	 *     - feed (bool) - Should feed rewrite rules be added for the structure? Default is true.
+	 *     - forcomments (bool) - Should the feed rules be a query for a comments feed? Default is false.
+	 *     - walk_dirs (bool) - Should the 'directories' making up the structure be walked over and rewrite
+	 *                          rules built for each in turn? Default is true.
+	 *     - endpoints (bool) - Should endpoints be applied to the generated rewrite rules? Default is true.
+	 */
+	public function add_permastruct( $name, $struct, $args = array() ) {
+		// backwards compatibility for the old parameters: $with_front and $ep_mask
+		if ( ! is_array( $args ) )
+			$args = array( 'with_front' => $args );
+		if ( func_num_args() == 4 )
+			$args['ep_mask'] = func_get_arg( 3 );
+
+		$defaults = array(
+			'with_front' => true,
+			'ep_mask' => EP_NONE,
+			'paged' => true,
+			'feed' => true,
+			'forcomments' => false,
+			'walk_dirs' => true,
+			'endpoints' => true,
+		);
+		$args = array_intersect_key( $args, $defaults );
+		$args = wp_parse_args( $args, $defaults );
+
+		if ( $args['with_front'] )
+			$struct = $this->front . $struct;
+		else
+			$struct = $this->root . $struct;
+		$args['struct'] = $struct;
+
+		$this->extra_permastructs[ $name ] = $args;
+	}
+
+	/**
 	 * Remove rewrite rules and then recreate rewrite rules.
 	 *
 	 * Calls {@link WP_Rewrite::wp_rewrite_rules()} after removing the
