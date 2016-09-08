@@ -677,6 +677,28 @@ function is_network_admin() {
 }
 
 /**
+ * Whether the current request is for a user admin screen.
+ *
+ * e.g. `/wp-admin/user/`
+ *
+ * Does not inform on whether the user is an admin! Use capability
+ * checks to tell if the user should be accessing a section or not
+ * {@see current_user_can()}.
+ *
+ * @since 3.1.0
+ *
+ * @return bool True if inside WordPress user administration pages.
+ */
+function is_user_admin() {
+	if ( isset( $GLOBALS['current_screen'] ) )
+		return $GLOBALS['current_screen']->in_admin( 'user' );
+	elseif ( defined( 'WP_USER_ADMIN' ) )
+		return WP_USER_ADMIN;
+
+	return false;
+}
+
+/**
  * If Multisite is enabled.
  *
  * @since 3.0.0
