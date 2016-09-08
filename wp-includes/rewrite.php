@@ -567,6 +567,34 @@ class WP_Rewrite {
 	}
 
 	/**
+	 * Add or update existing rewrite tags (e.g. %postname%).
+	 *
+	 * If the tag already exists, replace the existing pattern and query for
+	 * that tag, otherwise add the new tag.
+	 *
+	 * @see WP_Rewrite::$rewritecode
+	 * @see WP_Rewrite::$rewritereplace
+	 * @see WP_Rewrite::$queryreplace
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @param string $tag Name of the rewrite tag to add or update.
+	 * @param string $regex Regular expression to substitute the tag for in rewrite rules.
+	 * @param string $query String to append to the rewritten query. Must end in '='.
+	 */
+	public function add_rewrite_tag( $tag, $regex, $query ) {
+		$position = array_search( $tag, $this->rewritecode );
+		if ( false !== $position && null !== $position ) {
+			$this->rewritereplace[ $position ] = $regex;
+			$this->queryreplace[ $position ] = $query;
+		} else {
+			$this->rewritecode[] = $tag;
+			$this->rewritereplace[] = $regex;
+			$this->queryreplace[] = $query;
+		}
+	}
+
+	/**
 	 * Construct rewrite matches and queries from permalink structure.
 	 *
 	 * Runs the action 'generate_rewrite_rules' with the parameter that is an
