@@ -59,4 +59,24 @@ class Custom_Image_Header {
 	 * @access private
 	 */
 	private $page = '';
+
+	/**
+	 * Constructor - Register administration header callback.
+	 *
+	 * @since 2.1.0
+	 * @param callback $admin_header_callback
+	 * @param callback $admin_image_div_callback Optional custom image div output callback.
+	 * @return Custom_Image_Header
+	 */
+	public function __construct($admin_header_callback, $admin_image_div_callback = '') {
+		$this->admin_header_callback = $admin_header_callback;
+		$this->admin_image_div_callback = $admin_image_div_callback;
+
+		add_action( 'admin_menu', array( $this, 'init' ) );
+
+		add_action( 'customize_save_after',         array( $this, 'customize_set_last_used' ) );
+		add_action( 'wp_ajax_custom-header-crop',   array( $this, 'ajax_header_crop'        ) );
+		add_action( 'wp_ajax_custom-header-add',    array( $this, 'ajax_header_add'         ) );
+		add_action( 'wp_ajax_custom-header-remove', array( $this, 'ajax_header_remove'      ) );
+	}
 }
