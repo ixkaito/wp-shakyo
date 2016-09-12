@@ -268,6 +268,39 @@ function get_search_form( $echo = true ) {
 }
 
 /**
+ * Returns the Log In URL.
+ *
+ * Returns the URL that allows the user to log in to the site.
+ *
+ * @since 2.7.0
+ *
+ * @uses site_url() To generate the log in URL.
+ *
+ * @param string $redirect Path to redirect to on login.
+ * @param bool $force_reauth Whether to force reauthorization, even if a cookie is present. Default is false.
+ * @return string A log in URL.
+ */
+function wp_login_url($redirect = '', $force_reauth = false) {
+	$login_url = site_url('wp-login.php', 'login');
+
+	if ( !empty($redirect) )
+		$login_url = add_query_arg('redirect_to', urlencode($redirect), $login_url);
+
+	if ( $force_reauth )
+		$login_url = add_query_arg('reauth', '1', $login_url);
+
+	/**
+	 * Filter the login URL.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param string $login_url The login URL.
+	 * @param string $redirect  The path to redirect to on login, if supplied.
+	 */
+	return apply_filters( 'login_url', $login_url, $redirect );
+}
+
+/**
  * Returns the Lost Password URL.
  *
  * Returns the URL that allows the user to retrieve the lost password
