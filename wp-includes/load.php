@@ -113,7 +113,7 @@ function wp_check_php_mysql_versions() {
 
 	if ( version_compare( $required_php_version, $php_version, '>' ) ) {
 		wp_load_translations_early();
-		header( 'Content-Type: text/html; charest=utf-8' );
+		header( 'Content-Type: text/html; charset=utf-8' );
 		die( sprintf( __( 'Your server is running PHP version %1$s but WordPress %2$s requires at least %3$s.' ), $php_version, $wp_version, $required_php_version ) );
 	}
 
