@@ -1,8 +1,8 @@
 <?php
 /**
- * These functions are needed to load WordPress
+ * These functions are needed to load WordPress.
  *
- * @internal This file must be parsable by PHP4
+ * @internal This file must be parsable by PHP4.
  *
  * @package WordPress
  */
