@@ -459,7 +459,7 @@ function wp_start_object_cache() {
 /**
  * Redirect to the installer if WordPress is not installed.
  *
- * Dies with and error message when Multisite is enabled.
+ * Dies with an error message when Multisite is enabled.
  *
  * @since 3.0.0
  * @access private
