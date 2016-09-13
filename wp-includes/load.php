@@ -801,7 +801,7 @@ function wp_load_translations_early() {
 				if ( file_exists( $location . '/' . $locale . '.mo' ) ) {
 					load_textdomain( 'default', $location . '/' . $locale . '.mo' );
 					if ( defined( 'WP_SETUP_CONFIG' ) && file_exists( $location . '/admin-' . $locale . '.mo' ) )
-						load_textdomain( 'default', $location . '/admin-' .$locale . '.mo' );
+						load_textdomain( 'default', $location . '/admin-' . $locale . '.mo' );
 					break 2;
 				}
 			}
