@@ -575,7 +575,7 @@ function wp_set_internal_encoding() {
  * Add magic quotes to `$_GET`, `$_POST`, `$_COOKIE`, and `$_SERVER`.
  *
  * Also forces `$_REQUEST` to be `$_GET + $_POST`. If `$_SERVER`,
- * `$_COOKITE`, or `$_ENV` are needed, use those superglobals directly.
+ * `$_COOKIE`, or `$_ENV` are needed, use those superglobals directly.
  *
  * @since 3.0.0
  * @access private
