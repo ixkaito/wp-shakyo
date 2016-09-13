@@ -144,7 +144,7 @@ function wp_favicon_request() {
  *
  * Checks for a file in the WordPress root directory named ".maintenance".
  * This file will contain the variable $upgrading, set to the time the file
- * was created. If the file was reated less than 10 minutes ago, WordPress
+ * was created. If the file was created less than 10 minutes ago, WordPress
  * enters maintenance mode and displays a message.
  *
  * The default message can be replaced by using a drop-in (maintenance.php in
