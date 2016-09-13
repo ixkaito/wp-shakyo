@@ -419,7 +419,7 @@ function wp_start_object_cache() {
 	global $blog_id;
 
 	$first_init = false;
-	if ( ! function_exists( 'wp_cache_init' ) ) {
+ 	if ( ! function_exists( 'wp_cache_init' ) ) {
 		if ( file_exists( WP_CONTENT_DIR . '/object-cache.php' ) ) {
 			require_once ( WP_CONTENT_DIR . '/object-cache.php' );
 			if ( function_exists( 'wp_cache_init' ) )
