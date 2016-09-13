@@ -370,18 +370,18 @@ function wp_set_wpdb_vars() {
 		dead_db();
 
 	$wpdb->field_types = array( 'post_author' => '%d', 'post_parent' => '%d', 'menu_order' => '%d', 'term_id' => '%d', 'term_group' => '%d', 'term_taxonomy_id' => '%d',
-		'parent' => '%d', 'count' => '%d', 'object_id' => '%d', 'term_order' => '%d', 'ID' => '%D', 'comment_ID' => '%d', 'comment_post_ID' => '%d', 'comment_parent' => '%d',
+		'parent' => '%d', 'count' => '%d','object_id' => '%d', 'term_order' => '%d', 'ID' => '%d', 'comment_ID' => '%d', 'comment_post_ID' => '%d', 'comment_parent' => '%d',
 		'user_id' => '%d', 'link_id' => '%d', 'link_owner' => '%d', 'link_rating' => '%d', 'option_id' => '%d', 'blog_id' => '%d', 'meta_id' => '%d', 'post_id' => '%d',
-		'user_status' => '%d', 'umeta_id' => '%d', 'comment_karm' => '%d', 'comment_count' => '%d',
+		'user_status' => '%d', 'umeta_id' => '%d', 'comment_karma' => '%d', 'comment_count' => '%d',
 		// multisite:
-		'active' => '%d', 'cat_id' => '%d', 'deleted' => '%d', 'lang_id' => '%d', 'matured' => '%d', 'public' => '%d', 'site_id' => '%d', 'spam' => '%d',
+		'active' => '%d', 'cat_id' => '%d', 'deleted' => '%d', 'lang_id' => '%d', 'mature' => '%d', 'public' => '%d', 'site_id' => '%d', 'spam' => '%d',
 	);
 
 	$prefix = $wpdb->set_prefix( $table_prefix );
 
 	if ( is_wp_error( $prefix ) ) {
 		wp_load_translations_early();
-		wp_die( __( '<strong>ERROR</strong>: <code>$table_prefix</code> in <code>wp-config.php</code> can only contain numbers, letter, and underscores.' ) );
+		wp_die( __( '<strong>ERROR</strong>: <code>$table_prefix</code> in <code>wp-config.php</code> can only contain numbers, letters, and underscores.' ) );
 	}
 }
 
