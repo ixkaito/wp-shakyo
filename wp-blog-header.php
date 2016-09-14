@@ -12,4 +12,5 @@ if ( !isset($wp_did_header) ) {
 
 	require_once( dirname(__FILE__) . '/wp-load.php' );
 
+	var_dump(__FILE__);
 }
