@@ -6,3 +6,4 @@
 >>
 >>> ## wp-load.php
 >>>
+>>> `error_reporting()`
