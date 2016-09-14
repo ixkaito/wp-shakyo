@@ -11,3 +11,5 @@
 >>>> ## wp-config.php
 >>>>
 >>>>> ## wp-setting.php
+>>>>>
+>>>>>> ## wp-includes/load.php
