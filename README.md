@@ -10,3 +10,4 @@
 >>>
 >>>> ## wp-config.php
 >>>>
+>>>>> ## wp-setting.php
