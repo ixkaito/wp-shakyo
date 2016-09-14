@@ -7,3 +7,6 @@
 >>> ## wp-load.php
 >>>
 >>> `error_reporting()`
+>>>
+>>>> ## wp-config.php
+>>>>
