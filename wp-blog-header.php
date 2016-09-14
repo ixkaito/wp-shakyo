@@ -5,7 +5,6 @@
  * @package WordPress
  */
 
-var_dump($wp_did_header);
 
 if ( !isset($wp_did_header) ) {
 
