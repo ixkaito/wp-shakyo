@@ -21,4 +21,12 @@ define( 'WPINC', 'wp-includes' );
 require( ABSPATH . WPINC . '/load.php' );
 require( ABSPATH . WPINC . '/default-constants.php' );
 
+/*
+ * These can't be directly globalized in version.php. When updating,
+ * we're including version.php from another install and don't want
+ * these values to be overridden if already set.
+ */
+global $wp_version, $wp_db_version, $tinymce_version, $required_php_version, $required_mysql_version;
+require( ABSPATH . WPINC . '/version.php' );
+
 var_dump(__FILE__);
