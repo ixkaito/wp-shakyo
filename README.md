@@ -29,3 +29,5 @@
 >>>>>> `wp_fix_server_vars()`
 >>>>>> 
 >>>>>> `wp_favicon_request()`
+>>>>>> 
+>>>>>> `wp_maintenance()`
