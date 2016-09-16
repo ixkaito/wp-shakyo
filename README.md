@@ -46,3 +46,5 @@
 >>>>>> 
 >>>>>> **wp-includes/class-wp.php**
 >>>>>> 
+>>>>>> **wp-includes/class-wp-error.php**
+>>>>>> 
