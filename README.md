@@ -50,3 +50,5 @@
 >>>>>> 
 >>>>>> **wp-includes/plugin.php**
 >>>>>> 
+>>>>>> **wp-includes/pomo/mo.php**
+>>>>>> 
