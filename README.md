@@ -13,3 +13,7 @@
 >>>>> ## wp-setting.php
 >>>>>
 >>>>>> ## wp-includes/load.php
+>>>>>> 
+>>>>>> ## wp-includes/default-constants.php
+>>>>>
+>>>>> `wp_initial_constants()`
