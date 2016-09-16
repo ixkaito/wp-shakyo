@@ -42,4 +42,7 @@ wp_check_php_mysql_versions();
 // WordPress calculates offsets from UTC.
 date_default_timezone_set( 'UTC' );
 
+// Turn register_globals off.
+wp_unregister_GLOBALS();
+
 var_dump(__FILE__);

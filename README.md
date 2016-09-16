@@ -21,4 +21,7 @@
 >>>>>>> `is_multisite()`
 >>>>>> 
 >>>>>> `wp_check_php_mysql_versions()`
->>>>> 
+>>>>>> 
+>>>>>> `date_default_timezone_set()`
+>>>>>> 
+>>>>>> `wp_unregister_GLOBALS()`
