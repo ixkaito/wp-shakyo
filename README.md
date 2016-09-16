@@ -27,3 +27,5 @@
 >>>>>> `wp_unregister_GLOBALS()`
 >>>>>> 
 >>>>>> `wp_fix_server_vars()`
+>>>>>> 
+>>>>>> `wp_favicon_request()`
