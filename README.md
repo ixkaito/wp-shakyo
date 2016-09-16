@@ -25,3 +25,5 @@
 >>>>>> `date_default_timezone_set()`
 >>>>>> 
 >>>>>> `wp_unregister_GLOBALS()`
+>>>>>> 
+>>>>>> `wp_fix_server_vars()`

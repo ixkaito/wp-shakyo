@@ -45,4 +45,7 @@ date_default_timezone_set( 'UTC' );
 // Turn register_globals off.
 wp_unregister_GLOBALS();
 
+// Standardize $_SERVER variables across setups.
+wp_fix_server_vars();
+
 var_dump(__FILE__);
