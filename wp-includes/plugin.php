@@ -18,3 +18,18 @@
  * @subpackage Plugin
  * @since 1.5.0
  */
+
+// Initialize the filter globals.
+global $wp_filter, $wp_actions, $merged_filters, $wp_current_filter;
+
+if ( ! isset( $wp_filter ) )
+	$wp_filter = array();
+
+if ( ! isset( $wp_actions ) )
+	$wp_actions = array();
+
+if ( ! isset( $merged_filters ) )
+	$merged_filters = array();
+
+if ( ! isset( $wp_current_filter ) )
+	$wp_current_filter = array();
