@@ -64,4 +64,7 @@ wp_debug_mode();
 if ( WP_CACHE )
 	WP_DEBUG ? include( WP_CONTENT_DIR . '/advanced-cache.php' ) : @include( WP_CONTENT_DIR . '/advanced-cache.php' );
 
+// Define WP_LANG_DIR if not set.
+wp_set_lang_dir();
+
 var_dump(__FILE__);

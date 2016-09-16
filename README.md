@@ -35,3 +35,5 @@
 >>>>>> `timer_start()`
 >>>>>> 
 >>>>>> `wp_debug_mode()`
+>>>>>> 
+>>>>>> `wp_set_lang_dir()`
