@@ -37,3 +37,6 @@
 >>>>>> `wp_debug_mode()`
 >>>>>> 
 >>>>>> `wp_set_lang_dir()`
+>>>>>> 
+>>>>>> **wp-includes/compat.php**
+>>>>>> 

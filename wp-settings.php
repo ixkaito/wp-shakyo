@@ -67,4 +67,7 @@ if ( WP_CACHE )
 // Define WP_LANG_DIR if not set.
 wp_set_lang_dir();
 
+// Load early WordPress files.
+require( ABSPATH . WPINC . '/compat.php' );
+
 var_dump(__FILE__);
