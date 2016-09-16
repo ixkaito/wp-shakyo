@@ -52,3 +52,5 @@
 >>>>>> 
 >>>>>> **wp-includes/pomo/mo.php**
 >>>>>> 
+>>>>>>> **wp-includes/pomo/translations.php**
+>>>>>>> 

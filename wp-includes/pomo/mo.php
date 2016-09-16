@@ -6,3 +6,7 @@
  * @package pomo
  * @subpackage mo
  */
+
+require_once dirname(__FILE__) . '/translations.php';
+
+var_dump(__FILE__);
