@@ -33,3 +33,5 @@
 >>>>>> `wp_maintenance()`
 >>>>>> 
 >>>>>> `timer_start()`
+>>>>>> 
+>>>>>> `wp_debug_mode()`
