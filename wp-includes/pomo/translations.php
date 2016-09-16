@@ -6,3 +6,5 @@
  * @package pomo
  * @subpackage translations
  */
+
+require_once dirname(__FILE__) . '/entry.php';

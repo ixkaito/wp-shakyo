@@ -54,3 +54,5 @@
 >>>>>> 
 >>>>>>> **wp-includes/pomo/translations.php**
 >>>>>>> 
+>>>>>>>> **wp-includes/pomo/entry.php**
+>>>>>>>> 
