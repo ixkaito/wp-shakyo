@@ -31,3 +31,5 @@
 >>>>>> `wp_favicon_request()`
 >>>>>> 
 >>>>>> `wp_maintenance()`
+>>>>>> 
+>>>>>> `timer_start()`
