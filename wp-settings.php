@@ -60,4 +60,8 @@ timer_start();
 // Check if we're in WP_DEBUG mode.
 wp_debug_mode();
 
+// For an advanced caching plugin to use. Uses a static drop-in because you would only want one.
+if ( WP_CACHE )
+	WP_DEBUG ? include( WP_CONTENT_DIR . '/advanced-cache.php' ) : @include( WP_CONTENT_DIR . '/advanced-cache.php' );
+
 var_dump(__FILE__);
