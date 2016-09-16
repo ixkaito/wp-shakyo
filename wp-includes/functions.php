@@ -4,3 +4,5 @@
  *
  * @package WordPress
  */
+
+require( ABSPATH . WPINC . '/option.php' );
