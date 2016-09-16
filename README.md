@@ -43,4 +43,6 @@
 >>>>>> **wp-includes/functions.php**
 >>>>>> 
 >>>>>>> **wp-includes/option.php**
->>>>>>> 
+>>>>>> 
+>>>>>> **wp-includes/class-wp.php**
+>>>>>> 
