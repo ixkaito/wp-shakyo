@@ -40,3 +40,5 @@
 >>>>>> 
 >>>>>> **wp-includes/compat.php**
 >>>>>> 
+>>>>>> **wp-includes/functions.php**
+>>>>>> 
