@@ -72,5 +72,6 @@ require( ABSPATH . WPINC . '/compat.php' );
 require( ABSPATH . WPINC . '/functions.php' );
 require( ABSPATH . WPINC . '/class-wp.php' );
 require( ABSPATH . WPINC . '/class-wp-error.php' );
+require( ABSPATH . WPINC . '/plugin.php' );
 
 var_dump(__FILE__);
