@@ -55,4 +55,6 @@
 >>>>>>> **wp-includes/pomo/translations.php**
 >>>>>>> 
 >>>>>>>> **wp-includes/pomo/entry.php**
->>>>>>>> 
+>>>>>>> 
+>>>>>>> **wp-includes/pomo/streams.php**
+>>>>>>> 

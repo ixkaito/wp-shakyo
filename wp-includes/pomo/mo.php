@@ -8,5 +8,6 @@
  */
 
 require_once dirname(__FILE__) . '/translations.php';
+require_once dirname(__FILE__) . '/streams.php';
 
 var_dump(__FILE__);
