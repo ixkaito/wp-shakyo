@@ -611,4 +611,15 @@ class wpdb {
 
 		$this->db_connect();
 	}
+
+	/**
+	 * PHP5 style destructor and will run when database object is destroyed.
+	 *
+	 * @see wpdb::__construct()
+	 * @since 2.0.8
+	 * @return bool true
+	 */
+	public function __destruct() {
+		return true;
+	}
 }
