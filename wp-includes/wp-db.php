@@ -622,4 +622,24 @@ class wpdb {
 	public function __destruct() {
 		return true;
 	}
+
+	/**
+	 * Set $this->charset and $this->collate
+	 *
+	 * @since 3.1.0
+	 */
+	public function init_charset() {
+		if ( function_exists('is_multisite') && is_multisite() ) {
+			$this->charset = 'utf8';
+			if ( defined( 'DB_COLLATE' ) && DB_COLLATE )
+				$this->collate = DB_COLLATE;
+			else
+				$this->collate = 'utf8_general_ci';
+		} elseif ( defined( 'DB_COLLATE' ) ) {
+			$this->collate = DB_COLLATE;
+		}
+
+		if ( defined( 'DB_CHARSET' ) )
+			$this->charset = DB_CHARSET;
+	}
 }
