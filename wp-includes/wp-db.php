@@ -820,4 +820,20 @@ class wpdb {
 
 		return false;
 	}
+
+	/**
+	 * The database version number.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @return false|string false on failure, version number on success
+	 */
+	public function db_version() {
+		if ( $this->use_mysqli ) {
+			$server_info = mysqli_get_server_info( $this->dbh );
+		} else {
+			$server_info = mysql_get_server_info( $this->dbh );
+		}
+		return preg_replace( '/[^0-9.].*/', '', $server_info );
+	}
 }
