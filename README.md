@@ -60,3 +60,5 @@
 >>>>>> 
 >>>>>> `require_wp_db()`
 >>>>>> 
+>>>>>>> **wp-includes/wp-db.php**
+>>>>>>> 
