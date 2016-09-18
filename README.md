@@ -57,4 +57,6 @@
 >>>>>>>> **wp-includes/pomo/entry.php**
 >>>>>>> 
 >>>>>>> **wp-includes/pomo/streams.php**
->>>>>>> 
+>>>>>> 
+>>>>>> `require_wp_db()`
+>>>>>> 
