@@ -644,6 +644,43 @@ class wpdb {
 	}
 
 	/**
+	 * Sets the connection's character set.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param resource $dbh     The resource given by mysql_connect
+	 * @param string   $charset The character set (optional)
+	 * @param string   $collate The collation (optional)
+	 */
+	public function set_charset( $dbh, $charset = null, $collate = null ) {
+		if ( ! isset( $charset ) )
+			$charset = $this->charset;
+		if ( ! isset( $collate ) )
+			$collate = $this->collate;
+		if ( $this->has_cap( 'collation' ) && ! empty( $charset ) ) {
+			if ( $this->use_mysqli ) {
+				if ( function_exists( 'mysqli_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
+					mysqli_set_charset( $dbh, $charset );
+				} else {
+					$query = $this->prepare( 'SET NAMES %s', $charset );
+					if ( ! empty( $collate ) )
+						$query .= $this->prepare( ' COLLATE %s', $collate );
+					mysqli_query( $query, $dbh );
+				}
+			} else {
+				if ( function_exists( 'mysql_set_charset' ) && $this->has_cap( 'set_charset' ) ) {
+					mysql_set_charset( $charset, $dbh );
+				} else {
+					$query = $this->prepare( 'SET NAMES %s', $charset );
+					if ( ! empty( $collate ) )
+						$query .= $this->prepare( ' COLLATE %s', $collate );
+					mysql_query( $query, $dbh );
+				}
+			}
+		}
+	}
+
+	/**
 	 * Connect to and select database.
 	 *
 	 * If $allow_bail is false, the lack of database connection will need
