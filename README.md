@@ -73,3 +73,5 @@
 >>>>>>>>> `wpdb::db_connect()`
 >>>>>>>>> 
 >>>>>>>>> `wpdb::set_charset()`
+>>>>>>>>> 
+>>>>>>>>>> `wpdb::has_cap()`
