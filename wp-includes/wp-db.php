@@ -559,4 +559,56 @@ class wpdb {
 	 * @var bool
 	 */
 	private $has_connected = false;
+
+	/**
+	 * Connects to the database server and selects a database
+	 *
+	 * PHP5 style constructor for compatibility with PHP5. Does
+	 * the actual setting up of the class properties and connection
+	 * to the database.
+	 *
+	 * @link http://core.trac.wordpress.org/ticket/3354
+	 * @since 2.0.8
+	 *
+	 * @param string $dbuser MySQL database user
+	 * @param string $dbpassword MySQL database password
+	 * @param string $dbname MySQL database name
+	 * @param string $dbhost MySQL database host
+	 */
+	public function __construct( $dbuser, $dbpassword, $dbname, $dbhost ) {
+		register_shutdown_function( array( $this, '__destruct' ) );
+
+		if ( WP_DEBUG && WP_DEBUG_DISPLAY )
+			$this->show_errors();
+
+		/* Use ext/mysqli if it exists and:
+		 *  - WP_USE_EXT_MYSQL is defined as false, or
+		 *  - We are a development version of WordPress, or
+		 *  - We are running PHP 5.5 or greater, or
+		 *  - ext/mysql is not loaded.
+		 */
+		if ( function_exists( 'mysqli_connect' ) ) {
+			if ( defined( 'WP_USE_EXT_MYSQL' ) ) {
+				$this->use_mysqli = ! WP_USE_EXT_MYSQL;
+			} elseif ( version_compare( phpversion(), '5.5', '>=' ) || ! function_exists( 'mysql_connect' ) ) {
+				$this->use_mysqli = true;
+			} elseif ( false !== strpos( $GLOBALS['wp_version'], '-' ) ) {
+				$this->use_mysqli = true;
+			}
+		}
+
+		$this->init_charset();
+
+		$this->dbuser = $dbuser;
+		$this->dbpassword = $dbpassword;
+		$this->dbname = $dbname;
+		$this->dbhost = $dbhost;
+
+		// wp-config.php creation will manually connect when ready.
+		if ( defined( 'WP_SETUP_CONFIG' ) ) {
+			return;
+		}
+
+		$this->db_connect();
+	}
 }
