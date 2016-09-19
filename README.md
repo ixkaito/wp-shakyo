@@ -83,3 +83,5 @@
 >>>>>>>>>> `wpdb::select()`
 >>>>>> 
 >>>>>> `wp_set_wpdb_vars()`
+>>>>>> 
+>>>>>>> `wpdb::set_prefix`
