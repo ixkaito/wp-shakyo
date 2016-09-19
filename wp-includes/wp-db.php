@@ -748,6 +748,45 @@ class wpdb {
 	}
 
 	/**
+	 * Sets the table prefix for the WordPress tables.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @param string $prefix Alphanumeric name for the new prefix.
+	 * @param bool $set_table_names Optional. Whether the table names, e.g. wpdb::$posts, should be updated or not.
+	 * @return string|WP_Error Old prefix or WP_Error on error
+	 */
+	public function set_prefix( $prefix, $set_table_names = true ) {
+
+		if ( preg_match( '|[^a-z0-9_]|i', $prefix ) )
+			return new WP_Error('invalid_db_prefix', 'Invalid database prefix' );
+
+		$old_prefix = is_multisite() ? '' : $prefix;
+
+		if ( isset( $this->base_prefix ) )
+			$old_prefix = $this->base_prefix;
+
+		$this->base_prefix = $prefix;
+
+		if ( $set_table_names ) {
+			foreach ( $this->tables( 'global' ) as $table => $prefixed_table )
+				$this->$table = $prefixed_table;
+
+			if ( is_multisite() && empty( $this->blogid ) )
+				return $old_prefix;
+
+			$this->prefix = $this->get_blog_prefix();
+
+			foreach ( $this->tables( 'blog' ) as $table => $prefixed_table )
+				$this->$table = $prefixed_table;
+
+			foreach ( $this->tables( 'old' ) as $table => $prefixed_table )
+				$this->$table = $prefixed_table;
+		}
+		return $old_prefix;
+	}
+
+	/**
 	 * Selects a database using the current database connection.
 	 *
 	 * The database name will be changed based on the current database
