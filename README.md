@@ -87,3 +87,5 @@
 >>>>>>> `wpdb::set_prefix()`
 >>>>>>> 
 >>>>>>>> `wpdb::tables()`
+>>>>>>>> 
+>>>>>>>>> `wpdb::get_blog_prefix()`
