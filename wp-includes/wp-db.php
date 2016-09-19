@@ -787,6 +787,83 @@ class wpdb {
 	}
 
 	/**
+	 * Returns an array of WordPress tables.
+	 *
+	 * Also allows for the CUSTOM_USER_TABLE and CUSTOM_USER_META_TABLE to
+	 * override the WordPress users and usermeta tables that would otherwise
+	 * be determined by the prefix.
+	 *
+	 * The scope argument can take one of the following:
+	 *
+	 * 'all' - returns 'all' and 'global' tables. No old tables are returned.
+	 * 'blog' - returns the blog-level tables for the queried blog.
+	 * 'global' - returns the global tables for the installation, returning multisite tables only if running multisite.
+	 * 'ms_global' - returns the multisite global tables, regardless if current installation is multisite.
+	 * 'old' - returns tables which are deprecated.
+	 *
+	 * @since 3.0.0
+	 * @uses wpdb::$tables
+	 * @uses wpdb::$old_tables
+	 * @uses wpdb::$global_tables
+	 * @uses wpdb::$ms_global_tables
+	 * @uses is_multisite()
+	 *
+	 * @param string $scope Optional. Can be all, global, ms_global, blog, or old tables. Defaults to all.
+	 * @param bool $prefix Optional. Whether to include table prefixes. Default true. If blog
+	 * 	prefix is requested, then the custom users and usermeta tables will be mapped.
+	 * @param int $blog_id Optional. The blog_id to prefix. Defaults to wpdb::$blogid. Used only when prefix is requested.
+	 * @return array Table names. When a prefix is requested, the key is the unprefixed table name.
+	 */
+	public function tables( $scope = 'all', $prefix = true, $blog_id = 0 ) {
+		switch ( $scope ) {
+			case 'all' :
+				$tables = array_merge( $this->global_tables, $this->tables );
+				if ( is_multisite() )
+					$tables = array_merge( $tables, $this->ms_global_tables );
+				break;
+			case 'blog' :
+				$tables = $this->tables;
+				break;
+			case 'global' :
+				$tables = $this->global_tables;
+				if ( is_multisite() )
+					$tables = array_merge( $tables, $this->ms_global_tables );
+				break;
+			case 'ms_global' :
+				$tables = $this->ms_global_tables;
+				break;
+			case 'old' :
+				$tables = $this->old_tables;
+				break;
+			default :
+				return array();
+		}
+
+		if ( $prefix ) {
+			if ( ! $blog_id )
+				$blog_id = $this->blogid;
+			$blog_prefix = $this->get_blog_prefix( $blog_id );
+			$base_prefix = $this->base_prefix;
+			$global_tables = array_merge( $this->global_tables, $this->ms_global_tables );
+			foreach ( $tables as $k => $table ) {
+				if ( in_array( $table, $global_tables ) )
+					$tables[ $table ] = $base_prefix . $table;
+				else
+					$tables[ $table ] = $blog_prefix . $table;
+				unset( $tables[ $k ] );
+			}
+
+			if ( isset( $tables['users'] ) && defined( 'CUSTOM_USER_TABLE' ) )
+				$tables['users'] = CUSTOM_USER_TABLE;
+
+			if ( isset( $tables['usermeta'] ) && defined( 'CUSTOM_USER_META_TABLE' ) )
+				$tables['usermeta'] = CUSTOM_USER_META_TABLE;
+		}
+
+		return $tables;
+	}
+
+	/**
 	 * Selects a database using the current database connection.
 	 *
 	 * The database name will be changed based on the current database
