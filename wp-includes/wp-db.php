@@ -787,6 +787,28 @@ class wpdb {
 	}
 
 	/**
+	 * Gets blog prefix.
+	 *
+	 * @uses is_multisite()
+	 * @since 3.0.0
+	 * @param int $blog_id Optional.
+	 * @return string Blog prefix.
+	 */
+	public function get_blog_prefix( $blog_id = null ) {
+		if ( is_multisite() ) {
+			if ( null === $blog_id )
+				$blog_id = $this->blogid;
+			$blog_id = (int) $blog_id;
+			if ( defined( 'MULTISITE' ) && ( 0 == $blog_id || 1 == $blog_id ) )
+				return $this->base_prefix;
+			else
+				return $this->base_prefix . $blog_id . '_';
+		} else {
+			return $this->base_prefix;
+		}
+	}
+
+	/**
 	 * Returns an array of WordPress tables.
 	 *
 	 * Also allows for the CUSTOM_USER_TABLE and CUSTOM_USER_META_TABLE to

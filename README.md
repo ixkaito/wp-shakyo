@@ -89,3 +89,5 @@
 >>>>>>>> `wpdb::tables()`
 >>>>>>>> 
 >>>>>>>>> `wpdb::get_blog_prefix()`
+>>>>>>>> 
+>>>>>>>> `wpdb::get_blog_prefix()`
