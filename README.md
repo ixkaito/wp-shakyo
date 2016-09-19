@@ -84,4 +84,6 @@
 >>>>>> 
 >>>>>> `wp_set_wpdb_vars()`
 >>>>>> 
->>>>>>> `wpdb::set_prefix`
+>>>>>>> `wpdb::set_prefix()`
+>>>>>>> 
+>>>>>>>> `wpdb::tables()`
