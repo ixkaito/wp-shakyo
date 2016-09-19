@@ -81,3 +81,5 @@
 >>>>>>>>>> `wpdb::set_sql_mode()`
 >>>>>>>>>> 
 >>>>>>>>>> `wpdb::select()`
+>>>>>> 
+>>>>>> `wp_set_wpdb_vars()`
