@@ -72,8 +72,10 @@
 >>>>>>>>> 
 >>>>>>>>> `wpdb::db_connect()`
 >>>>>>>>> 
->>>>>>>>> `wpdb::set_charset()`
->>>>>>>>> 
->>>>>>>>>> `wpdb::has_cap()`
+>>>>>>>>>> `wpdb::set_charset()`
 >>>>>>>>>> 
->>>>>>>>>>> `wpdb::db_version()`
+>>>>>>>>>>> `wpdb::has_cap()`
+>>>>>>>>>>> 
+>>>>>>>>>>>> `wpdb::db_version()`
+>>>>>>>>>> 
+>>>>>>>>>> `wpdb::set_sql_mode()`
