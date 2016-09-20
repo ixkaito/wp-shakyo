@@ -91,3 +91,5 @@
 >>>>>>>> `wpdb::get_blog_prefix()`
 >>>>>>> 
 >>>>>>> `is_wp_error()`
+>>>>>> 
+>>>>>> `wp_start_object_cache()`
