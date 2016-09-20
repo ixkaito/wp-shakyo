@@ -19,6 +19,19 @@ function wp_cache_init() {
 }
 
 /**
+ * Adds a group or set of groups to the list of global groups.
+ *
+ * @since 2.6.0
+ *
+ * @param string|array $groups A group or an array of groups to add
+ */
+function wp_cache_add_global_groups( $groups ) {
+	global $wp_object_cache;
+
+	return $wp_object_cache->add_global_groups( $groups );
+}
+
+/**
  * WordPress Object Cache
  *
  * The WordPress Object Cache is used to save on trips to the database. The
