@@ -99,3 +99,5 @@
 >>>>>>> **wp-includes/cache.php**
 >>>>>>> 
 >>>>>>> `wp_cache_init()`
+>>>>>>> 
+>>>>>>>> `new WP_Object_Cache()`
