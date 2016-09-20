@@ -96,4 +96,6 @@ if ( is_multisite() ) {
 	define( 'MULTISITE', false );
 }
 
+register_shutdown_function( 'shutdown_action_hook' );
+
 var_dump(__FILE__);
