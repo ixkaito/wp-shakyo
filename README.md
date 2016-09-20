@@ -8,7 +8,7 @@
 >>> 
 >>>> **wp-config.php**
 >>>> 
->>>>> **wp-setting.php**
+>>>>> **wp-settings.php**
 >>>>> 
 >>>>>> **wp-includes/load.php**
 >>>>>> 
