@@ -113,3 +113,5 @@
 >>>>>>> `wp_cache_add_non_persistent_groups()`
 >>>>>> 
 >>>>>> **wp-includes/default-filters.php**
+>>>>>> 
+>>>>>>> `add_filter()`
