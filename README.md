@@ -97,3 +97,5 @@
 >>>>>>> `wp_using_ext_object_cache()`
 >>>>>>> 
 >>>>>>> **wp-includes/cache.php**
+>>>>>>> 
+>>>>>>> `wp_cache_init()`
