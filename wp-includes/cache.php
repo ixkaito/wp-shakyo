@@ -17,3 +17,87 @@
 function wp_cache_init() {
 	$GLOBALS['wp_object_cache'] = new WP_Object_Cache();
 }
+
+/**
+ * WordPress Object Cache
+ *
+ * The WordPress Object Cache is used to save on trips to the database. The
+ * Object Cache stores all of the cache data to memory and makes the cache
+ * contents available by using a key, which is used to name and later retrieve
+ * the cache contents.
+ *
+ * The Object Cache can be replaced by other caching mechanisms by placing files
+ * in the wp-content folder which is looked at in wp-settings. If that file
+ * exists, then this file will not be included.
+ *
+ * @package WordPress
+ * @subpackage Cache
+ * @since 2.0.0
+ */
+class WP_Object_Cache {
+
+	/**
+	 * Holds the cached objects
+	 *
+	 * @var array
+	 * @access private
+	 * @since 2.0.0
+	 */
+	private $cache = array();
+
+	/**
+	 * The amount of times the cache data was already stored in the cache.
+	 *
+	 * @since 2.5.0
+	 * @access private
+	 * @var int
+	 */
+	private $cache_hits = 0;
+
+	/**
+	 * Amount of times the cache did not have the request in cache
+	 *
+	 * @var int
+	 * @access public
+	 * @since 2.0.0
+	 */
+	public $cache_misses = 0;
+
+	/**
+	 * List of global groups
+	 *
+	 * @var array
+	 * @access protected
+	 * @since 3.0.0
+	 */
+	protected $global_groups = array();
+
+	/**
+	 * The blog prefix to prepend to keys in non-global groups.
+	 *
+	 * @var int
+	 * @access private
+	 * @since 3.5.0
+	 */
+	private $blog_prefix;
+
+	/**
+	 * Sets up object properties; PHP 5 style constructor
+	 *
+	 * @since 2.0.8
+	 * @return null|WP_Object_Cache If cache is disabled, returns null.
+	 */
+	public function __construct() {
+		global $blog_id;
+
+		$this->multisite = is_multisite();
+		$this->blog_prefix =  $this->multisite ? $blog_id . ':' : '';
+
+
+		/**
+		 * @todo This should be moved to the PHP4 style constructor, PHP5
+		 * already calls __destruct()
+		 */
+		register_shutdown_function( array( $this, '__destruct' ) );
+	}
+}
