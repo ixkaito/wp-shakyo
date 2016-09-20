@@ -95,6 +95,20 @@ class WP_Object_Cache {
 	private $blog_prefix;
 
 	/**
+	 * Sets the list of global groups.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param array $groups List of groups that are global.
+	 */
+	public function add_global_groups( $groups ) {
+		$groups = (array) $groups;
+
+		$groups = array_fill_keys( $groups, true );
+		$this->global_groups = array_merge( $this->global_groups, $groups );
+	}
+
+	/**
 	 * Sets up object properties; PHP 5 style constructor
 	 *
 	 * @since 2.0.8
