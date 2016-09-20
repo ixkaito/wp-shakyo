@@ -107,3 +107,5 @@
 >>>>>>>>>> `WP_Object_Cache::__destruct()`
 >>>>>>> 
 >>>>>>> `wp_cache_add_global_groups()`
+>>>>>>> 
+>>>>>>>> `WP_Object_Cache::add_global_groups()`
