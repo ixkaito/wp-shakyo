@@ -85,4 +85,7 @@ wp_set_wpdb_vars();
 // Start the WordPress object cache, or an external object cache if the drop-in is present.
 wp_start_object_cache();
 
+// Attach the default filters.
+require( ABSPATH . WPINC . '/default-filters.php' );
+
 var_dump(__FILE__);
