@@ -101,3 +101,7 @@
 >>>>>>> `wp_cache_init()`
 >>>>>>> 
 >>>>>>>> `new WP_Object_Cache()`
+>>>>>>>> 
+>>>>>>>>> `WP_Object_Cache::__construct()`
+>>>>>>>>> 
+>>>>>>>>>> `WP_Object_Cache::__destruct()`

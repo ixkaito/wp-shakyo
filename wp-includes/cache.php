@@ -100,4 +100,17 @@ class WP_Object_Cache {
 		 */
 		register_shutdown_function( array( $this, '__destruct' ) );
 	}
+
+	/**
+	 * Will save the object cache before object is completely destroyed.
+	 *
+	 * Called upon object destruction, which should be when PHP ends.
+	 *
+	 * @since  2.0.8
+	 *
+	 * @return bool True value. Won't be used by PHP
+	 */
+	public function __destruct() {
+		return true;
+	}
 }
