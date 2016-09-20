@@ -88,4 +88,12 @@ wp_start_object_cache();
 // Attach the default filters.
 require( ABSPATH . WPINC . '/default-filters.php' );
 
+// Initialize multisite if enabled.
+if ( is_multisite() ) {
+	require( ABSPATH . WPINC . '/ms-blogs.php' );
+	require( ABSPATH . WPINC . '/ms-settings.php' );
+} elseif ( ! defined( 'MULTISITE' ) ) {
+	define( 'MULTISITE', false );
+}
+
 var_dump(__FILE__);
