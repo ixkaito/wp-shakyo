@@ -119,3 +119,5 @@
 >>>>>>>> `_wp_filter_build_unique_id()`
 >>>>>>> 
 >>>>>>> `is_admin()`
+>>>>>>> 
+>>>>>>> `add_action()`
