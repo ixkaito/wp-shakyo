@@ -361,6 +361,58 @@ function wp_set_wpdb_vars() {
 }
 
 /**
+ * Start the WordPress object cache.
+ *
+ * If an object-cache.php file exists in the wp-content directory,
+ * it uses that drop-in as an external object cache.
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @global int $blog_id Blog ID.
+ */
+function wp_start_object_cache() {
+	global $blog_id;
+
+	$first_init = false;
+ 	if ( ! function_exists( 'wp_cache_init' ) ) {
+		if ( file_exists( WP_CONTENT_DIR . '/object-cache.php' ) ) {
+			require_once ( WP_CONTENT_DIR . '/object-cache.php' );
+			if ( function_exists( 'wp_cache_init' ) )
+				wp_using_ext_object_cache( true );
+		}
+
+		$first_init = true;
+	} else if ( ! wp_using_ext_object_cache() && file_exists( WP_CONTENT_DIR . '/object-cache.php' ) ) {
+		/*
+		 * Sometimes advanced-cache.php can load object-cache.php before
+		 * it is loaded here. This breaks the function_exists check above
+		 * and can result in `$_wp_using_ext_object_cache` being set
+		 * incorrectly. Double check if an external cache exists.
+		 */
+		wp_using_ext_object_cache( true );
+	}
+
+	if ( ! wp_using_ext_object_cache() )
+		require_once ( ABSPATH . WPINC . '/cache.php' );
+
+	/*
+	 * If cache supports reset, reset instead of init if already
+	 * initialized. Reset signals to the cache that global IDs
+	 * have changed and it may need to update keys and cleanup caches.
+	 */
+	if ( ! $first_init && function_exists( 'wp_cache_switch_to_blog' ) )
+		wp_cache_switch_to_blog( $blog_id );
+	elseif ( function_exists( 'wp_cache_init' ) )
+		wp_cache_init();
+
+	if ( function_exists( 'wp_cache_add_global_groups' ) ) {
+		wp_cache_add_global_groups( array( 'users', 'userlogins', 'usermeta', 'user_meta', 'site-transient', 'site-options', 'site-lookup', 'blog-lookup', 'blog-details', 'rss', 'global-posts', 'blog-id-cache' ) );
+		wp_cache_add_non_persistent_groups( array( 'comment', 'counts', 'plugins' ) );
+	}
+}
+
+/**
  * If Multisite is enabled.
  *
  * @since 3.0.0
