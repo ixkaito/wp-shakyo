@@ -117,3 +117,5 @@
 >>>>>>> `add_filter()`
 >>>>>>> 
 >>>>>>>> `_wp_filter_build_unique_id()`
+>>>>>>> 
+>>>>>>> `is_admin()`
