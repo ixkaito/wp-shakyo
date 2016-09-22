@@ -126,4 +126,4 @@
 >>>>>> 
 >>>>>>> `shutdown_action_hook()`
 >>>>>>> 
->>>>>>>> `do_action()`
+>>>>>>>> `do_action( 'shutdown' )`
