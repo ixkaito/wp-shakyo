@@ -102,4 +102,7 @@ register_shutdown_function( 'shutdown_action_hook' );
 if ( SHORTINIT )
 	return false;
 
+// Load the L10n library.
+require_once( ABSPATH . WPINC . '/l10n.php' );
+
 var_dump(__FILE__);

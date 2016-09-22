@@ -129,3 +129,5 @@
 >>>>>>>> `do_action( 'shutdown' )`
 >>>>>>>> 
 >>>>>>>>> `wp_ob_end_flush_all()`
+>>>>>> 
+>>>>>> **wp-includes/l10n.php**
