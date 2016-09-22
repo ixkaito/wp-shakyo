@@ -133,3 +133,5 @@
 >>>>>> **wp-includes/l10n.php**
 >>>>>> 
 >>>>>> `wp_not_installed()`
+>>>>>> 
+>>>>>>> `is_blog_installed()`
