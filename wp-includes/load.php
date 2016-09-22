@@ -432,6 +432,23 @@ function wp_start_object_cache() {
 }
 
 /**
+ * Runs just before PHP shuts down execution.
+ *
+ * @since 1.2.0
+ * @access private
+ */
+function shutdown_action_hook() {
+	/**
+	 * Fires just before PHP shuts down execution.
+	 *
+	 * @since 1.2.0
+	 */
+	do_action( 'shutdown' );
+
+	wp_cache_close();
+}
+
+/**
  * Whether the current request is for an administrative interface page.
  *
  * Does not check if the user is an administrator; {@see current_user_can()}
