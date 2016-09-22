@@ -127,3 +127,5 @@
 >>>>>>> `shutdown_action_hook()`
 >>>>>>> 
 >>>>>>>> `do_action( 'shutdown' )`
+>>>>>>>> 
+>>>>>>>>> `wp_ob_end_flush_all()`
