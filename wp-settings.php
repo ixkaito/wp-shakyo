@@ -98,4 +98,8 @@ if ( is_multisite() ) {
 
 register_shutdown_function( 'shutdown_action_hook' );
 
+// Stop most of WordPress from being loaded if we just want the basics.
+if ( SHORTINIT )
+	return false;
+
 var_dump(__FILE__);
