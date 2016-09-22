@@ -121,3 +121,9 @@
 >>>>>>> `is_admin()`
 >>>>>>> 
 >>>>>>> `add_action()`
+>>>>>> 
+>>>>>> `register_shutdown_function( 'shutdown_action_hook' )`
+>>>>>> 
+>>>>>>> `shutdown_action_hook()`
+>>>>>>> 
+>>>>>>>> `do_action()`
