@@ -131,3 +131,5 @@
 >>>>>>>>> `wp_ob_end_flush_all()`
 >>>>>> 
 >>>>>> **wp-includes/l10n.php**
+>>>>>> 
+>>>>>> `wp_not_installed()`

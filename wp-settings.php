@@ -105,4 +105,7 @@ if ( SHORTINIT )
 // Load the L10n library.
 require_once( ABSPATH . WPINC . '/l10n.php' );
 
+// Run the installer if WordPress is not installed.
+wp_not_installed();
+
 var_dump(__FILE__);
