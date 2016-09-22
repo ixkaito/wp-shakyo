@@ -9,6 +9,22 @@
  */
 
 /**
+ * Closes the cache.
+ *
+ * This function has ceased to do anything since WordPress 2.5. The
+ * functionality was removed along with the rest of the persistent cache. This
+ * does not mean that plugins can't implement this function when they need to
+ * make sure that the cache is cleaned up after WordPress no longer needs it.
+ *
+ * @since 2.0.0
+ *
+ * @return bool Always returns True
+ */
+function wp_cache_close() {
+	return true;
+}
+
+/**
  * Sets up Object Cache Global and assigns it.
  *
  * @since 2.0.0
