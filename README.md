@@ -137,3 +137,5 @@
 >>>>>>> `is_blog_installed()`
 >>>>>>> 
 >>>>>>>> `wp_cache_get()`
+>>>>>>>> 
+>>>>>>>>> `WP_Object_Cache::get()`
