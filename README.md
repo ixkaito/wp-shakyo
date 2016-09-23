@@ -135,3 +135,5 @@
 >>>>>> `wp_not_installed()`
 >>>>>> 
 >>>>>>> `is_blog_installed()`
+>>>>>>> 
+>>>>>>>> `wp_cache_get()`
