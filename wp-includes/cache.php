@@ -25,6 +25,26 @@ function wp_cache_close() {
 }
 
 /**
+ * Retrieves the cache contents from the cache by key and group.
+ *
+ * @since 2.0.0
+ * @uses $wp_object_cache Object Cache Class
+ * @see WP_Object_Cache::get()
+ *
+ * @param int|string $key What the contents in the cache are called
+ * @param string $group Where the cache contents are grouped
+ * @param bool $force Whether to force an update of the local cache from the persistent cache (default is false)
+ * @param &bool $found Whether key was found in the cache. Disambiguates a return of false, a storable value.
+ * @return bool|mixed False on failure to retrieve contents or the cache
+ *		contents on success
+ */
+function wp_cache_get( $key, $group = '', $force = false, &$found = null ) {
+	global $wp_object_cache;
+
+	return $wp_object_cache->get( $key, $group, $force, $found );
+}
+
+/**
  * Sets up Object Cache Global and assigns it.
  *
  * @since 2.0.0
