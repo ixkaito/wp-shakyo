@@ -139,3 +139,5 @@
 >>>>>>>> `wp_cache_get()`
 >>>>>>>> 
 >>>>>>>>> `WP_Object_Cache::get()`
+>>>>>>>>> 
+>>>>>>>>>> `WP_Object_Cache::_exists()`
