@@ -1058,6 +1058,118 @@ class wpdb {
 	}
 
 	/**
+	 * Perform a MySQL database query, using current database connection.
+	 *
+	 * More information can be found on the codex page.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string $query Database query
+	 * @return int|false Number of rows affected/selected or false on error
+	 */
+	public function query( $query ) {
+		if ( ! $this->ready )
+			return false;
+
+		/**
+		 * Filter the database query.
+		 *
+		 * Some queries are made before the plugins have been loaded,
+		 * and thus cannot be filtered with this method.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param string $query Database query.
+		 */
+		$query = apply_filters( 'query', $query );
+
+		$this->flush();
+
+		// Log how the function was called
+		$this->func_call = "\$db->query(\"$query\")";
+
+		// Keep track of the last query for debug..
+		$this->last_query = $query;
+
+		$this->_do_query( $query );
+
+		// MySQL server has gone away, try to reconnect
+		$mysql_errno = 0;
+		if ( ! empty( $this->dbh ) ) {
+			if ( $this->use_mysqli ) {
+				$mysql_errno = mysqli_errno( $this->dbh );
+			} else {
+				$mysql_errno = mysql_errno( $this->dbh );
+			}
+		}
+
+		if ( empty( $this->dbh ) || 2006 == $mysql_errno ) {
+			if ( $this->check_connection() ) {
+				$this->_do_query( $query );
+			} else {
+				$this->insert_id = 0;
+				return false;
+			}
+		}
+
+		// If there is an error then take note of it..
+		if ( $this->use_mysqli ) {
+			$this->last_error = mysqli_error( $this->dbh );
+		} else {
+			$this->last_error = mysql_error( $this->dbh );
+		}
+
+		if ( $this->last_error ) {
+			// Clear insert_id on a subsequent failed insert.
+			if ( $this->insert_id && preg_match( '/^\s*(insert|replace)\s/i', $query ) )
+				$this->insert_id = 0;
+
+			$this->print_error();
+			return false;
+		}
+
+		if ( preg_match( '/^\s*(create|alter|truncate|drop)\s/i', $query ) ) {
+			$return_val = $this->result;
+		} elseif ( preg_match( '/^\s*(insert|delete|update|replace)\s/i', $query ) ) {
+			if ( $this->use_mysqli ) {
+				$this->rows_affected = mysqli_affected_rows( $this->dbh );
+			} else {
+				$this->rows_affected = mysql_affected_rows( $this->dbh );
+			}
+			// Take note of the insert_id
+			if ( preg_match( '/^\s*(insert|replace)\s/i', $query ) ) {
+				if ( $this->use_mysqli ) {
+					$this->insert_id = mysqli_insert_id( $this->dbh );
+				} else {
+					$this->insert_id = mysql_insert_id( $this->dbh );
+				}
+			}
+			// Return number of rows affected
+			$return_val = $this->rows_affected;
+		} else {
+			$num_rows = 0;
+			if ( $this->use_mysqli ) {
+				while ( $row = @mysqli_fetch_object( $this->result ) ) {
+					$this->last_result[$num_rows] = $row;
+					$num_rows++;
+				}
+			} else {
+				while ( $row = @mysql_fetch_object( $this->result ) ) {
+					$this->last_result[$num_rows] = $row;
+					$num_rows++;
+				}
+			}
+
+			// Log number of rows the query returned
+			// and return number of rows selected
+			$this->num_rows = $num_rows;
+			$return_val     = $num_rows;
+		}
+
+		return $return_val;
+	}
+
+	/**
 	 * Retrieve an entire SQL result set from the database (i.e., many rows)
 	 *
 	 * Executes a SQL query and returns the entire SQL result.
