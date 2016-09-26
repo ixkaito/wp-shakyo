@@ -149,3 +149,5 @@
 >>>>>>>> `wpdb::get_results()`
 >>>>>>>> 
 >>>>>>>>> `wpdb::query()`
+>>>>>>>>> 
+>>>>>>>>>> `apply_filters()`
