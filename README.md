@@ -145,3 +145,5 @@
 >>>>>>> `wpdb::suppress_errors()`
 >>>>>>> 
 >>>>>>> `wp_load_alloptions()`
+>>>>>>> 
+>>>>>>>> `wpdb::get_results()`
