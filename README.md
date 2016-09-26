@@ -147,3 +147,5 @@
 >>>>>>> `wp_load_alloptions()`
 >>>>>>> 
 >>>>>>>> `wpdb::get_results()`
+>>>>>>>> 
+>>>>>>>>> `wpdb::query()`
