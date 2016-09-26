@@ -141,3 +141,5 @@
 >>>>>>>>> `WP_Object_Cache::get()`
 >>>>>>>>> 
 >>>>>>>>>> `WP_Object_Cache::_exists()`
+>>>>>>> 
+>>>>>>> `wpdb::suppress_errors()`
