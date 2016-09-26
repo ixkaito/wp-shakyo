@@ -941,6 +941,28 @@ class wpdb {
 	}
 
 	/**
+	 * Kill cached query results.
+	 *
+	 * @since 0.71
+	 * @return void
+	 */
+	public function flush() {
+		$this->last_result = array();
+		$this->col_info    = null;
+		$this->last_query  = null;
+		$this->rows_affected = $this->num_rows = 0;
+		$this->last_error  = '';
+
+		if ( is_resource( $this->result ) ) {
+			if ( $this->use_mysqli ) {
+				mysqli_free_result( $this->result );
+			} else {
+				mysql_free_result( $this->result );
+			}
+		}
+	}
+
+	/**
 	 * Connect to and select database.
 	 *
 	 * If $allow_bail is false, the lack of database connection will need
