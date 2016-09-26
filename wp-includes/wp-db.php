@@ -1192,6 +1192,33 @@ class wpdb {
 	}
 
 	/**
+	 * Internal function to perform the mysql_query() call.
+	 *
+	 * @since 3.9.0
+	 *
+	 * @access private
+	 * @see wpdb::query()
+	 *
+	 * @param string $query The query to run.
+	 */
+	private function _do_query( $query ) {
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
+			$this->timer_start();
+		}
+
+		if ( $this->use_mysqli ) {
+			$this->result = @mysqli_query( $this->dbh, $query );
+		} else {
+			$this->result = @mysql_query( $query, $this->dbh );
+		}
+		$this->num_queries++;
+
+		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES ) {
+			$this->queries[] = array( $query, $this->timer_stop(), $this->get_caller() );
+		}
+	}
+
+	/**
 	 * Retrieve an entire SQL result set from the database (i.e., many rows)
 	 *
 	 * Executes a SQL query and returns the entire SQL result.
