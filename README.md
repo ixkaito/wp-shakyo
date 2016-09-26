@@ -143,3 +143,5 @@
 >>>>>>>>>> `WP_Object_Cache::_exists()`
 >>>>>>> 
 >>>>>>> `wpdb::suppress_errors()`
+>>>>>>> 
+>>>>>>> `wp_load_alloptions()`
