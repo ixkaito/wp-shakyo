@@ -141,27 +141,27 @@
 >>>>>>>>> `WP_Object_Cache::get()`
 >>>>>>>>> 
 >>>>>>>>>> `WP_Object_Cache::_exists()`
->>>>>>> 
->>>>>>> `wpdb::suppress_errors()`
->>>>>>> 
->>>>>>> `wp_load_alloptions()`
->>>>>>> 
->>>>>>>> `wpdb::get_results()`
 >>>>>>>> 
->>>>>>>>> `wpdb::query()`
+>>>>>>>> `wpdb::suppress_errors()`
+>>>>>>>> 
+>>>>>>>> `wp_load_alloptions()`
+>>>>>>>> 
+>>>>>>>>> `wpdb::get_results()`
 >>>>>>>>> 
->>>>>>>>>> `apply_filters()`
+>>>>>>>>>> `wpdb::query()`
 >>>>>>>>>> 
->>>>>>>>>> `wpdb::flush()`
->>>>>>>>>> 
->>>>>>>>>> `wpdb::_do_query()`
->>>>>>>>>> 
->>>>>>>>>> `wpdb::print_error()`
->>>>>>>> 
->>>>>>>> `wp_cache_add()`
->>>>>>>> 
->>>>>>>>> `WP_Object_Cache::add()`
+>>>>>>>>>>> `apply_filters()`
+>>>>>>>>>>> 
+>>>>>>>>>>> `wpdb::flush()`
+>>>>>>>>>>> 
+>>>>>>>>>>> `wpdb::_do_query()`
+>>>>>>>>>>> 
+>>>>>>>>>>> `wpdb::print_error()`
 >>>>>>>>> 
->>>>>>>>>> `wp_suspend_cache_addition()`
+>>>>>>>>> `wp_cache_add()`
+>>>>>>>>> 
+>>>>>>>>>> `WP_Object_Cache::add()`
 >>>>>>>>>> 
->>>>>>>>>> `WP_Object_Cache::set()`
+>>>>>>>>>>> `wp_suspend_cache_addition()`
+>>>>>>>>>>> 
+>>>>>>>>>>> `WP_Object_Cache::set()`
