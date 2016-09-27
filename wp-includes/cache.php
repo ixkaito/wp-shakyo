@@ -162,6 +162,38 @@ class WP_Object_Cache {
 	private $blog_prefix;
 
 	/**
+	 * Adds data to the cache if it doesn't already exist.
+	 *
+	 * @uses WP_Object_Cache::_exists Checks to see if the cache already has data.
+	 * @uses WP_Object_Cache::set Sets the data after the checking the cache
+	 *		contents existence.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int|string $key What to call the contents in the cache
+	 * @param mixed $data The contents to store in the cache
+	 * @param string $group Where to group the cache contents
+	 * @param int $expire When to expire the cache contents
+	 * @return bool False if cache key and group already exist, true on success
+	 */
+	public function add( $key, $data, $group = 'default', $expire = 0 ) {
+		if ( wp_suspend_cache_addition() )
+			return false;
+
+		if ( empty( $group ) )
+			$group = 'default';
+
+		$id = $key;
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$id = $this->blog_prefix . $key;
+
+		if ( $this->_exists( $id, $group ) )
+			return false;
+
+		return $this->set( $key, $data, $group, (int) $expire );
+	}
+
+	/**
 	 * Sets the list of global groups.
 	 *
 	 * @since 3.0.0
