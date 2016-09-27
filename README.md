@@ -165,3 +165,5 @@
 >>>>>>>>>>> `wp_suspend_cache_addition()`
 >>>>>>>>>>> 
 >>>>>>>>>>> `WP_Object_Cache::set()`
+>>>>>>>> 
+>>>>>>>> `wpdb::get_var()`
