@@ -74,6 +74,26 @@ function wp_cache_init() {
 }
 
 /**
+ * Saves the data to the cache.
+ *
+ * @since 2.0.0
+ *
+ * @uses $wp_object_cache Object Cache Class
+ * @see WP_Object_Cache::set()
+ *
+ * @param int|string $key What to call the contents in the cache
+ * @param mixed $data The contents to store in the cache
+ * @param string $group Where to group the cache contents
+ * @param int $expire When to expire the cache contents
+ * @return bool False on failure, true on success
+ */
+function wp_cache_set( $key, $data, $group = '', $expire = 0 ) {
+	global $wp_object_cache;
+
+	return $wp_object_cache->set( $key, $data, $group, (int) $expire );
+}
+
+/**
  * Adds a group or set of groups to the list of global groups.
  *
  * @since 2.6.0
