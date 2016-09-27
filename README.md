@@ -159,3 +159,5 @@
 >>>>>>>>>> `wpdb::print_error()`
 >>>>>>>> 
 >>>>>>>> `wp_cache_add()`
+>>>>>>>> 
+>>>>>>>>> `WP_Object_Cache::add()`
