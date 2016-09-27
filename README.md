@@ -161,3 +161,5 @@
 >>>>>>>> `wp_cache_add()`
 >>>>>>>> 
 >>>>>>>>> `WP_Object_Cache::add()`
+>>>>>>>>> 
+>>>>>>>>>> `wp_suspend_cache_addition()`
