@@ -924,6 +924,61 @@ class wpdb {
 	}
 
 	/**
+	 * Print SQL/DB error.
+	 *
+	 * @since 0.71
+	 * @global array $EZSQL_ERROR Stores error information of query and error string
+	 *
+	 * @param string $str The error to display
+	 * @return bool False if the showing of errors is disabled.
+	 */
+	public function print_error( $str = '' ) {
+		global $EZSQL_ERROR;
+
+		if ( !$str ) {
+			if ( $this->use_mysqli ) {
+				$str = mysqli_error( $this->dbh );
+			} else {
+				$str = mysql_error( $this->dbh );
+			}
+		}
+		$EZSQL_ERROR[] = array( 'query' => $this->last_query, 'error_str' => $str );
+
+		if ( $this->suppress_errors )
+			return false;
+
+		wp_load_translations_early();
+
+		if ( $caller = $this->get_caller() )
+			$error_str = sprintf( __( 'WordPress database error %1$s for query %2$s made by %3$s' ), $str, $this->last_query, $caller );
+		else
+			$error_str = sprintf( __( 'WordPress database error %1$s for query %2$s' ), $str, $this->last_query );
+
+		error_log( $error_str );
+
+		// Are we showing errors?
+		if ( ! $this->show_errors )
+			return false;
+
+		// If there is an error then take note of it
+		if ( is_multisite() ) {
+			$msg = "WordPress database error: [$str]\n{$this->last_query}\n";
+			if ( defined( 'ERRORLOGFILE' ) )
+				error_log( $msg, 3, ERRORLOGFILE );
+			if ( defined( 'DIEONDBERROR' ) )
+				wp_die( $msg );
+		} else {
+			$str   = htmlspecialchars( $str, ENT_QUOTES );
+			$query = htmlspecialchars( $this->last_query, ENT_QUOTES );
+
+			print "<div id='error'>
+			<p class='wpdberror'><strong>WordPress database error:</strong> [$str]<br />
+			<code>$query</code></p>
+			</div>";
+		}
+	}
+
+	/**
 	 * Whether to suppress database errors.
 	 *
 	 * By default database errors are suppressed, with a simple
