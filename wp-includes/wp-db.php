@@ -1274,6 +1274,34 @@ class wpdb {
 	}
 
 	/**
+	 * Retrieve one variable from the database.
+	 *
+	 * Executes a SQL query and returns the value from the SQL result.
+	 * If the SQL result contains more than one column and/or more than one row, this function returns the value in the column and row specified.
+	 * If $query is null, this function returns the value in the specified column and row from the previous SQL result.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string|null $query Optional. SQL query. Defaults to null, use the result from the previous query.
+	 * @param int $x Optional. Column of value to return. Indexed from 0.
+	 * @param int $y Optional. Row of value to return. Indexed from 0.
+	 * @return string|null Database query result (as string), or null on failure
+	 */
+	public function get_var( $query = null, $x = 0, $y = 0 ) {
+		$this->func_call = "\$db->get_var(\"$query\", $x, $y)";
+		if ( $query )
+			$this->query( $query );
+
+		// Extract var out of cached results based x,y vals
+		if ( !empty( $this->last_result[$y] ) ) {
+			$values = array_values( get_object_vars( $this->last_result[$y] ) );
+		}
+
+		// If there is a value return it else return null
+		return ( isset( $values[$x] ) && $values[$x] !== '' ) ? $values[$x] : null;
+	}
+
+	/**
 	 * Retrieve an entire SQL result set from the database (i.e., many rows)
 	 *
 	 * Executes a SQL query and returns the entire SQL result.
