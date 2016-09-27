@@ -167,3 +167,5 @@
 >>>>>>>>>>> `WP_Object_Cache::set()`
 >>>>>>>> 
 >>>>>>>> `wpdb::get_var()`
+>>>>>>>> 
+>>>>>>>> `wp_cache_set()`
