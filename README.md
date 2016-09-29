@@ -176,6 +176,8 @@
 >>>>>>> 
 >>>>>>> **wp-includes/kses.php**
 >>>>>>> 
+>>>>>>>> `_wp_add_global_attributes()`
+>>>>>>> 
 >>>>>>> **wp-includes/pluggable.php**
 >>>>>>> 
 >>>>>>> **wp-includes/formatting.php**
