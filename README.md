@@ -181,3 +181,5 @@
 >>>>>>> **wp-includes/pluggable.php**
 >>>>>>> 
 >>>>>>> **wp-includes/formatting.php**
+>>>>>>> 
+>>>>>>> `wp_guess_url()`
