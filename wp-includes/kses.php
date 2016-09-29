@@ -465,3 +465,30 @@ if ( ! CUSTOM_TAGS ) {
 
 add_action('init', 'kses_init');
 add_action('set_current_user', 'kses_init');
+
+/**
+ * Helper function to add global attributes to a tag in the allowed html list.
+ *
+ * @since 3.5.0
+ * @access private
+ *
+ * @param array $value An array of attributes.
+ * @return array The array of attributes with global attributes added.
+ */
+function _wp_add_global_attributes( $value ) {
+	$global_attributes = array(
+		'class' => true,
+		'id' => true,
+		'style' => true,
+		'title' => true,
+		'role' => true,
+	);
+
+	if ( true === $value )
+		$value = array();
+
+	if ( is_array( $value ) )
+		return array_merge( $value, $global_attributes );
+
+	return $value;
+}
