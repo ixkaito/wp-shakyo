@@ -173,3 +173,9 @@
 >>>>>>> `nocache_headers()`
 >>>>>>> 
 >>>>>>>> `wp_get_nocache_headers()`
+>>>>>>> 
+>>>>>>> **wp-includes/kses.php**
+>>>>>>> 
+>>>>>>> **wp-includes/pluggable.php**
+>>>>>>> 
+>>>>>>> **wp-includes/formatting.php**
