@@ -183,3 +183,5 @@
 >>>>>>> **wp-includes/formatting.php**
 >>>>>>> 
 >>>>>>> `wp_guess_url()`
+>>>>>>> 
+>>>>>>>> `is_ssl()`
