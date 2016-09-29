@@ -171,3 +171,5 @@
 >>>>>>>> `wp_cache_set()`
 >>>>>>> 
 >>>>>>> `nocache_headers()`
+>>>>>>> 
+>>>>>>>> `wp_get_nocache_headers()`
