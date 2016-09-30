@@ -187,3 +187,5 @@
 >>>>>>>> `is_ssl()`
 >>>>>>> 
 >>>>>>> `wp_redirect()`
+>>>>>>> 
+>>>>>>>> `wp_sanitize_redirect()`
