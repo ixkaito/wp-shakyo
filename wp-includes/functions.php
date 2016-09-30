@@ -8,6 +8,42 @@
 require( ABSPATH . WPINC . '/option.php' );
 
 /**
+ * Set HTTP status header.
+ *
+ * @since 2.0.0
+ *
+ * @see get_status_header_desc()
+ *
+ * @param int $code HTTP status code.
+ */
+function status_header( $code ) {
+	$description = get_status_header_desc( $code );
+
+	if ( empty( $description ) )
+		return;
+
+	$protocol = $_SERVER['SERVER_PROTOCOL'];
+	if ( 'HTTP/1.1' != $protocol && 'HTTP/1.0' != $protocol )
+		$protocol = 'HTTP/1.0';
+	$status_header = "$protocol $code $description";
+	if ( function_exists( 'apply_filters' ) )
+
+		/**
+		 * Filter an HTTP status header.
+		 *
+		 * @since 2.2.0
+		 *
+		 * @param string $status_header HTTP status header.
+		 * @param int    $code          HTTP status code.
+		 * @param string $description   Description for the status code.
+		 * @param string $protocol      Server protocol.
+		 */
+		$status_header = apply_filters( 'status_header', $status_header, $code, $description, $protocol );
+
+	@header( $status_header, true, $code );
+}
+
+/**
  * Get the header information to prevent caching.
  *
  * The several different headers cover the different ways cache prevention
