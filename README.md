@@ -197,3 +197,5 @@
 >>>>>>>> `status_header()`
 >>>>>>>> 
 >>>>>>>>> `get_status_header_desc()`
+>>>>>>>>> 
+>>>>>>>>>> `absint()`
