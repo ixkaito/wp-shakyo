@@ -199,5 +199,5 @@
 >>>>>>>>> `get_status_header_desc()`
 >>>>>>>>> 
 >>>>>>>>>> `absint()`
->>>>>> 
->>>>>> Redirect to **wp-admin/install.php**
+>>>>>>> 
+>>>>>>> _Redirect to **wp-admin/install.php**_
