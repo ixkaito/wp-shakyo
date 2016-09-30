@@ -191,3 +191,5 @@
 >>>>>>>> `wp_sanitize_redirect()`
 >>>>>>>> 
 >>>>>>>>> `wp_kses_no_null()`
+>>>>>>>>> 
+>>>>>>>>> `_deep_replace()`
