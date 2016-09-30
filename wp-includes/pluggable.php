@@ -108,6 +108,22 @@ function wp_redirect($location, $status = 302) {
 endif;
 
 if ( !function_exists('wp_sanitize_redirect') ) :
+/**
+ * Sanitizes a URL for use in a redirect.
+ *
+ * @since 2.3.0
+ *
+ * @return string redirect-sanitized URL
+ **/
+function wp_sanitize_redirect($location) {
+	$location = preg_replace('|[^a-z0-9-~+_.?#=&;,/:%!*]|i', '', $location);
+	$location = wp_kses_no_null($location);
+
+	// remove %0d and %0a from location
+	$strip = array('%0d', '%0a', '%0D', '%0A');
+	$location = _deep_replace($strip, $location);
+	return $location;
+}
 endif;
 
 if ( !function_exists('wp_safe_redirect') ) :
