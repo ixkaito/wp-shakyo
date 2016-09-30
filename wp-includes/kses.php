@@ -463,6 +463,23 @@ if ( ! CUSTOM_TAGS ) {
 	$allowedposttags = wp_kses_array_lc( $allowedposttags );
 }
 
+/**
+ * Removes any invalid control characters in $string.
+ *
+ * Also removes any instance of the '\0' string.
+ *
+ * @since 1.0.0
+ *
+ * @param string $string
+ * @return string
+ */
+function wp_kses_no_null($string) {
+	$string = preg_replace('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', '', $string);
+	$string = preg_replace('/(\\\\0)+/', '', $string);
+
+	return $string;
+}
+
 add_action('init', 'kses_init');
 add_action('set_current_user', 'kses_init');
 
