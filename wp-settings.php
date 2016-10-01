@@ -110,5 +110,6 @@ wp_not_installed();
 
 // Load most of WordPress.
 require( ABSPATH . WPINC . '/class-wp-walker.php' );
+require( ABSPATH . WPINC . '/class-wp-ajax-response.php' );
 
 var_dump(__FILE__);
