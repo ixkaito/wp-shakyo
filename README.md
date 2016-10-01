@@ -204,3 +204,11 @@
 
 > **wp-admin/install.php**
 > 
+>> **wp-admin/wp-load.php**
+>> 
+>> **wp-admin/includes/upgrade.php**
+>> 
+>> **wp-admin/includes/translation-install.php**
+>> 
+>> **wp-includes/wp-db.php**
+>> 
