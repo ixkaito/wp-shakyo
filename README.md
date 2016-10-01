@@ -373,6 +373,90 @@
 >>>> **wp-includes/class-wp-walker.php**
 >>>> 
 >>>> **wp-includes/class-wp-ajax-response.php**
+>>>> 
+>>>> **wp-includes/formatting.php**
+>>>> 
+>>>> **wp-includes/capabilities.php**
+>>>> 
+>>>> **wp-includes/query.php**
+>>>> 
+>>>> **wp-includes/date.php**
+>>>> 
+>>>> **wp-includes/theme.php**
+>>>> 
+>>>> **wp-includes/class-wp-theme.php**
+>>>> 
+>>>> **wp-includes/template.php**
+>>>> 
+>>>> **wp-includes/user.php**
+>>>> 
+>>>> **wp-includes/session.php**
+>>>> 
+>>>> **wp-includes/meta.php**
+>>>> 
+>>>> **wp-includes/general-template.php**
+>>>> 
+>>>> **wp-includes/link-template.php**
+>>>> 
+>>>> **wp-includes/author-template.php**
+>>>> 
+>>>> **wp-includes/post.php**
+>>>> 
+>>>> **wp-includes/post-template.php**
+>>>> 
+>>>> **wp-includes/revision.php**
+>>>> 
+>>>> **wp-includes/post-formats.php**
+>>>> 
+>>>> **wp-includes/post-thumbnail-template.php**
+>>>> 
+>>>> **wp-includes/category.php**
+>>>> 
+>>>> **wp-includes/category-template.php**
+>>>> 
+>>>> **wp-includes/comment.php**
+>>>> 
+>>>> **wp-includes/comment-template.php**
+>>>> 
+>>>> **wp-includes/rewrite.php**
+>>>> 
+>>>> **wp-includes/feed.php**
+>>>> 
+>>>> **wp-includes/bookmark.php**
+>>>> 
+>>>> **wp-includes/bookmark-template.php**
+>>>> 
+>>>> **wp-includes/kses.php**
+>>>> 
+>>>> **wp-includes/cron.php**
+>>>> 
+>>>> **wp-includes/deprecated.php**
+>>>> 
+>>>> **wp-includes/script-loader.php**
+>>>> 
+>>>> **wp-includes/taxonomy.php**
+>>>> 
+>>>> **wp-includes/update.php**
+>>>> 
+>>>> **wp-includes/canonical.php**
+>>>> 
+>>>> **wp-includes/shortcodes.php**
+>>>> 
+>>>> **wp-includes/class-wp-embed.php**
+>>>> 
+>>>> **wp-includes/media.php**
+>>>> 
+>>>> **wp-includes/http.php**
+>>>> 
+>>>> **wp-includes/class-http.php**
+>>>> 
+>>>> **wp-includes/widgets.php**
+>>>> 
+>>>> **wp-includes/nav-menu.php**
+>>>> 
+>>>> **wp-includes/nav-menu-template.php**
+>>>> 
+>>>> **wp-includes/admin-bar.php**
 > 
 > **wp-admin/includes/upgrade.php**
 > 
