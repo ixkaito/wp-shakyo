@@ -202,6 +202,8 @@
 >>>>>>> 
 >>>>>>> _Redirect to **wp-admin/install.php**_
 
+
+
 > **wp-admin/install.php**
 > 
 >> **wp-admin/wp-load.php**
