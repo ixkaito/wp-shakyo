@@ -201,3 +201,6 @@
 >>>>>>>>>> `absint()`
 >>>>>>> 
 >>>>>>> _Redirect to **wp-admin/install.php**_
+
+> **wp-admin/install.php**
+> 
