@@ -9,3 +9,5 @@
  * @package WordPress
  * @subpackage Template
  */
+
+add_action('transition_post_status', '__clear_multi_author_cache');
