@@ -434,6 +434,16 @@
 >>>> 
 >>>> **wp-includes/script-loader.php**
 >>>> 
+>>>>> **wp-includes/class.wp-dependencies.php**
+>>>>> 
+>>>>> **wp-includes/class.wp-scripts.php**
+>>>>> 
+>>>>> **wp-includes/functions.wp-scripts.php**
+>>>>> 
+>>>>> **wp-includes/class.wp-styles.php**
+>>>>> 
+>>>>> **wp-includes/functions.wp-styles.php**
+>>>> 
 >>>> **wp-includes/taxonomy.php**
 >>>> 
 >>>> **wp-includes/update.php**
