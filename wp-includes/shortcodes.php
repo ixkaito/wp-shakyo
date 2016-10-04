@@ -31,3 +31,16 @@
  * @subpackage Shortcodes
  * @since 2.5.0
  */
+
+/**
+ * Container for storing shortcode tags and their hook to call for the shortcode
+ *
+ * @since 2.5.0
+ *
+ * @name $shortcode_tags
+ * @var array
+ * @global array $shortcode_tags
+ */
+$shortcode_tags = array();
+
+add_filter('the_content', 'do_shortcode', 11); // AFTER wpautop()
