@@ -454,6 +454,8 @@
 >>>> 
 >>>> **wp-includes/class-wp-embed.php**
 >>>> 
+>>>>> `new WP_Embed()`
+>>>> 
 >>>> **wp-includes/media.php**
 >>>> 
 >>>> **wp-includes/http.php**
