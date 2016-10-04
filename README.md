@@ -455,6 +455,10 @@
 >>>> **wp-includes/class-wp-embed.php**
 >>>> 
 >>>>> `new WP_Embed()`
+>>>>> 
+>>>>>> `WP_Embed::__construct()`
+>>>>>> 
+>>>>>>> `add_shortcode()`
 >>>> 
 >>>> **wp-includes/media.php**
 >>>> 
