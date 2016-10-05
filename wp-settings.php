@@ -154,4 +154,11 @@ require( ABSPATH . WPINC . '/nav-menu.php' );
 require( ABSPATH . WPINC . '/nav-menu-template.php' );
 require( ABSPATH . WPINC . '/admin-bar.php' );
 
+// Load multisite-specific files.
+if ( is_multisite() ) {
+	require( ABSPATH . WPINC . '/ms-functions.php' );
+	require( ABSPATH . WPINC . '/ms-default-filters.php' );
+	require( ABSPATH . WPINC . '/ms-deprecated.php' );
+}
+
 var_dump(__FILE__);
