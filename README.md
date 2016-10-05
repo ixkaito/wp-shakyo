@@ -473,6 +473,8 @@
 >>>> **wp-includes/nav-menu-template.php**
 >>>> 
 >>>> **wp-includes/admin-bar.php**
+>>>> 
+>>>> `wp_plugin_directory_constants()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
