@@ -1,4 +1,4 @@
-# wp.shakyo
+# WP-Shakyo 4.0
 
 ## index.php
 
