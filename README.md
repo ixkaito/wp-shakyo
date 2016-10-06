@@ -26,7 +26,9 @@
 >>>>>>> 
 >>>>>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
 >>>>>>>> 
->>>>>>>> [`Translations::translate()`](https://developer.wordpress.org/reference/classes/translations/translate/)
+>>>>>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>>>>>> 
+>>>>>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
 >>>>>>>> 
 >>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/)
 >>>>>>>> 
