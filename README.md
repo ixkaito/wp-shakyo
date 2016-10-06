@@ -475,6 +475,8 @@
 >>>> **wp-includes/admin-bar.php**
 >>>> 
 >>>> `wp_plugin_directory_constants()`
+>>>> 
+>>>>> `get_option()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
