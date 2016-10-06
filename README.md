@@ -477,6 +477,8 @@
 >>>> `wp_plugin_directory_constants()`
 >>>> 
 >>>>> `get_option()`
+>>>>> 
+>>>>>> `wpdb::get_row()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
