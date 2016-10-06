@@ -23,6 +23,14 @@
 >>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>>> 
 >>>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
+>>>>>>> 
+>>>>>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
+>>>>>>>> 
+>>>>>>>> [`Translations::translate()`](https://developer.wordpress.org/reference/classes/translations/translate/)
+>>>>>>>> 
+>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/)
+>>>>>>>> 
+>>>>>>>> [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
 >>>>> 
 >>>>> `date_default_timezone_set()`
 >>>>> 
