@@ -14,9 +14,9 @@
 >>>>> 
 >>>>> **wp-includes/default-constants.php**
 >>>>> 
->>>>> `wp_initial_constants()`
+>>>>> [`wp_initial_constants()`](https://developer.wordpress.org/reference/functions/wp_initial_constants/)
 >>>>> 
->>>>>> `is_multisite()`
+>>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 >>>>> 
 >>>>> `wp_check_php_mysql_versions()`
 >>>>> 
