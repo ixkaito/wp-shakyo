@@ -18,7 +18,9 @@
 >>>>> 
 >>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 >>>>> 
->>>>> `wp_check_php_mysql_versions()`
+>>>>> [`wp_check_php_mysql_versions()`](https://developer.wordpress.org/reference/functions/wp_check_php_mysql_versions/)
+>>>>> 
+>>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
 >>>>> `date_default_timezone_set()`
 >>>>> 
