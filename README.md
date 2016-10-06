@@ -30,11 +30,9 @@
 >>>>>>>> 
 >>>>>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
 >>>>>>>> 
->>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/)
+>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>>>>>> 
->>>>>>>> [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
 >>>>> 
 >>>>> `date_default_timezone_set()`
 >>>>> 
