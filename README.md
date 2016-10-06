@@ -21,6 +21,8 @@
 >>>>> [`wp_check_php_mysql_versions()`](https://developer.wordpress.org/reference/functions/wp_check_php_mysql_versions/)
 >>>>> 
 >>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
+>>>>>> 
+>>>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
 >>>>> 
 >>>>> `date_default_timezone_set()`
 >>>>> 
