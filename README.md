@@ -32,6 +32,8 @@
 >>>>>>>> 
 >>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/)
 >>>>>>>> 
+>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>>> 
 >>>>>>>> [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
 >>>>> 
 >>>>> `date_default_timezone_set()`
