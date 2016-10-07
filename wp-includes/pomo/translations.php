@@ -8,3 +8,12 @@
  */
 
 require_once dirname(__FILE__) . '/entry.php';
+
+if ( !class_exists( 'NOOP_Translations' ) ):
+/**
+ * Provides the same interface as Translations, but doesn't do anything
+ */
+class NOOP_Translations {
+	var $entries = array();
+	var $headers = array();
+}
