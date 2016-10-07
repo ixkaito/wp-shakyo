@@ -51,6 +51,14 @@
 >>>>>>> **wp-includes/l10n.php**
 >>>>>>> 
 >>>>>>> **wp-includes/locale.php**
+>>>>>>> 
+>>>>>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
+>>>>>>> 
+>>>>>>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
+>>>>>>> 
+>>>>>>> [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
+>>>>>>> 
+>>>>>>> [`WP_Locale::__construct()`](https://developer.wordpress.org/reference/classes/wp_locale/__construct/)
 >>>>>> 
 >>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
 >>>>>> 
