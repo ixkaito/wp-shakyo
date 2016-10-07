@@ -42,6 +42,12 @@
 >>>>> 
 >>>>> [`wp_maintenance()`](https://developer.wordpress.org/reference/functions/wp_maintenance/)
 >>>>> 
+>>>>>> [`wp_load_translations_early()`](https://developer.wordpress.org/reference/functions/wp_load_translations_early/)
+>>>>>> 
+>>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
+>>>>>> 
+>>>>>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
+>>>>> 
 >>>>> `timer_start()`
 >>>>> 
 >>>>> `wp_debug_mode()`
