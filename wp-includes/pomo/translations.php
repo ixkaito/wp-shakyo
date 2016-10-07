@@ -16,4 +16,8 @@ if ( !class_exists( 'NOOP_Translations' ) ):
 class NOOP_Translations {
 	var $entries = array();
 	var $headers = array();
+
+	function translate($singular, $context=null) {
+		return $singular;
+	}
 }
