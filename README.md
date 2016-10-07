@@ -44,6 +44,14 @@
 >>>>> 
 >>>>>> [`wp_load_translations_early()`](https://developer.wordpress.org/reference/functions/wp_load_translations_early/)
 >>>>>> 
+>>>>>>> **wp-includes/version.php**
+>>>>>>> 
+>>>>>>> **wp-includes/pomo/mo.php**
+>>>>>>> 
+>>>>>>> **wp-includes/l10n.php**
+>>>>>>> 
+>>>>>>> **wp-includes/locale.php**
+>>>>>> 
 >>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
 >>>>>> 
 >>>>>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
