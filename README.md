@@ -59,6 +59,10 @@
 >>>>>>> [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
 >>>>>>> 
 >>>>>>> [`WP_Locale::__construct()`](https://developer.wordpress.org/reference/classes/wp_locale/__construct/)
+>>>>>>> 
+>>>>>>>> [`WP_Locale::init()`](https://developer.wordpress.org/reference/classes/wp_locale/init/)
+>>>>>>>> 
+>>>>>>>> [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
 >>>>>> 
 >>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
 >>>>>> 
