@@ -21,3 +21,4 @@ class NOOP_Translations {
 		return $singular;
 	}
 }
+endif;
