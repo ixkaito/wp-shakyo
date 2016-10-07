@@ -83,6 +83,20 @@ class WP_Locale {
 	 * @access private
 	 */
 	var $text_direction = 'ltr';
+
+	/**
+	 * Constructor which calls helper methods to set up object variables
+	 *
+	 * @uses WP_Locale::init()
+	 * @uses WP_Locale::register_globals()
+	 * @since 2.1.0
+	 *
+	 * @return WP_Locale
+	 */
+	function __construct() {
+		$this->init();
+		$this->register_globals();
+	}
 }
 
 /**
