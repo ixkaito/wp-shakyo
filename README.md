@@ -69,6 +69,8 @@
 >>>>>>> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
 >>>>>> 
 >>>>>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
+>>>>>> 
+>>>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
 >>>>> 
 >>>>> `timer_start()`
 >>>>> 
