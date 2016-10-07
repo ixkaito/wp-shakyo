@@ -191,6 +191,22 @@ class WP_Locale {
 	}
 
 	/**
+	 * Global variables are deprecated. For backwards compatibility only.
+	 *
+	 * @deprecated For backwards compatibility only.
+	 * @access private
+	 *
+	 * @since 2.1.0
+	 */
+	function register_globals() {
+		$GLOBALS['weekday']         = $this->weekday;
+		$GLOBALS['weekday_initial'] = $this->weekday_initial;
+		$GLOBALS['weekday_abbrev']  = $this->weekday_abbrev;
+		$GLOBALS['month']           = $this->month;
+		$GLOBALS['month_abbrev']    = $this->month_abbrev;
+	}
+
+	/**
 	 * Constructor which calls helper methods to set up object variables
 	 *
 	 * @uses WP_Locale::init()
