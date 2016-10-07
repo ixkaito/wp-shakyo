@@ -34,13 +34,13 @@
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `wp_unregister_GLOBALS()`
+>>>>> [`wp_unregister_GLOBALS()`](https://developer.wordpress.org/reference/functions/wp_unregister_globals/)
 >>>>> 
->>>>> `wp_fix_server_vars()`
+>>>>> [`wp_fix_server_vars()`](https://developer.wordpress.org/reference/functions/wp_fix_server_vars/)
 >>>>> 
->>>>> `wp_favicon_request()`
+>>>>> [`wp_favicon_request()`](https://developer.wordpress.org/reference/functions/wp_favicon_request/)
 >>>>> 
->>>>> `wp_maintenance()`
+>>>>> [`wp_maintenance()`](https://developer.wordpress.org/reference/functions/wp_maintenance/)
 >>>>> 
 >>>>> `timer_start()`
 >>>>> 
