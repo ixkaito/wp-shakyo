@@ -269,6 +269,36 @@ function do_action($tag, $arg = '') {
 }
 
 /**
+ * Call the 'all' hook, which will process the functions hooked into it.
+ *
+ * The 'all' hook passes all of the arguments or parameters that were used for
+ * the hook, which this function was called for.
+ *
+ * This function is used internally for apply_filters(), do_action(), and
+ * do_action_ref_array() and is not meant to be used from outside those
+ * functions. This function does not check for the existence of the all hook, so
+ * it will fail unless the all hook exists prior to this function call.
+ *
+ * @since 2.5.0
+ * @access private
+ *
+ * @uses $wp_filter Used to process all of the functions in the 'all' hook.
+ *
+ * @param array $args The collected parameters from the hook that was called.
+ */
+function _wp_call_all_hook($args) {
+	global $wp_filter;
+
+	reset( $wp_filter['all'] );
+	do {
+		foreach( (array) current($wp_filter['all']) as $the_ )
+			if ( !is_null($the_['function']) )
+				call_user_func_array($the_['function'], $args);
+
+	} while ( next($wp_filter['all']) !== false );
+}
+
+/**
  * Build Unique ID for storage and retrieval.
  *
  * The old way to serialize the callback caused issues and this function is the
