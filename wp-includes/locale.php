@@ -219,6 +219,16 @@ class WP_Locale {
 		$this->init();
 		$this->register_globals();
 	}
+
+	/**
+	 * Checks if current locale is RTL.
+	 *
+	 * @since 3.0.0
+	 * @return bool Whether locale is RTL.
+	 */
+	function is_rtl() {
+		return 'rtl' == $this->text_direction;
+	}
 }
 
 /**
