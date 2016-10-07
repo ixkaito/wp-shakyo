@@ -34,8 +34,6 @@
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `date_default_timezone_set()`
->>>>> 
 >>>>> `wp_unregister_GLOBALS()`
 >>>>> 
 >>>>> `wp_fix_server_vars()`
