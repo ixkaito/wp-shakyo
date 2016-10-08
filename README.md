@@ -82,9 +82,9 @@
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `timer_start()`
+>>>>> [`timer_start()`](https://developer.wordpress.org/reference/functions/timer_start/)
 >>>>> 
->>>>> `wp_debug_mode()`
+>>>>> [`wp_debug_mode()`](https://developer.wordpress.org/reference/functions/wp_debug_mode/)
 >>>>> 
 >>>>> `wp_set_lang_dir()`
 >>>>> 
