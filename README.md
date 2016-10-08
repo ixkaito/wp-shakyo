@@ -90,7 +90,7 @@
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `wp_set_lang_dir()`
+>>>>> [`wp_set_lang_dir()`](https://developer.wordpress.org/reference/functions/wp_set_lang_dir/)
 >>>>> 
 >>>>> **wp-includes/compat.php**
 >>>>> 
