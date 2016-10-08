@@ -112,19 +112,21 @@
 >>>>>> 
 >>>>>> **wp-includes/pomo/streams.php**
 >>>>> 
->>>>> `require_wp_db()`
+>>>>> [`require_wp_db()`](https://developer.wordpress.org/reference/functions/require_wp_db/)
 >>>>> 
 >>>>>> **wp-includes/wp-db.php**
 >>>>>> 
->>>>>> `new wpdb()`
+>>>>>> [`new wpdb()`](https://developer.wordpress.org/reference/classes/wpdb/)
 >>>>>> 
->>>>>>> `wpdb::__construct()`
+>>>>>>> [`wpdb::__construct()`](https://developer.wordpress.org/reference/classes/wpdb/__construct/)
 >>>>>>> 
->>>>>>>> `wpdb::__destruct()`
+>>>>>>>> [`wpdb::__destruct()`](https://developer.wordpress.org/reference/classes/wpdb/__destruct/)
 >>>>>>>> 
->>>>>>>> `wpdb::init_charset()`
+>>>>>>>> [`wpdb::show_errors()`](https://developer.wordpress.org/reference/classes/wpdb/show_errors/)
 >>>>>>>> 
->>>>>>>> `wpdb::db_connect()`
+>>>>>>>> [`wpdb::init_charset()`](https://developer.wordpress.org/reference/classes/wpdb/init_charset/)
+>>>>>>>> 
+>>>>>>>> [`wpdb::db_connect()`](https://developer.wordpress.org/reference/classes/wpdb/db_connect/)
 >>>>>>>> 
 >>>>>>>>> `wpdb::set_charset()`
 >>>>>>>>> 
