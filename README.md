@@ -86,6 +86,10 @@
 >>>>> 
 >>>>> [`wp_debug_mode()`](https://developer.wordpress.org/reference/functions/wp_debug_mode/)
 >>>>> 
+>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`enable_wp_debug_mode_checks`](https://developer.wordpress.org/reference/hooks/enable_wp_debug_mode_checks/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
 >>>>> `wp_set_lang_dir()`
 >>>>> 
 >>>>> **wp-includes/compat.php**
