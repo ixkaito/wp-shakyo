@@ -128,11 +128,11 @@
 >>>>>>>> 
 >>>>>>>> [`wpdb::db_connect()`](https://developer.wordpress.org/reference/classes/wpdb/db_connect/)
 >>>>>>>> 
->>>>>>>>> `wpdb::set_charset()`
+>>>>>>>>> [`wpdb::set_charset()`](https://developer.wordpress.org/reference/classes/wpdb/set_charset/)
 >>>>>>>>> 
->>>>>>>>>> `wpdb::has_cap()`
+>>>>>>>>>> [`wpdb::has_cap()`](https://developer.wordpress.org/reference/classes/wpdb/has_cap/)
 >>>>>>>>>> 
->>>>>>>>>>> `wpdb::db_version()`
+>>>>>>>>>>> [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
 >>>>>>>>> 
 >>>>>>>>> `wpdb::set_sql_mode()`
 >>>>>>>>> 
