@@ -138,6 +138,14 @@
 >>>>>>>>>> 
 >>>>>>>>>>> [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
 >>>>>>>>>>> 
+>>>>>>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`doing_it_wrong_run`](https://developer.wordpress.org/reference/hooks/doing_it_wrong_run/)
+>>>>>>>>>>>> 
+>>>>>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`doing_it_wrong_trigger_error`](https://developer.wordpress.org/reference/hooks/doing_it_wrong_trigger_error/)
+>>>>>>>>>>>> 
+>>>>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>>>>>>> 
+>>>>>>>>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
+>>>>>>>>>>> 
 >>>>>>>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>>>>>> 
 >>>>>>>>> `wpdb::set_sql_mode()`
