@@ -240,7 +240,7 @@
 >>>>>>>>>>>> 
 >>>>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `wp_set_wpdb_vars()`
+>>>>> [`wp_set_wpdb_vars()`](https://developer.wordpress.org/reference/functions/wp_set_wpdb_vars/)
 >>>>> 
 >>>>>> `wpdb::set_prefix()`
 >>>>>> 
