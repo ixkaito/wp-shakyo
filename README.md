@@ -242,6 +242,8 @@
 >>>>> 
 >>>>> [`wp_set_wpdb_vars()`](https://developer.wordpress.org/reference/functions/wp_set_wpdb_vars/)
 >>>>> 
+>>>>>> [`dead_db()`](https://developer.wordpress.org/reference/functions/dead_db/)
+>>>>>>
 >>>>>> `wpdb::set_prefix()`
 >>>>>> 
 >>>>>>> `wpdb::tables()`
