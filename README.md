@@ -326,13 +326,9 @@
 >>>>>>> 
 >>>>>>> [`wpdb::tables()`](https://developer.wordpress.org/reference/classes/wpdb/tables/)
 >>>>>>> 
->>>>>>> [`wpdb::get_blog_prefix()`](https://developer.wordpress.org/reference/classes/wpdb/get_blog_prefix/)
->>>>>> 
->>>>>>> `wpdb::tables()`
->>>>>>> 
 >>>>>>>> `wpdb::get_blog_prefix()`
 >>>>>>> 
->>>>>>> `wpdb::get_blog_prefix()`
+>>>>>>> [`wpdb::get_blog_prefix()`](https://developer.wordpress.org/reference/classes/wpdb/get_blog_prefix/)
 >>>>>> 
 >>>>>> `is_wp_error()`
 >>>>> 
