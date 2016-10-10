@@ -174,7 +174,11 @@
 >>>>>>>>>>>>> 
 >>>>>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>>> 
->>>>>>>>> `wpdb::set_sql_mode()`
+>>>>>>>>> [`wpdb::set_sql_mode()`](https://developer.wordpress.org/reference/classes/wpdb/set_sql_mode/)
+>>>>>>>>> 
+>>>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`incompatible_sql_modes`](https://developer.wordpress.org/reference/hooks/incompatible_sql_modes/)
+>>>>>>>>>> 
+>>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>>> 
 >>>>>>>>> `wpdb::select()`
 >>>>> 
