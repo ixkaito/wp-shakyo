@@ -205,6 +205,8 @@
 >>>>>>>>>>>>> [`WP_Locale::init()`](https://developer.wordpress.org/reference/classes/wp_locale/init/)
 >>>>>>>>>>>>> 
 >>>>>>>>>>>>> [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
+>>>>>>>>>> 
+>>>>>>>>>> [`wpdb::bail()`](https://developer.wordpress.org/reference/classes/wpdb/bail/)
 >>>>> 
 >>>>> `wp_set_wpdb_vars()`
 >>>>> 
