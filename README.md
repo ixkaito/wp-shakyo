@@ -292,6 +292,12 @@
 >>>>>>> 
 >>>>>>> [`nocache_headers()`](https://developer.wordpress.org/reference/functions/nocache_headers/)
 >>>>>>> 
+>>>>>>>> [`wp_get_nocache_headers()`](https://developer.wordpress.org/reference/functions/wp_get_nocache_headers/)
+>>>>>>>> 
+>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`nocache_headers`](https://developer.wordpress.org/reference/hooks/nocache_headers/)
+>>>>>>>> 
+>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
 >>>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
 >>>>>>> 
 >>>>>>>> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
@@ -308,7 +314,7 @@
 >>>>>>>>> 
 >>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
 >>>>>>>>> 
->>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)_
+>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>
 >>>>>> `wpdb::set_prefix()`
 >>>>>> 
