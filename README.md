@@ -58,7 +58,7 @@
 >>>>>>> 
 >>>>>>> [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
 >>>>>>> 
->>>>>>>> [`WP_Locale::__c>onstruct()`](https://developer.wordpress.org/reference/classes/wp_locale/__construct/)
+>>>>>>>> [`WP_Locale::__construct()`](https://developer.wordpress.org/reference/classes/wp_locale/__construct/)
 >>>>>>>> 
 >>>>>>>>> [`WP_Locale::init()`](https://developer.wordpress.org/reference/classes/wp_locale/init/)
 >>>>>>>>> 
