@@ -294,6 +294,59 @@ function wp_ob_end_flush_all() {
 }
 
 /**
+ * Load custom DB error or display WordPress DB error.
+ *
+ * If a file exists in the wp-content directory named db-error.php, then it will
+ * be loaded instead of displaying the WordPress DB error. If it is not found,
+ * then the WordPress DB error will be displayed instead.
+ *
+ * The WordPress DB error sets the HTTP status header to 500 to try to prevent
+ * search engines from caching the message. Custom DB messages should do the
+ * same.
+ *
+ * This function was backported to WordPress 2.3.2, but originally was added
+ * in WordPress 2.5.0.
+ *
+ * @since 2.3.2
+ *
+ * @global wpdb $wpdb WordPress database access abstraction object.
+ */
+function dead_db() {
+	global $wpdb;
+
+	wp_load_translations_early();
+
+	// Load custom DB error template, if present.
+	if ( file_exists( WP_CONTENT_DIR . '/db-error.php' ) ) {
+		require_once( WP_CONTENT_DIR . '/db-error.php' );
+		die();
+	}
+
+	// If installing or in the admin, provide the verbose message.
+	if ( defined('WP_INSTALLING') || defined('WP_ADMIN') )
+		wp_die($wpdb->error);
+
+	// Otherwise, be terse.
+	status_header( 500 );
+	nocache_headers();
+	header( 'Content-Type: text/html; charset=utf-8' );
+?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"<?php if ( is_rtl() ) echo ' dir="rtl"'; ?>>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title><?php _e( 'Database Error' ); ?></title>
+
+</head>
+<body>
+	<h1><?php _e( 'Error establishing a database connection' ); ?></h1>
+</body>
+</html>
+<?php
+	die();
+}
+
+/**
  * Convert a value to non-negative integer.
  *
  * @since 2.5.0
