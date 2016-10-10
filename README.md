@@ -207,6 +207,12 @@
 >>>>>>>>>>>>> [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
 >>>>>>>>>> 
 >>>>>>>>>> [`wpdb::bail()`](https://developer.wordpress.org/reference/classes/wpdb/bail/)
+>>>>>>>>>> 
+>>>>>>>>>>> [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
+>>>>>>>>>>> 
+>>>>>>>>>>>> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
+>>>>>>>>>>> 
+>>>>>>>>>>> [`wp_die()`](https://developer.wordpress.org/reference/functions/wp_die/)
 >>>>> 
 >>>>> `wp_set_wpdb_vars()`
 >>>>> 
