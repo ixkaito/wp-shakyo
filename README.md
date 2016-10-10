@@ -183,6 +183,28 @@
 >>>>>>>>> [`wpdb::select()`](https://developer.wordpress.org/reference/classes/wpdb/select/)
 >>>>>>>>> 
 >>>>>>>>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
+>>>>>>>>>> 
+>>>>>>>>>> [`wp_load_translations_early()`](https://developer.wordpress.org/reference/functions/wp_load_translations_early/)
+>>>>>>>>>> 
+>>>>>>>>>>> **wp-includes/version.php**
+>>>>>>>>>>> 
+>>>>>>>>>>> **wp-includes/pomo/mo.php**
+>>>>>>>>>>> 
+>>>>>>>>>>> **wp-includes/l10n.php**
+>>>>>>>>>>> 
+>>>>>>>>>>> **wp-includes/locale.php**
+>>>>>>>>>>> 
+>>>>>>>>>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
+>>>>>>>>>>> 
+>>>>>>>>>>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
+>>>>>>>>>>> 
+>>>>>>>>>>> [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
+>>>>>>>>>>> 
+>>>>>>>>>>>> [`WP_Locale::__construct()`](https://developer.wordpress.org/reference/classes/wp_locale/__construct/)
+>>>>>>>>>>>> 
+>>>>>>>>>>>>> [`WP_Locale::init()`](https://developer.wordpress.org/reference/classes/wp_locale/init/)
+>>>>>>>>>>>>> 
+>>>>>>>>>>>>> [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
 >>>>> 
 >>>>> `wp_set_wpdb_vars()`
 >>>>> 
