@@ -279,6 +279,14 @@
 >>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_die_handler`](https://developer.wordpress.org/reference/hooks/wp_die_handler/)
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
+>>>>>>> [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
+>>>>>>> 
+>>>>>>> [`nocache_headers()`](https://developer.wordpress.org/reference/functions/nocache_headers/)
+>>>>>>> 
+>>>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
+>>>>>>> 
+>>>>>>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
 >>>>>>
 >>>>>> `wpdb::set_prefix()`
 >>>>>> 
