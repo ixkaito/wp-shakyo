@@ -135,6 +135,10 @@
 >>>>>>>>>>> [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
 >>>>>>>>>> 
 >>>>>>>>>> [`wpdb::prepare()`](https://developer.wordpress.org/reference/classes/wpdb/prepare/)
+>>>>>>>>>> 
+>>>>>>>>>>> [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
+>>>>>>>>>>> 
+>>>>>>>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>>>>>> 
 >>>>>>>>> `wpdb::set_sql_mode()`
 >>>>>>>>> 
