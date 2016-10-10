@@ -181,6 +181,8 @@
 >>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>>> 
 >>>>>>>>> [`wpdb::select()`](https://developer.wordpress.org/reference/classes/wpdb/select/)
+>>>>>>>>> 
+>>>>>>>>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
 >>>>> 
 >>>>> `wp_set_wpdb_vars()`
 >>>>> 
