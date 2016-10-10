@@ -49,6 +49,18 @@ function __( $text, $domain = 'default' ) {
 }
 
 /**
+ * Display translated text.
+ *
+ * @since 1.2.0
+ *
+ * @param string $text   Text to translate.
+ * @param string $domain Optional. Text domain. Unique identifier for retrieving translated strings.
+ */
+function _e( $text, $domain = 'default' ) {
+	echo translate( $text, $domain );
+}
+
+/**
  * Return the Translations instance for a text domain.
  *
  * If there isn't one, returns empty Translations instance.
