@@ -1417,6 +1417,28 @@ class wpdb {
 	}
 
 	/**
+	 * Wraps errors in a nice header and footer and dies.
+	 *
+	 * Will not die if wpdb::$show_errors is false.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param string $message The Error message
+	 * @param string $error_code Optional. A Computer readable string to identify the error.
+	 * @return false|void
+	 */
+	public function bail( $message, $error_code = '500' ) {
+		if ( !$this->show_errors ) {
+			if ( class_exists( 'WP_Error' ) )
+				$this->error = new WP_Error($error_code, $message);
+			else
+				$this->error = $message;
+			return false;
+		}
+		wp_die($message);
+	}
+
+	/**
 	 * Determine if a database supports a particular feature.
 	 *
 	 * @since 2.7.0
