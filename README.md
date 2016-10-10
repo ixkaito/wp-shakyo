@@ -316,7 +316,7 @@
 >>>>>>>>> 
 >>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>
->>>>>> `wpdb::set_prefix()`
+>>>>>> [`wpdb::set_prefix()`](https://developer.wordpress.org/reference/classes/wpdb/set_prefix/)
 >>>>>> 
 >>>>>>> `wpdb::tables()`
 >>>>>>> 
