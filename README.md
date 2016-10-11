@@ -336,7 +336,7 @@
 >>>>>>> 
 >>>>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 >>>>>> 
->>>>>> `is_wp_error()`
+>>>>>> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 >>>>> 
 >>>>> `wp_start_object_cache()`
 >>>>> 
