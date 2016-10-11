@@ -392,19 +392,21 @@
 >>>>> 
 >>>>> [`wp_not_installed()`](https://developer.wordpress.org/reference/functions/wp_not_installed/)
 >>>>> 
->>>>>> `is_blog_installed()`
+>>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 >>>>>> 
->>>>>>> `wp_cache_get()`
+>>>>>> [`is_blog_installed()`](https://developer.wordpress.org/reference/functions/is_blog_installed/)
+>>>>>> 
+>>>>>>> [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
 >>>>>>> 
->>>>>>>> `WP_Object_Cache::get()`
+>>>>>>>> [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
 >>>>>>>> 
->>>>>>>>> `WP_Object_Cache::_exists()`
+>>>>>>>>> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
 >>>>>>> 
->>>>>>> `wpdb::suppress_errors()`
+>>>>>>> [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
 >>>>>>> 
->>>>>>> `wp_load_alloptions()`
+>>>>>>> [`wp_load_alloptions()`](https://developer.wordpress.org/reference/functions/wp_load_alloptions/)
 >>>>>>> 
->>>>>>>> `wpdb::get_results()`
+>>>>>>>> [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
 >>>>>>>> 
 >>>>>>>>> `wpdb::query()`
 >>>>>>>>> 
@@ -424,9 +426,9 @@
 >>>>>>>>>> 
 >>>>>>>>>> `WP_Object_Cache::set()`
 >>>>>>> 
->>>>>>> `wpdb::get_var()`
+>>>>>>> [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
 >>>>>>> 
->>>>>>> `wp_cache_set()`
+>>>>>>> [`wp_cache_set()`](https://developer.wordpress.org/reference/functions/wp_cache_set/)
 >>>>>> 
 >>>>>> `nocache_headers()`
 >>>>>> 
