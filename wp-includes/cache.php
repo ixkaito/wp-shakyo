@@ -94,6 +94,21 @@ function wp_cache_set( $key, $data, $group = '', $expire = 0 ) {
 }
 
 /**
+ * Switch the interal blog id.
+ *
+ * This changes the blog id used to create keys in blog specific groups.
+ *
+ * @since 3.5.0
+ *
+ * @param int $blog_id Blog ID
+ */
+function wp_cache_switch_to_blog( $blog_id ) {
+	global $wp_object_cache;
+
+	return $wp_object_cache->switch_to_blog( $blog_id );
+}
+
+/**
  * Adds a group or set of groups to the list of global groups.
  *
  * @since 2.6.0
