@@ -340,11 +340,11 @@
 >>>>> 
 >>>>> [`wp_start_object_cache()`](https://developer.wordpress.org/reference/functions/wp_start_object_cache/)
 >>>>> 
->>>>>> `wp_using_ext_object_cache()`
+>>>>>> [`wp_using_ext_object_cache()`](https://developer.wordpress.org/reference/functions/wp_using_ext_object_cache/)
 >>>>>> 
 >>>>>> **wp-includes/cache.php**
 >>>>>> 
->>>>>> `wp_cache_init()`
+>>>>>> [`wp_cache_init()`](https://developer.wordpress.org/reference/functions/wp_cache_init/)
 >>>>>> 
 >>>>>>> `new WP_Object_Cache()`
 >>>>>>> 
@@ -352,11 +352,11 @@
 >>>>>>>> 
 >>>>>>>>> `WP_Object_Cache::__destruct()`
 >>>>>> 
->>>>>> `wp_cache_add_global_groups()`
+>>>>>> [`wp_cache_add_global_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_global_groups/)
 >>>>>> 
 >>>>>>> `WP_Object_Cache::add_global_groups()`
 >>>>>> 
->>>>>> `wp_cache_add_non_persistent_groups()`
+>>>>>> [`wp_cache_add_non_persistent_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_non_persistent_groups/)
 >>>>> 
 >>>>> **wp-includes/default-filters.php**
 >>>>> 
