@@ -338,7 +338,7 @@
 >>>>>> 
 >>>>>> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 >>>>> 
->>>>> `wp_start_object_cache()`
+>>>>> [`wp_start_object_cache()`](https://developer.wordpress.org/reference/functions/wp_start_object_cache/)
 >>>>> 
 >>>>>> `wp_using_ext_object_cache()`
 >>>>>> 
