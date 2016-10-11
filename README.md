@@ -344,6 +344,8 @@
 >>>>>> 
 >>>>>> **wp-includes/cache.php**
 >>>>>> 
+>>>>>> [`wp_cache_switch_to_blog()`](https://developer.wordpress.org/reference/functions/wp_cache_switch_to_blog/)
+>>>>>> 
 >>>>>> [`wp_cache_init()`](https://developer.wordpress.org/reference/functions/wp_cache_init/)
 >>>>>> 
 >>>>>>> `new WP_Object_Cache()`
