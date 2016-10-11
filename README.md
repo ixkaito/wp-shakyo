@@ -350,15 +350,17 @@
 >>>>>> 
 >>>>>> [`wp_cache_init()`](https://developer.wordpress.org/reference/functions/wp_cache_init/)
 >>>>>> 
->>>>>>> `new WP_Object_Cache()`
+>>>>>>> [`new WP_Object_Cache()`](https://developer.wordpress.org/reference/classes/wp_object_cache/)
 >>>>>>> 
->>>>>>>> `WP_Object_Cache::__construct()`
+>>>>>>>> [`WP_Object_Cache::__construct()`](https://developer.wordpress.org/reference/classes/wp_object_cache/__construct/)
 >>>>>>>> 
->>>>>>>>> `WP_Object_Cache::__destruct()`
+>>>>>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+>>>>>>>>> 
+>>>>>>>>> [`WP_Object_Cache::__destruct()`](https://developer.wordpress.org/reference/classes/wp_object_cache/__destruct/)
 >>>>>> 
 >>>>>> [`wp_cache_add_global_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_global_groups/)
 >>>>>> 
->>>>>>> `WP_Object_Cache::add_global_groups()`
+>>>>>>> [`WP_Object_Cache::add_global_groups()`](https://developer.wordpress.org/reference/classes/wp_object_cache/add_global_groups/)
 >>>>>> 
 >>>>>> [`wp_cache_add_non_persistent_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_non_persistent_groups/)
 >>>>> 
