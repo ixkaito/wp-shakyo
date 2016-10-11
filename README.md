@@ -366,13 +366,17 @@
 >>>>> 
 >>>>> **wp-includes/default-filters.php**
 >>>>> 
->>>>>> `add_filter()`
+>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
 >>>>>> 
->>>>>>> `_wp_filter_build_unique_id()`
+>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>>> 
 >>>>>> `is_admin()`
 >>>>>> 
->>>>>> `add_action()`
+>>>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
+>>>>>> 
+>>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>>> 
+>>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>> 
 >>>>> `register_shutdown_function( 'shutdown_action_hook' )`
 >>>>> 
