@@ -429,6 +429,48 @@
 >>>>>>> [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
 >>>>>>> 
 >>>>>>> [`wp_cache_set()`](https://developer.wordpress.org/reference/functions/wp_cache_set/)
+>>>>>>> 
+>>>>>>> [`wpdb::tables()`](https://developer.wordpress.org/reference/classes/wpdb/tables/)
+>>>>>>> 
+>>>>>>> [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
+>>>>>>> 
+>>>>>>> [`wp_load_translations_early()`](https://developer.wordpress.org/reference/functions/wp_load_translations_early/)
+>>>>>>> 
+>>>>>>>> **wp-includes/version.php**
+>>>>>>>> 
+>>>>>>>> **wp-includes/pomo/mo.php**
+>>>>>>>> 
+>>>>>>>> **wp-includes/l10n.php**
+>>>>>>>> 
+>>>>>>>> **wp-includes/locale.php**
+>>>>>>>> 
+>>>>>>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
+>>>>>>>> 
+>>>>>>>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
+>>>>>>>> 
+>>>>>>>> [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
+>>>>>>>> 
+>>>>>>>>> [`WP_Locale::__construct()`](https://developer.wordpress.org/reference/classes/wp_locale/__construct/)
+>>>>>>>>> 
+>>>>>>>>>> [`WP_Locale::init()`](https://developer.wordpress.org/reference/classes/wp_locale/init/)
+>>>>>>>>>> 
+>>>>>>>>>> [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
+>>>>>>> 
+>>>>>>> [`dead_db()`](https://developer.wordpress.org/reference/functions/dead_db/)
+>>>>>>> 
+>>>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
+>>>>>>> 
+>>>>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
+>>>>>>>> 
+>>>>>>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
+>>>>>>>>> 
+>>>>>>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>>>>>>> 
+>>>>>>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
+>>>>>>>>> 
+>>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
+>>>>>>>>> 
+>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
 >>>>>> `nocache_headers()`
 >>>>>> 
