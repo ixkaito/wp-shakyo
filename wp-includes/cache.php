@@ -263,6 +263,20 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Switch the interal blog id.
+	 *
+	 * This changes the blog id used to create keys in blog specific groups.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @param int $blog_id Blog ID
+	 */
+	public function switch_to_blog( $blog_id ) {
+		$blog_id = (int) $blog_id;
+		$this->blog_prefix = $this->multisite ? $blog_id . ':' : '';
+	}
+
+	/**
 	 * Sets the list of global groups.
 	 *
 	 * @since 3.0.0
