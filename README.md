@@ -378,13 +378,15 @@
 >>>>>>> 
 >>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>> 
->>>>> `register_shutdown_function( 'shutdown_action_hook' )`
+>>>>> [`shutdown_action_hook()`](https://developer.wordpress.org/reference/functions/shutdown_action_hook/)
 >>>>> 
->>>>>> `shutdown_action_hook()`
+>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`shutdown`](https://developer.wordpress.org/reference/hooks/shutdown/)
 >>>>>> 
->>>>>>> `do_action( 'shutdown' )`
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
->>>>>>>> `wp_ob_end_flush_all()`
+>>>>>>> [`wp_ob_end_flush_all()`](https://developer.wordpress.org/reference/functions/wp_ob_end_flush_all/)
+>>>>>> 
+>>>>>> [`wp_cache_close()`](https://developer.wordpress.org/reference/functions/wp_cache_close/)
 >>>>> 
 >>>>> **wp-includes/l10n.php**
 >>>>> 
