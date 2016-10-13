@@ -1562,6 +1562,20 @@ class wpdb {
 	}
 
 	/**
+	 * Retrieve the name of the function that called wpdb.
+	 *
+	 * Searches up the list of functions until it reaches
+	 * the one that would most logically had called this method.
+	 *
+	 * @since 2.5.0
+	 *
+	 * @return string The name of the calling function
+	 */
+	public function get_caller() {
+		return wp_debug_backtrace_summary( __CLASS__ );
+	}
+
+	/**
 	 * The database version number.
 	 *
 	 * @since 2.7.0
