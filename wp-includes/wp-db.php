@@ -1505,6 +1505,17 @@ class wpdb {
 	}
 
 	/**
+	 * Stops the debugging timer.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return float Total time spent on the query, in seconds
+	 */
+	public function timer_stop() {
+		return ( microtime( true ) - $this->time_start );
+	}
+
+	/**
 	 * Wraps errors in a nice header and footer and dies.
 	 *
 	 * Will not die if wpdb::$show_errors is false.
