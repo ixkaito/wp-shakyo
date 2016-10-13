@@ -410,7 +410,9 @@
 >>>>>>>> 
 >>>>>>>>> [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
 >>>>>>>>> 
->>>>>>>>>> `apply_filters()`
+>>>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`query`](https://developer.wordpress.org/reference/hooks/query/)
+>>>>>>>>>> 
+>>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>>>> 
 >>>>>>>>>> `wpdb::flush()`
 >>>>>>>>>> 
