@@ -746,6 +746,12 @@
 >>>>>>>>>> 
 >>>>>>>>>> [`wpdb::_do_query()`](https://developer.wordpress.org/reference/classes/wpdb/_do_query/)
 >>>>>>>>>> 
+>>>>>>>>>>> [`wpdb::timer_start()`](https://developer.wordpress.org/reference/classes/wpdb/timer_start/)
+>>>>>>>>>>> 
+>>>>>>>>>>> [`wpdb::timer_stop()`](https://developer.wordpress.org/reference/classes/wpdb/timer_stop/)
+>>>>>>>>>>> 
+>>>>>>>>>>> [`wpdb::get_caller()`](https://developer.wordpress.org/reference/classes/wpdb/get_caller/)
+>>>>>>>>>> 
 >>>>>>>>>> [`wpdb::print_error()`](https://developer.wordpress.org/reference/classes/wpdb/print_error/)
 >>>>>>>> 
 >>>>>>>> `wp_cache_add()`
