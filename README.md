@@ -416,7 +416,7 @@
 >>>>>>>>>> 
 >>>>>>>>>> [`wpdb::flush()`](https://developer.wordpress.org/reference/classes/wpdb/flush/)
 >>>>>>>>>> 
->>>>>>>>>> `wpdb::_do_query()`
+>>>>>>>>>> [`wpdb::_do_query()`](https://developer.wordpress.org/reference/classes/wpdb/_do_query/)
 >>>>>>>>>> 
 >>>>>>>>>> `wpdb::print_error()`
 >>>>>>>> 
