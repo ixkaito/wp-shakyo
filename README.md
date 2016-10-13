@@ -408,7 +408,7 @@
 >>>>>>> 
 >>>>>>>> [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
 >>>>>>>> 
->>>>>>>>> `wpdb::query()`
+>>>>>>>>> [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
 >>>>>>>>> 
 >>>>>>>>>> `apply_filters()`
 >>>>>>>>>> 
