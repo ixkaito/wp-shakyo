@@ -1493,6 +1493,18 @@ class wpdb {
 	}
 
 	/**
+	 * Starts the timer, for debugging purposes.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return true
+	 */
+	public function timer_start() {
+		$this->time_start = microtime( true );
+		return true;
+	}
+
+	/**
 	 * Wraps errors in a nice header and footer and dies.
 	 *
 	 * Will not die if wpdb::$show_errors is false.
