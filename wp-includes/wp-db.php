@@ -1194,6 +1194,82 @@ class wpdb {
 	}
 
 	/**
+	 * Check that the connection to the database is still up. If not, try to reconnect.
+	 *
+	 * If this function is unable to reconnect, it will forcibly die, or if after the
+	 * the template_redirect hook has been fired, return false instead.
+	 *
+	 * If $allow_bail is false, the lack of database connection will need
+	 * to be handled manually.
+	 *
+	 * @since 3.9.0
+	 *
+	 * @param bool $allow_bail Optional. Allows the function to bail. Default true.
+	 * @return bool True if the connection is up.
+	 */
+	public function check_connection( $allow_bail = true ) {
+		if ( $this->use_mysqli ) {
+			if ( @mysqli_ping( $this->dbh ) ) {
+				return true;
+			}
+		} else {
+			if ( @mysql_ping( $this->dbh ) ) {
+				return true;
+			}
+		}
+
+		$error_reporting = false;
+
+		// Disable warnings, as we don't want to see a multitude of "unable to connect" messages
+		if ( WP_DEBUG ) {
+			$error_reporting = error_reporting();
+			error_reporting( $error_reporting & ~E_WARNING );
+		}
+
+		for ( $tries = 1; $tries <= $this->reconnect_retries; $tries++ ) {
+			// On the last try, re-enable warnings. We want to see a single instance of the
+			// "unable to connect" message on the bail() screen, if it appears.
+			if ( $this->reconnect_retries === $tries && WP_DEBUG ) {
+				error_reporting( $error_reporting );
+			}
+
+			if ( $this->db_connect( false ) ) {
+				if ( $error_reporting ) {
+					error_reporting( $error_reporting );
+				}
+
+				return true;
+			}
+
+			sleep( 1 );
+		}
+
+		// If template_redirect has already happened, it's too late for wp_die()/dead_db().
+		// Let's just return and hope for the best.
+		if ( did_action( 'template_redirect' ) ) {
+			return false;
+		}
+
+		if ( ! $allow_bail ) {
+			return false;
+		}
+
+		// We weren't able to reconnect, so we better bail.
+		$this->bail( sprintf( ( "
+<h1>Error reconnecting to the database</h1>
+<p>This means that we lost contact with the database server at <code>%s</code>. This could mean your host's database server is down.</p>
+<ul>
+	<li>Are you sure that the database server is running?</li>
+	<li>Are you sure that the database server is not under particularly heavy load?</li>
+</ul>
+<p>If you're unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href='https://wordpress.org/support/'>WordPress Support Forums</a>.</p>
+" ), htmlspecialchars( $this->dbhost, ENT_QUOTES ) ), 'db_connect_fail' );
+
+		// Call dead_db() if bail didn't die, because this database is no more. It has ceased to be (at least temporarily).
+		dead_db();
+	}
+
+	/**
 	 * Perform a MySQL database query, using current database connection.
 	 *
 	 * More information can be found on the codex page.
