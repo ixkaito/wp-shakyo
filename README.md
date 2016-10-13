@@ -414,7 +414,7 @@
 >>>>>>>>>> 
 >>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>>>> 
->>>>>>>>>> `wpdb::flush()`
+>>>>>>>>>> [`wpdb::flush()`](https://developer.wordpress.org/reference/classes/wpdb/flush/)
 >>>>>>>>>> 
 >>>>>>>>>> `wpdb::_do_query()`
 >>>>>>>>>> 
