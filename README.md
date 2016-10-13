@@ -418,7 +418,7 @@
 >>>>>>>>>> 
 >>>>>>>>>> [`wpdb::_do_query()`](https://developer.wordpress.org/reference/classes/wpdb/_do_query/)
 >>>>>>>>>> 
->>>>>>>>>> `wpdb::print_error()`
+>>>>>>>>>> [`wpdb::print_error()`](https://developer.wordpress.org/reference/classes/wpdb/print_error/)
 >>>>>>>> 
 >>>>>>>> `wp_cache_add()`
 >>>>>>>> 
