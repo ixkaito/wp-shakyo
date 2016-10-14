@@ -950,7 +950,7 @@
 >>>>>> 
 >>>>>> **wp-includes/kses.php**
 >>>>>> 
->>>>>>> `_wp_add_global_attributes()`
+>>>>>>> [`_wp_add_global_attributes()`](https://developer.wordpress.org/reference/functions/_wp_add_global_attributes/)
 >>>>>> 
 >>>>>> **wp-includes/pluggable.php**
 >>>>>> 
