@@ -1020,7 +1020,7 @@
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
->>>> `wp_unregister_GLOBALS()`
+>>>> [`wp_unregister_GLOBALS()`](https://developer.wordpress.org/reference/functions/wp_unregister_globals/)
 >>>> 
 >>>> `wp_fix_server_vars()`
 >>>> 
