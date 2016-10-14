@@ -968,7 +968,7 @@
 >>>>>>>> 
 >>>>>>>> `_deep_replace()`
 >>>>>>> 
->>>>>>> `status_header()`
+>>>>>>> [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
 >>>>>>> 
 >>>>>>>> `get_status_header_desc()`
 >>>>>>>> 
