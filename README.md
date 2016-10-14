@@ -956,7 +956,7 @@
 >>>>>> 
 >>>>>> **wp-includes/formatting.php**
 >>>>>> 
->>>>>> `wp_guess_url()`
+>>>>>> [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
 >>>>>> 
 >>>>>>> `is_ssl()`
 >>>>>> 
