@@ -985,8 +985,8 @@
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`status_header`](https://developer.wordpress.org/reference/hooks/status_header/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>>>> 
->>>>>> _Redirect to **wp-admin/install.php**_
+>>>>>>> 
+>>>>>>> _Redirect to **wp-admin/install.php**_
 
 ## wp-admin/install.php
 
