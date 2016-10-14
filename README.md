@@ -978,7 +978,7 @@
 >>>>>>> 
 >>>>>>> [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
 >>>>>>> 
->>>>>>>> `get_status_header_desc()`
+>>>>>>>> [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
 >>>>>>>> 
 >>>>>>>>> `absint()`
 >>>>>> 
