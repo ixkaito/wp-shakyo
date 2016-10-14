@@ -972,7 +972,7 @@
 >>>>>>> 
 >>>>>>> [`wp_sanitize_redirect()`](https://developer.wordpress.org/reference/functions/wp_sanitize_redirect/)
 >>>>>>> 
->>>>>>>> `wp_kses_no_null()`
+>>>>>>>> [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
 >>>>>>>> 
 >>>>>>>> `_deep_replace()`
 >>>>>>> 
