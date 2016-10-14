@@ -962,6 +962,14 @@
 >>>>>> 
 >>>>>> [`wp_redirect()`](https://developer.wordpress.org/reference/functions/wp_redirect/)
 >>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_redirect`](https://developer.wordpress.org/reference/hooks/wp_redirect/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_redirect_status`](https://developer.wordpress.org/reference/hooks/wp_redirect_status/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
 >>>>>>> [`wp_sanitize_redirect()`](https://developer.wordpress.org/reference/functions/wp_sanitize_redirect/)
 >>>>>>> 
 >>>>>>>> `wp_kses_no_null()`
