@@ -960,7 +960,7 @@
 >>>>>> 
 >>>>>>> [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
 >>>>>> 
->>>>>> `wp_redirect()`
+>>>>>> [`wp_redirect()`](https://developer.wordpress.org/reference/functions/wp_redirect/)
 >>>>>> 
 >>>>>>> `wp_sanitize_redirect()`
 >>>>>>> 
