@@ -1022,9 +1022,9 @@
 >>>> 
 >>>> [`wp_unregister_GLOBALS()`](https://developer.wordpress.org/reference/functions/wp_unregister_globals/)
 >>>> 
->>>> `wp_fix_server_vars()`
+>>>> [`wp_fix_server_vars()`](https://developer.wordpress.org/reference/functions/wp_fix_server_vars/)
 >>>> 
->>>> `wp_favicon_request()`
+>>>> [`wp_favicon_request()`](https://developer.wordpress.org/reference/functions/wp_favicon_request/)
 >>>> 
 >>>> `wp_maintenance()`
 >>>> 
