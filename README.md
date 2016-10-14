@@ -812,7 +812,7 @@
 >>>>>>>>>>>> 
 >>>>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>> 
->>>>>>>> `wp_cache_add()`
+>>>>>>>> [`wp_cache_add()`](https://developer.wordpress.org/reference/functions/wp_cache_add/)
 >>>>>>>> 
 >>>>>>>>> `WP_Object_Cache::add()`
 >>>>>>>>> 
