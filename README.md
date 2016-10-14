@@ -974,7 +974,7 @@
 >>>>>>> 
 >>>>>>>> [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
 >>>>>>>> 
->>>>>>>> `_deep_replace()`
+>>>>>>>> [`_deep_replace()`](https://developer.wordpress.org/reference/functions/_deep_replace/)
 >>>>>>> 
 >>>>>>> [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
 >>>>>>> 
