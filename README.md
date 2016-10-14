@@ -816,7 +816,7 @@
 >>>>>>>> 
 >>>>>>>>> [`WP_Object_Cache::add()`](https://developer.wordpress.org/reference/classes/wp_object_cache/add/)
 >>>>>>>>> 
->>>>>>>>>> `wp_suspend_cache_addition()`
+>>>>>>>>>> [`wp_suspend_cache_addition()`](https://developer.wordpress.org/reference/functions/wp_suspend_cache_addition/)
 >>>>>>>>>> 
 >>>>>>>>>> `WP_Object_Cache::set()`
 >>>>>>> 
