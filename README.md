@@ -962,7 +962,7 @@
 >>>>>> 
 >>>>>> [`wp_redirect()`](https://developer.wordpress.org/reference/functions/wp_redirect/)
 >>>>>> 
->>>>>>> `wp_sanitize_redirect()`
+>>>>>>> [`wp_sanitize_redirect()`](https://developer.wordpress.org/reference/functions/wp_sanitize_redirect/)
 >>>>>>> 
 >>>>>>>> `wp_kses_no_null()`
 >>>>>>>> 
