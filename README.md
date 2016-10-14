@@ -980,7 +980,7 @@
 >>>>>>> 
 >>>>>>>> [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
 >>>>>>>> 
->>>>>>>>> `absint()`
+>>>>>>>>> [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
 >>>>>> 
 >>>>>> _Redirect to **wp-admin/install.php**_
 
