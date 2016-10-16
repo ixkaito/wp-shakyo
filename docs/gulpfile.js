@@ -7,6 +7,7 @@ var argv         = require('yargs').argv;
 var autoprefixer = require('gulp-autoprefixer');
 var browsersync  = require('browser-sync').create();
 var cp           = require('child_process');
+var editorstyles = require('editorstyles').includePaths;
 var gulp         = require('gulp');
 var imagemin     = require('gulp-imagemin');
 var named        = require('vinyl-named');
@@ -99,7 +100,10 @@ gulp.task('server', ['jekyll-build'], function() {
  */
 gulp.task('sass', function () {
   return gulp.src(paths.sass + '/**/*')
-    .pipe(sass({outputStyle: config.sass.outputStyle}).on('error', sass.logError))
+    .pipe(sass({
+      includePaths: editorstyles,
+      outputStyle: config.sass.outputStyle
+    }).on('error', sass.logError))
     .pipe(autoprefixer({ browsers: config.autoprefixer.browsers }))
     .pipe(gulp.dest(paths.css));
 });
