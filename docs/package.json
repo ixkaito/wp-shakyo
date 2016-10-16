@@ -49,5 +49,8 @@
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^3.2.0",
     "yargs": "^4.8.1"
+  },
+  "dependencies": {
+    "editorstyles": "0.0.3"
   }
 }
