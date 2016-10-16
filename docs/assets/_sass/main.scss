@@ -1,5 +1,27 @@
 @charset "UTF-8";
+@import "variables";
 @import "bourbon/bourbon";
 @import "neat/neat";
 // @import "base/base";
 @import "github";
+
+.file {
+	@include outer-container;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	max-width: 960px;
+
+	.filename {
+		background: #f8f8f8;
+		border-bottom: 1px solid #eee;
+		padding: .3em .5em;
+
+		h1 {
+			border-bottom: 0;
+			font-size: 12px;
+			font-weight: normal;
+			margin: 0;
+			padding: 0;
+		}
+	}
+}
