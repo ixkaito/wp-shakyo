@@ -987,4 +987,4 @@ filename: index.php
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
->>>>>>> _Redirect to **wp-admin/install.php**_
+>>>>>>> _Redirect to **[wp-admin/install.php](/wp-admin/install.html)**_
