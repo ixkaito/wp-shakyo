@@ -79,6 +79,8 @@ filename: index.php
 >>>>>>>>>> 
 >>>>>>>>>> [`_x()`](https://developer.wordpress.org/reference/functions/_x/)
 >>>>>>>>>> 
+>>>>>>>>>>> [`translate_with_gettext_context()`](https://developer.wordpress.org/reference/functions/translate_with_gettext_context/)
+>>>>>>>>>> 
 >>>>>>>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
 >>>>>>>>>> 
 >>>>>>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
