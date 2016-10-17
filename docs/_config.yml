@@ -1,5 +1,5 @@
 # Site settings
-title: 'WP-Shakyo 4.0'
+title: 'WP-Shakyo | WordPress 4.0'
 description:
 url: https://ixkaito.github.io # the base hostname & protocol for your site
 baseurl: '/wp-shakyo' # the subpath of your site, e.g. /blog
