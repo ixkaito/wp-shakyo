@@ -81,9 +81,11 @@ filename: index.php
 >>>>>>>>>> 
 >>>>>>>>>>> [`translate_with_gettext_context()`](https://developer.wordpress.org/reference/functions/translate_with_gettext_context/)
 >>>>>>>>>>> 
->>>>>>>>>>>> [`get_translations_for_domain()`]()
+>>>>>>>>>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
 >>>>>>>>>>>> 
->>>>>>>>>>>> [`Translations::translate()`]()
+>>>>>>>>>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>>>>>>>>>> 
+>>>>>>>>>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
 >>>>>>>>>>>> 
 >>>>>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext_with_context`](https://developer.wordpress.org/reference/hooks/gettext_with_context/)
 >>>>>>>>>>>> 
