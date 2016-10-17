@@ -1,3 +1,3 @@
-# WP-Shakyo 4.0
+# WP-Shakyo
 
-https://ixkaito.github.io/wp-shakyo/
+**WordPress 4.0:** https://ixkaito.github.io/wp-shakyo/
