@@ -1363,7 +1363,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> **wp-includes/class-wp-embed.php**
 >>>> 
->>>>> `new WP_Embed()`
+>>>>> [`new WP_Embed()`](https://developer.wordpress.org/reference/classes/wp_embed/)
 >>>>> 
 >>>>>> [`WP_Embed::__construct()`](https://developer.wordpress.org/reference/classes/wp_embed/__construct/)
 >>>>>> 
