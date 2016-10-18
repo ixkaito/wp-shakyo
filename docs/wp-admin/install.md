@@ -1367,7 +1367,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>>> [`WP_Embed::__construct()`](https://developer.wordpress.org/reference/classes/wp_embed/__construct/)
 >>>>>> 
->>>>>>> `add_shortcode()`
+>>>>>>> [`add_shortcode()`](https://developer.wordpress.org/reference/functions/add_shortcode/)
 >>>> 
 >>>> **wp-includes/media.php**
 >>>> 
