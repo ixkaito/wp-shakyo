@@ -1365,7 +1365,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> `new WP_Embed()`
 >>>>> 
->>>>>> `WP_Embed::__construct()`
+>>>>>> [`WP_Embed::__construct()`](https://developer.wordpress.org/reference/classes/wp_embed/__construct/)
 >>>>>> 
 >>>>>>> `add_shortcode()`
 >>>> 
