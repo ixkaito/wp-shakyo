@@ -1361,13 +1361,27 @@ filename: wp-admin/install.php
 >>>> 
 >>>> **wp-includes/shortcodes.php**
 >>>> 
+>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>> 
+>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+>>>> 
 >>>> **wp-includes/class-wp-embed.php**
 >>>> 
 >>>>> [`new WP_Embed()`](https://developer.wordpress.org/reference/classes/wp_embed/)
 >>>>> 
 >>>>>> [`WP_Embed::__construct()`](https://developer.wordpress.org/reference/classes/wp_embed/__construct/)
 >>>>>> 
+>>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>>> 
+>>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+>>>>>>> 
 >>>>>>> [`add_shortcode()`](https://developer.wordpress.org/reference/functions/add_shortcode/)
+>>>>>>> 
+>>>>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
+>>>>>>> 
+>>>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>>>> 
+>>>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>> 
 >>>> **wp-includes/media.php**
 >>>> 
