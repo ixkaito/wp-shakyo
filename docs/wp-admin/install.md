@@ -1405,7 +1405,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_plugin_directory_constants()`](https://developer.wordpress.org/reference/functions/wp_plugin_directory_constants/)
 >>>> 
->>>>> `get_option()`
+>>>>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>>>> 
 >>>>>> `wpdb::get_row()`
 > 
