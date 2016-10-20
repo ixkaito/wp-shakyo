@@ -1403,7 +1403,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> **wp-includes/ms-deprecated.php**
 >>>> 
->>>> `wp_plugin_directory_constants()`
+>>>> [`wp_plugin_directory_constants()`](https://developer.wordpress.org/reference/functions/wp_plugin_directory_constants/)
 >>>> 
 >>>>> `get_option()`
 >>>>> 
