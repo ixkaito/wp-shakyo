@@ -1397,6 +1397,12 @@ filename: wp-admin/install.php
 >>>> 
 >>>> **wp-includes/admin-bar.php**
 >>>> 
+>>>> **wp-includes/ms-functions.php**
+>>>> 
+>>>> **wp-includes/ms-default-filters.php**
+>>>> 
+>>>> **wp-includes/ms-deprecated.php**
+>>>> 
 >>>> `wp_plugin_directory_constants()`
 >>>> 
 >>>>> `get_option()`
