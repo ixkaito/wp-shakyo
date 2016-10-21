@@ -5,6 +5,8 @@ global.$ = jQuery;
 
 $('p + blockquote').hide();
 
-$('blockquote').prev('p').on('click', function() {
-  $(this).next('blockquote').toggle();
+$('blockquote').prev('p').append('<i class="fa fa-caret-down toggler"></i>');
+
+$('.toggler').on('click', function() {
+  $(this).toggleClass('fa-caret-up').parent().next('blockquote').toggle();
 });
