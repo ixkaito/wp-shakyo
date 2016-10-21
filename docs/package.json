@@ -51,6 +51,7 @@
     "yargs": "^4.8.1"
   },
   "dependencies": {
-    "editorstyles": "0.0.3"
+    "editorstyles": "0.0.3",
+    "jquery": "^3.1.1"
   }
 }
