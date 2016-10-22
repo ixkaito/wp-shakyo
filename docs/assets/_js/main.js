@@ -12,5 +12,13 @@ $('.toggler').on('click', function() {
 });
 
 $('.js-toggle-all').on('click', function() {
-  $('p + blockquote').show();
+  if ($(this).text() === 'Expand all') {
+    $('p + blockquote').show();
+    $(this).text('Collapse all');
+    $('.toggler').addClass('fa-caret-up');
+  } else {
+    $('p + blockquote').hide();
+    $(this).text('Expand all');
+    $('.toggler').removeClass('fa-caret-up');
+  }
 });
