@@ -2721,6 +2721,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_get_active_network_plugins()`](https://developer.wordpress.org/reference/functions/wp_get_active_network_plugins/)
 >>>> 
+>>>>> [`get_site_option()`](https://developer.wordpress.org/reference/functions/get_site_option/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
