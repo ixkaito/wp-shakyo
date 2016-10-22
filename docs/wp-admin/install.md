@@ -2717,6 +2717,10 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_get_mu_plugins()`](https://developer.wordpress.org/reference/functions/wp_get_mu_plugins/)
 >>>> 
+>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+>>>> 
+>>>> [`wp_get_active_network_plugins()`](https://developer.wordpress.org/reference/functions/wp_get_active_network_plugins/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
