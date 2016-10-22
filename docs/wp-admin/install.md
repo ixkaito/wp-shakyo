@@ -2715,6 +2715,8 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>> 
+>>>> [`wp_get_mu_plugins()`](https://developer.wordpress.org/reference/functions/wp_get_mu_plugins/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
