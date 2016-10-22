@@ -173,4 +173,13 @@ foreach ( wp_get_mu_plugins() as $mu_plugin ) {
 }
 unset( $mu_plugin );
 
+// Load network activated plugins.
+if ( is_multisite() ) {
+	foreach( wp_get_active_network_plugins() as $network_plugin ) {
+		wp_register_plugin_realpath( $network_plugin );
+		include_once( $network_plugin );
+	}
+	unset( $network_plugin );
+}
+
 var_dump(__FILE__);
