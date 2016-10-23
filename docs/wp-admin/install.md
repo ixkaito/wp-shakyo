@@ -2725,9 +2725,11 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 >>>> 
->>>> [`wp_get_active_network_plugins()`](https://developer.wordpress.org/reference/functions/wp_get_active_network_plugins/)
+>>>> `wp_get_active_network_plugins()`
 >>>> 
->>>>> [`get_site_option()`](https://developer.wordpress.org/reference/functions/get_site_option/)
+>>>> `wp_register_plugin_realpath()`
+>>>> 
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
