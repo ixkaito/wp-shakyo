@@ -2733,6 +2733,9 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
+>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+>>>> 
+>>>> `ms_cookie_constants()`
 >>>> 
 > 
 > **wp-admin/includes/upgrade.php**
