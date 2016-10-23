@@ -2729,6 +2729,10 @@ filename: wp-admin/install.php
 >>>> 
 >>>> `wp_register_plugin_realpath()`
 >>>> 
+>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`muplugins_loaded`](https://developer.wordpress.org/reference/hooks/muplugins_loaded/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 >>>> 
 > 
 > **wp-admin/includes/upgrade.php**
