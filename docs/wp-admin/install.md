@@ -4580,7 +4580,7 @@ filename: wp-admin/install.php
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_option_{$option}`](https://developer.wordpress.org/reference/hooks/site_option_option-5/)
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>>>> 
+>>>>> 
 >>>>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>>>> 
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_option_{}`](https://developer.wordpress.org/reference/hooks/pre_option_option/)
