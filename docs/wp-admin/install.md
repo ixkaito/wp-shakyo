@@ -6923,6 +6923,9 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>> 
+>>>>> [`force_ssl_admin()`](https://developer.wordpress.org/reference/functions/force_ssl_admin/)
+>>>> 
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
