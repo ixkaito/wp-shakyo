@@ -2739,6 +2739,8 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_cookie_constants()`](https://developer.wordpress.org/reference/functions/wp_cookie_constants/)
 >>>> 
+>>>>> [`get_site_option()`](https://developer.wordpress.org/reference/functions/get_site_option/)
+>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
