@@ -269,6 +269,25 @@ function do_action($tag, $arg = '') {
 }
 
 /**
+ * Retrieve the number of times an action is fired.
+ *
+ * @since 2.1.0
+ *
+ * @global array $wp_actions Increments the amount of times action was triggered.
+ *
+ * @param string $tag The name of the action hook.
+ * @return int The number of times action hook $tag is fired.
+ */
+function did_action($tag) {
+	global $wp_actions;
+
+	if ( ! isset( $wp_actions[ $tag ] ) )
+		return 0;
+
+	return $wp_actions[$tag];
+}
+
+/**
  * Call the 'all' hook, which will process the functions hooked into it.
  *
  * The 'all' hook passes all of the arguments or parameters that were used for
