@@ -6931,6 +6931,8 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`is_network_admin()`](https://developer.wordpress.org/reference/functions/is_network_admin/)
 >>>>> 
+>>>>> [`is_user_admin()`](https://developer.wordpress.org/reference/functions/is_user_admin/)
+>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
