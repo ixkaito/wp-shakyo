@@ -6925,6 +6925,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`force_ssl_admin()`](https://developer.wordpress.org/reference/functions/force_ssl_admin/)
 >>>> 
+>>>> **wp-includes/vars.php**
 >>>> 
 > 
 > **wp-admin/includes/upgrade.php**
