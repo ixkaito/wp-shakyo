@@ -88,3 +88,29 @@ if ( $is_safari && stripos($_SERVER['HTTP_USER_AGENT'], 'mobile') !== false )
 	$is_iphone = true;
 
 $is_IE = ( $is_macIE || $is_winIE );
+
+// Server detection
+
+/**
+ * Whether the server software is Apache or something else
+ * @global bool $is_apache
+ */
+$is_apache = (strpos($_SERVER['SERVER_SOFTWARE'], 'Apache') !== false || strpos($_SERVER['SERVER_SOFTWARE'], 'LiteSpeed') !== false);
+
+/**
+ * Whether the server software is Nginx or something else
+ * @global bool $is_nginx
+ */
+$is_nginx = (strpos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false);
+
+/**
+ * Whether the server software is IIS or something else
+ * @global bool $is_IIS
+ */
+$is_IIS = !$is_apache && (strpos($_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS') !== false || strpos($_SERVER['SERVER_SOFTWARE'], 'ExpressionDevServer') !== false);
+
+/**
+ * Whether the server software is IIS 7.X or greater
+ * @global bool $is_iis7
+ */
+$is_iis7 = $is_IIS && intval( substr( $_SERVER['SERVER_SOFTWARE'], strpos( $_SERVER['SERVER_SOFTWARE'], 'Microsoft-IIS/' ) + 14 ) ) >= 7;
