@@ -6927,6 +6927,10 @@ filename: wp-admin/install.php
 >>>> 
 >>>> **wp-includes/vars.php**
 >>>> 
+>>>>> [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
+>>>>> 
+>>>>> [`is_network_admin()`](https://developer.wordpress.org/reference/functions/is_network_admin/)
+>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
