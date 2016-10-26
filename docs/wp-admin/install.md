@@ -6935,6 +6935,8 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`create_initial_taxonomies()`](https://developer.wordpress.org/reference/functions/create_initial_taxonomies/)
 >>>> 
+>>>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
+>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
