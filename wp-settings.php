@@ -198,4 +198,7 @@ wp_cookie_constants();
 // Define and enforce our SSL constants
 wp_ssl_constants();
 
+// Create common globals.
+require( ABSPATH . WPINC . '/vars.php' );
+
 var_dump(__FILE__);
