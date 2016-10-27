@@ -8166,6 +8166,10 @@ filename: wp-admin/install.php
 >>>>>>> [`utf8_uri_encode()`](https://developer.wordpress.org/reference/functions/utf8_uri_encode/)
 >>>>>>> 
 >>>>>>>> [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
+>>>>>>>> 
+>>>>>>>> [`reset_mbstring_encoding()`](https://developer.wordpress.org/reference/functions/reset_mbstring_encoding/)
+>>>>>>>> 
+>>>>>>>>> [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
