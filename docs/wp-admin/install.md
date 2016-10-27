@@ -8164,6 +8164,8 @@ filename: wp-admin/install.php
 >>>>>> [`sanitize_title_with_dashes()`](https://developer.wordpress.org/reference/functions/sanitize_title_with_dashes/)
 >>>>>> 
 >>>>>>> [`utf8_uri_encode()`](https://developer.wordpress.org/reference/functions/utf8_uri_encode/)
+>>>>>>> 
+>>>>>>>> [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
