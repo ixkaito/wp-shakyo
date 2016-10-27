@@ -8161,7 +8161,9 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
 >>>>>> 
+>>>>>> [`sanitize_title_with_dashes()`](https://developer.wordpress.org/reference/functions/sanitize_title_with_dashes/)
 >>>>>> 
+>>>>>>> [`utf8_uri_encode()`](https://developer.wordpress.org/reference/functions/utf8_uri_encode/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
