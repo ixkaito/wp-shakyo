@@ -8115,6 +8115,8 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`register_taxonomy()`](https://developer.wordpress.org/reference/functions/register_taxonomy/)
 >>>>> 
+>>>>>> [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
+>>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
 >>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
