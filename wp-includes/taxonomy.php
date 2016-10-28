@@ -306,3 +306,63 @@ function register_taxonomy( $taxonomy, $object_type, $args = array() ) {
 	 */
 	do_action( 'registered_taxonomy', $taxonomy, $object_type, $args );
 }
+
+/**
+ * Builds an object with all taxonomy labels out of a taxonomy object
+ *
+ * Accepted keys of the label array in the taxonomy object:
+ * - name - general name for the taxonomy, usually plural. The same as and overridden by $tax->label. Default is Tags/Categories
+ * - singular_name - name for one object of this taxonomy. Default is Tag/Category
+ * - search_items - Default is Search Tags/Search Categories
+ * - popular_items - This string isn't used on hierarchical taxonomies. Default is Popular Tags
+ * - all_items - Default is All Tags/All Categories
+ * - parent_item - This string isn't used on non-hierarchical taxonomies. In hierarchical ones the default is Parent Category
+ * - parent_item_colon - The same as <code>parent_item</code>, but with colon <code>:</code> in the end
+ * - edit_item - Default is Edit Tag/Edit Category
+ * - view_item - Default is View Tag/View Category
+ * - update_item - Default is Update Tag/Update Category
+ * - add_new_item - Default is Add New Tag/Add New Category
+ * - new_item_name - Default is New Tag Name/New Category Name
+ * - separate_items_with_commas - This string isn't used on hierarchical taxonomies. Default is "Separate tags with commas", used in the meta box.
+ * - add_or_remove_items - This string isn't used on hierarchical taxonomies. Default is "Add or remove tags", used in the meta box when JavaScript is disabled.
+ * - choose_from_most_used - This string isn't used on hierarchical taxonomies. Default is "Choose from the most used tags", used in the meta box.
+ * - not_found - This string isn't used on hierarchical taxonomies. Default is "No tags found", used in the meta box.
+ *
+ * Above, the first default value is for non-hierarchical taxonomies (like tags) and the second one is for hierarchical taxonomies (like categories).
+ *
+ * @since 3.0.0
+ * @param object $tax Taxonomy object
+ * @return object object with all the labels as member variables
+ */
+
+function get_taxonomy_labels( $tax ) {
+	$tax->labels = (array) $tax->labels;
+
+	if ( isset( $tax->helps ) && empty( $tax->labels['separate_items_with_commas'] ) )
+		$tax->labels['separate_items_with_commas'] = $tax->helps;
+
+	if ( isset( $tax->no_tagcloud ) && empty( $tax->labels['not_found'] ) )
+		$tax->labels['not_found'] = $tax->no_tagcloud;
+
+	$nohier_vs_hier_defaults = array(
+		'name' => array( _x( 'Tags', 'taxonomy general name' ), _x( 'Categories', 'taxonomy general name' ) ),
+		'singular_name' => array( _x( 'Tag', 'taxonomy singular name' ), _x( 'Category', 'taxonomy singular name' ) ),
+		'search_items' => array( __( 'Search Tags' ), __( 'Search Categories' ) ),
+		'popular_items' => array( __( 'Popular Tags' ), null ),
+		'all_items' => array( __( 'All Tags' ), __( 'All Categories' ) ),
+		'parent_item' => array( null, __( 'Parent Category' ) ),
+		'parent_item_colon' => array( null, __( 'Parent Category:' ) ),
+		'edit_item' => array( __( 'Edit Tag' ), __( 'Edit Category' ) ),
+		'view_item' => array( __( 'View Tag' ), __( 'View Category' ) ),
+		'update_item' => array( __( 'Update Tag' ), __( 'Update Category' ) ),
+		'add_new_item' => array( __( 'Add New Tag' ), __( 'Add New Category' ) ),
+		'new_item_name' => array( __( 'New Tag Name' ), __( 'New Category Name' ) ),
+		'separate_items_with_commas' => array( __( 'Separate tags with commas' ), null ),
+		'add_or_remove_items' => array( __( 'Add or remove tags' ), null ),
+		'choose_from_most_used' => array( __( 'Choose from the most used tags' ), null ),
+		'not_found' => array( __( 'No tags found.' ), null ),
+	);
+	$nohier_vs_hier_defaults['menu_name'] = $nohier_vs_hier_defaults['name'];
+
+	return _get_custom_object_labels( $tax, $nohier_vs_hier_defaults );
+}
