@@ -9427,7 +9427,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> 
+>>>>> [`current_theme_supports()`](https://developer.wordpress.org/reference/functions/current_theme_supports/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
