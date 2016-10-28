@@ -9346,6 +9346,10 @@ filename: wp-admin/install.php
 >>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>> 
 >>>>>> [`add_rewrite_tag()`](https://developer.wordpress.org/reference/functions/add_rewrite_tag/)
+>>>>>> 
+>>>>>>> [`WP::add_query_var()`](https://developer.wordpress.org/reference/classes/wp/add_query_var/)
+>>>>>>> 
+>>>>>>> [`WP_Rewrite::add_rewrite_tag()`](https://developer.wordpress.org/reference/classes/wp_rewrite/add_rewrite_tag/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
