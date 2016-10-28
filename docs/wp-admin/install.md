@@ -9365,12 +9365,9 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>>> 
->>>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
+>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`registered_taxonomy`](https://developer.wordpress.org/reference/hooks/registered_taxonomy/)
 >>>>>> 
->>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
->>>>>>> 
->>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
->>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
