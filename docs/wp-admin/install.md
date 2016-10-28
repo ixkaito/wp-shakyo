@@ -9345,7 +9345,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>> 
->>>>>> 
+>>>>>> [`add_rewrite_tag()`](https://developer.wordpress.org/reference/functions/add_rewrite_tag/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 

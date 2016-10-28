@@ -7,6 +7,36 @@
  */
 
 /**
+ * Add a new rewrite tag (like %postname%).
+ *
+ * The $query parameter is optional. If it is omitted you must ensure that
+ * you call this on, or before, the 'init' hook. This is because $query defaults
+ * to "$tag=", and for this to work a new query var has to be added.
+ *
+ * @see WP_Rewrite::add_rewrite_tag()
+ * @since 2.1.0
+ *
+ * @param string $tag Name of the new rewrite tag.
+ * @param string $regex Regular expression to substitute the tag for in rewrite rules.
+ * @param string $query String to append to the rewritten query. Must end in '='. Optional.
+ */
+function add_rewrite_tag( $tag, $regex, $query = '' ) {
+	// validate the tag's name
+	if ( strlen( $tag ) < 3 || $tag[0] != '%' || $tag[ strlen($tag) - 1 ] != '%' )
+		return;
+
+	global $wp_rewrite, $wp;
+
+	if ( empty( $query ) ) {
+		$qv = trim( $tag, '%' );
+		$wp->add_query_var( $qv );
+		$query = $qv . '=';
+	}
+
+	$wp_rewrite->add_rewrite_tag( $tag, $regex, $query );
+}
+
+/**
  * Endpoint Mask for default, which is nothing.
  *
  * @since 2.1.0
