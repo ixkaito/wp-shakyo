@@ -37,6 +37,29 @@ function add_rewrite_tag( $tag, $regex, $query = '' ) {
 }
 
 /**
+ * Add permalink structure.
+ *
+ * @see WP_Rewrite::add_permastruct()
+ * @since 3.0.0
+ *
+ * @param string $name Name for permalink structure.
+ * @param string $struct Permalink structure.
+ * @param array $args Optional configuration for building the rules from the permalink structure,
+ *     see {@link WP_Rewrite::add_permastruct()} for full details.
+ */
+function add_permastruct( $name, $struct, $args = array() ) {
+	global $wp_rewrite;
+
+	// backwards compatibility for the old parameters: $with_front and $ep_mask
+	if ( ! is_array( $args ) )
+		$args = array( 'with_front' => $args );
+	if ( func_num_args() == 4 )
+		$args['ep_mask'] = func_get_arg( 3 );
+
+	return $wp_rewrite->add_permastruct( $name, $struct, $args );
+}
+
+/**
  * Endpoint Mask for default, which is nothing.
  *
  * @since 2.1.0
