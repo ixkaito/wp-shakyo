@@ -9428,6 +9428,13 @@ filename: wp-admin/install.php
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
 >>>>> [`current_theme_supports()`](https://developer.wordpress.org/reference/functions/current_theme_supports/)
+>>>>> 
+>>>>>> [`current_theme_supports()`](https://developer.wordpress.org/reference/functions/current_theme_supports/)
+>>>>>> 
+>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`current_theme_supports-{$feature}`](https://developer.wordpress.org/reference/hooks/current_theme_supports-feature/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
