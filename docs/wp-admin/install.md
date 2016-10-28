@@ -9360,6 +9360,17 @@ filename: wp-admin/install.php
 >>>>>>>>> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
 >>>>>> 
 >>>>>> [`get_taxonomy_labels()`](https://developer.wordpress.org/reference/functions/get_taxonomy_labels/)
+>>>>>> 
+>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>> 
+>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+>>>>>> 
+>>>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
+>>>>>> 
+>>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>>> 
+>>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+>>>>>> 
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
