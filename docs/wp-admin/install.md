@@ -9359,6 +9359,7 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>>> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
 >>>>>> 
+>>>>>> [`get_taxonomy_labels()`](https://developer.wordpress.org/reference/functions/get_taxonomy_labels/)
 >>>>> 
 >>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
 >>>>> 
