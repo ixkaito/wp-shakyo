@@ -452,6 +452,107 @@ function register_post_type( $post_type, $args = array() ) {
 }
 
 /**
+ * Build an object with all post type capabilities out of a post type object
+ *
+ * Post type capabilities use the 'capability_type' argument as a base, if the
+ * capability is not set in the 'capabilities' argument array or if the
+ * 'capabilities' argument is not supplied.
+ *
+ * The capability_type argument can optionally be registered as an array, with
+ * the first value being singular and the second plural, e.g. array('story, 'stories')
+ * Otherwise, an 's' will be added to the value for the plural form. After
+ * registration, capability_type will always be a string of the singular value.
+ *
+ * By default, seven keys are accepted as part of the capabilities array:
+ *
+ * - edit_post, read_post, and delete_post are meta capabilities, which are then
+ *   generally mapped to corresponding primitive capabilities depending on the
+ *   context, which would be the post being edited/read/deleted and the user or
+ *   role being checked. Thus these capabilities would generally not be granted
+ *   directly to users or roles.
+ *
+ * - edit_posts - Controls whether objects of this post type can be edited.
+ * - edit_others_posts - Controls whether objects of this type owned by other users
+ *   can be edited. If the post type does not support an author, then this will
+ *   behave like edit_posts.
+ * - publish_posts - Controls publishing objects of this post type.
+ * - read_private_posts - Controls whether private objects can be read.
+ *
+ * These four primitive capabilities are checked in core in various locations.
+ * There are also seven other primitive capabilities which are not referenced
+ * directly in core, except in map_meta_cap(), which takes the three aforementioned
+ * meta capabilities and translates them into one or more primitive capabilities
+ * that must then be checked against the user or role, depending on the context.
+ *
+ * - read - Controls whether objects of this post type can be read.
+ * - delete_posts - Controls whether objects of this post type can be deleted.
+ * - delete_private_posts - Controls whether private objects can be deleted.
+ * - delete_published_posts - Controls whether published objects can be deleted.
+ * - delete_others_posts - Controls whether objects owned by other users can be
+ *   can be deleted. If the post type does not support an author, then this will
+ *   behave like delete_posts.
+ * - edit_private_posts - Controls whether private objects can be edited.
+ * - edit_published_posts - Controls whether published objects can be edited.
+ *
+ * These additional capabilities are only used in map_meta_cap(). Thus, they are
+ * only assigned by default if the post type is registered with the 'map_meta_cap'
+ * argument set to true (default is false).
+ *
+ * @since 3.0.0
+ *
+ * @see register_post_type()
+ * @see map_meta_cap()
+ *
+ * @param object $args Post type registration arguments.
+ * @return object object with all the capabilities as member variables.
+ */
+function get_post_type_capabilities( $args ) {
+	if ( ! is_array( $args->capability_type ) )
+		$args->capability_type = array( $args->capability_type, $args->capability_type . 's' );
+
+	// Singular base for meta capabilities, plural base for primitive capabilities.
+	list( $singular_base, $plural_base ) = $args->capability_type;
+
+	$default_capabilities = array(
+		// Meta capabilities
+		'edit_post'          => 'edit_'         . $singular_base,
+		'read_post'          => 'read_'         . $singular_base,
+		'delete_post'        => 'delete_'       . $singular_base,
+		// Primitive capabilities used outside of map_meta_cap():
+		'edit_posts'         => 'edit_'         . $plural_base,
+		'edit_others_posts'  => 'edit_others_'  . $plural_base,
+		'publish_posts'      => 'publish_'      . $plural_base,
+		'read_private_posts' => 'read_private_' . $plural_base,
+	);
+
+	// Primitive capabilities used within map_meta_cap():
+	if ( $args->map_meta_cap ) {
+		$default_capabilities_for_mapping = array(
+			'read'                   => 'read',
+			'delete_posts'           => 'delete_'           . $plural_base,
+			'delete_private_posts'   => 'delete_private_'   . $plural_base,
+			'delete_published_posts' => 'delete_published_' . $plural_base,
+			'delete_others_posts'    => 'delete_others_'    . $plural_base,
+			'edit_private_posts'     => 'edit_private_'     . $plural_base,
+			'edit_published_posts'   => 'edit_published_'   . $plural_base,
+		);
+		$default_capabilities = array_merge( $default_capabilities, $default_capabilities_for_mapping );
+	}
+
+	$capabilities = array_merge( $default_capabilities, $args->capabilities );
+
+	// Post creation capability simply maps to edit_posts by default:
+	if ( ! isset( $capabilities['create_posts'] ) )
+		$capabilities['create_posts'] = $capabilities['edit_posts'];
+
+	// Remember meta capabilities for future reference.
+	if ( $args->map_meta_cap )
+		_post_type_meta_capabilities( $capabilities );
+
+	return (object) $capabilities;
+}
+
+/**
  * Build an object with custom-something object (post type, taxonomy) labels
  * out of a custom-something object
  *
