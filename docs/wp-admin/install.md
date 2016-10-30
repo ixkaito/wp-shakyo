@@ -10703,6 +10703,21 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`get_post_type_labels()`](https://developer.wordpress.org/reference/functions/get_post_type_labels/)
 >>>>>> 
+>>>>>>> [`_x()`](https://developer.wordpress.org/reference/functions/_x/)
+>>>>>>> 
+>>>>>>>> [`translate_with_gettext_context()`](https://developer.wordpress.org/reference/functions/translate_with_gettext_context/)
+>>>>>>>> 
+>>>>>>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
+>>>>>>>>> 
+>>>>>>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>>>>>>> 
+>>>>>>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
+>>>>>>>>> 
+>>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext_with_context`](https://developer.wordpress.org/reference/hooks/gettext_with_context/)
+>>>>>>>>> 
+>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
+>>>>>> 
 >>>>>> `register_taxonomy_for_object_type()`
 >>>>>> 
 >>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`registered_post_type`](https://developer.wordpress.org/reference/hooks/registered_post_type/)
