@@ -10731,6 +10731,11 @@ filename: wp-admin/install.php
 >>>>>>>>> 
 >>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
+>>>>>>> `_get_custom_object_labels`
+>>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`post_type_labels_{$post_type}`](https://developer.wordpress.org/reference/hooks/post_type_labels_post_type/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
 >>>>>> `register_taxonomy_for_object_type()`
 >>>>>> 
