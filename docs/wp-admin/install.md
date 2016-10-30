@@ -9493,6 +9493,8 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`get_post_type_capabilities()`](https://developer.wordpress.org/reference/functions/get_post_type_capabilities/)
 >>>>>> 
+>>>>>>> [`_post_type_meta_capabilities()`](https://developer.wordpress.org/reference/functions/_post_type_meta_capabilities/)
+>>>>>> 
 >>>>>> [`add_post_type_support()`](https://developer.wordpress.org/reference/functions/add_post_type_support/)
 >>>>>> 
 >>>>>> [`sanitize_title_with_dashes()`](https://developer.wordpress.org/reference/functions/sanitize_title_with_dashes/)
