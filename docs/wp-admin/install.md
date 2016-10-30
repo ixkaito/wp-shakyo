@@ -10701,7 +10701,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>>> 
->>>>>> `get_post_type_labels()`
+>>>>>> [`get_post_type_labels()`](https://developer.wordpress.org/reference/functions/get_post_type_labels/)
 >>>>>> 
 >>>>>> `register_taxonomy_for_object_type()`
 >>>>>> 
