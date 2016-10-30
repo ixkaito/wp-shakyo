@@ -366,3 +366,28 @@ function get_taxonomy_labels( $tax ) {
 
 	return _get_custom_object_labels( $tax, $nohier_vs_hier_defaults );
 }
+
+/**
+ * Add an already registered taxonomy to an object type.
+ *
+ * @since 3.0.0
+ * @uses $wp_taxonomies Modifies taxonomy object
+ *
+ * @param string $taxonomy Name of taxonomy object
+ * @param string $object_type Name of the object type
+ * @return bool True if successful, false if not
+ */
+function register_taxonomy_for_object_type( $taxonomy, $object_type) {
+	global $wp_taxonomies;
+
+	if ( !isset($wp_taxonomies[$taxonomy]) )
+		return false;
+
+	if ( ! get_post_type_object($object_type) )
+		return false;
+
+	if ( ! in_array( $object_type, $wp_taxonomies[$taxonomy]->object_type ) )
+		$wp_taxonomies[$taxonomy]->object_type[] = $object_type;
+
+	return true;
+}
