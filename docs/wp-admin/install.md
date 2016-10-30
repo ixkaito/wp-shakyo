@@ -9445,6 +9445,10 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`sanitize_key()`](https://developer.wordpress.org/reference/functions/sanitize_key/)
 >>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`sanitize_key`](https://developer.wordpress.org/reference/hooks/sanitize_key/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
 >>>>>> [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
 >>>>>> 
 >>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`doing_it_wrong_run`](https://developer.wordpress.org/reference/hooks/doing_it_wrong_run/)
