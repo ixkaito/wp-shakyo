@@ -571,6 +571,75 @@ function _post_type_meta_capabilities( $capabilities = null ) {
 }
 
 /**
+ * Build an object with all post type labels out of a post type object
+ *
+ * Accepted keys of the label array in the post type object:
+ *
+ * - name - general name for the post type, usually plural. The same and overridden
+ *          by $post_type_object->label. Default is Posts/Pages
+ * - singular_name - name for one object of this post type. Default is Post/Page
+ * - add_new - Default is Add New for both hierarchical and non-hierarchical types.
+ *             When internationalizing this string, please use a gettext context
+ *             {@see http://codex.wordpress.org/I18n_for_WordPress_Developers#Disambiguation_by_context}
+ *             matching your post type. Example: <code>_x('Add New', 'product');</code>.
+ * - add_new_item - Default is Add New Post/Add New Page.
+ * - edit_item - Default is Edit Post/Edit Page.
+ * - new_item - Default is New Post/New Page.
+ * - view_item - Default is View Post/View Page.
+ * - search_items - Default is Search Posts/Search Pages.
+ * - not_found - Default is No posts found/No pages found.
+ * - not_found_in_trash - Default is No posts found in Trash/No pages found in Trash.
+ * - parent_item_colon - This string isn't used on non-hierarchical types. In hierarchical
+ *                       ones the default is 'Parent Page:'.
+ * - all_items - String for the submenu. Default is All Posts/All Pages.
+ * - menu_name - Default is the same as <code>name</code>.
+ *
+ * Above, the first default value is for non-hierarchical post types (like posts)
+ * and the second one is for hierarchical post types (like pages).
+ *
+ * @since 3.0.0
+ * @access private
+ *
+ * @param object $post_type_object Post type object.
+ * @return object object with all the labels as member variables.
+ */
+function get_post_type_labels( $post_type_object ) {
+	$nohier_vs_hier_defaults = array(
+		'name' => array( _x('Posts', 'post type general name'), _x('Pages', 'post type general name') ),
+		'singular_name' => array( _x('Post', 'post type singular name'), _x('Page', 'post type singular name') ),
+		'add_new' => array( _x('Add New', 'post'), _x('Add New', 'page') ),
+		'add_new_item' => array( __('Add New Post'), __('Add New Page') ),
+		'edit_item' => array( __('Edit Post'), __('Edit Page') ),
+		'new_item' => array( __('New Post'), __('New Page') ),
+		'view_item' => array( __('View Post'), __('View Page') ),
+		'search_items' => array( __('Search Posts'), __('Search Pages') ),
+		'not_found' => array( __('No posts found.'), __('No pages found.') ),
+		'not_found_in_trash' => array( __('No posts found in Trash.'), __('No pages found in Trash.') ),
+		'parent_item_colon' => array( null, __('Parent Page:') ),
+		'all_items' => array( __( 'All Posts' ), __( 'All Pages' ) )
+	);
+	$nohier_vs_hier_defaults['menu_name'] = $nohier_vs_hier_defaults['name'];
+
+	$labels = _get_custom_object_labels( $post_type_object, $nohier_vs_hier_defaults );
+
+	$post_type = $post_type_object->name;
+
+	/**
+	 * Filter the labels of a specific post type.
+	 *
+	 * The dynamic portion of the hook name, $post_type, refers to
+	 * the post type slug.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @see get_post_type_labels() for the full list of labels.
+	 *
+	 * @param array $labels Array of labels for the given post type.
+	 */
+	return apply_filters( "post_type_labels_{$post_type}", $labels );
+}
+
+/**
  * Build an object with custom-something object (post type, taxonomy) labels
  * out of a custom-something object
  *
