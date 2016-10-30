@@ -10737,7 +10737,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
->>>>>> `register_taxonomy_for_object_type()`
+>>>>>> [`register_taxonomy_for_object_type()`](https://developer.wordpress.org/reference/functions/register_taxonomy_for_object_type/)
 >>>>>> 
 >>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`registered_post_type`](https://developer.wordpress.org/reference/hooks/registered_post_type/)
 >>>>>> 
