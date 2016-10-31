@@ -10739,7 +10739,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`register_taxonomy_for_object_type()`](https://developer.wordpress.org/reference/functions/register_taxonomy_for_object_type/)
 >>>>>> 
->>>>>>> `get_post_type_object()`
+>>>>>>> [`get_post_type_object()`](https://developer.wordpress.org/reference/functions/get_post_type_object/)
 >>>>>> 
 >>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`registered_post_type`](https://developer.wordpress.org/reference/hooks/registered_post_type/)
 >>>>>> 
