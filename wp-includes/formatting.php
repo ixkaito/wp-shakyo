@@ -153,6 +153,21 @@ function sanitize_title_with_dashes( $title, $raw_title = '', $context = 'displa
 }
 
 /**
+ * Removes trailing forward slashes and backslashes if they exist.
+ *
+ * The primary use of this is for paths and thus should be used for paths. It is
+ * not restricted to paths and offers no specific path support.
+ *
+ * @since 2.2.0
+ *
+ * @param string $string What to remove the trailing slashes from.
+ * @return string String without the trailing slashes.
+ */
+function untrailingslashit( $string ) {
+	return rtrim( $string, '/\\' );
+}
+
+/**
  * Perform a deep string replace operation to ensure the values in $search are no longer present
  *
  * Repeats the replacement operation until it no longer replaces anything so as to remove "nested" values
