@@ -10690,6 +10690,8 @@ filename: wp-admin/install.php
 >>>>>> [`add_rewrite_rule()`](https://developer.wordpress.org/reference/functions/add_rewrite_rule/)
 >>>>>> 
 >>>>>>> [`WP_Rewrite::add_rule()`](https://developer.wordpress.org/reference/classes/wp_rewrite/add_rule/)
+>>>>>>> 
+>>>>>>>> [`add_query_arg()`](https://developer.wordpress.org/reference/functions/add_query_arg/)
 >>>>>> 
 >>>>>> [`add_permastruct()`](https://developer.wordpress.org/reference/functions/add_permastruct/)
 >>>>>> 
