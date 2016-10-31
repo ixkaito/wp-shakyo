@@ -206,4 +206,7 @@ require( ABSPATH . WPINC . '/vars.php' );
 create_initial_taxonomies();
 create_initial_post_types();
 
+// Register the default theme directory root
+register_theme_directory( get_theme_root() );
+
 var_dump(__FILE__);
