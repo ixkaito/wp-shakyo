@@ -7,6 +7,21 @@
  */
 
 /**
+ * Add a straight rewrite rule.
+ *
+ * @see WP_Rewrite::add_rule() for long description.
+ * @since 2.1.0
+ *
+ * @param string $regex Regular Expression to match request against.
+ * @param string $redirect Page to redirect to.
+ * @param string $after Optional, default is 'bottom'. Where to add rule, can also be 'top'.
+ */
+function add_rewrite_rule($regex, $redirect, $after = 'bottom') {
+	global $wp_rewrite;
+	$wp_rewrite->add_rule($regex, $redirect, $after);
+}
+
+/**
  * Add a new rewrite tag (like %postname%).
  *
  * The $query parameter is optional. If it is omitted you must ensure that
