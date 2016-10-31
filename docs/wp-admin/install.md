@@ -10794,6 +10794,10 @@ filename: wp-admin/install.php
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
 >>>>> [`_n_noop()`](https://developer.wordpress.org/reference/functions/_n_noop/)
+>>>> 
+>>>> [`register_theme_directory()`](https://developer.wordpress.org/reference/functions/register_theme_directory/)
+>>>> 
+>>>>> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
