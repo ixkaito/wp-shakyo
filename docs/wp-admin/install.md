@@ -10777,12 +10777,15 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`register_post_status()`](https://developer.wordpress.org/reference/functions/register_post_status/)
 >>>>> 
+>>>>>> [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
+>>>>>> 
+>>>>>>> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
+>>>>>> 
 >>>>>> [`sanitize_key()`](https://developer.wordpress.org/reference/functions/sanitize_key/)
 >>>>>> 
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`sanitize_key`](https://developer.wordpress.org/reference/hooks/sanitize_key/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>>>> 
 >>>>> 
 >>>>> [`_n_noop()`](https://developer.wordpress.org/reference/functions/_n_noop/)
 > 
