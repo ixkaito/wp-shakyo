@@ -10687,6 +10687,8 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>> [`WP_Rewrite::add_rewrite_tag()`](https://developer.wordpress.org/reference/classes/wp_rewrite/add_rewrite_tag/)
 >>>>>> 
+>>>>>> `add_rewrite_rule()`
+>>>>>> 
 >>>>>> [`add_permastruct()`](https://developer.wordpress.org/reference/functions/add_permastruct/)
 >>>>>> 
 >>>>>>> [`WP_Rewrite::add_permastruct()`](https://developer.wordpress.org/reference/classes/wp_rewrite/add_permastruct/)
