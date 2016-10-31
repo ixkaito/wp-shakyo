@@ -110,6 +110,34 @@ function _x( $text, $context, $domain = 'default' ) {
 }
 
 /**
+ * Register plural strings in POT file, but don't translate them.
+ *
+ * Used when you want to keep structures with translatable plural
+ * strings and use them later.
+ *
+ * Example:
+ * <code>
+ * $messages = array(
+ *  	'post' => _n_noop('%s post', '%s posts'),
+ *  	'page' => _n_noop('%s pages', '%s pages')
+ * );
+ * ...
+ * $message = $messages[$type];
+ * $usable_text = sprintf( translate_nooped_plural( $message, $count ), $count );
+ * </code>
+ *
+ * @since 2.5.0
+ *
+ * @param string $singular Single form to be i18ned.
+ * @param string $plural   Plural form to be i18ned.
+ * @param string $domain   Optional. Text domain. Unique identifier for retrieving translated strings.
+ * @return array array($singular, $plural)
+ */
+function _n_noop( $singular, $plural, $domain = null ) {
+	return array( 0 => $singular, 1 => $plural, 'singular' => $singular, 'plural' => $plural, 'context' => null, 'domain' => $domain );
+}
+
+/**
  * Return the Translations instance for a text domain.
  *
  * If there isn't one, returns empty Translations instance.
