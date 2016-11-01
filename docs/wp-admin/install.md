@@ -11975,7 +11975,13 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`get_theme_roots()`](https://developer.wordpress.org/reference/functions/get_theme_roots/)
 >>>>>> 
->>>>>>> `get_site_transient()`
+>>>>>>> [`get_site_transient()`](https://developer.wordpress.org/reference/functions/get_site_transient/)
+>>>>>>> 
+>>>>>>>> 
+>>>>>>>> 
+>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_transient_{$transient}`](https://developer.wordpress.org/reference/hooks/site_transient_transient/)
+>>>>>>>> 
+>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
 >>>>>>> `search_theme_directories()`
 >>>>> 
