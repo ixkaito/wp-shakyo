@@ -10801,6 +10801,12 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`get_theme_root()`](https://developer.wordpress.org/reference/functions/get_theme_root/)
 >>>> 
+>>>>> `get_raw_theme_root()`
+>>>>> 
+>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`theme_root`](https://developer.wordpress.org/reference/hooks/theme_root/)
+>>>>> 
+>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 >>>> `wp_get_active_and_valid_plugins()`
 >>>> 
 >>>> `wp_register_plugin_realpath()`
