@@ -11977,7 +11977,15 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`get_site_transient()`](https://developer.wordpress.org/reference/functions/get_site_transient/)
 >>>>>>> 
+>>>>>>>> [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
 >>>>>>>> 
+>>>>>>>>> [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
+>>>>>>>>> 
+>>>>>>>>>> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
+>>>>>>>> 
+>>>>>>>> `delete_site_option()`
+>>>>>>>> 
+>>>>>>>> `get_site_option()`
 >>>>>>>> 
 >>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_transient_{$transient}`](https://developer.wordpress.org/reference/hooks/site_transient_transient/)
 >>>>>>>> 
