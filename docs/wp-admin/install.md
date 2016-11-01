@@ -10801,7 +10801,9 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`get_theme_root()`](https://developer.wordpress.org/reference/functions/get_theme_root/)
 >>>> 
->>>>> `get_raw_theme_root()`
+>>>>> [`get_raw_theme_root()`](https://developer.wordpress.org/reference/functions/get_raw_theme_root/)
+>>>>> 
+>>>>>> 
 >>>>> 
 >>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`theme_root`](https://developer.wordpress.org/reference/hooks/theme_root/)
 >>>>> 
