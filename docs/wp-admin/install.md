@@ -11973,7 +11973,11 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>> 
->>>>>> `get_theme_roots()`
+>>>>>> [`get_theme_roots()`](https://developer.wordpress.org/reference/functions/get_theme_roots/)
+>>>>>> 
+>>>>>>> `get_site_transient()`
+>>>>>>> 
+>>>>>>> `search_theme_directories()`
 >>>>> 
 >>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`theme_root`](https://developer.wordpress.org/reference/hooks/theme_root/)
 >>>>> 
