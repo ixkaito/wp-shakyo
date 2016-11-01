@@ -246,3 +246,69 @@ function get_site_option( $option, $default = false, $use_cache = true ) {
 	 */
  	return apply_filters( 'site_option_' . $option, $value );
 }
+
+/**
+ * Get the value of a site transient.
+ *
+ * If the transient does not exist, does not have a value, or has expired,
+ * then the return value will be false.
+ *
+ * @since 2.9.0
+ *
+ * @see get_transient()
+ *
+ * @param string $transient Transient name. Expected to not be SQL-escaped.
+ * @return mixed Value of transient.
+ */
+function get_site_transient( $transient ) {
+
+	/**
+	 * Filter the value of an existing site transient.
+	 *
+	 * The dynamic portion of the hook name, $transient, refers to the transient name.
+	 *
+	 * Passing a truthy value to the filter will effectively short-circuit retrieval,
+	 * returning the passed value instead.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param mixed $pre_site_transient The default value to return if the site transient does not exist.
+	 *                                  Any value other than false will short-circuit the retrieval
+	 *                                  of the transient, and return the returned value.
+	 */
+	$pre = apply_filters( 'pre_site_transient_' . $transient, false );
+
+	if ( false !== $pre )
+		return $pre;
+
+	if ( wp_using_ext_object_cache() ) {
+		$value = wp_cache_get( $transient, 'site-transient' );
+	} else {
+		// Core transients that do not have a timeout. Listed here so querying timeouts can be avoided.
+		$no_timeout = array('update_core', 'update_plugins', 'update_themes');
+		$transient_option = '_site_transient_' . $transient;
+		if ( ! in_array( $transient, $no_timeout ) ) {
+			$transient_timeout = '_site_transient_timeout_' . $transient;
+			$timeout = get_site_option( $transient_timeout );
+			if ( false !== $timeout && $timeout < time() ) {
+				delete_site_option( $transient_option  );
+				delete_site_option( $transient_timeout );
+				$value = false;
+			}
+		}
+
+		if ( ! isset( $value ) )
+			$value = get_site_option( $transient_option );
+	}
+
+	/**
+	 * Filter the value of an existing site transient.
+	 *
+	 * The dynamic portion of the hook name, $transient, refers to the transient name.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param mixed $value Value of site transient.
+	 */
+	return apply_filters( 'site_transient_' . $transient, $value );
+}
