@@ -10799,7 +10799,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
 >>>> 
->>>> `get_theme_root()`
+>>>> [`get_theme_root()`](https://developer.wordpress.org/reference/functions/get_theme_root/)
 >>>> 
 >>>> `wp_get_active_and_valid_plugins()`
 >>>> 
