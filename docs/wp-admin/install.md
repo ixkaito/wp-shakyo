@@ -11977,6 +11977,8 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`get_site_transient()`](https://developer.wordpress.org/reference/functions/get_site_transient/)
 >>>>>>> 
+>>>>>>>> [`wp_using_ext_object_cache()`](https://developer.wordpress.org/reference/functions/wp_using_ext_object_cache/)
+>>>>>>>> 
 >>>>>>>> [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
 >>>>>>>> 
 >>>>>>>>> [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
