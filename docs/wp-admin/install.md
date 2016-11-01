@@ -10799,6 +10799,8 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
 >>>> 
+>>>> `get_theme_root()`
+>>>> 
 >>>> `wp_get_active_and_valid_plugins()`
 >>>> 
 >>>> `wp_register_plugin_realpath()`
