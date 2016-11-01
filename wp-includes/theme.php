@@ -7,6 +7,27 @@
  */
 
 /**
+ * Retrieve theme roots.
+ *
+ * @since 2.9.0
+ *
+ * @return array|string An array of theme roots keyed by template/stylesheet or a single theme root if all themes have the same root.
+ */
+function get_theme_roots() {
+	global $wp_theme_directories;
+
+	if ( count($wp_theme_directories) <= 1 )
+		return '/themes';
+
+	$theme_roots = get_site_transient( 'theme_roots' );
+	if ( false === $theme_roots ) {
+		search_theme_directories( true ); // Regenerate the transient.
+		$theme_roots = get_site_transient( 'theme_roots' );
+	}
+	return $theme_roots;
+}
+
+/**
  * Register a directory that contains themes.
  *
  * @since 2.9.0
