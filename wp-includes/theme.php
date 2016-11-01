@@ -70,6 +70,40 @@ function get_theme_root( $stylesheet_or_template = false ) {
 	return apply_filters( 'theme_root', $theme_root );
 }
 
+/**
+ * Get the raw theme root relative to the content directory with no filters applied.
+ *
+ * @since 3.1.0
+ *
+ * @param string $stylesheet_or_template The stylesheet or template name of the theme
+ * @param bool $skip_cache Optional. Whether to skip the cache. Defaults to false, meaning the cache is used.
+ * @return string Theme root
+ */
+function get_raw_theme_root( $stylesheet_or_template, $skip_cache = false ) {
+	global $wp_theme_directories;
+
+	if ( count($wp_theme_directories) <= 1 )
+		return '/themes';
+
+	$theme_root = false;
+
+	// If requesting the root for the current theme, consult options to avoid calling get_theme_roots()
+	if ( ! $skip_cache ) {
+		if ( get_option('stylesheet') == $stylesheet_or_template )
+			$theme_root = get_option('stylesheet_root');
+		elseif ( get_option('template') == $stylesheet_or_template )
+			$theme_root = get_option('template_root');
+	}
+
+	if ( empty($theme_root) ) {
+		$theme_roots = get_theme_roots();
+		if ( !empty($theme_roots[$stylesheet_or_template]) )
+			$theme_root = $theme_roots[$stylesheet_or_template];
+	}
+
+	return $theme_root;
+}
+
 add_action('setup_theme', 'preview_theme');
 
 add_action( 'wp_loaded', '_custom_header_background_just_in_time' );
