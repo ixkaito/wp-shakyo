@@ -10798,6 +10798,10 @@ filename: wp-admin/install.php
 >>>> [`register_theme_directory()`](https://developer.wordpress.org/reference/functions/register_theme_directory/)
 >>>> 
 >>>>> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
+>>>> 
+>>>> `wp_get_active_and_valid_plugins()`
+>>>> 
+>>>> `wp_register_plugin_realpath()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
