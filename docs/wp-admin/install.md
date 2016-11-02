@@ -11991,6 +11991,14 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>> [`delete_site_option()`](https://developer.wordpress.org/reference/functions/delete_site_option/)
 >>>>>>>> 
+>>>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`pre_delete_site_option_{$option}`](https://developer.wordpress.org/reference/hooks/pre_delete_site_option_option-5/)
+>>>>>>>>> 
+>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>>>> 
+>>>>>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+>>>>>>>>> 
+>>>>>>>>> `delete_option()`
+>>>>>>>>> 
 >>>>>>>>> [`wpdb::get_row()`](https://developer.wordpress.org/reference/classes/wpdb/get_row/)
 >>>>>>>>> 
 >>>>>>>>>> [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
