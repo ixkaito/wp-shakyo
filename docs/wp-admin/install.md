@@ -11991,6 +11991,10 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>> [`delete_site_option()`](https://developer.wordpress.org/reference/functions/delete_site_option/)
 >>>>>>>> 
+>>>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`delete_site_option_{$option}`](https://developer.wordpress.org/reference/hooks/delete_site_option_option-5/)
+>>>>>>>>> 
+>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>>>> 
 >>>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`delete_site_option`](https://developer.wordpress.org/reference/hooks/delete_site_option-5/)
 >>>>>>>>> 
 >>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
