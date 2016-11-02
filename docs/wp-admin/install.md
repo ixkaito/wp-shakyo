@@ -11989,7 +11989,11 @@ filename: wp-admin/install.php
 >>>>>>>>> 
 >>>>>>>>>> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
 >>>>>>>> 
->>>>>>>> `delete_site_option()`
+>>>>>>>> [`delete_site_option()`](https://developer.wordpress.org/reference/functions/delete_site_option/)
+>>>>>>>> 
+>>>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`delete_site_option`](https://developer.wordpress.org/reference/hooks/delete_site_option-5/)
+>>>>>>>>> 
+>>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>>> 
 >>>>>>>> `get_site_option()`
 >>>>>>>> 
