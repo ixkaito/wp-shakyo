@@ -11994,6 +11994,8 @@ filename: wp-admin/install.php
 >>>>>>>>> [`wp_cache_delete`](https://developer.wordpress.org/reference/functions/wp_cache_delete/)
 >>>>>>>>> 
 >>>>>>>>>> [`WP_Object_Cache::delete()`](https://developer.wordpress.org/reference/classes/wp_object_cache/delete/)
+>>>>>>>>>> 
+>>>>>>>>>>> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
 >>>>>>>>> 
 >>>>>>>>> [`wpdb::delete()`](https://developer.wordpress.org/reference/classes/wpdb/delete/)
 >>>>>>>>> 
