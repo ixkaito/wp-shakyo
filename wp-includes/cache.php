@@ -321,6 +321,17 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Utility function to determine whether a key exists in the cache.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @access protected
+	 */
+	protected function _exists( $key, $group ) {
+		return isset( $this->cache[ $group ] ) && ( isset( $this->cache[ $group ][ $key ] ) || array_key_exists( $key, $this->cache[ $group ] ) );
+	}
+
+	/**
 	 * Sets the list of global groups.
 	 *
 	 * @since 3.0.0
