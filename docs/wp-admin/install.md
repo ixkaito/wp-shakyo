@@ -11991,6 +11991,8 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>> [`delete_site_option()`](https://developer.wordpress.org/reference/functions/delete_site_option/)
 >>>>>>>> 
+>>>>>>>>> `wp_cache_delete`
+>>>>>>>>> 
 >>>>>>>>> [`wpdb::delete()`](https://developer.wordpress.org/reference/classes/wpdb/delete/)
 >>>>>>>>> 
 >>>>>>>>>> [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
