@@ -248,6 +248,70 @@ function get_site_option( $option, $default = false, $use_cache = true ) {
 }
 
 /**
+ * Removes site option by name.
+ *
+ * @since 2.8.0
+ *
+ * @see delete_option()
+ *
+ * @param string $option Name of option to remove. Expected to not be SQL-escaped.
+ * @return bool True, if succeed. False, if failure.
+ */
+function delete_site_option( $option ) {
+	global $wpdb;
+
+	// ms_protect_special_option( $option ); @todo
+
+	/**
+	 * Fires immediately before a specific site option is deleted.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 3.0.0
+	 */
+	do_action( 'pre_delete_site_option_' . $option );
+
+	if ( !is_multisite() ) {
+		$result = delete_option( $option );
+	} else {
+		$row = $wpdb->get_row( $wpdb->prepare( "SELECT meta_id FROM {$wpdb->sitemeta} WHERE meta_key = %s AND site_id = %d", $option, $wpdb->siteid ) );
+		if ( is_null( $row ) || !$row->meta_id )
+			return false;
+		$cache_key = "{$wpdb->siteid}:$option";
+		wp_cache_delete( $cache_key, 'site-options' );
+
+		$result = $wpdb->delete( $wpdb->sitemeta, array( 'meta_key' => $option, 'site_id' => $wpdb->siteid ) );
+	}
+
+	if ( $result ) {
+
+		/**
+		 * Fires after a specific site option has been deleted.
+		 *
+		 * The dynamic portion of the hook name, $option, refers to the option name.
+		 *
+		 * @since 2.9.0 As "delete_site_option_{$key}"
+		 * @since 3.0.0
+		 *
+		 * @param string $option Name of the site option.
+		 */
+		do_action( "delete_site_option_{$option}", $option );
+
+		/**
+		 * Fires after a site option has been deleted.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string $option Name of the site option.
+		 */
+		do_action( "delete_site_option", $option );
+
+		return true;
+	}
+	return false;
+}
+
+/**
  * Get the value of a site transient.
  *
  * If the transient does not exist, does not have a value, or has expired,
