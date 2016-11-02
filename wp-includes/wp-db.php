@@ -1447,6 +1447,48 @@ class wpdb {
 	}
 
 	/**
+	 * Delete a row in the table
+	 *
+	 * <code>
+	 * wpdb::delete( 'table', array( 'ID' => 1 ) )
+	 * wpdb::delete( 'table', array( 'ID' => 1 ), array( '%d' ) )
+	 * </code>
+	 *
+	 * @since 3.4.0
+	 * @see wpdb::prepare()
+	 * @see wpdb::$field_types
+	 * @see wp_set_wpdb_vars()
+	 *
+	 * @param string $table table name
+	 * @param array $where A named array of WHERE clauses (in column => value pairs). Multiple clauses will be joined with ANDs. Both $where columns and $where values should be "raw".
+	 * @param array|string $where_format Optional. An array of formats to be mapped to each of the values in $where. If string, that format will be used for all of the items in $where. A format is one of '%d', '%f', '%s' (integer, float, string). If omitted, all values in $where will be treated as strings unless otherwise specified in wpdb::$field_types.
+	 * @return int|false The number of rows updated, or false on error.
+	 */
+	public function delete( $table, $where, $where_format = null ) {
+		if ( ! is_array( $where ) )
+			return false;
+
+		$wheres = array();
+
+		$where_formats = $where_format = (array) $where_format;
+
+		foreach ( array_keys( $where ) as $field ) {
+			if ( !empty( $where_format ) ) {
+				$form = ( $form = array_shift( $where_formats ) ) ? $form : $where_format[0];
+			} elseif ( isset( $this->field_types[ $field ] ) ) {
+				$form = $this->field_types[ $field ];
+			} else {
+				$form = '%s';
+			}
+
+			$wheres[] = "$field = $form";
+		}
+
+		$sql = "DELETE FROM $table WHERE " . implode( ' AND ', $wheres );
+		return $this->query( $this->prepare( $sql, $where ) );
+	}
+
+	/**
 	 * Retrieve one variable from the database.
 	 *
 	 * Executes a SQL query and returns the value from the SQL result.
