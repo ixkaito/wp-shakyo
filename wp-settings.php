@@ -216,4 +216,8 @@ foreach ( wp_get_active_and_valid_plugins() as $plugin ) {
 }
 unset( $plugin );
 
+// Load pluggable functions.
+require( ABSPATH . WPINC . '/pluggable.php' );
+require( ABSPATH . WPINC . '/pluggable-deprecated.php' );
+
 var_dump(__FILE__);
