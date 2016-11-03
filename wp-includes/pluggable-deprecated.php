@@ -10,3 +10,24 @@
  * @subpackage Deprecated
  * @see pluggable.php
  */
+
+if ( !function_exists('set_current_user') ) :
+endif;
+
+if ( !function_exists('get_userdatabylogin') ) :
+endif;
+
+if ( !function_exists('get_user_by_email') ) :
+endif;
+
+if ( !function_exists('wp_setcookie') ) :
+endif;
+
+if ( !function_exists('wp_clearcookie') ) :
+endif;
+
+if ( !function_exists('wp_get_cookie_login') ):
+endif;
+
+if ( !function_exists('wp_login') ) :
+endif;
