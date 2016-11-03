@@ -246,6 +246,20 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Sets the list of global groups.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param array $groups List of groups that are global.
+	 */
+	public function add_global_groups( $groups ) {
+		$groups = (array) $groups;
+
+		$groups = array_fill_keys( $groups, true );
+		$this->global_groups = array_merge( $this->global_groups, $groups );
+	}
+
+	/**
 	 * Remove the contents of the cache key in the group
 	 *
 	 * If the cache key does not exist in the group, then nothing will happen.
@@ -270,6 +284,44 @@ class WP_Object_Cache {
 
 		unset( $this->cache[$group][$key] );
 		return true;
+	}
+
+	/**
+	 * Retrieves the cache contents, if it exists
+	 *
+	 * The contents will be first attempted to be retrieved by searching by the
+	 * key in the cache group. If the cache is hit (success) then the contents
+	 * are returned.
+	 *
+	 * On failure, the number of cache misses will be incremented.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int|string $key What the contents in the cache are called
+	 * @param string $group Where the cache contents are grouped
+	 * @param string $force Whether to force a refetch rather than relying on the local cache (default is false)
+	 * @return bool|mixed False on failure to retrieve contents or the cache
+	 *		contents on success
+	 */
+	public function get( $key, $group = 'default', $force = false, &$found = null ) {
+		if ( empty( $group ) )
+			$group = 'default';
+
+		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
+			$key = $this->blog_prefix . $key;
+
+		if ( $this->_exists( $key, $group ) ) {
+			$found = true;
+			$this->cache_hits += 1;
+			if ( is_object($this->cache[$group][$key]) )
+				return clone $this->cache[$group][$key];
+			else
+				return $this->cache[$group][$key];
+		}
+
+		$found = false;
+		$this->cache_misses += 1;
+		return false;
 	}
 
 	/**
@@ -318,69 +370,6 @@ class WP_Object_Cache {
 	public function switch_to_blog( $blog_id ) {
 		$blog_id = (int) $blog_id;
 		$this->blog_prefix = $this->multisite ? $blog_id . ':' : '';
-	}
-
-	/**
-	 * Utility function to determine whether a key exists in the cache.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @access protected
-	 */
-	protected function _exists( $key, $group ) {
-		return isset( $this->cache[ $group ] ) && ( isset( $this->cache[ $group ][ $key ] ) || array_key_exists( $key, $this->cache[ $group ] ) );
-	}
-
-	/**
-	 * Sets the list of global groups.
-	 *
-	 * @since 3.0.0
-	 *
-	 * @param array $groups List of groups that are global.
-	 */
-	public function add_global_groups( $groups ) {
-		$groups = (array) $groups;
-
-		$groups = array_fill_keys( $groups, true );
-		$this->global_groups = array_merge( $this->global_groups, $groups );
-	}
-
-	/**
-	 * Retrieves the cache contents, if it exists
-	 *
-	 * The contents will be first attempted to be retrieved by searching by the
-	 * key in the cache group. If the cache is hit (success) then the contents
-	 * are returned.
-	 *
-	 * On failure, the number of cache misses will be incremented.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @param int|string $key What the contents in the cache are called
-	 * @param string $group Where the cache contents are grouped
-	 * @param string $force Whether to force a refetch rather than relying on the local cache (default is false)
-	 * @return bool|mixed False on failure to retrieve contents or the cache
-	 *		contents on success
-	 */
-	public function get( $key, $group = 'default', $force = false, &$found = null ) {
-		if ( empty( $group ) )
-			$group = 'default';
-
-		if ( $this->multisite && ! isset( $this->global_groups[ $group ] ) )
-			$key = $this->blog_prefix . $key;
-
-		if ( $this->_exists( $key, $group ) ) {
-			$found = true;
-			$this->cache_hits += 1;
-			if ( is_object($this->cache[$group][$key]) )
-				return clone $this->cache[$group][$key];
-			else
-				return $this->cache[$group][$key];
-		}
-
-		$found = false;
-		$this->cache_misses += 1;
-		return false;
 	}
 
 	/**
