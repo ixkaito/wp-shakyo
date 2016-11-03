@@ -14402,6 +14402,10 @@ filename: wp-admin/install.php
 >>>>> `validate_file()`
 >>>> 
 >>>> `wp_register_plugin_realpath()`
+>>>> 
+>>>> **wp-includes/pluggable.php**
+>>>> 
+>>>> **wp-includes/pluggable-deprecated.php**
 > 
 > **wp-admin/includes/upgrade.php**
 > 
