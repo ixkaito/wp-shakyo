@@ -530,6 +530,23 @@ function wp_get_active_and_valid_plugins() {
 }
 
 /**
+ * Set internal encoding.
+ *
+ * In most cases the default internal encoding is latin1, which is
+ * of no use, since we want to use the `mb_` functions for `utf-8` strings.
+ *
+ * @since 3.0.0
+ * @access private
+ */
+function wp_set_internal_encoding() {
+	if ( function_exists( 'mb_internal_encoding' ) ) {
+		$charset = get_option( 'blog_charset' );
+		if ( ! $charset || ! @mb_internal_encoding( $charset ) )
+			mb_internal_encoding( 'UTF-8' );
+	}
+}
+
+/**
  * Runs just before PHP shuts down execution.
  *
  * @since 1.2.0
