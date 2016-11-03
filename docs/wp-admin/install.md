@@ -14398,6 +14398,8 @@ filename: wp-admin/install.php
 >>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 >>>>> 
 >>>>> `wp_get_active_network_plugins()`
+>>>>> 
+>>>>> `validate_file()`
 >>>> 
 >>>> `wp_register_plugin_realpath()`
 > 
