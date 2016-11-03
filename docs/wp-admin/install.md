@@ -13221,7 +13221,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
->>>> `wp_get_active_and_valid_plugins()`
+>>>> [`wp_get_active_and_valid_plugins()`](https://developer.wordpress.org/reference/functions/wp_get_active_and_valid_plugins/)
 >>>> 
 >>>> `wp_register_plugin_realpath()`
 > 
