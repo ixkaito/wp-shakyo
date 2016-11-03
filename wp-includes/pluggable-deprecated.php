@@ -21,6 +21,8 @@ if ( !function_exists('get_user_by_email') ) :
 endif;
 
 if ( !function_exists('wp_setcookie') ) :
+else :
+	_deprecated_function( 'wp_setcookie', '2.5', 'wp_set_auth_cookie()' );
 endif;
 
 if ( !function_exists('wp_clearcookie') ) :
