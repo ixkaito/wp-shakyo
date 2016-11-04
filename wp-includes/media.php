@@ -20,6 +20,17 @@ add_shortcode( 'audio', 'wp_audio_shortcode' );
 add_shortcode( 'video', 'wp_video_shortcode' );
 
 /**
+ * Register an embed handler. This function should probably only be used for sites that do not support oEmbed.
+ *
+ * @since 2.9.0
+ * @see WP_Embed::register_handler()
+ */
+function wp_embed_register_handler( $id, $regex, $callback, $priority = 10 ) {
+	global $wp_embed;
+	$wp_embed->register_handler( $id, $regex, $callback, $priority );
+}
+
+/**
  * Determines if default embed handlers should be loaded.
  *
  * Checks to make sure that the embeds library hasn't already been loaded. If
