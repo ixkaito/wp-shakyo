@@ -223,4 +223,8 @@ require( ABSPATH . WPINC . '/pluggable-deprecated.php' );
 // Set internal encoding.
 wp_set_internal_encoding();
 
+// Run wp_cache_postload() if object cache is enabled and the function exists.
+if ( WP_CACHE && function_exists( 'wp_cache_postload' ) )
+	wp_cache_postload();
+
 var_dump(__FILE__);
