@@ -15583,6 +15583,12 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_maybe_load_widgets()`](https://developer.wordpress.org/reference/functions/wp_maybe_load_widgets/)
 >>>> 
+>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`load_default_widgets`](https://developer.wordpress.org/reference/hooks/load_default_widgets/)
+>>>>> 
+>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> **wp-includes/default-widgets.php**
+>>>>> 
 >>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
 >>>>> 
 >>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
