@@ -15605,7 +15605,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>>> [`WP_Embed::register_handler()`](https://developer.wordpress.org/reference/classes/wp_embed/register_handler/)
 >>>>> 
->>>>> `wp_get_audio_extensions()`
+>>>>> [`wp_get_audio_extensions()`](https://developer.wordpress.org/reference/functions/wp_get_audio_extensions/)
 >>>>> 
 >>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_audio_embed_handler`](https://developer.wordpress.org/reference/hooks/wp_audio_embed_handler/)
 >>>>> 
