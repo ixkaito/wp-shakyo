@@ -15632,6 +15632,8 @@ filename: wp-admin/install.php
 >>>>> [`_wp_customize_include()`](https://developer.wordpress.org/reference/functions/_wp_customize_include/)
 >>>>> 
 >>>>>> [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
+>>>>>> 
+>>>>>> **wp-includes/class-wp-customize-manager.php**
 > 
 > **wp-admin/includes/upgrade.php**
 > 
