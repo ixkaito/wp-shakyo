@@ -15625,7 +15625,11 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
->>>> `_wp_customize_include()`
+>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`plugins_loaded`](https://developer.wordpress.org/reference/hooks/plugins_loaded/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> `_wp_customize_include()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
