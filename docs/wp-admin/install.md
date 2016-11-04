@@ -15629,7 +15629,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `_wp_customize_include()`
+>>>>> [`_wp_customize_include()`](https://developer.wordpress.org/reference/functions/_wp_customize_include/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
