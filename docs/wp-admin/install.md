@@ -15603,7 +15603,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`wp_embed_register_handler()`](https://developer.wordpress.org/reference/functions/wp_embed_register_handler/)
 >>>>> 
->>>>>> `WP_Embed::register_handler()`
+>>>>>> [`WP_Embed::register_handler()`](https://developer.wordpress.org/reference/classes/wp_embed/register_handler/)
 >>>>> 
 >>>>> `wp_get_audio_extensions()`
 >>>>> 
