@@ -227,4 +227,13 @@ wp_set_internal_encoding();
 if ( WP_CACHE && function_exists( 'wp_cache_postload' ) )
 	wp_cache_postload();
 
+/**
+ * Fires once activated plugins have loaded.
+ *
+ * Pluggable functions are also available at this point in the loading order.
+ *
+ * @since 1.5.0
+ */
+do_action( 'plugins_loaded' );
+
 var_dump(__FILE__);

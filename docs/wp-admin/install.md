@@ -15578,7 +15578,8 @@ filename: wp-admin/install.php
 >>>>>> [`maybe_unserialize()`](https://developer.wordpress.org/reference/functions/maybe_unserialize/)
 >>>>>> 
 >>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
->>>>> 
+>>>> 
+>>>> `wp_cache_postload()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
