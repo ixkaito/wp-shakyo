@@ -15601,7 +15601,9 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `wp_embed_register_handler()`
+>>>>> [`wp_embed_register_handler()`](https://developer.wordpress.org/reference/functions/wp_embed_register_handler/)
+>>>>> 
+>>>>>> `WP_Embed::register_handler()`
 >>>>> 
 >>>>> `wp_get_audio_extensions()`
 >>>>> 
