@@ -15595,7 +15595,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>> 
->>>> `wp_maybe_load_embeds()`
+>>>> [`wp_maybe_load_embeds()`](https://developer.wordpress.org/reference/functions/wp_maybe_load_embeds/)
 >>>> 
 >>>> `_wp_customize_include()`
 > 
