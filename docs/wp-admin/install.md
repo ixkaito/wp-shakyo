@@ -14407,7 +14407,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> **wp-includes/pluggable-deprecated.php**
 >>>> 
->>>> `wp_set_internal_encoding()`
+>>>> [`wp_set_internal_encoding()`](https://developer.wordpress.org/reference/functions/wp_set_internal_encoding/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
