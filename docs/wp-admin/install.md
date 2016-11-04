@@ -15607,6 +15607,10 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`wp_get_audio_extensions()`](https://developer.wordpress.org/reference/functions/wp_get_audio_extensions/)
 >>>>> 
+>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_audio_extensions`](https://developer.wordpress.org/reference/hooks/wp_audio_extensions/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
 >>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_audio_embed_handler`](https://developer.wordpress.org/reference/hooks/wp_audio_embed_handler/)
 >>>>> 
 >>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
