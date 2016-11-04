@@ -15580,6 +15580,12 @@ filename: wp-admin/install.php
 >>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>> 
 >>>> `wp_cache_postload()`
+>>>> 
+>>>> `wp_maybe_load_widgets()`
+>>>> 
+>>>> `wp_maybe_load_embeds()`
+>>>> 
+>>>> `_wp_customize_include()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
