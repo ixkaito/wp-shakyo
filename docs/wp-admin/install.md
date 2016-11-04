@@ -15634,6 +15634,10 @@ filename: wp-admin/install.php
 >>>>>> [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
 >>>>>> 
 >>>>>> **wp-includes/class-wp-customize-manager.php**
+>>>>>> 
+>>>>>> `new WP_Customize_Manager()`
+>>>>>> 
+>>>>>>> `WP_Customize_Manager::__construct()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
