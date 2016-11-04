@@ -15597,6 +15597,24 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_maybe_load_embeds()`](https://developer.wordpress.org/reference/functions/wp_maybe_load_embeds/)
 >>>> 
+>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`load_default_embeds`](https://developer.wordpress.org/reference/hooks/load_default_embeds/)
+>>>>> 
+>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> `wp_embed_register_handler()`
+>>>>> 
+>>>>> `wp_get_audio_extensions()`
+>>>>> 
+>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_audio_embed_handler`](https://developer.wordpress.org/reference/hooks/wp_audio_embed_handler/)
+>>>>> 
+>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> `wp_get_video_extensions()`
+>>>>> 
+>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_video_embed_handler`](https://developer.wordpress.org/reference/hooks/wp_video_embed_handler/)
+>>>>> 
+>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 >>>> `_wp_customize_include()`
 > 
 > **wp-admin/includes/upgrade.php**
