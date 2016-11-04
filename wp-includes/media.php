@@ -35,6 +35,24 @@ function wp_get_audio_extensions() {
 
 add_shortcode( 'audio', 'wp_audio_shortcode' );
 
+/**
+ * Return a filtered list of WP-supported video formats
+ *
+ * @since 3.6.0
+ * @return array
+ */
+function wp_get_video_extensions() {
+	/**
+	 * Filter the list of supported video formats.
+	 *
+	 * @since 3.6.0
+	 *
+	 * @param array $extensions An array of support video formats. Defaults are
+	 *                          'mp4', 'm4v', 'webm', 'ogv', 'wmv', 'flv'.
+	 */
+	return apply_filters( 'wp_video_extensions', array( 'mp4', 'm4v', 'webm', 'ogv', 'wmv', 'flv' ) );
+}
+
 add_shortcode( 'video', 'wp_video_shortcode' );
 
 /**
