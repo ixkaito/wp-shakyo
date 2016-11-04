@@ -320,6 +320,35 @@ function wp_parse_args( $args, $defaults = '' ) {
 }
 
 /**
+ * Determines if Widgets library should be loaded.
+ *
+ * Checks to make sure that the widgets library hasn't already been loaded.
+ * If it hasn't, then it will load the widgets library and run an action hook.
+ *
+ * @since 2.2.0
+ */
+function wp_maybe_load_widgets() {
+	/**
+	 * Filter whether to load the Widgets library.
+	 *
+	 * Passing a falsey value to the filter will effectively short-circuit
+	 * the Widgets library from loading.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param bool $wp_maybe_load_widgets Whether to load the Widgets library.
+	 *                                    Default true.
+	 */
+	if ( ! apply_filters( 'load_default_widgets', true ) ) {
+		return;
+	}
+
+	require_once( ABSPATH . WPINC . '/default-widgets.php' );
+
+	add_action( '_admin_menu', 'wp_widgets_add_menu' );
+}
+
+/**
  * Flush all output buffers for PHP 5.2.
  *
  * Make sure all output buffers are flushed before our singletons are destroyed.
