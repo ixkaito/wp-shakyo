@@ -15581,7 +15581,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> `wp_cache_postload()`
 >>>> 
->>>> `wp_maybe_load_widgets()`
+>>>> [`wp_maybe_load_widgets()`](https://developer.wordpress.org/reference/functions/wp_maybe_load_widgets/)
 >>>> 
 >>>> `wp_maybe_load_embeds()`
 >>>> 
