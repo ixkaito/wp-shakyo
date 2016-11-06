@@ -15638,6 +15638,8 @@ filename: wp-admin/install.php
 >>>>>> `new WP_Customize_Manager()`
 >>>>>> 
 >>>>>>> `WP_Customize_Manager::__construct()`
+>>>> 
+>>>> `wp_functionality_constants()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
