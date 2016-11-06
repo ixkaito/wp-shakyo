@@ -15646,6 +15646,10 @@ filename: wp-admin/install.php
 >>>>> `stripslashes_deep()`
 >>>>> 
 >>>>> [`add_magic_quotes()`](https://developer.wordpress.org/reference/functions/add_magic_quotes/)
+>>>> 
+>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`sanitize_comment_cookies`](https://developer.wordpress.org/reference/hooks/sanitize_comment_cookies/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
