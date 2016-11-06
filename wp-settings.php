@@ -236,4 +236,7 @@ if ( WP_CACHE && function_exists( 'wp_cache_postload' ) )
  */
 do_action( 'plugins_loaded' );
 
+// Define constants which affect functionality if not already defined.
+wp_functionality_constants();
+
 var_dump(__FILE__);
