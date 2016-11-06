@@ -15641,7 +15641,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_functionality_constants()`](https://developer.wordpress.org/reference/functions/wp_functionality_constants/)
 >>>> 
->>>> `wp_magic_quotes()`
+>>>> [`wp_magic_quotes()`](https://developer.wordpress.org/reference/functions/wp_magic_quotes/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
