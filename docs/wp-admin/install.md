@@ -15639,7 +15639,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> `WP_Customize_Manager::__construct()`
 >>>> 
->>>> `wp_functionality_constants()`
+>>>> [`wp_functionality_constants()`](https://developer.wordpress.org/reference/functions/wp_functionality_constants/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
