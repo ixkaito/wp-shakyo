@@ -15650,6 +15650,8 @@ filename: wp-admin/install.php
 >>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`sanitize_comment_cookies`](https://developer.wordpress.org/reference/hooks/sanitize_comment_cookies/)
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> `sanitize_comment_cookies()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
