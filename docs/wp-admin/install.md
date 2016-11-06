@@ -15645,7 +15645,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> `stripslashes_deep()`
 >>>>> 
->>>>> `add_magic_quotes()`
+>>>>> [`add_magic_quotes()`](https://developer.wordpress.org/reference/functions/add_magic_quotes/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
