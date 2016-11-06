@@ -242,4 +242,11 @@ wp_functionality_constants();
 // Add magic quotes and set up $_REQUEST ( $_GET + $_POST )
 wp_magic_quotes();
 
+/**
+ * Fires when comment cookies are sanitized.
+ *
+ * @since 2.0.11
+ */
+do_action( 'sanitize_comment_cookies' );
+
 var_dump(__FILE__);
