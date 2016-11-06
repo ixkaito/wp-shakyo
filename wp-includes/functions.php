@@ -22,6 +22,25 @@ function maybe_unserialize( $original ) {
 }
 
 /**
+ * Walks the array while sanitizing the contents.
+ *
+ * @since 0.71
+ *
+ * @param array $array Array to walk while sanitizing contents.
+ * @return array Sanitized $array.
+ */
+function add_magic_quotes( $array ) {
+	foreach ( (array) $array as $k => $v ) {
+		if ( is_array( $v ) ) {
+			$array[$k] = add_magic_quotes( $v );
+		} else {
+			$array[$k] = addslashes( $v );
+		}
+	}
+	return $array;
+}
+
+/**
  * Retrieve the description for the HTTP status.
  *
  * @since 2.3.0
