@@ -15653,6 +15653,8 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`sanitize_comment_cookies()`](https://developer.wordpress.org/reference/functions/sanitize_comment_cookies/)
 >>>>> 
+>>>>>> `esc_attr()`
+>>>>>> 
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_comment_author_url`](https://developer.wordpress.org/reference/hooks/pre_comment_author_url/)
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
