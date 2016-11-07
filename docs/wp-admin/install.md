@@ -15667,7 +15667,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> `wp_unslash()`
 >>>>>> 
->>>>>> `esc_attr()`
+>>>>>> [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
