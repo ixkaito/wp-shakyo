@@ -15652,6 +15652,8 @@ filename: wp-admin/install.php
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
 >>>>> [`sanitize_comment_cookies()`](https://developer.wordpress.org/reference/functions/sanitize_comment_cookies/)
+>>>>> 
+>>>>>> `wp_unslash()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
