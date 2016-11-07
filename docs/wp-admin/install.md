@@ -15669,9 +15669,9 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
 >>>>>> 
->>>>>>> `wp_check_invalid_utf8()`
+>>>>>>> [`wp_check_invalid_utf8()`](https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/)
 >>>>>>> 
->>>>>>> `_wp_specialchars()`
+>>>>>>> [`_wp_specialchars()`](https://developer.wordpress.org/reference/functions/_wp_specialchars/)
 >>>>>>> 
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`attribute_escape`](https://developer.wordpress.org/reference/hooks/attribute_escape/)
 >>>>>>> 
