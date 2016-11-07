@@ -15673,6 +15673,8 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>> [`_wp_specialchars()`](https://developer.wordpress.org/reference/functions/_wp_specialchars/)
 >>>>>>> 
+>>>>>>>> [`wp_specialchars_decode()`](https://developer.wordpress.org/reference/functions/wp_specialchars_decode/)
+>>>>>>>> 
 >>>>>>>> [`wp_kses_normalize_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities/)
 >>>>>>> 
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`attribute_escape`](https://developer.wordpress.org/reference/hooks/attribute_escape/)
