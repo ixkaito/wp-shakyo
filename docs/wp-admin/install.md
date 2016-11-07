@@ -15668,6 +15668,10 @@ filename: wp-admin/install.php
 >>>>>> `wp_unslash()`
 >>>>>> 
 >>>>>> [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
+>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`attribute_escape`](https://developer.wordpress.org/reference/hooks/attribute_escape/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
