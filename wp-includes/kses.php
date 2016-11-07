@@ -480,6 +480,31 @@ function wp_kses_no_null($string) {
 	return $string;
 }
 
+/**
+ * Converts and fixes HTML entities.
+ *
+ * This function normalizes HTML entities. It will convert "AT&T" to the correct
+ * "AT&amp;T", "&#00058;" to "&#58;", "&#XYZZY;" to "&amp;#XYZZY;" and so on.
+ *
+ * @since 1.0.0
+ *
+ * @param string $string Content to normalize entities
+ * @return string Content with normalized entities
+ */
+function wp_kses_normalize_entities($string) {
+	# Disarm all entities by converting & to &amp;
+
+	$string = str_replace('&', '&amp;', $string);
+
+	# Change back the allowed entities in our entity whitelist
+
+	$string = preg_replace_callback('/&amp;([A-Za-z]{2,8}[0-9]{0,2});/', 'wp_kses_named_entities', $string);
+	$string = preg_replace_callback('/&amp;#(0*[0-9]{1,7});/', 'wp_kses_normalize_entities2', $string);
+	$string = preg_replace_callback('/&amp;#[Xx](0*[0-9A-Fa-f]{1,6});/', 'wp_kses_normalize_entities3', $string);
+
+	return $string;
+}
+
 add_action('init', 'kses_init');
 add_action('set_current_user', 'kses_init');
 
