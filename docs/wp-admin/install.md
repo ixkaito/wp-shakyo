@@ -17360,6 +17360,8 @@ filename: wp-admin/install.php
 >>>> [`new WP_Query()`](https://developer.wordpress.org/reference/classes/wp_query/)
 >>>> 
 >>>>> [`WP_Query::__construct()`](https://developer.wordpress.org/reference/classes/wp_query/__construct/)
+>>>>> 
+>>>>>> [`WP_Query::query()`](https://developer.wordpress.org/reference/classes/wp_query/query/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
