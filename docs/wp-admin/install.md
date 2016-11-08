@@ -17357,7 +17357,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
->>>> `new WP_Query()`
+>>>> [`new WP_Query()`](https://developer.wordpress.org/reference/classes/wp_query/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
