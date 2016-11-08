@@ -17362,6 +17362,14 @@ filename: wp-admin/install.php
 >>>>> [`WP_Query::__construct()`](https://developer.wordpress.org/reference/classes/wp_query/__construct/)
 >>>>> 
 >>>>>> [`WP_Query::query()`](https://developer.wordpress.org/reference/classes/wp_query/query/)
+>>>>>> 
+>>>>>>> `WP_Query::init()`
+>>>>>>> 
+>>>>>>> [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
+>>>>>>> 
+>>>>>>>> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
+>>>>>>> 
+>>>>>>> `WP_Query::get_posts()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
