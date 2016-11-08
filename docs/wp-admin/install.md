@@ -17349,7 +17349,6 @@ filename: wp-admin/install.php
 >>>>>>>>>>> 
 >>>>>>>>>>> [`WP_Object_Cache::set()`](https://developer.wordpress.org/reference/classes/wp_object_cache/set/)
 >>>>>>>> 
->>>>>>>> 
 >>>>>>>> [`wp_specialchars_decode()`](https://developer.wordpress.org/reference/functions/wp_specialchars_decode/)
 >>>>>>>> 
 >>>>>>>> [`wp_kses_normalize_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities/)
@@ -17357,6 +17356,8 @@ filename: wp-admin/install.php
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`attribute_escape`](https://developer.wordpress.org/reference/hooks/attribute_escape/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
+>>>> `new WP_Query()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
