@@ -17370,6 +17370,8 @@ filename: wp-admin/install.php
 >>>>>>>> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
 >>>>>>> 
 >>>>>>> `WP_Query::get_posts()`
+>>>> 
+>>>> `new WP_Rewrite()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
