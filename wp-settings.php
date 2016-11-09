@@ -256,4 +256,12 @@ do_action( 'sanitize_comment_cookies' );
  */
 $GLOBALS['wp_the_query'] = new WP_Query();
 
+/**
+ * Holds the reference to @see $wp_the_query
+ * Use this global for WordPress queries
+ * @global object $wp_query
+ * @since 1.5.0
+ */
+$GLOBALS['wp_query'] = $GLOBALS['wp_the_query'];
+
 var_dump(__FILE__);
