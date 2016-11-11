@@ -271,4 +271,11 @@ $GLOBALS['wp_query'] = $GLOBALS['wp_the_query'];
  */
 $GLOBALS['wp_rewrite'] = new WP_Rewrite();
 
+/**
+ * WordPress Object
+ * @global object $wp
+ * @since 2.0.0
+ */
+$GLOBALS['wp'] = new WP();
+
 var_dump(__FILE__);
