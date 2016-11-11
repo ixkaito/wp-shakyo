@@ -185,3 +185,20 @@ define( 'EP_ALL_ARCHIVES', EP_DATE | EP_YEAR | EP_MONTH | EP_DAY | EP_CATEGORIES
  * @since 2.1.0
  */
 define( 'EP_ALL', EP_PERMALINK | EP_ATTACHMENT | EP_ROOT | EP_COMMENTS | EP_SEARCH | EP_PAGES | EP_ALL_ARCHIVES );
+
+/**
+ * WordPress Rewrite Component.
+ *
+ * The WordPress Rewrite class writes the rewrite module rules to the .htaccess
+ * file. It also handles parsing the request to get the correct setup for the
+ * WordPress Query class.
+ *
+ * The Rewrite along with WP class function as a front controller for WordPress.
+ * You can add rules to trigger your page view and processing using this
+ * component. The full functionality of a front controller does not exist,
+ * meaning you can't define how the template files load based on the rewrite
+ * rules.
+ *
+ * @since 1.5.0
+ */
+class WP_Rewrite {}
