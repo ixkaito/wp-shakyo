@@ -13,6 +13,15 @@
  * @subpackage Widgets
  */
 
+/**
+ * Singleton that registers and instantiates WP_Widget classes.
+ *
+ * @package WordPress
+ * @subpackage Widgets
+ * @since 2.8.0
+ */
+class WP_Widget_Factory {}
+
 /* Global Variables */
 
 /** @ignore */
