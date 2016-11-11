@@ -20,7 +20,9 @@
  * @subpackage Widgets
  * @since 2.8.0
  */
-class WP_Widget_Factory {}
+class WP_Widget_Factory {
+	public $widgets = array();
+}
 
 /* Global Variables */
 
