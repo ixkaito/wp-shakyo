@@ -17376,6 +17376,9 @@ filename: wp-admin/install.php
 >>>>> [`WP_Rewrite::__construct()`](https://developer.wordpress.org/reference/classes/wp_rewrite/__construct/)
 >>>>> 
 >>>>>> [`WP_Rewrite::init()`](https://developer.wordpress.org/reference/classes/wp_rewrite/init/)
+>>>>>> 
+>>>>>>> [`WP_Rewrite::using_index_permalinks()`](https://developer.wordpress.org/reference/classes/wp_rewrite/using_index_permalinks/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
