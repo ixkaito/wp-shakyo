@@ -538,6 +538,27 @@ class WP_Rewrite {
 	var $feeds = array( 'feed', 'rdf', 'rss', 'rss2', 'atom' );
 
 	/**
+	 * Whether permalinks are being used and rewrite module is not enabled.
+	 *
+	 * Means that permalink links are enabled and index.php is in the URL.
+	 *
+	 * @since 1.5.0
+	 * @access public
+	 *
+	 * @return bool
+	 */
+	public function using_index_permalinks() {
+		if ( empty($this->permalink_structure) )
+			return false;
+
+		// If the index is not in the permalink, we're using mod_rewrite.
+		if ( preg_match('#^/*' . $this->index . '#', $this->permalink_structure) )
+			return true;
+
+		return false;
+	}
+
+	/**
 	 * Sets up the object's properties.
 	 *
 	 * The 'use_verbose_page_rules' object property will be set to true if the
