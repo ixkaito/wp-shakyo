@@ -18549,6 +18549,8 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>> [`WP_Rewrite::using_index_permalinks()`](https://developer.wordpress.org/reference/classes/wp_rewrite/using_index_permalinks/)
 >>>> 
+>>>> [`new WP()`]()
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
