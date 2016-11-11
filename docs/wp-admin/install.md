@@ -17372,6 +17372,8 @@ filename: wp-admin/install.php
 >>>>>>> `WP_Query::get_posts()`
 >>>> 
 >>>> [`new WP_Rewrite()`](https://developer.wordpress.org/reference/classes/wp_rewrite/)
+>>>> 
+>>>>> [`WP_Rewrite::__construct()`](https://developer.wordpress.org/reference/classes/wp_rewrite/__construct/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
