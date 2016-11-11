@@ -18551,6 +18551,8 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`new WP()`](https://developer.wordpress.org/reference/classes/wp/)
 >>>> 
+>>>> [`new WP_Widget_Factory()`](https://developer.wordpress.org/reference/classes/wp_widget_factory/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
