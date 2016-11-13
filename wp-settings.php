@@ -285,4 +285,11 @@ $GLOBALS['wp'] = new WP();
  */
 $GLOBALS['wp_widget_factory'] = new WP_Widget_Factory();
 
+/**
+ * WordPress User Roles
+ * @global object $wp_roles
+ * @since 2.0.0
+ */
+$GLOBALS['wp_roles'] = new WP_Roles();
+
 var_dump(__FILE__);
