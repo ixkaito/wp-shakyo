@@ -18553,7 +18553,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`new WP_Widget_Factory()`](https://developer.wordpress.org/reference/classes/wp_widget_factory/)
 >>>> 
->>>> `new WP_Roles()`
+>>>> [`new WP_Roles()`](https://developer.wordpress.org/reference/classes/wp_roles/)
 >>>> 
 > 
 > **wp-admin/includes/upgrade.php**
