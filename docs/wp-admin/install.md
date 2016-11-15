@@ -19745,6 +19745,8 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`get_template_directory()`](https://developer.wordpress.org/reference/functions/get_template_directory/)
 >>>>> 
+>>>>>> `get_template()`
+>>>>> 
 >>>>> `get_stylesheet_directory()`
 > 
 > **wp-admin/includes/upgrade.php**
