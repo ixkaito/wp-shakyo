@@ -23349,7 +23349,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`get_stylesheet_directory()`](https://developer.wordpress.org/reference/functions/get_stylesheet_directory/)
 >>>>> 
->>>>>> [`get_stylesheet()`]
+>>>>>> [`get_stylesheet()`](https://developer.wordpress.org/reference/functions/get_stylesheet/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
