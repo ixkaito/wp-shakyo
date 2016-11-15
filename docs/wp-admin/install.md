@@ -19743,7 +19743,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`wp_templating_constants()`](https://developer.wordpress.org/reference/functions/wp_templating_constants/)
 >>>> 
->>>>> `get_template_directory()`
+>>>>> [`get_template_directory()`](https://developer.wordpress.org/reference/functions/get_template_directory/)
 >>>>> 
 >>>>> `get_stylesheet_directory()`
 > 
