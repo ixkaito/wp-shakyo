@@ -24521,6 +24521,10 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`stylesheet`](https://developer.wordpress.org/reference/hooks/stylesheet/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
