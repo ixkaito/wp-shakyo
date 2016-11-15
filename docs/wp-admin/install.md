@@ -19741,6 +19741,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`preview_theme()`](https://developer.wordpress.org/reference/functions/preview_theme/)
 >>>> 
+>>>> [`wp_templating_constants()`]
 > 
 > **wp-admin/includes/upgrade.php**
 > 
