@@ -19746,6 +19746,11 @@ filename: wp-admin/install.php
 >>>>> [`get_template_directory()`](https://developer.wordpress.org/reference/functions/get_template_directory/)
 >>>>> 
 >>>>>> [`get_template()`](https://developer.wordpress.org/reference/functions/get_template/)
+>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`template`](https://developer.wordpress.org/reference/hooks/template/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
 >>>>> 
 >>>>> `get_stylesheet_directory()`
 > 
