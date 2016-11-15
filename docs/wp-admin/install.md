@@ -19738,6 +19738,8 @@ filename: wp-admin/install.php
 >>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`setup_theme`](https://developer.wordpress.org/reference/hooks/setup_theme/)
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> `preview_theme`
 >>>> 
 > 
 > **wp-admin/includes/upgrade.php**
