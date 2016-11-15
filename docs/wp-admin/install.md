@@ -18555,6 +18555,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`new WP_Roles()`](https://developer.wordpress.org/reference/classes/wp_roles/)
 >>>> 
+>>>>> [`WP_Roles::__construct()`](https://developer.wordpress.org/reference/classes/wp_roles/__construct/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
