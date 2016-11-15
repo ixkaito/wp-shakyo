@@ -19734,6 +19734,11 @@ filename: wp-admin/install.php
 >>>>>>> [`new WP_Role()`](https://developer.wordpress.org/reference/classes/wp_role/)
 >>>>>>> 
 >>>>>>>> [`WP_Role::__construct()`](https://developer.wordpress.org/reference/classes/wp_role/__construct/)
+>>>> 
+>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`setup_theme`](https://developer.wordpress.org/reference/hooks/setup_theme/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
