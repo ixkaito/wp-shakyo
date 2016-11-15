@@ -19739,7 +19739,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `preview_theme`
+>>>>> [`preview_theme()`](https://developer.wordpress.org/reference/functions/preview_theme/)
 >>>> 
 > 
 > **wp-admin/includes/upgrade.php**
