@@ -292,4 +292,11 @@ $GLOBALS['wp_widget_factory'] = new WP_Widget_Factory();
  */
 $GLOBALS['wp_roles'] = new WP_Roles();
 
+/**
+ * Fires before the theme is loaded.
+ *
+ * @since 2.6.0
+ */
+do_action( 'setup_theme' );
+
 var_dump(__FILE__);
