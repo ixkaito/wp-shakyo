@@ -26953,6 +26953,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`load_default_textdomain()`](https://developer.wordpress.org/reference/functions/load_default_textdomain/)
 >>>> 
+>>>>> `get_locale()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
