@@ -29982,6 +29982,8 @@ filename: wp-admin/install.php
 >>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`unload_textdomain`](https://developer.wordpress.org/reference/hooks/unload_textdomain/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
+>>>>>> `load_textdomain()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
