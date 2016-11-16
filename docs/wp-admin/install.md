@@ -26950,7 +26950,8 @@ filename: wp-admin/install.php
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`stylesheet_directory`](https://developer.wordpress.org/reference/hooks/stylesheet_directory/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>>>>> 
+>>>> 
+>>>> `load_default_textdomain()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
