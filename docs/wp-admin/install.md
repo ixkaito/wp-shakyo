@@ -26955,6 +26955,10 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`get_locale()`](https://developer.wordpress.org/reference/functions/get_locale/)
 >>>>> 
+>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`locale`](https://developer.wordpress.org/reference/hooks/locale/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
