@@ -203,6 +203,47 @@ function _n_noop( $singular, $plural, $domain = null ) {
 }
 
 /**
+ * Unload translations for a text domain.
+ *
+ * @since 3.0.0
+ *
+ * @param string $domain Text domain. Unique identifier for retrieving translated strings.
+ * @return bool Whether textdomain was unloaded.
+ */
+function unload_textdomain( $domain ) {
+	global $l10n;
+
+	/**
+	 * Filter the text domain for loading translation.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param bool   $override Whether to override unloading the text domain. Default false.
+	 * @param string $domain   Text domain. Unique identifier for retrieving translated strings.
+	 */
+	$plugin_override = apply_filters( 'override_unload_textdomain', false, $domain );
+
+	if ( $plugin_override )
+		return true;
+
+	/**
+	 * Fires before the text domain is unloaded.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string $domain Text domain. Unique identifier for retrieving translated strings.
+	 */
+	do_action( 'unload_textdomain', $domain );
+
+	if ( isset( $l10n[$domain] ) ) {
+		unset( $l10n[$domain] );
+		return true;
+	}
+
+	return false;
+}
+
+/**
  * Load default translated strings based on locale.
  *
  * Loads the .mo file in WP_LANG_DIR constant path from WordPress root.
