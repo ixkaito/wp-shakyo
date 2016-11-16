@@ -29973,7 +29973,12 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
->>>>>> `unload_textdomain()`
+>>>>>> [`unload_textdomain()`](https://developer.wordpress.org/reference/functions/unload_textdomain/)
+>>>>>> 
+>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`unload_textdomain`](https://developer.wordpress.org/reference/hooks/unload_textdomain/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
