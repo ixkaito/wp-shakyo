@@ -29983,7 +29983,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
->>>>>> `load_textdomain()`
+>>>>>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
