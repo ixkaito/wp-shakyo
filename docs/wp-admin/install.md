@@ -29975,10 +29975,13 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`unload_textdomain()`](https://developer.wordpress.org/reference/functions/unload_textdomain/)
 >>>>>> 
->>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`unload_textdomain`](https://developer.wordpress.org/reference/hooks/unload_textdomain/)
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`override_unload_textdomain`](https://developer.wordpress.org/reference/hooks/override_unload_textdomain/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
+>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`unload_textdomain`](https://developer.wordpress.org/reference/hooks/unload_textdomain/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
