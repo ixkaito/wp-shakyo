@@ -29997,7 +29997,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
->>>>>>> `new MO()` <- `Gettext_Translations` <- `Translations`
+>>>>>>> [`new MO()`](https://developer.wordpress.org/reference/classes/mo/) <- `Gettext_Translations` <- `Translations`
 >>>>>>> 
 >>>>>>> `MO::import_from_file()`
 >>>>>>> 
