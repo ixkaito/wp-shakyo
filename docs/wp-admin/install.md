@@ -29984,6 +29984,16 @@ filename: wp-admin/install.php
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
 >>>>>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
+>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`load_textdomain_mofile`](https://developer.wordpress.org/reference/hooks/load_textdomain_mofile/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
+>>>>>>> `new MO()` <- `Gettext_Translations` <- `Translations`
+>>>>>>> 
+>>>>>>> `MO::import_from_file()`
+>>>>>>> 
+>>>>>>> `MO::merge_with()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
