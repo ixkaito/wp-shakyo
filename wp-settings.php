@@ -311,4 +311,7 @@ if ( ( 0 === validate_file( $locale ) ) && is_readable( $locale_file ) )
 	require( $locale_file );
 unset( $locale_file );
 
+// Pull in locale data after loading text domain.
+require_once( ABSPATH . WPINC . '/locale.php' );
+
 var_dump(__FILE__);
