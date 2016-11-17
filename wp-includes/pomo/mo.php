@@ -9,3 +9,10 @@
 
 require_once dirname(__FILE__) . '/translations.php';
 require_once dirname(__FILE__) . '/streams.php';
+
+if ( !class_exists( 'MO' ) ):
+class MO extends Gettext_Translations {
+
+	var $_nplurals = 2;
+}
+endif;
