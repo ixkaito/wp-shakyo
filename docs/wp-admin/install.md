@@ -29985,6 +29985,10 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
 >>>>>> 
+>>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`load_textdomain`](https://developer.wordpress.org/reference/hooks/load_textdomain/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`load_textdomain_mofile`](https://developer.wordpress.org/reference/hooks/load_textdomain_mofile/)
 >>>>>>> 
 >>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
