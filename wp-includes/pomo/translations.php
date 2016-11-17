@@ -9,6 +9,10 @@
 
 require_once dirname(__FILE__) . '/entry.php';
 
+class Gettext_Translations extends Translations {
+
+}
+
 if ( !class_exists( 'NOOP_Translations' ) ):
 /**
  * Provides the same interface as Translations, but doesn't do anything
