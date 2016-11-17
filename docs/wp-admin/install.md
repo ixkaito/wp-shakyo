@@ -33024,6 +33024,8 @@ filename: wp-admin/install.php
 >>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
 >>>> [`validate_file()`](https://developer.wordpress.org/reference/functions/validate_file/)
+>>>> 
+>>>> **wp-includes/locale.php**
 > 
 > **wp-admin/includes/upgrade.php**
 > 
