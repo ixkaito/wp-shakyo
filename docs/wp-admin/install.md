@@ -33072,6 +33072,11 @@ filename: wp-admin/install.php
 >>>> **`STYLESHEETPATH`/functions.php**
 >>>> 
 >>>> **`TEMPLATEPATH`/functions.php**
+>>>> 
+>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`after_setup_theme`](https://developer.wordpress.org/reference/hooks/after_setup_theme/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
