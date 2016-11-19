@@ -33077,7 +33077,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
->>>> `WP::init()`
+>>>> [`WP::init()`](https://developer.wordpress.org/reference/classes/wp/init/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
