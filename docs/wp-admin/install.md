@@ -33079,7 +33079,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`WP::init()`](https://developer.wordpress.org/reference/classes/wp/init/)
 >>>> 
->>>>> `wp_get_current_user()`
+>>>>> [`wp_get_current_user()`](https://developer.wordpress.org/reference/functions/wp_get_current_user/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
