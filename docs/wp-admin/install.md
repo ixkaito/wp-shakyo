@@ -33081,7 +33081,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`wp_get_current_user()`](https://developer.wordpress.org/reference/functions/wp_get_current_user/)
 >>>>> 
->>>>>> `get_currentuserinfo()`
+>>>>>> [`get_currentuserinfo()`](https://developer.wordpress.org/reference/functions/get_currentuserinfo/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
