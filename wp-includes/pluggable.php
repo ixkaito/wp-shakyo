@@ -10,6 +10,20 @@ if ( !function_exists('wp_set_current_user') ) :
 endif;
 
 if ( !function_exists('wp_get_current_user') ) :
+/**
+ * Retrieve the current user object.
+ *
+ * @since 2.0.3
+ *
+ * @return WP_User Current user WP_User object
+ */
+function wp_get_current_user() {
+	global $current_user;
+
+	get_currentuserinfo();
+
+	return $current_user;
+}
 endif;
 
 if ( !function_exists('get_currentuserinfo') ) :
