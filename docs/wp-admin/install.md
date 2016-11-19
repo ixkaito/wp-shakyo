@@ -33069,6 +33069,9 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
 >>>> 
+>>>> **${STYLESHEETPATH}/functions.php**
+>>>> 
+>>>> **${TEMPLATEPATH}/functions.php**
 > 
 > **wp-admin/includes/upgrade.php**
 > 
