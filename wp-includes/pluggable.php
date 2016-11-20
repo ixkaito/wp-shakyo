@@ -109,6 +109,116 @@ if ( !function_exists('wp_logout') ) :
 endif;
 
 if ( !function_exists('wp_validate_auth_cookie') ) :
+/**
+ * Validates authentication cookie.
+ *
+ * The checks include making sure that the authentication cookie is set and
+ * pulling in the contents (if $cookie is not used).
+ *
+ * Makes sure the cookie is not expired. Verifies the hash in cookie is what is
+ * should be and compares the two.
+ *
+ * @since 2.5.0
+ *
+ * @param string $cookie Optional. If used, will validate contents instead of cookie's
+ * @param string $scheme Optional. The cookie scheme to use: auth, secure_auth, or logged_in
+ * @return bool|int False if invalid cookie, User ID if valid.
+ */
+function wp_validate_auth_cookie($cookie = '', $scheme = '') {
+	if ( ! $cookie_elements = wp_parse_auth_cookie($cookie, $scheme) ) {
+		/**
+		 * Fires if an authentication cookie is malformed.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param string $cookie Malformed auth cookie.
+		 * @param string $scheme Authentication scheme. Values include 'auth', 'secure_auth',
+		 *                       or 'logged_in'.
+		 */
+		do_action( 'auth_cookie_malformed', $cookie, $scheme );
+		return false;
+	}
+
+	$scheme = $cookie_elements['scheme'];
+	$username = $cookie_elements['username'];
+	$hmac = $cookie_elements['hmac'];
+	$token = $cookie_elements['token'];
+	$expired = $expiration = $cookie_elements['expiration'];
+
+	// Allow a grace period for POST and AJAX requests
+	if ( defined('DOING_AJAX') || 'POST' == $_SERVER['REQUEST_METHOD'] ) {
+		$expired += HOUR_IN_SECONDS;
+	}
+
+	// Quick check to see if an honest cookie has expired
+	if ( $expired < time() ) {
+		/**
+		 * Fires once an authentication cookie has expired.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param array $cookie_elements An array of data for the authentication cookie.
+		 */
+		do_action( 'auth_cookie_expired', $cookie_elements );
+		return false;
+	}
+
+	$user = get_user_by('login', $username);
+	if ( ! $user ) {
+		/**
+		 * Fires if a bad username is entered in the user authentication process.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param array $cookie_elements An array of data for the authentication cookie.
+		 */
+		do_action( 'auth_cookie_bad_username', $cookie_elements );
+		return false;
+	}
+
+	$pass_frag = substr($user->user_pass, 8, 4);
+
+	$key = wp_hash( $username . '|' . $pass_frag . '|' . $expiration . '|' . $token, $scheme );
+
+	// If ext/hash is not present, compat.php's hash_hmac() does not support sha256.
+	$algo = function_exists( 'hash' ) ? 'sha256' : 'sha1';
+	$hash = hash_hmac( $algo, $username . '|' . $expiration . '|' . $token, $key );
+
+	if ( ! hash_equals( $hash, $hmac ) ) {
+		/**
+		 * Fires if a bad authentication cookie hash is encountered.
+		 *
+		 * @since 2.7.0
+		 *
+		 * @param array $cookie_elements An array of data for the authentication cookie.
+		 */
+		do_action( 'auth_cookie_bad_hash', $cookie_elements );
+		return false;
+	}
+
+	$manager = WP_Session_Tokens::get_instance( $user->ID );
+	if ( ! $manager->verify( $token ) ) {
+		do_action( 'auth_cookie_bad_session_token', $cookie_elements );
+		return false;
+	}
+
+	// AJAX/POST grace period set above
+	if ( $expiration < time() ) {
+		$GLOBALS['login_grace_period'] = 1;
+	}
+
+	/**
+	 * Fires once an authentication cookie has been validated.
+	 *
+	 * @since 2.7.0
+	 *
+	 * @param array   $cookie_elements An array of data for the authentication cookie.
+	 * @param WP_User $user            User object.
+	 */
+	do_action( 'auth_cookie_valid', $cookie_elements, $user );
+
+	return $user->ID;
+}
 endif;
 
 if ( !function_exists('wp_generate_auth_cookie') ) :
