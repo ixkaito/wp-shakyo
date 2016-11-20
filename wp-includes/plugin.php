@@ -171,6 +171,43 @@ function apply_filters( $tag, $value ) {
 }
 
 /**
+ * Removes a function from a specified filter hook.
+ *
+ * This function removes a function attached to a specified filter hook. This
+ * method can be used to remove default functions attached to a specific filter
+ * hook and possibly replace them with a substitute.
+ *
+ * To remove a hook, the $function_to_remove and $priority arguments must match
+ * when the hook was added. This goes for both filters and actions. No warning
+ * will be given on removal failure.
+ *
+ * @since 1.2.0
+ *
+ * @param string   $tag                The filter hook to which the function to be removed is hooked.
+ * @param callback $function_to_remove The name of the function which should be removed.
+ * @param int      $priority           Optional. The priority of the function. Default 10.
+ * @return boolean Whether the function existed before it was removed.
+ */
+function remove_filter( $tag, $function_to_remove, $priority = 10 ) {
+	$function_to_remove = _wp_filter_build_unique_id( $tag, $function_to_remove, $priority );
+
+	$r = isset( $GLOBALS['wp_filter'][ $tag ][ $priority ][ $function_to_remove ] );
+
+	if ( true === $r ) {
+		unset( $GLOBALS['wp_filter'][ $tag ][ $priority ][ $function_to_remove ] );
+		if ( empty( $GLOBALS['wp_filter'][ $tag ][ $priority ] ) ) {
+			unset( $GLOBALS['wp_filter'][ $tag ][ $priority ] );
+		}
+		if ( empty( $GLOBALS['wp_filter'][ $tag ] ) ) {
+			$GLOBALS['wp_filter'][ $tag ] = array();
+		}
+		unset( $GLOBALS['merged_filters'][ $tag ] );
+	}
+
+	return $r;
+}
+
+/**
  * Hooks a function on to a specific action.
  *
  * Actions are the hooks that the WordPress core launches at specific points
