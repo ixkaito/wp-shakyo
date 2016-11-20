@@ -506,6 +506,34 @@ function wp_kses_normalize_entities($string) {
 }
 
 /**
+ * Adds all Kses input form content filters.
+ *
+ * All hooks have default priority. The wp_filter_kses() function is added to
+ * the 'pre_comment_content' and 'title_save_pre' hooks.
+ *
+ * The wp_filter_post_kses() function is added to the 'content_save_pre',
+ * 'excerpt_save_pre', and 'content_filtered_save_pre' hooks.
+ *
+ * @since 2.0.0
+ * @uses add_filter() See description for what functions are added to what hooks.
+ */
+function kses_init_filters() {
+	// Normal filtering
+	add_filter('title_save_pre', 'wp_filter_kses');
+
+	// Comment filtering
+	if ( current_user_can( 'unfiltered_html' ) )
+		add_filter( 'pre_comment_content', 'wp_filter_post_kses' );
+	else
+		add_filter( 'pre_comment_content', 'wp_filter_kses' );
+
+	// Post filtering
+	add_filter('content_save_pre', 'wp_filter_post_kses');
+	add_filter('excerpt_save_pre', 'wp_filter_post_kses');
+	add_filter('content_filtered_save_pre', 'wp_filter_post_kses');
+}
+
+/**
  * Removes all Kses input form content filters.
  *
  * A quick procedural method to removing all of the filters that kses uses for
