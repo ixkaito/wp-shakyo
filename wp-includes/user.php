@@ -32,3 +32,47 @@ function wp_validate_logged_in_cookie( $user_id ) {
 
 	return wp_validate_auth_cookie( $_COOKIE[LOGGED_IN_COOKIE], 'logged_in' );
 }
+
+//
+// Private helper functions
+//
+
+/**
+ * Set up global user vars.
+ *
+ * Used by wp_set_current_user() for back compat. Might be deprecated in the future.
+ *
+ * @since 2.0.4
+ * @global string $userdata User description.
+ * @global string $user_login The user username for logging in
+ * @global int $user_level The level of the user
+ * @global int $user_ID The ID of the user
+ * @global string $user_email The email address of the user
+ * @global string $user_url The url in the user's profile
+ * @global string $user_identity The display name of the user
+ *
+ * @param int $for_user_id Optional. User ID to set up global data.
+ */
+function setup_userdata($for_user_id = '') {
+	global $user_login, $userdata, $user_level, $user_ID, $user_email, $user_url, $user_identity;
+
+	if ( '' == $for_user_id )
+		$for_user_id = get_current_user_id();
+	$user = get_userdata( $for_user_id );
+
+	if ( ! $user ) {
+		$user_ID = 0;
+		$user_level = 0;
+		$userdata = null;
+		$user_login = $user_email = $user_url = $user_identity = '';
+		return;
+	}
+
+	$user_ID    = (int) $user->ID;
+	$user_level = (int) $user->user_level;
+	$userdata   = $user;
+	$user_login = $user->user_login;
+	$user_email = $user->user_email;
+	$user_url   = $user->user_url;
+	$user_identity = $user->display_name;
+}
