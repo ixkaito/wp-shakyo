@@ -33086,7 +33086,9 @@ filename: wp-admin/install.php
 >>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`init`](https://developer.wordpress.org/reference/hooks/init/)
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>> 
+>>>>> 
+>>>>> `seems_utf8()`
+>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
