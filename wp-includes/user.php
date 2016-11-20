@@ -34,6 +34,26 @@ function wp_validate_logged_in_cookie( $user_id ) {
 }
 
 //
+// User option functions
+//
+
+/**
+ * Get the current user's ID
+ *
+ * @since MU
+ *
+ * @uses wp_get_current_user
+ *
+ * @return int The current user's ID
+ */
+function get_current_user_id() {
+	if ( ! function_exists( 'wp_get_current_user' ) )
+		return 0;
+	$user = wp_get_current_user();
+	return ( isset( $user->ID ) ? (int) $user->ID : 0 );
+}
+
+//
 // Private helper functions
 //
 
