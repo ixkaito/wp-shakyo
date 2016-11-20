@@ -339,4 +339,17 @@ do_action( 'after_setup_theme' );
 // Set up current user.
 $GLOBALS['wp']->init();
 
+/**
+ * Fires after WordPress has finished loading but before any headers are sent.
+ *
+ * Most of WP is loaded at this stage, and the user is authenticated. WP continues
+ * to load on the init hook that follows (e.g. widgets), and many plugins instantiate
+ * themselves on it for all sorts of reasons (e.g. they need a user, a taxonomy, etc.).
+ *
+ * If you wish to plug an action once WP is loaded, use the wp_loaded hook below.
+ *
+ * @since 1.5.0
+ */
+do_action( 'init' );
+
 var_dump(__FILE__);
