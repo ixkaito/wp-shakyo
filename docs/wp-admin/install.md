@@ -33089,6 +33089,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`seems_utf8()`](https://developer.wordpress.org/reference/functions/seems_utf8/)
 >>>>> 
+>>>>>> [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
