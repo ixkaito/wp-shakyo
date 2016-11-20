@@ -506,31 +506,26 @@ function wp_kses_normalize_entities($string) {
 }
 
 /**
- * Adds all Kses input form content filters.
+ * Sets up most of the Kses filters for input form content.
  *
- * All hooks have default priority. The wp_filter_kses() function is added to
- * the 'pre_comment_content' and 'title_save_pre' hooks.
+ * If you remove the kses_init() function from 'init' hook and
+ * 'set_current_user' (priority is default), then none of the Kses filter hooks
+ * will be added.
  *
- * The wp_filter_post_kses() function is added to the 'content_save_pre',
- * 'excerpt_save_pre', and 'content_filtered_save_pre' hooks.
+ * First removes all of the Kses filters in case the current user does not need
+ * to have Kses filter the content. If the user does not have unfiltered_html
+ * capability, then Kses filters are added.
  *
+ * @uses kses_remove_filters() Removes the Kses filters
+ * @uses kses_init_filters() Adds the Kses filters back if the user
+ *		does not have unfiltered HTML capability.
  * @since 2.0.0
- * @uses add_filter() See description for what functions are added to what hooks.
  */
-function kses_init_filters() {
-	// Normal filtering
-	add_filter('title_save_pre', 'wp_filter_kses');
+function kses_init() {
+	kses_remove_filters();
 
-	// Comment filtering
-	if ( current_user_can( 'unfiltered_html' ) )
-		add_filter( 'pre_comment_content', 'wp_filter_post_kses' );
-	else
-		add_filter( 'pre_comment_content', 'wp_filter_kses' );
-
-	// Post filtering
-	add_filter('content_save_pre', 'wp_filter_post_kses');
-	add_filter('excerpt_save_pre', 'wp_filter_post_kses');
-	add_filter('content_filtered_save_pre', 'wp_filter_post_kses');
+	if (current_user_can('unfiltered_html') == false)
+		kses_init_filters();
 }
 
 add_action('init', 'kses_init');
