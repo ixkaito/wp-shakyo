@@ -235,4 +235,68 @@ class WP_User {
 		if ( $data )
 			$this->init( $data, $blog_id );
 	}
+
+	/**
+	 * Return only the main user fields
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param string $field The field to query against: 'id', 'slug', 'email' or 'login'
+	 * @param string|int $value The field value
+	 * @return object Raw user object
+	 */
+	public static function get_data_by( $field, $value ) {
+		global $wpdb;
+
+		if ( 'id' == $field ) {
+			// Make sure the value is numeric to avoid casting objects, for example,
+			// to int 1.
+			if ( ! is_numeric( $value ) )
+				return false;
+			$value = intval( $value );
+			if ( $value < 1 )
+				return false;
+		} else {
+			$value = trim( $value );
+		}
+
+		if ( !$value )
+			return false;
+
+		switch ( $field ) {
+			case 'id':
+				$user_id = $value;
+				$db_field = 'ID';
+				break;
+			case 'slug':
+				$user_id = wp_cache_get($value, 'userslugs');
+				$db_field = 'user_nicename';
+				break;
+			case 'email':
+				$user_id = wp_cache_get($value, 'useremail');
+				$db_field = 'user_email';
+				break;
+			case 'login':
+				$value = sanitize_user( $value );
+				$user_id = wp_cache_get($value, 'userlogins');
+				$db_field = 'user_login';
+				break;
+			default:
+				return false;
+		}
+
+		if ( false !== $user_id ) {
+			if ( $user = wp_cache_get( $user_id, 'users' ) )
+				return $user;
+		}
+
+		if ( !$user = $wpdb->get_row( $wpdb->prepare(
+			"SELECT * FROM $wpdb->users WHERE $db_field = %s", $value
+		) ) )
+			return false;
+
+		update_user_caches( $user );
+
+		return $user;
+	}
 }
