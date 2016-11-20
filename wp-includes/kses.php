@@ -506,6 +506,32 @@ function wp_kses_normalize_entities($string) {
 }
 
 /**
+ * Removes all Kses input form content filters.
+ *
+ * A quick procedural method to removing all of the filters that kses uses for
+ * content in WordPress Loop.
+ *
+ * Does not remove the kses_init() function from 'init' hook (priority is
+ * default). Also does not remove kses_init() function from 'set_current_user'
+ * hook (priority is also default).
+ *
+ * @since 2.0.6
+ */
+function kses_remove_filters() {
+	// Normal filtering
+	remove_filter('title_save_pre', 'wp_filter_kses');
+
+	// Comment filtering
+	remove_filter( 'pre_comment_content', 'wp_filter_post_kses' );
+	remove_filter( 'pre_comment_content', 'wp_filter_kses' );
+
+	// Post filtering
+	remove_filter('content_save_pre', 'wp_filter_post_kses');
+	remove_filter('excerpt_save_pre', 'wp_filter_post_kses');
+	remove_filter('content_filtered_save_pre', 'wp_filter_post_kses');
+}
+
+/**
  * Sets up most of the Kses filters for input form content.
  *
  * If you remove the kses_init() function from 'init' hook and
