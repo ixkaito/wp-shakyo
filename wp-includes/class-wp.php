@@ -84,6 +84,18 @@ class WP {
 	public $did_permalink = false;
 
 	/**
+	 * Add name to list of public query variables.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string $qv Query variable name.
+	 */
+	public function add_query_var($qv) {
+		if ( !in_array($qv, $this->public_query_vars) )
+			$this->public_query_vars[] = $qv;
+	}
+
+	/**
 	 * Set up the current user.
 	 *
 	 * @since 2.0.0
