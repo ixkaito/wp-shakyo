@@ -33094,7 +33094,10 @@ filename: wp-admin/install.php
 >>>>>> [`reset_mbstring_encoding()`](https://developer.wordpress.org/reference/functions/reset_mbstring_encoding/)
 >>>>>> 
 >>>>>>> [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
->>>>>> 
+>>>>> 
+>>>>> [`WP::add_query_var()`](https://developer.wordpress.org/reference/classes/wp/add_query_var/)
+>>>>> 
+>>>>> `wp_widgets_init`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
