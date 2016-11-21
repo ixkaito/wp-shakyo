@@ -33097,7 +33097,7 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`WP::add_query_var()`](https://developer.wordpress.org/reference/classes/wp/add_query_var/)
 >>>>> 
->>>>> `wp_widgets_init`
+>>>>> `wp_widgets_init()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
