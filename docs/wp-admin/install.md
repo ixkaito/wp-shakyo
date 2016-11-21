@@ -34991,6 +34991,10 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>> 
+>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`widgets_init`](https://developer.wordpress.org/reference/hooks/widgets_init/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
