@@ -36168,7 +36168,7 @@ filename: wp-admin/install.php
 >>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>> 
 >>>>>> `wp_spaces_regexp()`
->>>>>> 
+>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
