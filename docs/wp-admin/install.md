@@ -34995,7 +34995,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `smilies_init()`
+>>>>> [`smilies_init()`](https://developer.wordpress.org/reference/functions/smilies_init/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
