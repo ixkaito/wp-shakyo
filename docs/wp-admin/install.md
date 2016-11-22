@@ -36171,7 +36171,8 @@ filename: wp-admin/install.php
 >>>>> 
 >>>>> [`wp_cron()`](https://developer.wordpress.org/reference/functions/wp_cron/)
 >>>>> 
->>>>>> `_get_cron_array()`
+>>>>>> [`_get_cron_array()`](https://developer.wordpress.org/reference/functions/_get_cron_array/)
+>>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
