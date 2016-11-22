@@ -36169,6 +36169,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> `wp_spaces_regexp()`
 >>>>> 
+>>>>> `wp_cron()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
