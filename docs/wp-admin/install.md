@@ -37344,6 +37344,8 @@ filename: wp-admin/install.php
 >>>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>>> 
 >>>>>>> `_upgrade_cron_array()`
+>>>>>> 
+>>>>>> `wp_get_schedules()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
