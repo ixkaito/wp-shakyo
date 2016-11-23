@@ -37348,6 +37348,41 @@ filename: wp-admin/install.php
 >>>>>> `wp_get_schedules()`
 >>>>> 
 >>>>> `_show_post_preview()`
+>>>>> 
+>>>>>> `wp_verify_nonce()`
+>>>>>> 
+>>>>>> [`wp_die()`](https://developer.wordpress.org/reference/functions/wp_die/)
+>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_die_ajax_handler`](https://developer.wordpress.org/reference/hooks/wp_die_ajax_handler/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_die_xmlrpc_handler`](https://developer.wordpress.org/reference/hooks/wp_die_xmlrpc_handler/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_die_handler`](https://developer.wordpress.org/reference/hooks/wp_die_handler/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
+>>>>>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
+>>>>>> 
+>>>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
+>>>>>>> 
+>>>>>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
+>>>>>>>> 
+>>>>>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>>>>>> 
+>>>>>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
+>>>>>>>> 
+>>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
+>>>>>>>> 
+>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
+>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>> 
+>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+>>>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
