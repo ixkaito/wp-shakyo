@@ -37347,7 +37347,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> `wp_get_schedules()`
 >>>>> 
->>>>> `_show_post_preview()`
+>>>>> [`_show_post_preview()`](https://developer.wordpress.org/reference/functions/_show_post_preview/)
 >>>>> 
 >>>>>> `wp_verify_nonce()`
 >>>>>> 
