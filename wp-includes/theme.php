@@ -328,6 +328,45 @@ function current_theme_supports( $feature ) {
 add_action( 'delete_attachment', '_delete_attachment_theme_mod' );
 
 /**
+ * Checks if a theme has been changed and runs 'after_switch_theme' hook on the next WP load
+ *
+ * @since 3.3.0
+ */
+function check_theme_switched() {
+	if ( $stylesheet = get_option( 'theme_switched' ) ) {
+		$old_theme = wp_get_theme( $stylesheet );
+
+		// Prevent retrieve_widgets() from running since Customizer already called it up front
+		if ( get_option( 'theme_switched_via_customizer' ) ) {
+			remove_action( 'after_switch_theme', '_wp_sidebars_changed' );
+			update_option( 'theme_switched_via_customizer', false );
+		}
+
+		if ( $old_theme->exists() ) {
+			/**
+			 * Fires on the first WP load after a theme switch if the old theme still exists.
+			 *
+			 * This action fires multiple times and the parameters differs
+			 * according to the context, if the old theme exists or not.
+			 * If the old theme is missing, the parameter will be the slug
+			 * of the old theme.
+			 *
+			 * @since 3.3.0
+			 *
+			 * @param string   $old_name  Old theme name.
+			 * @param WP_Theme $old_theme WP_Theme instance of the old theme.
+			 */
+			do_action( 'after_switch_theme', $old_theme->get( 'Name' ), $old_theme );
+		} else {
+			/** This action is documented in wp-includes/theme.php */
+			do_action( 'after_switch_theme', $stylesheet );
+		}
+
+		update_option( 'theme_switched', false );
+	}
+}
+
+/**
  * Includes and instantiates the WP_Customize_Manager class.
  *
  * Fires when ?wp_customize=on or on wp-admin/customize.php.
