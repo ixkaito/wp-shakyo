@@ -38564,6 +38564,8 @@ filename: wp-admin/install.php
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
 >>>>>> `update_option()`
+>>>> 
+>>>> `ms_site_check()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
