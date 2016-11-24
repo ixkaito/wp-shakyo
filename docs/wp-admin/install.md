@@ -37383,7 +37383,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>> 
->>>>> `check_theme_switched()`
+>>>>> [`check_theme_switched()`](https://developer.wordpress.org/reference/functions/check_theme_switched/)
 > 
 > **wp-admin/includes/upgrade.php**
 > 
