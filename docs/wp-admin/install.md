@@ -37382,7 +37382,8 @@ filename: wp-admin/install.php
 >>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
 >>>>>> 
 >>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
->>>>>> 
+>>>>> 
+>>>>> `check_theme_switched()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
