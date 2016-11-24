@@ -37384,6 +37384,13 @@ filename: wp-admin/install.php
 >>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
 >>>>> 
 >>>>> [`check_theme_switched()`](https://developer.wordpress.org/reference/functions/check_theme_switched/)
+>>>>> 
+>>>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`after_switch_theme`](https://developer.wordpress.org/reference/hooks/after_switch_theme/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
+>>>>>> 
+>>>>>> `update_option()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
