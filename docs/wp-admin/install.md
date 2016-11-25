@@ -38572,6 +38572,28 @@ filename: wp-admin/install.php
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
 >>>> [`_custom_header_background_just_in_time()`](https://developer.wordpress.org/reference/functions/_custom_header_background_just_in_time/)
+>>>> 
+>>>>> `current_theme_supports()`
+>>>>> 
+>>>>> `add_theme_support()`
+>>>>> 
+>>>>> `get_theme_support()`
+>>>>> 
+>>>>> [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
+>>>>> 
+>>>>> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
+>>>>> 
+>>>>>> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
+>>>>>> 
+>>>>>>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+>>>>> 
+>>>>> `new Custom_Image_Header()`
+>>>>> 
+>>>>>> `Custom_Image_Header::__construct()`
+>>>>> 
+>>>>> `new Custom_Background()`
+>>>>> 
+>>>>>> `Custom_Background::__construct()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
