@@ -35,4 +35,7 @@ define( 'WP_INSTALLING', true );
 /** Load WordPress Bootstrap */
 require_once( dirname( dirname( __FILE__ ) ) . '/wp-load.php' );
 
+/** Load WordPress Administration Upgrade API */
+require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+
 var_dump(__FILE__);
