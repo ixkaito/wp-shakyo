@@ -38571,6 +38571,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>> 
+>>>> `_custom_header_background_just_in_time()`
 > 
 > **wp-admin/includes/upgrade.php**
 > 
