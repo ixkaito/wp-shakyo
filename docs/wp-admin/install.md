@@ -38566,6 +38566,11 @@ filename: wp-admin/install.php
 >>>>>> `update_option()`
 >>>> 
 >>>> `ms_site_check()`
+>>>> 
+>>>> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`wp_loaded`](https://developer.wordpress.org/reference/hooks/wp_loaded/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>> 
 > 
 > **wp-admin/includes/upgrade.php**
 > 
