@@ -38601,6 +38601,14 @@ filename: wp-admin/install.php
 >> 
 >>> [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
 >>> 
+>>> **wp-admin/includes/bookmark.php**
+>>> 
+>>> **wp-admin/includes/comment.php**
+>>> 
+>>> **wp-admin/includes/file.php**
+>>> 
+>>> **wp-admin/includes/image.php**
+>>> 
 > 
 > **wp-admin/includes/translation-install.php**
 > 
