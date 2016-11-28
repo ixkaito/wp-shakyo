@@ -38609,6 +38609,8 @@ filename: wp-admin/install.php
 >>> 
 >>> **wp-admin/includes/image.php**
 >>> 
+>>> **Add wp-admin/includes/media.php**
+>>> 
 > 
 > **wp-admin/includes/translation-install.php**
 > 
