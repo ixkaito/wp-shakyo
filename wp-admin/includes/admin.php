@@ -24,4 +24,7 @@ require_once(ABSPATH . 'wp-admin/includes/comment.php');
 /** WordPress Administration File API */
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 
+/** WordPress Image Administration API */
+require_once(ABSPATH . 'wp-admin/includes/image.php');
+
 var_dump(__FILE__);
