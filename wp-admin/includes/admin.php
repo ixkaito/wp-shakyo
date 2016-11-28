@@ -27,4 +27,7 @@ require_once(ABSPATH . 'wp-admin/includes/file.php');
 /** WordPress Image Administration API */
 require_once(ABSPATH . 'wp-admin/includes/image.php');
 
+/** WordPress Media Administration API */
+require_once(ABSPATH . 'wp-admin/includes/media.php');
+
 var_dump(__FILE__);
