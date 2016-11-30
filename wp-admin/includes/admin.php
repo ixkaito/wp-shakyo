@@ -39,4 +39,7 @@ require_once(ABSPATH . 'wp-admin/includes/misc.php');
 /** WordPress Plugin Administration API */
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
+/** WordPress Post Administration API */
+require_once(ABSPATH . 'wp-admin/includes/post.php');
+
 var_dump(__FILE__);
