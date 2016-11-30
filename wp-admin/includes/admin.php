@@ -48,4 +48,7 @@ require_once(ABSPATH . 'wp-admin/includes/screen.php');
 /** WordPress Taxonomy Administration API */
 require_once(ABSPATH . 'wp-admin/includes/taxonomy.php');
 
+/** WordPress Template Administration API */
+require_once(ABSPATH . 'wp-admin/includes/template.php');
+
 var_dump(__FILE__);
