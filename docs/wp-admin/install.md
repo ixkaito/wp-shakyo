@@ -38615,6 +38615,8 @@ filename: wp-admin/install.php
 >>> 
 >>> **wp-admin/includes/misc.php**
 >>> 
+>>> **wp-admin/includes/plugin.php**
+>>> 
 > 
 > **wp-admin/includes/translation-install.php**
 > 
