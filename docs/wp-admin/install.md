@@ -38623,6 +38623,8 @@ filename: wp-admin/install.php
 >>> 
 >>> **wp-admin/includes/taxonomy.php**
 >>> 
+>>> **wp-admin/includes/template.php**
+>>> 
 > 
 > **wp-admin/includes/translation-install.php**
 > 
