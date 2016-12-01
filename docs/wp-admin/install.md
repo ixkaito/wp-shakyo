@@ -38625,6 +38625,10 @@ filename: wp-admin/install.php
 >>> 
 >>> **wp-admin/includes/template.php**
 >>> 
+>>> **wp-admin/includes/class-wp-list-table.php**
+>>> 
+>>> **wp-admin/includes/list-table.php**
+>>> 
 > 
 > **wp-admin/includes/translation-install.php**
 > 
