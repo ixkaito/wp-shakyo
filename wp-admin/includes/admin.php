@@ -58,4 +58,7 @@ require_once(ABSPATH . 'wp-admin/includes/list-table.php');
 /** WordPress Theme Administration API */
 require_once(ABSPATH . 'wp-admin/includes/theme.php');
 
+/** WordPress User Administration API */
+require_once(ABSPATH . 'wp-admin/includes/user.php');
+
 var_dump(__FILE__);
