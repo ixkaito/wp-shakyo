@@ -38638,6 +38638,8 @@ filename: wp-admin/install.php
 >>> **wp-admin/includes/deprecated.php**
 >> 
 >> **wp-admin/includes/schema.php**
+>> 
+>>> `wpdb::get_charset_collate()`
 > 
 > **wp-admin/includes/translation-install.php**
 > 
