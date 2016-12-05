@@ -38642,6 +38642,10 @@ filename: wp-admin/install.php
 >>> [`wpdb::get_charset_collate()`](https://developer.wordpress.org/reference/classes/wpdb/get_charset_collate/)
 >>> 
 >>> [`wp_get_db_schema()`](https://developer.wordpress.org/reference/functions/wp_get_db_schema/)
+>>> 
+>>>> `wpdb::set_blog_id()`
+>>>> 
+>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
 > 
 > **wp-admin/includes/translation-install.php**
 > 
