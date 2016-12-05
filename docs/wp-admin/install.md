@@ -38640,6 +38640,8 @@ filename: wp-admin/install.php
 >> **wp-admin/includes/schema.php**
 >> 
 >>> [`wpdb::get_charset_collate()`](https://developer.wordpress.org/reference/classes/wpdb/get_charset_collate/)
+>>> 
+>>> `wp_get_db_schema()`
 > 
 > **wp-admin/includes/translation-install.php**
 > 
