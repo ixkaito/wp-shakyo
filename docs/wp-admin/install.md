@@ -39384,3 +39384,4 @@ filename: wp-admin/install.php
 > [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
 > 
 > [`wp_can_install_language_pack()`](https://developer.wordpress.org/reference/functions/wp_can_install_language_pack/)
+> 
