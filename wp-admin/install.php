@@ -44,4 +44,6 @@ require_once( ABSPATH . 'wp-admin/includes/translation-install.php' );
 /** Load wpdb */
 require_once( ABSPATH . WPINC . '/wp-db.php' );
 
+nocache_headers();
+
 var_dump(__FILE__);
