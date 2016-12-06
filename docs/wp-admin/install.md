@@ -39381,3 +39381,5 @@ filename: wp-admin/install.php
 > 
 > `display_header()`
 > 
+> [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
+> 
