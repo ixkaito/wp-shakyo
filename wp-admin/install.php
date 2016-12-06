@@ -46,4 +46,6 @@ require_once( ABSPATH . WPINC . '/wp-db.php' );
 
 nocache_headers();
 
+$step = isset( $_GET['step'] ) ? (int) $_GET['step'] : 0;
+
 var_dump(__FILE__);
