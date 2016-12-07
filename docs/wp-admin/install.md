@@ -39385,3 +39385,13 @@ filename: wp-admin/install.php
 > 
 > [`wp_can_install_language_pack()`](https://developer.wordpress.org/reference/functions/wp_can_install_language_pack/)
 > 
+>> **wp-admin/includes/class-wp-upgrader.php**
+>> 
+>> `new Automatic_Upgrader_Skin()`
+>> 
+>> `new Language_Pack_Upgrader()`
+>> 
+>> `Language_Pack_Upgrader::fs_connect()`
+>> 
+>> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
+> 
