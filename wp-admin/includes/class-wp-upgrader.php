@@ -13,3 +13,4 @@
 
 require ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
 
+add_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
