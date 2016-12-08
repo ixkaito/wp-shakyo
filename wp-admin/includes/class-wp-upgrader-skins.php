@@ -8,6 +8,15 @@
  */
 
 /**
+ * Generic Skin for the WordPress Upgrader classes. This skin is designed to be extended for specific purposes.
+ *
+ * @package WordPress
+ * @subpackage Upgrader
+ * @since 2.8.0
+ */
+class WP_Upgrader_Skin {}
+
+/**
  * Upgrader Skin for Automatic WordPress Upgrades
  *
  * This skin is designed to be used when no output is intended, all output
