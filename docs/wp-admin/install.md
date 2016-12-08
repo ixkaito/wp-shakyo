@@ -39387,6 +39387,8 @@ filename: wp-admin/install.php
 > 
 >> **wp-admin/includes/class-wp-upgrader.php**
 >> 
+>>> **wp-admin/includes/class-wp-upgrader-skins.php**
+>> 
 >> `new Automatic_Upgrader_Skin()`
 >> 
 >> `new Language_Pack_Upgrader()`
