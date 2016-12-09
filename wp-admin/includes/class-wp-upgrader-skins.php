@@ -26,4 +26,6 @@ class WP_Upgrader_Skin {}
  * @subpackage Upgrader
  * @since 3.7.0
  */
-class Automatic_Upgrader_Skin extends WP_Upgrader_Skin {}
+class Automatic_Upgrader_Skin extends WP_Upgrader_Skin {
+	protected $messages = array();
+}
