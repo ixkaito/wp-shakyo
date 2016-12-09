@@ -14,7 +14,17 @@
  * @subpackage Upgrader
  * @since 2.8.0
  */
-class WP_Upgrader_Skin {}
+class WP_Upgrader_Skin {
+	public $upgrader;
+	public $done_header = false;
+	public $done_footer = false;
+	public $result = false;
+
+	public function __construct($args = array()) {
+		$defaults = array( 'url' => '', 'nonce' => '', 'title' => '', 'context' => false );
+		$this->options = wp_parse_args($args, $defaults);
+	}
+}
 
 /**
  * Upgrader Skin for Automatic WordPress Upgrades
