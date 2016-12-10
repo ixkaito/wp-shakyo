@@ -39399,6 +39399,8 @@ filename: wp-admin/install.php
 >> 
 >> [`new Language_Pack_Upgrader()`](https://developer.wordpress.org/reference/classes/language_pack_upgrader/) <- [`WP_Upgrader`](https://developer.wordpress.org/reference/classes/wp_upgrader/)
 >> 
+>>> [`WP_Upgrader::__construct()`](https://developer.wordpress.org/reference/classes/wp_upgrader/__construct/)
+>> 
 >> `Language_Pack_Upgrader::fs_connect()`
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
