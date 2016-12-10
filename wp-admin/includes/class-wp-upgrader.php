@@ -14,3 +14,15 @@
 require ABSPATH . 'wp-admin/includes/class-wp-upgrader-skins.php';
 
 add_action( 'upgrader_process_complete', array( 'Language_Pack_Upgrader', 'async_upgrade' ), 20 );
+
+/**
+ * Language pack upgrader, for updating translations of plugins, themes, and core.
+ *
+ * @package WordPress
+ * @subpackage Upgrader
+ * @since 3.7.0
+ */
+class Language_Pack_Upgrader extends WP_Upgrader {
+	public $result;
+	public $bulk = true;
+}
