@@ -39397,7 +39397,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
 >> 
->> `new Language_Pack_Upgrader()`
+>> [`new Language_Pack_Upgrader()`](https://developer.wordpress.org/reference/classes/language_pack_upgrader/)
 >> 
 >> `Language_Pack_Upgrader::fs_connect()`
 >> 
