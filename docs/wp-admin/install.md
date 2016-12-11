@@ -39400,6 +39400,8 @@ filename: wp-admin/install.php
 >> [`new Language_Pack_Upgrader()`](https://developer.wordpress.org/reference/classes/language_pack_upgrader/) <- [`WP_Upgrader`](https://developer.wordpress.org/reference/classes/wp_upgrader/)
 >> 
 >>> [`WP_Upgrader::__construct()`](https://developer.wordpress.org/reference/classes/wp_upgrader/__construct/)
+>>> 
+>>>> `new WP_Upgrader_Skin()`
 >> 
 >> `Language_Pack_Upgrader::fs_connect()`
 >> 
