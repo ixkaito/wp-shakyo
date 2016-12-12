@@ -40587,6 +40587,9 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
 >>>>>> 
+>>>>>> `wp_unslash()`
+>>>>>> 
+>>>>>> `update_option()`
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
