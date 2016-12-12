@@ -39406,6 +39406,8 @@ filename: wp-admin/install.php
 >> [`Language_Pack_Upgrader::fs_connect()`](https://developer.wordpress.org/reference/classes/wp_upgrader/fs_connect/)
 >> 
 >>> [`Automatic_Upgrader_Skin::request_filesystem_credentials()`](https://developer.wordpress.org/reference/classes/automatic_upgrader_skin/request_filesystem_credentials/)
+>>> 
+>>>> `WP_Upgrader_Skin::request_filesystem_credentials()`
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
