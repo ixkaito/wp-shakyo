@@ -40607,6 +40607,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 >>>>>> 
+>>>>>> `esc_html()`
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
