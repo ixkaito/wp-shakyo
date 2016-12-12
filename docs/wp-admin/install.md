@@ -40608,6 +40608,11 @@ filename: wp-admin/install.php
 >>>>>> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 >>>>>> 
 >>>>>> `esc_html()`
+>>>>>> 
+>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`fs_ftp_connection_types`](https://developer.wordpress.org/reference/hooks/fs_ftp_connection_types/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
