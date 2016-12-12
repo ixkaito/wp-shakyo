@@ -39409,7 +39409,7 @@ filename: wp-admin/install.php
 >>> 
 >>>> [`WP_Upgrader_Skin::request_filesystem_credentials()`](https://developer.wordpress.org/reference/classes/wp_upgrader_skin/request_filesystem_credentials/)
 >>>> 
->>>>> `request_filesystem_credentials()`
+>>>>> [`request_filesystem_credentials()`](https://developer.wordpress.org/reference/functions/request_filesystem_credentials/)
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
