@@ -40605,6 +40605,8 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
+>>>>>> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
+>>>>>> 
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
