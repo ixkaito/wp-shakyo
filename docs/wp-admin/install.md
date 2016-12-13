@@ -39417,7 +39417,9 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`get_filesystem_method()`](https://developer.wordpress.org/reference/functions/get_filesystem_method/)
 >>>>>> 
->>>>>>> `trailingslashit()`
+>>>>>>> [`trailingslashit()`](https://developer.wordpress.org/reference/functions/trailingslashit/)
+>>>>>>> 
+>>>>>>>> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
 >>>>>>> 
 >>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`filesystem_method`](https://developer.wordpress.org/reference/hooks/filesystem_method)
 >>>>>>> 
