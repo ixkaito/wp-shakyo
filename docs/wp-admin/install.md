@@ -39415,7 +39415,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
->>>>>> `get_filesystem_method()`
+>>>>>> [`get_filesystem_method()`](https://developer.wordpress.org/reference/functions/get_filesystem_method/)
 >>>>>> 
 >>>>>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>>>>> 
