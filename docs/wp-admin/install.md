@@ -40651,6 +40651,8 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`disabled()`](https://developer.wordpress.org/reference/functions/disabled/)
 >>>>>> 
+>>>>>>> [`__checked_selected_helper()`](https://developer.wordpress.org/reference/functions/__checked_selected_helper/)
+>>>>>> 
 >>>>>> `checked()`
 >>>>>> 
 >>>>>> [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
