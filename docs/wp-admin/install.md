@@ -40621,7 +40621,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
->>>>>> `esc_url()`
+>>>>>> [`esc_url()`](https://developer.wordpress.org/reference/functions/esc_url/)
 >>>>>> 
 >>>>>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
 >>>>>> 
