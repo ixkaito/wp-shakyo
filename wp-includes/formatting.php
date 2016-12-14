@@ -435,6 +435,69 @@ function _deep_replace( $search, $subject ) {
 }
 
 /**
+ * Checks and cleans a URL.
+ *
+ * A number of characters are removed from the URL. If the URL is for displaying
+ * (the default behaviour) ampersands are also replaced. The 'clean_url' filter
+ * is applied to the returned cleaned URL.
+ *
+ * @since 2.8.0
+ * @uses wp_kses_bad_protocol() To only permit protocols in the URL set
+ *		via $protocols or the common ones set in the function.
+ *
+ * @param string $url The URL to be cleaned.
+ * @param array $protocols Optional. An array of acceptable protocols.
+ *		Defaults to 'http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet', 'mms', 'rtsp', 'svn' if not set.
+ * @param string $_context Private. Use esc_url_raw() for database usage.
+ * @return string The cleaned $url after the 'clean_url' filter is applied.
+ */
+function esc_url( $url, $protocols = null, $_context = 'display' ) {
+	$original_url = $url;
+
+	if ( '' == $url )
+		return $url;
+	$url = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $url);
+	$strip = array('%0d', '%0a', '%0D', '%0A');
+	$url = _deep_replace($strip, $url);
+	$url = str_replace(';//', '://', $url);
+	/* If the URL doesn't appear to contain a scheme, we
+	 * presume it needs http:// appended (unless a relative
+	 * link starting with /, # or ? or a php file).
+	 */
+	if ( strpos($url, ':') === false && ! in_array( $url[0], array( '/', '#', '?' ) ) &&
+		! preg_match('/^[a-z0-9-]+?\.php/i', $url) )
+		$url = 'http://' . $url;
+
+	// Replace ampersands and single quotes only when displaying.
+	if ( 'display' == $_context ) {
+		$url = wp_kses_normalize_entities( $url );
+		$url = str_replace( '&amp;', '&#038;', $url );
+		$url = str_replace( "'", '&#039;', $url );
+	}
+
+	if ( '/' === $url[0] ) {
+		$good_protocol_url = $url;
+	} else {
+		if ( ! is_array( $protocols ) )
+			$protocols = wp_allowed_protocols();
+		$good_protocol_url = wp_kses_bad_protocol( $url, $protocols );
+		if ( strtolower( $good_protocol_url ) != strtolower( $url ) )
+			return '';
+	}
+
+	/**
+	 * Filter a string cleaned and escaped for output as a URL.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param string $good_protocol_url The cleaned URL to be returned.
+	 * @param string $original_url      The URL prior to cleaning.
+	 * @param string $_context          If 'display', replace ampersands and single quotes only.
+	 */
+	return apply_filters( 'clean_url', $good_protocol_url, $original_url, $_context );
+}
+
+/**
  * Escaping for HTML attributes.
  *
  * @since 2.8.0
