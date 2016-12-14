@@ -40649,7 +40649,7 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>> 
->>>>>> `disabled()`
+>>>>>> [`disabled()`](https://developer.wordpress.org/reference/functions/disabled/)
 >>>>>> 
 >>>>>> `checked()`
 >>>>>> 
