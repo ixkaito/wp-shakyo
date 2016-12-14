@@ -40623,6 +40623,18 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`esc_url()`](https://developer.wordpress.org/reference/functions/esc_url/)
 >>>>>> 
+>>>>>>> [`_deep_replace()`](https://developer.wordpress.org/reference/functions/_deep_replace/)
+>>>>>>> 
+>>>>>>> `wp_kses_normalize_entities()`
+>>>>>>> 
+>>>>>>> `wp_allowed_protocols()`
+>>>>>>> 
+>>>>>>> `wp_kses_bad_protocol()`
+>>>>>>> 
+>>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`clean_url`](https://developer.wordpress.org/reference/hooks/clean_url/)
+>>>>>>> 
+>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
 >>>>>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
 >>>>>> 
 >>>>>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
