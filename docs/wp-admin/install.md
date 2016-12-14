@@ -40653,7 +40653,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`__checked_selected_helper()`](https://developer.wordpress.org/reference/functions/__checked_selected_helper/)
 >>>>>> 
->>>>>> `checked()`
+>>>>>> [`checked()`](https://developer.wordpress.org/reference/functions/checked/)
 >>>>>> 
 >>>>>> [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
 >>>>>> 
