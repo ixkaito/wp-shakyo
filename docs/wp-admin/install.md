@@ -42350,6 +42350,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> [`submit_button()`](https://developer.wordpress.org/reference/functions/submit_button/)
 >>>>>> 
+>>>>>>> [`get_submit_button()`](https://developer.wordpress.org/reference/functions/get_submit_button/)
 >> 
 >> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
 > 
