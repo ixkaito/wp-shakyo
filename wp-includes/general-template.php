@@ -12,6 +12,22 @@ add_action( 'update_option_start_of_week', 'delete_get_calendar_cache' );
 add_action( 'update_option_gmt_offset', 'delete_get_calendar_cache' );
 
 /**
+ * Outputs the html checked attribute.
+ *
+ * Compares the first two arguments and if identical marks as checked
+ *
+ * @since 1.0.0
+ *
+ * @param mixed $checked One of the values to compare
+ * @param mixed $current (true) The other value to compare if not just true
+ * @param bool $echo Whether to echo or just return the string
+ * @return string html attribute or empty string
+ */
+function checked( $checked, $current = true, $echo = true ) {
+	return __checked_selected_helper( $checked, $current, $echo, 'checked' );
+}
+
+/**
  * Outputs the html disabled attribute.
  *
  * Compares the first two arguments and if identical marks as disabled
