@@ -39382,6 +39382,38 @@ filename: wp-admin/install.php
 > [`display_header()`](https://developer.wordpress.org/reference/functions/display_header/)
 > 
 >> [`language_attributes()`](https://developer.wordpress.org/reference/functions/language_attributes/)
+>> 
+>> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
+>> 
+>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
+>>> 
+>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
+>>>> 
+>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>> 
+>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
+>>>> 
+>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>> 
+>> `wp_admin_css()`
+>> 
+>> `esc_url()`
+>> 
+>> [`__()`](https://developer.wordpress.org/reference/functions/__/)
+>> 
+>>> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
+>>> 
+>>>> [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
+>>>> 
+>>>>> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+>>>> 
+>>>> [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
+>>>> 
+>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext`](https://developer.wordpress.org/reference/hooks/gettext/)
+>>>> 
+>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 > 
 > [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
 > 
