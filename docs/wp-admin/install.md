@@ -40562,7 +40562,6 @@ filename: wp-admin/install.php
 >>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`language_attributes`](https://developer.wordpress.org/reference/hooks/language_attributes/)
 >>> 
 >>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>> 
 >> 
 >> [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
 >> 
