@@ -39379,7 +39379,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 > 
-> `display_header()`
+> [`display_header()`](https://developer.wordpress.org/reference/functions/display_header/)
 > 
 > [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
 > 
