@@ -39381,6 +39381,8 @@ filename: wp-admin/install.php
 > 
 > [`display_header()`](https://developer.wordpress.org/reference/functions/display_header/)
 > 
+>> [`language_attributes()`](https://developer.wordpress.org/reference/functions/language_attributes/)
+> 
 > [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
 > 
 > [`wp_can_install_language_pack()`](https://developer.wordpress.org/reference/functions/wp_can_install_language_pack/)
