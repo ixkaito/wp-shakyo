@@ -39387,7 +39387,7 @@ filename: wp-admin/install.php
 >>> 
 >>>> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
 >>> 
->>> `get_bloginfo()`
+>>> [`get_bloginfo()`](https://developer.wordpress.org/reference/functions/get_bloginfo/)
 >>> 
 >>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>> 
