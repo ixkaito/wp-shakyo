@@ -44805,7 +44805,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >> 
->> `wp_admin_css()`
+>> [`wp_admin_css()`](https://developer.wordpress.org/reference/functions/wp_admin_css/)
 >> 
 >> `esc_url()`
 >> 
