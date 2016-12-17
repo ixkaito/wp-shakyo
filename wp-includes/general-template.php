@@ -184,6 +184,62 @@ function language_attributes($doctype = 'html') {
 }
 
 /**
+ * Enqueues or directly prints a stylesheet link to the specified CSS file.
+ *
+ * "Intelligently" decides to enqueue or to print the CSS file. If the
+ * 'wp_print_styles' action has *not* yet been called, the CSS file will be
+ * enqueued. If the wp_print_styles action *has* been called, the CSS link will
+ * be printed. Printing may be forced by passing true as the $force_echo
+ * (second) parameter.
+ *
+ * For backward compatibility with WordPress 2.3 calling method: If the $file
+ * (first) parameter does not correspond to a registered CSS file, we assume
+ * $file is a file relative to wp-admin/ without its ".css" extension. A
+ * stylesheet link to that generated URL is printed.
+ *
+ * @since 2.3.0
+ * @uses $wp_styles WordPress Styles Object
+ *
+ * @param string $file Optional. Style handle name or file name (without ".css" extension) relative
+ * 	 to wp-admin/. Defaults to 'wp-admin'.
+ * @param bool $force_echo Optional. Force the stylesheet link to be printed rather than enqueued.
+ */
+function wp_admin_css( $file = 'wp-admin', $force_echo = false ) {
+	global $wp_styles;
+	if ( !is_a($wp_styles, 'WP_Styles') )
+		$wp_styles = new WP_Styles();
+
+	// For backward compatibility
+	$handle = 0 === strpos( $file, 'css/' ) ? substr( $file, 4 ) : $file;
+
+	if ( $wp_styles->query( $handle ) ) {
+		if ( $force_echo || did_action( 'wp_print_styles' ) ) // we already printed the style queue. Print this one immediately
+			wp_print_styles( $handle );
+		else // Add to style queue
+			wp_enqueue_style( $handle );
+		return;
+	}
+
+	/**
+	 * Filter the stylesheet link to the specified CSS file.
+	 *
+	 * If the site is set to display right-to-left, the RTL stylesheet link
+	 * will be used instead.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param string $file Style handle name or filename (without ".css" extension)
+	 *                     relative to wp-admin/. Defaults to 'wp-admin'.
+	 */
+	echo apply_filters( 'wp_admin_css', "<link rel='stylesheet' href='" . esc_url( wp_admin_css_uri( $file ) ) . "' type='text/css' />\n", $file );
+
+	if ( function_exists( 'is_rtl' ) && is_rtl() ) {
+		/** This filter is documented in wp-includes/general-template.php */
+		echo apply_filters( 'wp_admin_css', "<link rel='stylesheet' href='" . esc_url( wp_admin_css_uri( "$file-rtl" ) ) . "' type='text/css' />\n", "$file-rtl" );
+	}
+}
+
+/**
  * Outputs the html checked attribute.
  *
  * Compares the first two arguments and if identical marks as checked
