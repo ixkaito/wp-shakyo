@@ -44807,6 +44807,28 @@ filename: wp-admin/install.php
 >> 
 >> [`wp_admin_css()`](https://developer.wordpress.org/reference/functions/wp_admin_css/)
 >> 
+>>> `new WP_Styles()`
+>>> 
+>>> [`new WP_Styles()`](https://developer.wordpress.org/reference/classes/wp_styles/)
+>>> 
+>>>> `__construct()`
+>>> 
+>>> `WP_Styles::query`
+>>> 
+>>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
+>>> 
+>>> `wp_print_styles()`
+>>> 
+>>> `wp_enqueue_style()`
+>>> 
+>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_admin_css`](https://developer.wordpress.org/reference/hooks/wp_admin_css/)
+>>> 
+>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>> 
+>>> `esc_url()`
+>>> 
+>>> `wp_admin_css_uri()`
+>> 
 >> `esc_url()`
 >> 
 >> [`__()`](https://developer.wordpress.org/reference/functions/__/)
