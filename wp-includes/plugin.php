@@ -325,6 +325,62 @@ function did_action($tag) {
 }
 
 /**
+ * Execute functions hooked on a specific action hook, specifying arguments in an array.
+ *
+ * @since 2.1.0
+ *
+ * @see do_action() This function is identical, but the arguments passed to the
+ *                  functions hooked to $tag< are supplied using an array.
+ * @global array $wp_filter  Stores all of the filters
+ * @global array $wp_actions Increments the amount of times action was triggered.
+ *
+ * @param string $tag  The name of the action to be executed.
+ * @param array  $args The arguments supplied to the functions hooked to <tt>$tag</tt>
+ * @return null Will return null if $tag does not exist in $wp_filter array
+ */
+function do_action_ref_array($tag, $args) {
+	global $wp_filter, $wp_actions, $merged_filters, $wp_current_filter;
+
+	if ( ! isset($wp_actions[$tag]) )
+		$wp_actions[$tag] = 1;
+	else
+		++$wp_actions[$tag];
+
+	// Do 'all' actions first
+	if ( isset($wp_filter['all']) ) {
+		$wp_current_filter[] = $tag;
+		$all_args = func_get_args();
+		_wp_call_all_hook($all_args);
+	}
+
+	if ( !isset($wp_filter[$tag]) ) {
+		if ( isset($wp_filter['all']) )
+			array_pop($wp_current_filter);
+		return;
+	}
+
+	if ( !isset($wp_filter['all']) )
+		$wp_current_filter[] = $tag;
+
+	// Sort
+	if ( !isset( $merged_filters[ $tag ] ) ) {
+		ksort($wp_filter[$tag]);
+		$merged_filters[ $tag ] = true;
+	}
+
+	reset( $wp_filter[ $tag ] );
+
+	do {
+		foreach( (array) current($wp_filter[$tag]) as $the_ )
+			if ( !is_null($the_['function']) )
+				call_user_func_array($the_['function'], array_slice($args, 0, (int) $the_['accepted_args']));
+
+	} while ( next($wp_filter[$tag]) !== false );
+
+	array_pop($wp_current_filter);
+}
+
+/**
  * Call the 'all' hook, which will process the functions hooked into it.
  *
  * The 'all' hook passes all of the arguments or parameters that were used for
