@@ -44813,7 +44813,7 @@ filename: wp-admin/install.php
 >>> 
 >>>> [`WP_Styles::__construct()`](https://developer.wordpress.org/reference/classes/wp_styles/__construct/)
 >>>> 
->>>>> `do_action_ref_array()`
+>>>>> [`do_action_ref_array()`](https://developer.wordpress.org/reference/functions/do_action_ref_array/)
 >>> 
 >>> `WP_Styles::query`
 >>> 
