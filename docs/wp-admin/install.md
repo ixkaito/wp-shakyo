@@ -44811,7 +44811,7 @@ filename: wp-admin/install.php
 >>> 
 >>>> [`WP_Styles::__construct()`](https://developer.wordpress.org/reference/classes/wp_styles/__construct/)
 >>>> 
->>>>> [`do_action_ref_array()`](https://developer.wordpress.org/reference/functions/do_action_ref_array/)
+>>>>> [`do_action_ref_array()`](https://developer.wordpress.org/reference/functions/do_action_ref_array/) - [`wp_default_styles`](https://developer.wordpress.org/reference/hooks/wp_default_styles/)
 >>>>> 
 >>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>> 
