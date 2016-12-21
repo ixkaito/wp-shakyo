@@ -44807,8 +44807,6 @@ filename: wp-admin/install.php
 >> 
 >> [`wp_admin_css()`](https://developer.wordpress.org/reference/functions/wp_admin_css/)
 >> 
->>> `new WP_Styles()`
->>> 
 >>> [`new WP_Styles()`](https://developer.wordpress.org/reference/classes/wp_styles/)
 >>> 
 >>>> [`WP_Styles::__construct()`](https://developer.wordpress.org/reference/classes/wp_styles/__construct/)
