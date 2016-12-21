@@ -44813,7 +44813,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`do_action_ref_array()`](https://developer.wordpress.org/reference/functions/do_action_ref_array/)
 >>>>> 
->>>>>> `_wp_call_all_hook()`
+>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>> 
 >>> `WP_Styles::query`
 >>> 
