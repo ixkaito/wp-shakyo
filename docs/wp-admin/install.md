@@ -44818,6 +44818,11 @@ filename: wp-admin/install.php
 >>>>>> [`wp_default_styles()`](https://developer.wordpress.org/reference/functions/wp_default_styles/)
 >>>>>> 
 >>>>>>> **wp-includes/version.php***
+>>>>>>> 
+>>>>>>> `site_url()`
+>>>>>>> 
+>>>>>>> `wp_guess_url()`
+>>>>>>> 
 >>> 
 >>> `WP_Styles::query`
 >>> 
