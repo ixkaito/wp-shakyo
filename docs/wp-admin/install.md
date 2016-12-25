@@ -49053,6 +49053,10 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
+>>>>>>> [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
+>>>>>>> 
+>>>>>>>> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
+>>>>>>> 
 >>> 
 >>> `WP_Styles::query`
 >>> 
