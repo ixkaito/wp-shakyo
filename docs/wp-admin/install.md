@@ -39411,10 +39411,19 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`get_site_url()`](https://developer.wordpress.org/reference/functions/get_site_url/)
 >>>>> 
+>>>>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+>>>>>> 
+>>>>>> `get_option()`
+>>>>>> 
+>>>>>> `switch_to_blog()`
+>>>>>> 
+>>>>>> `restore_current_blog()`
+>>>>>> 
+>>>>>> `set_url_scheme()`
+>>>>>> 
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_url`](https://developer.wordpress.org/reference/hooks/site_url/)
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->>>>>> 
 >>>> 
 >>>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>>> 
