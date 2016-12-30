@@ -39411,6 +39411,10 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`get_site_url()`](https://developer.wordpress.org/reference/functions/get_site_url/)
 >>>>> 
+>>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_url`](https://developer.wordpress.org/reference/hooks/site_url/)
+>>>>>> 
+>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>>> 
 >>>> 
 >>>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>>> 
