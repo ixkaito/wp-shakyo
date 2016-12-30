@@ -39409,7 +39409,8 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`site_url()`](https://developer.wordpress.org/reference/functions/site_url/)
 >>>> 
->>>>> `get_site_url()`
+>>>>> [`get_site_url()`](https://developer.wordpress.org/reference/functions/get_site_url/)
+>>>>> 
 >>>> 
 >>>> [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
 >>>> 
