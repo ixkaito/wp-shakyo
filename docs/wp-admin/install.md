@@ -52651,6 +52651,10 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>> [`WP_Dependencies::add()`](https://developer.wordpress.org/reference/classes/wp_dependencies/add/)
 >>>>>>> 
+>>>>>>>> `new _WP_Dependency()`
+>>>>>>>> 
+>>>>>>>>> `_WP_Dependency::__construct()`
+>>>>>>> 
 >>>>>>> `WP_Styles::add_data()`
 >>> 
 >>> `WP_Styles::query`
