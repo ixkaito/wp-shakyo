@@ -52649,7 +52649,7 @@ filename: wp-admin/install.php
 >>>>>>>>> 
 >>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
->>>>>>> `WP_Styles::add()`
+>>>>>>> [`WP_Dependencies::add()`](https://developer.wordpress.org/reference/classes/wp_dependencies/add/)
 >>>>>>> 
 >>>>>>> `WP_Styles::add_data()`
 >>> 
