@@ -52651,7 +52651,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>> [`WP_Dependencies::add()`](https://developer.wordpress.org/reference/classes/wp_dependencies/add/)
 >>>>>>> 
->>>>>>>> `new _WP_Dependency()`
+>>>>>>>> [`new _WP_Dependency()`](https://developer.wordpress.org/reference/classes/_wp_dependency/)
 >>>>>>>> 
 >>>>>>>>> `_WP_Dependency::__construct()`
 >>>>>>> 
