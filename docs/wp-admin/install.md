@@ -47205,7 +47205,9 @@ filename: wp-admin/install.php
 >>>>>>>>> 
 >>>>>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>>>> 
->>>>>>> `wp_guess_url()`
+>>>>>>> [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
+>>>>>>> 
+>>>>>>>> [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
 >>>>>>> 
 >>>>>>> [`get_bloginfo()`](https://developer.wordpress.org/reference/functions/get_bloginfo/)
 >>>>>>> 
