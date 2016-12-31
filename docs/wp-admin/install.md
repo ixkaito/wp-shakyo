@@ -52653,7 +52653,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`new _WP_Dependency()`](https://developer.wordpress.org/reference/classes/_wp_dependency/)
 >>>>>>>> 
->>>>>>>>> `_WP_Dependency::__construct()`
+>>>>>>>>> [`_WP_Dependency::__construct()`](https://developer.wordpress.org/reference/classes/_wp_dependency/__construct/)
 >>>>>>> 
 >>>>>>> `WP_Styles::add_data()`
 >>> 
