@@ -40587,7 +40587,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>> `restore_current_blog()`
 >>>>>> 
->>>>>> `set_url_scheme()`
+>>>>>> [`set_url_scheme()`](https://developer.wordpress.org/reference/functions/set_url_scheme/)
 >>>>>> 
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_url`](https://developer.wordpress.org/reference/hooks/site_url/)
 >>>>>> 
