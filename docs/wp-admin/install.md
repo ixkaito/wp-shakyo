@@ -52655,7 +52655,7 @@ filename: wp-admin/install.php
 >>>>>>>> 
 >>>>>>>>> [`_WP_Dependency::__construct()`](https://developer.wordpress.org/reference/classes/_wp_dependency/__construct/)
 >>>>>>> 
->>>>>>> [`WP_Dependencies::add_data()`](https://developer.wordpress.org/reference/classes/wp_dependencies/add_data/)
+>>>>>>> [`_WP_Dependency::add_data()`](https://developer.wordpress.org/reference/classes/_wp_dependency/add_data/)
 >>> 
 >>> `WP_Styles::query`
 >>> 
