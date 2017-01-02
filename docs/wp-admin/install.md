@@ -52659,7 +52659,7 @@ filename: wp-admin/install.php
 >>>>>>> 
 >>>>>>>> [`_WP_Dependency::add_data()`](https://developer.wordpress.org/reference/classes/_wp_dependency/add_data/)
 >>> 
->>> `WP_Styles::query`
+>>> [`WP_Styles::query()`](https://developer.wordpress.org/reference/classes/wp_styles/query/)
 >>> 
 >>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
 >>> 
