@@ -52663,7 +52663,7 @@ filename: wp-admin/install.php
 >>> 
 >>> [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
 >>> 
->>> `wp_print_styles()`
+>>> [`wp_print_styles()`](https://developer.wordpress.org/reference/functions/wp_print_styles/)
 >>> 
 >>> `wp_enqueue_style()`
 >>> 
