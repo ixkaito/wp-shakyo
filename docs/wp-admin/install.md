@@ -59370,6 +59370,8 @@ filename: wp-admin/install.php
 >>>>>>>>> [`_WP_Dependency::add_data()`](https://developer.wordpress.org/reference/classes/_wp_dependency/add_data/)
 >>>> 
 >>>> [`WP_Dependencies::do_items()`](https://developer.wordpress.org/reference/classes/wp_dependencies/do_items/)
+>>>> 
+>>>>> `WP_Styles::all_deps()`
 >>> 
 >>> `wp_enqueue_style()`
 >>> 
