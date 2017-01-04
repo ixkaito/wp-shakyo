@@ -59373,7 +59373,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>>> [`WP_Styles::all_deps()`](https://developer.wordpress.org/reference/classes/wp_styles/all_deps/)
 >>>>> 
->>>>>> `WP_Dependencies::all_deps()`
+>>>>>> [`WP_Dependencies::all_deps()`](https://developer.wordpress.org/reference/classes/wp_dependencies/all_deps/)
 >>>>>> 
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`print_styles_array`](https://developer.wordpress.org/reference/hooks/print_styles_array/)
 >>>>>> 
