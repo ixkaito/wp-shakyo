@@ -59371,7 +59371,7 @@ filename: wp-admin/install.php
 >>>> 
 >>>> [`WP_Dependencies::do_items()`](https://developer.wordpress.org/reference/classes/wp_dependencies/do_items/)
 >>>> 
->>>>> `WP_Styles::all_deps()`
+>>>>> [`WP_Styles::all_deps()`](https://developer.wordpress.org/reference/classes/wp_styles/all_deps/)
 >>> 
 >>> `wp_enqueue_style()`
 >>> 
