@@ -40,4 +40,128 @@ class WP_Styles extends WP_Dependencies {
 	}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function all_deps( $handles, $recursion = false, $group = false ) {
+		$r = parent::all_deps( $handles, $recursion );
+		if ( !$recursion ) {
+			/**
+			 * Filter the array of enqueued styles before processing for output.
+			 *
+			 * @since 2.6.0
+			 *
+			 * @param array $to_do The list of enqueued styles about to be processed.
+			 */
+			$this->to_do = apply_filters( 'print_styles_array', $this->to_do );
+		}
+		return $r;
+	}
 }
