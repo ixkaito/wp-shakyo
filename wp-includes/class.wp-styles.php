@@ -39,85 +39,85 @@ class WP_Styles extends WP_Dependencies {
 		do_action_ref_array( 'wp_default_styles', array(&$this) );
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public function do_item( $handle ) {
+		if ( !parent::do_item($handle) )
+			return false;
+
+		$obj = $this->registered[$handle];
+		if ( null === $obj->ver )
+			$ver = '';
+		else
+			$ver = $obj->ver ? $obj->ver : $this->default_version;
+
+		if ( isset($this->args[$handle]) )
+			$ver = $ver ? $ver . '&amp;' . $this->args[$handle] : $this->args[$handle];
+
+		if ( $this->do_concat ) {
+			if ( $this->in_default_dir($obj->src) && !isset($obj->extra['conditional']) && !isset($obj->extra['alt']) ) {
+				$this->concat .= "$handle,";
+				$this->concat_version .= "$handle$ver";
+
+				$this->print_code .= $this->print_inline_style( $handle, false );
+
+				return true;
+			}
+		}
+
+		if ( isset($obj->args) )
+			$media = esc_attr( $obj->args );
+		else
+			$media = 'all';
+
+		$href = $this->_css_href( $obj->src, $ver, $handle );
+		if ( empty( $href ) ) {
+			// Turns out there is nothing to print.
+			return true;
+		}
+		$rel = isset($obj->extra['alt']) && $obj->extra['alt'] ? 'alternate stylesheet' : 'stylesheet';
+		$title = isset($obj->extra['title']) ? "title='" . esc_attr( $obj->extra['title'] ) . "'" : '';
+
+		/**
+		 * Filter the HTML link tag of an enqueued style.
+		 *
+		 * @since 2.6.0
+		 *
+		 * @param string         The link tag for the enqueued style.
+		 * @param string $handle The style's registered handle.
+		 */
+		$tag = apply_filters( 'style_loader_tag', "<link rel='$rel' id='$handle-css' $title href='$href' type='text/css' media='$media' />\n", $handle );
+		if ( 'rtl' === $this->text_direction && isset($obj->extra['rtl']) && $obj->extra['rtl'] ) {
+			if ( is_bool( $obj->extra['rtl'] ) || 'replace' === $obj->extra['rtl'] ) {
+				$suffix = isset( $obj->extra['suffix'] ) ? $obj->extra['suffix'] : '';
+				$rtl_href = str_replace( "{$suffix}.css", "-rtl{$suffix}.css", $this->_css_href( $obj->src , $ver, "$handle-rtl" ));
+			} else {
+				$rtl_href = $this->_css_href( $obj->extra['rtl'], $ver, "$handle-rtl" );
+			}
+
+			/** This filter is documented in wp-includes/class.wp-styles.php */
+			$rtl_tag = apply_filters( 'style_loader_tag', "<link rel='$rel' id='$handle-rtl-css' $title href='$rtl_href' type='text/css' media='$media' />\n", $handle );
+
+			if ( $obj->extra['rtl'] === 'replace' ) {
+				$tag = $rtl_tag;
+			} else {
+				$tag .= $rtl_tag;
+			}
+		}
+
+		if ( isset($obj->extra['conditional']) && $obj->extra['conditional'] ) {
+			$tag = "<!--[if {$obj->extra['conditional']}]>\n" . $tag . "<![endif]-->\n";
+		}
+
+		if ( $this->do_concat ) {
+			$this->print_html .= $tag;
+			if ( $inline_style = $this->print_inline_style( $handle, false ) )
+				$this->print_html .= sprintf( "<style type='text/css'>\n%s\n</style>\n", $inline_style );
+		} else {
+			echo $tag;
+			$this->print_inline_style( $handle );
+		}
+
+		return true;
+	}
 
 
 
