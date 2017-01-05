@@ -59380,6 +59380,8 @@ filename: wp-admin/install.php
 >>>>>> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`print_styles_array`](https://developer.wordpress.org/reference/hooks/print_styles_array/)
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+>>>>> 
+>>>>> `WP_Styles::do_item()`
 >>> 
 >>> `wp_enqueue_style()`
 >>> 
