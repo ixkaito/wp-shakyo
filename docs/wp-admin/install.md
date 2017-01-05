@@ -59381,7 +59381,7 @@ filename: wp-admin/install.php
 >>>>>> 
 >>>>>>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >>>>> 
->>>>> `WP_Styles::do_item()`
+>>>>> [`WP_Styles::do_item()`](https://developer.wordpress.org/reference/classes/wp_styles/do_item/)
 >>> 
 >>> `wp_enqueue_style()`
 >>> 
