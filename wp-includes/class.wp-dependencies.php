@@ -129,18 +129,18 @@ class WP_Dependencies {
 		return $this->done;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Process a dependency.
+	 *
+	 * @access public
+	 * @since 2.6.0
+	 *
+	 * @param string $handle Name of the item. Should be unique.
+	 * @return bool True on success, false if not set.
+	 */
+	public function do_item( $handle ) {
+		return isset($this->registered[$handle]);
+	}
 
 	/**
 	 * Determine dependencies.
