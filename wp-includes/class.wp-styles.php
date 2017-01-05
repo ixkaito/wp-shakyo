@@ -164,4 +164,24 @@ class WP_Styles extends WP_Dependencies {
 		}
 		return $r;
 	}
+
+	public function _css_href( $src, $ver, $handle ) {
+		if ( !is_bool($src) && !preg_match('|^(https?:)?//|', $src) && ! ( $this->content_url && 0 === strpos($src, $this->content_url) ) ) {
+			$src = $this->base_url . $src;
+		}
+
+		if ( !empty($ver) )
+			$src = add_query_arg('ver', $ver, $src);
+
+		/**
+		 * Filter an enqueued style's fully-qualified URL.
+		 *
+		 * @since 2.6.0
+		 *
+		 * @param string $src    The source URL of the enqueued style.
+		 * @param string $handle The style's registered handle.
+		 */
+		$src = apply_filters( 'style_loader_src', $src, $handle );
+		return esc_url( $src );
+	}
 }
