@@ -1183,6 +1183,33 @@ function wp_kses_named_entities($matches) {
 }
 
 /**
+ * Callback for wp_kses_normalize_entities() regular expression.
+ *
+ * This function helps wp_kses_normalize_entities() to only accept 16-bit values
+ * and nothing more for &#number; entities.
+ *
+ * @access private
+ * @since 1.0.0
+ *
+ * @param array $matches preg_replace_callback() matches array
+ * @return string Correctly encoded entity
+ */
+function wp_kses_normalize_entities2($matches) {
+	if ( empty($matches[1]) )
+		return '';
+
+	$i = $matches[1];
+	if (valid_unicode($i)) {
+		$i = str_pad(ltrim($i,'0'), 3, '0', STR_PAD_LEFT);
+		$i = "&#$i;";
+	} else {
+		$i = "&amp;#$i;";
+	}
+
+	return $i;
+}
+
+/**
  * Adds all Kses input form content filters.
  *
  * All hooks have default priority. The wp_filter_kses() function is added to
