@@ -1210,6 +1210,25 @@ function wp_kses_normalize_entities2($matches) {
 }
 
 /**
+ * Callback for wp_kses_normalize_entities() for regular expression.
+ *
+ * This function helps wp_kses_normalize_entities() to only accept valid Unicode
+ * numeric entities in hex form.
+ *
+ * @access private
+ *
+ * @param array $matches preg_replace_callback() matches array
+ * @return string Correctly encoded entity
+ */
+function wp_kses_normalize_entities3($matches) {
+	if ( empty($matches[1]) )
+		return '';
+
+	$hexchars = $matches[1];
+	return ( ( ! valid_unicode(hexdec($hexchars)) ) ? "&amp;#x$hexchars;" : '&#x'.ltrim($hexchars,'0').';' );
+}
+
+/**
  * Adds all Kses input form content filters.
  *
  * All hooks have default priority. The wp_filter_kses() function is added to
