@@ -3002,6 +3002,22 @@ function _deep_replace( $search, $subject ) {
 	return $subject;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Checks and cleans a URL.
  *
