@@ -1074,35 +1074,35 @@ function wp_kses_no_null($string) {
 
 
 
+/**
+ * Sanitizes content from bad protocols and other characters.
+ *
+ * This function searches for URL protocols at the beginning of $string, while
+ * handling whitespace and HTML entities.
+ *
+ * @since 1.0.0
+ *
+ * @param string $string Content to check for bad protocols
+ * @param string $allowed_protocols Allowed protocols
+ * @return string Sanitized content
+ */
+function wp_kses_bad_protocol_once($string, $allowed_protocols, $count = 1 ) {
+	$string2 = preg_split( '/:|&#0*58;|&#x0*3a;/i', $string, 2 );
+	if ( isset($string2[1]) && ! preg_match('%/\?%', $string2[0]) ) {
+		$string = trim( $string2[1] );
+		$protocol = wp_kses_bad_protocol_once2( $string2[0], $allowed_protocols );
+		if ( 'feed:' == $protocol ) {
+			if ( $count > 2 )
+				return '';
+			$string = wp_kses_bad_protocol_once( $string, $allowed_protocols, ++$count );
+			if ( empty( $string ) )
+				return $string;
+		}
+		$string = $protocol . $string;
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return $string;
+}
 
 
 
