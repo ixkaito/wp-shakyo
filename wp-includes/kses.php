@@ -1228,6 +1228,126 @@ function wp_kses_normalize_entities3($matches) {
 	return ( ( ! valid_unicode(hexdec($hexchars)) ) ? "&amp;#x$hexchars;" : '&#x'.ltrim($hexchars,'0').';' );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Convert all entities to their character counterparts.
+ *
+ * This function decodes numeric HTML entities (&#65; and &#x41;). It doesn't do
+ * anything with other entities like &auml;, but we don't need them in the URL
+ * protocol whitelisting system anyway.
+ *
+ * @since 1.0.0
+ *
+ * @param string $string Content to change entities
+ * @return string Content after decoded entities
+ */
+function wp_kses_decode_entities($string) {
+	$string = preg_replace_callback('/&#([0-9]+);/', '_wp_kses_decode_entities_chr', $string);
+	$string = preg_replace_callback('/&#[Xx]([0-9A-Fa-f]+);/', '_wp_kses_decode_entities_chr_hexdec', $string);
+
+	return $string;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Adds all Kses input form content filters.
  *
@@ -1307,6 +1427,68 @@ function kses_init() {
 
 add_action('init', 'kses_init');
 add_action('set_current_user', 'kses_init');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Helper function to add global attributes to a tag in the allowed html list.
