@@ -1104,37 +1104,37 @@ function wp_kses_bad_protocol_once($string, $allowed_protocols, $count = 1 ) {
 	return $string;
 }
 
+/**
+ * Callback for wp_kses_bad_protocol_once() regular expression.
+ *
+ * This function processes URL protocols, checks to see if they're in the
+ * whitelist or not, and returns different data depending on the answer.
+ *
+ * @access private
+ * @since 1.0.0
+ *
+ * @param string $string URI scheme to check against the whitelist
+ * @param string $allowed_protocols Allowed protocols
+ * @return string Sanitized content
+ */
+function wp_kses_bad_protocol_once2( $string, $allowed_protocols ) {
+	$string2 = wp_kses_decode_entities($string);
+	$string2 = preg_replace('/\s/', '', $string2);
+	$string2 = wp_kses_no_null($string2);
+	$string2 = strtolower($string2);
 
+	$allowed = false;
+	foreach ( (array) $allowed_protocols as $one_protocol )
+		if ( strtolower($one_protocol) == $string2 ) {
+			$allowed = true;
+			break;
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	if ($allowed)
+		return "$string2:";
+	else
+		return '';
+}
 
 /**
  * Converts and fixes HTML entities.
