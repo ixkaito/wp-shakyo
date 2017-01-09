@@ -1260,15 +1260,15 @@ function wp_kses_decode_entities($string) {
 	return $string;
 }
 
-
-
-
-
-
-
-
-
-
+/**
+ * Regex callback for wp_kses_decode_entities()
+ *
+ * @param array $match preg match
+ * @return string
+ */
+function _wp_kses_decode_entities_chr( $match ) {
+	return chr( $match[1] );
+}
 
 
 
