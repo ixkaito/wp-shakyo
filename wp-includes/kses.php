@@ -961,34 +961,34 @@ if ( ! CUSTOM_TAGS ) {
 
 
 
+/**
+ * Sanitize string from bad protocols.
+ *
+ * This function removes all non-allowed protocols from the beginning of
+ * $string. It ignores whitespace and the case of the letters, and it does
+ * understand HTML entities. It does its work in a while loop, so it won't be
+ * fooled by a string like "javascript:javascript:alert(57)".
+ *
+ * @since 1.0.0
+ *
+ * @param string $string Content to filter bad protocols from
+ * @param array $allowed_protocols Allowed protocols to keep
+ * @return string Filtered content
+ */
+function wp_kses_bad_protocol($string, $allowed_protocols) {
+	$string = wp_kses_no_null($string);
+	$iterations = 0;
 
+	do {
+		$original_string = $string;
+		$string = wp_kses_bad_protocol_once($string, $allowed_protocols);
+	} while ( $original_string != $string && ++$iterations < 6 );
 
+	if ( $original_string != $string )
+		return '';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return $string;
+}
 
 /**
  * Removes any invalid control characters in $string.
