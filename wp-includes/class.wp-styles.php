@@ -132,23 +132,23 @@ class WP_Styles extends WP_Dependencies {
 
 
 
+	public function print_inline_style( $handle, $echo = true ) {
+		$output = $this->get_data( $handle, 'after' );
 
+		if ( empty( $output ) )
+			return false;
 
+		$output = implode( "\n", $output );
 
+		if ( !$echo )
+			return $output;
 
+		echo "<style type='text/css'>\n";
+		echo "$output\n";
+		echo "</style>\n";
 
-
-
-
-
-
-
-
-
-
-
-
-
+		return true;
+	}
 
 	public function all_deps( $handles, $recursion = false, $group = false ) {
 		$r = parent::all_deps( $handles, $recursion );
