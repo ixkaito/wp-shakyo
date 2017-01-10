@@ -99,6 +99,25 @@ function translate( $text, $domain = 'default' ) {
 	return apply_filters( 'gettext', $translations, $text, $domain );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Retrieve the translation of $text in the context defined in $context.
  *
@@ -142,6 +161,36 @@ function __( $text, $domain = 'default' ) {
 	return translate( $text, $domain );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Display translated text.
  *
@@ -153,6 +202,30 @@ function __( $text, $domain = 'default' ) {
 function _e( $text, $domain = 'default' ) {
 	echo translate( $text, $domain );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Retrieve translated string with gettext context.
@@ -173,6 +246,116 @@ function _e( $text, $domain = 'default' ) {
 function _x( $text, $context, $domain = 'default' ) {
 	return translate_with_gettext_context( $text, $context, $domain );
 }
+
+/**
+ * Display translated string with gettext context.
+ *
+ * @since 3.0.0
+ *
+ * @param string $text    Text to translate.
+ * @param string $context Context information for the translators.
+ * @param string $domain  Optional. Text domain. Unique identifier for retrieving translated strings.
+ * @return string Translated context string without pipe.
+ */
+function _ex( $text, $context, $domain = 'default' ) {
+	echo _x( $text, $context, $domain );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Register plural strings in POT file, but don't translate them.
@@ -201,6 +384,36 @@ function _x( $text, $context, $domain = 'default' ) {
 function _n_noop( $singular, $plural, $domain = null ) {
 	return array( 0 => $singular, 1 => $plural, 'singular' => $singular, 'plural' => $plural, 'context' => null, 'domain' => $domain );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Load a .mo file into the text domain $domain.
@@ -345,6 +558,138 @@ function load_default_textdomain( $locale = null ) {
 
 	return $return;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Return the Translations instance for a text domain.
