@@ -1118,47 +1118,47 @@ function utf8_uri_encode( $utf8_string, $length = 0 ) {
 
 
 
+/**
+ * Sanitizes a username, stripping out unsafe characters.
+ *
+ * Removes tags, octets, entities, and if strict is enabled, will only keep
+ * alphanumeric, _, space, ., -, @. After sanitizing, it passes the username,
+ * raw username (the username in the parameter), and the value of $strict as
+ * parameters for the 'sanitize_user' filter.
+ *
+ * @since 2.0.0
+ *
+ * @param string $username The username to be sanitized.
+ * @param bool $strict If set limits $username to specific characters. Default false.
+ * @return string The sanitized username, after passing through filters.
+ */
+function sanitize_user( $username, $strict = false ) {
+	$raw_username = $username;
+	$username = wp_strip_all_tags( $username );
+	$username = remove_accents( $username );
+	// Kill octets
+	$username = preg_replace( '|%([a-fA-F0-9][a-fA-F0-9])|', '', $username );
+	$username = preg_replace( '/&.+?;/', '', $username ); // Kill entities
 
+	// If strict, reduce to ASCII for max portability.
+	if ( $strict )
+		$username = preg_replace( '|[^a-z0-9 _.\-@]|i', '', $username );
 
+	$username = trim( $username );
+	// Consolidate contiguous whitespace
+	$username = preg_replace( '|\s+|', ' ', $username );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Filter a sanitized username string.
+	 *
+	 * @since 2.0.1
+	 *
+	 * @param string $username     Sanitized username.
+	 * @param string $raw_username The username prior to sanitization.
+	 * @param bool   $strict       Whether to limit the sanitization to specific characters. Default false.
+	 */
+	return apply_filters( 'sanitize_user', $username, $raw_username, $strict );
+}
 
 /**
  * Sanitizes a string key.
