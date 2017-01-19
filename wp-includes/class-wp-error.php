@@ -36,6 +36,34 @@ class WP_Error {
 	 * @access private
 	 */
 	private $error_data = array();
+
+	/**
+	 * Initialize the error.
+	 *
+	 * If `$code` is empty, the other parameters will be ignored.
+	 * When `$code` is not empty, `$message` will be used even if
+	 * it is empty. The `$data` parameter will be used only if it
+	 * is not empty.
+	 *
+	 * Though the class is constructed with a single error code and
+	 * message, multiple codes can be added using the `add()` method.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string|int $code Error code
+	 * @param string $message Error message
+	 * @param mixed $data Optional. Error data.
+	 * @return WP_Error
+	 */
+	public function __construct( $code = '', $message = '', $data = '' ) {
+		if ( empty($code) )
+			return;
+
+		$this->errors[$code][] = $message;
+
+		if ( ! empty($data) )
+			$this->error_data[$code] = $data;
+	}
 }
 
 /**
