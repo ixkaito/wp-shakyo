@@ -117,20 +117,20 @@ class WP_Error {
 
 
 
+	/**
+	 * Retrieve all error codes.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @return array List of error codes, if available.
+	 */
+	public function get_error_codes() {
+		if ( empty($this->errors) )
+			return array();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+		return array_keys($this->errors);
+	}
 
 	/**
 	 * Retrieve first error code available.
