@@ -18,7 +18,25 @@
  * @package WordPress
  * @since 2.1.0
  */
-class WP_Error {}
+class WP_Error {
+	/**
+	 * Stores the list of errors.
+	 *
+	 * @since 2.1.0
+	 * @var array
+	 * @access private
+	 */
+	private $errors = array();
+
+	/**
+	 * Stores the list of data for error codes.
+	 *
+	 * @since 2.1.0
+	 * @var array
+	 * @access private
+	 */
+	private $error_data = array();
+}
 
 /**
  * Check whether variable is a WordPress Error.
