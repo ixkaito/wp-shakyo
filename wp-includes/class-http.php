@@ -383,23 +383,23 @@ class WP_Http {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Uses the POST HTTP method.
+	 *
+	 * Used for sending data that is expected to be in the body.
+	 *
+	 * @access public
+	 * @since 2.7.0
+	 *
+	 * @param string       $url  The request URL.
+	 * @param string|array $args Optional. Override the defaults.
+	 * @return array|WP_Error Array containing 'headers', 'body', 'response', 'cookies', 'filename'. A WP_Error instance upon error
+	 */
+	public function post($url, $args = array()) {
+		$defaults = array('method' => 'POST');
+		$r = wp_parse_args( $args, $defaults );
+		return $this->request($url, $r);
+	}
 
 
 
