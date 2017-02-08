@@ -1885,3 +1885,96 @@ class WP_Http_Cookie {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Implementation for deflate and gzip transfer encodings.
+ *
+ * Includes RFC 1950, RFC 1951, and RFC 1952.
+ *
+ * @since 2.8.0
+ * @package WordPress
+ * @subpackage HTTP
+ */
+class WP_Http_Encoding {}
