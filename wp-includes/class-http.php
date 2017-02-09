@@ -1687,73 +1687,73 @@ class WP_HTTP_Proxy {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Whether URL should be sent through the proxy server.
+	 *
+	 * We want to keep localhost and the blog URL from being sent through the proxy server, because
+	 * some proxies can not handle this. We also have the constant available for defining other
+	 * hosts that won't be sent through the proxy.
+	 *
+	 * @uses WP_PROXY_BYPASS_HOSTS
+	 * @since 2.8.0
+	 *
+	 * @param string $uri URI to check.
+	 * @return bool True, to send through the proxy and false if, the proxy should not be used.
+	 */
+	public function send_through_proxy( $uri ) {
+		/*
+		 * parse_url() only handles http, https type URLs, and will emit E_WARNING on failure.
+		 * This will be displayed on blogs, which is not reasonable.
+		 */
+		$check = @parse_url($uri);
+
+		// Malformed URL, can not process, but this could mean ssl, so let through anyway.
+		if ( $check === false )
+			return true;
+
+		$home = parse_url( get_option('siteurl') );
+
+		/**
+		 * Filter whether to preempt sending the request through the proxy server.
+		 *
+		 * Returning false will bypass the proxy; returning true will send
+		 * the request through the proxy. Returning null bypasses the filter.
+		 *
+		 * @since 3.5.0
+		 *
+		 * @param null   $override Whether to override the request result. Default null.
+		 * @param string $uri      URL to check.
+		 * @param array  $check    Associative array result of parsing the URI.
+		 * @param array  $home     Associative array result of parsing the site URL.
+		 */
+		$result = apply_filters( 'pre_http_send_through_proxy', null, $uri, $check, $home );
+		if ( ! is_null( $result ) )
+			return $result;
+
+		if ( 'localhost' == $check['host'] || ( isset( $home['host'] ) && $home['host'] == $check['host'] ) )
+			return false;
+
+		if ( !defined('WP_PROXY_BYPASS_HOSTS') )
+			return true;
+
+		static $bypass_hosts;
+		static $wildcard_regex = false;
+		if ( null == $bypass_hosts ) {
+			$bypass_hosts = preg_split('|,\s*|', WP_PROXY_BYPASS_HOSTS);
+
+			if ( false !== strpos(WP_PROXY_BYPASS_HOSTS, '*') ) {
+				$wildcard_regex = array();
+				foreach ( $bypass_hosts as $host )
+					$wildcard_regex[] = str_replace( '\*', '.+', preg_quote( $host, '/' ) );
+				$wildcard_regex = '/^(' . implode('|', $wildcard_regex) . ')$/i';
+			}
+		}
+
+		if ( !empty($wildcard_regex) )
+			return !preg_match($wildcard_regex, $check['host']);
+		else
+			return !in_array( $check['host'], $bypass_hosts );
+	}
 }
 /**
  * Internal representation of a single cookie.
