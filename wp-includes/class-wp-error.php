@@ -148,6 +148,26 @@ class WP_Error {
 
 		return $codes[0];
 	}
+
+	/**
+	 * Get single error message.
+	 *
+	 * This will get the first message available for the code. If no code is
+	 * given then the first code available will be used.
+	 *
+	 * @since 2.1.0
+	 *
+	 * @param string|int $code Optional. Error code to retrieve message.
+	 * @return string
+	 */
+	public function get_error_message($code = '') {
+		if ( empty($code) )
+			$code = $this->get_error_code();
+		$messages = $this->get_error_messages($code);
+		if ( empty($messages) )
+			return '';
+		return $messages[0];
+	}
 }
 
 /**
