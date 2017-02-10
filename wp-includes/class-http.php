@@ -527,33 +527,6 @@ class WP_Http {
 		return array('response' => $response, 'headers' => $newheaders, 'cookies' => $cookies);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	/**
 	 * Takes the arguments for a ::request() and checks for the cookie array.
 	 *
@@ -819,8 +792,6 @@ class WP_Http {
 
 
 }
-
-
 
 
 
@@ -1500,19 +1471,19 @@ class WP_Http_Curl {
 		return $response;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Grab the headers of the cURL request
+	 *
+	 * Each header is sent individually to this callback, so we append to the $header property for temporary storage
+	 *
+	 * @since 3.2.0
+	 * @access private
+	 * @return int
+	 */
+	private function stream_headers( $handle, $headers ) {
+		$this->headers .= $headers;
+		return strlen( $headers );
+	}
 
 
 
