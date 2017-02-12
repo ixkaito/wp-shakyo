@@ -192,10 +192,10 @@ switch($step) {
 	case 0: // Step 0
 
 		if ( wp_can_install_language_pack() && empty( $language ) && ( $languages = wp_get_available_translations() ) ) {
-			var_dump(__FILE__);
 			display_header( 'language-chooser' );
 			echo '<form id="setup" method="post" action="?step=1">';
 			wp_install_language_form( $languages );
+			var_dump(__FILE__);
 			echo '</form>';
 			break;
 		}
