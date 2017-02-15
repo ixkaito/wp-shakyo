@@ -17,5 +17,3 @@ require_once(ABSPATH . 'wp-admin/includes/admin.php');
 
 /** WordPress Schema API */
 require_once(ABSPATH . 'wp-admin/includes/schema.php');
-
-var_dump(__FILE__);
