@@ -212,6 +212,31 @@ function timer_start() {
 	return true;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Set PHP error reporting based on WordPress debug settings.
  *
@@ -590,6 +615,20 @@ function shutdown_action_hook() {
 	wp_cache_close();
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Whether the current request is for an administrative interface page.
  *
@@ -651,6 +690,28 @@ function is_network_admin() {
 	return false;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * If Multisite is enabled.
  *
@@ -666,6 +727,18 @@ function is_multisite() {
 		return true;
 
 	return false;
+}
+
+/**
+ * Retrieve the current blog ID.
+ *
+ * @since 3.1.0
+ *
+ * @return int Blog id
+ */
+function get_current_blog_id() {
+	global $blog_id;
+	return absint($blog_id);
 }
 
 /**
