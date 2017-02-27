@@ -2533,18 +2533,18 @@ function get_site_url( $blog_id = null, $path = '', $scheme = null ) {
 	return apply_filters( 'site_url', $url, $path, $scheme, $blog_id );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Retrieve the url to the admin area for the current site.
+ *
+ * @since 2.6.0
+ *
+ * @param string $path Optional path relative to the admin url.
+ * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
+ * @return string Admin url link with optional path appended.
+*/
+function admin_url( $path = '', $scheme = 'admin' ) {
+	return get_admin_url( null, $path, $scheme );
+}
 
 
 
