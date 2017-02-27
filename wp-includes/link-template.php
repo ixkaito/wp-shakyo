@@ -2546,33 +2546,33 @@ function admin_url( $path = '', $scheme = 'admin' ) {
 	return get_admin_url( null, $path, $scheme );
 }
 
+/**
+ * Retrieve the url to the admin area for a given site.
+ *
+ * @since 3.0.0
+ *
+ * @param int $blog_id (optional) Blog ID. Defaults to current blog.
+ * @param string $path Optional path relative to the admin url.
+ * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
+ * @return string Admin url link with optional path appended.
+*/
+function get_admin_url( $blog_id = null, $path = '', $scheme = 'admin' ) {
+	$url = get_site_url($blog_id, 'wp-admin/', $scheme);
 
+	if ( $path && is_string( $path ) )
+		$url .= ltrim( $path, '/' );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Filter the admin area URL.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param string   $url     The complete admin area URL including scheme and path.
+	 * @param string   $path    Path relative to the admin area URL. Blank string if no path is specified.
+	 * @param int|null $blog_id Blog ID, or null for the current blog.
+	 */
+	return apply_filters( 'admin_url', $url, $path, $blog_id );
+}
 
 
 
