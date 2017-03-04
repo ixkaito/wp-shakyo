@@ -195,7 +195,6 @@ switch($step) {
 			display_header( 'language-chooser' );
 			echo '<form id="setup" method="post" action="?step=1">';
 			wp_install_language_form( $languages );
-			var_dump(__FILE__);
 			echo '</form>';
 			break;
 		}
