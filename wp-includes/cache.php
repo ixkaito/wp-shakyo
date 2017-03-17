@@ -43,6 +43,24 @@ function wp_cache_close() {
 	return true;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Removes the cache contents matching key and group.
  *
@@ -58,6 +76,21 @@ function wp_cache_delete($key, $group = '') {
 	global $wp_object_cache;
 
 	return $wp_object_cache->delete($key, $group);
+}
+
+/**
+ * Removes all cache items.
+ *
+ * @since 2.0.0
+ * @uses $wp_object_cache Object Cache Class
+ * @see WP_Object_Cache::flush()
+ *
+ * @return bool False on failure, true on success
+ */
+function wp_cache_flush() {
+	global $wp_object_cache;
+
+	return $wp_object_cache->flush();
 }
 
 /**
