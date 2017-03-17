@@ -320,6 +320,19 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Clears the object cache of all data
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return bool Always returns true
+	 */
+	public function flush() {
+		$this->cache = array ();
+
+		return true;
+	}
+
+	/**
 	 * Retrieves the cache contents, if it exists
 	 *
 	 * The contents will be first attempted to be retrieved by searching by the
