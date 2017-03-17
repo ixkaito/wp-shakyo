@@ -113,6 +113,24 @@ function wp_cache_get( $key, $group = '', $force = false, &$found = null ) {
 	return $wp_object_cache->get( $key, $group, $force, $found );
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Sets up Object Cache Global and assigns it.
  *
@@ -122,6 +140,25 @@ function wp_cache_get( $key, $group = '', $force = false, &$found = null ) {
 function wp_cache_init() {
 	$GLOBALS['wp_object_cache'] = new WP_Object_Cache();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Saves the data to the cache.
@@ -182,6 +219,29 @@ function wp_cache_add_non_persistent_groups( $groups ) {
 	// Default cache doesn't persist so nothing to do here.
 	return;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * WordPress Object Cache
@@ -246,6 +306,58 @@ class WP_Object_Cache {
 	 */
 	private $blog_prefix;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * Adds data to the cache if it doesn't already exist.
 	 *
@@ -291,6 +403,39 @@ class WP_Object_Cache {
 		$groups = array_fill_keys( $groups, true );
 		$this->global_groups = array_merge( $this->global_groups, $groups );
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * Remove the contents of the cache key in the group
@@ -370,6 +515,81 @@ class WP_Object_Cache {
 		return false;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * Sets the data contents into the cache
 	 *
@@ -403,6 +623,26 @@ class WP_Object_Cache {
 		$this->cache[$group][$key] = $data;
 		return true;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/**
 	 * Switch the interal blog id.
