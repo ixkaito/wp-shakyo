@@ -363,13 +363,10 @@ final class WP_Theme implements ArrayAccess {
 	 */
 	public function offsetSet( $offset, $value ) {}
 
-
-
-
-
-
-
-
+	/**
+	 * Method to implement ArrayAccess for keys formerly returned by get_themes()
+	 */
+	public function offsetUnset( $offset ) {}
 
 	/**
 	 * Method to implement ArrayAccess for keys formerly returned by get_themes()
