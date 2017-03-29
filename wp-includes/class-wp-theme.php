@@ -368,18 +368,18 @@ final class WP_Theme implements ArrayAccess {
 
 
 
+	/**
+	 * Method to implement ArrayAccess for keys formerly returned by get_themes()
+	 */
+	public function offsetExists( $offset ) {
+		static $keys = array(
+			'Name', 'Version', 'Status', 'Title', 'Author', 'Author Name', 'Author URI', 'Description',
+			'Template', 'Stylesheet', 'Template Files', 'Stylesheet Files', 'Template Dir', 'Stylesheet Dir',
+			 'Screenshot', 'Tags', 'Theme Root', 'Theme Root URI', 'Parent Theme',
+		);
 
-
-
-
-
-
-
-
-
-
-
-
+		return in_array( $offset, $keys );
+	}
 
 	/**
 	 * Method to implement ArrayAccess for keys formerly returned by get_themes().
