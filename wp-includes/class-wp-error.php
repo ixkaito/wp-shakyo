@@ -192,6 +192,39 @@ class WP_Error {
 			return '';
 		return $messages[0];
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * Add an error or append additional message to an existing error.
+	 *
+	 * @since 2.1.0
+	 * @access public
+	 *
+	 * @param string|int $code Error code.
+	 * @param string $message Error message.
+	 * @param mixed $data Optional. Error data.
+	 */
+	public function add($code, $message, $data = '') {
+		$this->errors[$code][] = $message;
+		if ( ! empty($data) )
+			$this->error_data[$code] = $data;
+	}
 }
 
 /**
