@@ -436,17 +436,17 @@ final class WP_Theme implements ArrayAccess {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Returns errors property.
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @return WP_Error|bool WP_Error if there are errors, or false.
+	 */
+	public function errors() {
+		return is_wp_error( $this->errors ) ? $this->errors : false;
+	}
 
 
 
