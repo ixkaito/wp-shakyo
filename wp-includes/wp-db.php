@@ -1905,30 +1905,30 @@ class wpdb {
 		}
 	}
 
+	/**
+	 * Retrieve one column from the database.
+	 *
+	 * Executes a SQL query and returns the column from the SQL result.
+	 * If the SQL result contains more than one column, this function returns the column specified.
+	 * If $query is null, this function returns the specified column from the previous SQL result.
+	 *
+	 * @since 0.71
+	 *
+	 * @param string|null $query Optional. SQL query. Defaults to previous query.
+	 * @param int $x Optional. Column to return. Indexed from 0.
+	 * @return array Database query result. Array indexed from 0 by SQL result row number.
+	 */
+	public function get_col( $query = null , $x = 0 ) {
+		if ( $query )
+			$this->query( $query );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		$new_array = array();
+		// Extract the column values
+		for ( $i = 0, $j = count( $this->last_result ); $i < $j; $i++ ) {
+			$new_array[$i] = $this->get_var( null, $x, $i );
+		}
+		return $new_array;
+	}
 
 	/**
 	 * Retrieve an entire SQL result set from the database (i.e., many rows)
