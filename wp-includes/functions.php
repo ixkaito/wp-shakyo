@@ -3651,42 +3651,42 @@ function is_main_site( $site_id = null ) {
 	return (int) $site_id === (int) $current_site->blog_id;
 }
 
+/**
+ * Determine whether a network is the main network of the Multisite install.
+ *
+ * @since 3.7.0
+ *
+ * @param int $network_id Optional. Network ID to test. Defaults to current network.
+ * @return bool True if $network_id is the main network, or if not running Multisite.
+ */
+function is_main_network( $network_id = null ) {
+	global $wpdb;
 
+	if ( ! is_multisite() )
+		return true;
 
+	$current_network_id = (int) get_current_site()->id;
 
+	if ( ! $network_id )
+		$network_id = $current_network_id;
+	$network_id = (int) $network_id;
 
+	if ( defined( 'PRIMARY_NETWORK_ID' ) )
+		return $network_id === (int) PRIMARY_NETWORK_ID;
 
+	if ( 1 === $current_network_id )
+		return $network_id === $current_network_id;
 
+	$primary_network_id = (int) wp_cache_get( 'primary_network_id', 'site-options' );
 
+	if ( $primary_network_id )
+		return $network_id === $primary_network_id;
 
+	$primary_network_id = (int) $wpdb->get_var( "SELECT id FROM $wpdb->site ORDER BY id LIMIT 1" );
+	wp_cache_add( 'primary_network_id', $primary_network_id, 'site-options' );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return $network_id === $primary_network_id;
+}
 
 
 
