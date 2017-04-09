@@ -572,3 +572,19 @@ function populate_options() {
 		$wpdb->query( $wpdb->prepare( $sql, $wpdb->esc_like( '_site_transient_' ) . '%', $wpdb->esc_like( '_site_transient_timeout_' ) . '%', $time ) );
 	}
 }
+
+/**
+ * Execute WordPress role creation for the various WordPress versions.
+ *
+ * @since 2.0.0
+ */
+function populate_roles() {
+	populate_roles_160();
+	populate_roles_210();
+	populate_roles_230();
+	populate_roles_250();
+	populate_roles_260();
+	populate_roles_270();
+	populate_roles_280();
+	populate_roles_300();
+}
