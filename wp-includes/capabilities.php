@@ -127,7 +127,7 @@ class WP_Roles {
 			$this->role_names[$role] = $this->roles[$role]['name'];
 		}
 	}
-}
+
 
 
 
@@ -289,7 +289,7 @@ class WP_Roles {
 
 
 
-
+}
 
 
 
