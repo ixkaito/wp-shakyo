@@ -3250,206 +3250,206 @@ function esc_attr( $text ) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Sanitises various option values based on the nature of the option.
+ *
+ * This is basically a switch statement which will pass $value through a number
+ * of functions depending on the $option.
+ *
+ * @since 2.0.5
+ *
+ * @param string $option The name of the option.
+ * @param string $value The unsanitised value.
+ * @return string Sanitized value.
+ */
+function sanitize_option($option, $value) {
+
+	switch ( $option ) {
+		case 'admin_email' :
+		case 'new_admin_email' :
+			$value = sanitize_email( $value );
+			if ( ! is_email( $value ) ) {
+				$value = get_option( $option ); // Resets option to stored value in the case of failed sanitization
+				if ( function_exists( 'add_settings_error' ) )
+					add_settings_error( $option, 'invalid_admin_email', __( 'The email address entered did not appear to be a valid email address. Please enter a valid email address.' ) );
+			}
+			break;
+
+		case 'thumbnail_size_w':
+		case 'thumbnail_size_h':
+		case 'medium_size_w':
+		case 'medium_size_h':
+		case 'large_size_w':
+		case 'large_size_h':
+		case 'mailserver_port':
+		case 'comment_max_links':
+		case 'page_on_front':
+		case 'page_for_posts':
+		case 'rss_excerpt_length':
+		case 'default_category':
+		case 'default_email_category':
+		case 'default_link_category':
+		case 'close_comments_days_old':
+		case 'comments_per_page':
+		case 'thread_comments_depth':
+		case 'users_can_register':
+		case 'start_of_week':
+			$value = absint( $value );
+			break;
+
+		case 'posts_per_page':
+		case 'posts_per_rss':
+			$value = (int) $value;
+			if ( empty($value) )
+				$value = 1;
+			if ( $value < -1 )
+				$value = abs($value);
+			break;
+
+		case 'default_ping_status':
+		case 'default_comment_status':
+			// Options that if not there have 0 value but need to be something like "closed"
+			if ( $value == '0' || $value == '')
+				$value = 'closed';
+			break;
+
+		case 'blogdescription':
+		case 'blogname':
+			$value = wp_kses_post( $value );
+			$value = esc_html( $value );
+			break;
+
+		case 'blog_charset':
+			$value = preg_replace('/[^a-zA-Z0-9_-]/', '', $value); // strips slashes
+			break;
+
+		case 'blog_public':
+			// This is the value if the settings checkbox is not checked on POST. Don't rely on this.
+			if ( null === $value )
+				$value = 1;
+			else
+				$value = intval( $value );
+			break;
+
+		case 'date_format':
+		case 'time_format':
+		case 'mailserver_url':
+		case 'mailserver_login':
+		case 'mailserver_pass':
+		case 'upload_path':
+			$value = strip_tags( $value );
+			$value = wp_kses_data( $value );
+			break;
+
+		case 'ping_sites':
+			$value = explode( "\n", $value );
+			$value = array_filter( array_map( 'trim', $value ) );
+			$value = array_filter( array_map( 'esc_url_raw', $value ) );
+			$value = implode( "\n", $value );
+			break;
+
+		case 'gmt_offset':
+			$value = preg_replace('/[^0-9:.-]/', '', $value); // strips slashes
+			break;
+
+		case 'siteurl':
+			if ( (bool)preg_match( '#http(s?)://(.+)#i', $value) ) {
+				$value = esc_url_raw($value);
+			} else {
+				$value = get_option( $option ); // Resets option to stored value in the case of failed sanitization
+				if ( function_exists('add_settings_error') )
+					add_settings_error('siteurl', 'invalid_siteurl', __('The WordPress address you entered did not appear to be a valid URL. Please enter a valid URL.'));
+			}
+			break;
+
+		case 'home':
+			if ( (bool)preg_match( '#http(s?)://(.+)#i', $value) ) {
+				$value = esc_url_raw($value);
+			} else {
+				$value = get_option( $option ); // Resets option to stored value in the case of failed sanitization
+				if ( function_exists('add_settings_error') )
+					add_settings_error('home', 'invalid_home', __('The Site address you entered did not appear to be a valid URL. Please enter a valid URL.'));
+			}
+			break;
+
+		case 'WPLANG':
+			$allowed = get_available_languages();
+			if ( ! is_multisite() && defined( 'WPLANG' ) && '' !== WPLANG && 'en_US' !== WPLANG ) {
+				$allowed[] = WPLANG;
+			}
+			if ( ! in_array( $value, $allowed ) && ! empty( $value ) ) {
+				$value = get_option( $option );
+			}
+			break;
+
+		case 'illegal_names':
+			if ( ! is_array( $value ) )
+				$value = explode( ' ', $value );
+
+			$value = array_values( array_filter( array_map( 'trim', $value ) ) );
+
+			if ( ! $value )
+				$value = '';
+			break;
+
+		case 'limited_email_domains':
+		case 'banned_email_domains':
+			if ( ! is_array( $value ) )
+				$value = explode( "\n", $value );
+
+			$domains = array_values( array_filter( array_map( 'trim', $value ) ) );
+			$value = array();
+
+			foreach ( $domains as $domain ) {
+				if ( ! preg_match( '/(--|\.\.)/', $domain ) && preg_match( '|^([a-zA-Z0-9-\.])+$|', $domain ) )
+					$value[] = $domain;
+			}
+			if ( ! $value )
+				$value = '';
+			break;
+
+		case 'timezone_string':
+			$allowed_zones = timezone_identifiers_list();
+			if ( ! in_array( $value, $allowed_zones ) && ! empty( $value ) ) {
+				$value = get_option( $option ); // Resets option to stored value in the case of failed sanitization
+				if ( function_exists('add_settings_error') )
+					add_settings_error('timezone_string', 'invalid_timezone_string', __('The timezone you have entered is not valid. Please select a valid timezone.') );
+			}
+			break;
+
+		case 'permalink_structure':
+		case 'category_base':
+		case 'tag_base':
+			$value = esc_url_raw( $value );
+			$value = str_replace( 'http://', '', $value );
+			break;
+
+		case 'default_role' :
+			if ( ! get_role( $value ) && get_role( 'subscriber' ) )
+				$value = 'subscriber';
+			break;
+
+		case 'moderation_keys':
+		case 'blacklist_keys':
+			$value = explode( "\n", $value );
+			$value = array_filter( array_map( 'trim', $value ) );
+			$value = array_unique( $value );
+			$value = implode( "\n", $value );
+			break;
+	}
+
+	/**
+	 * Filter an option value following sanitization.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param string $value  The sanitized option value.
+	 * @param string $option The option name.
+	 */
+	$value = apply_filters( "sanitize_option_{$option}", $value, $option );
+
+	return $value;
+}
 
 /**
  * Parses a string into variables to be stored in an array.
