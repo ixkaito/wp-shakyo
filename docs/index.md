@@ -3,4 +3,4 @@ layout: default
 filename: index.php
 ---
 
-{% include wp/wp-blog-header.md %}
+<blockquote>{% include wp/wp-blog-header.php.md %}</blockquote>
