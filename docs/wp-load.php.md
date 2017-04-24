@@ -1,3 +1,3 @@
 <p><b>wp-load.php</b></p>
 
-<blockquote>{% include wp/wp-config.php.md %}</blockquote>
+<blockquote>{% include_relative wp-config.php.md %}</blockquote>
