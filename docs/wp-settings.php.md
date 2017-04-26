@@ -1,10 +1,9 @@
 <p><b>wp-settings.php</b></p>
 
+<blockquote>{% include_relative wp-includes/load.php.md %}</blockquote>
 
- **wp-includes/load.php**
- 
- **wp-includes/default-constants.php**
- 
+<blockquote>{% include_relative wp-includes/default-constants.php.md %}</blockquote>
+
  [`wp_initial_constants()`](https://developer.wordpress.org/reference/functions/wp_initial_constants/)
  
 > [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
