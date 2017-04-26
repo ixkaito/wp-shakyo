@@ -1,8 +1,10 @@
 <p><b>wp-settings.php</b></p>
 
-<blockquote>{% include_relative wp-includes/load.php.md %}</blockquote>
+<blockquote>
 
-<blockquote>{% include_relative wp-includes/default-constants.php.md %}</blockquote>
+{% include_relative wp-includes/load.php.md %}
+
+{% include_relative wp-includes/default-constants.php.md %}
 
  [`wp_initial_constants()`](https://developer.wordpress.org/reference/functions/wp_initial_constants/)
  
@@ -1317,3 +1319,5 @@
 >>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
 >> 
 >> _Redirect to **[wp-admin/install.php]({{ site.baseurl }}/wp-admin/install.html)**_
+
+</blockquote>
