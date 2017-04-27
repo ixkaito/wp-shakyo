@@ -6,9 +6,7 @@
 
 {% include_relative wp-includes/default-constants.php.md %}
 
- [`wp_initial_constants()`](https://developer.wordpress.org/reference/functions/wp_initial_constants/)
- 
-> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+{% include functions/wp_initial_constants.md %}
  
  [`wp_check_php_mysql_versions()`](https://developer.wordpress.org/reference/functions/wp_check_php_mysql_versions/)
  
