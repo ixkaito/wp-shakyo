@@ -3,7 +3,5 @@
 <blockquote>
 
 {% include classes/NOOP_Translations.md %}
-
-> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
  
 </blockquote>
