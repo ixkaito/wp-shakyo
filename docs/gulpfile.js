@@ -80,7 +80,7 @@ gulp.task('jekyll-build', function (done) {
  */
 gulp.task('jekyll-rebuild', ['jekyll-build'], function () {
   browsersync.notify('Rebuilded Jekyll');
-  browsersync.reload();
+  // browsersync.reload();
 });
 
 /**

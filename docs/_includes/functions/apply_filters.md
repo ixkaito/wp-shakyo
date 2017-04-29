@@ -1,4 +1,4 @@
-<p><a href="https://developer.wordpress.org/reference/functions/apply_filters/"><code>apply_filters()</code></a> - <a href="https://developer.wordpress.org/reference/hooks/{{ include.hook }}/"><code>{{ include.hook }}</code></a></p>
+<p><code><a href="https://developer.wordpress.org/reference/functions/apply_filters/">apply_filters</a>( '<a href="https://developer.wordpress.org/reference/hooks/{{ include.hook }}/">{{ include.hook }}</a>' )</code></p>
 
 <blockquote>
 

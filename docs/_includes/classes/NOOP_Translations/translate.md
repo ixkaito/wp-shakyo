@@ -1,0 +1,1 @@
+<p><code><a href="https://developer.wordpress.org/reference/classes/noop_translations/translate/">NOOP_Translations::translate()</a></code></p>
