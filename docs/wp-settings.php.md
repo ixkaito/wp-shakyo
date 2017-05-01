@@ -9,8 +9,8 @@
 {% include functions/wp_initial_constants.md %}
 
 {% include functions/wp_check_php_mysql_versions.md %}
- 
- [`wp_unregister_GLOBALS()`](https://developer.wordpress.org/reference/functions/wp_unregister_globals/)
+
+{% include functions/wp_unregister_GLOBALS.md %}
  
  [`wp_fix_server_vars()`](https://developer.wordpress.org/reference/functions/wp_fix_server_vars/)
  
