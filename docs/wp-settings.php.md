@@ -11,9 +11,9 @@
 {% include functions/wp_check_php_mysql_versions.md %}
 
 {% include functions/wp_unregister_GLOBALS.md %}
- 
- [`wp_fix_server_vars()`](https://developer.wordpress.org/reference/functions/wp_fix_server_vars/)
- 
+
+{% include functions/wp_fix_server_vars.md %}
+  
  [`wp_favicon_request()`](https://developer.wordpress.org/reference/functions/wp_favicon_request/)
  
  [`wp_maintenance()`](https://developer.wordpress.org/reference/functions/wp_maintenance/)
