@@ -13,8 +13,8 @@
 {% include functions/wp_unregister_GLOBALS.md %}
 
 {% include functions/wp_fix_server_vars.md %}
-  
- [`wp_favicon_request()`](https://developer.wordpress.org/reference/functions/wp_favicon_request/)
+
+{% include functions/wp_favicon_request.md %}
  
  [`wp_maintenance()`](https://developer.wordpress.org/reference/functions/wp_maintenance/)
  
