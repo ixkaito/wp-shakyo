@@ -1,4 +1,4 @@
-<p><a href="https://developer.wordpress.org/reference/functions/wp_load_translations_early/"><code>wp_load_translations_early()</code></a></p>
+<p><code><a href="https://developer.wordpress.org/reference/functions/wp_load_translations_early/">wp_load_translations_early()</a></code></p>
 
 <blockquote>
 
