@@ -2,9 +2,9 @@
 
 <blockquote>
 
-{% include wp-includes/load.php.md %}
+{% include wordpress/wp-includes/load.php.md %}
 
-{% include wp-includes/default-constants.php.md %}
+{% include wordpress/wp-includes/default-constants.php.md %}
 
 {% include functions/wp_initial_constants.md %}
 

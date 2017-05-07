@@ -2,7 +2,7 @@
 
 <blockquote>
 
- {% include wp-includes/version.php.md %}
+ {% include wordpress/wp-includes/version.php.md %}
  
  **wp-includes/pomo/mo.php**
  
