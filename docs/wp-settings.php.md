@@ -4,7 +4,7 @@
 
 {% include wp-includes/load.php.md %}
 
-{% include_relative wp-includes/default-constants.php.md %}
+{% include wp-includes/default-constants.php.md %}
 
 {% include functions/wp_initial_constants.md %}
 
