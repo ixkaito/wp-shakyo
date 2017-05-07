@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include_relative wp-includes/load.php.md %}
+{% include wp-includes/load.php.md %}
 
 {% include_relative wp-includes/default-constants.php.md %}
 
