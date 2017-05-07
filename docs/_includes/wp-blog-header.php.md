@@ -2,6 +2,6 @@
 
 <blockquote>
 
-{% include_relative wp-load.php.md %}
+{% include wp-load.php.md %}
 
 </blockquote>
