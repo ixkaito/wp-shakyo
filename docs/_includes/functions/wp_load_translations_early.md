@@ -3,8 +3,8 @@
 <blockquote>
 
  {% include wordpress/wp-includes/version.php.md %}
- 
- **wp-includes/pomo/mo.php**
+
+ {% include wordpress/wp-includes/pomo/mo.php.md %}
  
  **wp-includes/l10n.php**
  
