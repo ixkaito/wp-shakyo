@@ -6,7 +6,7 @@
 
  {% include wordpress/wp-includes/pomo/mo.php.md %}
  
- **wp-includes/l10n.php**
+ {% include wordpress/wp-includes/l10n.php.md %}
  
  **wp-includes/locale.php**
  
