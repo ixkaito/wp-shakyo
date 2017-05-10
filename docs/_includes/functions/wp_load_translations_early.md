@@ -7,9 +7,9 @@
  {% include wordpress/wp-includes/pomo/mo.php.md %}
  
  {% include wordpress/wp-includes/l10n.php.md %}
- 
- **wp-includes/locale.php**
- 
+
+ {% include wordpress/wp-includes/locale.php.md %}
+  
  [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
  
  [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
