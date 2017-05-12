@@ -2,17 +2,17 @@
 
 <blockquote>
 
- {% include wordpress/wp-includes/version.php.md %}
+{% include wordpress/wp-includes/version.php.md %}
 
- {% include wordpress/wp-includes/pomo/mo.php.md %}
+{% include wordpress/wp-includes/pomo/mo.php.md %}
  
- {% include wordpress/wp-includes/l10n.php.md %}
+{% include wordpress/wp-includes/l10n.php.md %}
 
- {% include wordpress/wp-includes/locale.php.md %}
+{% include wordpress/wp-includes/locale.php.md %}
 
- {% include functions/did_action.md %}
- 
- [`load_textdomain()`](https://developer.wordpress.org/reference/functions/load_textdomain/)
+{% include functions/did_action.md %}
+
+{% include functions/load_textdomain.md %}
  
  [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
  
