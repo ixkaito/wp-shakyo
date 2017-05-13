@@ -13,6 +13,8 @@
 {% include functions/did_action.md %}
 
 {% include functions/load_textdomain.md %}
+
+{% include classes/WP_Locale.md %}
  
  [`new WP_Locale()`](https://developer.wordpress.org/reference/classes/wp_locale/)
  
