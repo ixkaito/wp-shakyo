@@ -1,4 +1,4 @@
-<p><a href="https://developer.wordpress.org/reference/functions/translate/"><code>translate()</code></a></p>
+<p><code><a href="https://developer.wordpress.org/reference/functions/translate/">translate()</a></code></p>
 
 <blockquote>
 
