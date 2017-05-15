@@ -1,10 +1,8 @@
 <p><code><a href="https://developer.wordpress.org/reference/functions/translate_with_gettext_context/">translate_with_gettext_context()</a></code></p>
 
 <blockquote>
- 
- [`get_translations_for_domain()`](https://developer.wordpress.org/reference/functions/get_translations_for_domain/)
- 
-> [`new NOOP_Translations()`](https://developer.wordpress.org/reference/classes/noop_translations/)
+
+{% include functions/get_translations_for_domain.md %}
  
  [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
  
