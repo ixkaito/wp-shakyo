@@ -3,8 +3,8 @@
 <blockquote>
 
 {% include functions/get_translations_for_domain.md %}
- 
- [`NOOP_Translations::translate()`](https://developer.wordpress.org/reference/classes/noop_translations/translate/)
+
+{% include classes/NOOP_Translations/translate.md %}
  
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`gettext_with_context`](https://developer.wordpress.org/reference/hooks/gettext_with_context/)
  
