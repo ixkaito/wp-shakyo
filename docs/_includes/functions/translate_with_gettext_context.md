@@ -6,6 +6,6 @@
 
 {% include classes/NOOP_Translations/translate.md %}
 
-{% include functions/apply_filters.md hook="gettext_with_context" %} 
+{% include functions/apply_filters.md hook="gettext_with_context" %}
 
 </blockquote>
