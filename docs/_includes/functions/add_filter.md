@@ -2,6 +2,6 @@
 
 <blockquote>
 
-[`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
+{% include functions/_wp_filter_build_unique_id.md %}
 
 </blockquote>
