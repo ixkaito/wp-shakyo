@@ -3,7 +3,7 @@
 <blockquote>
 
 {% include classes/WP_Locale/init.md %}
- 
- [`WP_Locale::register_globals()`](https://developer.wordpress.org/reference/classes/wp_locale/register_globals/)
+
+{% include classes/WP_Locale/register_globals.md %}
 
 </blockquote>
