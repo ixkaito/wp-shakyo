@@ -17,8 +17,8 @@
 {% include functions/wp_favicon_request.md %}
 
 {% include functions/wp_maintenance.md %}
-  
- [`timer_start()`](https://developer.wordpress.org/reference/functions/timer_start/)
+
+{% include functions/timer_start.md %}
  
  [`wp_debug_mode()`](https://developer.wordpress.org/reference/functions/wp_debug_mode/)
  
