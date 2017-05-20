@@ -21,8 +21,8 @@
 {% include functions/timer_start.md %}
 
 {% include functions/wp_debug_mode.md %}
- 
- [`wp_set_lang_dir()`](https://developer.wordpress.org/reference/functions/wp_set_lang_dir/)
+
+{% include functions/wp_set_lang_dir.md %}
  
  **wp-includes/compat.php**
  
