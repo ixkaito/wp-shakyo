@@ -19,6 +19,8 @@
 {% include functions/wp_maintenance.md %}
 
 {% include functions/timer_start.md %}
+
+{% include functions/wp_debug_mode.md %}
  
  [`wp_debug_mode()`](https://developer.wordpress.org/reference/functions/wp_debug_mode/)
  
