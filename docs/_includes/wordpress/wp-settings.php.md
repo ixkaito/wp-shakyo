@@ -23,8 +23,8 @@
 {% include functions/wp_debug_mode.md %}
 
 {% include functions/wp_set_lang_dir.md %}
- 
- **wp-includes/compat.php**
+
+{% include wordpress/wp-includes/compat.php.md %}
  
  **wp-includes/functions.php**
  
