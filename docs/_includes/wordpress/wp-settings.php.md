@@ -25,10 +25,8 @@
 {% include functions/wp_set_lang_dir.md %}
 
 {% include wordpress/wp-includes/compat.php.md %}
- 
- **wp-includes/functions.php**
- 
-> **wp-includes/option.php**
+
+{% include wordpress/wp-includes/functions.php.md %}
  
  **wp-includes/class-wp.php**
  
