@@ -27,8 +27,8 @@
 {% include wordpress/wp-includes/compat.php.md %}
 
 {% include wordpress/wp-includes/functions.php.md %}
- 
- **wp-includes/class-wp.php**
+
+{% include wordpress/wp-includes/class-wp.php.md %}
  
  **wp-includes/class-wp-error.php**
  
