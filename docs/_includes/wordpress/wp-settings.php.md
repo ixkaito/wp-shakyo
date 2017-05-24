@@ -31,8 +31,8 @@
 {% include wordpress/wp-includes/class-wp.php.md %}
 
 {% include wordpress/wp-includes/class-wp-error.php.md %}
- 
- **wp-includes/plugin.php**
+
+{% include wordpress/wp-includes/plugin.php.md %}
  
  **wp-includes/pomo/mo.php**
  
