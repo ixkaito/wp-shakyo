@@ -36,12 +36,6 @@
 
 {% include wordpress/wp-includes/pomo/mo.php.md %}
  
-> **wp-includes/pomo/translations.php**
-> 
->> **wp-includes/pomo/entry.php**
-> 
-> **wp-includes/pomo/streams.php**
- 
  [`require_wp_db()`](https://developer.wordpress.org/reference/functions/require_wp_db/)
  
 > **wp-includes/wp-db.php**
