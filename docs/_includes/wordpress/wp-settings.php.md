@@ -33,8 +33,8 @@
 {% include wordpress/wp-includes/class-wp-error.php.md %}
 
 {% include wordpress/wp-includes/plugin.php.md %}
- 
- **wp-includes/pomo/mo.php**
+
+{% include wordpress/wp-includes/pomo/mo.php.md %}
  
 > **wp-includes/pomo/translations.php**
 > 
