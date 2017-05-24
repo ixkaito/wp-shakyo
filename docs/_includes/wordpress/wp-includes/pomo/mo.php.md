@@ -2,10 +2,8 @@
 
 <blockquote>
 
- **wp-includes/pomo/translations.php**
+{% include wordpress/wp-includes/pomo/translations.php.md %}
  
-> **wp-includes/pomo/entry.php**
- 
- **wp-includes/pomo/streams.php**
+{% include wordpress/wp-includes/pomo/streams.php.md %}
 
 </blockquote>
