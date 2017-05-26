@@ -2,7 +2,7 @@
 
 <blockquote>
 
- **wp-includes/wp-db.php**
+{% include wordpress/wp-includes/wp-db.php.md %}
  
  [`new wpdb()`](https://developer.wordpress.org/reference/classes/wpdb/)
  
