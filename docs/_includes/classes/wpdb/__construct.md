@@ -1,8 +1,8 @@
 <p><code><a href="https://developer.wordpress.org/reference/classes/wpdb/__construct/">wpdb::__construct()</a></code></p>
 
 <blockquote>
- 
- [`wpdb::__destruct()`](https://developer.wordpress.org/reference/classes/wpdb/__destruct/)
+
+{% include classes/wpdb/__destruct.md %}
  
  [`wpdb::show_errors()`](https://developer.wordpress.org/reference/classes/wpdb/show_errors/)
  
