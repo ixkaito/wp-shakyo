@@ -3,8 +3,8 @@
 <blockquote>
 
 {% include classes/wpdb/__destruct.md %}
- 
- [`wpdb::show_errors()`](https://developer.wordpress.org/reference/classes/wpdb/show_errors/)
+
+{% include classes/wpdb/show_errors.md %}
  
  [`wpdb::init_charset()`](https://developer.wordpress.org/reference/classes/wpdb/init_charset/)
  
