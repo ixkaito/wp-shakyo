@@ -5,7 +5,7 @@
 <p><code><a href="https://developer.wordpress.org/reference/classes/wpdb/db_connect/">wpdb::db_connect()</a></code></p>
 
 {% include functions/wp_load_translations_early.md %}
- 
+
  [`wpdb::bail()`](https://developer.wordpress.org/reference/classes/wpdb/bail/)
  
 > [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
