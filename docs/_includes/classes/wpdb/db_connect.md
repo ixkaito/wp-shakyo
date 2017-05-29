@@ -2,7 +2,7 @@
 
 <blockquote>
 
- [`wpdb::db_connect()`](https://developer.wordpress.org/reference/classes/wpdb/db_connect/)
+<p><code><a href="https://developer.wordpress.org/reference/classes/wpdb/db_connect/">wpdb::db_connect()</a></code></p>
 
 {% include functions/wp_load_translations_early.md %}
  
