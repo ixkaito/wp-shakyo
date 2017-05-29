@@ -5,8 +5,8 @@
 {% include classes/wpdb/__destruct.md %}
 
 {% include classes/wpdb/show_errors.md %}
- 
- [`wpdb::init_charset()`](https://developer.wordpress.org/reference/classes/wpdb/init_charset/)
+
+{% include classes/wpdb/init_charset.md %}
  
  [`wpdb::db_connect()`](https://developer.wordpress.org/reference/classes/wpdb/db_connect/)
  
