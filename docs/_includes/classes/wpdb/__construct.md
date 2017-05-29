@@ -8,4 +8,6 @@
 
 {% include classes/wpdb/init_charset.md %}
 
+{% include classes/wpdb/db_connect.md %}
+
 </blockquote>
