@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
- 
-> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
- 
+{% include classes/WP_Error.md %}
+  
  [`wp_die()`](https://developer.wordpress.org/reference/functions/wp_die/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_die_ajax_handler`](https://developer.wordpress.org/reference/hooks/wp_die_ajax_handler/)
