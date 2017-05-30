@@ -2,6 +2,6 @@
 
 <blockquote>
 
-> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
+{% include classes/WP_Error/__construct.md %}
 
 </blockquote>
