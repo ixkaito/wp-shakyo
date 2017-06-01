@@ -1,10 +1,8 @@
 <p><code><a href="https://developer.wordpress.org/reference/classes/wpdb/set_charset/">wpdb::set_charset()</a></code></p>
 
 <blockquote>
- 
- [`wpdb::has_cap()`](https://developer.wordpress.org/reference/classes/wpdb/has_cap/)
- 
-> [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
+
+{% include classes/wpdb/has_cap.md %}
  
  [`wpdb::prepare()`](https://developer.wordpress.org/reference/classes/wpdb/prepare/)
  
