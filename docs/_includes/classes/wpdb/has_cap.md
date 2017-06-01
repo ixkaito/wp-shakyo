@@ -2,6 +2,6 @@
 
 <blockquote>
 
-[`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
+{% include classes/wpdb/db_version.md %}
 
 </blockquote>
