@@ -13,6 +13,8 @@
 {% include classes/wpdb/set_charset.md %}
 
 {% include classes/wpdb/set_sql_mode.md %}
+
+{% include classes/wpdb/select.md %}
  
  [`wpdb::select()`](https://developer.wordpress.org/reference/classes/wpdb/select/)
  
