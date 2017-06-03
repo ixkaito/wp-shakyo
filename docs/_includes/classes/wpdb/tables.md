@@ -2,7 +2,7 @@
 
 <blockquote>
 
- [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+{% include functions/is_multisite.md %}
  
  [`wpdb::get_blog_prefix()`](https://developer.wordpress.org/reference/classes/wpdb/get_blog_prefix/)
  
