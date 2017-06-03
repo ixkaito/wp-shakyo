@@ -9,11 +9,9 @@
 {% include functions/status_header.md %}
 
 {% include functions/nocache_headers.md %}
- 
- [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
- 
-> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
- 
+
+{% include functions/is_rtl.md %}
+
  [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
  
 > [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
