@@ -5,16 +5,8 @@
 {% include functions/wp_load_translations_early.md %}
 
 {% include functions/wp_die.md %}
- 
- [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
- 
-> [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
-> 
->> [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
-> 
-> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`status_header`](https://developer.wordpress.org/reference/hooks/status_header/)
-> 
->> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+
+{% include functions/status_header.md %}
  
  [`nocache_headers()`](https://developer.wordpress.org/reference/functions/nocache_headers/)
  
