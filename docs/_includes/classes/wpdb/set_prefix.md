@@ -3,9 +3,9 @@
 <blockquote>
 
 {% include classes/WP_Error.md %}
- 
- [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
- 
+
+{% include functions/is_multisite.md %}
+
  [`wpdb::tables()`](https://developer.wordpress.org/reference/classes/wpdb/tables/)
  
 > [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
