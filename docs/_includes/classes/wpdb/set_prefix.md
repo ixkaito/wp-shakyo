@@ -2,9 +2,7 @@
 
 <blockquote>
 
- [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
- 
-> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
+{% include classes/WP_Error.md %}
  
  [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
  
