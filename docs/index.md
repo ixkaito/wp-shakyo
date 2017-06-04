@@ -5,6 +5,6 @@ filename: index.php
 
 <blockquote>
 
-{% include wordpress/wp-blog-header.php.md %}
+{% include files/wp-blog-header.php.md %}
 
 </blockquote>

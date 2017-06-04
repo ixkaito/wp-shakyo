@@ -1,10 +1,10 @@
-<p><b>wp-settings.php</b></p>
+<p><b><a href="https://developer.wordpress.org/reference/files/wp-settings.php/">wp-settings.php</a></b></p>
 
 <blockquote>
 
-{% include wordpress/wp-includes/load.php.md %}
+{% include files/wp-includes/load.php.md %}
 
-{% include wordpress/wp-includes/default-constants.php.md %}
+{% include files/wp-includes/default-constants.php.md %}
 
 {% include functions/wp_initial_constants.md %}
 
@@ -24,48 +24,24 @@
 
 {% include functions/wp_set_lang_dir.md %}
 
-{% include wordpress/wp-includes/compat.php.md %}
+{% include files/wp-includes/compat.php.md %}
 
-{% include wordpress/wp-includes/functions.php.md %}
+{% include files/wp-includes/functions.php.md %}
 
-{% include wordpress/wp-includes/class-wp.php.md %}
+{% include files/wp-includes/class-wp.php.md %}
 
-{% include wordpress/wp-includes/class-wp-error.php.md %}
+{% include files/wp-includes/class-wp-error.php.md %}
 
-{% include wordpress/wp-includes/plugin.php.md %}
+{% include files/wp-includes/plugin.php.md %}
 
-{% include wordpress/wp-includes/pomo/mo.php.md %}
+{% include files/wp-includes/pomo/mo.php.md %}
 
 {% include functions/require_wp_db.md %}
 
 {% include functions/wp_set_wpdb_vars.md %}
- 
- [`wp_start_object_cache()`](https://developer.wordpress.org/reference/functions/wp_start_object_cache/)
- 
-> [`wp_using_ext_object_cache()`](https://developer.wordpress.org/reference/functions/wp_using_ext_object_cache/)
-> 
-> **wp-includes/cache.php**
-> 
-> [`wp_cache_switch_to_blog()`](https://developer.wordpress.org/reference/functions/wp_cache_switch_to_blog/)
-> 
->> [`WP_Object_Cache::switch_to_blog()`](https://developer.wordpress.org/reference/classes/wp_object_cache/switch_to_blog/)
-> 
-> [`wp_cache_init()`](https://developer.wordpress.org/reference/functions/wp_cache_init/)
-> 
->> [`new WP_Object_Cache()`](https://developer.wordpress.org/reference/classes/wp_object_cache/)
->> 
->>> [`WP_Object_Cache::__construct()`](https://developer.wordpress.org/reference/classes/wp_object_cache/__construct/)
->>> 
->>>> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
->>>> 
->>>> [`WP_Object_Cache::__destruct()`](https://developer.wordpress.org/reference/classes/wp_object_cache/__destruct/)
-> 
-> [`wp_cache_add_global_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_global_groups/)
-> 
->> [`WP_Object_Cache::add_global_groups()`](https://developer.wordpress.org/reference/classes/wp_object_cache/add_global_groups/)
-> 
-> [`wp_cache_add_non_persistent_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_non_persistent_groups/)
- 
+
+{% include functions/wp_start_object_cache.md %}
+
  **wp-includes/default-filters.php**
  
 > [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)

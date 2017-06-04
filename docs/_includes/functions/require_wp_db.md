@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include wordpress/wp-includes/wp-db.php.md %}
+{% include files/wp-includes/wp-db.php.md %}
 
 {% include classes/wpdb.md %}
 
