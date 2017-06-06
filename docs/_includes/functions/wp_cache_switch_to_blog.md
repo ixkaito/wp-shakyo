@@ -2,6 +2,6 @@
 
 <blockquote>
 
-> [`WP_Object_Cache::switch_to_blog()`](https://developer.wordpress.org/reference/classes/wp_object_cache/switch_to_blog/)
+{% include classes/WP_Object_Cache/switch_to_blog.md %}
 
 </blockquote>
