@@ -6,10 +6,8 @@
 
 {% include files/wp-includes/cache.php.md %}
 
- [`wp_cache_switch_to_blog()`](https://developer.wordpress.org/reference/functions/wp_cache_switch_to_blog/)
- 
-> [`WP_Object_Cache::switch_to_blog()`](https://developer.wordpress.org/reference/classes/wp_object_cache/switch_to_blog/)
- 
+{% include functions/wp_cache_switch_to_blog.md %}
+
  [`wp_cache_init()`](https://developer.wordpress.org/reference/functions/wp_cache_init/)
  
 > [`new WP_Object_Cache()`](https://developer.wordpress.org/reference/classes/wp_object_cache/)
