@@ -4,7 +4,6 @@
 
 {% include functions/is_multisite.md %}
 
-[`WP_Object_Cache::__destruct()`](https://developer.wordpress.org/reference/classes/wp_object_cache/__destruct/)
-
+{% include classes/WP_Object_Cache/__destruct.md %}
 
 </blockquote>
