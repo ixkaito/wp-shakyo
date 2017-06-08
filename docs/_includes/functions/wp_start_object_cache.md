@@ -10,10 +10,8 @@
 
 {% include functions/wp_cache_init.md %}
 
- [`wp_cache_add_global_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_global_groups/)
- 
-> [`WP_Object_Cache::add_global_groups()`](https://developer.wordpress.org/reference/classes/wp_object_cache/add_global_groups/)
- 
+{% include functions/wp_cache_add_global_groups.md %}
+
  [`wp_cache_add_non_persistent_groups()`](https://developer.wordpress.org/reference/functions/wp_cache_add_non_persistent_groups/)
 
 </blockquote>
