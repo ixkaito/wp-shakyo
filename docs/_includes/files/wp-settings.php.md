@@ -42,7 +42,7 @@
 
 {% include functions/wp_start_object_cache.md %}
 
- **wp-includes/default-filters.php**
+{% include files/wp-includes/default-filters.php.md %}
  
 > [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
 > 
