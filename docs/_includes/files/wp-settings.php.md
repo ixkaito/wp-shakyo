@@ -44,18 +44,6 @@
 
 {% include files/wp-includes/default-filters.php.md %}
  
-> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
-> 
->> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
-> 
-> [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
-> 
-> [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
-> 
->> [`add_filter()`](https://developer.wordpress.org/reference/functions/add_filter/)
->> 
->>> [`_wp_filter_build_unique_id()`](https://developer.wordpress.org/reference/functions/_wp_filter_build_unique_id/)
- 
  [`shutdown_action_hook()`](https://developer.wordpress.org/reference/functions/shutdown_action_hook/)
  
 > [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`shutdown`](https://developer.wordpress.org/reference/hooks/shutdown/)
