@@ -2,8 +2,6 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="" %}
-
 {% include functions/add_filter.md %}
 
 {% include functions/is_admin.md %}
