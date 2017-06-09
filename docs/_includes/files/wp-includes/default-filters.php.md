@@ -5,8 +5,8 @@
 {% include functions/apply_filters.md hook="" %}
 
 {% include functions/add_filter.md %}
- 
- [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
+
+{% include functions/is_admin.md %}
  
  [`add_action()`](https://developer.wordpress.org/reference/functions/add_action/)
  
