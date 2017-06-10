@@ -43,17 +43,9 @@
 {% include functions/wp_start_object_cache.md %}
 
 {% include files/wp-includes/default-filters.php.md %}
- 
- [`shutdown_action_hook()`](https://developer.wordpress.org/reference/functions/shutdown_action_hook/)
- 
-> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`shutdown`](https://developer.wordpress.org/reference/hooks/shutdown/)
-> 
->> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
->> 
->> [`wp_ob_end_flush_all()`](https://developer.wordpress.org/reference/functions/wp_ob_end_flush_all/)
-> 
-> [`wp_cache_close()`](https://developer.wordpress.org/reference/functions/wp_cache_close/)
- 
+
+{% include functions/shutdown_action_hook.md %}
+
  **wp-includes/l10n.php**
  
  [`wp_not_installed()`](https://developer.wordpress.org/reference/functions/wp_not_installed/)
