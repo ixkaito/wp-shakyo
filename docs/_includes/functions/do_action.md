@@ -4,4 +4,9 @@
 
 {% include functions/_wp_call_all_hook.md %}
 
+{% for action in include.actions %}
+  {% capture function %}functions/{{ action }}.md{% endcapture %}
+  {% include {{ function }} %}
+{% endfor %}
+
 </blockquote>
