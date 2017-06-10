@@ -3,7 +3,7 @@
 <blockquote>
 
 {% include functions/do_action.md %}
- 
- [`wp_cache_close()`](https://developer.wordpress.org/reference/functions/wp_cache_close/)
+
+{% include functions/wp_cache_close.md %}
 
 </blockquote>
