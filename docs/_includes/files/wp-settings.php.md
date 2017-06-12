@@ -47,8 +47,6 @@
 {% include functions/shutdown_action_hook.md %}
 
 {% include files/wp-includes/l10n.php.md %}
-
- **wp-includes/l10n.php**
  
  [`wp_not_installed()`](https://developer.wordpress.org/reference/functions/wp_not_installed/)
  
