@@ -47,7 +47,7 @@
 {% include functions/shutdown_action_hook.md %}
 
 {% include files/wp-includes/l10n.php.md %}
- 
+
  [`wp_not_installed()`](https://developer.wordpress.org/reference/functions/wp_not_installed/)
  
 > [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
