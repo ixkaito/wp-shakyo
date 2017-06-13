@@ -6,8 +6,6 @@
 
 {% include classes/wpdb/flush.md %}
 
- [`wpdb::flush()`](https://developer.wordpress.org/reference/classes/wpdb/flush/)
- 
  [`wpdb::check_connection()`](https://developer.wordpress.org/reference/classes/wpdb/check_connection/)
  
 > [`wpdb::db_connect()`](https://developer.wordpress.org/reference/classes/wpdb/db_connect/)
