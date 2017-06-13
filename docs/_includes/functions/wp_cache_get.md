@@ -2,8 +2,6 @@
 
 <blockquote>
 
- [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
- 
-> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
+{% include classes/WP_Object_Cache/get.md %}
 
 </blockquote>
