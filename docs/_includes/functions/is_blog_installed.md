@@ -2,12 +2,8 @@
 
 <blockquote>
 
- [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
- 
-> [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
-> 
->> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
- 
+{% include functions/wp_cache_get.md %}
+
  [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
  
  [`wp_load_alloptions()`](https://developer.wordpress.org/reference/functions/wp_load_alloptions/)
