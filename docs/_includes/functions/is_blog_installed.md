@@ -4,8 +4,8 @@
 
 {% include functions/wp_cache_get.md %}
 
- [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
- 
+{% include classes/wpdb/suppress_errors.md %}
+
  [`wp_load_alloptions()`](https://developer.wordpress.org/reference/functions/wp_load_alloptions/)
  
 > [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
