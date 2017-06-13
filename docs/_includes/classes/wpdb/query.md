@@ -3,7 +3,9 @@
 <blockquote>
 
 {% include functions/apply_filters.md hook="query" filters=site.data.filters.query %}
- 
+
+{% include classes/wpdb/flush.md %}
+
  [`wpdb::flush()`](https://developer.wordpress.org/reference/classes/wpdb/flush/)
  
  [`wpdb::check_connection()`](https://developer.wordpress.org/reference/classes/wpdb/check_connection/)
