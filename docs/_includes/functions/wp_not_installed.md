@@ -12,9 +12,7 @@
 
 {% include files/wp-includes/pluggable.php.md %}
 
- **wp-includes/pluggable.php**
- 
- **wp-includes/formatting.php**
+{% include files/wp-includes/formatting.php.md %} 
  
  [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
  
