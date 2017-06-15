@@ -9,7 +9,9 @@
 {% include functions/nocache_headers.md %}
 
 {% include files/wp-includes/kses.php.md %}
- 
+
+{% include files/wp-includes/pluggable.php.md %}
+
  **wp-includes/pluggable.php**
  
  **wp-includes/formatting.php**
