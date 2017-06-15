@@ -7,10 +7,8 @@
 {% include functions/is_blog_installed.md %}
 
 {% include functions/nocache_headers.md %}
- 
- **wp-includes/kses.php**
- 
-> [`_wp_add_global_attributes()`](https://developer.wordpress.org/reference/functions/_wp_add_global_attributes/)
+
+{% include files/wp-includes/kses.php.md %}
  
  **wp-includes/pluggable.php**
  
