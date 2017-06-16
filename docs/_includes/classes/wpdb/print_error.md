@@ -8,8 +8,7 @@
 
 {% include functions/__.md %}
 
- 
- [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
+{% include functions/is_multisite.md %}
  
  [`wp_die()`](https://developer.wordpress.org/reference/functions/wp_die/)
  
