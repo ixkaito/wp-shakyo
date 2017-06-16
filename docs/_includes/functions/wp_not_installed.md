@@ -6,22 +6,14 @@
 
 {% include functions/is_blog_installed.md %}
 
- [`nocache_headers()`](https://developer.wordpress.org/reference/functions/nocache_headers/)
- 
-> [`wp_get_nocache_headers()`](https://developer.wordpress.org/reference/functions/wp_get_nocache_headers/)
-> 
-> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`nocache_headers`](https://developer.wordpress.org/reference/hooks/nocache_headers/)
-> 
->> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
- **wp-includes/kses.php**
- 
-> [`_wp_add_global_attributes()`](https://developer.wordpress.org/reference/functions/_wp_add_global_attributes/)
- 
- **wp-includes/pluggable.php**
- 
- **wp-includes/formatting.php**
- 
+{% include functions/nocache_headers.md %}
+
+{% include files/wp-includes/kses.php.md %}
+
+{% include files/wp-includes/pluggable.php.md %}
+
+{% include files/wp-includes/formatting.php.md %}
+
  [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
  
 > [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
