@@ -4,8 +4,8 @@
 
 {% include classes/wpdb/db_connect.md %}
 
- [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
- 
+{% include functions/did_action.md %}
+
  [`wpdb::bail()`](https://developer.wordpress.org/reference/classes/wpdb/bail/)
  
 > [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
