@@ -4,8 +4,8 @@
 
 {% include classes/wpdb/timer_start.md %}
 
- [`wpdb::timer_stop()`](https://developer.wordpress.org/reference/classes/wpdb/timer_stop/)
- 
+{% include classes/wpdb/timer_stop.md %}
+
  [`wpdb::get_caller()`](https://developer.wordpress.org/reference/classes/wpdb/get_caller/)
  
 > [`wp_debug_backtrace_summary()`](https://developer.wordpress.org/reference/functions/wp_debug_backtrace_summary/)
