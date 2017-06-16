@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`wpdb::timer_start()`](https://developer.wordpress.org/reference/classes/wpdb/timer_start/)
- 
+{% include classes/wpdb/timer_start.md %}
+
  [`wpdb::timer_stop()`](https://developer.wordpress.org/reference/classes/wpdb/timer_stop/)
  
  [`wpdb::get_caller()`](https://developer.wordpress.org/reference/classes/wpdb/get_caller/)
