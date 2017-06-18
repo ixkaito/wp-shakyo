@@ -6,6 +6,6 @@
 
 {% include classes/WP_Object_Cache/_exists.md %}
 
- [`WP_Object_Cache::set()`](https://developer.wordpress.org/reference/classes/wp_object_cache/set/)
+{% include classes/WP_Object_Cache/set.md %}
 
 </blockquote>
