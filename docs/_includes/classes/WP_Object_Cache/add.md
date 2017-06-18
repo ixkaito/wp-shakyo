@@ -3,9 +3,9 @@
 <blockquote>
 
 {% include functions/wp_suspend_cache_addition.md %}
- 
- [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
- 
+
+{% include classes/WP_Object_Cache/_exists.md %}
+
  [`WP_Object_Cache::set()`](https://developer.wordpress.org/reference/classes/wp_object_cache/set/)
 
 </blockquote>
