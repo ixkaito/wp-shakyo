@@ -11,9 +11,9 @@
 {% include classes/wpdb/get_var.md %}
 
 {% include functions/wp_cache_set.md %}
- 
- [`wpdb::tables()`](https://developer.wordpress.org/reference/classes/wpdb/tables/)
- 
+
+{% include classes/wpdb/tables.md %}
+
  [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
  
  [`wp_load_translations_early()`](https://developer.wordpress.org/reference/functions/wp_load_translations_early/)
