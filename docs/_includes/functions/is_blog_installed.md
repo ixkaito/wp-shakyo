@@ -9,8 +9,8 @@
 {% include functions/wp_load_alloptions.md %}
 
 {% include classes/wpdb/get_var.md %}
- 
- [`wp_cache_set()`](https://developer.wordpress.org/reference/functions/wp_cache_set/)
+
+{% include functions/wp_cache_set.md %}
  
  [`wpdb::tables()`](https://developer.wordpress.org/reference/classes/wpdb/tables/)
  
