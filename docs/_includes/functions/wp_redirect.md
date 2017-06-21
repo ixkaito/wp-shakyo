@@ -6,12 +6,8 @@
 
 {% include functions/apply_filters.md hook="wp_redirect_status" filters=site.data.filters.wp_redirect_status %}
 
- [`wp_sanitize_redirect()`](https://developer.wordpress.org/reference/functions/wp_sanitize_redirect/)
- 
-> [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
-> 
-> [`_deep_replace()`](https://developer.wordpress.org/reference/functions/_deep_replace/)
- 
+{% include functions/wp_sanitize_redirect.md %}
+
  [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
  
 > [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
