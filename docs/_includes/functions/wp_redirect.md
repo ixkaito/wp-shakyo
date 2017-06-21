@@ -4,10 +4,8 @@
 
 {% include functions/apply_filters.md hook="wp_redirect" filters=site.data.filters.wp_redirect %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_redirect_status`](https://developer.wordpress.org/reference/hooks/wp_redirect_status/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="wp_redirect_status" filters=site.data.filters.wp_redirect_status %}
+
  [`wp_sanitize_redirect()`](https://developer.wordpress.org/reference/functions/wp_sanitize_redirect/)
  
 > [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
