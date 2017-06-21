@@ -14,9 +14,7 @@
 
 {% include files/wp-includes/formatting.php.md %}
 
- [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
- 
-> [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
+{% include functions/wp_guess_url.md %}
  
  [`wp_redirect()`](https://developer.wordpress.org/reference/functions/wp_redirect/)
  
