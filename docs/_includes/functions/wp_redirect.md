@@ -8,16 +8,10 @@
 
 {% include functions/wp_sanitize_redirect.md %}
 
- [`status_header()`](https://developer.wordpress.org/reference/functions/status_header/)
- 
-> [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
-> 
->> [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
- 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`status_header`](https://developer.wordpress.org/reference/hooks/status_header/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
- _Redirect to **[wp-admin/install.php]({{ site.baseurl }}/wp-admin/install.html)**_
+{% include functions/status_header.md %}
+
+{% include functions/apply_filters.md hook="status_header" filters=site.data.filters.status_header %}
+
+<em>Redirect to <strong><a href="{{ site.baseurl }}/wp-admin/install.html">wp-admin/install.php</a></strong></em>
 
 </blockquote>
