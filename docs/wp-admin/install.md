@@ -19,9 +19,8 @@ filename: wp-admin/install.php
 
 {% include functions/display_header.md %}
 
-> 
-> [`wpdb::db_version()`](https://developer.wordpress.org/reference/classes/wpdb/db_version/)
-> 
+{% include classes/wpdb/db_version.md %}
+
 > [`__()`](https://developer.wordpress.org/reference/functions/__/)
 > 
 >> [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
