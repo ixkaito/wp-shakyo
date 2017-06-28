@@ -31,9 +31,6 @@ filename: wp-admin/install.php
 
 {% include functions/wp_download_language_pack.md %}
 
-> 
-> `wp_download_language_pack()`
-> 
 > [`load_default_textdomain()`](https://developer.wordpress.org/reference/functions/load_default_textdomain/)
 > 
 >> [`get_locale()`](https://developer.wordpress.org/reference/functions/get_locale/)
