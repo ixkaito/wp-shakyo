@@ -3,6 +3,8 @@
 <blockquote>
 
 {% include classes/wpdb/prepare.md %}
+
+{% include classes/wpdb/esc_like.md %}
  
  [`wpdb::esc_like()`](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
  
