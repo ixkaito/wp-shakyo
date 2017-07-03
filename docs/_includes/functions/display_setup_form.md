@@ -6,14 +6,10 @@
 
 {% include classes/wpdb/esc_like.md %}
 
- [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
- 
- [`wp_unslash()`](https://developer.wordpress.org/reference/functions/wp_unslash/)
- 
-> [`stripslashes_deep()`](https://developer.wordpress.org/reference/functions/stripslashes_deep/)
-> 
->> [`stripslashes_deep()`](https://developer.wordpress.org/reference/functions/stripslashes_deep/)
- 
+{% include classes/wpdb/get_var.md %}
+
+{% include functions/wp_unslash.md %}
+
  [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
  
 > [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
