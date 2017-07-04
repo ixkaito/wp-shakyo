@@ -49,9 +49,8 @@ filename: wp-admin/install.php
 
 {% include functions/is_email.md %}
 
-> 
-> [`wpdb::show_errors()`](https://developer.wordpress.org/reference/classes/wpdb/show_errors/)
-> 
+{% include classes/wpdb/show_errors.md %}
+
 > [`wp_install()`](https://developer.wordpress.org/reference/functions/wp_install/)
 > 
 >> `_deprecated_argument()`
