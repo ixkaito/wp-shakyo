@@ -53,10 +53,8 @@ filename: wp-admin/install.php
 
 {% include functions/wp_install.md %}
 
-> 
-> [`wp_slash()`](https://developer.wordpress.org/reference/functions/wp_slash/)
-> 
->> [`wp_slash()`](https://developer.wordpress.org/reference/functions/wp_slash/)
+{% include functions/wp_slash.md %}
+
 > 
 > [`esc_html()`](https://developer.wordpress.org/reference/functions/esc_html/)
 > 
