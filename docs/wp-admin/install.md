@@ -47,14 +47,8 @@ filename: wp-admin/install.php
 
 {% include functions/wp_unslash.md %}
 
-> 
-> [`is_email()`](https://developer.wordpress.org/reference/functions/is_email/)
-> 
->> `_deprecated_argument()`
->> 
->> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`is_email`](https://developer.wordpress.org/reference/hooks/is_email/)
->> 
->>> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/is_email.md %}
+
 > 
 > [`wpdb::show_errors()`](https://developer.wordpress.org/reference/classes/wpdb/show_errors/)
 > 
