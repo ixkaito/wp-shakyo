@@ -45,20 +45,8 @@ filename: wp-admin/install.php
 
 {% include classes/WP_Error/get_error_message.md %}
 
-> 
-> [`WP_Error::get_error_message()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_message/)
-> 
->> [`WP_Error::get_error_code()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_code/)
->> 
->>> [`WP_Error::get_error_codes()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_codes/)
->> 
->> [`WP_Error::get_error_messages()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_messages/)
-> 
-> [`wp_unslash()`](https://developer.wordpress.org/reference/functions/wp_unslash/)
-> 
->> [`stripslashes_deep()`](https://developer.wordpress.org/reference/functions/stripslashes_deep/)
->> 
->>> [`stripslashes_deep()`](https://developer.wordpress.org/reference/functions/stripslashes_deep/)
+{% include functions/wp_unslash.md %}
+
 > 
 > [`is_email()`](https://developer.wordpress.org/reference/functions/is_email/)
 > 
