@@ -59,9 +59,8 @@ filename: wp-admin/install.php
 
 {% include functions/sanitize_user.md %}
 
-> 
-> [`wp_is_mobile()`](https://developer.wordpress.org/reference/functions/wp_is_mobile/)
-> 
+{% include functions/wp_is_mobile.md %}
+
 > [`wp_print_scripts()`](https://developer.wordpress.org/reference/functions/wp_print_scripts/)
 > 
 >> [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`wp_print_scripts`](https://developer.wordpress.org/reference/hooks/wp_print_scripts/)
