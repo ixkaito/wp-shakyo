@@ -43,6 +43,8 @@ filename: wp-admin/install.php
 
 {% include functions/wp_die.md %}
 
+{% include classes/WP_Error/get_error_message.md %}
+
 > 
 > [`WP_Error::get_error_message()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_message/)
 > 
