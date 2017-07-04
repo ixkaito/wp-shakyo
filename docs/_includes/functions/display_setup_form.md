@@ -10,6 +10,8 @@
 
 {% include functions/wp_unslash.md %}
 
+{% include functions/_e.md %}
+
  [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
  
 > [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
