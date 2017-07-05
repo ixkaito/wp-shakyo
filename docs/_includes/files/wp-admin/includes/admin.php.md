@@ -1,8 +1,10 @@
-<p><b><a href="https://developer.wordpress.org/reference/files/wp-admin/includes/admin.php/">wp-admin/includes/admin.php</a></b></p>
+<p><b>wp-admin/includes/admin.php</b></p>
 
 <blockquote>
 
 {% include functions/load_textdomain.md %}
+
+{% include files/wp-admin/includes/bookmark.php.md %}
 
 **wp-admin/includes/bookmark.php**
 
