@@ -6,9 +6,7 @@
 
 {% include files/wp-admin/includes/bookmark.php.md %}
 
-**wp-admin/includes/bookmark.php**
-
-**wp-admin/includes/comment.php**
+{% include files/wp-admin/includes/comment.php.md %}
 
 **wp-admin/includes/file.php**
 
