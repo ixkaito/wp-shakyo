@@ -8,7 +8,7 @@
 
 {% include files/wp-admin/includes/comment.php.md %}
 
-**wp-admin/includes/file.php**
+{% include files/wp-admin/includes/file.php.md %}
 
 **wp-admin/includes/image.php**
 
