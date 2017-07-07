@@ -1,10 +1,8 @@
 <p><code><a href="https://developer.wordpress.org/reference/functions/language_attributes/">language_attributes()</a></code></p>
 
 <blockquote>
- 
- [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
- 
-> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
+
+{% include functions/is_rtl.md %}
  
  [`get_bloginfo()`](https://developer.wordpress.org/reference/functions/get_bloginfo/)
  
