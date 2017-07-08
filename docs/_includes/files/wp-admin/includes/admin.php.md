@@ -10,34 +10,34 @@
 
 {% include files/wp-admin/includes/file.php.md %}
 
-**wp-admin/includes/image.php**
+{% include files/wp-admin/includes/image.php.md %}
 
-**wp-admin/includes/media.php**
+{% include files/wp-admin/includes/media.php.md %}
 
-**wp-admin/includes/import.php**
+{% include files/wp-admin/includes/import.php.md %}
 
-**wp-admin/includes/misc.php**
+{% include files/wp-admin/includes/misc.php.md %}
 
-**wp-admin/includes/plugin.php**
+{% include files/wp-admin/includes/plugin.php.md %}
 
-**wp-admin/includes/post.php**
+{% include files/wp-admin/includes/post.php.md %}
 
-**wp-admin/includes/screen.php**
+{% include files/wp-admin/includes/screen.php.md %}
 
-**wp-admin/includes/taxonomy.php**
+{% include files/wp-admin/includes/taxonomy.php.md %}
 
-**wp-admin/includes/template.php**
+{% include files/wp-admin/includes/template.php.md %}
 
-**wp-admin/includes/class-wp-list-table.php**
+{% include files/wp-admin/includes/class-wp-list-table.php.md %}
 
-**wp-admin/includes/list-table.php**
+{% include files/wp-admin/includes/list-table.php.md %}
 
-**wp-admin/includes/theme.php**
+{% include files/wp-admin/includes/theme.php.md %}
 
-**wp-admin/includes/user.php**
+{% include files/wp-admin/includes/user.php.md %}
 
-**wp-admin/includes/update.php**
+{% include files/wp-admin/includes/update.php.md %}
 
-**wp-admin/includes/deprecated.php**
+{% include files/wp-admin/includes/deprecated.php.md %}
 
 </blockquote>
