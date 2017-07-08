@@ -4,6 +4,8 @@
 
 {% include files/wp-admin/includes/admin.php.md %}
 
+{% include files/wp-admin/includes/schema.php.md %}
+
  **wp-admin/includes/schema.php**
  
 > [`wpdb::get_charset_collate()`](https://developer.wordpress.org/reference/classes/wpdb/get_charset_collate/)
