@@ -6,10 +6,8 @@
 
 {% include functions/wp_cache_get.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`default_option_{$option}`](https://developer.wordpress.org/reference/hooks/default_option_option/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="default_option_{$option}" filters=site.data.filters.default_option_option %}
+
  [`wp_load_alloptions()`](https://developer.wordpress.org/reference/functions/wp_load_alloptions/)
  
 > [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
