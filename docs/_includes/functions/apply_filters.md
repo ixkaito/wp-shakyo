@@ -1,4 +1,5 @@
-<p><code><a href="https://developer.wordpress.org/reference/functions/apply_filters/">apply_filters</a>( '<a href="https://developer.wordpress.org/reference/hooks/{{ include.hook }}/">{{ include.hook }}</a>' )</code></p>
+{% assign brace = '}' %}
+<p><code><a href="https://developer.wordpress.org/reference/functions/apply_filters/">apply_filters</a>( '<a href="https://developer.wordpress.org/reference/hooks/{{ include.hook | remove : '{$' | remove : brace }}/">{{ include.hook }}</a>' )</code></p>
 
 <blockquote>
 
