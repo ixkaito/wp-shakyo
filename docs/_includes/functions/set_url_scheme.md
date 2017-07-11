@@ -6,8 +6,6 @@
 
 {% include functions/force_ssl_admin.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`set_url_scheme`](https://developer.wordpress.org/reference/hooks/set_url_scheme/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="set_url_scheme" filters=site.data.filters.set_url_scheme %}
 
 </blockquote>
