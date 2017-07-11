@@ -24,8 +24,8 @@
 
 <p><code><a href="https://developer.wordpress.org/reference/functions/get_option/">get_option()</a></code></p>
 
- [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
- 
+{% include functions/untrailingslashit.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`option_{$option}`](https://developer.wordpress.org/reference/hooks/option_option/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
