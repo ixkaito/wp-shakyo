@@ -5,13 +5,13 @@
 {% include functions/is_multisite.md %}
 
 {% include functions/get_option.md %}
- 
- `switch_to_blog()`
- 
- `restore_current_blog()`
- 
- [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
- 
+
+`switch_to_blog()`
+
+`restore_current_blog()`
+
+{% include functions/is_ssl.md %}
+
  [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
  
  [`set_url_scheme()`](https://developer.wordpress.org/reference/functions/set_url_scheme/)
