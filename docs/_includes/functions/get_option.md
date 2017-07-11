@@ -28,8 +28,6 @@
 
 {% include functions/apply_filters.md hook="option_{$option}" filters=site.data.filters.option_option %}
 
- [`maybe_unserialize()`](https://developer.wordpress.org/reference/functions/maybe_unserialize/)
- 
-> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
+{% include functions/maybe_unserialize.md %}
 
 </blockquote>
