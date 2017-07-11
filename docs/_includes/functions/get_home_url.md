@@ -12,8 +12,8 @@
 
 {% include functions/is_ssl.md %}
 
- [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
- 
+{% include functions/is_admin.md %}
+
  [`set_url_scheme()`](https://developer.wordpress.org/reference/functions/set_url_scheme/)
  
 > [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
