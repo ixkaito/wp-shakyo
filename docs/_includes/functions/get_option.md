@@ -22,8 +22,8 @@
 
 {% include classes/wpdb/suppress_errors.md %}
 
- [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
- 
+<p><code><a href="https://developer.wordpress.org/reference/functions/get_option/">get_option()</a></code></p>
+
  [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
  
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`option_{$option}`](https://developer.wordpress.org/reference/hooks/option_option/)
