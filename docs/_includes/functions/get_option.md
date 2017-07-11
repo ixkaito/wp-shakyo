@@ -20,8 +20,8 @@
 
 {% include functions/wp_cache_set.md %}
 
- [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
- 
+{% include classes/wpdb/suppress_errors.md %}
+
  [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
  
  [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
