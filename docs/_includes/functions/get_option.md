@@ -18,8 +18,8 @@
 
 {% include functions/wp_cache_add.md %}
 
- [`wp_cache_set()`](https://developer.wordpress.org/reference/functions/wp_cache_set/)
- 
+{% include functions/wp_cache_set.md %}
+
  [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
  
  [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
