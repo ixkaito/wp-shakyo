@@ -26,10 +26,8 @@
 
 {% include functions/untrailingslashit.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`option_{$option}`](https://developer.wordpress.org/reference/hooks/option_option/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="option_{$option}" filters=site.data.filters.option_option %}
+
  [`maybe_unserialize()`](https://developer.wordpress.org/reference/functions/maybe_unserialize/)
  
 > [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
