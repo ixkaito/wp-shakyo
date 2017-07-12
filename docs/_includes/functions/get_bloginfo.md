@@ -12,12 +12,12 @@
 
 {% include functions/get_option.md %}
 
- `get_feed_link()`
- 
- `get_stylesheet_uri()`
- 
- `get_stylesheet_directory_uri()`
- 
+<p><code>get_feed_link()</code></p>
+
+<p><code>get_stylesheet_uri()</code></p>
+
+<p><code>get_stylesheet_directory_uri()</code></p>
+
  [`get_locale()`](https://developer.wordpress.org/reference/functions/get_locale/)
  
 > [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
