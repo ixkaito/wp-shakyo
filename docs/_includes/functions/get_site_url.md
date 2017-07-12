@@ -12,8 +12,6 @@
 
 {% include functions/set_url_scheme.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_url`](https://developer.wordpress.org/reference/hooks/site_url/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="site_url" filters=site.data.filters.site_url %}
 
 </blockquote>
