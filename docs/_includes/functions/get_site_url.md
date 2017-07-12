@@ -6,10 +6,10 @@
 
 {% include functions/get_option.md %}
 
- `switch_to_blog()`
- 
- `restore_current_blog()`
- 
+<p><code>switch_to_blog()</code></p>
+
+<p><code>restore_current_blog()</code></p>
+
  [`set_url_scheme()`](https://developer.wordpress.org/reference/functions/set_url_scheme/)
  
 > [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
