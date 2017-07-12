@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
- 
+{% include functions/is_multisite.md %}
+
  [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_option_{$option}`](https://developer.wordpress.org/reference/hooks/pre_option_option/)
