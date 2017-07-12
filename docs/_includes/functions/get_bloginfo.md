@@ -2,7 +2,7 @@
 
 <blockquote>
 
- `_deprecated_argument()`
+<p><code>_deprecated_argument()</code></p>
 
 {% include functions/__.md %}
 

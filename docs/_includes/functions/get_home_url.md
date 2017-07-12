@@ -6,9 +6,9 @@
 
 {% include functions/get_option.md %}
 
-`switch_to_blog()`
+<p><code>switch_to_blog()</code></p>
 
-`restore_current_blog()`
+<p><code>restore_current_blog()</code></p>
 
 {% include functions/is_ssl.md %}
 
