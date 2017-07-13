@@ -14,6 +14,6 @@ wp-admin/includes/class-wp-upgrader.php
 
 `Language_Pack_Upgrader::upgrade()`
 
-`is_wp_error()`
+{% include functions/is_wp_error.md %}
 
 </blockquote>
