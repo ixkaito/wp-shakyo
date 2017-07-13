@@ -22,10 +22,8 @@
 
 {% include functions/is_rtl.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`bloginfo_url`](https://developer.wordpress.org/reference/hooks/bloginfo_url/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="bloginfo_url" filters=site.data.filters.bloginfo_url %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`bloginfo`](https://developer.wordpress.org/reference/hooks/bloginfo/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
