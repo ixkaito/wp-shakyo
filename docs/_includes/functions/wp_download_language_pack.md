@@ -2,6 +2,18 @@
 
 <blockquote>
 
+`get_available_languages()`
 
+`wp_get_available_translations()`
+
+wp-admin/includes/class-wp-upgrader.php
+
+`new Automatic_Upgrader_Skin()`
+
+`new Language_Pack_Upgrader()`
+
+`Language_Pack_Upgrader::upgrade()`
+
+`is_wp_error()`
 
 </blockquote>
