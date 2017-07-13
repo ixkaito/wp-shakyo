@@ -4,6 +4,7 @@
 
 {% include functions/apply_filters.md hook="pre_site_option_{$option}" filters=site.data.filters.pre_site_option_option %}
 
+{% include functions/wp_cache_get.md %}
  [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
  
 > [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
