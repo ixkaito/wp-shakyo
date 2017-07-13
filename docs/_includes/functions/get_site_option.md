@@ -14,9 +14,7 @@
 
 {% include classes/wpdb/prepare.md %}
 
- [`maybe_unserialize()`](https://developer.wordpress.org/reference/functions/maybe_unserialize/)
- 
-> [`is_serialized()`](https://developer.wordpress.org/reference/functions/is_serialized/)
+{% include functions/maybe_unserialize.md %}
  
  [`wp_cache_set()`](https://developer.wordpress.org/reference/functions/wp_cache_set/)
  
