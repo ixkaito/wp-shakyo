@@ -4,7 +4,7 @@
 
 `get_available_languages()`
 
-`wp_get_available_translations()`
+{% include functions/wp_get_available_translations.md %}
 
 wp-admin/includes/class-wp-upgrader.php
 
