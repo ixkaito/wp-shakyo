@@ -15,9 +15,9 @@
 {% include classes/wpdb/prepare.md %}
 
 {% include functions/maybe_unserialize.md %}
- 
- [`wp_cache_set()`](https://developer.wordpress.org/reference/functions/wp_cache_set/)
- 
+
+{% include functions/wp_cache_set.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`default_site_option_{}`](https://developer.wordpress.org/reference/hooks/default_site_option_option-5/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
