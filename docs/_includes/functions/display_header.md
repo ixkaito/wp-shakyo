@@ -3,6 +3,8 @@
 <blockquote>
 
 {% include functions/language_attributes.md %}
+
+{% include functions/_e.md %}
  
  [`_e()`](https://developer.wordpress.org/reference/functions/_e/)
  
