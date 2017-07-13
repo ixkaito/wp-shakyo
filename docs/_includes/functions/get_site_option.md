@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_site_option_{}`](https://developer.wordpress.org/reference/hooks/pre_site_option_option-5/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="pre_site_option_{$option}" filters=site.data.filters.pre_site_option_option %}
+
  [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
  
 > [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
