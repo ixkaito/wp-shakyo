@@ -10,10 +10,8 @@
 
 {% include functions/get_bloginfo.md %}
 
- [`is_rtl()`](https://developer.wordpress.org/reference/functions/is_rtl/)
- 
-> [`WP_Locale::is_rtl()`](https://developer.wordpress.org/reference/classes/wp_locale/is_rtl/)
- 
+{% include functions/is_rtl.md %}
+
  [`_x()`](https://developer.wordpress.org/reference/functions/_x/)
  
 > [`translate_with_gettext_context()`](https://developer.wordpress.org/reference/functions/translate_with_gettext_context/)
