@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/_wp_call_all_hook.md %}
+
  [`wp_default_styles()`](https://developer.wordpress.org/reference/functions/wp_default_styles/)
  
 > **wp-includes/version.php**
