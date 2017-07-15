@@ -2,8 +2,6 @@
 
 <blockquote>
 
-> [`new _WP_Dependency()`](https://developer.wordpress.org/reference/classes/_wp_dependency/)
-> 
->> [`_WP_Dependency::__construct()`](https://developer.wordpress.org/reference/classes/_wp_dependency/__construct/)
+{% include classes/_WP_Dependency.md %}
 
 </blockquote>
