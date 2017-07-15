@@ -2,6 +2,6 @@
 
 <blockquote>
 
-> [`_WP_Dependency::add_data()`](https://developer.wordpress.org/reference/classes/_wp_dependency/add_data/)
+{% include classes/_WP_Dependency/add_data.md %}
 
 </blockquote>
