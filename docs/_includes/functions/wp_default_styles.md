@@ -16,8 +16,6 @@
 
 {% include classes/WP_Dependencies/add.md %}
 
- [`WP_Dependencies::add_data()`](https://developer.wordpress.org/reference/classes/wp_dependencies/add_data/)
- 
-> [`_WP_Dependency::add_data()`](https://developer.wordpress.org/reference/classes/_wp_dependency/add_data/)
+{% include classes/WP_Dependencies/add_data.md %}
 
 </blockquote>
