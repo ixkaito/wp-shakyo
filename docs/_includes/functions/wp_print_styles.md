@@ -4,8 +4,8 @@
 
 {% include functions/do_action.md hook="wp_print_styles" actions=site.data.actions.wp_print_styles %}
 
- [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
- 
+{% include functions/did_action.md %}
+
  [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
  
 > [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`doing_it_wrong_run`](https://developer.wordpress.org/reference/hooks/doing_it_wrong_run/)
