@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`wp_print_styles`](https://developer.wordpress.org/reference/hooks/wp_print_styles/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/do_action.md hook="wp_print_styles" actions=site.data.actions.wp_print_styles %}
+
  [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
  
  [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
