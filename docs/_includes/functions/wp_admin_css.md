@@ -6,8 +6,8 @@
 
 {% include classes/WP_Dependencies/query.md %}
 
- [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
- 
+{% include functions/did_action.md %}
+
  [`wp_print_styles()`](https://developer.wordpress.org/reference/functions/wp_print_styles/)
  
 > [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`wp_print_styles`](https://developer.wordpress.org/reference/hooks/wp_print_styles/)
