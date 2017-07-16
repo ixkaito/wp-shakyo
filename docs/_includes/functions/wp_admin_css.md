@@ -4,8 +4,8 @@
 
 {% include classes/WP_Styles.md %}
 
- [`WP_Dependencies::query()`](https://developer.wordpress.org/reference/classes/wp_dependencies/query/)
- 
+{% include classes/WP_Dependencies/query.md %}
+
  [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
  
  [`wp_print_styles()`](https://developer.wordpress.org/reference/functions/wp_print_styles/)
