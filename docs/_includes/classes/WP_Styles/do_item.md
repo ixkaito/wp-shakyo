@@ -5,11 +5,9 @@
 {% include classes/WP_Dependencies/do_item.md %}
 
 <p><code>WP_Styles::in_default_dir()</code></p>
- 
- [`WP_Styles::print_inline_style()`](https://developer.wordpress.org/reference/classes/wp_styles/print_inline_style/)
- 
-> [`WP_Dependencies::get_data()`](https://developer.wordpress.org/reference/classes/wp_dependencies/get_data/)
- 
+
+{% include classes/WP_Styles/print_inline_style.md %}
+
  [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
  
 > [`wp_check_invalid_utf8()`](https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/)
