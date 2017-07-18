@@ -3,7 +3,7 @@
 <blockquote>
 
 {% include classes/WP_Styles/all_deps.md %}
- 
+
  [`WP_Styles::do_item()`](https://developer.wordpress.org/reference/classes/wp_styles/do_item/)
  
 > [`WP_Dependencies::do_item()`](https://developer.wordpress.org/reference/classes/wp_dependencies/do_item/)
