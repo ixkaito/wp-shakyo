@@ -3,9 +3,7 @@
 <blockquote>
 
 {% include classes/WP_Dependencies/all_deps.md %}
- 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`print_styles_array`](https://developer.wordpress.org/reference/hooks/print_styles_array/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+
+{% include functions/apply_filters.md hook="print_styles_array" filters=site.data.filters.print_styles_array %}
 
 </blockquote>
