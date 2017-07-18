@@ -2,7 +2,6 @@
 
 <blockquote>
 
-[`WP_Dependencies::set_group()`](https://developer.wordpress.org/reference/classes/wp_dependencies/set_group/)
-
+{% include classes/WP_Dependencies/set_group.md %}
 
 </blockquote>
