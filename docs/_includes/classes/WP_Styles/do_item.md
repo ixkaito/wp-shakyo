@@ -4,7 +4,7 @@
 
 {% include classes/WP_Dependencies/do_item.md %}
 
- `WP_Styles::in_default_dir()`
+<p><code>WP_Styles::in_default_dir()</code></p>
  
  [`WP_Styles::print_inline_style()`](https://developer.wordpress.org/reference/classes/wp_styles/print_inline_style/)
  
