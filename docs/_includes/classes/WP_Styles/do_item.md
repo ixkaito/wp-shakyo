@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`WP_Dependencies::do_item()`](https://developer.wordpress.org/reference/classes/wp_dependencies/do_item/)
- 
+{% include classes/WP_Dependencies/do_item.md %}
+
  `WP_Styles::in_default_dir()`
  
  [`WP_Styles::print_inline_style()`](https://developer.wordpress.org/reference/classes/wp_styles/print_inline_style/)
