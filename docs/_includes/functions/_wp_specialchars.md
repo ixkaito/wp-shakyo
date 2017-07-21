@@ -6,6 +6,6 @@
 
 {% include functions/wp_specialchars_decode.md %}
 
- [`wp_kses_normalize_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities/)
+{% include functions/wp_kses_normalize_entities.md %}
 
 </blockquote>
