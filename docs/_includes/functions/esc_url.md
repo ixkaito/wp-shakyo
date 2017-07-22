@@ -4,18 +4,8 @@
 
 {% include functions/_deep_replace.md %}
 
- [`wp_kses_normalize_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities/)
- 
-> [`wp_kses_named_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_named_entities/)
-> 
-> [`wp_kses_normalize_entities2()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities2/)
-> 
->> [`valid_unicode()`](https://developer.wordpress.org/reference/functions/valid_unicode/)
-> 
-> [`wp_kses_normalize_entities3()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities3/)
-> 
->> [`valid_unicode()`](https://developer.wordpress.org/reference/functions/valid_unicode/)
- 
+{% include functions/wp_kses_normalize_entities.md %}
+
  [`wp_allowed_protocols()`](https://developer.wordpress.org/reference/functions/wp_allowed_protocols/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`kses_allowed_protocols`](https://developer.wordpress.org/reference/hooks/kses_allowed_protocols/)
