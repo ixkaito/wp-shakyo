@@ -11,9 +11,7 @@
 {% include functions/esc_attr.md %}
 
 {% include classes/WP_Styles/_css_href.md %}
- 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`style_loader_tag`](https://developer.wordpress.org/reference/hooks/style_loader_tag/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+
+{% include functions/apply_filters.md hook="style_loader_tag" filters=site.data.filters.style_loader_tag %}
 
 </blockquote>
