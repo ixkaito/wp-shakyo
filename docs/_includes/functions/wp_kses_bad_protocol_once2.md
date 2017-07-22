@@ -4,6 +4,6 @@
 
 {% include functions/wp_kses_decode_entities.md %}
 
- [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
+{% include functions/wp_kses_no_null.md %}
 
 </blockquote>
