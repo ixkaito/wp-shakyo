@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`_wp_kses_decode_entities_chr()`](https://developer.wordpress.org/reference/functions/_wp_kses_decode_entities_chr/)
- 
+{% include functions/_wp_kses_decode_entities_chr.md %}
+
  [`_wp_kses_decode_entities_chr_hexdec()`](https://developer.wordpress.org/reference/functions/_wp_kses_decode_entities_chr_hexdec/)
 
 </blockquote>
