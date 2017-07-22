@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`_deep_replace()`](https://developer.wordpress.org/reference/functions/_deep_replace/)
- 
+{% include functions/_deep_replace.md %}
+
  [`wp_kses_normalize_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_normalize_entities/)
  
 > [`wp_kses_named_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_named_entities/)
