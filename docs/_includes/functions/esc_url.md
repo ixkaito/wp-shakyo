@@ -10,8 +10,6 @@
 
 {% include functions/wp_kses_bad_protocol.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`clean_url`](https://developer.wordpress.org/reference/hooks/clean_url/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="clean_url" filters=site.data.filters.clean_url %}
 
 </blockquote>
