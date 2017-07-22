@@ -2,18 +2,8 @@
 
 <blockquote>
 
- [`add_query_arg()`](https://developer.wordpress.org/reference/functions/add_query_arg/)
- 
-> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
-> 
-> [`urlencode_deep()`](https://developer.wordpress.org/reference/functions/urlencode_deep/)
-> 
-> [`build_query()`](https://developer.wordpress.org/reference/functions/build_query/)
-> 
->> [`_http_build_query()`](https://developer.wordpress.org/reference/functions/_http_build_query/)
->> 
->>> [`_http_build_query()`](https://developer.wordpress.org/reference/functions/_http_build_query/)
- 
+{% include functions/add_query_arg.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`style_loader_src`](https://developer.wordpress.org/reference/hooks/style_loader_src/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
