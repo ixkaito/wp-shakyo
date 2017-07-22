@@ -4,6 +4,6 @@
 
 {% include functions/_wp_kses_decode_entities_chr.md %}
 
- [`_wp_kses_decode_entities_chr_hexdec()`](https://developer.wordpress.org/reference/functions/_wp_kses_decode_entities_chr_hexdec/)
+{% include functions/_wp_kses_decode_entities_chr_hexdec.md %}
 
 </blockquote>
