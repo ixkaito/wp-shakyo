@@ -4,8 +4,8 @@
 
 {% include functions/wp_parse_str.md %}
 
- [`urlencode_deep()`](https://developer.wordpress.org/reference/functions/urlencode_deep/)
- 
+{% include functions/urlencode_deep.md %}
+
  [`build_query()`](https://developer.wordpress.org/reference/functions/build_query/)
  
 > [`_http_build_query()`](https://developer.wordpress.org/reference/functions/_http_build_query/)
