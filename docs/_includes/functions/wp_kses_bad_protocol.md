@@ -2,7 +2,7 @@
 
 <blockquote>
 
- [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
+{% include functions/wp_kses_no_null.md %}
  
  [`wp_kses_bad_protocol_once()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol_once/)
  
