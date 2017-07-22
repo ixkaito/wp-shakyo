@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
- 
+{% include functions/wp_parse_str.md %}
+
  [`urlencode_deep()`](https://developer.wordpress.org/reference/functions/urlencode_deep/)
  
  [`build_query()`](https://developer.wordpress.org/reference/functions/build_query/)
