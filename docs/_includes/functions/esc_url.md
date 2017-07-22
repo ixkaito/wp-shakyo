@@ -6,12 +6,8 @@
 
 {% include functions/wp_kses_normalize_entities.md %}
 
- [`wp_allowed_protocols()`](https://developer.wordpress.org/reference/functions/wp_allowed_protocols/)
- 
-> [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`kses_allowed_protocols`](https://developer.wordpress.org/reference/hooks/kses_allowed_protocols/)
-> 
->> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/wp_allowed_protocols.md %}
+
  [`wp_kses_bad_protocol()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol/)
  
 > [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
