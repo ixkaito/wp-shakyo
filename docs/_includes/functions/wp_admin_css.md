@@ -10,7 +10,7 @@
 
 {% include functions/wp_print_styles.md %}
 
- `wp_enqueue_style()`
+<p><code>wp_enqueue_style()</code></p>
  
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_admin_css`](https://developer.wordpress.org/reference/hooks/wp_admin_css/)
  
