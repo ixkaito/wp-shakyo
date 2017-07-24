@@ -11,11 +11,9 @@
 {% include functions/wp_print_styles.md %}
 
 <p><code>wp_enqueue_style()</code></p>
- 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_admin_css`](https://developer.wordpress.org/reference/hooks/wp_admin_css/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+
+{% include functions/apply_filters.md hook="wp_admin_css" filters=site.data.filters.wp_admin_css %}
+
  [`esc_url()`](https://developer.wordpress.org/reference/functions/esc_url/)
  
 > [`_deep_replace()`](https://developer.wordpress.org/reference/functions/_deep_replace/)
