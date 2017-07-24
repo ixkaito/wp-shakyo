@@ -16,6 +16,6 @@
 
 {% include functions/esc_url.md %}
 
- `wp_admin_css_uri()`
+<p><code>wp_admin_css_uri</code></p>
 
 </blockquote>
