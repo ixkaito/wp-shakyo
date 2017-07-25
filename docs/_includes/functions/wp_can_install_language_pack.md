@@ -2,10 +2,8 @@
 
 <blockquote>
 
- **wp-admin/includes/class-wp-upgrader.php**
- 
-> **wp-admin/includes/class-wp-upgrader-skins.php**
- 
+{% include files/wp-admin/includes/class-wp-upgrader.php.md %}
+
  [`new Automatic_Upgrader_Skin()`](https://developer.wordpress.org/reference/classes/automatic_upgrader_skin/) <- [`WP_Upgrader_Skin`](https://developer.wordpress.org/reference/classes/wp_upgrader_skin/)
  
 > [`WP_Upgrader_Skin::__construct()`](https://developer.wordpress.org/reference/classes/wp_upgrader_skin/__construct/)
