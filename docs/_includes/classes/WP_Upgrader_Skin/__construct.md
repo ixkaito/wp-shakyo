@@ -2,8 +2,6 @@
 
 <blockquote>
 
- [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
- 
-> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
+{% include functions/wp_parse_args.md %}
 
 </blockquote>
