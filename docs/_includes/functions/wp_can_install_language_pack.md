@@ -6,12 +6,8 @@
 
 {% include classes/Automatic_Upgrader_Skin.md %}
 
- [`new Language_Pack_Upgrader()`](https://developer.wordpress.org/reference/classes/language_pack_upgrader/) <- [`WP_Upgrader`](https://developer.wordpress.org/reference/classes/wp_upgrader/)
- 
-> [`WP_Upgrader::__construct()`](https://developer.wordpress.org/reference/classes/wp_upgrader/__construct/)
-> 
->> `new WP_Upgrader_Skin()`
- 
+{% include classes/Language_Pack_Upgrader.md %}
+
  [`WP_Upgrader::fs_connect()`](https://developer.wordpress.org/reference/classes/wp_upgrader/fs_connect/)
  
 > [`Automatic_Upgrader_Skin::request_filesystem_credentials()`](https://developer.wordpress.org/reference/classes/automatic_upgrader_skin/request_filesystem_credentials/)
