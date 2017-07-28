@@ -2,6 +2,6 @@
 
 <blockquote>
 
-<p><code>new WP_Upgrader_Skin()</code></p>
+{% include classes/WP_Upgrader_Skin.md %}
 
 </blockquote>
