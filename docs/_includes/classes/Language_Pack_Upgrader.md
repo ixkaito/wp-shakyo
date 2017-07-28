@@ -2,8 +2,6 @@
 
 <blockquote>
 
- [`WP_Upgrader::__construct()`](https://developer.wordpress.org/reference/classes/wp_upgrader/__construct/)
- 
-> `new WP_Upgrader_Skin()`
+{% include classes/WP_Upgrader/__construct.md %}
 
 </blockquote>
