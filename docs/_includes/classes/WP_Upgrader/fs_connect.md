@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include classes/Automatic_Upgrader_Skin/request_filesystem_credentials.md %}
+
  [`Automatic_Upgrader_Skin::request_filesystem_credentials()`](https://developer.wordpress.org/reference/classes/automatic_upgrader_skin/request_filesystem_credentials/)
  
 > [`WP_Upgrader_Skin::request_filesystem_credentials()`](https://developer.wordpress.org/reference/classes/wp_upgrader_skin/request_filesystem_credentials/)
