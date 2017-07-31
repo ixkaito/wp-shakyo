@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`request_filesystem_credentials`](https://developer.wordpress.org/reference/hooks/request_filesystem_credentials/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="request_filesystem_credentials" filters=site.data.filters.request_filesystem_credentials %}
+
  [`get_filesystem_method()`](https://developer.wordpress.org/reference/functions/get_filesystem_method/)
  
 > [`trailingslashit()`](https://developer.wordpress.org/reference/functions/trailingslashit/)
