@@ -13,9 +13,11 @@
 {% include functions/update_option.md %}
 
 {% include functions/__.md %}
- 
- [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
- 
+
+{% include functions/is_wp_error.md %}
+
+{% include functions/esc_html.md %}
+
  [`esc_html()`](https://developer.wordpress.org/reference/functions/esc_html/)
  
 > [`wp_check_invalid_utf8()`](https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/)
