@@ -1,0 +1,1 @@
+<p><code>update_option()</code></p>
