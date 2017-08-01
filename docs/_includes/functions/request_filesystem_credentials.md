@@ -24,10 +24,8 @@
 
 {% include functions/_e.md %}
 
- [`disabled()`](https://developer.wordpress.org/reference/functions/disabled/)
- 
-> [`__checked_selected_helper()`](https://developer.wordpress.org/reference/functions/__checked_selected_helper/)
- 
+{% include functions/disabled.md %}
+
  [`checked()`](https://developer.wordpress.org/reference/functions/checked/)
  
 > [`__checked_selected_helper()`](https://developer.wordpress.org/reference/functions/__checked_selected_helper/)
