@@ -6,10 +6,8 @@
 
 {% include functions/get_filesystem_method.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`filesystem_method_file`](https://developer.wordpress.org/reference/hooks/filesystem_method_file/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="filesystem_method_file" filters=site.data.filters.filesystem_method_file %}
+
  **wp-admin/includes/class-wp-filesystem-direct.php**
  
  [`new WP_Filesystem_Direct()`](https://developer.wordpress.org/reference/classes/wp_filesystem_direct/) <- [`WP_Filesystem_Base`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/)
