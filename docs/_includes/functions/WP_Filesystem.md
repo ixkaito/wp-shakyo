@@ -2,8 +2,8 @@
 
 <blockquote>
 
- **wp-admin/includes/class-wp-filesystem-base.php**
- 
+{% include files/wp-admin/includes/class-wp-filesystem-base.php.md %}
+
  [`get_filesystem_method()`](https://developer.wordpress.org/reference/functions/get_filesystem_method/)
  
 > [`trailingslashit()`](https://developer.wordpress.org/reference/functions/trailingslashit/)
