@@ -10,14 +10,8 @@
 
 {% include files/wp-admin/includes/class-wp-filesystem-direct.php.md %}
 
- [`new WP_Filesystem_Direct()`](https://developer.wordpress.org/reference/classes/wp_filesystem_direct/) <- [`WP_Filesystem_Base`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/)
- 
-> [`WP_Filesystem_Direct::__construct()`](https://developer.wordpress.org/reference/classes/wp_filesystem_direct/__construct/)
-> 
->> [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
->> 
->>> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
- 
+{% include classes/WP_Filesystem_Direct.md %}
+
  [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
  
  [`WP_Error::get_error_code()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_code/)
