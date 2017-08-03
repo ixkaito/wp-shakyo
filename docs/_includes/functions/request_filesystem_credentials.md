@@ -30,8 +30,6 @@
 
 {% include functions/esc_attr.md %}
 
- [`submit_button()`](https://developer.wordpress.org/reference/functions/submit_button/)
- 
-> [`get_submit_button()`](https://developer.wordpress.org/reference/functions/get_submit_button/)
+{% include functions/submit_button.md %}
 
 </blockquote>
