@@ -8,8 +8,8 @@
 
 {% include functions/apply_filters.md hook="filesystem_method_file" filters=site.data.filters.filesystem_method_file %}
 
- **wp-admin/includes/class-wp-filesystem-direct.php**
- 
+{% include files/wp-admin/includes/class-wp-filesystem-direct.php.md %}
+
  [`new WP_Filesystem_Direct()`](https://developer.wordpress.org/reference/classes/wp_filesystem_direct/) <- [`WP_Filesystem_Base`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/)
  
 > [`WP_Filesystem_Direct::__construct()`](https://developer.wordpress.org/reference/classes/wp_filesystem_direct/__construct/)
