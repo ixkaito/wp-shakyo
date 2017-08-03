@@ -6,8 +6,6 @@
 
 {% include functions/_wp_specialchars.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`esc_html`](https://developer.wordpress.org/reference/hooks/esc_html/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="esc_html" filters=site.data.filters.esc_html %}
 
 </blockquote>
