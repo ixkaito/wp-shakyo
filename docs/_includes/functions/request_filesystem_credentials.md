@@ -26,10 +26,8 @@
 
 {% include functions/disabled.md %}
 
- [`checked()`](https://developer.wordpress.org/reference/functions/checked/)
- 
-> [`__checked_selected_helper()`](https://developer.wordpress.org/reference/functions/__checked_selected_helper/)
- 
+{% include functions/checked.md %}
+
  [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
  
 > [`wp_check_invalid_utf8()`](https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/)
