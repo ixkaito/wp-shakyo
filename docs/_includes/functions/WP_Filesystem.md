@@ -16,6 +16,6 @@
 
 {% include classes/WP_Error/get_error_code.md %}
 
- [`WP_Fielsystem_Base::connect()`](https://developer.wordpress.org/reference/classes/wp_fielsystem_base/connect/)
+{% include classes/WP_Fielsystem_Base/connect.md %}
 
 </blockquote>
