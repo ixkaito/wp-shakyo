@@ -6,10 +6,8 @@
 
 {% include functions/WP_Filesystem.md %}
 
- [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
- 
-> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
- 
+{% include classes/WP_Error.md %}
+
  [`WP_Error::get_error_code()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_code/)
  
 > [`WP_Error::get_error_codes()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_codes/)
