@@ -8,10 +8,8 @@
 
 {% include classes/WP_Error.md %}
 
- [`WP_Error::get_error_code()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_code/)
- 
-> [`WP_Error::get_error_codes()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_codes/)
- 
+{% include classes/WP_Error/get_error_code.md %}
+
  `WP_Filesystem_Base::abspath()`
  
  [`WP_Filesystem_Base::wp_content_dir()`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/wp_content_dir/)
