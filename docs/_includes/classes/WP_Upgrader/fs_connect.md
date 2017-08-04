@@ -10,8 +10,8 @@
 
 {% include classes/WP_Error/get_error_code.md %}
 
- `WP_Filesystem_Base::abspath()`
- 
+{% include classes/WP_Filesystem_Base/abspath.md %}
+
  [`WP_Filesystem_Base::wp_content_dir()`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/wp_content_dir/)
  
 > [`WP_Filesystem_Base::find_folder()`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/find_folder/)
