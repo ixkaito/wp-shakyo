@@ -12,19 +12,7 @@
 
 {% include classes/WP_Filesystem_Base/abspath.md %}
 
- [`WP_Filesystem_Base::wp_content_dir()`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/wp_content_dir/)
- 
-> [`WP_Filesystem_Base::find_folder()`](https://developer.wordpress.org/reference/classes/wp_filesystem_base/find_folder/)
-> 
->> [`trailingslashit()`](https://developer.wordpress.org/reference/functions/trailingslashit/)
->> 
->>> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
->> 
->> `WP_Filesystem_Base::is_dir()`
->> 
->> `WP_Filesystem_Base::exists()`
->> 
->> `WP_Filesystem_Base::search_for_folder()`
+{% include classes/WP_Filesystem_Base/wp_content_dir.md %}
  
  `WP_Filesystem_Base::wp_plugins_dir()`
  
