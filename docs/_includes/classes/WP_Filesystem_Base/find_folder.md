@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`trailingslashit()`](https://developer.wordpress.org/reference/functions/trailingslashit/)
- 
-> [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
- 
+{% include functions/trailingslashit.md %}
+
  `WP_Filesystem_Base::is_dir()`
  
  `WP_Filesystem_Base::exists()`
