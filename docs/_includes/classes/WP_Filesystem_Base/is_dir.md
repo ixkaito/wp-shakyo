@@ -1,0 +1,1 @@
+<p><code>WP_Filesystem_Base::is_dir()</code></p>

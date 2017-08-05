@@ -4,8 +4,8 @@
 
 {% include functions/trailingslashit.md %}
 
- `WP_Filesystem_Base::is_dir()`
- 
+{% include classes/WP_Filesystem_Base/is_dir.md %}
+
  `WP_Filesystem_Base::exists()`
  
  `WP_Filesystem_Base::search_for_folder()`
