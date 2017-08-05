@@ -1,0 +1,1 @@
+<p><code>WP_Filesystem_Base::search_for_folder()</code></p>
