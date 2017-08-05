@@ -1,0 +1,1 @@
+<p><code>WP_Filesystem_Base::exists()</code></p>
