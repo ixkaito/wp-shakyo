@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_site_transient_{}`](https://developer.wordpress.org/reference/hooks/pre_site_transient_transient/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="pre_site_transient_{$transient}" filters=site.data.filters.pre_site_transient_transient %}
+
  [`wp_using_ext_object_cache()`](https://developer.wordpress.org/reference/functions/wp_using_ext_object_cache/)
  
  [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
