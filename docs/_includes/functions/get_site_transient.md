@@ -6,12 +6,8 @@
 
 {% include functions/wp_using_ext_object_cache.md %}
 
- [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
- 
-> [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
-> 
->> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
- 
+{% include functions/wp_cache_get.md %}
+
  [`delete_site_option()`](https://developer.wordpress.org/reference/functions/delete_site_option/)
  
 > [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`pre_delete_site_option_{}`](https://developer.wordpress.org/reference/hooks/pre_delete_site_option_option-5/)
