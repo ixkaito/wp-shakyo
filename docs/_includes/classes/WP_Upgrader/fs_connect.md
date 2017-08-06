@@ -13,9 +13,9 @@
 {% include classes/WP_Filesystem_Base/abspath.md %}
 
 {% include classes/WP_Filesystem_Base/wp_content_dir.md %}
- 
- `WP_Filesystem_Base::wp_plugins_dir()`
- 
+
+{% include classes/WP_Filesystem_Base/wp_plugins_dir.md %}
+
  [`get_theme_root()`](https://developer.wordpress.org/reference/functions/get_theme_root/)
  
 > [`get_raw_theme_root()`](https://developer.wordpress.org/reference/functions/get_raw_theme_root/)

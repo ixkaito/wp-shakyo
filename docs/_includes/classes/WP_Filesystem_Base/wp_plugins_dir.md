@@ -1,0 +1,1 @@
+<p><code>WP_Filesystem_Base::wp_plugins_dir()</code></p>
