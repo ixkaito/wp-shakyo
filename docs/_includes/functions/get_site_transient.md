@@ -4,8 +4,8 @@
 
 {% include functions/apply_filters.md hook="pre_site_transient_{$transient}" filters=site.data.filters.pre_site_transient_transient %}
 
- [`wp_using_ext_object_cache()`](https://developer.wordpress.org/reference/functions/wp_using_ext_object_cache/)
- 
+{% include functions/wp_using_ext_object_cache.md %}
+
  [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
  
 > [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
