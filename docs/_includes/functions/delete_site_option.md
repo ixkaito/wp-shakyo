@@ -4,8 +4,8 @@
 
 {% include functions/do_action.md hook="pre_delete_site_option_{$option}" actions=site.data.actions.pre_delete_site_option_option %}
 
- [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
- 
+{% include functions/is_multisite.md %}
+
  `delete_option()`
  
  [`wpdb::get_row()`](https://developer.wordpress.org/reference/classes/wpdb/get_row/)
