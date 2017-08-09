@@ -6,8 +6,8 @@
 
 {% include functions/is_multisite.md %}
 
- `delete_option()`
- 
+{% include functions/delete_option.md %}
+
  [`wpdb::get_row()`](https://developer.wordpress.org/reference/classes/wpdb/get_row/)
  
 > [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
