@@ -2,8 +2,6 @@
 
 <blockquote>
 
- [`WP_Object_Cache::delete()`](https://developer.wordpress.org/reference/classes/wp_object_cache/delete/)
- 
-> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
+{% include classes/WP_Object_Cache/delete.md %}
 
 </blockquote>
