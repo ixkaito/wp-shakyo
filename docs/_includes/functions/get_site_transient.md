@@ -12,8 +12,6 @@
 
 {% include functions/get_site_option.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_transient_{}`](https://developer.wordpress.org/reference/hooks/site_transient_transient/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="site_transient_{$transient}" filters=site.data.filters.site_transient_transient %}
 
 </blockquote>
