@@ -12,12 +12,8 @@
 
 {% include classes/wpdb/prepare.md %}
 
- [`wp_cache_delete`](https://developer.wordpress.org/reference/functions/wp_cache_delete/)
- 
-> [`WP_Object_Cache::delete()`](https://developer.wordpress.org/reference/classes/wp_object_cache/delete/)
-> 
->> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
- 
+{% include functions/wp_cache_delete.md %}
+
  [`wpdb::delete()`](https://developer.wordpress.org/reference/classes/wpdb/delete/)
  
 > [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
