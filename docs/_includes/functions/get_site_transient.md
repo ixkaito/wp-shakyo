@@ -10,8 +10,8 @@
 
 {% include functions/delete_site_option.md %}
 
- `get_site_option()`
- 
+{% include functions/get_site_option.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`site_transient_{}`](https://developer.wordpress.org/reference/hooks/site_transient_transient/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
