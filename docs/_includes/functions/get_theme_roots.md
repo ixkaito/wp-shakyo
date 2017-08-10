@@ -4,6 +4,6 @@
 
 {% include functions/get_site_transient.md %}
 
- `search_theme_directories()`
+{% include functions/search_theme_directories.md %}
 
 </blockquote>
