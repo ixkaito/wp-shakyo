@@ -16,10 +16,8 @@
 
 {% include classes/wpdb/delete.md %}
 
- [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`delete_site_option_{}`](https://developer.wordpress.org/reference/hooks/delete_site_option_option-5/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/do_action.md hook="delete_site_option_{$option}" actions=site.data.actions.delete_site_option_option %}
+
  [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`delete_site_option`](https://developer.wordpress.org/reference/hooks/delete_site_option-5/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
