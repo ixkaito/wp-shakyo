@@ -20,8 +20,8 @@
 
 {% include classes/WP_Filesystem_Base/wp_themes_dir.md %}
 
- `WP_Filesystem_Base::find_folder()`
- 
+{% include classes/WP_Filesystem_Base/find_folder.md %}
+
  [`esc_html()`](https://developer.wordpress.org/reference/functions/esc_html/)
  
 > [`wp_check_invalid_utf8()`](https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/)
