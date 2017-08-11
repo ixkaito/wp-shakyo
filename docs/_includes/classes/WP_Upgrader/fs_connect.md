@@ -18,8 +18,8 @@
 
 {% include functions/get_theme_root.md %}
 
- `WP_Filesystem_Base::wp_themes_dir()`
- 
+{% include classes/WP_Filesystem_Base/wp_themes_dir.md %}
+
  `WP_Filesystem_Base::find_folder()`
  
  [`esc_html()`](https://developer.wordpress.org/reference/functions/esc_html/)
