@@ -3,11 +3,9 @@
 <blockquote>
 
 {% include files/wp-includes/version.php.md %}
- 
- [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
- 
-> [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
- 
+
+{% include classes/WP_Error.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`translations_api`](https://developer.wordpress.org/reference/hooks/translations_api/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
