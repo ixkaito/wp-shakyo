@@ -2,7 +2,7 @@
 
 <blockquote>
 
- **wp-includes/version.php**
+{% include files/wp-includes/version.php.md %}
  
  [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
  
