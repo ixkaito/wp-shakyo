@@ -4,8 +4,8 @@
 
 {% include functions/get_site_transient.md %}
 
- **wp-includes/version.php**
- 
+{% include files/wp-includes/version.php.md %}
+
  [`translations_api()`](https://developer.wordpress.org/reference/functions/translations_api/)
  
 > **wp-includes/version.php**
