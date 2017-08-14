@@ -6,10 +6,8 @@
 
 {% include classes/WP_Error.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`translations_api`](https://developer.wordpress.org/reference/hooks/translations_api/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="translations_api" filters=site.data.filters.translations_api %}
+
  [`wp_http_supports()`](https://developer.wordpress.org/reference/functions/wp_http_supports/)
  
 > [`_wp_http_get_object()`](https://developer.wordpress.org/reference/functions/_wp_http_get_object/)
