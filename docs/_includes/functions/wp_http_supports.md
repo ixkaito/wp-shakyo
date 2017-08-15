@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`_wp_http_get_object()`](https://developer.wordpress.org/reference/functions/_wp_http_get_object/)
- 
-> [`new WP_Http()`](https://developer.wordpress.org/reference/classes/wp_http/)
- 
+{% include functions/_wp_http_get_object.md %}
+
  [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
  
 > [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
