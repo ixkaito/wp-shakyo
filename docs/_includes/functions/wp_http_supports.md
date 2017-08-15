@@ -4,10 +4,8 @@
 
 {% include functions/_wp_http_get_object.md %}
 
- [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
- 
-> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
- 
+{% include functions/wp_parse_args.md %}
+
  [`WP_Http::_get_first_available_transport()`](https://developer.wordpress.org/reference/classes/wp_http/_get_first_available_transport/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_api_transports`](https://developer.wordpress.org/reference/hooks/http_api_transports/)
