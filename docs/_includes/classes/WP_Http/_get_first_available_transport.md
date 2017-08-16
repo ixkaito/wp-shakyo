@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_api_transports`](https://developer.wordpress.org/reference/hooks/http_api_transports/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="http_api_transports" filters=site.data.filters.http_api_transports %}
+
  [`WP_Http_Curl::test()`](https://developer.wordpress.org/reference/classes/wp_http_curl/test/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`use_curl_transport`](https://developer.wordpress.org/reference/hooks/use_curl_transport/)
