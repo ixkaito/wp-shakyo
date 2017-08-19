@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
- 
-> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
- 
+{% include functions/wp_parse_args.md %}
+
  [`WP_Http::request()`](https://developer.wordpress.org/reference/classes/wp_http/request/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_request_timeout`](https://developer.wordpress.org/reference/hooks/http_request_timeout/)
