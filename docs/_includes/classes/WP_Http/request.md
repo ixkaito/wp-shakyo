@@ -10,10 +10,8 @@
 
 {% include functions/apply_filters.md hook="http_headers_useragent" filters=site.data.filters.http_headers_useragent %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_request_reject_unsafe_urls`](https://developer.wordpress.org/reference/hooks/http_request_reject_unsafe_urls/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="http_request_reject_unsafe_urls" filters=site.data.filters.http_request_reject_unsafe_urls %}
+
  [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
  
 > [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
