@@ -14,14 +14,10 @@
 
 {% include functions/wp_parse_args.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_request_args`](https://developer.wordpress.org/reference/hooks/http_request_args/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_http_request`](https://developer.wordpress.org/reference/hooks/pre_http_request/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="http_request_args" filters=site.data.filters.http_request_args %}
+
+{% include functions/apply_filters.md hook="pre_http_request" filters=site.data.filters.pre_http_request %}
+
  `wp_http_validate_url()`
  
  [`wp_kses_bad_protocol()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol/)
