@@ -18,8 +18,8 @@
 
 {% include functions/apply_filters.md hook="pre_http_request" filters=site.data.filters.pre_http_request %}
 
- `wp_http_validate_url()`
- 
+{% include functions/wp_http_validate_url.md %}
+
  [`wp_kses_bad_protocol()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol/)
  
 > [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
