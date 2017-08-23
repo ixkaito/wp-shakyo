@@ -20,24 +20,8 @@
 
 {% include functions/wp_http_validate_url.md %}
 
- [`wp_kses_bad_protocol()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol/)
- 
-> [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
-> 
-> [`wp_kses_bad_protocol_once()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol_once/)
-> 
->> [`wp_kses_bad_protocol_once2()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol_once2/)
->> 
->>> [`wp_kses_decode_entities()`](https://developer.wordpress.org/reference/functions/wp_kses_decode_entities/)
->>> 
->>>> [`_wp_kses_decode_entities_chr()`](https://developer.wordpress.org/reference/functions/_wp_kses_decode_entities_chr/)
->>>> 
->>>> [`_wp_kses_decode_entities_chr_hexdec()`](https://developer.wordpress.org/reference/functions/_wp_kses_decode_entities_chr_hexdec/)
->>> 
->>> [`wp_kses_no_null()`](https://developer.wordpress.org/reference/functions/wp_kses_no_null/)
->> 
->> [`wp_kses_bad_protocol_once()`](https://developer.wordpress.org/reference/functions/wp_kses_bad_protocol_once/)
- 
+{% include functions/wp_kses_bad_protocol.md %}
+
  [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
  
 > [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
