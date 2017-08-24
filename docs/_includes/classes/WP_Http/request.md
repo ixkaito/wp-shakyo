@@ -32,8 +32,8 @@
 
 {% include functions/get_template_dir.md %}
 
- `wp_is_writable()`
- 
+{% include functions/wp_is_writable.md %}
+
  `WP_Http::processHeaders()`
  
  [`WP_Http::buildCookieHeader()`](https://developer.wordpress.org/reference/classes/wp_http/buildCookieHeader/)
