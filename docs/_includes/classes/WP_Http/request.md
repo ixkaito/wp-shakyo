@@ -30,8 +30,8 @@
 
 {% include functions/get_bloginfo.md %}
 
- `get_template_dir()`
- 
+{% include functions/get_template_dir.md %}
+
  `wp_is_writable()`
  
  `WP_Http::processHeaders()`
