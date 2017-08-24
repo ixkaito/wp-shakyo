@@ -34,8 +34,8 @@
 
 {% include functions/wp_is_writable.md %}
 
- `WP_Http::processHeaders()`
- 
+{% include classes/WP_Http/processheaders.md %}
+
  [`WP_Http::buildCookieHeader()`](https://developer.wordpress.org/reference/classes/wp_http/buildCookieHeader/)
  
 > [`new WP_Http_Cookie()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/)
