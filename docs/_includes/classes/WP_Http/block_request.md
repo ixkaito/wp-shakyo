@@ -4,8 +4,6 @@
 
 {% include functions/get_option.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`block_local_requests`](https://developer.wordpress.org/reference/hooks/block_local_requests/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="block_local_requests" filters=site.data.filters.block_local_requests %}
 
 </blockquote>
