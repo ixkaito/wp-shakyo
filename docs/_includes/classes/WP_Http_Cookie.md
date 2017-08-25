@@ -2,6 +2,6 @@
 
 <blockquote>
 
-[`WP_Http_Cookie::__construct()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/__construct/)
+{% include classes/WP_Http_Cookie/__construct.md %}
 
 </blockquote>
