@@ -38,8 +38,8 @@
 
 {% include classes/WP_Http/buildCookieHeader.md %}
 
- [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
- 
+{% include functions/mbstring_binary_safe_encoding.md %}
+
  [`WP_Http_Encoding::accept_encoding()`](https://developer.wordpress.org/reference/classes/wp_http_encoding/accept_encoding/)
  
 > [`WP_Http_Encoding::is_available()`](https://developer.wordpress.org/reference/classes/wp_http_encoding/is_available/)
