@@ -46,10 +46,8 @@
 
 {% include classes/WP_Http/_dispatch_request.md %}
 
- [`reset_mbstring_encoding()`](https://developer.wordpress.org/reference/functions/reset_mbstring_encoding/)
- 
-> [`mbstring_binary_safe_encoding()`](https://developer.wordpress.org/reference/functions/mbstring_binary_safe_encoding/)
- 
+{% include functions/reset_mbstring_encoding.md %}
+
  [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
  
  `wp_list_pluck()`
