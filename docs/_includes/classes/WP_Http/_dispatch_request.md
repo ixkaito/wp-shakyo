@@ -8,8 +8,8 @@
 
 {% include functions/__.md %}
 
- [`new WP_Http_Curl()`](https://developer.wordpress.org/reference/classes/wp_http_curl/)
- 
+{% include classes/WP_Http_Curl.md %}
+
  [`WP_Http_Curl::request()`](https://developer.wordpress.org/reference/classes/wp_http_curl/request/)
  
 > [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
