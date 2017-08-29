@@ -50,6 +50,6 @@
 
 {% include functions/is_wp_error.md %}
 
- `wp_list_pluck()`
+{% include functions/wp_list_pluck.md %}
 
 </blockquote>
