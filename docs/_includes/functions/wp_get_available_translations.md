@@ -8,8 +8,8 @@
 
 {% include functions/translations_api.md %}
 
- [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
- 
+{% include functions/is_wp_error.md %}
+
  `set_site_transient()`
 
 </blockquote>
