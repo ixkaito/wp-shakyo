@@ -22,10 +22,8 @@
 
 {% include classes/WP_Error/get_error_message.md %}
 
- [`wp_remote_retrieve_body()`](https://developer.wordpress.org/reference/functions/wp_remote_retrieve_body/)
- 
-> [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
- 
+{% include functions/wp_remote_retrieve_body.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`translations_api_result`](https://developer.wordpress.org/reference/hooks/translations_api_result/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
