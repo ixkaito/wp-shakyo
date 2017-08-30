@@ -24,8 +24,6 @@
 
 {% include functions/wp_remote_retrieve_body.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`translations_api_result`](https://developer.wordpress.org/reference/hooks/translations_api_result/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="translations_api_result" filters=site.data.filters.translations_api_result %}
 
 </blockquote>
