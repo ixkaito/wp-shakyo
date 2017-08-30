@@ -16,8 +16,8 @@
 
 {% include functions/wp_remote_post.md %}
 
- [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
- 
+{% include functions/is_wp_error.md %}
+
  [`__()`](https://developer.wordpress.org/reference/functions/__/)
  
 > [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
