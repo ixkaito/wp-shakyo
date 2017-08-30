@@ -10,6 +10,6 @@
 
 {% include functions/is_wp_error.md %}
 
- `set_site_transient()`
+{% include functions/set_site_transient.md %}
 
 </blockquote>
