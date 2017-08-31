@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`wp_parse_args()`](https://developer.wordpress.org/reference/functions/wp_parse_args/)
- 
-> [`wp_parse_str()`](https://developer.wordpress.org/reference/functions/wp_parse_str/)
- 
+{% include functions/wp_parse_args.md %}
+
  [`WP_Http::buildCookieHeader()`](https://developer.wordpress.org/reference/classes/wp_http/buildCookieHeader/)
  
 > [`new WP_Http_Cookie()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/)
