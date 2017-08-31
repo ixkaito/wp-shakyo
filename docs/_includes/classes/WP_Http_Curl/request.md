@@ -4,12 +4,8 @@
 
 {% include functions/wp_parse_args.md %}
 
- [`WP_Http::buildCookieHeader()`](https://developer.wordpress.org/reference/classes/wp_http/buildCookieHeader/)
- 
-> [`new WP_Http_Cookie()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/)
-> 
->> [`WP_Http_Cookie::__construct()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/__construct/)
- 
+{% include classes/WP_Http/buildCookieHeader.md %}
+
  [`new WP_HTTP_Proxy()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/)
  
  [`WP_HTTP_Proxy::is_enabled()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/is_enabled/)
