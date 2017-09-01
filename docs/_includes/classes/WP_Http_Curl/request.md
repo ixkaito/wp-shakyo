@@ -6,8 +6,8 @@
 
 {% include classes/WP_Http/buildCookieHeader.md %}
 
- [`new WP_HTTP_Proxy()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/)
- 
+{% include classes/WP_HTTP_Proxy.md %}
+
  [`WP_HTTP_Proxy::is_enabled()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/is_enabled/)
  
  [`WP_HTTP_Proxy::send_through_proxy()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/send_through_proxy/)
