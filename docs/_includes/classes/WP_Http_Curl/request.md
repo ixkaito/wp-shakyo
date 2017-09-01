@@ -8,8 +8,8 @@
 
 {% include classes/WP_HTTP_Proxy.md %}
 
- [`WP_HTTP_Proxy::is_enabled()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/is_enabled/)
- 
+{% include classes/WP_HTTP_Proxy/is_enabled.md %}
+
  [`WP_HTTP_Proxy::send_through_proxy()`](https://developer.wordpress.org/reference/classes/wp_http_proxy/send_through_proxy/)
  
 > [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
