@@ -14,8 +14,8 @@
 
 {% include classes/WP_HTTP_Proxy/host.md %}
 
- `WP_HTTP_Proxy::port()`
- 
+{% include classes/WP_HTTP_Proxy/port.md %}
+
  `WP_HTTP_Proxy::use_authentication()`
  
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`https_local_ssl_verify`](https://developer.wordpress.org/reference/hooks/https_local_ssl_verify/)
