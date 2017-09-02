@@ -12,6 +12,8 @@
 
 {% include classes/WP_HTTP_Proxy/send_through_proxy.md %}
 
+{% include classes/WP_HTTP_Proxy/host.md %}
+
  `WP_HTTP_Proxy::host()`
  
  `WP_HTTP_Proxy::port()`
