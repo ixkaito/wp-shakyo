@@ -20,10 +20,8 @@
 
 {% include functions/apply_filters.md hook="https_local_ssl_verify" filters=site.data.filters.https_local_ssl_verify %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`https_ssl_verify`](https://developer.wordpress.org/reference/hooks/https_ssl_verify/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="https_ssl_verify" filters=site.data.filters.https_ssl_verify %}
+
  [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
  
 > [`WP_Error::__construct()`](https://developer.wordpress.org/reference/classes/wp_error/__construct/)
