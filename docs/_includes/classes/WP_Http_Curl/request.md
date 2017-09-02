@@ -14,8 +14,6 @@
 
 {% include classes/WP_HTTP_Proxy/host.md %}
 
- `WP_HTTP_Proxy::host()`
- 
  `WP_HTTP_Proxy::port()`
  
  `WP_HTTP_Proxy::use_authentication()`
