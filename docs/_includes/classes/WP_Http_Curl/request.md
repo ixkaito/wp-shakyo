@@ -26,10 +26,8 @@
 
 {% include functions/__.md %}
 
- [`do_action_ref_array()`](https://developer.wordpress.org/reference/functions/do_action_ref_array/) - [`http_api_curl`](https://developer.wordpress.org/reference/hooks/http_api_curl/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/do_action_ref_array.md hook="http_api_curl" actions=site.data.actions.http_api_curl %}
+
  [`WP_Http_Curl::stream_headers()`](https://developer.wordpress.org/reference/classes/wp_http_curl/stream_headers/)
  
  [`WP_Http_Curl::stream_body()`](https://developer.wordpress.org/reference/classes/wp_http_curl/stream_body/)
