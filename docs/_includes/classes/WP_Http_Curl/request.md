@@ -28,8 +28,8 @@
 
 {% include functions/do_action_ref_array.md hook="http_api_curl" actions=site.data.actions.http_api_curl %}
 
- [`WP_Http_Curl::stream_headers()`](https://developer.wordpress.org/reference/classes/wp_http_curl/stream_headers/)
- 
+{% include classes/WP_Http_Curl/stream_headers.md %}
+
  [`WP_Http_Curl::stream_body()`](https://developer.wordpress.org/reference/classes/wp_http_curl/stream_body/)
  
  [`WP_Http::processHeaders()`](https://developer.wordpress.org/reference/classes/wp_http/processheaders/)
