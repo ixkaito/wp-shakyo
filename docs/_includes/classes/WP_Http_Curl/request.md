@@ -30,8 +30,8 @@
 
 {% include classes/WP_Http_Curl/stream_headers.md %}
 
- [`WP_Http_Curl::stream_body()`](https://developer.wordpress.org/reference/classes/wp_http_curl/stream_body/)
- 
+{% include classes/WP_Http_Curl/stream_body.md %}
+
  [`WP_Http::processHeaders()`](https://developer.wordpress.org/reference/classes/wp_http/processheaders/)
  
 > [`new WP_Http_Cookie()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/)
