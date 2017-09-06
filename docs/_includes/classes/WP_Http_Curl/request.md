@@ -34,10 +34,8 @@
 
 {% include classes/WP_Http/processHeaders.md %}
 
- [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
- 
-> [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
- 
+{% include functions/get_status_header_desc.md %}
+
  [`WP_HTTP::handle_redirects()`](https://developer.wordpress.org/reference/classes/wp_http/handle_redirects/)
  
 > [`new WP_Error()`](https://developer.wordpress.org/reference/classes/wp_error/)
