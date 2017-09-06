@@ -32,12 +32,8 @@
 
 {% include classes/WP_Http_Curl/stream_body.md %}
 
- [`WP_Http::processHeaders()`](https://developer.wordpress.org/reference/classes/wp_http/processheaders/)
- 
-> [`new WP_Http_Cookie()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/)
-> 
->> [`WP_Http_Cookie::__construct()`](https://developer.wordpress.org/reference/classes/wp_http_cookie/__construct/)
- 
+{% include classes/WP_Http/processHeaders.md %}
+
  [`get_status_header_desc()`](https://developer.wordpress.org/reference/functions/get_status_header_desc/)
  
 > [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
