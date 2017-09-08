@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`get_available_languages()`](https://developer.wordpress.org/reference/functions/get_available_languages/)
- 
+{% include functions/get_available_languages.md %}
+
  [`esc_attr()`](https://developer.wordpress.org/reference/functions/esc_attr/)
  
 > [`wp_check_invalid_utf8()`](https://developer.wordpress.org/reference/functions/wp_check_invalid_utf8/)
