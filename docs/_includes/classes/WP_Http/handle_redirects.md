@@ -6,8 +6,8 @@
 
 {% include functions/__.md %}
 
- `WP_Http::make_absolute_url()`
- 
+{% include classes/WP_Http/make_absolute_url.md %}
+
  `wp_remote_request()`
 
 </blockquote>
