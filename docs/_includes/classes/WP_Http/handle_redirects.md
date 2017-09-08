@@ -8,6 +8,6 @@
 
 {% include classes/WP_Http/make_absolute_url.md %}
 
- `wp_remote_request()`
+{% include functions/wp_remote_request.md %}
 
 </blockquote>
