@@ -38,8 +38,8 @@
 
 {% include classes/WP_HTTP/handle_redirects.md %}
 
- [`WP_Http_Encoding::should_decode()`](https://developer.wordpress.org/reference/classes/wp_http_encoding/should_decode/)
- 
+{% include classes/WP_Http_Encoding/should_decode.md %}
+
  `WP_Http_Encoding::decompress()`
 
 </blockquote>
