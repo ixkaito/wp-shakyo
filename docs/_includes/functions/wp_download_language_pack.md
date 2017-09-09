@@ -8,7 +8,7 @@
 
 {% include files/wp-admin/includes/class-wp-upgrader.php.md %}
 
-`new Automatic_Upgrader_Skin()`
+{% include classes/Automatic_Upgrader_Skin.md %}
 
 `new Language_Pack_Upgrader()`
 
