@@ -40,6 +40,6 @@
 
 {% include classes/WP_Http_Encoding/should_decode.md %}
 
- `WP_Http_Encoding::decompress()`
+{% include classes/WP_Http_Encoding/decompress.md %}
 
 </blockquote>
