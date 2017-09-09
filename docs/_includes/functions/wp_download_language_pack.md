@@ -10,7 +10,7 @@
 
 {% include classes/Automatic_Upgrader_Skin.md %}
 
-`new Language_Pack_Upgrader()`
+{% include classes/Language_Pack_Upgrader.md %}
 
 `Language_Pack_Upgrader::upgrade()`
 
