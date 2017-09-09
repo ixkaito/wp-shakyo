@@ -2,7 +2,7 @@
 
 <blockquote>
 
-`get_available_languages()`
+{% include functions/get_available_languages.md %}
 
 {% include functions/wp_get_available_translations.md %}
 
