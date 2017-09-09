@@ -12,7 +12,7 @@
 
 {% include classes/Language_Pack_Upgrader.md %}
 
-`Language_Pack_Upgrader::upgrade()`
+{% include classes/Language_Pack_Upgrader/upgrade.md %}
 
 {% include functions/is_wp_error.md %}
 
