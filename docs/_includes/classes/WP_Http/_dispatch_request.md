@@ -14,8 +14,8 @@
 
 {% include functions/do_action.md hook="http_api_debug" actions=site.data.actions.http_api_debug %}
 
- [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
- 
+{% include functions/is_wp_error.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_response`](https://developer.wordpress.org/reference/hooks/http_response/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
