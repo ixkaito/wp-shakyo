@@ -6,7 +6,7 @@
 
 {% include functions/wp_get_available_translations.md %}
 
-wp-admin/includes/class-wp-upgrader.php
+{% include files/wp-admin/includes/class-wp-upgrader.php.md %}
 
 `new Automatic_Upgrader_Skin()`
 
