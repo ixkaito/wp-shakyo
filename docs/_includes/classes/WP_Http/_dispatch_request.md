@@ -16,8 +16,6 @@
 
 {% include functions/is_wp_error.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`http_response`](https://developer.wordpress.org/reference/hooks/http_response/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="http_response" filters=site.data.filters.http_response %}
 
 </blockquote>
