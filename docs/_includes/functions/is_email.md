@@ -2,7 +2,7 @@
 
 <blockquote>
 
-`_deprecated_argument()`
+{% include functions/_deprecated_argument.md %}
 
 {% include functions/apply_filters.md hook="is_email" filters=site.data.filters.is_email %}
 
