@@ -2,8 +2,8 @@
 
 <blockquote>
 
- `_deprecated_argument()`
- 
+{% include functions/_deprecated_argument.md %}
+
  [`wp_check_mysql_version()`](https://developer.wordpress.org/reference/functions/wp_check_mysql_version/)
  
 > [`wpdb::check_database_version()`](https://developer.wordpress.org/reference/classes/wpdb/check_database_version/)
