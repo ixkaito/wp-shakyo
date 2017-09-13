@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`wp_strip_all_tags()`](https://developer.wordpress.org/reference/functions/wp_strip_all_tags/)
- 
+{% include functions/wp_strip_all_tags.md %}
+
  [`remove_accents()`](https://developer.wordpress.org/reference/functions/remove_accents/)
  
 > [`get_locale()`](https://developer.wordpress.org/reference/functions/get_locale/)
