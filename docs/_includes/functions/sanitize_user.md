@@ -6,8 +6,6 @@
 
 {% include functions/remove_accents.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`sanitize_user`](https://developer.wordpress.org/reference/hooks/sanitize_user/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="sanitize_user" filters=site.data.filters.sanitize_user %}
 
 </blockquote>
