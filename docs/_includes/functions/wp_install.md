@@ -6,10 +6,8 @@
 
 {% include functions/wp_check_mysql_version.md %}
 
- [`wp_cache_flush()`](https://developer.wordpress.org/reference/functions/wp_cache_flush/)
- 
-> [`WP_Object_Cache::flush()`](https://developer.wordpress.org/reference/classes/wp_object_cache/flush/)
- 
+{% include functions/wp_cache_flush.md %}
+
  [`make_db_current_silent()`](https://developer.wordpress.org/reference/functions/make_db_current_silent/)
  
 > [`dbDelta()`](https://developer.wordpress.org/reference/functions/dbdelta/)
