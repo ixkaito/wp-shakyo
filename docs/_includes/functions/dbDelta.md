@@ -12,14 +12,8 @@
 
 {% include classes/wpdb/tables.md %}
 
- [`is_main_site()`](https://developer.wordpress.org/reference/functions/is_main_site/)
- 
-> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
-> 
-> [`get_current_blog_id()`](https://developer.wordpress.org/reference/functions/get_current_blog_id/)
-> 
->> [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
- 
+{% include functions/is_main_site.md %}
+
  [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
  
  [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
