@@ -14,8 +14,8 @@
 
 {% include functions/is_main_site.md %}
 
- [`wpdb::suppress_errors()`](https://developer.wordpress.org/reference/classes/wpdb/suppress_errors/)
- 
+{% include classes/wpdb/suppress_errors.md %}
+
  [`wpdb::get_results()`](https://developer.wordpress.org/reference/classes/wpdb/get_results/)
  
 > [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
