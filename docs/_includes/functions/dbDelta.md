@@ -4,10 +4,8 @@
 
 {% include functions/wp_get_db_schema.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`dbdelta_queries`](https://developer.wordpress.org/reference/hooks/dbdelta_queries/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="dbdelta_queries" filters=site.data.filters.dbdelta_queries %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`dbdelta_create_queries`](https://developer.wordpress.org/reference/hooks/dbdelta_create_queries/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
