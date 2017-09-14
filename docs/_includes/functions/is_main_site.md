@@ -4,6 +4,8 @@
 
 {% include functions/is_multisite.md %}
 
-{% include functions/get_current_blog_id.md %}
+ [`get_current_blog_id()`](https://developer.wordpress.org/reference/functions/get_current_blog_id/)
+ 
+> [`absint()`](https://developer.wordpress.org/reference/functions/absint/)
 
 </blockquote>
