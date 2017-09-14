@@ -2,12 +2,8 @@
 
 <blockquote>
 
- [`wp_get_db_schema()`](https://developer.wordpress.org/reference/functions/wp_get_db_schema/)
- 
-> `wpdb::set_blog_id()`
-> 
-> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
- 
+{% include functions/wp_get_db_schema.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`dbdelta_queries`](https://developer.wordpress.org/reference/hooks/dbdelta_queries/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)

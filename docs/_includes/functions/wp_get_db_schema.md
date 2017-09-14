@@ -2,7 +2,7 @@
 
 <blockquote>
 
-<p><code>wpdb::set_blog_id()</code></p>
+{% include classes/wpdb/set_blog_id.md %}
 
 {% include functions/is_multisite.md %}
 
