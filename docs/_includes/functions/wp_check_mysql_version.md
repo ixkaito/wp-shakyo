@@ -4,8 +4,8 @@
 
 {% include classes/wpdb/check_database_version.md %}
 
- [`is_wp_error()`](https://developer.wordpress.org/reference/functions/is_wp_error/)
- 
+{% include functions/is_wp_error.md %}
+
  [`WP_Error::get_error_message()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_message/)
  
 > [`WP_Error::get_error_code()`](https://developer.wordpress.org/reference/classes/wp_error/get_error_code/)
