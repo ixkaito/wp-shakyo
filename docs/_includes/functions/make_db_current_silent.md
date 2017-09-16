@@ -6,10 +6,8 @@
 
 {% include functions/populate_options.md %}
 
- [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
- 
-> [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
- 
+{% include functions/wp_guess_url.md %}
+
  [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`populate_options`](https://developer.wordpress.org/reference/hooks/populate_options/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
