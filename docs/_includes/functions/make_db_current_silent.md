@@ -8,10 +8,8 @@
 
 {% include functions/wp_guess_url.md %}
 
- [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`populate_options`](https://developer.wordpress.org/reference/hooks/populate_options/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/do_action.md hook="populate_options" actions=site.data.actions.populate_options %}
+
  `wp_get_theme()`
  
  [`_x()`](https://developer.wordpress.org/reference/functions/_x/)
