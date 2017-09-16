@@ -4,7 +4,7 @@
 
 {% include functions/dbDelta.md %}
 
-`populate_options()`
+{% include functions/populate_options.md %}
 
  [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
  
