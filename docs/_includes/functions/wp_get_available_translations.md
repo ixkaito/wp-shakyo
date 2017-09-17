@@ -6,4 +6,6 @@
 
 {% include files/wp-includes/version.php.md %}
 
+{% include functions/translations_api.md %}
+
 </blockquote>
