@@ -23,6 +23,8 @@ filename: wp-admin/install.php
 
 {% include functions/__.md %}
 
+{% include functions/wp_can_install_language_pack.md %}
+
 
 
 {% include functions/load_default_textdomain.md %}
