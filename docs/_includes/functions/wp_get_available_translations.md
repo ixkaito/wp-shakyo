@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/get_site_transient.md %}
 
 </blockquote>
