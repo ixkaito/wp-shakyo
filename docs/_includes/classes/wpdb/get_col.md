@@ -4,6 +4,6 @@
 
 {% include classes/wpdb/query.md %}
 
- [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
+{% include classes/wpdb/get_var.md %}
 
 </blockquote>
