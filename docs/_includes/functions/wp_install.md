@@ -2,7 +2,13 @@
 
 <blockquote>
 
+{% include functions/_deprecated_argument.md %}
 
+{% include functions/wp_check_mysql_version.md %}
+
+{% include functions/wp_cache_flush.md %}
+
+{% include functions/make_db_current_silent.md %}
 
  [`populate_roles()`](https://developer.wordpress.org/reference/functions/populate_roles/)
  
