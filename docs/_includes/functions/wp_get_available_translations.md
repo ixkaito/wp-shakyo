@@ -6,6 +6,8 @@
 
 {% include files/wp-includes/version.php.md %}
 
-{% include functions/translations_api.md %}
+{% include functions/is_wp_error.md %}
+
+{% include functions/set_site_transient.md %}
 
 </blockquote>
