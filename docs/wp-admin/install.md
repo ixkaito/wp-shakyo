@@ -26,7 +26,6 @@ filename: wp-admin/install.php
 {% include functions/wp_can_install_language_pack.md %}
 
 
-{% include functions/wp_install_language_form.md %}
 
 {% include functions/wp_download_language_pack.md %}
 
