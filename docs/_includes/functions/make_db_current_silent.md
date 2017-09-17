@@ -17,9 +17,9 @@
 {% include functions/__.md %}
 
 {% include functions/is_multisite.md %}
- 
- `get_current_site()`
- 
+
+{% include functions/get_current_site.md %}
+
  [`wpdb::get_col()`](https://developer.wordpress.org/reference/classes/wpdb/get_col/)
  
 > [`wpdb::query()`](https://developer.wordpress.org/reference/classes/wpdb/query/)
