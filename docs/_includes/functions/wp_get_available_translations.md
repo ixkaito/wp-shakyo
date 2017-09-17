@@ -4,4 +4,6 @@
 
 {% include functions/get_site_transient.md %}
 
+{% include files/wp-includes/version.php.md %}
+
 </blockquote>
