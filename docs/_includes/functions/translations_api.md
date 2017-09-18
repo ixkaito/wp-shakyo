@@ -14,12 +14,12 @@
 
 {% include functions/get_locale.md %}
 
-{% include functions/wp_remote_post.md %}
-
-{% include functions/is_wp_error.md %}
-
-{% include functions/__.md %}
 
 
+{% include classes/WP_Error/get_error_message.md %}
+
+{% include functions/wp_remote_retrieve_body.md %}
+
+{% include functions/apply_filters.md hook="translations_api_result" filters=site.data.filters.translations_api_result %}
 
 </blockquote>
