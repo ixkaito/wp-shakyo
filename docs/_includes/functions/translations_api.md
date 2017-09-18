@@ -14,6 +14,7 @@
 
 {% include functions/get_locale.md %}
 
+{% include functions/wp_remote_post.md %}
 
 {% include functions/is_wp_error.md %}
 

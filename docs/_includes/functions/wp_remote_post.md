@@ -2,8 +2,6 @@
 
 <blockquote>
 
-{% include functions/_wp_http_get_object.md %}
 
-{% include classes/WP_Http/post.md %}
 
 </blockquote>
