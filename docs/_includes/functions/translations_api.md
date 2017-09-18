@@ -14,9 +14,10 @@
 
 {% include functions/get_locale.md %}
 
-{% include functions/wp_remote_post.md %}
 
+{% include functions/is_wp_error.md %}
 
+{% include functions/__.md %}
 
 {% include classes/WP_Error/get_error_message.md %}
 
