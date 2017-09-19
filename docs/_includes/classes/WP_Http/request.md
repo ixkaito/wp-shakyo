@@ -22,6 +22,20 @@
 
 {% include functions/wp_kses_bad_protocol.md %}
 
+{% include classes/WP_Error.md %}
+
+{% include functions/__.md %}
+
+{% include classes/WP_Http/block_request.md %}
+
+{% include functions/get_bloginfo.md %}
+
+{% include functions/get_template_dir.md %}
+
+{% include functions/wp_is_writable.md %}
+
+{% include classes/WP_Http/processheaders.md %}
+
 
 
 </blockquote>
