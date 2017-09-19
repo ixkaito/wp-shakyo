@@ -44,6 +44,7 @@
 
 {% include functions/get_option.md %}
 
+{% include classes/WP_Http/_dispatch_request.md %}
 
 {% include functions/reset_mbstring_encoding.md %}
 
