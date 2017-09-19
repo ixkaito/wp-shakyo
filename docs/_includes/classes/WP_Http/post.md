@@ -4,6 +4,5 @@
 
 {% include functions/wp_parse_args.md %}
 
-{% include classes/WP_Http/request.md %}
 
 </blockquote>
