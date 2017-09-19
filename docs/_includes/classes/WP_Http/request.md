@@ -22,34 +22,6 @@
 
 {% include functions/wp_kses_bad_protocol.md %}
 
-{% include classes/WP_Error.md %}
 
-{% include functions/__.md %}
-
-{% include classes/WP_Http/block_request.md %}
-
-{% include functions/get_bloginfo.md %}
-
-{% include functions/get_template_dir.md %}
-
-{% include functions/wp_is_writable.md %}
-
-{% include classes/WP_Http/processheaders.md %}
-
-{% include classes/WP_Http/buildCookieHeader.md %}
-
-{% include functions/mbstring_binary_safe_encoding.md %}
-
-{% include classes/WP_Http_Encoding/accept_encoding.md %}
-
-{% include functions/get_option.md %}
-
-{% include classes/WP_Http/_dispatch_request.md %}
-
-{% include functions/reset_mbstring_encoding.md %}
-
-{% include functions/is_wp_error.md %}
-
-{% include functions/wp_list_pluck.md %}
 
 </blockquote>
