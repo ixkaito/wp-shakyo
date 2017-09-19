@@ -36,6 +36,12 @@
 
 {% include classes/WP_Http/processheaders.md %}
 
+{% include classes/WP_Http/buildCookieHeader.md %}
+
+{% include functions/mbstring_binary_safe_encoding.md %}
+
+{% include classes/WP_Http_Encoding/accept_encoding.md %}
+
 
 
 </blockquote>
