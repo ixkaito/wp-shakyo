@@ -44,6 +44,8 @@
 
 {% include functions/get_option.md %}
 
+{% include classes/WP_Http/_dispatch_request.md %}
+
 
 
 </blockquote>
