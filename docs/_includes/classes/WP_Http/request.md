@@ -42,6 +42,8 @@
 
 {% include classes/WP_Http_Encoding/accept_encoding.md %}
 
+{% include functions/get_option.md %}
+
 
 
 </blockquote>
