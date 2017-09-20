@@ -32,7 +32,9 @@
 
 {% include classes/WP_Http_Curl/stream_body.md %}
 
+{% include classes/WP_Http/processHeaders.md %}
 
+{% include functions/get_status_header_desc.md %}
 
 {% include classes/WP_HTTP/handle_redirects.md %}
 
