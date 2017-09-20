@@ -10,6 +10,7 @@
 
 {% include classes/WP_Http_Curl.md %}
 
+{% include classes/WP_Http_Curl/request.md %}
 
 {% include functions/do_action.md hook="http_api_debug" actions=site.data.actions.http_api_debug %}
 
