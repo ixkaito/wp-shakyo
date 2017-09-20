@@ -10,6 +10,8 @@
 
 {% include classes/WP_Http_Curl.md %}
 
+{% include classes/WP_Http_Curl/request.md %}
+
 
 
 </blockquote>
