@@ -4,6 +4,8 @@
 
 {% include classes/WP_Http/_get_first_available_transport.md %}
 
+{% include classes/WP_Error.md %}
+
 
 
 </blockquote>
