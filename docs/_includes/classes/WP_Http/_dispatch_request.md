@@ -6,6 +6,10 @@
 
 {% include classes/WP_Error.md %}
 
+{% include functions/__.md %}
+
+{% include classes/WP_Http_Curl.md %}
+
 
 
 </blockquote>
