@@ -30,12 +30,4 @@
 
 
 
-{% include functions/get_status_header_desc.md %}
-
-{% include classes/WP_HTTP/handle_redirects.md %}
-
-{% include classes/WP_Http_Encoding/should_decode.md %}
-
-{% include classes/WP_Http_Encoding/decompress.md %}
-
 </blockquote>
