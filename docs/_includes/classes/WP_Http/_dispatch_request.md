@@ -10,8 +10,11 @@
 
 {% include classes/WP_Http_Curl.md %}
 
-{% include classes/WP_Http_Curl/request.md %}
 
+{% include functions/do_action.md hook="http_api_debug" actions=site.data.actions.http_api_debug %}
 
+{% include functions/is_wp_error.md %}
+
+{% include functions/apply_filters.md hook="http_response" filters=site.data.filters.http_response %}
 
 </blockquote>
