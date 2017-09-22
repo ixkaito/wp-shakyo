@@ -27,9 +27,10 @@ filename: wp-admin/install.php
 
 {% include functions/wp_get_available_translations.md %}
 
-{% include functions/wp_install_language_form.md %}
 
+{% include functions/wp_download_language_pack.md %}
 
+{% include functions/load_default_textdomain.md %}
 
 {% include functions/_ex.md %}
 
