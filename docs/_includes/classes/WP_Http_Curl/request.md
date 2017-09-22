@@ -32,10 +32,6 @@
 
 
 
-
-
-{% include classes/WP_Http_Encoding/should_decode.md %}
-
 {% include classes/WP_Http_Encoding/decompress.md %}
 
 </blockquote>
