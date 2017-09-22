@@ -5,6 +5,18 @@ filename: wp-admin/install.php
 
 <blockquote>
 
+{% include files/wp-load.php.md %}
+
+{% include files/wp-admin/includes/upgrade.php.md %}
+
+{% include files/wp-admin/includes/translation-install.php.md %}
+
+{% include files/wp-includes/wp-db.php.md %}
+
+{% include functions/nocache_headers.md %}
+
+{% include functions/is_blog_installed.md %}
+
 
 
 {% include functions/_ex.md %}
