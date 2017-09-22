@@ -30,7 +30,6 @@
 
 {% include classes/WP_Http_Curl/stream_headers.md %}
 
-{% include classes/WP_Http_Curl/stream_body.md %}
 
 
 {% include functions/get_status_header_desc.md %}
