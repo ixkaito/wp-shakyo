@@ -1,1 +1,1 @@
-<p><code>WP_Http::processheaders()</code></p>
+<p><code>WP_Http::processHeaders()</code></p>
