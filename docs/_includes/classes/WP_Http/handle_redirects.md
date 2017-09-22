@@ -1,4 +1,4 @@
-<p><code><a href="https://developer.wordpress.org/reference/classes/wp_http/handle_redirects/">WP_HTTP::handle_redirects()</a></code></p>
+<p><code><a href="https://developer.wordpress.org/reference/classes/wp_http/handle_redirects/">WP_Http::handle_redirects()</a></code></p>
 
 <blockquote>
 
