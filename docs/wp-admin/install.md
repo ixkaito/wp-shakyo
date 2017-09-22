@@ -17,6 +17,14 @@ filename: wp-admin/install.php
 
 {% include functions/is_blog_installed.md %}
 
+{% include functions/display_header.md %}
+
+{% include classes/wpdb/db_version.md %}
+
+{% include functions/__.md %}
+
+{% include functions/wp_can_install_language_pack.md %}
+
 
 
 {% include functions/_ex.md %}
