@@ -4,8 +4,8 @@
 
 {% include functions/untrailingslashit.md %}
 
- [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
- 
+{% include classes/wpdb/get_var.md %}
+
  [`wpdb::prepare()`](https://developer.wordpress.org/reference/classes/wpdb/prepare/)
  
 > [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
