@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`untrailingslashit()`](https://developer.wordpress.org/reference/functions/untrailingslashit/)
- 
+{% include functions/untrailingslashit.md %}
+
  [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
  
  [`wpdb::prepare()`](https://developer.wordpress.org/reference/classes/wpdb/prepare/)
