@@ -28,8 +28,8 @@
 
 {% include functions/__get_option.md %}
 
- `update_option()`
- 
+{% include functions/update_option.md %}
+
  [`delete_option()`](https://developer.wordpress.org/reference/functions/delete_option/)
  
 > [`wp_protect_special_option()`](https://developer.wordpress.org/reference/functions/wp_protect_special_option/)
