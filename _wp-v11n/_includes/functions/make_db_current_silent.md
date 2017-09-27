@@ -34,8 +34,8 @@
 
 {% include classes/wpdb/esc_like.md %}
 
- [`is_main_site()`](https://developer.wordpress.org/reference/functions/is_main_site/)
- 
+{% include functions/is_main_site.md %}
+
  [`is_main_network()`](https://developer.wordpress.org/reference/functions/is_main_network/)
  
 > [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
