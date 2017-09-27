@@ -38,28 +38,6 @@
 
 {% include functions/is_main_network.md %}
 
- [`is_main_network()`](https://developer.wordpress.org/reference/functions/is_main_network/)
- 
-> [`is_multisite()`](https://developer.wordpress.org/reference/functions/is_multisite/)
-> 
-> `get_current_site()`
-> 
-> [`wp_cache_get()`](https://developer.wordpress.org/reference/functions/wp_cache_get/)
-> 
->> [`WP_Object_Cache::get()`](https://developer.wordpress.org/reference/classes/wp_object_cache/get/)
->> 
->>> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
-> 
-> [`wpdb::get_var()`](https://developer.wordpress.org/reference/classes/wpdb/get_var/)
-> 
-> [`wp_cache_add()`](https://developer.wordpress.org/reference/functions/wp_cache_add/)
-> 
->> [`WP_Object_Cache::add()`](https://developer.wordpress.org/reference/classes/wp_object_cache/add/)
->> 
->>> [`wp_suspend_cache_addition()`](https://developer.wordpress.org/reference/functions/wp_suspend_cache_addition/)
->>> 
->>> [`WP_Object_Cache::_exists()`](https://developer.wordpress.org/reference/classes/wp_object_cache/_exists/)
->>> 
->>> [`WP_Object_Cache::set()`](https://developer.wordpress.org/reference/classes/wp_object_cache/set/)
+{% include functions/is_multisite.md %}
 
 </blockquote>
