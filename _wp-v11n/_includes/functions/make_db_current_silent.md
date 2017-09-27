@@ -32,8 +32,8 @@
 
 {% include functions/delete_option.md %}
 
- [`wpdb::esc_like()`](https://developer.wordpress.org/reference/classes/wpdb/esc_like/)
- 
+{% include classes/wpdb/esc_like.md %}
+
  [`is_main_site()`](https://developer.wordpress.org/reference/functions/is_main_site/)
  
  [`is_main_network()`](https://developer.wordpress.org/reference/functions/is_main_network/)
