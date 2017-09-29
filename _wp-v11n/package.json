@@ -47,8 +47,8 @@
     "gulp-watch": "^4.3.8",
     "imagemin-pngquant": "^5.0.0",
     "vinyl-named": "^1.1.0",
-    "webpack-stream": "^3.2.0",
-    "yargs": "^8.0.1"
+    "webpack-stream": "^4.0.0",
+    "yargs": "^9.0.1"
   },
   "dependencies": {
     "editorstyles": "0.0.3",
