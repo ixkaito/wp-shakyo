@@ -14,10 +14,8 @@
 
 {% include functions/update_option.md %}
 
- [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
- 
-> [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
- 
+{% include functions/wp_guess_url.md %}
+
  `username_exists()`
  
  `wp_generate_password()`
