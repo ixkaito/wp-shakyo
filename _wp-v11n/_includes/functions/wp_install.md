@@ -12,8 +12,8 @@
 
 {% include functions/populate_roles.md %}
 
- `update_option()`
- 
+{% include functions/update_option.md %}
+
  [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
  
 > [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
