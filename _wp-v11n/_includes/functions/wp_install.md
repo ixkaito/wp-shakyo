@@ -16,8 +16,8 @@
 
 {% include functions/wp_guess_url.md %}
 
- `username_exists()`
- 
+{% include functions/username_exists.md %}
+
  `wp_generate_password()`
  
  [`__()`](https://developer.wordpress.org/reference/functions/__/)
