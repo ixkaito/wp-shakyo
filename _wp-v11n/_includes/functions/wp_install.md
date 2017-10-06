@@ -18,8 +18,8 @@
 
 {% include functions/username_exists.md %}
 
- `wp_generate_password()`
- 
+{% include functions/wp_generate_password.md %}
+
  [`__()`](https://developer.wordpress.org/reference/functions/__/)
  
 > [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
