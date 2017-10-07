@@ -2,6 +2,6 @@
 
 <blockquote>
 
-[`WP_Role::__construct()`](https://developer.wordpress.org/reference/classes/wp_role/__construct/)
+{% include classes/WP_Role/__construct.md %}
 
 </blockquote>
