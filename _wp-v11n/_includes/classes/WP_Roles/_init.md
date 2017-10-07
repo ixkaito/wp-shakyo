@@ -2,8 +2,8 @@
 
 <blockquote>
 
- `wpdb::get_blog_prefix()`
- 
+{% include classes/wpdb/get_blog_prefix.md %}
+
  [`get_option()`](https://developer.wordpress.org/reference/functions/get_option/)
  
 > [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`pre_option_{}`](https://developer.wordpress.org/reference/hooks/pre_option_option/)
