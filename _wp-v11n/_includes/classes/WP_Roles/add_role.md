@@ -4,8 +4,6 @@
 
 {% include functions/update_option.md %}
 
- [`new WP_Role()`](https://developer.wordpress.org/reference/classes/wp_role/)
- 
-> [`WP_Role::__construct()`](https://developer.wordpress.org/reference/classes/wp_role/__construct/)
+{% include classes/WP_Role.md %}
 
 </blockquote>
