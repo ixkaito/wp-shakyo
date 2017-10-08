@@ -22,8 +22,8 @@
 
 {% include functions/__.md %}
 
- `wp_create_user()`
- 
+{% include functions/wp_create_user.md %}
+
  `update_user_option()`
  
  `new WP_User()`
