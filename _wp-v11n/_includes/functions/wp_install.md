@@ -24,8 +24,8 @@
 
 {% include functions/wp_create_user.md %}
 
- `update_user_option()`
- 
+{% include functions/update_user_option.md %}
+
  `new WP_User()`
  
  `WP_User::set_role()`
