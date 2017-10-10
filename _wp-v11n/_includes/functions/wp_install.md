@@ -26,8 +26,8 @@
 
 {% include functions/update_user_option.md %}
 
- `new WP_User()`
- 
+{% include classes/WP_User.md %}
+
  `WP_User::set_role()`
  
  `wp_install_defaults()`
