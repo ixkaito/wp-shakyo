@@ -9,7 +9,7 @@ module.exports = {
   },
 
   paths: {
-    dest:      "_site",
+    dest:      "../docs",
     posts:     "_posts",
     assets:    "./assets",
     css:       "css",
