@@ -6,4 +6,6 @@
 
 {% include functions/sanitize_user.md %}
 
+{% include classes/wpdb/get_row.md %}
+
 </blockquote>
