@@ -4,4 +4,6 @@
 
 {% include classes/WP_User/init.md %}
 
+{% include classes/WP_User/get_data_by.md %}
+
 </blockquote>
