@@ -10,4 +10,6 @@
 
 {% include classes/wpdb/prepare.md %}
 
+{% include functions/update_user_caches.md %}
+
 </blockquote>
