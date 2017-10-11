@@ -4,4 +4,6 @@
 
 {% include functions/wp_cache_get.md %}
 
+{% include functions/sanitize_user.md %}
+
 </blockquote>
