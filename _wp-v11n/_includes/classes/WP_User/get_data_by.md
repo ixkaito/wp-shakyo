@@ -8,4 +8,6 @@
 
 {% include classes/wpdb/get_row.md %}
 
+{% include classes/wpdb/prepare.md %}
+
 </blockquote>
