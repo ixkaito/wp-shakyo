@@ -28,8 +28,8 @@
 
 {% include classes/WP_User.md %}
 
- `WP_User::set_role()`
- 
+{% include classes/WP_User/set_role.md %}
+
  `wp_install_defaults()`
  
  `flush_rewrite_rules()`
