@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/do_action.md hook="wp_print_scripts" actions=site.data.actions.wp_print_scripts %}
+
  [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`wp_print_scripts`](https://developer.wordpress.org/reference/hooks/wp_print_scripts/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
