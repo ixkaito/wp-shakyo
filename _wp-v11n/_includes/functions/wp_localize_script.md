@@ -6,8 +6,6 @@
 
 {% include functions/_doing_it_wrong.md %}
 
- [`WP_Scripts::localize()`](https://developer.wordpress.org/reference/classes/wp_scripts/localize/)
- 
-> [`wp_json_encode()`](https://developer.wordpress.org/reference/functions/wp_json_encode/)
+{% include classes/WP_Scripts/localize.md %}
 
 </blockquote>
