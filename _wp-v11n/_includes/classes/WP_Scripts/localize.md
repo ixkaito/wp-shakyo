@@ -2,6 +2,6 @@
 
 <blockquote>
 
-[`wp_json_encode()`](https://developer.wordpress.org/reference/functions/wp_json_encode/)
+{% include functions/wp_json_encode.md %}
 
 </blockquote>
