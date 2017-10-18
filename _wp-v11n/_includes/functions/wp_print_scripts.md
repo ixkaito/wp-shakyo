@@ -5,7 +5,9 @@
 {% include functions/do_action.md hook="wp_print_scripts" actions=site.data.actions.wp_print_scripts %}
 
 {% include functions/did_action.md %}
- 
+
+{% include functions/_doing_it_wrong.md %}
+
  [`_doing_it_wrong()`](https://developer.wordpress.org/reference/functions/_doing_it_wrong/)
  
 > [`do_action()`](https://developer.wordpress.org/reference/functions/do_action/) - [`doing_it_wrong_run`](https://developer.wordpress.org/reference/hooks/doing_it_wrong_run/)
