@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/do_action_ref_array.md hook="wp_default_scripts" actions=site.data.actions.wp_default_scripts %}
+
  [`do_action_ref_array()`](https://developer.wordpress.org/reference/functions/do_action_ref_array/) - [`wp_default_scripts`](https://developer.wordpress.org/reference/hooks/wp_default_scripts/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
