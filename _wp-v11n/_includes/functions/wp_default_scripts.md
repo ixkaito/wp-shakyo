@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include files/wp-includes/version.php.md %}
+
  **wp-includes/version.php**
  
  [`site_url()`](https://developer.wordpress.org/reference/functions/site_url/)
