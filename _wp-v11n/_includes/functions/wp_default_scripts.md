@@ -4,6 +4,8 @@
 
 {% include files/wp-includes/version.php.md %}
 
+{% include functions/site_url.md %}
+
  [`site_url()`](https://developer.wordpress.org/reference/functions/site_url/)
  
 > [`get_site_url()`](https://developer.wordpress.org/reference/functions/get_site_url/)
