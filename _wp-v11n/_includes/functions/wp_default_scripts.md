@@ -10,8 +10,8 @@
 
 {% include functions/get_bloginfo.md %}
 
- [`did_action()`](https://developer.wordpress.org/reference/functions/did_action/)
- 
+{% include functions/did_action.md %}
+
  [`WP_Scripts::localize()`](https://developer.wordpress.org/reference/classes/wp_scripts/localize/)
  
  `get_current_user_id()`
