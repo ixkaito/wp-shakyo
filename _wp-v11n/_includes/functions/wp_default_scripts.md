@@ -14,8 +14,6 @@
 
 {% include classes/WP_Scripts/localize.md %}
 
- [`WP_Scripts::localize()`](https://developer.wordpress.org/reference/classes/wp_scripts/localize/)
- 
  `get_current_user_id()`
  
  [`__()`](https://developer.wordpress.org/reference/functions/__/)
