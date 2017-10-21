@@ -5,11 +5,9 @@
 {% include files/wp-includes/version.php.md %}
 
 {% include functions/site_url.md %}
- 
- [`wp_guess_url()`](https://developer.wordpress.org/reference/functions/wp_guess_url/)
- 
-> [`is_ssl()`](https://developer.wordpress.org/reference/functions/is_ssl/)
- 
+
+{% include functions/wp_guess_url.md %}
+
  [`get_bloginfo()`](https://developer.wordpress.org/reference/functions/get_bloginfo/)
  
 > `_deprecated_argument()`
