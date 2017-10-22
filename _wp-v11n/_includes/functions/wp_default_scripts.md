@@ -14,8 +14,8 @@
 
 {% include classes/WP_Scripts/localize.md %}
 
- `get_current_user_id()`
- 
+{% include functions/get_current_user_id.md %}
+
  [`__()`](https://developer.wordpress.org/reference/functions/__/)
  
 > [`translate()`](https://developer.wordpress.org/reference/functions/translate/)
