@@ -20,6 +20,8 @@
 
 {% include functions/esc_attr.md %}
 
+{% include functions/apply_filters.md hook="heartbeat_settings" filters=site.data.filters.heartbeat_settings %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`heartbeat_settings`](https://developer.wordpress.org/reference/hooks/heartbeat_settings/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)

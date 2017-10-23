@@ -1,1 +1,3 @@
 - wp_default_scripts
+- wp_heartbeat_settings
+- wp_heartbeat_set_suspension
