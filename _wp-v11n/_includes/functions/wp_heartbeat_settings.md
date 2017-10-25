@@ -2,8 +2,8 @@
 
 <blockquote>
 
- [`is_admin()`](https://developer.wordpress.org/reference/functions/is_admin/)
- 
+{% include functions/is_admin.md %}
+
  [`admin_url()`](https://developer.wordpress.org/reference/functions/admin_url/)
  
 > [`get_admin_url()`](https://developer.wordpress.org/reference/functions/get_admin_url/)
