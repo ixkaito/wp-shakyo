@@ -6,8 +6,6 @@
 
 {% include functions/get_site_url.md %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`admin_url`](https://developer.wordpress.org/reference/hooks/admin_url/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
+{% include functions/apply_filters.md hook="admin_url" filters=site.data.filters.admin_url %}
 
 </blockquote>
