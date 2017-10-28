@@ -4,6 +4,6 @@
 
 {% include functions/wp_get_current_user.md %}
 
- [`WP_User::exists()`](https://developer.wordpress.org/reference/classes/wp_user/exists/)
+{% include classes/WP_User/exists.md %}
 
 </blockquote>
