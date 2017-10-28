@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`wp_get_current_user()`](https://developer.wordpress.org/reference/functions/wp_get_current_user/)
- 
-> [`get_currentuserinfo()`](https://developer.wordpress.org/reference/functions/get_currentuserinfo/)
- 
+{% include functions/wp_get_current_user.md %}
+
  [`WP_User::exists()`](https://developer.wordpress.org/reference/classes/wp_user/exists/)
 
 </blockquote>
