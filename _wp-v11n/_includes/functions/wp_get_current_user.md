@@ -2,7 +2,6 @@
 
 <blockquote>
 
-[`get_currentuserinfo()`](https://developer.wordpress.org/reference/functions/get_currentuserinfo/)
-
+{% include functions/get_currentuserinfo.md %}
 
 </blockquote>
