@@ -6,14 +6,8 @@
 
 {% include functions/admin_url.md %}
 
- [`is_user_logged_in()`](https://developer.wordpress.org/reference/functions/is_user_logged_in/)
- 
-> [`wp_get_current_user()`](https://developer.wordpress.org/reference/functions/wp_get_current_user/)
-> 
->> [`get_currentuserinfo()`](https://developer.wordpress.org/reference/functions/get_currentuserinfo/)
-> 
-> [`WP_User::exists()`](https://developer.wordpress.org/reference/classes/wp_user/exists/)
- 
+{% include functions/is_user_logged_in.md %}
+
  [`wp_create_nonce()`](https://developer.wordpress.org/reference/functions/wp_create_nonce/)
  
 > [`wp_get_current_user()`](https://developer.wordpress.org/reference/functions/wp_get_current_user/)
