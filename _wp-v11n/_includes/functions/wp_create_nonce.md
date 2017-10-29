@@ -2,10 +2,8 @@
 
 <blockquote>
 
- [`wp_get_current_user()`](https://developer.wordpress.org/reference/functions/wp_get_current_user/)
- 
-> [`get_currentuserinfo()`](https://developer.wordpress.org/reference/functions/get_currentuserinfo/)
- 
+{% include functions/wp_get_current_user.md %}
+
  [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`nonce_user_logged_out`](https://developer.wordpress.org/reference/hooks/nonce_user_logged_out/)
  
 > [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
