@@ -6,8 +6,8 @@
 
 {% include functions/apply_filters.md hook="nonce_user_logged_out" filters=site.data.filters.nonce_user_logged_out %}
 
- `wp_get_session_token()`
- 
+{% include functions/wp_get_session_token.md %}
+
  `wp_nonce_tick()`
  
  `wp_hash()`
