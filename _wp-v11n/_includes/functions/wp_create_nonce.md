@@ -10,6 +10,6 @@
 
 {% include functions/wp_nonce_tick.md %}
 
- `wp_hash()`
+{% include functions/wp_hash.md %}
 
 </blockquote>
