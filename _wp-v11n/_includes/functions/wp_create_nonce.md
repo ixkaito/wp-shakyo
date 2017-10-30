@@ -8,8 +8,8 @@
 
 {% include functions/wp_get_session_token.md %}
 
- `wp_nonce_tick()`
- 
+{% include functions/wp_nonce_tick.md %}
+
  `wp_hash()`
 
 </blockquote>
