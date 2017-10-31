@@ -22,10 +22,8 @@
 
 {% include functions/apply_filters.md hook="heartbeat_settings" filters=site.data.filters.heartbeat_settings %}
 
- [`apply_filters()`](https://developer.wordpress.org/reference/functions/apply_filters/) - [`wp_auth_check_interval`](https://developer.wordpress.org/reference/hooks/wp_auth_check_interval/)
- 
-> [`_wp_call_all_hook()`](https://developer.wordpress.org/reference/functions/_wp_call_all_hook/)
- 
+{% include functions/apply_filters.md hook="wp_auth_check_interval" filters=site.data.filters.wp_auth_check_interval %}
+
  [`includes_url()`](https://developer.wordpress.org/reference/functions/includes_url/)
  
 > [`site_url()`](https://developer.wordpress.org/reference/functions/site_url/)
