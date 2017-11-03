@@ -1,7 +1,7 @@
 <p><code><a href="https://developer.wordpress.org/reference/functions/update_option/">update_option()</a></code></p>
 
 <blockquote>
-
+{% comment %}
 {% include functions/wp_protect_special_option.md %}
 
 {% include functions/sanitize_option.md %}
@@ -29,5 +29,5 @@
 {% include functions/do_action.md hook="update_option_{$option}" actions=site.data.actions.update_option_option %}
 
 {% include functions/do_action.md hook="updated_option" actions=site.data.actions.updated_option %}
-
+{% endcomment %}
 </blockquote>
