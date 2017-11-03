@@ -50,4 +50,6 @@
 
 {% include functions/wp_not_installed.md %}
 
+{% include files/wp-includes/class-wp-walker.php.md %}
+
 </blockquote>
