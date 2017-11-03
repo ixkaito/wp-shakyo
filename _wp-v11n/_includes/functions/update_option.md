@@ -10,7 +10,7 @@
 
 {% include functions/apply_filters.md hook="pre_update_option_{$option}" filters=site.data.filters.pre_update_option_option %}
 
-{% include functions/apply_filters.md hook="pre_update_option_{$value}" filters=site.data.filters.pre_update_option_value %}
+{% include functions/apply_filters.md hook="pre_update_option" filters=site.data.filters.pre_update_option %}
 
 {% include functions/add_option.md %}
 
