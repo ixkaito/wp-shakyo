@@ -52,4 +52,6 @@
 
 {% include files/wp-includes/class-wp-walker.php.md %}
 
+{% include files/wp-includes/class-wp-ajax-response.php.md %}
+
 </blockquote>
