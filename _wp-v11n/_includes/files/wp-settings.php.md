@@ -56,4 +56,6 @@
 
 {% include files/wp-includes/formatting.php.md %}
 
+{% include files/wp-includes/capabilities.php.md %}
+
 </blockquote>
