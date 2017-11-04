@@ -54,4 +54,6 @@
 
 {% include files/wp-includes/class-wp-ajax-response.php.md %}
 
+{% include files/wp-includes/formatting.php.md %}
+
 </blockquote>
