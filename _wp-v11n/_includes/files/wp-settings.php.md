@@ -62,4 +62,6 @@
 
 {% include files/wp-includes/date.php.md %}
 
+{% include files/wp-includes/theme.php.md %}
+
 </blockquote>
