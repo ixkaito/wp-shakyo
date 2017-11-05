@@ -60,4 +60,6 @@
 
 {% include files/wp-includes/query.php.md %}
 
+{% include files/wp-includes/date.php.md %}
+
 </blockquote>
