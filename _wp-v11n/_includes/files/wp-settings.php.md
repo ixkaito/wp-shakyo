@@ -58,4 +58,6 @@
 
 {% include files/wp-includes/capabilities.php.md %}
 
+{% include files/wp-includes/query.php.md %}
+
 </blockquote>
