@@ -68,4 +68,6 @@
 
 {% include files/wp-includes/template.php.md %}
 
+{% include files/wp-includes/user.php.md %}
+
 </blockquote>
