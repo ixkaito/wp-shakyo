@@ -78,4 +78,6 @@
 
 {% include files/wp-includes/link-template.php.md %}
 
+{% include files/wp-includes/author-template.php.md %}
+
 </blockquote>
