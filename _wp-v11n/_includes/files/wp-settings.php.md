@@ -64,4 +64,8 @@
 
 {% include files/wp-includes/theme.php.md %}
 
+{% include files/wp-includes/class-wp-theme.php.md %}
+
+{% include files/wp-includes/template.php.md %}
+
 </blockquote>
