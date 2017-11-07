@@ -74,4 +74,6 @@
 
 {% include files/wp-includes/meta.php.md %}
 
+{% include files/wp-includes/general-template.php.md %}
+
 </blockquote>
