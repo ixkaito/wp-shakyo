@@ -72,4 +72,6 @@
 
 {% include files/wp-includes/session.php.md %}
 
+{% include files/wp-includes/meta.php.md %}
+
 </blockquote>
