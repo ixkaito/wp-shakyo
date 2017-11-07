@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/add_action.md %}
 
 </blockquote>
