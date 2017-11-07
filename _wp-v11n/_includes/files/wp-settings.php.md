@@ -70,4 +70,6 @@
 
 {% include files/wp-includes/user.php.md %}
 
+{% include files/wp-includes/session.php.md %}
+
 </blockquote>
