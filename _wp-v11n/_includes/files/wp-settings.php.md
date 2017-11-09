@@ -82,6 +82,6 @@
 
 {% include files/wp-includes/post.php.md %}
 
-{% include files/wp-includes/post-template.php.md %}
+{% include files/wp-includes/category.php.md %}
 
 </blockquote>
