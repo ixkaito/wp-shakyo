@@ -80,4 +80,6 @@
 
 {% include files/wp-includes/author-template.php.md %}
 
+{% include files/wp-includes/post.php.md %}
+
 </blockquote>
