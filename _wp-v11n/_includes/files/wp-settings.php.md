@@ -92,4 +92,6 @@
 
 {% include files/wp-includes/rewrite.php.md %}
 
+{% include files/wp-includes/feed.php.md %}
+
 </blockquote>
