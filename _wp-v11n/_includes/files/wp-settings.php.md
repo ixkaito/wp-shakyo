@@ -82,4 +82,6 @@
 
 {% include files/wp-includes/post.php.md %}
 
+{% include files/wp-includes/post-template.php.md %}
+
 </blockquote>
