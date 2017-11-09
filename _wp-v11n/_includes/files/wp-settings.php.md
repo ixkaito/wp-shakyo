@@ -90,4 +90,6 @@
 
 {% include files/wp-includes/comment-template.php.md %}
 
+{% include files/wp-includes/rewrite.php.md %}
+
 </blockquote>
