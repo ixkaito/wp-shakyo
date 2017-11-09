@@ -86,4 +86,8 @@
 
 {% include files/wp-includes/category-template.php.md %}
 
+{% include files/wp-includes/comment.php.md %}
+
+{% include files/wp-includes/comment-template.php.md %}
+
 </blockquote>
