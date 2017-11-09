@@ -84,4 +84,6 @@
 
 {% include files/wp-includes/category.php.md %}
 
+{% include files/wp-includes/category-template.php.md %}
+
 </blockquote>
