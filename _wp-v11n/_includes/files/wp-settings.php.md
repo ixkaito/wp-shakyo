@@ -94,4 +94,6 @@
 
 {% include files/wp-includes/feed.php.md %}
 
+{% include files/wp-includes/bookmark.php.md %}
+
 </blockquote>
