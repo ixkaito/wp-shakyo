@@ -96,4 +96,6 @@
 
 {% include files/wp-includes/bookmark.php.md %}
 
+{% include files/wp-includes/bookmark-template.php.md %}
+
 </blockquote>
