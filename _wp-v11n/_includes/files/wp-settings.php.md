@@ -98,4 +98,6 @@
 
 {% include files/wp-includes/bookmark-template.php.md %}
 
+{% include files/wp-includes/kses.php.md %}
+
 </blockquote>
