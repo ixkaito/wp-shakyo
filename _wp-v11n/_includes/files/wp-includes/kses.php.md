@@ -6,4 +6,6 @@
 
 {% include functions/wp_kses_array_lc.md %}
 
+{% include functions/add_action.md %}
+
 </blockquote>
