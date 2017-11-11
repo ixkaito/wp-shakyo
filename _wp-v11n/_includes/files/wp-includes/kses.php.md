@@ -4,4 +4,6 @@
 
 {% include functions/_wp_add_global_attributes.md %}
 
+{% include functions/wp_kses_array_lc.md %}
+
 </blockquote>
