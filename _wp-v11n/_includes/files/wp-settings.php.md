@@ -100,4 +100,6 @@
 
 {% include files/wp-includes/kses.php.md %}
 
+{% include files/wp-includes/cron.php.md %}
+
 </blockquote>
