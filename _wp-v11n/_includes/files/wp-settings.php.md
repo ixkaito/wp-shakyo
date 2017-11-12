@@ -102,4 +102,6 @@
 
 {% include files/wp-includes/cron.php.md %}
 
+{% include files/wp-includes/deprecated.php.md %}
+
 </blockquote>
