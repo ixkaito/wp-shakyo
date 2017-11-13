@@ -2,6 +2,10 @@
 
 <blockquote>
 
+{% include files/wp-includes/class.wp-dependencies.php.md %}
 
+{% include functions/add_action.md %}
+
+{% include functions/add_filter.md %}
 
 </blockquote>
