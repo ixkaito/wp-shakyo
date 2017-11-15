@@ -10,6 +10,8 @@
 
 {% include files/wp-includes/class.wp-styles.php.md %}
 
+{% include files/wp-includes/functions.wp-styles.php.md %}
+
 {% include functions/add_action.md %}
 
 {% include functions/add_filter.md %}
