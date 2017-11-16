@@ -110,4 +110,6 @@
 
 {% include files/wp-includes/update.php.md %}
 
+{% include files/wp-includes/canonical.php.md %}
+
 </blockquote>
