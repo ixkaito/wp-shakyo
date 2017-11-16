@@ -106,4 +106,6 @@
 
 {% include files/wp-includes/script-loader.php.md %}
 
+{% include files/wp-includes/taxonomy.php.md %}
+
 </blockquote>
