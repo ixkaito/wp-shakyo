@@ -108,4 +108,6 @@
 
 {% include files/wp-includes/taxonomy.php.md %}
 
+{% include files/wp-includes/update.php.md %}
+
 </blockquote>
