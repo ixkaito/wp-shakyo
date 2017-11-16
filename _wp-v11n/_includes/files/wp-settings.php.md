@@ -112,4 +112,8 @@
 
 {% include files/wp-includes/canonical.php.md %}
 
+{% include files/wp-includes/shortcodes.php.md %}
+
+{% include files/wp-includes/class-wp-embed.php.md %}
+
 </blockquote>
