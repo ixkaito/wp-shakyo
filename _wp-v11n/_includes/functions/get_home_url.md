@@ -6,7 +6,7 @@
 
 {% include functions/get_option.md %}
 
-<p><code>switch_to_blog()</code></p>
+{% include functions/switch_to_blog.md %}
 
 <p><code>restore_current_blog()</code></p>
 
