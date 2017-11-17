@@ -4,6 +4,6 @@
 
 {% include classes/WP_Http_Encoding/is_available.md %}
 
-{% include functions/apply_filters.md hook="wp_http_accept_encoding" filters=site.data.filters.wp_http_accept_encoding %}
+{% include functions/apply_filters.md hook="wp_http_accept_encoding" %}
 
 </blockquote>
