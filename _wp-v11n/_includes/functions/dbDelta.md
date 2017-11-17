@@ -4,11 +4,11 @@
 
 {% include functions/wp_get_db_schema.md %}
 
-{% include functions/apply_filters.md hook="dbdelta_queries" filters=site.data.filters.dbdelta_queries %}
+{% include functions/apply_filters.md hook="dbdelta_queries" %}
 
-{% include functions/apply_filters.md hook="dbdelta_create_queries" filters=site.data.filters.dbdelta_create_queries %}
+{% include functions/apply_filters.md hook="dbdelta_create_queries" %}
 
-{% include functions/apply_filters.md hook="dbdelta_insert_queries" filters=site.data.filters.dbdelta_insert_queries %}
+{% include functions/apply_filters.md hook="dbdelta_insert_queries" %}
 
 {% include classes/wpdb/tables.md %}
 
