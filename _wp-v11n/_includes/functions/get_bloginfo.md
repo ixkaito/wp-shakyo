@@ -16,7 +16,7 @@
 
 {% include functions/get_stylesheet_uri.md %}
 
-<p><code>get_stylesheet_directory_uri()</code></p>
+{% include functions/get_stylesheet_directory_uri.md %}
 
 {% include functions/get_locale.md %}
 
