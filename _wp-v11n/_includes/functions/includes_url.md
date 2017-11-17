@@ -4,6 +4,6 @@
 
 {% include functions/site_url.md %}
 
-{% include functions/apply_filters.md hook="includes_url" filters=site.data.filters.includes_url %}
+{% include functions/apply_filters.md hook="includes_url" %}
 
 </blockquote>
