@@ -2,6 +2,6 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="use_curl_transport" filters=site.data.filters.use_curl_transport %}
+{% include functions/apply_filters.md hook="use_curl_transport" %}
 
 </blockquote>
