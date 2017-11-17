@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="pre_site_option_{$option}" filters=site.data.filters.pre_site_option_option %}
+{% include functions/apply_filters.md hook="pre_site_option_{$option}" %}
 
 {% include functions/wp_cache_get.md %}
 
@@ -18,8 +18,8 @@
 
 {% include functions/wp_cache_set.md %}
 
-{% include functions/apply_filters.md hook="default_site_option_{$option}" filters=site.data.filters.default_site_option_option %}
+{% include functions/apply_filters.md hook="default_site_option_{$option}" %}
 
-{% include functions/apply_filters.md hook="site_option_{$option}" filters=site.data.filters.site_option_option %}
+{% include functions/apply_filters.md hook="site_option_{$option}" %}
 
 </blockquote>

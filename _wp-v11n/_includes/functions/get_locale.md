@@ -8,6 +8,6 @@
 
 {% include functions/get_option.md %}
 
-{% include functions/apply_filters.md hook="locale" filters=site.data.filters.locale %}
+{% include functions/apply_filters.md hook="locale" %}
 
 </blockquote>
