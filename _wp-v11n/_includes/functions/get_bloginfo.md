@@ -12,7 +12,7 @@
 
 {% include functions/get_option.md %}
 
-<p><code>get_feed_link()</code></p>
+{% include functions/get_feed_link.md %}
 
 <p><code>get_stylesheet_uri()</code></p>
 
