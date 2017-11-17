@@ -2,11 +2,11 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="pre_option_{$option}" filters=site.data.filters.pre_option_option %}
+{% include functions/apply_filters.md hook="pre_option_{$option}" %}
 
 {% include functions/wp_cache_get.md %}
 
-{% include functions/apply_filters.md hook="default_option_{$option}" filters=site.data.filters.default_option_option %}
+{% include functions/apply_filters.md hook="default_option_{$option}" %}
 
 {% include functions/wp_load_alloptions.md %}
 
@@ -26,7 +26,7 @@
 
 {% include functions/untrailingslashit.md %}
 
-{% include functions/apply_filters.md hook="option_{$option}" filters=site.data.filters.option_option %}
+{% include functions/apply_filters.md hook="option_{$option}" %}
 
 {% include functions/maybe_unserialize.md %}
 
