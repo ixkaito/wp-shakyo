@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="request_filesystem_credentials" filters=site.data.filters.request_filesystem_credentials %}
+{% include functions/apply_filters.md hook="request_filesystem_credentials" %}
 
 {% include functions/get_filesystem_method.md %}
 
@@ -18,7 +18,7 @@
 
 {% include functions/esc_html.md %}
 
-{% include functions/apply_filters.md hook="fs_ftp_connection_types" filters=site.data.filters.fs_ftp_connection_types %}
+{% include functions/apply_filters.md hook="fs_ftp_connection_types" %}
 
 {% include functions/esc_url.md %}
 
