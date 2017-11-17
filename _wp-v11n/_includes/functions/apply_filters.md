@@ -8,8 +8,7 @@
 {% include functions/_wp_call_all_hook.md %}
 
 {% for filter in site.data.filters[hook] %}
-  {%- capture function %}functions/{{ filter }}.md{% endcapture -%}
-  {%- include {{ function }} -%}
+  {%- include functions/{{ filter }}.md -%}
 {% endfor %}
 
 </blockquote>

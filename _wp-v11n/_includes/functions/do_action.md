@@ -8,8 +8,7 @@
 {% include functions/_wp_call_all_hook.md %}
 
 {% for action in site.data.actions[hook] %}
-  {%- capture function %}functions/{{ action }}.md{% endcapture -%}
-  {%- include {{ function }} -%}
+  {%- include functions/{{ action }}.md -%}
 {% endfor %}
 
 </blockquote>
