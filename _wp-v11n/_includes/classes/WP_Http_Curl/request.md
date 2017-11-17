@@ -18,15 +18,15 @@
 
 {% include classes/WP_HTTP_Proxy/use_authentication.md %}
 
-{% include functions/apply_filters.md hook="https_local_ssl_verify" filters=site.data.filters.https_local_ssl_verify %}
+{% include functions/apply_filters.md hook="https_local_ssl_verify" %}
 
-{% include functions/apply_filters.md hook="https_ssl_verify" filters=site.data.filters.https_ssl_verify %}
+{% include functions/apply_filters.md hook="https_ssl_verify" %}
 
 {% include classes/WP_Error.md %}
 
 {% include functions/__.md %}
 
-{% include functions/do_action_ref_array.md hook="http_api_curl" actions=site.data.actions.http_api_curl %}
+{% include functions/do_action_ref_array.md hook="http_api_curl" %}
 
 {% include classes/WP_Http_Curl/stream_headers.md %}
 
