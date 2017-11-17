@@ -14,7 +14,7 @@
 
 {% include functions/get_feed_link.md %}
 
-<p><code>get_stylesheet_uri()</code></p>
+{% include functions/get_stylesheet_uri.md %}
 
 <p><code>get_stylesheet_directory_uri()</code></p>
 
