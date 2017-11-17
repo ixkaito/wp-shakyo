@@ -4,6 +4,6 @@
 
 {% include functions/get_option.md %}
 
-{% include functions/apply_filters.md hook="block_local_requests" filters=site.data.filters.block_local_requests %}
+{% include functions/apply_filters.md hook="block_local_requests" %}
 
 </blockquote>
