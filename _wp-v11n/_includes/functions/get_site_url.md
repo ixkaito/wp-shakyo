@@ -8,7 +8,7 @@
 
 {% include functions/switch_to_blog.md %}
 
-<p><code>restore_current_blog()</code></p>
+{% include functions/restore_current_blog.md %}
 
 {% include functions/set_url_scheme.md %}
 
