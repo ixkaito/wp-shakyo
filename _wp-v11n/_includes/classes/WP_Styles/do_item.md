@@ -4,7 +4,7 @@
 
 {% include classes/WP_Dependencies/do_item.md %}
 
-<p><code>WP_Styles::in_default_dir()</code></p>
+{% include classes/WP_Styles/in_default_dir.md %}
 
 {% include classes/WP_Styles/print_inline_style.md %}
 
@@ -12,6 +12,6 @@
 
 {% include classes/WP_Styles/_css_href.md %}
 
-{% include functions/apply_filters.md hook="style_loader_tag" filters=site.data.filters.style_loader_tag %}
+{% include functions/apply_filters.md hook="style_loader_tag" %}
 
 </blockquote>
