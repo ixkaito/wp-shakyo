@@ -22,8 +22,8 @@
 
 {% include functions/is_rtl.md %}
 
-{% include functions/apply_filters.md hook="bloginfo_url" filters=site.data.filters.bloginfo_url %}
+{% include functions/apply_filters.md hook="bloginfo_url" %}
 
-{% include functions/apply_filters.md hook="bloginfo" filters=site.data.filters.bloginfo %}
+{% include functions/apply_filters.md hook="bloginfo" %}
 
 </blockquote>

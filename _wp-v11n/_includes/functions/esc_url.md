@@ -10,6 +10,6 @@
 
 {% include functions/wp_kses_bad_protocol.md %}
 
-{% include functions/apply_filters.md hook="clean_url" filters=site.data.filters.clean_url %}
+{% include functions/apply_filters.md hook="clean_url" %}
 
 </blockquote>
