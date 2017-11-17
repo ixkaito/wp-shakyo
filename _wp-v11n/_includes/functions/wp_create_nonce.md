@@ -4,7 +4,7 @@
 
 {% include functions/wp_get_current_user.md %}
 
-{% include functions/apply_filters.md hook="nonce_user_logged_out" filters=site.data.filters.nonce_user_logged_out %}
+{% include functions/apply_filters.md hook="nonce_user_logged_out" %}
 
 {% include functions/wp_get_session_token.md %}
 
