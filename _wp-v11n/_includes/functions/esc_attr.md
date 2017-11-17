@@ -6,6 +6,6 @@
 
 {% include functions/_wp_specialchars.md %}
 
-{% include functions/apply_filters.md hook="attribute_escape" filters=site.data.filters.attribute_escape %}
+{% include functions/apply_filters.md hook="attribute_escape" %}
 
 </blockquote>
