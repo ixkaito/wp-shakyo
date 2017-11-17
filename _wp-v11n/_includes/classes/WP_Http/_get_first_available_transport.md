@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="http_api_transports" filters=site.data.filters.http_api_transports %}
+{% include functions/apply_filters.md hook="http_api_transports" %}
 
 {% include classes/WP_Http_Curl/test.md %}
 
