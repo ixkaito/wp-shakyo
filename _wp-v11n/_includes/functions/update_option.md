@@ -8,15 +8,15 @@
 
 {% include functions/get_option.md %}
 
-{% include functions/apply_filters.md hook="pre_update_option_{$option}" filters=site.data.filters.pre_update_option_option %}
+{% include functions/apply_filters.md hook="pre_update_option_{$option}" %}
 
-{% include functions/apply_filters.md hook="pre_update_option" filters=site.data.filters.pre_update_option %}
+{% include functions/apply_filters.md hook="pre_update_option" %}
 
 {% include functions/add_option.md %}
 
 {% include functions/maybe_serialize.md %}
 
-{% include functions/do_action.md hook="update_option" actions=site.data.actions.update_option %}
+{% include functions/do_action.md hook="update_option" %}
 
 {% include classes/wpdb/update.md %}
 
@@ -26,8 +26,8 @@
 
 {% include functions/wp_cache_set.md %}
 
-{% include functions/do_action.md hook="update_option_{$option}" actions=site.data.actions.update_option_option %}
+{% include functions/do_action.md hook="update_option_{$option}" %}
 
-{% include functions/do_action.md hook="updated_option" actions=site.data.actions.updated_option %}
+{% include functions/do_action.md hook="updated_option" %}
 {% endcomment %}
 </blockquote>
