@@ -12,6 +12,6 @@
 
 {% include functions/set_url_scheme.md %}
 
-{% include functions/apply_filters.md hook="site_url" filters=site.data.filters.site_url %}
+{% include functions/apply_filters.md hook="site_url" %}
 
 </blockquote>

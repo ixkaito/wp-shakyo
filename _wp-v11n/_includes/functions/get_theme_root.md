@@ -4,6 +4,6 @@
 
 {% include functions/get_raw_theme_root.md %}
 
-{% include functions/apply_filters.md hook="theme_root" filters=site.data.filters.theme_root %}
+{% include functions/apply_filters.md hook="theme_root" %}
 
 </blockquote>
