@@ -2,6 +2,6 @@
 
 <blockquote>
 
-{% include functions/do_action_ref_array.md hook="wp_default_styles" actions=site.data.actions.wp_default_styles %}
+{% include functions/do_action_ref_array.md hook="wp_default_styles" %}
 
 </blockquote>
