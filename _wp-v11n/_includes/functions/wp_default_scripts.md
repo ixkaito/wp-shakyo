@@ -20,9 +20,9 @@
 
 {% include functions/esc_attr.md %}
 
-{% include functions/apply_filters.md hook="heartbeat_settings" filters=site.data.filters.heartbeat_settings %}
+{% include functions/apply_filters.md hook="heartbeat_settings" %}
 
-{% include functions/apply_filters.md hook="wp_auth_check_interval" filters=site.data.filters.wp_auth_check_interval %}
+{% include functions/apply_filters.md hook="wp_auth_check_interval" %}
 
 {% include functions/includes_url.md %}
 
