@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/do_action.md hook="shutdown" actions=site.data.actions.shutdown %}
+{% include functions/do_action.md hook="shutdown" %}
 
 {% include functions/wp_cache_close.md %}
 
