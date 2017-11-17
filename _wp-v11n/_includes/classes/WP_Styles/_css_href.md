@@ -4,7 +4,7 @@
 
 {% include functions/add_query_arg.md %}
 
-{% include functions/apply_filters.md hook="style_loader_src" filters=site.data.filters.style_loader_src %}
+{% include functions/apply_filters.md hook="style_loader_src" %}
 
 {% include functions/esc_url.md %}
 

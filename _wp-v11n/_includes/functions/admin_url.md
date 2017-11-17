@@ -6,6 +6,6 @@
 
 {% include functions/get_site_url.md %}
 
-{% include functions/apply_filters.md hook="admin_url" filters=site.data.filters.admin_url %}
+{% include functions/apply_filters.md hook="admin_url" %}
 
 </blockquote>

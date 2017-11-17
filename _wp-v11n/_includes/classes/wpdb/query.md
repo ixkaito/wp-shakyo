@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="query" filters=site.data.filters.query %}
+{% include functions/apply_filters.md hook="query" %}
 
 {% include classes/wpdb/flush.md %}
 
