@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/do_action.md hook="wp_print_scripts" actions=site.data.actions.wp_print_scripts %}
+{% include functions/do_action.md hook="wp_print_scripts" %}
 
 {% include functions/did_action.md %}
 
