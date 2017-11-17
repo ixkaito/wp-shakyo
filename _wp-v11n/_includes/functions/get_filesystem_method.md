@@ -4,6 +4,6 @@
 
 {% include functions/trailingslashit.md %}
 
-{% include functions/apply_filters.md hook="filesystem_method" filters=site.data.filters.filesystem_method %}
+{% include functions/apply_filters.md hook="filesystem_method" %}
 
 </blockquote>
