@@ -2,7 +2,7 @@
 
 <blockquote>
 
-{% include functions/do_action.md hook="pre_delete_site_option_{$option}" actions=site.data.actions.pre_delete_site_option_option %}
+{% include functions/do_action.md hook="pre_delete_site_option_{$option}" %}
 
 {% include functions/is_multisite.md %}
 
@@ -16,8 +16,8 @@
 
 {% include classes/wpdb/delete.md %}
 
-{% include functions/do_action.md hook="delete_site_option_{$option}" actions=site.data.actions.delete_site_option_option %}
+{% include functions/do_action.md hook="delete_site_option_{$option}" %}
 
-{% include functions/do_action.md hook="delete_site_option" actions=site.data.actions.delete_site_option %}
+{% include functions/do_action.md hook="delete_site_option" %}
 
 </blockquote>
