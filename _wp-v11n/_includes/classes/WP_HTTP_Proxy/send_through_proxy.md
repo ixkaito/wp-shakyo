@@ -4,6 +4,6 @@
 
 {% include functions/get_option.md %}
 
-{% include functions/apply_filters.md hook="pre_http_send_through_proxy" filters=site.data.filters.pre_http_send_through_proxy %}
+{% include functions/apply_filters.md hook="pre_http_send_through_proxy" %}
 
 </blockquote>
