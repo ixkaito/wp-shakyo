@@ -6,7 +6,7 @@
 
 {% include functions/get_filesystem_method.md %}
 
-{% include functions/apply_filters.md hook="filesystem_method_file" filters=site.data.filters.filesystem_method_file %}
+{% include functions/apply_filters.md hook="filesystem_method_file" %}
 
 {% include files/wp-admin/includes/class-wp-filesystem-direct.php.md %}
 
