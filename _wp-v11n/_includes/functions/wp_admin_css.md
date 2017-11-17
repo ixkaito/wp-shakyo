@@ -12,7 +12,7 @@
 
 <p><code>wp_enqueue_style()</code></p>
 
-{% include functions/apply_filters.md hook="wp_admin_css" filters=site.data.filters.wp_admin_css %}
+{% include functions/apply_filters.md hook="wp_admin_css" %}
 
 {% include functions/esc_url.md %}
 

@@ -6,7 +6,7 @@
 
 {% include classes/WP_Error.md %}
 
-{% include functions/apply_filters.md hook="translations_api" filters=site.data.filters.translations_api %}
+{% include functions/apply_filters.md hook="translations_api" %}
 
 {% include functions/wp_http_supports.md %}
 
@@ -24,6 +24,6 @@
 
 {% include functions/wp_remote_retrieve_body.md %}
 
-{% include functions/apply_filters.md hook="translations_api_result" filters=site.data.filters.translations_api_result %}
+{% include functions/apply_filters.md hook="translations_api_result" %}
 
 </blockquote>

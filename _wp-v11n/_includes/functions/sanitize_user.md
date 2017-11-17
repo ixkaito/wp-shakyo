@@ -6,6 +6,6 @@
 
 {% include functions/remove_accents.md %}
 
-{% include functions/apply_filters.md hook="sanitize_user" filters=site.data.filters.sanitize_user %}
+{% include functions/apply_filters.md hook="sanitize_user" %}
 
 </blockquote>

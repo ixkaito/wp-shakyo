@@ -6,6 +6,6 @@
 
 {% include functions/force_ssl_admin.md %}
 
-{% include functions/apply_filters.md hook="set_url_scheme" filters=site.data.filters.set_url_scheme %}
+{% include functions/apply_filters.md hook="set_url_scheme" %}
 
 </blockquote>

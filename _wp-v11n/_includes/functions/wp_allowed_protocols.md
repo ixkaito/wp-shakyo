@@ -2,6 +2,6 @@
 
 <blockquote>
 
-{% include functions/apply_filters.md hook="kses_allowed_protocols" filters=site.data.filters.kses_allowed_protocols %}
+{% include functions/apply_filters.md hook="kses_allowed_protocols" %}
 
 </blockquote>
