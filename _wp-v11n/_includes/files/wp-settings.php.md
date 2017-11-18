@@ -116,4 +116,6 @@
 
 {% include files/wp-includes/class-wp-embed.php.md %}
 
+{% include files/wp-includes/media.php.md %}
+
 </blockquote>
