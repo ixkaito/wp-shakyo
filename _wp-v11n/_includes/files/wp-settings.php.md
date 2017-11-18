@@ -118,4 +118,6 @@
 
 {% include files/wp-includes/media.php.md %}
 
+{% include files/wp-includes/http.php.md %}
+
 </blockquote>
