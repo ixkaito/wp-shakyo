@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/add_shortcode.md %}
 
+{% include functions/add_action.md %}
 
 </blockquote>
