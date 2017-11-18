@@ -120,4 +120,6 @@
 
 {% include files/wp-includes/http.php.md %}
 
+{% include files/wp-includes/class-http.php.md %}
+
 </blockquote>
