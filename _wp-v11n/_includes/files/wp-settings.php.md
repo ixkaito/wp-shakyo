@@ -124,4 +124,6 @@
 
 {% include files/wp-includes/widgets.php.md %}
 
+{% include files/wp-includes/nav-menu.php.md %}
+
 </blockquote>
