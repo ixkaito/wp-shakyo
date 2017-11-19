@@ -122,4 +122,6 @@
 
 {% include files/wp-includes/class-http.php.md %}
 
+{% include files/wp-includes/widgets.php.md %}
+
 </blockquote>
