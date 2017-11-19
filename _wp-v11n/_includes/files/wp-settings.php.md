@@ -128,4 +128,6 @@
 
 {% include files/wp-includes/nav-menu-template.php.md %}
 
+{% include files/wp-includes/admin-bar.php.md %}
+
 </blockquote>
