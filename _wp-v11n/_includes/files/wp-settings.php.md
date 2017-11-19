@@ -126,4 +126,6 @@
 
 {% include files/wp-includes/nav-menu.php.md %}
 
+{% include files/wp-includes/nav-menu-template.php.md %}
+
 </blockquote>
