@@ -130,4 +130,6 @@
 
 {% include files/wp-includes/admin-bar.php.md %}
 
+{% include functions/is_multisite.md %}
+
 </blockquote>
