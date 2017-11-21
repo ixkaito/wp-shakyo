@@ -132,4 +132,6 @@
 
 {% include functions/is_multisite.md %}
 
+{% include files/wp-includes/ms-functions.php.md %}
+
 </blockquote>
