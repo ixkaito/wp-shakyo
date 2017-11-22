@@ -134,4 +134,6 @@
 
 {% include files/wp-includes/ms-functions.php.md %}
 
+{% include files/wp-includes/ms-default-filters.php.md %}
+
 </blockquote>
