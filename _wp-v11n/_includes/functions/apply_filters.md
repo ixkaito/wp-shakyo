@@ -8,11 +8,13 @@
 {% include functions/_wp_call_all_hook.md %}
 
 {% for filter in site.data.filters[hook] %}
-  {%- if filter contains '::' -%}
-    {%- include classes/{{ filter | replace: '::', '/' }}.md -%}
-  {%- else -%}
-    {%- include functions/{{ filter }}.md -%}
-  {%- endif -%}
+  {%- unless filter contains 'php/' -%}
+    {%- if filter contains '::' -%}
+      {%- include classes/{{ filter | replace: '::', '/' }}.md -%}
+    {%- else -%}
+      {%- include functions/{{ filter }}.md -%}
+    {%- endif -%}
+  {%- endunless -%}
 {% endfor %}
 
 </blockquote>

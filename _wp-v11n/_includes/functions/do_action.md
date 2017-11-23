@@ -8,11 +8,13 @@
 {% include functions/_wp_call_all_hook.md %}
 
 {% for action in site.data.actions[hook] %}
-  {%- if action contains '::' -%}
-    {%- include classes/{{ action | replace: '::', '/' }}.md -%}
-  {%- else -%}
-    {%- include functions/{{ action }}.md -%}
-  {%- endif -%}
+  {%- unless action contains 'php/' -%}
+    {%- if action contains '::' -%}
+      {%- include classes/{{ action | replace: '::', '/' }}.md -%}
+    {%- else -%}
+      {%- include functions/{{ action }}.md -%}
+    {%- endif -%}
+  {%- endunless -%}
 {% endfor %}
 
 </blockquote>
