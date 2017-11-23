@@ -1,1 +1,3 @@
 - __clear_multi_author_cache
+- _update_blog_date_on_post_publish # 10
+- _update_posts_count_on_transition_post_status # 10

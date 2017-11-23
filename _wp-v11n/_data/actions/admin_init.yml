@@ -1,1 +1,2 @@
 - _wp_admin_bar_init
+- wp_schedule_update_network_counts
