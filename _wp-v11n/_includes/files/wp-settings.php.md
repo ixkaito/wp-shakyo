@@ -144,4 +144,8 @@
 
 {% include functions/is_multisite.md %}
 
+{% include functions/wp_get_active_network_plugins.md %}
+
+{% include functions/wp_register_plugin_realpath.md %}
+
 </blockquote>
