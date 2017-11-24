@@ -136,4 +136,6 @@
 
 {% include files/wp-includes/ms-default-filters.php.md %}
 
+{% include files/wp-includes/ms-deprecated.php.md %}
+
 </blockquote>
