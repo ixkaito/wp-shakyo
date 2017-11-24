@@ -142,4 +142,6 @@
 
 {% include functions/wp_get_mu_plugins.md %}
 
+{% include functions/is_multisite.md %}
+
 </blockquote>
