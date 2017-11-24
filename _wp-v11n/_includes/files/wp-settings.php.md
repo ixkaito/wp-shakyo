@@ -140,4 +140,6 @@
 
 {% include functions/wp_plugin_directory_constants.md %}
 
+{% include functions/wp_get_mu_plugins.md %}
+
 </blockquote>
