@@ -138,4 +138,6 @@
 
 {% include files/wp-includes/ms-deprecated.php.md %}
 
+{% include functions/wp_plugin_directory_constants.md %}
+
 </blockquote>
