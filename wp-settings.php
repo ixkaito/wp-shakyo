@@ -175,6 +175,7 @@ unset( $mu_plugin );
 
 // Load network activated plugins.
 if ( is_multisite() ) {
+	var_dump('test');
 	foreach( wp_get_active_network_plugins() as $network_plugin ) {
 		wp_register_plugin_realpath( $network_plugin );
 		include_once( $network_plugin );

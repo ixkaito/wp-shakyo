@@ -148,4 +148,6 @@
 
 {% include functions/wp_register_plugin_realpath.md %}
 
+{% include functions/do_action.md %}
+
 </blockquote>
