@@ -152,4 +152,6 @@
 
 {% include functions/ms_cookie_constants.md %}
 
+{% include functions/wp_cookie_constants.md %}
+
 </blockquote>
