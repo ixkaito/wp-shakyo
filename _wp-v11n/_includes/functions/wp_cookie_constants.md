@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/get_site_option.md %}
 
+{% include functions/get_option.md %}
 
 </blockquote>
