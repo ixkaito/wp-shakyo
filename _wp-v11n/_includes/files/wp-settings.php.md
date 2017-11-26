@@ -150,4 +150,6 @@
 
 {% include functions/do_action.md hook="muplugins_loaded" %}
 
+{% include functions/ms_cookie_constants.md %}
+
 </blockquote>
