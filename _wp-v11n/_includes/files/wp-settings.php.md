@@ -156,4 +156,6 @@
 
 {% include functions/wp_ssl_constants.md %}
 
+{% include files/wp-includes/vars.php.md %}
+
 </blockquote>
