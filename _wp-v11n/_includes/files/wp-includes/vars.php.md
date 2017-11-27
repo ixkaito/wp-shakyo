@@ -4,4 +4,6 @@
 
 {% include functions/is_admin.md %}
 
+{% include functions/is_network_admin.md %}
+
 </blockquote>
