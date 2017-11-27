@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/get_option.md %}
 
+{% include functions/force_ssl_admin.md %}
 
 </blockquote>
