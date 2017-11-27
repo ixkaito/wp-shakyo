@@ -6,4 +6,8 @@
 
 {% include functions/is_network_admin.md %}
 
+{% include functions/is_user_admin.md %}
+
+{% include functions/apply_filters.md hook="use_google_chrome_frame" %}
+
 </blockquote>
