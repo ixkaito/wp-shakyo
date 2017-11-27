@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/is_admin.md %}
 
 </blockquote>
