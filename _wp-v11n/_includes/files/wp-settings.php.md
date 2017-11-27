@@ -154,4 +154,6 @@
 
 {% include functions/wp_cookie_constants.md %}
 
+{% include functions/wp_ssl_constants.md %}
+
 </blockquote>
