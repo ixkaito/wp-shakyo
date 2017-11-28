@@ -158,4 +158,6 @@
 
 {% include files/wp-includes/vars.php.md %}
 
+{% include functions/create_initial_taxonomies.md %}
+
 </blockquote>
