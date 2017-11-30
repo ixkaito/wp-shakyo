@@ -4,4 +4,6 @@
 
 {% include functions/mbstring_binary_safe_encoding.md %}
 
+{% include functions/reset_mbstring_encoding.md %}
+
 </blockquote>
