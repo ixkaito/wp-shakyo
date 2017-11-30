@@ -4,4 +4,6 @@
 
 {% include functions/seems_utf8.md %}
 
+{% include functions/utf8_uri_encode.md %}
+
 </blockquote>
