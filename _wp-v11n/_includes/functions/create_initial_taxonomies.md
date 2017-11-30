@@ -10,4 +10,6 @@
 
 {% include classes/WP_Rewrite/using_index_permalinks.md %}
 
+{% include functions/register_taxonomy.md %}
+
 </blockquote>
