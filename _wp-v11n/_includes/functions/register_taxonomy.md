@@ -18,4 +18,6 @@
 
 {% include functions/wp_parse_args.md %}
 
+{% include functions/get_taxonomy_labels.md %}
+
 </blockquote>
