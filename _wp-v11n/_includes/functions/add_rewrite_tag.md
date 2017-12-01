@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include classes/WP_Rewrite/add_rewrite_tag.md %}
 
 </blockquote>
