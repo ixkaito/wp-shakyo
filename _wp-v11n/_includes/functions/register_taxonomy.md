@@ -18,6 +18,14 @@
 
 {% include functions/wp_parse_args.md %}
 
+{% include functions/add_rewrite_tag.md %}
+
+{% include functions/add_permastruct.md %}
+
 {% include functions/get_taxonomy_labels.md %}
+
+{% include functions/add_filter.md %}
+
+{% include functions/do_action.md hook="registered_taxonomy" %}
 
 </blockquote>
