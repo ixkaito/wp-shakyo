@@ -12,4 +12,8 @@
 
 {% include classes/WP/add_query_var.md %}
 
+{% include functions/is_admin.md %}
+
+{% include functions/get_option.md %}
+
 </blockquote>
