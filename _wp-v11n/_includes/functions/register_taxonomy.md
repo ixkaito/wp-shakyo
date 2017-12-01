@@ -10,4 +10,6 @@
 
 {% include functions/sanitize_title_with_dashes.md %}
 
+{% include classes/WP/add_query_var.md %}
+
 </blockquote>
