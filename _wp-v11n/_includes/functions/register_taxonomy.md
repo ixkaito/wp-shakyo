@@ -16,4 +16,6 @@
 
 {% include functions/get_option.md %}
 
+{% include functions/wp_parse_args.md %}
+
 </blockquote>
