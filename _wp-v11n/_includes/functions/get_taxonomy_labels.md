@@ -6,4 +6,6 @@
 
 {% include functions/__.md %}
 
+{% include functions/_get_custom_object_labels.md %}
+
 </blockquote>
