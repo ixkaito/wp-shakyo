@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/_x.md %}
 
+{% include functions/__.md %}
 
 </blockquote>
