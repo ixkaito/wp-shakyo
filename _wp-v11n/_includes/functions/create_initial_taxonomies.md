@@ -12,4 +12,8 @@
 
 {% include functions/register_taxonomy.md %}
 
+{% include functions/__.md %}
+
+{% include functions/_x.md %}
+
 </blockquote>
