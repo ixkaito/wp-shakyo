@@ -160,4 +160,6 @@
 
 {% include functions/create_initial_taxonomies.md %}
 
+{% include functions/create_initial_post_types.md %}
+
 </blockquote>
