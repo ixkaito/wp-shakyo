@@ -16,4 +16,6 @@
 
 {% include functions/_x.md %}
 
+{% include functions/current_theme_supports.md %}
+
 </blockquote>
