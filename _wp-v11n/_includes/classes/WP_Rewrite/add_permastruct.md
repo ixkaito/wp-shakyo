@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/wp_parse_args.md %}
 
 </blockquote>
