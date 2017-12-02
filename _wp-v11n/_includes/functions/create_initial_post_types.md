@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/register_post_type.md %}
 
+{% include functions/_x.md %}
 
 </blockquote>
