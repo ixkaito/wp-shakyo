@@ -26,4 +26,10 @@
 
 {% include functions/add_action.md %}
 
+{% include functions/get_post_type_labels.md %}
+
+{% include functions/register_taxonomy_for_object_type.md %}
+
+{% include functions/do_action.md hook="registered_post_type" %}
+
 </blockquote>
