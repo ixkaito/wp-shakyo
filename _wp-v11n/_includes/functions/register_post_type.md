@@ -8,4 +8,22 @@
 
 {% include functions/_doing_it_wrong.md %}
 
+{% include functions/__.md %}
+
+{% include functions/get_post_type_capabilities.md %}
+
+{% include functions/add_post_type_support.md %}
+
+{% include functions/sanitize_title_with_dashes.md %}
+
+{% include classes/WP/add_query_var.md %}
+
+{% include functions/is_admin.md %}
+
+{% include functions/get_option.md %}
+
+{% include functions/add_rewrite_tag.md %}
+
+{% include functions/add_action.md %}
+
 </blockquote>
