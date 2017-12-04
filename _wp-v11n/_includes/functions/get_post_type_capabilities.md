@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/_post_type_meta_capabilities.md %}
 
 </blockquote>
