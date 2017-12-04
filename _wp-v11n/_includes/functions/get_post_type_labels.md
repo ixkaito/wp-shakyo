@@ -6,4 +6,8 @@
 
 {% include functions/__.md %}
 
+{% include functions/_get_custom_object_labels.md %}
+
+{% include functions/apply_filters.md hook="post_type_labels_{$post_type}" %}
+
 </blockquote>
