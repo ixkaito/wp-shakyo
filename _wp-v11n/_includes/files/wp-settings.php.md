@@ -166,4 +166,6 @@
 
 {% include functions/wp_get_active_and_valid_plugins.md %}
 
+{% include functions/wp_register_plugin_realpath.md %}
+
 </blockquote>
