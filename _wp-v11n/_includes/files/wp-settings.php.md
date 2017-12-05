@@ -164,4 +164,6 @@
 
 {% include functions/register_theme_directory.md %}
 
+{% include functions/wp_get_active_and_valid_plugins.md %}
+
 </blockquote>
