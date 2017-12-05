@@ -162,4 +162,6 @@
 
 {% include functions/create_initial_post_types.md %}
 
+{% include functions/register_theme_directory.md %}
+
 </blockquote>
