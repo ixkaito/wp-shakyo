@@ -168,4 +168,6 @@
 
 {% include functions/wp_register_plugin_realpath.md %}
 
+{% include files/wp-includes/pluggable.php.md %}
+
 </blockquote>
