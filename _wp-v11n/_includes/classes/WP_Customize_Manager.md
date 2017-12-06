@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include classes/WP_Customize_Manager/__construct.md %}
 
 </blockquote>
