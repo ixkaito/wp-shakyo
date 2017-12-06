@@ -170,4 +170,6 @@
 
 {% include files/wp-includes/pluggable.php.md %}
 
+{% include files/wp-includes/pluggable-deprecated.php.md %}
+
 </blockquote>
