@@ -4,4 +4,6 @@
 
 {% include functions/is_admin.md %}
 
+{% include files/wp-includes/class-wp-customize-manager.php.md %}
+
 </blockquote>
