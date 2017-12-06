@@ -174,4 +174,6 @@
 
 {% include functions/wp_set_internal_encoding.md %}
 
+{% include functions/do_action.md hook="plugins_loaded" %}
+
 </blockquote>
