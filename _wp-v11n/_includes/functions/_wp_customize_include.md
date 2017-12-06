@@ -6,4 +6,6 @@
 
 {% include files/wp-includes/class-wp-customize-manager.php.md %}
 
+{% include classes/WP_Customize_Manager.md %}
+
 </blockquote>
