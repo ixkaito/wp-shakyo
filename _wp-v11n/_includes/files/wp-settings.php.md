@@ -172,4 +172,6 @@
 
 {% include files/wp-includes/pluggable-deprecated.php.md %}
 
+{% include functions/wp_set_internal_encoding.md %}
+
 </blockquote>
