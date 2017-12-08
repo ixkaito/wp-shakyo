@@ -180,4 +180,6 @@
 
 {% include functions/wp_magic_quotes.md %}
 
+{% include functions/do_action.md hook="sanitize_comment_cookies" %}
+
 </blockquote>
