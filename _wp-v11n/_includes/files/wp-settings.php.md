@@ -176,4 +176,6 @@
 
 {% include functions/do_action.md hook="plugins_loaded" %}
 
+{% include functions/wp_functionality_constants.md %}
+
 </blockquote>
