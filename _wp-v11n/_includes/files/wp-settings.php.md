@@ -178,4 +178,6 @@
 
 {% include functions/wp_functionality_constants.md %}
 
+{% include functions/wp_magic_quotes.md %}
+
 </blockquote>
