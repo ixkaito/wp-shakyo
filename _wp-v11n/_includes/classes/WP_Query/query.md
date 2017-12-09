@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include classes/WP_Query/init.md %}
 
+{% include functions/wp_parse_args.md %}
 
 </blockquote>
