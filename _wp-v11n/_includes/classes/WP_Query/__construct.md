@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include classes/WP_Query/query.md %}
 
 </blockquote>
