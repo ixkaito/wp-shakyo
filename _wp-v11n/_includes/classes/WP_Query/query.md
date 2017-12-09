@@ -6,4 +6,6 @@
 
 {% include functions/wp_parse_args.md %}
 
+{% include classes/WP_Query/get_posts.md %}
+
 </blockquote>
