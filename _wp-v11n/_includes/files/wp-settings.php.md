@@ -182,4 +182,6 @@
 
 {% include functions/do_action.md hook="sanitize_comment_cookies" %}
 
+{% include classes/WP_Query.md %}
+
 </blockquote>
