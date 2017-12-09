@@ -1,4 +1,4 @@
-<p><code><a href="https://developer.wordpress.org/reference/classes/WP_Query/__construct/">WP_Query::__construct()</a></code></p>
+<p><code><a href="https://developer.wordpress.org/reference/classes/wp_query/__construct/">WP_Query::__construct()</a></code></p>
 
 <blockquote>
 
