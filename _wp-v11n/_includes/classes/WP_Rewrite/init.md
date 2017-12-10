@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/get_option.md %}
 
+{% include classes/WP_Rewrite/using_index_permalinks.md %}
 
 </blockquote>
