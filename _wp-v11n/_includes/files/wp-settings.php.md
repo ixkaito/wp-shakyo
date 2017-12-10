@@ -184,4 +184,6 @@
 
 {% include classes/WP_Query.md %}
 
+{% include classes/WP_Rewrite.md %}
+
 </blockquote>
