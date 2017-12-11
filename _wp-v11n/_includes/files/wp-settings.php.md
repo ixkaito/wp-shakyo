@@ -188,4 +188,6 @@
 
 {% include classes/WP.md %}
 
+{% include classes/WP_Widget_Factory.md %}
+
 </blockquote>
