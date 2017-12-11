@@ -190,4 +190,6 @@
 
 {% include classes/WP_Widget_Factory.md %}
 
+{% include classes/WP_Roles.md %}
+
 </blockquote>
