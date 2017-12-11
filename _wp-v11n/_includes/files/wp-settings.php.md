@@ -192,4 +192,6 @@
 
 {% include classes/WP_Roles.md %}
 
+{% include functions/do_action.md hook="setup_theme" %}
+
 </blockquote>
