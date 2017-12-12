@@ -200,4 +200,6 @@
 
 {% include functions/get_locale.md %}
 
+{% include files/wp-includes/locale.php.md %}
+
 </blockquote>
