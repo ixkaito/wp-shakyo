@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/wp_get_current_user.md %}
 
 </blockquote>
