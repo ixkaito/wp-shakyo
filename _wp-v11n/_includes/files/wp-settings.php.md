@@ -194,4 +194,6 @@
 
 {% include functions/do_action.md hook="setup_theme" %}
 
+{% include functions/wp_templating_constants.md %}
+
 </blockquote>
