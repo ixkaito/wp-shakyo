@@ -4,4 +4,8 @@
 
 {% include functions/kses_remove_filters.md %}
 
+{% include functions/current_user_can.md %}
+
+{% include functions/kses_init_filters.md %}
+
 </blockquote>
