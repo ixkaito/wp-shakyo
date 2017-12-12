@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/add_filter.md %}
 
+{% include functions/current_user_can.md %}
 
 </blockquote>
