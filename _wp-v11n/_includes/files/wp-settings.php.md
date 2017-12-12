@@ -206,4 +206,6 @@
 
 {% include functions/do_action.md hook="after_setup_theme" %}
 
+{% include classes/WP/init.md %}
+
 </blockquote>
