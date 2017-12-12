@@ -198,4 +198,6 @@
 
 {% include functions/load_default_textdomain.md %}
 
+{% include functions/get_locale.md %}
+
 </blockquote>
