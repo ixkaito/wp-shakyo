@@ -196,4 +196,6 @@
 
 {% include functions/wp_templating_constants.md %}
 
+{% include functions/load_default_textdomain.md %}
+
 </blockquote>
