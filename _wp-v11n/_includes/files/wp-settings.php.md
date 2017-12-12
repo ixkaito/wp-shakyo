@@ -204,4 +204,6 @@
 
 {% include classes/WP_Locale.md %}
 
+{% include functions/do_action.md hook="after_setup_theme" %}
+
 </blockquote>
