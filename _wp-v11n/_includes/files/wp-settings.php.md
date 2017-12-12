@@ -208,4 +208,6 @@
 
 {% include classes/WP/init.md %}
 
+{% include functions/do_action.md hook="init" %}
+
 </blockquote>
