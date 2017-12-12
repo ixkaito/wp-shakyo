@@ -202,4 +202,6 @@
 
 {% include files/wp-includes/locale.php.md %}
 
+{% include classes/WP_Locale.md %}
+
 </blockquote>
