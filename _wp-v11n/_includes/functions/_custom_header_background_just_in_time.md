@@ -2,6 +2,18 @@
 
 <blockquote>
 
+{% include functions/current_theme_supports.md %}
 
+{% include functions/add_theme_support.md %}
+
+{% include functions/get_theme_support.md %}
+
+{% include functions/add_action.md %}
+
+{% include functions/is_admin.md %}
+
+{% include files/wp-admin/custom-header.php.md %}
+
+{% include classes/Custom_Image_Header.md %}
 
 </blockquote>
