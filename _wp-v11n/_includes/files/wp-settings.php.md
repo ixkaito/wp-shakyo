@@ -210,4 +210,6 @@
 
 {% include functions/do_action.md hook="init" %}
 
+{% include functions/ms_site_check.md %}
+
 </blockquote>
