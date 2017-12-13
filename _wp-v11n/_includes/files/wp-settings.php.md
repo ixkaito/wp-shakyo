@@ -212,4 +212,6 @@
 
 {% include functions/ms_site_check.md %}
 
+{% include functions/do_action.md hook="wp_loaded" %}
+
 </blockquote>
