@@ -179,7 +179,7 @@ class WP_Scripts extends WP_Dependencies {
 
 		return $this->add_data( $handle, 'data', $script );
 	}
-}
+
 
 
 
@@ -208,3 +208,40 @@ class WP_Scripts extends WP_Dependencies {
 		return $r;
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
