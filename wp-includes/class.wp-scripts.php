@@ -180,3 +180,31 @@ class WP_Scripts extends WP_Dependencies {
 		return $this->add_data( $handle, 'data', $script );
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function all_deps( $handles, $recursion = false, $group = false ) {
+		$r = parent::all_deps( $handles, $recursion );
+		if ( ! $recursion ) {
+			/**
+			 * Filter the list of script dependencies left to print.
+			 *
+			 * @since 2.3.0
+			 *
+			 * @param array $to_do An array of script dependencies.
+			 */
+			$this->to_do = apply_filters( 'print_scripts_array', $this->to_do );
+		}
+		return $r;
+	}
+
