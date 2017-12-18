@@ -1,14 +1,15 @@
-{%- assign class = include.class %-}
-{%- if ! class -%}
-  {%- class = 'WP_Dependencies' -%}
+{%- assign self = "WP_Dependencies" -%}
+
+{%- if include.self -%}
+  {%- capture self -%}{{ include.self }}{%- endcapture -%}
 {%- endif -%}
 
-<p><code><a href="https://developer.wordpress.org/reference/classes/{{ class | downcase }}/do_items/">{{ class }}::do_items()</a></code></p>
+<p><code><a href="https://developer.wordpress.org/reference/classes/{{ self | downcase }}/do_items/">{{ self }}::do_items()</a></code></p>
 
 <blockquote>
 
-{% include classes/{{ class }}/all_deps.md %}
+{% include classes/{{ self }}/all_deps.md %}
 
-{% include classes/{{ class }}/do_item.md %}
+{% include classes/{{ self }}/do_item.md %}
 
 </blockquote>
