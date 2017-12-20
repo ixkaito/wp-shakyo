@@ -4,4 +4,6 @@
 
 {% include classes/WP_Dependencies/do_item.md %}
 
+{% include functions/apply_filters.md hook="script_loader_src" %}
+
 </blockquote>
