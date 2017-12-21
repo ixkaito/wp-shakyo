@@ -1,4 +1,11 @@
-<p><code><a href="https://developer.wordpress.org/reference/classes/wp_scripts/do_item/">WP_Scripts::do_item()</a></code></p>
+{%- assign self = "WP_Scripts" -%}
+{%- assign method = "do_item" -%}
+
+{%- if include.self -%}
+  {%- capture self -%}{{ include.self }}{%- endcapture -%}
+{%- endif -%}
+
+<p><code><a href="https://developer.wordpress.org/reference/classes/{{ self | downcase }}/{{ method | downcase }}/">{{ self }}::{{ method }}()</a></code></p>
 
 <blockquote>
 
