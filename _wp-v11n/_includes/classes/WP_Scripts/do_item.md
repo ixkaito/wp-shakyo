@@ -13,4 +13,10 @@
 
 {% include functions/apply_filters.md hook="script_loader_src" %}
 
+{% include classes/{{ self }}/in_default_dir.md %}
+
+{% include classes/{{ self }}/print_extra_script.md %}
+
+{% include functions/add_query_arg.md %}
+
 </blockquote>
