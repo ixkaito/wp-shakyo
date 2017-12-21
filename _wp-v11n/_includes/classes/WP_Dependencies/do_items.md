@@ -5,7 +5,7 @@
   {%- capture self -%}{{ include.self }}{%- endcapture -%}
 {%- endif -%}
 
-<p><code><a href="https://developer.wordpress.org/reference/classes/{{ self | downcase }}/{{ method }}/">{{ self }}::{{ method }}()</a></code></p>
+<p><code><a href="https://developer.wordpress.org/reference/classes/{{ self | downcase }}/{{ method | downcase }}/">{{ self }}::{{ method }}()</a></code></p>
 
 <blockquote>
 
