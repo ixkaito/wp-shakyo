@@ -12,6 +12,6 @@
 
 {% include classes/WP_Scripts.md %}
 
-{% include classes/WP_Scripts/do_items.md %}
+{% include classes/WP_Scripts/do_items.md self="WP_Scripts" %}
 
 </blockquote>
