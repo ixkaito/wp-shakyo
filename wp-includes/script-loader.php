@@ -688,28 +688,6 @@ function wp_prototype_before_jquery( $js_array ) {
 	return $js_array;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * Load localized data on print rather than initialization.
  *
