@@ -663,8 +663,30 @@ function wp_default_styles( &$styles ) {
 	}
 }
 
+/**
+ * Reorder JavaScript scripts array to place prototype before jQuery.
+ *
+ * @since 2.3.1
+ *
+ * @param array $js_array JavaScript scripts array
+ * @return array Reordered array, if needed.
+ */
+function wp_prototype_before_jquery( $js_array ) {
+	if ( false === $prototype = array_search( 'prototype', $js_array, true ) )
+		return $js_array;
 
+	if ( false === $jquery = array_search( 'jquery', $js_array, true ) )
+		return $js_array;
 
+	if ( $prototype < $jquery )
+		return $js_array;
+
+	unset($js_array[$prototype]);
+
+	array_splice( $js_array, $jquery, 0, 'prototype' );
+
+	return $js_array;
+}
 
 
 
