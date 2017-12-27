@@ -10,6 +10,8 @@
 
 <blockquote>
 
+{% include classes/{{ self }}/get_data.md %}
 
+{% include classes/WP_Dependencies/set_group.md self="WP_Scripts" %}
 
 </blockquote>
