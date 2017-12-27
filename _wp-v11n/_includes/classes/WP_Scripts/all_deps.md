@@ -10,7 +10,7 @@
 
 <blockquote>
 
-{% include classes/WP_Dependencies/all_deps.md %}
+{% include classes/WP_Dependencies/all_deps.md self="WP_Scripts" %}
 
 {% include functions/apply_filters.md hook="print_scripts_array" %}
 
