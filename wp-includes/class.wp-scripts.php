@@ -180,18 +180,18 @@ class WP_Scripts extends WP_Dependencies {
 		return $this->add_data( $handle, 'data', $script );
 	}
 
+	public function set_group( $handle, $recursion, $group = false ) {
 
+		if ( $this->registered[$handle]->args === 1 )
+			$grp = 1;
+		else
+			$grp = (int) $this->get_data( $handle, 'group' );
 
+		if ( false !== $group && $grp > $group )
+			$grp = $group;
 
-
-
-
-
-
-
-
-
-
+		return parent::set_group( $handle, $recursion, $grp );
+	}
 
 	public function all_deps( $handles, $recursion = false, $group = false ) {
 		$r = parent::all_deps( $handles, $recursion );
