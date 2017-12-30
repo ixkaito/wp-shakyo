@@ -1,6 +1,6 @@
 {%- assign parent = "WP_Dependencies" -%}
 {%- assign class = "WP_Scripts" -%}
-{%- assign method = "all_deps.md" -%}
+{%- assign method = "all_deps" -%}
 {%- assign self = class -%}
 
 {%- if include.self -%}
