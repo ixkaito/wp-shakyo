@@ -82,7 +82,7 @@ class WP_Scripts extends WP_Dependencies {
 
 
 	public function do_item( $handle, $group = false ) {
-		if ( !parent::do_item($handle))
+		if ( !parent::do_item($handle) )
 			return false;
 
 		if ( 0 === $group && $this->groups[$handle] > 0 ) {
@@ -96,12 +96,12 @@ class WP_Scripts extends WP_Dependencies {
 		if ( null === $this->registered[$handle]->ver )
 			$ver = '';
 		else
-			$ver = $this->registered[$handle]->ver ? $this->regitered[$handle]->ver : $this->default_version;
+			$ver = $this->registered[$handle]->ver ? $this->registered[$handle]->ver : $this->default_version;
 
 		if ( isset($this->args[$handle]) )
 			$ver = $ver ? $ver . '&amp;' . $this->args[$handle] : $this->args[$handle];
 
-		$src = $this->regisered[$handle]->src;
+		$src = $this->registered[$handle]->src;
 
 		if ( $this->do_concat ) {
 			/**
