@@ -81,70 +81,70 @@ class WP_Scripts extends WP_Dependencies {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	public function do_item( $handle, $group = false ) {
+		if ( !parent::do_item($handle))
+			return false;
+
+		if ( 0 === $group && $this->groups[$handle] > 0 ) {
+			$this->in_footer[] = $handle;
+			return false;
+		}
+
+		if ( false === $group && in_array($handle, $this->in_footer, true) )
+			$this->in_footer = array_diff( $this->in_footer, (array) $handle );
+
+		if ( null === $this->registered[$handle]->ver )
+			$ver = '';
+		else
+			$ver = $this->registered[$handle]->ver ? $this->regitered[$handle]->ver : $this->default_version;
+
+		if ( isset($this->args[$handle]) )
+			$ver = $ver ? $ver . '&amp;' . $this->args[$handle] : $this->args[$handle];
+
+		$src = $this->regisered[$handle]->src;
+
+		if ( $this->do_concat ) {
+			/**
+			 * Filter the script loader source.
+			 *
+			 * @since 2.2.0
+			 *
+			 * @param string $src    Script loader source path.
+			 * @param string $handle Script handle.
+			 */
+			$srce = apply_filters( 'script_loader_src', $src, $handle );
+			if ( $this->in_default_dir($srce) ) {
+				$this->print_code .= $this->print_extra_script( $handle, false );
+				$this->concat .= "$handle,";
+				$this->concat_version .= "$handle$ver";
+				return true;
+			} else {
+				$this->ext_handles .= "$handle,";
+				$this->ext_version .= "$handle$ver";
+			}
+		}
+
+		$this->print_extra_script( $handle );
+		if ( !preg_match('|^(https?:)?//|', $src) && ! ( $this->content_url && 0 === strpos($src, $this->content_url) ) ) {
+			$src = $this->base_url . $src;
+		}
+
+		if ( !empty($ver) )
+			$src = add_query_arg('ver', $ver, $src);
+
+		/** This filter is documented in wp-includes/class.wp-scripts.php */
+		$src = esc_url( apply_filters( 'script_loader_src', $src, $handle ) );
+
+		if ( ! $src )
+			return true;
+
+		if ( $this->do_concat )
+			$this->print_html .= "<script type='text/javascript' src='$src'></script>\n";
+		else
+			echo "<script type='text/javascript' src='$src'></script>\n";
+
+		return true;
+	}
 
 	/**
 	 * Localizes a script
