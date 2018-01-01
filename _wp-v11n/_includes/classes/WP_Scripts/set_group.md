@@ -13,6 +13,6 @@
 
 {% include classes/{{ self }}/get_data.md %}
 
-{% include classes/{{ parent }}/{{ method }}.md self="WP_Scripts" %}
+{% include classes/{{ parent }}/set_group.md self="WP_Scripts" %}
 
 </blockquote>
