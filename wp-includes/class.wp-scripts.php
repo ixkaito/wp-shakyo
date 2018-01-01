@@ -65,21 +65,21 @@ class WP_Scripts extends WP_Dependencies {
 
 
 
+	public function print_extra_script( $handle, $echo = true ) {
+		if ( !$output = $this->get_data( $handle, 'data' ) )
+			return;
 
+		if ( !$echo )
+			return $output;
 
+		echo "<script type='text/javascript'>\n"; // CDATA and type='text/javascript' is not needed for HTML 5
+		echo "/* <![CDATA[ */\n";
+		echo "$output\n";
+		echo "/* ]]> */\n";
+		echo "</script>\n";
 
-
-
-
-
-
-
-
-
-
-
-
-
+		return true;
+	}
 
 	public function do_item( $handle, $group = false ) {
 		if ( !parent::do_item($handle) )
