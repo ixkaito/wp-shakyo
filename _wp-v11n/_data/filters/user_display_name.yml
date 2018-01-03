@@ -1,0 +1,3 @@
+- sanitize_text_field
+- wp_kses_data
+- _wp_specialchars
