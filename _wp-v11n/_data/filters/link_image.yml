@@ -1,0 +1,3 @@
+- wp_strip_all_tags
+- esc_url
+- wp_kses_data
