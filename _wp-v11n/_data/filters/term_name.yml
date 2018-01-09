@@ -1,3 +1,6 @@
 - sanitize_text_field
 - wp_kses_data
 - _wp_specialchars
+- wptexturize
+- convert_chars
+- esc_html
