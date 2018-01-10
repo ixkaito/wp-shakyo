@@ -1,3 +1,4 @@
 - do_shortcode
 - WP_Embed::run_shortcode # 8
 - WP_Embed::autoembed # 8
+- capital_P_dangit # 11
