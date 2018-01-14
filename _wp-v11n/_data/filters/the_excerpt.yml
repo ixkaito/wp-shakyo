@@ -1,0 +1,5 @@
+- wptexturize
+- convert_smilies
+- convert_chars
+- wpautop
+- shortcode_unautop
