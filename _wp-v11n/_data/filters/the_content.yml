@@ -1,4 +1,10 @@
 - do_shortcode
+- wptexturize
+- convert_smilies
+- convert_chars
+- wpautop
+- shortcode_unautop
+- prepend_attachment
 - WP_Embed::run_shortcode # 8
 - WP_Embed::autoembed # 8
 - capital_P_dangit # 11
