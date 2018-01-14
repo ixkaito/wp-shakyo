@@ -1,2 +1,8 @@
 - wp_kses_post
+- wptexturize
+- convert_chars
+- make_clickable # 9
+- convert_smilies # 20
+- force_balance_tags # 25
+- wpautop # 30
 - capital_P_dangit # 31
