@@ -1,0 +1,14 @@
+- wp_enqueue_scripts # 1
+- noindex # 1
+- feed_links # 2
+- feed_links_extra # 3
+- rsd_link
+- wlwmanifest_link
+- locale_stylesheet
+- wp_generator
+- rel_canonical
+- wp_no_robots
+- wp_print_styles # 8
+- wp_print_head_scripts # 9
+- adjacent_posts_rel_link_wp_head # 10
+- wp_shortlink_wp_head # 10
