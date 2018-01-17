@@ -1,2 +1,1 @@
-- _wp_admin_bar_init # 0
-- maybe_redirect_404
+- wp_shortlink_header # 11

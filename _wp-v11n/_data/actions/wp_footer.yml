@@ -1,1 +1,1 @@
-- wp_admin_bar_render # 1000
+- wp_print_footer_scripts # 20
