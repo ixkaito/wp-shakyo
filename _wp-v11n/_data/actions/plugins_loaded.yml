@@ -1,1 +1,3 @@
+- wp_maybe_load_widgets # 0
+- wp_maybe_load_embeds # 0
 - _wp_customize_include
