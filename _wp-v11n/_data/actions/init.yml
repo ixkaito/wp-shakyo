@@ -1,5 +1,6 @@
 - create_initial_post_types
 - kses_init
 - maybe_add_existing_user_to_blog
+- _show_post_preview
 - smilies_init # 5
 - check_theme_switched # 99
