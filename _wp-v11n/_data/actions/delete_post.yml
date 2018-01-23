@@ -1,3 +1,4 @@
 - delete_get_calendar_cache
 - _update_posts_count_on_delete
 - _update_blog_date_on_post_delete
+- _wp_delete_post_menu_item
