@@ -1,1 +1,2 @@
 - wp_save_post_revision # 10
+- wp_check_for_changed_slugs # 12
