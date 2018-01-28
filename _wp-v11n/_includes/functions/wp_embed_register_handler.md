@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include classes/WP_Embed/register_handler.md %}
 
 </blockquote>
