@@ -2257,3 +2257,95 @@ function wp_maybe_load_embeds() {
 }
 
 add_action( 'customize_controls_enqueue_scripts', 'wp_plupload_default_settings' );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Audio embed handler callback.
+ *
+ * @since 3.6.0
+ *
+ * @param array $matches The regex matches from the provided regex when calling {@link wp_embed_register_handler()}.
+ * @param array $attr Embed attributes.
+ * @param string $url The original URL that was matched by the regex.
+ * @param array $rawattr The original unmodified attributes.
+ * @return string The embed HTML.
+ */
+function wp_embed_handler_audio( $matches, $attr, $url, $rawattr ) {
+	$audio = sprintf( '[audio src="%s" /]', esc_url( $url ) );
+
+	/**
+	 * Filter the audio embed output.
+	 *
+	 * @since 3.6.0
+	 *
+	 * @param string $audio   Audio embed output.
+	 * @param array  $attr    An array of embed attributes.
+	 * @param string $url     The original URL that was matched by the regex.
+	 * @param array  $rawattr The original unmodified attributes.
+	 */
+	return apply_filters( 'wp_embed_handler_audio', $audio, $attr, $url, $rawattr );
+}
