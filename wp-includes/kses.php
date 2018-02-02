@@ -1280,18 +1280,18 @@ function _wp_kses_decode_entities_chr_hexdec( $match ) {
 	return chr( hexdec( $match[1] ) );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Sanitize content with allowed HTML Kses rules.
+ *
+ * @since 1.0.0
+ * @uses $allowedtags
+ *
+ * @param string $data Content to filter, expected to be escaped with slashes
+ * @return string Filtered content
+ */
+function wp_filter_kses( $data ) {
+	return addslashes( wp_kses( stripslashes( $data ), current_filter() ) );
+}
 
 
 
