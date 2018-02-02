@@ -1,1 +1,2 @@
--_wp_customize_loader_settings
+- _wp_customize_loader_settings
+- wp_auth_check_load

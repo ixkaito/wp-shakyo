@@ -1,0 +1,2 @@
+- wp_authenticate_username_password # 20
+- wp_authenticate_spam_check # 99
