@@ -1047,17 +1047,17 @@ function wp_kses_no_null($string) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Removes the HTML JavaScript entities found in early versions of Netscape 4.
+ *
+ * @since 1.0.0
+ *
+ * @param string $string
+ * @return string
+ */
+function wp_kses_js_entities($string) {
+	return preg_replace('%&\s*\{[^}]*(\}\s*;?|$)%', '', $string);
+}
 
 
 
