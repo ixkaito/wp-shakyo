@@ -545,32 +545,32 @@ function wp_kses( $string, $allowed_html, $allowed_protocols = array() ) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * You add any kses hooks here.
+ *
+ * There is currently only one kses WordPress hook and it is called here. All
+ * parameters are passed to the hooks and expected to receive a string.
+ *
+ * @since 1.0.0
+ *
+ * @param string $string Content to filter through kses
+ * @param array $allowed_html List of allowed HTML elements
+ * @param array $allowed_protocols Allowed protocol in links
+ * @return string Filtered content through 'pre_kses' hook
+ */
+function wp_kses_hook( $string, $allowed_html, $allowed_protocols ) {
+	/**
+	 * Filter content to be run through kses.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param string $string            Content to run through kses.
+	 * @param array  $allowed_html      Allowed HTML elements.
+	 * @param array  $allowed_protocols Allowed protocol in links.
+	 */
+	$string = apply_filters( 'pre_kses', $string, $allowed_html, $allowed_protocols );
+	return $string;
+}
 
 
 
