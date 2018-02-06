@@ -1,4 +1,4 @@
 - wptexturize
 - convert_chars
-- trim
+- php/trim
 - capital_P_dangit # 11
