@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/apply_filters.md hook="sanitize_email" %}
 
 </blockquote>
