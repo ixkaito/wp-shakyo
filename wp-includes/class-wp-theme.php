@@ -448,20 +448,20 @@ final class WP_Theme implements ArrayAccess {
 		return is_wp_error( $this->errors ) ? $this->errors : false;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Whether the theme exists.
+	 *
+	 * A theme with errors exists. A theme with the error of 'theme_not_found',
+	 * meaning that the theme's directory was not found, does not exist.
+	 *
+	 * @since 3.4.0
+	 * @access public
+	 *
+	 * @return bool Whether the theme exists.
+	 */
+	public function exists() {
+		return ! ( $this->errors() && in_array( 'theme_not_found', $this->errors()->get_error_codes() ) );
+	}
 
 
 
