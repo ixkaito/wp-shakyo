@@ -407,9 +407,9 @@ class WP_Widget_Factory {
 
 
 
-	public function register($widget_class) {
-		$this->widgets[$widget_class] = new $widget_class();
-	}
+
+
+
 
 
 
