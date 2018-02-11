@@ -1,5 +1,5 @@
 {%- assign class = "WP_Theme" -%}
-{%- assign method = "exists" -%}
+{%- assign method = "errors" -%}
 {%- assign self = class -%}
 
 {%- if include.self -%}
@@ -10,6 +10,6 @@
 
 <blockquote>
 
-{% include classes/{{ self }}/errors.md %}
+{% include functions/is_wp_error.md %}
 
 </blockquote>
