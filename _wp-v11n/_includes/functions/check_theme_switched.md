@@ -10,9 +10,9 @@
 
 {% include functions/update_option.md %}
 
-{% include functions/WP_Theme/exists.md %}
+{% include classes/WP_Theme/exists.md %}
 
-{% include functions/WP_Theme/get.md %}
+{% include classes/WP_Theme/get.md %}
 
 {% include functions/do_action.md hook="after_switch_theme" %}
 
