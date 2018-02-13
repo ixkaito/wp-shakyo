@@ -6,4 +6,6 @@
 
 {% include functions/__.md %}
 
+{% include functions/esc_html.md %}
+
 </blockquote>
