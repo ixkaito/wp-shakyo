@@ -291,8 +291,48 @@ class WP_Roles {
 
 }
 
+/**
+ * WordPress Role class.
+ *
+ * @since 2.0.0
+ * @package WordPress
+ * @subpackage User
+ */
+class WP_Role {
+	/**
+	 * Role name.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var string
+	 */
+	public $name;
 
+	/**
+	 * List of capabilities the role contains.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 * @var array
+	 */
+	public $capabilities;
 
+	/**
+	 * Constructor - Set up object properties.
+	 *
+	 * The list of capabilities, must have the key as the name of the capability
+	 * and the value a boolean of whether it is granted to the role.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string $role Role name.
+	 * @param array $capabilities List of capabilities.
+	 */
+	public function __construct( $role, $capabilities ) {
+		$this->name = $role;
+		$this->capabilities = $capabilities;
+	}
 
 
 
@@ -368,47 +408,7 @@ class WP_Roles {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 /**
  * WordPress User class.
