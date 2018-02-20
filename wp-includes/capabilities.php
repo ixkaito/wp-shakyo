@@ -212,24 +212,24 @@ class WP_Roles {
 
 
 
+	/**
+	 * Add capability to role.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param string $role Role name.
+	 * @param string $cap Capability name.
+	 * @param bool $grant Optional, default is true. Whether role is capable of performing capability.
+	 */
+	public function add_cap( $role, $cap, $grant = true ) {
+		if ( ! isset( $this->roles[$role] ) )
+			return;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		$this->roles[$role]['capabilities'][$cap] = $grant;
+		if ( $this->use_db )
+			update_option( $this->role_key, $this->roles );
+	}
 
 
 
