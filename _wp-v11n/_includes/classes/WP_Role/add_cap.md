@@ -10,6 +10,8 @@
 
 <blockquote>
 
+{% include classes/WP_Roles.md %}
 
+{% include classes/WP_Roles/add_cap.md %}
 
 </blockquote>
