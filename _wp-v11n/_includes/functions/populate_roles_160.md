@@ -6,4 +6,8 @@
 
 {% include functions/add_role.md %}
 
+{% include functions/get_role.md %}
+
+{% include classes/WP_Role/add_cap.md %}
+
 </blockquote>
