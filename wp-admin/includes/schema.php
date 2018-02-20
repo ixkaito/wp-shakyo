@@ -780,3 +780,17 @@ function populate_roles_260() {
 		$role->add_cap( 'delete_plugins' );
 	}
 }
+
+/**
+ * Create and modify WordPress roles for WordPress 2.7.
+ *
+ * @since 2.7.0
+ */
+function populate_roles_270() {
+	$role = get_role( 'administrator' );
+
+	if ( !empty( $role ) ) {
+		$role->add_cap( 'install_plugins' );
+		$role->add_cap( 'update_themes' );
+	}
+}
