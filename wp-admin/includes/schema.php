@@ -753,3 +753,16 @@ function populate_roles_230() {
 		$role->add_cap( 'unfiltered_upload' );
 	}
 }
+
+/**
+ * Create and modify WordPress roles for WordPress 2.5.
+ *
+ * @since 2.5.0
+ */
+function populate_roles_250() {
+	$role = get_role( 'administrator' );
+
+	if ( !empty( $role ) ) {
+		$role->add_cap( 'edit_dashboard' );
+	}
+}
