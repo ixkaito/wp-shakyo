@@ -10,6 +10,6 @@
 
 <blockquote>
 
-
+{% include functions/update_option.md %}
 
 </blockquote>
