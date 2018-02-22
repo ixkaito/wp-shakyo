@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/wp_kses_split2.md %}
 
 </blockquote>
