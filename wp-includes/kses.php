@@ -602,12 +602,6 @@ function wp_kses_split( $string, $allowed_html, $allowed_protocols ) {
 	return preg_replace_callback( '%(<!--.*?(-->|$))|(<[^>]*(>|$)|>)%', '_wp_kses_split_callback', $string );
 }
 
-
-
-
-
-
-
 /**
  * Callback for wp_kses_split.
  *
@@ -619,63 +613,69 @@ function _wp_kses_split_callback( $match ) {
 	return wp_kses_split2( $match[0], $pass_allowed_html, $pass_allowed_protocols );
 }
 
+/**
+ * Callback for wp_kses_split for fixing malformed HTML tags.
+ *
+ * This function does a lot of work. It rejects some very malformed things like
+ * <:::>. It returns an empty string, if the element isn't allowed (look ma, no
+ * strip_tags()!). Otherwise it splits the tag into an element and an attribute
+ * list.
+ *
+ * After the tag is split into an element and an attribute list, it is run
+ * through another filter which will remove illegal attributes and once that is
+ * completed, will be returned.
+ *
+ * @access private
+ * @since 1.0.0
+ * @uses wp_kses_attr()
+ *
+ * @param string $string Content to filter
+ * @param array $allowed_html Allowed HTML elements
+ * @param array $allowed_protocols Allowed protocols to keep
+ * @return string Fixed HTML element
+ */
+function wp_kses_split2($string, $allowed_html, $allowed_protocols) {
+	$string = wp_kses_stripslashes($string);
 
+	if (substr($string, 0, 1) != '<')
+		return '&gt;';
+	# It matched a ">" character
 
+	if ( '<!--' == substr( $string, 0, 4 ) ) {
+		$string = str_replace( array('<!--', '-->'), '', $string );
+		while ( $string != ($newstring = wp_kses($string, $allowed_html, $allowed_protocols)) )
+			$string = $newstring;
+		if ( $string == '' )
+			return '';
+		// prevent multiple dashes in comments
+		$string = preg_replace('/--+/', '-', $string);
+		// prevent three dashes closing a comment
+		$string = preg_replace('/-$/', '', $string);
+		return "<!--{$string}-->";
+	}
+	# Allow HTML comments
 
+	if (!preg_match('%^<\s*(/\s*)?([a-zA-Z0-9]+)([^>]*)>?$%', $string, $matches))
+		return '';
+	# It's seriously malformed
 
+	$slash = trim($matches[1]);
+	$elem = $matches[2];
+	$attrlist = $matches[3];
 
+	if ( ! is_array( $allowed_html ) )
+		$allowed_html = wp_kses_allowed_html( $allowed_html );
 
+	if ( ! isset($allowed_html[strtolower($elem)]) )
+		return '';
+	# They are using a not allowed HTML element
 
+	if ($slash != '')
+		return "</$elem>";
+	# No attributes are allowed for closing elements
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return wp_kses_attr( $elem, $attrlist, $allowed_html, $allowed_protocols );
+}
 
 
 
