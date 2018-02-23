@@ -2,6 +2,12 @@
 
 <blockquote>
 
+{% include functions/wp_kses_stripslashes.md %}
 
+{% include functions/wp_kses.md %}
+
+{% include functions/wp_kses_allowed_html.md %}
+
+{% include functions/wp_kses_attr.md %}
 
 </blockquote>
