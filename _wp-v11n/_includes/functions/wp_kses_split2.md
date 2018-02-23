@@ -4,7 +4,7 @@
 
 {% include functions/wp_kses_stripslashes.md %}
 
-{% include functions/wp_kses.md %}
+<p><code><a href="https://developer.wordpress.org/reference/functions/wp_kses/">wp_kses()</a></code></p>
 
 {% include functions/wp_kses_allowed_html.md %}
 
