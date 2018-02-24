@@ -2,6 +2,6 @@
 
 <blockquote>
 
-
+{% include functions/apply_filters.md hook="wp_kses_allowed_html" %}
 
 </blockquote>
