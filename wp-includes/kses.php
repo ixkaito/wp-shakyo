@@ -677,88 +677,88 @@ function wp_kses_split2($string, $allowed_html, $allowed_protocols) {
 	return wp_kses_attr( $elem, $attrlist, $allowed_html, $allowed_protocols );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Removes all attributes, if none are allowed for this element.
+ *
+ * If some are allowed it calls wp_kses_hair() to split them further, and then
+ * it builds up new HTML code from the data that kses_hair() returns. It also
+ * removes "<" and ">" characters, if there are any left. One more thing it does
+ * is to check if the tag has a closing XHTML slash, and if it does, it puts one
+ * in the returned code as well.
+ *
+ * @since 1.0.0
+ *
+ * @param string $element HTML element/tag
+ * @param string $attr HTML attributes from HTML element to closing HTML element tag
+ * @param array $allowed_html Allowed HTML elements
+ * @param array $allowed_protocols Allowed protocols to keep
+ * @return string Sanitized HTML element
+ */
+function wp_kses_attr($element, $attr, $allowed_html, $allowed_protocols) {
+	# Is there a closing XHTML slash at the end of the attributes?
+
+	if ( ! is_array( $allowed_html ) )
+		$allowed_html = wp_kses_allowed_html( $allowed_html );
+
+	$xhtml_slash = '';
+	if (preg_match('%\s*/\s*$%', $attr))
+		$xhtml_slash = ' /';
+
+	# Are any attributes allowed at all for this element?
+	if ( ! isset($allowed_html[strtolower($element)]) || count($allowed_html[strtolower($element)]) == 0 )
+		return "<$element$xhtml_slash>";
+
+	# Split it
+	$attrarr = wp_kses_hair($attr, $allowed_protocols);
+
+	# Go through $attrarr, and save the allowed attributes for this element
+	# in $attr2
+	$attr2 = '';
+
+	$allowed_attr = $allowed_html[strtolower($element)];
+	foreach ($attrarr as $arreach) {
+		if ( ! isset( $allowed_attr[strtolower($arreach['name'])] ) )
+			continue; # the attribute is not allowed
+
+		$current = $allowed_attr[strtolower($arreach['name'])];
+		if ( $current == '' )
+			continue; # the attribute is not allowed
+
+		if ( strtolower( $arreach['name'] ) == 'style' ) {
+			$orig_value = $arreach['value'];
+			$value = safecss_filter_attr( $orig_value );
+
+			if ( empty( $value ) )
+				continue;
+
+			$arreach['value'] = $value;
+			$arreach['whole'] = str_replace( $orig_value, $value, $arreach['whole'] );
+		}
+
+		if ( ! is_array($current) ) {
+			$attr2 .= ' '.$arreach['whole'];
+		# there are no checks
+
+		} else {
+			# there are some checks
+			$ok = true;
+			foreach ($current as $currkey => $currval) {
+				if ( ! wp_kses_check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval) ) {
+					$ok = false;
+					break;
+				}
+			}
+
+			if ( $ok )
+				$attr2 .= ' '.$arreach['whole']; # it passed them
+		} # if !is_array($current)
+	} # foreach
+
+	# Remove any "<" or ">" characters
+	$attr2 = preg_replace('/[<>]/', '', $attr2);
+
+	return "<$element$attr2$xhtml_slash>";
+}
 
 
 
