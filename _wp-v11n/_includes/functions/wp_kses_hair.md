@@ -2,6 +2,8 @@
 
 <blockquote>
 
+{% include functions/wp_kses_bad_protocol.md %}
 
+{% include functions/wp_kses_html_error.md %}
 
 </blockquote>
