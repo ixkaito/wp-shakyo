@@ -760,134 +760,134 @@ function wp_kses_attr($element, $attr, $allowed_html, $allowed_protocols) {
 	return "<$element$attr2$xhtml_slash>";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Builds an attribute list from string containing attributes.
+ *
+ * This function does a lot of work. It parses an attribute list into an array
+ * with attribute data, and tries to do the right thing even if it gets weird
+ * input. It will add quotes around attribute values that don't have any quotes
+ * or apostrophes around them, to make it easier to produce HTML code that will
+ * conform to W3C's HTML specification. It will also remove bad URL protocols
+ * from attribute values. It also reduces duplicate attributes by using the
+ * attribute defined first (foo='bar' foo='baz' will result in foo='bar').
+ *
+ * @since 1.0.0
+ *
+ * @param string $attr Attribute list from HTML element to closing HTML element tag
+ * @param array $allowed_protocols Allowed protocols to keep
+ * @return array List of attributes after parsing
+ */
+function wp_kses_hair($attr, $allowed_protocols) {
+	$attrarr = array();
+	$mode = 0;
+	$attrname = '';
+	$uris = array('xmlns', 'profile', 'href', 'src', 'cite', 'classid', 'codebase', 'data', 'usemap', 'longdesc', 'action');
+
+	# Loop through the whole attribute list
+
+	while (strlen($attr) != 0) {
+		$working = 0; # Was the last operation successful?
+
+		switch ($mode) {
+			case 0 : # attribute name, href for instance
+
+				if ( preg_match('/^([-a-zA-Z:]+)/', $attr, $match ) ) {
+					$attrname = $match[1];
+					$working = $mode = 1;
+					$attr = preg_replace( '/^[-a-zA-Z:]+/', '', $attr );
+				}
+
+				break;
+
+			case 1 : # equals sign or valueless ("selected")
+
+				if (preg_match('/^\s*=\s*/', $attr)) # equals sign
+					{
+					$working = 1;
+					$mode = 2;
+					$attr = preg_replace('/^\s*=\s*/', '', $attr);
+					break;
+				}
+
+				if (preg_match('/^\s+/', $attr)) # valueless
+					{
+					$working = 1;
+					$mode = 0;
+					if(false === array_key_exists($attrname, $attrarr)) {
+						$attrarr[$attrname] = array ('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+					}
+					$attr = preg_replace('/^\s+/', '', $attr);
+				}
+
+				break;
+
+			case 2 : # attribute value, a URL after href= for instance
+
+				if (preg_match('%^"([^"]*)"(\s+|/?$)%', $attr, $match))
+					# "value"
+					{
+					$thisval = $match[1];
+					if ( in_array(strtolower($attrname), $uris) )
+						$thisval = wp_kses_bad_protocol($thisval, $allowed_protocols);
+
+					if(false === array_key_exists($attrname, $attrarr)) {
+						$attrarr[$attrname] = array ('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
+					}
+					$working = 1;
+					$mode = 0;
+					$attr = preg_replace('/^"[^"]*"(\s+|$)/', '', $attr);
+					break;
+				}
+
+				if (preg_match("%^'([^']*)'(\s+|/?$)%", $attr, $match))
+					# 'value'
+					{
+					$thisval = $match[1];
+					if ( in_array(strtolower($attrname), $uris) )
+						$thisval = wp_kses_bad_protocol($thisval, $allowed_protocols);
+
+					if(false === array_key_exists($attrname, $attrarr)) {
+						$attrarr[$attrname] = array ('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname='$thisval'", 'vless' => 'n');
+					}
+					$working = 1;
+					$mode = 0;
+					$attr = preg_replace("/^'[^']*'(\s+|$)/", '', $attr);
+					break;
+				}
+
+				if (preg_match("%^([^\s\"']+)(\s+|/?$)%", $attr, $match))
+					# value
+					{
+					$thisval = $match[1];
+					if ( in_array(strtolower($attrname), $uris) )
+						$thisval = wp_kses_bad_protocol($thisval, $allowed_protocols);
+
+					if(false === array_key_exists($attrname, $attrarr)) {
+						$attrarr[$attrname] = array ('name' => $attrname, 'value' => $thisval, 'whole' => "$attrname=\"$thisval\"", 'vless' => 'n');
+					}
+					# We add quotes to conform to W3C's HTML spec.
+					$working = 1;
+					$mode = 0;
+					$attr = preg_replace("%^[^\s\"']+(\s+|$)%", '', $attr);
+				}
+
+				break;
+		} # switch
+
+		if ($working == 0) # not well formed, remove and try again
+		{
+			$attr = wp_kses_html_error($attr);
+			$mode = 0;
+		}
+	} # while
+
+	if ($mode == 1 && false === array_key_exists($attrname, $attrarr))
+		# special case, for when the attribute list ends with a valueless
+		# attribute like "selected"
+		$attrarr[$attrname] = array ('name' => $attrname, 'value' => '', 'whole' => $attrname, 'vless' => 'y');
+
+	return $attrarr;
+}
 
 
 
