@@ -1428,67 +1428,67 @@ function kses_init() {
 add_action('init', 'kses_init');
 add_action('set_current_user', 'kses_init');
 
+/**
+ * Inline CSS filter
+ *
+ * @since 2.8.1
+ */
+function safecss_filter_attr( $css, $deprecated = '' ) {
+	if ( !empty( $deprecated ) )
+		_deprecated_argument( __FUNCTION__, '2.8.1' ); // Never implemented
 
+	$css = wp_kses_no_null($css);
+	$css = str_replace(array("\n","\r","\t"), '', $css);
 
+	if ( preg_match( '%[\\\\(&=}]|/\*%', $css ) ) // remove any inline css containing \ ( & } = or comments
+		return '';
 
+	$css_array = explode( ';', trim( $css ) );
 
+	/**
+	 * Filter list of allowed CSS attributes.
+	 *
+	 * @since 2.8.1
+	 *
+	 * @param array $attr List of allowed CSS attributes.
+	 */
+	$allowed_attr = apply_filters( 'safe_style_css', array( 'text-align', 'margin', 'color', 'float',
+	'border', 'background', 'background-color', 'border-bottom', 'border-bottom-color',
+	'border-bottom-style', 'border-bottom-width', 'border-collapse', 'border-color', 'border-left',
+	'border-left-color', 'border-left-style', 'border-left-width', 'border-right', 'border-right-color',
+	'border-right-style', 'border-right-width', 'border-spacing', 'border-style', 'border-top',
+	'border-top-color', 'border-top-style', 'border-top-width', 'border-width', 'caption-side',
+	'clear', 'cursor', 'direction', 'font', 'font-family', 'font-size', 'font-style',
+	'font-variant', 'font-weight', 'height', 'letter-spacing', 'line-height', 'margin-bottom',
+	'margin-left', 'margin-right', 'margin-top', 'overflow', 'padding', 'padding-bottom',
+	'padding-left', 'padding-right', 'padding-top', 'text-decoration', 'text-indent', 'vertical-align',
+	'width' ) );
 
+	if ( empty($allowed_attr) )
+		return $css;
 
+	$css = '';
+	foreach ( $css_array as $css_item ) {
+		if ( $css_item == '' )
+			continue;
+		$css_item = trim( $css_item );
+		$found = false;
+		if ( strpos( $css_item, ':' ) === false ) {
+			$found = true;
+		} else {
+			$parts = explode( ':', $css_item );
+			if ( in_array( trim( $parts[0] ), $allowed_attr ) )
+				$found = true;
+		}
+		if ( $found ) {
+			if( $css != '' )
+				$css .= ';';
+			$css .= $css_item;
+		}
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return $css;
+}
 
 /**
  * Helper function to add global attributes to a tag in the allowed html list.
