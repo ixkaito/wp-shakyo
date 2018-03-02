@@ -889,77 +889,77 @@ function wp_kses_hair($attr, $allowed_protocols) {
 	return $attrarr;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Performs different checks for attribute values.
+ *
+ * The currently implemented checks are "maxlen", "minlen", "maxval", "minval"
+ * and "valueless".
+ *
+ * @since 1.0.0
+ *
+ * @param string $value Attribute value
+ * @param string $vless Whether the value is valueless. Use 'y' or 'n'
+ * @param string $checkname What $checkvalue is checking for.
+ * @param mixed $checkvalue What constraint the value should pass
+ * @return bool Whether check passes
+ */
+function wp_kses_check_attr_val($value, $vless, $checkname, $checkvalue) {
+	$ok = true;
+
+	switch (strtolower($checkname)) {
+		case 'maxlen' :
+			# The maxlen check makes sure that the attribute value has a length not
+			# greater than the given value. This can be used to avoid Buffer Overflows
+			# in WWW clients and various Internet servers.
+
+			if (strlen($value) > $checkvalue)
+				$ok = false;
+			break;
+
+		case 'minlen' :
+			# The minlen check makes sure that the attribute value has a length not
+			# smaller than the given value.
+
+			if (strlen($value) < $checkvalue)
+				$ok = false;
+			break;
+
+		case 'maxval' :
+			# The maxval check does two things: it checks that the attribute value is
+			# an integer from 0 and up, without an excessive amount of zeroes or
+			# whitespace (to avoid Buffer Overflows). It also checks that the attribute
+			# value is not greater than the given value.
+			# This check can be used to avoid Denial of Service attacks.
+
+			if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value))
+				$ok = false;
+			if ($value > $checkvalue)
+				$ok = false;
+			break;
+
+		case 'minval' :
+			# The minval check makes sure that the attribute value is a positive integer,
+			# and that it is not smaller than the given value.
+
+			if (!preg_match('/^\s{0,6}[0-9]{1,6}\s{0,6}$/', $value))
+				$ok = false;
+			if ($value < $checkvalue)
+				$ok = false;
+			break;
+
+		case 'valueless' :
+			# The valueless check makes sure if the attribute has a value
+			# (like <a href="blah">) or not (<option selected>). If the given value
+			# is a "y" or a "Y", the attribute must not have a value.
+			# If the given value is an "n" or an "N", the attribute must have one.
+
+			if (strtolower($checkvalue) != $vless)
+				$ok = false;
+			break;
+	} # switch
+
+	return $ok;
+}
 
 /**
  * Sanitize string from bad protocols.
