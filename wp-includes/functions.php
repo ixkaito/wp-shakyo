@@ -4529,29 +4529,29 @@ function wp_allowed_protocols() {
 
 
 
+/**
+ * Retrieve a canonical form of the provided charset appropriate for passing to PHP
+ * functions such as htmlspecialchars() and charset html attributes.
+ *
+ * @since 3.6.0
+ * @access private
+ *
+ * @see http://core.trac.wordpress.org/ticket/23688
+ *
+ * @param string $charset A charset name.
+ * @return string The canonical form of the charset.
+ */
+function _canonical_charset( $charset ) {
+	if ( 'UTF-8' === $charset || 'utf-8' === $charset || 'utf8' === $charset ||
+		'UTF8' === $charset )
+		return 'UTF-8';
 
+	if ( 'ISO-8859-1' === $charset || 'iso-8859-1' === $charset ||
+		'iso8859-1' === $charset || 'ISO8859-1' === $charset )
+		return 'ISO-8859-1';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return $charset;
+}
 
 /**
  * Set the mbstring internal encoding to a binary safe encoding when func_overload
