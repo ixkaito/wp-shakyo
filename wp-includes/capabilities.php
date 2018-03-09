@@ -707,16 +707,16 @@ class WP_User {
 
 
 
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Return an array representation.
+	 *
+	 * @since 3.5.0
+	 *
+	 * @return array Array representation.
+	 */
+	public function to_array() {
+		return get_object_vars( $this->data );
+	}
 
 
 
