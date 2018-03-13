@@ -24,3 +24,20 @@
 # Obviously, since this code is in the public domain, the above are not
 # requirements (there can be none), but merely suggestions.
 #
+
+/**
+ * Portable PHP password hashing framework.
+ *
+ * @package phpass
+ * @version 0.3 / WordPress
+ * @link http://www.openwall.com/phpass/
+ * @since 2.5.0
+ */
+class PasswordHash {
+	var $itoa64;
+	var $iteration_count_log2;
+	var $portable_hashes;
+	var $random_state;
+}
+
+?>
