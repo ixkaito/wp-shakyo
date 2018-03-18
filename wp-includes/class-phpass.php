@@ -75,6 +75,29 @@ class PasswordHash {
 		return $output;
 	}
 
+	function encode64($input, $count)
+	{
+		$output = '';
+		$i = 0;
+		do {
+			$value = ord($input[$i++]);
+			$output .= $this->itoa64[$value & 0x3f];
+			if ($i < $count)
+				$value |= ord($input[$i]) << 8;
+			$output .= $this->itoa64[($value >> 6) & 0x3f];
+			if ($i++ >= $count)
+				break;
+			if ($i < $count)
+				$value |= ord($input[$i]) << 16;
+			$output .= $this->itoa64[($value >> 12) & 0x3f];
+			if ($i++ >= $count)
+				break;
+			$output .= $this->itoa64[($value >> 18) & 0x3f];
+		} while ($i < $count);
+
+		return $output;
+	}
+
 	function gensalt_extended($input)
 	{
 		$count_log2 = min($this->iteration_count_log2 + 8, 24);
