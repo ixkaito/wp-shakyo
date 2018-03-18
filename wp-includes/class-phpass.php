@@ -75,6 +75,24 @@ class PasswordHash {
 		return $output;
 	}
 
+	function gensalt_extended($input)
+	{
+		$count_log2 = min($this->iteration_count_log2 + 8, 24);
+		# This should be odd to not reveal weak DES keys, and the
+		# maximum valid value is (2**24 - 1) which is odd anyway.
+		$count = (1 << $count_log2) - 1;
+
+		$output = '_';
+		$output .= $this->itoa64[$count & 0x3f];
+		$output .= $this->itoa64[($count >> 6) & 0x3f];
+		$output .= $this->itoa64[($count >> 12) & 0x3f];
+		$output .= $this->itoa64[($count >> 18) & 0x3f];
+
+		$output .= $this->encode64($input, 3);
+
+		return $output;
+	}
+
 	function gensalt_blowfish($input)
 	{
 		# This one needs to use a different order of characters and a
