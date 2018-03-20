@@ -98,6 +98,16 @@ class PasswordHash {
 		return $output;
 	}
 
+	function gensalt_private($input)
+	{
+		$output = '$P$';
+		$output .= $this->itoa64[min($this->iteration_count_log2 +
+			((PHP_VERSION >= '5') ? 5 : 3), 30)];
+		$output .= $this->encode64($input, 6);
+
+		return $output;
+	}
+
 	function crypt_private($password, $setting)
 	{
 		$output = '*0';
