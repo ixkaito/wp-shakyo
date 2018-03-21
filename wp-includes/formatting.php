@@ -1186,42 +1186,42 @@ function sanitize_key( $key ) {
 	return apply_filters( 'sanitize_key', $key, $raw_key );
 }
 
+/**
+ * Sanitizes a title, or returns a fallback title.
+ *
+ * Specifically, HTML and PHP tags are stripped. Further actions can be added
+ * via the plugin API. If $title is empty and $fallback_title is set, the latter
+ * will be used.
+ *
+ * @since 1.0.0
+ *
+ * @param string $title The string to be sanitized.
+ * @param string $fallback_title Optional. A title to use if $title is empty.
+ * @param string $context Optional. The operation for which the string is sanitized
+ * @return string The sanitized string.
+ */
+function sanitize_title( $title, $fallback_title = '', $context = 'save' ) {
+	$raw_title = $title;
 
+	if ( 'save' == $context )
+		$title = remove_accents($title);
 
+	/**
+	 * Filter a sanitized title string.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param string $title     Sanitized title.
+	 * @param string $raw_title The title prior to sanitization.
+	 * @param string $context   The context for which the title is being sanitized.
+	 */
+	$title = apply_filters( 'sanitize_title', $title, $raw_title, $context );
 
+	if ( '' === $title || false === $title )
+		$title = $fallback_title;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return $title;
+}
 
 
 
