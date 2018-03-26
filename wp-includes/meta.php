@@ -1142,3 +1142,54 @@ function _get_meta_table($type) {
 
 	return $wpdb->$table_name;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Sanitize meta value.
+ *
+ * @since 3.1.3
+ *
+ * @param string $meta_key Meta key
+ * @param mixed $meta_value Meta value to sanitize
+ * @param string $meta_type Type of meta
+ * @return mixed Sanitized $meta_value
+ */
+function sanitize_meta( $meta_key, $meta_value, $meta_type ) {
+
+	/**
+	 * Filter the sanitization of a specific meta key of a specific meta type.
+	 *
+	 * The dynamic portions of the hook name, $meta_type and $meta_key, refer to the
+	 * metadata object type (comment, post, or user) and the meta key value,
+	 * respectively.
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param mixed  $meta_value Meta value to sanitize.
+	 * @param string $meta_key   Meta key.
+	 * @param string $meta_type  Meta type.
+	 */
+	return apply_filters( "sanitize_{$meta_type}_meta_{$meta_key}", $meta_value, $meta_key, $meta_type );
+}
