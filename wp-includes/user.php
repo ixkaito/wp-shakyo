@@ -1872,3 +1872,142 @@ function wp_insert_user( $userdata ) {
 
 	return $user_id;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Set up the user contact methods.
+ *
+ * Default contact methods were removed in 3.6. A filter dictates contact methods.
+ *
+ * @since 3.7.0
+ *
+ * @param WP_User $user Optional. WP_User object.
+ * @return array Array of contact methods and their labels.
+ */
+function wp_get_user_contact_methods( $user = null ) {
+	$methods = array();
+	if ( get_site_option( 'initial_db_version' ) < 23588 ) {
+		$methods = array(
+			'aim'    => __( 'AIM' ),
+			'yim'    => __( 'Yahoo IM' ),
+			'jabber' => __( 'Jabber / Google Talk' )
+		);
+	}
+
+	/**
+	 * Filter the user contact methods.
+	 *
+	 * @since 2.9.0
+	 *
+	 * @param array   $methods Array of contact methods and their labels.
+ 	 * @param WP_User $user    WP_User object.
+	 */
+	return apply_filters( 'user_contactmethods', $methods, $user );
+}
