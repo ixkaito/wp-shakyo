@@ -2247,3 +2247,153 @@ function wp_maybe_update_network_user_counts() {
 
 	wp_update_network_user_counts();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Whether or not we have a large network.
+ *
+ * The default criteria for a large network is either more than 10,000 users or more than 10,000 sites.
+ * Plugins can alter this criteria using the 'wp_is_large_network' filter.
+ *
+ * @since 3.3.0
+ * @param string $using 'sites or 'users'. Default is 'sites'.
+ * @return bool True if the network meets the criteria for large. False otherwise.
+ */
+function wp_is_large_network( $using = 'sites' ) {
+	if ( 'users' == $using ) {
+		$count = get_user_count();
+		/**
+		 * Filter whether the network is considered large.
+		 *
+		 * @since 3.3.0
+		 *
+		 * @param bool   $is_large_network Whether the network has more than 10000 users or sites.
+		 * @param string $component        The component to count. Accepts 'users', or 'sites'.
+		 * @param int    $count            The count of items for the component.
+		 */
+		return apply_filters( 'wp_is_large_network', $count > 10000, 'users', $count );
+	}
+
+	$count = get_blog_count();
+	/** This filter is documented in wp-includes/ms-functions.php */
+	return apply_filters( 'wp_is_large_network', $count > 10000, 'sites', $count );
+}
