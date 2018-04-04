@@ -2260,17 +2260,17 @@ function wp_maybe_update_network_user_counts() {
 
 
 
+/**
+ * Update the network-wide user count.
+ *
+ * @since 3.7.0
+ */
+function wp_update_network_user_counts() {
+	global $wpdb;
 
-
-
-
-
-
-
-
-
-
-
+	$count = $wpdb->get_var( "SELECT COUNT(ID) as c FROM $wpdb->users WHERE spam = '0' AND deleted = '0'" );
+	update_site_option( 'user_count', $count );
+}
 
 
 
