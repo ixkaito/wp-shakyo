@@ -6,7 +6,7 @@
 
 {% include functions/get_site_option.md %}
 
-{% include functions/apply_filters.md hook="pre_update_site_option_" %}
+{% include functions/apply_filters.md hook="pre_update_site_option_{$option}" %}
 
 {% include functions/add_site_option.md %}
 
