@@ -1164,95 +1164,95 @@ function delete_site_option( $option ) {
 	return false;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Update the value of a site option that was already added.
+ *
+ * @since 2.8.0
+ *
+ * @see update_option()
+ *
+ * @param string $option Name of option. Expected to not be SQL-escaped.
+ * @param mixed $value Option value. Expected to not be SQL-escaped.
+ * @return bool False if value was not updated and true if value was updated.
+ */
+function update_site_option( $option, $value ) {
+	global $wpdb;
+
+	wp_protect_special_option( $option );
+
+	$old_value = get_site_option( $option );
+
+	/**
+	 * Filter a specific site option before its value is updated.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 2.9.0 As 'pre_update_site_option_' . $key
+	 * @since 3.0.0
+	 *
+	 * @param mixed $value     New value of site option.
+	 * @param mixed $old_value Old value of site option.
+	 */
+	$value = apply_filters( 'pre_update_site_option_' . $option, $value, $old_value );
+
+	if ( $value === $old_value )
+		return false;
+
+	if ( false === $old_value )
+		return add_site_option( $option, $value );
+
+	$notoptions_key = "{$wpdb->siteid}:notoptions";
+	$notoptions = wp_cache_get( $notoptions_key, 'site-options' );
+	if ( is_array( $notoptions ) && isset( $notoptions[$option] ) ) {
+		unset( $notoptions[$option] );
+		wp_cache_set( $notoptions_key, $notoptions, 'site-options' );
+	}
+
+	if ( !is_multisite() ) {
+		$result = update_option( $option, $value );
+	} else {
+		$value = sanitize_option( $option, $value );
+
+		$serialized_value = maybe_serialize( $value );
+		$result = $wpdb->update( $wpdb->sitemeta, array( 'meta_value' => $serialized_value ), array( 'site_id' => $wpdb->siteid, 'meta_key' => $option ) );
+
+		if ( $result ) {
+			$cache_key = "{$wpdb->siteid}:$option";
+			wp_cache_set( $cache_key, $value, 'site-options' );
+		}
+	}
+
+	if ( $result ) {
+
+		/**
+		 * Fires after the value of a specific site option has been successfully updated.
+		 *
+		 * The dynamic portion of the hook name, $option, refers to the option name.
+		 *
+		 * @since 2.9.0 As "update_site_option_{$key}"
+		 * @since 3.0.0
+		 *
+		 * @param string $option    Name of site option.
+		 * @param mixed  $value     Current value of site option.
+		 * @param mixed  $old_value Old value of site option.
+		 */
+		do_action( "update_site_option_{$option}", $option, $value, $old_value );
+
+		/**
+		 * Fires after the value of a site option has been successfully updated.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string $option    Name of site option.
+		 * @param mixed  $value     Current value of site option.
+		 * @param mixed  $old_value Old value of site option.
+		 */
+		do_action( "update_site_option", $option, $value, $old_value );
+
+		return true;
+	}
+	return false;
+}
 
 
 
