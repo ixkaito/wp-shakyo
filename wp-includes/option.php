@@ -1009,96 +1009,96 @@ function get_site_option( $option, $default = false, $use_cache = true ) {
  	return apply_filters( 'site_option_' . $option, $value );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * Add a new site option.
+ *
+ * Existing options will not be updated. Note that prior to 3.3 this wasn't the case.
+ *
+ * @since 2.8.0
+ *
+ * @see add_option()
+ *
+ * @param string $option Name of option to add. Expected to not be SQL-escaped.
+ * @param mixed $value Optional. Option value, can be anything. Expected to not be SQL-escaped.
+ * @return bool False if option was not added and true if option was added.
+ */
+function add_site_option( $option, $value ) {
+	global $wpdb;
+
+	wp_protect_special_option( $option );
+
+	/**
+	 * Filter the value of a specific site option before it is added.
+	 *
+	 * The dynamic portion of the hook name, $option, refers to the option name.
+	 *
+	 * @since 2.9.0 As 'pre_add_site_option_' . $key
+	 * @since 3.0.0
+	 *
+	 * @param mixed $value Value of site option.
+	 */
+	$value = apply_filters( 'pre_add_site_option_' . $option, $value );
+
+	$notoptions_key = "{$wpdb->siteid}:notoptions";
+
+	if ( !is_multisite() ) {
+		$result = add_option( $option, $value );
+	} else {
+		$cache_key = "{$wpdb->siteid}:$option";
+
+		// Make sure the option doesn't already exist. We can check the 'notoptions' cache before we ask for a db query
+		$notoptions = wp_cache_get( $notoptions_key, 'site-options' );
+		if ( ! is_array( $notoptions ) || ! isset( $notoptions[$option] ) )
+			if ( false !== get_site_option( $option ) )
+				return false;
+
+		$value = sanitize_option( $option, $value );
+
+		$serialized_value = maybe_serialize( $value );
+		$result = $wpdb->insert( $wpdb->sitemeta, array('site_id' => $wpdb->siteid, 'meta_key' => $option, 'meta_value' => $serialized_value ) );
+
+		if ( ! $result )
+			return false;
+
+		wp_cache_set( $cache_key, $value, 'site-options' );
+
+		// This option exists now
+		$notoptions = wp_cache_get( $notoptions_key, 'site-options' ); // yes, again... we need it to be fresh
+		if ( is_array( $notoptions ) && isset( $notoptions[$option] ) ) {
+			unset( $notoptions[$option] );
+			wp_cache_set( $notoptions_key, $notoptions, 'site-options' );
+		}
+	}
+
+	if ( $result ) {
+
+		/**
+		 * Fires after a specific site option has been successfully added.
+		 *
+		 * The dynamic portion of the hook name, $option, refers to the option name.
+		 *
+		 * @since 2.9.0 As "add_site_option_{$key}"
+		 * @since 3.0.0
+		 *
+		 * @param string $option Name of site option.
+		 * @param mixed  $value  Value of site option.
+		 */
+		do_action( "add_site_option_{$option}", $option, $value );
+
+		/**
+		 * Fires after a site option has been successfully added.
+		 *
+		 * @since 3.0.0
+		 *
+		 * @param string $option Name of site option.
+		 * @param mixed  $value  Value of site option.
+		 */
+		do_action( "add_site_option", $option, $value );
+
+		return true;
+	}
+	return false;
+}
 
 /**
  * Removes site option by name.
