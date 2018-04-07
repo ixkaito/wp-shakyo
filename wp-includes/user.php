@@ -1944,28 +1944,28 @@ function wp_insert_user( $userdata ) {
 
 
 
+/**
+ * A simpler way of inserting an user into the database.
+ *
+ * Creates a new user with just the username, password, and email. For more
+ * complex user creation use wp_insert_user() to specify more information.
+ *
+ * @since 2.0.0
+ * @see wp_insert_user() More complete way to create a new user
+ *
+ * @param string $username The user's username.
+ * @param string $password The user's password.
+ * @param string $email The user's email (optional).
+ * @return int The new user's ID.
+ */
+function wp_create_user($username, $password, $email = '') {
+	$user_login = wp_slash( $username );
+	$user_email = wp_slash( $email    );
+	$user_pass = $password;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	$userdata = compact('user_login', 'user_email', 'user_pass');
+	return wp_insert_user($userdata);
+}
 
 
 
