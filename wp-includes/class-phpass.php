@@ -39,18 +39,18 @@ class PasswordHash {
 	var $portable_hashes;
 	var $random_state;
 
+	function PasswordHash($iteration_count_log2, $portable_hashes)
+	{
+		$this->itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
+		if ($iteration_count_log2 < 4 || $iteration_count_log2 > 31)
+			$iteration_count_log2 = 8;
+		$this->iteration_count_log2 = $iteration_count_log2;
 
+		$this->portable_hashes = $portable_hashes;
 
-
-
-
-
-
-
-
-
-
+		$this->random_state = microtime() . uniqid(rand(), TRUE); // removed getmypid() for compatibility reasons
+	}
 
 	function get_random_bytes($count)
 	{
