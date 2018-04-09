@@ -1554,20 +1554,20 @@ function username_exists( $username ) {
 	}
 }
 
+/**
+ * Checks whether the given email exists.
+ *
+ * @since 2.1.0
+ *
+ * @param string $email Email.
+ * @return bool|int The user's ID on success, and false on failure.
+ */
+function email_exists( $email ) {
+	if ( $user = get_user_by('email', $email) )
+		return $user->ID;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return false;
+}
 
 
 
