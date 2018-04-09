@@ -24,6 +24,8 @@
 
 {% include functions/apply_filters.md hook="pre_user_email" %}
 
+{% include functions/email_exists.md %}
+
 {% include functions/apply_filters.md hook="pre_user_nickname" %}
 
 {% include functions/apply_filters.md hook="pre_user_first_name" %}
