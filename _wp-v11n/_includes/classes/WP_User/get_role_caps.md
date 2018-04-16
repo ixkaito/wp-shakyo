@@ -12,6 +12,8 @@
 
 {% include classes/WP_Roles.md %}
 
+{% include classes/WP_Roles/is_role.md %}
+
 {% include classes/WP_Roles/get_role.md %}
 
 </blockquote>
