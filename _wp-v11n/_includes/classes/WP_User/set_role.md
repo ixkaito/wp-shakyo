@@ -12,9 +12,9 @@
 
 {% include functions/update_user_meta.md %}
 
-{% include classes/{{ self }}/get_role_caps.md %}
+{% include classes/WP_User/get_role_caps.md %}
 
-{% include classes/{{ self }}/update_user_level_from_caps.md %}
+{% include classes/WP_User/update_user_level_from_caps.md %}
 
 {% include functions/do_action.md hook="set_user_role" %}
 
