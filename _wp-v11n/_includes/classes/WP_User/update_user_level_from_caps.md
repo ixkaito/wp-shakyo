@@ -12,6 +12,8 @@
 
 {% include functions/update_user_meta.md %}
 
+{% include classes/WP_User/level_reduction.md %}
+
 {% include classes/wpdb/get_blog_prefix.md %}
 
 </blockquote>
