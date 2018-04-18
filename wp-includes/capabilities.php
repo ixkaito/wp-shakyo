@@ -887,21 +887,21 @@ class WP_User {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Update the maximum user level for the user.
+	 *
+	 * Updates the 'user_level' user metadata (includes prefix that is the
+	 * database table prefix) with the maximum user level. Gets the value from
+	 * the all of the capabilities that the user has.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 */
+	public function update_user_level_from_caps() {
+		global $wpdb;
+		$this->user_level = array_reduce( array_keys( $this->allcaps ), array( $this, 'level_reduction' ), 0 );
+		update_user_meta( $this->ID, $wpdb->get_blog_prefix() . 'user_level', $this->user_level );
+	}
 
 
 
