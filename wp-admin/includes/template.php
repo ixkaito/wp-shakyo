@@ -2049,14 +2049,14 @@ final class WP_Internal_Pointers {
 
 
 
-
-
-
-
-
-
-
-
+	/**
+	 * Prevents new users from seeing existing 'new feature' pointers.
+	 *
+	 * @since 3.3.0
+	 */
+	public static function dismiss_pointers_for_new_users( $user_id ) {
+		add_user_meta( $user_id, 'dismissed_wp_pointers', 'wp350_media,wp360_revisions,wp360_locks,wp390_widgets' );
+	}
 }
 
 add_action( 'admin_enqueue_scripts', array( 'WP_Internal_Pointers', 'enqueue_scripts'                ) );
