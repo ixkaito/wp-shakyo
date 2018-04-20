@@ -1,2 +1,3 @@
 - _wp_customize_loader_settings
 - wp_auth_check_load
+- WP_Internal_Pointers::enqueue_scripts

@@ -1,1 +1,2 @@
 - wp_maybe_update_network_user_counts
+- WP_Internal_Pointers::dismiss_pointers_for_new_users
