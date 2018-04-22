@@ -30,7 +30,7 @@
 
 {% include classes/WP_User/set_role.md %}
 
- `wp_install_defaults()`
+{% include functions/wp_install_defaults.md %}
  
  `flush_rewrite_rules()`
  
