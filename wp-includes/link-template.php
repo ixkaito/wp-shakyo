@@ -2719,50 +2719,50 @@ function includes_url( $path = '', $scheme = null ) {
 
 
 
+/**
+ * Retrieve the home url for the current network.
+ *
+ * Returns the home url with the appropriate protocol, 'https' if
+ * is_ssl() and 'http' otherwise. If $scheme is 'http' or 'https', is_ssl() is
+ * overridden.
+ *
+ * @since 3.0.0
+ *
+ * @param  string $path   (optional) Path relative to the home url.
+ * @param  string $scheme (optional) Scheme to give the home url context. Currently 'http', 'https', or 'relative'.
+ * @return string Home url link with optional path appended.
+*/
+function network_home_url( $path = '', $scheme = null ) {
+	if ( ! is_multisite() )
+		return home_url($path, $scheme);
 
+	$current_site = get_current_site();
+	$orig_scheme = $scheme;
 
+	if ( ! in_array( $scheme, array( 'http', 'https', 'relative' ) ) )
+		$scheme = is_ssl() && ! is_admin() ? 'https' : 'http';
 
+	if ( 'relative' == $scheme )
+		$url = $current_site->path;
+	else
+		$url = set_url_scheme( 'http://' . $current_site->domain . $current_site->path, $scheme );
 
+	if ( $path && is_string( $path ) )
+		$url .= ltrim( $path, '/' );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Filter the network home URL.
+	 *
+	 * @since 3.0.0
+	 *
+	 * @param string      $url         The complete network home URL including scheme and path.
+	 * @param string      $path        Path relative to the network home URL. Blank string
+	 *                                 if no path is specified.
+	 * @param string|null $orig_scheme Scheme to give the URL context. Accepts 'http', 'https',
+	 *                                 'relative' or null.
+	 */
+	return apply_filters( 'network_home_url', $url, $path, $orig_scheme);
+}
 
 
 
