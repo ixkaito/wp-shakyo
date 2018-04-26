@@ -1473,3 +1473,67 @@ function add_role( $role, $display_name, $capabilities = array() ) {
 
 	return $wp_roles->add_role( $role, $display_name, $capabilities );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Determine if user is a site admin.
+ *
+ * @since 3.0.0
+ *
+ * @param int $user_id (Optional) The ID of a user. Defaults to the current user.
+ * @return bool True if the user is a site admin.
+ */
+function is_super_admin( $user_id = false ) {
+	if ( ! $user_id || $user_id == get_current_user_id() )
+		$user = wp_get_current_user();
+	else
+		$user = get_userdata( $user_id );
+
+	if ( ! $user || ! $user->exists() )
+		return false;
+
+	if ( is_multisite() ) {
+		$super_admins = get_super_admins();
+		if ( is_array( $super_admins ) && in_array( $user->user_login, $super_admins ) )
+			return true;
+	} else {
+		if ( $user->has_cap('delete_users') )
+			return true;
+	}
+
+	return false;
+}
