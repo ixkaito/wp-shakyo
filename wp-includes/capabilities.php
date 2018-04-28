@@ -1491,23 +1491,23 @@ function add_role( $role, $display_name, $capabilities = array() ) {
 
 
 
+/**
+ * Retrieve a list of super admins.
+ *
+ * @since 3.0.0
+ *
+ * @uses $super_admins Super admins global variable, if set.
+ *
+ * @return array List of super admin logins
+ */
+function get_super_admins() {
+	global $super_admins;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	if ( isset($super_admins) )
+		return $super_admins;
+	else
+		return get_site_option( 'site_admins', array('admin') );
+}
 
 /**
  * Determine if user is a site admin.
