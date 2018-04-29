@@ -998,20 +998,20 @@ class WP_User {
 		return true;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * Convert numeric level to level capability name.
+	 *
+	 * Prepends 'level_' to level number.
+	 *
+	 * @since 2.0.0
+	 * @access public
+	 *
+	 * @param int $level Level number, 1 to 10.
+	 * @return string
+	 */
+	public function translate_level_to_cap( $level ) {
+		return 'level_' . $level;
+	}
 
 	/**
 	 * Set the blog to operate on. Defaults to the current blog.
