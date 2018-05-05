@@ -9,13 +9,8 @@
 </template>
 
 <script>
-import File from './File.vue'
-
 export default {
   name: 'File',
-  components: {
-    File
-  },
   props: {
     filename: String,
     show: {
