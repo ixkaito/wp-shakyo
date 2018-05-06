@@ -3,6 +3,13 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-new Vue({
+Vue.component('example2', function(resolve, reject) {
+  setTimeout(function() {
+    resolve(require('./components/Example2.vue'))
+  }, 5000)
+})
+
+const app = new Vue({
+  el: '#app',
   render: h => h(App)
-}).$mount('#app')
+})

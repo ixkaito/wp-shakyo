@@ -1,27 +1,22 @@
 <template>
   <div id="app">
-    <File filename="wp-blog-header.php"/>
+    <button type="button" @click="onButtonClick">Click me to add the example2 component</button>
+    <example2 v-if="show_example2"></example2>
   </div>
 </template>
 
 <script>
-import File from './components/File.vue'
-
-export default {
-  name: 'app',
-  components: {
-    File
+  export default {
+    name: 'app',
+    data() {
+      return {
+        show_example2: false
+      }
+    },
+    methods: {
+      onButtonClick() {
+        this.show_example2 = true
+      }
+    }
   }
-}
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
