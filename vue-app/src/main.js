@@ -8,6 +8,5 @@ Vue.component('example2', function(resolve) {
 })
 
 new Vue({
-  el: '#app',
   render: h => h(App)
-})
+}).$mount('#app')
