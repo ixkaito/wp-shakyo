@@ -3,8 +3,8 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-Vue.component('example2', function(resolve) {
-  resolve(require('./components/Example2.vue'))
+Vue.component('wp-blog-header.php', function(resolve) {
+  resolve(require('./files/wp-blog-header.php.vue'))
 })
 
 new Vue({
