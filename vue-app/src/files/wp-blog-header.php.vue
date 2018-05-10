@@ -1,5 +1,3 @@
 <template>
-  <ul>
-    <li>wp-load.php</li>
-  </ul>
+  <p>wp-blog-header.php</p>
 </template>
