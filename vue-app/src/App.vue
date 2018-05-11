@@ -8,8 +8,13 @@
 </template>
 
 <script>
+  import WpBlogHeader from './files/wp-blog-header.php.vue'
+
   export default {
     name: 'app',
+    components: {
+      WpBlogHeader
+    },
     data() {
       return {
         expanded: false
