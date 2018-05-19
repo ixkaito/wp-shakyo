@@ -3,7 +3,7 @@
     <ul>
       <function3 v-if="expanded" />
     </ul>
-  </li></li>
+  </li>
 </template>
 
 <script>
