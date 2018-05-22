@@ -36,6 +36,19 @@ requireComponent.keys().forEach(fileName => {
   )
 })
 
+Vue.mixin({
+  data: function () {
+    return {
+      expanded: false
+    }
+  },
+  methods: {
+    expand: function () {
+      this.expanded = true
+    }
+  }
+})
+
 new Vue({
   render: h => h(App)
 }).$mount('#app')

@@ -5,19 +5,3 @@
     </ul>
   </li>
 </template>
-
-<script>
-  export default {
-    name: 'app',
-    data() {
-      return {
-        expanded: false
-      }
-    },
-    methods: {
-      expand() {
-        this.expanded = true
-      }
-    }
-  }
-</script>
