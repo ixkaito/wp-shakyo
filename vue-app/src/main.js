@@ -1,7 +1,9 @@
 import Vue from 'vue'
+import Router from 'vue-router';
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 import App from './App.vue'
+// import { routes } from './routes';
 
 Vue.config.productionTip = false
 
