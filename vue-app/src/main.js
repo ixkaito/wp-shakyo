@@ -3,9 +3,15 @@ import Router from 'vue-router';
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 import App from './App.vue'
-// import { routes } from './routes';
+import { routes } from './routes';
 
 Vue.config.productionTip = false
+
+Vue.use(Router)
+
+const router = new Router({
+  routes
+})
 
 const requireComponent = require.context(
   // The relative path of the functions folder
@@ -52,5 +58,6 @@ Vue.mixin({
 })
 
 new Vue({
+  router,
   render: h => h(App)
 }).$mount('#app')
