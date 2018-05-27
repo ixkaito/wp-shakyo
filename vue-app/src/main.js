@@ -1,17 +1,11 @@
 import Vue from 'vue'
-import Router from 'vue-router';
+import VueRouter from 'vue-router'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 import App from './App.vue'
-import { routes } from './routes';
+// import router from './router';
 
 Vue.config.productionTip = false
-
-Vue.use(Router)
-
-const router = new Router({
-  routes
-})
 
 const requireComponent = require.context(
   // The relative path of the functions folder
@@ -42,6 +36,16 @@ requireComponent.keys().forEach(fileName => {
     // otherwise fall back to module's root.
     componentConfig.default || componentConfig
   )
+})
+
+import function1 from './functions/function1.vue'
+
+const routes = [
+  { path: '/function1', component: function1 },
+]
+
+const router = new VueRouter({
+  routes // short for `routes: routes`
 })
 
 Vue.mixin({
