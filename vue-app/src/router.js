@@ -1,15 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import function1 from './functions/function1.vue';
+import Home from './views/Home.vue'
+import About from './views/About.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/function1',
-      name: 'function1',
-      component: function1
+      path: '/',
+      name: 'home',
+      component: Home
     },
+    {
+      path: '/about',
+      name: 'about',
+      component: About
+    }
   ]
 })

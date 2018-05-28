@@ -39,6 +39,7 @@ requireComponent.keys().forEach(fileName => {
 })
 
 import function1 from './functions/function1.vue'
+import router from './router'
 
 const routes = [
   { path: '/function1', component: function1 },
