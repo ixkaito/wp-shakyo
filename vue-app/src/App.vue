@@ -5,11 +5,5 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
-    <ul>
-      <function1 />
-      <function2 />
-      <function4 />
-      <router-view></router-view>
-    </ul>
   </div>
 </template>

@@ -1,5 +1,9 @@
 <template>
   <div class="home">
-    <img src="../assets/logo.png">
+    <ul>
+      <function1 />
+      <function2 />
+      <function4 />
+    </ul>
   </div>
 </template>
