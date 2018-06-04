@@ -9,6 +9,7 @@
         Nuxt.js project
       </h2>
       <div class="links">
+        <nuxt-link to="/user" class="button--green">User</nuxt-link>
         <a
           href="https://nuxtjs.org/"
           target="_blank"
