@@ -13,6 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {
@@ -23,4 +24,3 @@
     "eslint-plugin-vue": "^4.0.0"
   }
 }
-
