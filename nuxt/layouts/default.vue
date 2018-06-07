@@ -13,25 +13,7 @@
 </template>
 
 <style lang="scss">
-@mixin fontawesome () {
-  -moz-osx-font-smoothing: grayscale;
-  display: inline-block;
-  font-family: FontAwesome, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-feature-settings: normal;
-  font-kerning: auto;
-  font-language-override: normal;
-  font-size: inherit;
-  font-size-adjust: none;
-  font-stretch: normal;
-  font-style: normal;
-  font-synthesis: weight style;
-  font-variant: normal;
-  font-weight: normal;
-  line-height: 1;
-  text-rendering: auto;
-}
-
+@import "~assets/css/mixins";
 
 html, *, *:before, *:after {
   box-sizing: border-box;
