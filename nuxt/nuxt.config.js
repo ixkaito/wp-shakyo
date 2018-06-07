@@ -14,6 +14,9 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'}
     ]
   },
+  css: [
+    { src: '~assets/css/mixin.scss', lang: 'scss' },
+  ],
   /*
   ** Customize the progress bar color
   */
