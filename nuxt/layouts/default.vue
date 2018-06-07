@@ -1,53 +1,107 @@
 <template>
-  <div>
-    <nuxt/>
+  <div class="container">
+    <div class="file">
+      <header class="file-name">
+        <h1><i class="fa fa-file-text-o"></i></h1>
+        <!-- <p class="toggle-all js-toggle-all">Expand all</p> -->
+      </header>
+      <article class="entry-content file-content">
+        <nuxt/>
+      </article>
+    </div>
   </div>
 </template>
 
-<style>
-html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
+<style lang="scss">
+@mixin fontawesome () {
   -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: FontAwesome, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-feature-settings: normal;
+  font-kerning: auto;
+  font-language-override: normal;
+  font-size: inherit;
+  font-size-adjust: none;
+  font-stretch: normal;
+  font-style: normal;
+  font-synthesis: weight style;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+
+html, *, *:before, *:after {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+.file {
+  // @include outer-container;
+  border: 1px solid #d8d8d8;
+  border-radius: 3px;
+  margin: auto;
+  max-width: 960px;
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+  blockquote {
+    padding-right: 0;
+  }
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
+  .file-name {
+    background: #f5f5f5;
+    border-bottom: 1px solid #d8d8d8;
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 10px 10px;
 
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
+    h1,
+    .toggle-all {
+      border-bottom: 0;
+      font-size: 14px;
+      line-height: 17px;
+      margin: 0;
+      padding: 0;
+    }
 
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+    .toggle-all {
+      color: #4078c0;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .entry-content {
+    padding: 45px;
+  }
+
+  .file-content {
+
+    b,
+    strong {
+      @include fontawesome;
+
+      font-size: 14px;
+      font-weight: bolder;
+
+      &:before {
+        content: "\f0f6\20";
+        font-weight: normal;
+      }
+    }
+
+    .toggler {
+      cursor: pointer;
+      padding: 0.2em .5em;
+
+      &:hover {
+        color: #4078c0;
+      }
+    }
+  }
 }
 </style>
 
