@@ -13,7 +13,9 @@
 </template>
 
 <style lang="scss">
-@import "~assets/css/mixins";
+@import "~assets/scss/variables";
+@import "~assets/scss/mixins";
+@import "~assets/scss/editorstyles/github";
 
 html, *, *:before, *:after {
   box-sizing: border-box;

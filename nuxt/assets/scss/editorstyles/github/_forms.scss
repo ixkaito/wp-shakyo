@@ -1,0 +1,13 @@
+input {
+	font: inherit;
+	font-family: $font-family-base;
+	font-size: $input-font-size;
+	line-height: $input-line-height;
+	margin: 0;
+	overflow: visible;
+}
+
+[type="checkbox"] {
+	box-sizing: border-box;
+	padding: 0;
+}

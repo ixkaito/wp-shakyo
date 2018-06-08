@@ -1,0 +1,29 @@
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	display: block;
+	margin-top: 0;
+	margin-bottom: $margin-base-vertical;
+	overflow: auto;
+	width: 100%;
+	word-break: keep-all;
+
+	th {
+		font-weight: bold;
+	}
+
+	th,
+	td {
+		border: $table-border-width $table-border-style $table-border-color;
+		padding: $table-cell-padding;
+	}
+
+	tr {
+		background-color: $table-background-color;
+		border-top: $tr-border-width $tr-border-style $tr-border-color;
+
+		&:nth-child(2n) {
+			background-color: $table-background-color-accent;
+		}
+	}
+}

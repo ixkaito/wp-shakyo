@@ -1,0 +1,21 @@
+@import "variables";
+
+#{$container-class} {
+	color: $text-color;
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	line-height: $line-height-base;
+	text-size-adjust: 100%;
+	word-wrap: break-word;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	@import "media";
+	@import "buttons";
+	@import "forms";
+	@import "lists";
+	@import "tables";
+	@import "typography";
+}

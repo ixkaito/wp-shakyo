@@ -1,0 +1,210 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $headings-text-color;
+	font-family: $headings-font-family;
+	font-weight: $headings-font-weight;
+	line-height: $headings-line-height;
+	margin-bottom: $margin-base-vertical;
+	margin-top: $margin-large-vertical;
+
+	tt {
+		font-size: inherit;
+	}
+}
+
+h1 {
+	border-bottom: $h1-border-width $h1-border-style $h1-border-color;
+	font-size: $h1-font-size;
+	padding-bottom: $h1-padding-vertical;
+}
+
+h2 {
+	border-bottom: $h2-border-width $h2-border-style $h2-border-color;
+	font-size: $h2-font-size;
+	padding-bottom: $h2-padding-vertical;
+}
+
+h3 {
+	font-size: $h3-font-size;
+}
+
+h4 {
+	font-size: $h4-font-size;
+}
+
+h5 {
+	font-size: $h5-font-size;
+}
+
+h6 {
+	color: $h6-text-color;
+	font-size: $h6-font-size;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: $margin-base-vertical;
+}
+
+a {
+	background-color: $link-background-color;
+	color: $link-color;
+	text-decoration: $link-decoration;
+	-webkit-text-decoration-skip: objects;
+
+	&:active,
+	&:hover {
+		color: $link-hover-color;
+		outline-width: 0;
+		text-decoration: $link-hover-decoration;
+	}
+
+	&:not([href]) {
+		color: inherit;
+		text-decoration: none;
+	}
+}
+
+blockquote {
+	border-left: $blockquote-border-color $blockquote-border-style $blockquote-border-width;
+	color: $blockquote-text-color;
+	margin: 0 0 $margin-base-vertical;
+	padding: 0 $padding-base-horizontal;
+
+	> :first-child {
+		margin-top: 0;
+	}
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+strong {
+	font-weight: inherit;
+	font-weight: bolder;
+}
+
+code,
+kbd,
+pre,
+samp,
+tt {
+	font-family: $font-family-monospace;
+	font-size: 1em;
+}
+
+code,
+tt {
+	background-color: $code-background-color;
+	border-radius: $border-radius-base;
+	color: $code-text-color;
+	font-size: $code-font-size;
+	margin: 0;
+	padding: $code-padding;
+
+	&:before,
+	&:after {
+		content: "\00a0";
+		letter-spacing: -0.2em;
+	}
+
+	br {
+		display: none;
+	}
+}
+
+del {
+
+	code {
+		text-decoration: inherit;
+	}
+}
+
+kbd {
+	background-color: $kbd-background-color;
+	border: 1px solid #ccc;
+	border-bottom-color: #bbb;
+	border-radius: $border-radius-base;
+	box-shadow: inset 0 -1px 0 #bbb;
+	color: $kbd-text-color;
+	display: inline-block;
+	font-size: $kbd-font-size;
+	line-height: $kbd-line-height;
+	padding: $kbd-padding;
+	vertical-align: middle;
+}
+
+pre {
+	background-color: $pre-background-color;
+	border-radius: $border-radius-base;
+	color: $pre-text-color;
+	font-size: $pre-font-size;
+	line-height: $pre-line-height;
+	margin-top: 0;
+	margin-bottom: $margin-base-vertical;
+	overflow: auto;
+	padding: $pre-padding;
+	word-wrap: normal;
+
+	> code {
+		background: transparent;
+		border: 0;
+		font-size: 100%;
+		margin: 0;
+		padding: 0;
+		white-space: pre;
+		word-break: normal;
+	}
+
+	code,
+	tt {
+		background-color: transparent;
+		border: 0;
+		display: inline;
+		line-height: inherit;
+		margin: 0;
+		max-width: initial;
+		overflow: initial;
+		padding: 0;
+		word-wrap: normal;
+
+		&:before,
+		&:after {
+			content: normal;
+		}
+	}
+}
+
+.highlight {
+	margin-bottom: $margin-base-vertical;
+}
+
+.highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+}
+
+hr {
+	background-color: $hr-color;
+	border: 0;
+	box-sizing: content-box;
+	height: $hr-width;
+	margin: $margin-large-vertical 0;
+	overflow: hidden;
+	padding: 0;
+
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+	}
+
+	&:after {
+		clear: both;
+	}
+}

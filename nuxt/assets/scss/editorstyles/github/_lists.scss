@@ -1,0 +1,59 @@
+ul,
+ol,
+dl {
+	margin-top: 0;
+	margin-bottom: $margin-base-vertical;
+}
+
+ul,
+ol {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 2em;
+
+	ol {
+		list-style-type: lower-roman;
+	}
+
+	ul,
+	ol {
+		margin-bottom: 0;
+		margin-top: 0;
+
+		ol {
+			list-style-type: lower-alpha;
+		}
+	}
+}
+
+li {
+
+	+ li {
+		margin-top: 0.25em;
+	}
+
+	> p {
+		margin-top: $margin-base-vertical;
+	}
+}
+
+dl {
+	padding: 0;
+
+	dt {
+		font-size: 1em;
+		font-style: italic;
+		font-weight: bold;
+		margin-top: $margin-base-vertical;
+		padding: 0;
+	}
+
+	dd {
+		margin-bottom: $margin-base-vertical;
+		padding: 0 $padding-base-horizontal;
+	}
+}
+
+dd {
+	margin-left: 0;
+}
