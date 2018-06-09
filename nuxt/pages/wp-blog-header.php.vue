@@ -1,6 +1,6 @@
 <template>
   <div>
-    <wp-blog-header.php />
+    <wp-load.php />
   </div>
 </template>
 
