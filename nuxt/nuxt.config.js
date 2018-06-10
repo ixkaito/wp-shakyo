@@ -1,4 +1,7 @@
 module.exports = {
+  plugins: [
+    '~/plugins/global.js'
+  ],
   /*
   ** Headers of the page
   */

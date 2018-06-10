@@ -1,6 +1,6 @@
 <template>
   <div>
-    <wp-load.php />
+    hello
   </div>
 </template>
 
