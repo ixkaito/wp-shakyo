@@ -1,11 +1,5 @@
 <template>
-  <div>
-    hello
+  <div class="file">
+    <wp-load.php />
   </div>
 </template>
-
-<script>
-export default {
-  components: {}
-}
-</script>
