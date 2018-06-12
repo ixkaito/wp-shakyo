@@ -1,7 +1,21 @@
 module.exports = {
   plugins: [
-    '~/plugins/global.js'
+    '@/plugins/global.js'
   ],
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        path: '/',
+        component: '@/pages/index.php.vue',
+        name: 'index'
+      })
+    }
+  },
+  // generate: {
+  //   routes: [
+  //     '/'
+  //   ]
+  // },
   /*
   ** Headers of the page
   */
