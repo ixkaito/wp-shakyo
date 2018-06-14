@@ -15,20 +15,33 @@ requireComponent.keys().forEach(fileName => {
   // Get component config
   const componentConfig = requireComponent(fileName)
 
+  // Strip the leading `./` and extension from the filename
+  fileName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+
+  console.log(fileName)
+
+  // Get extension (e.g. .php)
+  const match = fileName.match(/(.*)(\.\w+$)/)
+  const extension = match ? match[2] : ''
+  fileName = match ? match[1] : fileName
+
   // Get PascalCase name of component
   const componentName = upperFirst(
     camelCase(
-      // Strip the leading `./` and extension from the filename
-      fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+      // Filename without extension
+      fileName
     )
-  )
+  // Add the extension
+  ) + extension
+
+  // console.log(componentName)
 
   // Register component globally
-  Vue.component(
-    componentName,
-    // Look for the component options on `.default`, which will
-    // exist if the component was exported with `export default`,
-    // otherwise fall back to module's root.
-    componentConfig.default || componentConfig
-  )
+  // Vue.component(
+  //   componentName,
+  //   // Look for the component options on `.default`, which will
+  //   // exist if the component was exported with `export default`,
+  //   // otherwise fall back to module's root.
+  //   componentConfig.default || componentConfig
+  // )
 })
