@@ -16,7 +16,7 @@ requireComponent.keys().forEach(fileName => {
   const componentConfig = requireComponent(fileName)
 
   // Strip the leading `./` and extension from the filename
-  componentName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
+  const componentName = fileName.replace(/^\.\/(.*)\.\w+$/, '$1')
 
   // Register component globally
   Vue.component(
