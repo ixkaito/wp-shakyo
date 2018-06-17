@@ -1,5 +1,5 @@
 <template>
   <div class="file">
-    wp-load
+    <h1>wp-load.php</h1>
   </div>
 </template>

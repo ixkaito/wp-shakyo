@@ -12,6 +12,19 @@
   </div>
 </template>
 
+<script>
+import axios from 'axios'
+
+export default {
+  async asyncData ({}) {
+    const { data: user } = await axios.get(`https://api.github.com/users/ixkaito`)
+    return {
+      user
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import "~assets/scss/variables";
 @import "~assets/scss/mixins";
