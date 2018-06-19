@@ -1,6 +1,3 @@
 <template>
-  <div class="file">
-    <h1>wp-blog-header.php</h1>
-    <wp-load.php />
-  </div>
+  <nuxt-link class="file" to="/wp-load.php">wp-load.php</nuxt-link>
 </template>
