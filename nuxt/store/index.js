@@ -5,11 +5,11 @@ const createStore = () => {
     state: {
       title: 'index.php'
     },
-    // mutations: {
-    //   increment (state) {
-    //     state.title++
-    //   }
-    // }
+    mutations: {
+      titleis (state, title) {
+        state.title = title
+      }
+    }
   })
 }
 
