@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="file">
-      <header class="file-name">
+      <header class="file-header">
         <h1><i class="fa fa-file-text-o"></i></h1>
         <!-- <p class="toggle-all js-toggle-all">Expand all</p> -->
       </header>
-      <article class="entry-content file-content">
+      <article class="file-body">
         <nuxt/>
       </article>
     </div>
@@ -45,7 +45,7 @@ html, *, *:before, *:after {
     padding-right: 0;
   }
 
-  .file-name {
+  .file-header {
     background: #f5f5f5;
     border-bottom: 1px solid #d8d8d8;
     display: flex;
@@ -71,11 +71,11 @@ html, *, *:before, *:after {
     }
   }
 
-  .entry-content {
+  .file-body {
     padding: 45px;
   }
 
-  .file-content {
+  .content {
 
     b,
     strong {
