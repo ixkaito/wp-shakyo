@@ -2,7 +2,7 @@
   <div class="container">
     <div class="file">
       <header class="file-name">
-        <h1><i class="fa fa-file-text-o">{{ $store.state.title }}</i></h1>
+        <h1><i class="fa fa-file-text-o"></i> {{ $route.path }}</h1>
         <!-- <p class="toggle-all js-toggle-all">Expand all</p> -->
       </header>
       <article class="entry-content file-content">
