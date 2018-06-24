@@ -78,7 +78,8 @@ html, *, *:before, *:after {
   .content {
 
     b,
-    strong {
+    strong,
+    .include {
       @include fontawesome;
 
       font-size: 14px;
