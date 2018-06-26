@@ -1,3 +1,6 @@
 <template>
-  <nuxt-link class="file" to="/wp-load.php">wp-load.php</nuxt-link>
+  <blockquote>
+    <p class="include">wp-load.php</p>
+    <wp-load.php />
+  </blockquote>
 </template>
