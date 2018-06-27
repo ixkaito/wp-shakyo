@@ -1,8 +1,8 @@
 <template>
-  <blockquote>
+  <div class="content">
     <p class="include">wp-config.php</p>
-    <blockquote>
+    <div class="content">
       <p class="include"><a href="https://developer.wordpress.org/reference/files/wp-settings.php/" target="_blank">wp-settings.php</a></p>
-    </blockquote>
-  </blockquote>
+    </div>
+  </div>
 </template>
