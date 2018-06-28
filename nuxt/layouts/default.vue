@@ -77,6 +77,21 @@ html, *, *:before, *:after {
 
   .content {
 
+    .content {
+      border-left: $blockquote-border-color $blockquote-border-style $blockquote-border-width;
+      color: $blockquote-text-color;
+      margin: 0 0 $margin-base-vertical;
+      padding-left: $padding-base-horizontal;
+
+      > :first-child {
+        margin-top: 0;
+      }
+
+      > :last-child {
+        margin-bottom: 0;
+      }
+    }
+
     b,
     strong,
     .include {
