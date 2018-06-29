@@ -3,6 +3,15 @@
     <!-- <include /> -->
     <!-- <nuxt-link class="file" to="/wp-blog-header.php">wp-blog-header.php</nuxt-link> -->
     <p class="include">wp-blog-header.php</p>
-    <wp-blog-header.php />
+    <div class="content" v-html="content"></div>
   </div>
 </template>
+
+<script>
+export default {
+  async asyncData ({ params }) {
+    const content = await import(`~/pages/wp-blog-header.php.vue`)
+    return { content }
+  }
+}
+</script>
