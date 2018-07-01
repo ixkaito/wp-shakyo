@@ -9,9 +9,14 @@
 
 <script>
 export default {
-  async asyncData ({ params }) {
-    const content = await import(`~/pages/wp-blog-header.php.vue`)
+  async asyncData({ $axios }) {
+    const content = await $axios.$get('/wp-blog-header.php')
     return { content }
   }
+
+  // async asyncData ({ params }) {
+  //   const content = await import(`~/pages/wp-blog-header.php.vue`)
+  //   return { content }
+  // }
 }
 </script>
