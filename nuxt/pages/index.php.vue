@@ -11,7 +11,10 @@
 export default {
   async asyncData({ $axios }) {
     const content = await $axios.$get('/wp-blog-header.php')
-    return { content }
+    // const data = $axios.$get('/wp-blog-header.php')
+    console.log(content)
+    // const this.c = { content }
+    // return this.c
   }
 
   // async asyncData ({ params }) {
