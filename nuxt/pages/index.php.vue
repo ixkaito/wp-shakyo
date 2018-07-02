@@ -3,7 +3,7 @@
     <!-- <include /> -->
     <!-- <nuxt-link class="file" to="/wp-blog-header.php">wp-blog-header.php</nuxt-link> -->
     <p class="include">wp-blog-header.php</p>
-    <div class="content" v-html="content"></div>
+    <!-- <div class="content" v-html="content"></div> -->
   </div>
 </template>
 
@@ -12,7 +12,10 @@ export default {
   async asyncData({ $axios }) {
     const content = await $axios.$get('/wp-blog-header.php')
     // const data = $axios.$get('/wp-blog-header.php')
-    console.log(content)
+
+    const html = new DOMParser().parseFromString(content, 'text/xml')
+
+    console.log(html)
     // const this.c = { content }
     // return this.c
   }
