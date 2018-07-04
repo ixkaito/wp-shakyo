@@ -13,9 +13,9 @@ export default {
     const content = await $axios.$get('/wp-blog-header.php')
     // const data = $axios.$get('/wp-blog-header.php')
 
-    const html = new DOMParser().parseFromString(content, 'text/xml')
+    // const html = new DOMParser().parseFromString(content, 'text/xml')
 
-    console.log(html)
+    // console.log(html)
     // const this.c = { content }
     // return this.c
   }
