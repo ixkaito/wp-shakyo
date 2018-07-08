@@ -11,7 +11,7 @@
 export default {
   asyncData () {
     return new Promise(resolve => {
-      setTimeout(function () {
+      setTimeout(() => {
         resolve({ name: 'world' })
       }, 1000)
     })
@@ -19,10 +19,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
-  text-align: center;
-  margin-top: 150px;
   font-size: 20px;
+  text-align: center;
+  padding-top: 100px;
 }
 </style>
