@@ -1,6 +1,7 @@
 {
   "name": "nuxt-test",
   "dependencies": {
+    "bulma": "^0.5.1",
     "nuxt": "latest"
   },
   "scripts": {
