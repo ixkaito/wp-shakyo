@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
-import App from './App.vue'
 
 Vue.config.productionTip = false
 
@@ -37,5 +36,5 @@ requireComponent.keys().forEach(fileName => {
 })
 
 new Vue({
-  render: h => h(App)
+  render: h => h()
 }).$mount('#app')
