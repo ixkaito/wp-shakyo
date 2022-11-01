@@ -37,7 +37,7 @@
   "homepage": "https://ixkaito.github.io/frasco",
   "devDependencies": {
     "browser-sync": "^2.13.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-imagemin": "^3.0.1",
     "gulp-newer": "^1.2.0",
