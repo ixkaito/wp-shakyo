@@ -16,14 +16,14 @@
     "@nuxtjs/axios": "^5.4.1",
     "axios": "^0.21.1",
     "node-sass": "^4.13.1",
-    "nuxt": "^1.0.0",
-    "sass-loader": "^7.0.3"
+    "nuxt": "^3.0.0",
+    "sass-loader": "^13.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.7.1",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-vue": "^4.0.0"
   }
 }
